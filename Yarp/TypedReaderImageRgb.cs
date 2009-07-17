@@ -47,24 +47,24 @@ namespace Yarp
 			}
 		}
 
-		public new void setStrict(bool strict)
+		public void setStrict(bool strict)
 		{
 			yarpPINVOKE.TypedReaderImageRgb_setStrict__SWIG_0(swigCPtr, strict);
 		}
 
-		public new void setStrict()
+		public void setStrict()
 		{
 			yarpPINVOKE.TypedReaderImageRgb_setStrict__SWIG_1(swigCPtr);
 		}
 
-		public new ImageRgb read(bool shouldWait)
+		public ImageRgb read(bool shouldWait)
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderImageRgb_read__SWIG_0(swigCPtr, shouldWait);
 			ImageRgb ret = (cPtr == IntPtr.Zero) ? null : new ImageRgb(cPtr, false);
 			return ret;
 		}
 
-		public new ImageRgb read()
+		public ImageRgb read()
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderImageRgb_read__SWIG_1(swigCPtr);
 			ImageRgb ret = (cPtr == IntPtr.Zero) ? null : new ImageRgb(cPtr, false);
@@ -76,20 +76,20 @@ namespace Yarp
 			yarpPINVOKE.TypedReaderImageRgb_interrupt(swigCPtr);
 		}
 
-		public new ImageRgb lastRead()
+		public ImageRgb lastRead()
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderImageRgb_lastRead(swigCPtr);
 			ImageRgb ret = (cPtr == IntPtr.Zero) ? null : new ImageRgb(cPtr, false);
 			return ret;
 		}
 
-		public new bool isClosed()
+		public bool isClosed()
 		{
 			bool ret = yarpPINVOKE.TypedReaderImageRgb_isClosed(swigCPtr);
 			return ret;
 		}
 
-		public new void useCallback(TypedReaderCallbackImageRgb callback)
+		public void useCallback(TypedReaderCallbackImageRgb callback)
 		{
 			yarpPINVOKE.TypedReaderImageRgb_useCallback(swigCPtr, TypedReaderCallbackImageRgb.getCPtr(callback));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
@@ -100,7 +100,7 @@ namespace Yarp
 			yarpPINVOKE.TypedReaderImageRgb_disableCallback(swigCPtr);
 		}
 
-		public new int getPendingReads()
+		public int getPendingReads()
 		{
 			int ret = yarpPINVOKE.TypedReaderImageRgb_getPendingReads(swigCPtr);
 			return ret;
@@ -112,7 +112,7 @@ namespace Yarp
 			return ret;
 		}
 
-		public new void setReplier(PortReader reader)
+		public void setReplier(PortReader reader)
 		{
 			yarpPINVOKE.TypedReaderImageRgb_setReplier(swigCPtr, PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();

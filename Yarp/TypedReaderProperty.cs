@@ -47,24 +47,24 @@ namespace Yarp
 			}
 		}
 
-		public new void setStrict(bool strict)
+		public void setStrict(bool strict)
 		{
 			yarpPINVOKE.TypedReaderProperty_setStrict__SWIG_0(swigCPtr, strict);
 		}
 
-		public new void setStrict()
+		public void setStrict()
 		{
 			yarpPINVOKE.TypedReaderProperty_setStrict__SWIG_1(swigCPtr);
 		}
 
-		public new Property read(bool shouldWait)
+		public Property read(bool shouldWait)
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderProperty_read__SWIG_0(swigCPtr, shouldWait);
 			Property ret = (cPtr == IntPtr.Zero) ? null : new Property(cPtr, false);
 			return ret;
 		}
 
-		public new Property read()
+		public Property read()
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderProperty_read__SWIG_1(swigCPtr);
 			Property ret = (cPtr == IntPtr.Zero) ? null : new Property(cPtr, false);
@@ -76,20 +76,20 @@ namespace Yarp
 			yarpPINVOKE.TypedReaderProperty_interrupt(swigCPtr);
 		}
 
-		public new Property lastRead()
+		public Property lastRead()
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderProperty_lastRead(swigCPtr);
 			Property ret = (cPtr == IntPtr.Zero) ? null : new Property(cPtr, false);
 			return ret;
 		}
 
-		public new bool isClosed()
+		public bool isClosed()
 		{
 			bool ret = yarpPINVOKE.TypedReaderProperty_isClosed(swigCPtr);
 			return ret;
 		}
 
-		public new void useCallback(TypedReaderCallbackProperty callback)
+		public void useCallback(TypedReaderCallbackProperty callback)
 		{
 			yarpPINVOKE.TypedReaderProperty_useCallback(swigCPtr, TypedReaderCallbackProperty.getCPtr(callback));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
@@ -100,7 +100,7 @@ namespace Yarp
 			yarpPINVOKE.TypedReaderProperty_disableCallback(swigCPtr);
 		}
 
-		public new int getPendingReads()
+		public int getPendingReads()
 		{
 			int ret = yarpPINVOKE.TypedReaderProperty_getPendingReads(swigCPtr);
 			return ret;
@@ -112,7 +112,7 @@ namespace Yarp
 			return ret;
 		}
 
-		public new void setReplier(PortReader reader)
+		public void setReplier(PortReader reader)
 		{
 			yarpPINVOKE.TypedReaderProperty_setReplier(swigCPtr, PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();

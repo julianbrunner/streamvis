@@ -47,13 +47,13 @@ namespace Yarp
 			}
 		}
 
-		public new void onRead(ImageFloat datum)
+		public void onRead(ImageFloat datum)
 		{
 			yarpPINVOKE.TypedReaderCallbackImageFloat_onRead__SWIG_0(swigCPtr, ImageFloat.getCPtr(datum));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void onRead(ImageFloat datum, TypedReaderImageFloat reader)
+		public void onRead(ImageFloat datum, TypedReaderImageFloat reader)
 		{
 			yarpPINVOKE.TypedReaderCallbackImageFloat_onRead__SWIG_1(swigCPtr, ImageFloat.getCPtr(datum), TypedReaderImageFloat.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();

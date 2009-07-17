@@ -47,24 +47,24 @@ namespace Yarp
 			}
 		}
 
-		public new void setStrict(bool strict)
+		public void setStrict(bool strict)
 		{
 			yarpPINVOKE.TypedReaderImageFloat_setStrict__SWIG_0(swigCPtr, strict);
 		}
 
-		public new void setStrict()
+		public void setStrict()
 		{
 			yarpPINVOKE.TypedReaderImageFloat_setStrict__SWIG_1(swigCPtr);
 		}
 
-		public new ImageFloat read(bool shouldWait)
+		public ImageFloat read(bool shouldWait)
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderImageFloat_read__SWIG_0(swigCPtr, shouldWait);
 			ImageFloat ret = (cPtr == IntPtr.Zero) ? null : new ImageFloat(cPtr, false);
 			return ret;
 		}
 
-		public new ImageFloat read()
+		public ImageFloat read()
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderImageFloat_read__SWIG_1(swigCPtr);
 			ImageFloat ret = (cPtr == IntPtr.Zero) ? null : new ImageFloat(cPtr, false);
@@ -76,20 +76,20 @@ namespace Yarp
 			yarpPINVOKE.TypedReaderImageFloat_interrupt(swigCPtr);
 		}
 
-		public new ImageFloat lastRead()
+		public ImageFloat lastRead()
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderImageFloat_lastRead(swigCPtr);
 			ImageFloat ret = (cPtr == IntPtr.Zero) ? null : new ImageFloat(cPtr, false);
 			return ret;
 		}
 
-		public new bool isClosed()
+		public bool isClosed()
 		{
 			bool ret = yarpPINVOKE.TypedReaderImageFloat_isClosed(swigCPtr);
 			return ret;
 		}
 
-		public new void useCallback(TypedReaderCallbackImageFloat callback)
+		public void useCallback(TypedReaderCallbackImageFloat callback)
 		{
 			yarpPINVOKE.TypedReaderImageFloat_useCallback(swigCPtr, TypedReaderCallbackImageFloat.getCPtr(callback));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
@@ -100,7 +100,7 @@ namespace Yarp
 			yarpPINVOKE.TypedReaderImageFloat_disableCallback(swigCPtr);
 		}
 
-		public new int getPendingReads()
+		public int getPendingReads()
 		{
 			int ret = yarpPINVOKE.TypedReaderImageFloat_getPendingReads(swigCPtr);
 			return ret;
@@ -112,7 +112,7 @@ namespace Yarp
 			return ret;
 		}
 
-		public new void setReplier(PortReader reader)
+		public void setReplier(PortReader reader)
 		{
 			yarpPINVOKE.TypedReaderImageFloat_setReplier(swigCPtr, PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();

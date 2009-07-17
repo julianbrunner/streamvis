@@ -197,21 +197,21 @@ namespace Yarp
 			return ret;
 		}
 
-		public new static bool write(Contact contact, PortWriter cmd, PortReader reply, bool admin)
+		public static bool write(Contact contact, PortWriter cmd, PortReader reply, bool admin)
 		{
 			bool ret = yarpPINVOKE.Network_write__SWIG_0(Contact.getCPtr(contact), PortWriter.getCPtr(cmd), PortReader.getCPtr(reply), admin);
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new static bool write(Contact contact, PortWriter cmd, PortReader reply)
+		public static bool write(Contact contact, PortWriter cmd, PortReader reply)
 		{
 			bool ret = yarpPINVOKE.Network_write__SWIG_1(Contact.getCPtr(contact), PortWriter.getCPtr(cmd), PortReader.getCPtr(reply));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new static bool write(string port_name, PortWriter cmd, PortReader reply)
+		public static bool write(string port_name, PortWriter cmd, PortReader reply)
 		{
 			bool ret = yarpPINVOKE.Network_write__SWIG_2(port_name, PortWriter.getCPtr(cmd), PortReader.getCPtr(reply));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();

@@ -81,7 +81,7 @@ namespace Yarp
 			yarpPINVOKE.BufferedPortImageRgb_interrupt(swigCPtr);
 		}
 
-		public new int getPendingReads()
+		public int getPendingReads()
 		{
 			int ret = yarpPINVOKE.BufferedPortImageRgb_getPendingReads(swigCPtr);
 			return ret;
@@ -105,12 +105,12 @@ namespace Yarp
 			return ret;
 		}
 
-		public new void write(bool forceStrict)
+		public void write(bool forceStrict)
 		{
 			yarpPINVOKE.BufferedPortImageRgb_write__SWIG_0(swigCPtr, forceStrict);
 		}
 
-		public new void write()
+		public void write()
 		{
 			yarpPINVOKE.BufferedPortImageRgb_write__SWIG_1(swigCPtr);
 		}
@@ -120,62 +120,62 @@ namespace Yarp
 			yarpPINVOKE.BufferedPortImageRgb_writeStrict(swigCPtr);
 		}
 
-		public new void setStrict(bool strict)
+		public void setStrict(bool strict)
 		{
 			yarpPINVOKE.BufferedPortImageRgb_setStrict__SWIG_0(swigCPtr, strict);
 		}
 
-		public new void setStrict()
+		public void setStrict()
 		{
 			yarpPINVOKE.BufferedPortImageRgb_setStrict__SWIG_1(swigCPtr);
 		}
 
-		public new ImageRgb read(bool shouldWait)
+		public ImageRgb read(bool shouldWait)
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortImageRgb_read__SWIG_0(swigCPtr, shouldWait);
 			ImageRgb ret = (cPtr == IntPtr.Zero) ? null : new ImageRgb(cPtr, false);
 			return ret;
 		}
 
-		public new ImageRgb read()
+		public ImageRgb read()
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortImageRgb_read__SWIG_1(swigCPtr);
 			ImageRgb ret = (cPtr == IntPtr.Zero) ? null : new ImageRgb(cPtr, false);
 			return ret;
 		}
 
-		public new ImageRgb lastRead()
+		public ImageRgb lastRead()
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortImageRgb_lastRead(swigCPtr);
 			ImageRgb ret = (cPtr == IntPtr.Zero) ? null : new ImageRgb(cPtr, false);
 			return ret;
 		}
 
-		public new bool isClosed()
+		public bool isClosed()
 		{
 			bool ret = yarpPINVOKE.BufferedPortImageRgb_isClosed(swigCPtr);
 			return ret;
 		}
 
-		public new void setReplier(PortReader reader)
+		public void setReplier(PortReader reader)
 		{
 			yarpPINVOKE.BufferedPortImageRgb_setReplier(swigCPtr, PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void onRead(ImageRgb datum)
+		public void onRead(ImageRgb datum)
 		{
 			yarpPINVOKE.BufferedPortImageRgb_onRead(swigCPtr, ImageRgb.getCPtr(datum));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void useCallback(TypedReaderCallbackImageRgb callback)
+		public void useCallback(TypedReaderCallbackImageRgb callback)
 		{
 			yarpPINVOKE.BufferedPortImageRgb_useCallback__SWIG_0(swigCPtr, TypedReaderCallbackImageRgb.getCPtr(callback));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void useCallback()
+		public void useCallback()
 		{
 			yarpPINVOKE.BufferedPortImageRgb_useCallback__SWIG_1(swigCPtr);
 		}

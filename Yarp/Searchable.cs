@@ -47,44 +47,44 @@ namespace Yarp
 			}
 		}
 
-		public new bool check(string key)
+		public bool check(string key)
 		{
 			bool ret = yarpPINVOKE.Searchable_check__SWIG_0(swigCPtr, key);
 			return ret;
 		}
 
-		public new bool check(string key, string comment)
+		public bool check(string key, string comment)
 		{
 			bool ret = yarpPINVOKE.Searchable_check__SWIG_1(swigCPtr, key, comment);
 			return ret;
 		}
 
-		public new Value find(string key)
+		public Value find(string key)
 		{
 			Value ret = new Value(yarpPINVOKE.Searchable_find(swigCPtr, key), false);
 			return ret;
 		}
 
-		public new Bottle findGroup(string key)
+		public Bottle findGroup(string key)
 		{
 			Bottle ret = new Bottle(yarpPINVOKE.Searchable_findGroup__SWIG_0(swigCPtr, key), false);
 			return ret;
 		}
 
-		public new Bottle findGroup(string key, string comment)
+		public Bottle findGroup(string key, string comment)
 		{
 			Bottle ret = new Bottle(yarpPINVOKE.Searchable_findGroup__SWIG_1(swigCPtr, key, comment), false);
 			return ret;
 		}
 
-		public new Value check(string key, Value fallback, string comment)
+		public Value check(string key, Value fallback, string comment)
 		{
 			Value ret = new Value(yarpPINVOKE.Searchable_check__SWIG_2(swigCPtr, key, Value.getCPtr(fallback), comment), true);
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new Value check(string key, Value fallback)
+		public Value check(string key, Value fallback)
 		{
 			Value ret = new Value(yarpPINVOKE.Searchable_check__SWIG_3(swigCPtr, key, Value.getCPtr(fallback)), true);
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
@@ -97,7 +97,7 @@ namespace Yarp
 			return ret;
 		}
 
-		public new ConstString toString_c()
+		public ConstString toString_c()
 		{
 			ConstString ret = new ConstString(yarpPINVOKE.Searchable_toString_c(swigCPtr), true);
 			return ret;

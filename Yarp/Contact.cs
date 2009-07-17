@@ -126,7 +126,7 @@ namespace Yarp
 			return ret;
 		}
 
-		public new ConstString toString_c()
+		public ConstString toString_c()
 		{
 			ConstString ret = new ConstString(yarpPINVOKE.Contact_toString_c(swigCPtr), true);
 			return ret;

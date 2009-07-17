@@ -47,13 +47,13 @@ namespace Yarp
 			}
 		}
 
-		public new void onRead(Bottle datum)
+		public void onRead(Bottle datum)
 		{
 			yarpPINVOKE.BottleCallback_onRead__SWIG_0(swigCPtr, Bottle.getCPtr(datum));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void onRead(Bottle datum, TypedReaderBottle reader)
+		public void onRead(Bottle datum, TypedReaderBottle reader)
 		{
 			yarpPINVOKE.BottleCallback_onRead__SWIG_1(swigCPtr, Bottle.getCPtr(datum), TypedReaderBottle.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();

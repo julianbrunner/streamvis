@@ -81,7 +81,7 @@ namespace Yarp
 			yarpPINVOKE.BufferedPortProperty_interrupt(swigCPtr);
 		}
 
-		public new int getPendingReads()
+		public int getPendingReads()
 		{
 			int ret = yarpPINVOKE.BufferedPortProperty_getPendingReads(swigCPtr);
 			return ret;
@@ -105,12 +105,12 @@ namespace Yarp
 			return ret;
 		}
 
-		public new void write(bool forceStrict)
+		public void write(bool forceStrict)
 		{
 			yarpPINVOKE.BufferedPortProperty_write__SWIG_0(swigCPtr, forceStrict);
 		}
 
-		public new void write()
+		public void write()
 		{
 			yarpPINVOKE.BufferedPortProperty_write__SWIG_1(swigCPtr);
 		}
@@ -120,62 +120,62 @@ namespace Yarp
 			yarpPINVOKE.BufferedPortProperty_writeStrict(swigCPtr);
 		}
 
-		public new void setStrict(bool strict)
+		public void setStrict(bool strict)
 		{
 			yarpPINVOKE.BufferedPortProperty_setStrict__SWIG_0(swigCPtr, strict);
 		}
 
-		public new void setStrict()
+		public void setStrict()
 		{
 			yarpPINVOKE.BufferedPortProperty_setStrict__SWIG_1(swigCPtr);
 		}
 
-		public new Property read(bool shouldWait)
+		public Property read(bool shouldWait)
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortProperty_read__SWIG_0(swigCPtr, shouldWait);
 			Property ret = (cPtr == IntPtr.Zero) ? null : new Property(cPtr, false);
 			return ret;
 		}
 
-		public new Property read()
+		public Property read()
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortProperty_read__SWIG_1(swigCPtr);
 			Property ret = (cPtr == IntPtr.Zero) ? null : new Property(cPtr, false);
 			return ret;
 		}
 
-		public new Property lastRead()
+		public Property lastRead()
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortProperty_lastRead(swigCPtr);
 			Property ret = (cPtr == IntPtr.Zero) ? null : new Property(cPtr, false);
 			return ret;
 		}
 
-		public new bool isClosed()
+		public bool isClosed()
 		{
 			bool ret = yarpPINVOKE.BufferedPortProperty_isClosed(swigCPtr);
 			return ret;
 		}
 
-		public new void setReplier(PortReader reader)
+		public void setReplier(PortReader reader)
 		{
 			yarpPINVOKE.BufferedPortProperty_setReplier(swigCPtr, PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void onRead(Property datum)
+		public void onRead(Property datum)
 		{
 			yarpPINVOKE.BufferedPortProperty_onRead(swigCPtr, Property.getCPtr(datum));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void useCallback(TypedReaderCallbackProperty callback)
+		public void useCallback(TypedReaderCallbackProperty callback)
 		{
 			yarpPINVOKE.BufferedPortProperty_useCallback__SWIG_0(swigCPtr, TypedReaderCallbackProperty.getCPtr(callback));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void useCallback()
+		public void useCallback()
 		{
 			yarpPINVOKE.BufferedPortProperty_useCallback__SWIG_1(swigCPtr);
 		}

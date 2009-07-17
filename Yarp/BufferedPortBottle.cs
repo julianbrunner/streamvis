@@ -81,7 +81,7 @@ namespace Yarp
 			yarpPINVOKE.BufferedPortBottle_interrupt(swigCPtr);
 		}
 
-		public new int getPendingReads()
+		public int getPendingReads()
 		{
 			int ret = yarpPINVOKE.BufferedPortBottle_getPendingReads(swigCPtr);
 			return ret;
@@ -105,12 +105,12 @@ namespace Yarp
 			return ret;
 		}
 
-		public new void write(bool forceStrict)
+		public void write(bool forceStrict)
 		{
 			yarpPINVOKE.BufferedPortBottle_write__SWIG_0(swigCPtr, forceStrict);
 		}
 
-		public new void write()
+		public void write()
 		{
 			yarpPINVOKE.BufferedPortBottle_write__SWIG_1(swigCPtr);
 		}
@@ -120,62 +120,62 @@ namespace Yarp
 			yarpPINVOKE.BufferedPortBottle_writeStrict(swigCPtr);
 		}
 
-		public new void setStrict(bool strict)
+		public void setStrict(bool strict)
 		{
 			yarpPINVOKE.BufferedPortBottle_setStrict__SWIG_0(swigCPtr, strict);
 		}
 
-		public new void setStrict()
+		public void setStrict()
 		{
 			yarpPINVOKE.BufferedPortBottle_setStrict__SWIG_1(swigCPtr);
 		}
 
-		public new Bottle read(bool shouldWait)
+		public Bottle read(bool shouldWait)
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortBottle_read__SWIG_0(swigCPtr, shouldWait);
 			Bottle ret = (cPtr == IntPtr.Zero) ? null : new Bottle(cPtr, false);
 			return ret;
 		}
 
-		public new Bottle read()
+		public Bottle read()
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortBottle_read__SWIG_1(swigCPtr);
 			Bottle ret = (cPtr == IntPtr.Zero) ? null : new Bottle(cPtr, false);
 			return ret;
 		}
 
-		public new Bottle lastRead()
+		public Bottle lastRead()
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortBottle_lastRead(swigCPtr);
 			Bottle ret = (cPtr == IntPtr.Zero) ? null : new Bottle(cPtr, false);
 			return ret;
 		}
 
-		public new bool isClosed()
+		public bool isClosed()
 		{
 			bool ret = yarpPINVOKE.BufferedPortBottle_isClosed(swigCPtr);
 			return ret;
 		}
 
-		public new void setReplier(PortReader reader)
+		public void setReplier(PortReader reader)
 		{
 			yarpPINVOKE.BufferedPortBottle_setReplier(swigCPtr, PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void onRead(Bottle datum)
+		public void onRead(Bottle datum)
 		{
 			yarpPINVOKE.BufferedPortBottle_onRead(swigCPtr, Bottle.getCPtr(datum));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void useCallback(BottleCallback callback)
+		public void useCallback(BottleCallback callback)
 		{
 			yarpPINVOKE.BufferedPortBottle_useCallback__SWIG_0(swigCPtr, BottleCallback.getCPtr(callback));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void useCallback()
+		public void useCallback()
 		{
 			yarpPINVOKE.BufferedPortBottle_useCallback__SWIG_1(swigCPtr);
 		}

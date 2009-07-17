@@ -81,7 +81,7 @@ namespace Yarp
 			yarpPINVOKE.BufferedPortImageFloat_interrupt(swigCPtr);
 		}
 
-		public new int getPendingReads()
+		public int getPendingReads()
 		{
 			int ret = yarpPINVOKE.BufferedPortImageFloat_getPendingReads(swigCPtr);
 			return ret;
@@ -105,12 +105,12 @@ namespace Yarp
 			return ret;
 		}
 
-		public new void write(bool forceStrict)
+		public void write(bool forceStrict)
 		{
 			yarpPINVOKE.BufferedPortImageFloat_write__SWIG_0(swigCPtr, forceStrict);
 		}
 
-		public new void write()
+		public void write()
 		{
 			yarpPINVOKE.BufferedPortImageFloat_write__SWIG_1(swigCPtr);
 		}
@@ -120,62 +120,62 @@ namespace Yarp
 			yarpPINVOKE.BufferedPortImageFloat_writeStrict(swigCPtr);
 		}
 
-		public new void setStrict(bool strict)
+		public void setStrict(bool strict)
 		{
 			yarpPINVOKE.BufferedPortImageFloat_setStrict__SWIG_0(swigCPtr, strict);
 		}
 
-		public new void setStrict()
+		public void setStrict()
 		{
 			yarpPINVOKE.BufferedPortImageFloat_setStrict__SWIG_1(swigCPtr);
 		}
 
-		public new ImageFloat read(bool shouldWait)
+		public ImageFloat read(bool shouldWait)
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortImageFloat_read__SWIG_0(swigCPtr, shouldWait);
 			ImageFloat ret = (cPtr == IntPtr.Zero) ? null : new ImageFloat(cPtr, false);
 			return ret;
 		}
 
-		public new ImageFloat read()
+		public ImageFloat read()
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortImageFloat_read__SWIG_1(swigCPtr);
 			ImageFloat ret = (cPtr == IntPtr.Zero) ? null : new ImageFloat(cPtr, false);
 			return ret;
 		}
 
-		public new ImageFloat lastRead()
+		public ImageFloat lastRead()
 		{
 			IntPtr cPtr = yarpPINVOKE.BufferedPortImageFloat_lastRead(swigCPtr);
 			ImageFloat ret = (cPtr == IntPtr.Zero) ? null : new ImageFloat(cPtr, false);
 			return ret;
 		}
 
-		public new bool isClosed()
+		public bool isClosed()
 		{
 			bool ret = yarpPINVOKE.BufferedPortImageFloat_isClosed(swigCPtr);
 			return ret;
 		}
 
-		public new void setReplier(PortReader reader)
+		public void setReplier(PortReader reader)
 		{
 			yarpPINVOKE.BufferedPortImageFloat_setReplier(swigCPtr, PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void onRead(ImageFloat datum)
+		public void onRead(ImageFloat datum)
 		{
 			yarpPINVOKE.BufferedPortImageFloat_onRead(swigCPtr, ImageFloat.getCPtr(datum));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void useCallback(TypedReaderCallbackImageFloat callback)
+		public void useCallback(TypedReaderCallbackImageFloat callback)
 		{
 			yarpPINVOKE.BufferedPortImageFloat_useCallback__SWIG_0(swigCPtr, TypedReaderCallbackImageFloat.getCPtr(callback));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void useCallback()
+		public void useCallback()
 		{
 			yarpPINVOKE.BufferedPortImageFloat_useCallback__SWIG_1(swigCPtr);
 		}

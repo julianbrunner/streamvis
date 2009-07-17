@@ -227,14 +227,14 @@ namespace Yarp
 			return ret;
 		}
 
-		public new bool write(ConnectionWriter connection)
+		public bool write(ConnectionWriter connection)
 		{
 			bool ret = yarpPINVOKE.Property_write(swigCPtr, ConnectionWriter.getCPtr(connection));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new string toString()
+		public string toString()
 		{
 			string ret = yarpPINVOKE.Property_toString(swigCPtr);
 			return ret;

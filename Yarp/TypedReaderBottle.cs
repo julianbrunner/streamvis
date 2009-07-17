@@ -47,24 +47,24 @@ namespace Yarp
 			}
 		}
 
-		public new void setStrict(bool strict)
+		public void setStrict(bool strict)
 		{
 			yarpPINVOKE.TypedReaderBottle_setStrict__SWIG_0(swigCPtr, strict);
 		}
 
-		public new void setStrict()
+		public void setStrict()
 		{
 			yarpPINVOKE.TypedReaderBottle_setStrict__SWIG_1(swigCPtr);
 		}
 
-		public new Bottle read(bool shouldWait)
+		public Bottle read(bool shouldWait)
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderBottle_read__SWIG_0(swigCPtr, shouldWait);
 			Bottle ret = (cPtr == IntPtr.Zero) ? null : new Bottle(cPtr, false);
 			return ret;
 		}
 
-		public new Bottle read()
+		public Bottle read()
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderBottle_read__SWIG_1(swigCPtr);
 			Bottle ret = (cPtr == IntPtr.Zero) ? null : new Bottle(cPtr, false);
@@ -76,20 +76,20 @@ namespace Yarp
 			yarpPINVOKE.TypedReaderBottle_interrupt(swigCPtr);
 		}
 
-		public new Bottle lastRead()
+		public Bottle lastRead()
 		{
 			IntPtr cPtr = yarpPINVOKE.TypedReaderBottle_lastRead(swigCPtr);
 			Bottle ret = (cPtr == IntPtr.Zero) ? null : new Bottle(cPtr, false);
 			return ret;
 		}
 
-		public new bool isClosed()
+		public bool isClosed()
 		{
 			bool ret = yarpPINVOKE.TypedReaderBottle_isClosed(swigCPtr);
 			return ret;
 		}
 
-		public new void useCallback(BottleCallback callback)
+		public void useCallback(BottleCallback callback)
 		{
 			yarpPINVOKE.TypedReaderBottle_useCallback(swigCPtr, BottleCallback.getCPtr(callback));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
@@ -100,7 +100,7 @@ namespace Yarp
 			yarpPINVOKE.TypedReaderBottle_disableCallback(swigCPtr);
 		}
 
-		public new int getPendingReads()
+		public int getPendingReads()
 		{
 			int ret = yarpPINVOKE.TypedReaderBottle_getPendingReads(swigCPtr);
 			return ret;
@@ -112,7 +112,7 @@ namespace Yarp
 			return ret;
 		}
 
-		public new void setReplier(PortReader reader)
+		public void setReplier(PortReader reader)
 		{
 			yarpPINVOKE.TypedReaderBottle_setReplier(swigCPtr, PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();

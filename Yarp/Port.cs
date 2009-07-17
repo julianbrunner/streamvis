@@ -87,42 +87,42 @@ namespace Yarp
 			return ret;
 		}
 
-		public new bool write(PortWriter writer, PortWriter callback)
+		public bool write(PortWriter writer, PortWriter callback)
 		{
 			bool ret = yarpPINVOKE.Port_write__SWIG_0(swigCPtr, PortWriter.getCPtr(writer), PortWriter.getCPtr(callback));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new bool write(PortWriter writer)
+		public bool write(PortWriter writer)
 		{
 			bool ret = yarpPINVOKE.Port_write__SWIG_1(swigCPtr, PortWriter.getCPtr(writer));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new bool write(PortWriter writer, PortReader reader, PortWriter callback)
+		public bool write(PortWriter writer, PortReader reader, PortWriter callback)
 		{
 			bool ret = yarpPINVOKE.Port_write__SWIG_2(swigCPtr, PortWriter.getCPtr(writer), PortReader.getCPtr(reader), PortWriter.getCPtr(callback));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new bool write(PortWriter writer, PortReader reader)
+		public bool write(PortWriter writer, PortReader reader)
 		{
 			bool ret = yarpPINVOKE.Port_write__SWIG_3(swigCPtr, PortWriter.getCPtr(writer), PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new bool read(PortReader reader, bool willReply)
+		public bool read(PortReader reader, bool willReply)
 		{
 			bool ret = yarpPINVOKE.Port_read__SWIG_0(swigCPtr, PortReader.getCPtr(reader), willReply);
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new bool read(PortReader reader)
+		public bool read(PortReader reader)
 		{
 			bool ret = yarpPINVOKE.Port_read__SWIG_1(swigCPtr, PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
@@ -207,35 +207,35 @@ namespace Yarp
 			yarpPINVOKE.Port_setAdminMode__SWIG_1(swigCPtr);
 		}
 
-		public new bool write(Bottle data)
+		public bool write(Bottle data)
 		{
 			bool ret = yarpPINVOKE.Port_write__SWIG_4(swigCPtr, Bottle.getCPtr(data));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new bool write(Property data)
+		public bool write(Property data)
 		{
 			bool ret = yarpPINVOKE.Port_write__SWIG_5(swigCPtr, Property.getCPtr(data));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new bool write(ImageRgb data)
+		public bool write(ImageRgb data)
 		{
 			bool ret = yarpPINVOKE.Port_write__SWIG_6(swigCPtr, ImageRgb.getCPtr(data));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new bool write(ImageFloat data)
+		public bool write(ImageFloat data)
 		{
 			bool ret = yarpPINVOKE.Port_write__SWIG_7(swigCPtr, ImageFloat.getCPtr(data));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 			return ret;
 		}
 
-		public new bool write(Bottle data1, Bottle data2)
+		public bool write(Bottle data1, Bottle data2)
 		{
 			bool ret = yarpPINVOKE.Port_write__SWIG_8(swigCPtr, Bottle.getCPtr(data1), Bottle.getCPtr(data2));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();

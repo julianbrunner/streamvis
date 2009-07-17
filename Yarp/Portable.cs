@@ -47,7 +47,7 @@ namespace Yarp
 			}
 		}
 
-		public new bool write(ConnectionWriter connection)
+		public bool write(ConnectionWriter connection)
 		{
 			bool ret = yarpPINVOKE.Portable_write(swigCPtr, ConnectionWriter.getCPtr(connection));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();

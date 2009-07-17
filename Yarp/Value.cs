@@ -174,19 +174,19 @@ namespace Yarp
 			return ret;
 		}
 
-		public new bool check(string key)
+		public bool check(string key)
 		{
 			bool ret = yarpPINVOKE.Value_check(swigCPtr, key);
 			return ret;
 		}
 
-		public new Value find(string key)
+		public Value find(string key)
 		{
 			Value ret = new Value(yarpPINVOKE.Value_find(swigCPtr, key), false);
 			return ret;
 		}
 
-		public new Bottle findGroup(string key)
+		public Bottle findGroup(string key)
 		{
 			Bottle ret = new Bottle(yarpPINVOKE.Value_findGroup(swigCPtr, key), false);
 			return ret;
@@ -211,7 +211,7 @@ namespace Yarp
 			yarpPINVOKE.Value_fromString(swigCPtr, str);
 		}
 
-		public new ConstString toString_c()
+		public ConstString toString_c()
 		{
 			ConstString ret = new ConstString(yarpPINVOKE.Value_toString_c(swigCPtr), true);
 			return ret;
@@ -306,7 +306,7 @@ namespace Yarp
 			return ret;
 		}
 
-		public new string toString()
+		public string toString()
 		{
 			string ret = yarpPINVOKE.Value_toString(swigCPtr);
 			return ret;

@@ -74,7 +74,7 @@ namespace Yarp
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void write(bool strict)
+		public void write(bool strict)
 		{
 			yarpPINVOKE.PortWriterBufferBase_write(swigCPtr, strict);
 		}

@@ -57,7 +57,7 @@ namespace Yarp
 			yarpPINVOKE.PortReaderBufferBase_setCreator(swigCPtr, PortReaderBufferBaseCreator.getCPtr(creator));
 		}
 
-		public new void setReplier(PortReader reader)
+		public void setReplier(PortReader reader)
 		{
 			yarpPINVOKE.PortReaderBufferBase_setReplier(swigCPtr, PortReader.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
@@ -75,7 +75,7 @@ namespace Yarp
 			yarpPINVOKE.PortReaderBufferBase_release__SWIG_0(swigCPtr, PortReader.getCPtr(completed));
 		}
 
-		public new int check()
+		public int check()
 		{
 			int ret = yarpPINVOKE.PortReaderBufferBase_check(swigCPtr);
 			return ret;
@@ -135,7 +135,7 @@ namespace Yarp
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new bool isClosed()
+		public bool isClosed()
 		{
 			bool ret = yarpPINVOKE.PortReaderBufferBase_isClosed(swigCPtr);
 			return ret;

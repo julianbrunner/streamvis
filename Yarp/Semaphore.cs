@@ -62,7 +62,7 @@ namespace Yarp
 			yarpPINVOKE.Semaphore_wait(swigCPtr);
 		}
 
-		public new bool check()
+		public bool check()
 		{
 			bool ret = yarpPINVOKE.Semaphore_check(swigCPtr);
 			return ret;

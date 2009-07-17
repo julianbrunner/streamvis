@@ -47,13 +47,13 @@ namespace Yarp
 			}
 		}
 
-		public new void onRead(Property datum)
+		public void onRead(Property datum)
 		{
 			yarpPINVOKE.TypedReaderCallbackProperty_onRead__SWIG_0(swigCPtr, Property.getCPtr(datum));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
 		}
 
-		public new void onRead(Property datum, TypedReaderProperty reader)
+		public void onRead(Property datum, TypedReaderProperty reader)
 		{
 			yarpPINVOKE.TypedReaderCallbackProperty_onRead__SWIG_1(swigCPtr, Property.getCPtr(datum), TypedReaderProperty.getCPtr(reader));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();

@@ -81,7 +81,7 @@ namespace Yarp
 			return ret;
 		}
 
-		public new void onRead(Bottle v)
+		public void onRead(Bottle v)
 		{
 			yarpPINVOKE.DeviceResponder_onRead(swigCPtr, Bottle.getCPtr(v));
 			if (yarpPINVOKE.SWIGPendingException.Pending) throw yarpPINVOKE.SWIGPendingException.Retrieve();
