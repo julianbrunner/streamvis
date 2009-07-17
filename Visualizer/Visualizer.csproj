@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F4356332-01E9-4114-B551-52912D6D86F8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Visualizer</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>3</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK, Version=0.9.7.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.Utilities, Version=0.9.6.0, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenTK.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="MainWindow.cs" />
+    <Compile Include="MainWindow.Designer.cs" />
+    <Compile Include="Parameters.cs" />
+    <Compile Include="PlotterType.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="TextDialog.cs" />
+    <Compile Include="TextDialog.Designer.cs" />
+    <Compile Include="TKDrawer.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties InternalTargetFrameworkVersion="3.5">
+        <Deployment.LinuxDeployData scriptName="vis" />
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <ItemGroup>
+    <None Include="Changelog.txt" />
+    <None Include="OpenTK.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OpenTK.Utilities.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Yarp.Visualizer.jnt" />
+    <None Include="Images\CrossMark.png" />
+    <None Include="Images\CrossMark.xcf" />
+    <None Include="Images\New.png" />
+    <None Include="Images\Open.png" />
+    <None Include="Images\Save.png" />
+    <None Include="Images\Text.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\Text.xcf" />
+    <None Include="OpenTK.dll" />
+    <None Include="OpenTK.Utilities.dll" />
+    <None Include="OpenTK.Utilities.xml" />
+    <None Include="OpenTK.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainWindow.resx">
+      <LogicalName>Visualizer.MainWindow.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TextDialog.resx">
+      <LogicalName>Visualizer.TextDialog.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Visualizer.Plotting\Visualizer.Plotting.csproj">
+      <Project>{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}</Project>
+      <Name>Visualizer.Plotting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Visualizer.Data\Visualizer.Data.csproj">
+      <Project>{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}</Project>
+      <Name>Visualizer.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Visualizer.Capturing\Visualizer.Capturing.csproj">
+      <Project>{EBD08DE0-7BF5-4B11-88FD-6677FC37CA23}</Project>
+      <Name>Visualizer.Capturing</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

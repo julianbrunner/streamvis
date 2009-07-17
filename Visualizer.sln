@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer", "Visualizer\Visualizer.csproj", "{F4356332-01E9-4114-B551-52912D6D86F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarp", "Yarp\Yarp.csproj", "{4570F9C8-6861-49E7-BD50-9C33993D2DAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer.Data", "Visualizer.Data\Visualizer.Data.csproj", "{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer.Capturing", "Visualizer.Capturing\Visualizer.Capturing.csproj", "{EBD08DE0-7BF5-4B11-88FD-6677FC37CA23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer.Plotting", "Visualizer.Plotting\Visualizer.Plotting.csproj", "{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{924D57ED-FFC8-43D4-9AC4-2DCFB27867F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sender", "Sender\Sender.csproj", "{E577647C-A7BD-4DEC-A723-E01AD0C0200E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receiver", "Receiver\Receiver.csproj", "{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4570F9C8-6861-49E7-BD50-9C33993D2DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4570F9C8-6861-49E7-BD50-9C33993D2DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4570F9C8-6861-49E7-BD50-9C33993D2DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4570F9C8-6861-49E7-BD50-9C33993D2DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E577647C-A7BD-4DEC-A723-E01AD0C0200E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E577647C-A7BD-4DEC-A723-E01AD0C0200E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E577647C-A7BD-4DEC-A723-E01AD0C0200E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E577647C-A7BD-4DEC-A723-E01AD0C0200E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBD08DE0-7BF5-4B11-88FD-6677FC37CA23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBD08DE0-7BF5-4B11-88FD-6677FC37CA23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBD08DE0-7BF5-4B11-88FD-6677FC37CA23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBD08DE0-7BF5-4B11-88FD-6677FC37CA23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4356332-01E9-4114-B551-52912D6D86F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4356332-01E9-4114-B551-52912D6D86F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4356332-01E9-4114-B551-52912D6D86F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4356332-01E9-4114-B551-52912D6D86F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E577647C-A7BD-4DEC-A723-E01AD0C0200E} = {924D57ED-FFC8-43D4-9AC4-2DCFB27867F6}
+		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2} = {924D57ED-FFC8-43D4-9AC4-2DCFB27867F6}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		version = 0.1
+		StartupItem = Visualizer\Visualizer.csproj
+	EndGlobalSection
+EndGlobal

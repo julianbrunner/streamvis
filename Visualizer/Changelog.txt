@@ -1,0 +1,161 @@
+﻿TODO: 14x 800Hz 70%
+TODO: 8x 120Hz 20%
+TODO: Make lines thin when no antialiasing is possible
+TODO: Exception on exit
+TODO: Embed font
+TODO: Correct minimal mode bug in mono WinForms
+TODO: Make hotkeys normal letters
+TODO: Test difference between VSync wait and AutoResetEvent wait
+TODO: Make frame counter an option (and a class)
+TODO: Text on Linux is blurry
+TODO: Name conflicts when more than one instance of the Visualizer is running
+TODO: Axis labels on Y-Axis can run off screen (use scientific notation?)
+TODO: Caching of Graph Data?
+TODO: Better parameter error checking
+ (values of 0 shouldn't be allowed for interval counts, etc.)
+TODO: Resamplig should be specified in DataEntry frequency rather than absolute plotter resolution
+TODO: Add versioning metadata
+TODO: Bundle into single assembly (mkbundle)
+TODO: Change design so that containers and ports are 1:1, in order to avoid excessive locks
+
+TODO:	Captured data is resampled immediately, before any permanent storing or other processing takes
+		place
+		
+TODO: One sample per pixel
+TODO: Test isolated data logging on Linux
+TODO: Memory profiling?
+TODO: Profiling on Linux
+TODO: Do nesting on .Designer and .resx
+
+- Peformance 2
+	14x 800Hz
+	- ACE_OS_Thread_Adapter::invoke(void)	18.89
+	- Yarp.Wrapper memory management		14.18
+	- ReadLoop								 8.50
+	- Yarp.Wrapper in ReadLoop				 7.50
+	- FittingValueManager.Update()			 5.14
+	- Drawing								31.59
+	- Transformation						10.00
+	
+	Yarp.Wrapper and below: 40.57
+
+- Performance
+	1. Idle Performance (8 hidden 120Hz streams)
+		- 50% in and below Yarp.Wrapper
+		!- 20% DrawLine and DrawNumber
+		!- 10% GL.SwapBuffers
+		(Could be improved by using buffer copying functions for text printing)
+	2. Load Performance
+		(Could be improved by shortening the DataEntry transformation pipeline (less enumerations))
+		(Could be improved by optimizing DataEntry to Point transformation)
+		(Could be improved by finding a faster way to draw a LineStrip than with GL.Vertex2 calls)
+
+Windows:
+	38x1000Hz, local, 38 flat, 10%
+	38x1000Hz, local, 2 flat, 4*9 nested, 30%
+	38x800Hz, network, 2 flat, 4*9 nested, 50%
+	38x1000Hz, local, 38 flat, Receiver, 10%
+		37.30%	Yarp.Value.Finalize()
+		27.81%	sharpyarp.dll (many small calls to ACE)
+		20.69%	Yarp.Bottle.get(int32)
+		 2.90%	Yarp.Value.asDouble()
+		 2.90%	Yarp.BufferedPortBottle.read()
+		 1.62%	Yarp.Bottle.Finalize()
+		------
+		93.22%
+	38x1000Hz, local, 38 flat, yarp read > NUL, 0%
+
+Ubuntu:
+	38x800Hz, local, 38 flat, 60%
+	38x800Hz, local, 38 flat, stub graphics, 33%
+	38x800Hz, local, 38 flat, no graphics, 32%
+	38x800Hz, local, 38 flat, Receiver, 30%
+	38x800Hz, local, 38 flat, yarp read > /dev/null, 16%
+	
+Ingo:
+	38x800Hz, local, 38 flat, 72%
+	38x800Hz, local, 38 flat, stub graphics, 42%
+	38x800Hz, local, 38 flat, no graphics, 30%
+	38x800Hz, local, 38 flat, Receiver, 26%
+	38x800Hz, local, 38 flat, yarp read > /dev/null, 13%
+	
+- compile ACE
+- do line drawing stress test (both in C and C#)
+- make own wrapper
+- software fallback for linestrip
+
+Version 0.6
+	- Renamed "yarp" to "sharpyarp" (results in "sharpyarp.dll" and "libsharpyarp.so")
+	- Rebuilt ACE, yarp and the C# bindings (newer versions, now also using x64 in Windows)
+	- Fixed a spelling error in the startup messages
+
+Version 0.5
+	- Added resampling of values before drawing
+	- Added option to set horizontal resolution of plotter
+	- Optimized FittingValueManager
+	- Improved graph extension (better graph cutting, incorporates more data entries for extension)
+	- Fixed a bug causing crashes when trying to plot a stream containing double.NaN values
+	- Removed some unnecessary formatting code
+	- Corrected general program description
+	- Shrinked scope of parameter error try clause so that other InvalidOperationExceptions won't be caught
+	- Fixed a few bugs related to error handling
+
+Version 0.4
+	- Fixed a bug causing exceptions because of different local number styles
+	- Removed frame timer
+	- Added VSync support
+	- Changed "-?" to "--help"
+	- Fixed a bug in "--help" layouting
+	- Added general description on "--help"
+	- Corrected spelling error
+	- Corrected a few errors in the "--help" description
+
+Version 0.3
+	- Better performance when displaying text (custom text printer)
+	- Added proper error handling for invalid command-line parameters
+	- Added proper error handling for invalid capture parameters
+	- Added support for paths to deep streams
+	- Added help display when "-?" is specified
+	- Lines are now antialiased
+	- Increased graph line thickness to 1.5 (looks better)
+	- Minor performance improvements
+	- Fixed issue of lines not being drawn on pixel centers
+	- Interval counts on X and Y axes can be customized
+	- Option to change plotter and background color
+	- Option to disable graph extension
+	- Made more settings accessible from the GUI, also added hotkeys
+	- Moved to OpenTK 0.9.7
+	- Fixed bug of not displaying the last interval caption on the X axis
+	- Fixed bug in "Container.GetIndex" method (picking wrong indices under certain conditions)
+	- Fixed bug in "Container.GetIndex" method (never picked the last index)
+	- Moved more layouting responsibilities to "Layouter"
+	- Removed all unused usings and references
+	- Fixed bug of empty ports being requested when the text box in the "New Capture" dialog is left empty
+	- FittingValueManager now respects graph extension feature
+	- Flipped coordinate system to improve layouting
+	- Removed option to hide labelsp
+	- Went back to old random color generation algorithm
+	- Removed Yarp.Visualizer.Utilities
+	- Fixed a bug in FittingValueManager that caused hidden graphs to cause value fitting
+	- Moved X axis down by 5 pixels
+	- Better internal parameter handling
+	- Proper error handling when YARP is not found
+	- StatusStrip is now hidden in minimal mode aswell
+
+Version 0.2
+	- Major design changes in "Yarp.Visualizer.Plotting"
+	- Substantially improved performance of "Container" by using binary search
+	- Added "Wrapping" plotter type
+	- Added fixed-scale Y-axis option
+	- Substantial performance improvements in various parts of the plotting process
+	- Removed "File" menu
+	- Added "Freeze" function
+	- Fixed potential error of streams containing consecutive entries with identical or wrongly ordered timestamps
+	- Fixed potential error of different streams getting different timestamps on data entries from the same bottle
+	- Graph is extended to known adjacent values on the left and right borders of the coordinate system
+	- Fixed occasionally thrown exception on exit
+	- Application can now be used on machines that do not have YARP installed
+	- Moved more responsibilities to TKDrawer
+
+Version 0.1
+	- Initial version
