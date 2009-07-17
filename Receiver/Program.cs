@@ -23,7 +23,7 @@ namespace Receiver
 					Bottle bottle = port.read();
 					for (int i = 0; i < 38; i++)
 					{
-						double a = bottle.get(i).asDouble();
+						bottle.get(i).asDouble();
 					}
 				}
 
