@@ -30,7 +30,7 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Yarp\Yarp.csproj">
+    <ProjectReference Include="..\Yarp\Yarp.csproj">
       <Project>{4570F9C8-6861-49E7-BD50-9C33993D2DAC}</Project>
       <Name>Yarp</Name>
     </ProjectReference>
