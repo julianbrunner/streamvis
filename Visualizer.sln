@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer", "Visualizer\Visualizer.csproj", "{F4356332-01E9-4114-B551-52912D6D86F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarp", "Yarp\Yarp.csproj", "{4570F9C8-6861-49E7-BD50-9C33993D2DAC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer.Data", "Visualizer.Data\Visualizer.Data.csproj", "{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer.Capturing", "Visualizer.Capturing\Visualizer.Capturing.csproj", "{EBD08DE0-7BF5-4B11-88FD-6677FC37CA23}"
@@ -17,16 +15,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sender", "Sender\Sender.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receiver", "Receiver\Receiver.csproj", "{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}"
 EndProject
+Project("{2857B73E-F847-4B02-9238-064979017E93}") = "Yarp.Wrapper", "Yarp.Wrapper\Yarp.Wrapper.cproj", "{E191CA1A-D35F-409B-A846-65E69CB15744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarp", "Yarp\Yarp.csproj", "{0BC9B692-9677-4433-B662-D51FF7004A39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4570F9C8-6861-49E7-BD50-9C33993D2DAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4570F9C8-6861-49E7-BD50-9C33993D2DAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4570F9C8-6861-49E7-BD50-9C33993D2DAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4570F9C8-6861-49E7-BD50-9C33993D2DAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC9B692-9677-4433-B662-D51FF7004A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC9B692-9677-4433-B662-D51FF7004A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC9B692-9677-4433-B662-D51FF7004A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC9B692-9677-4433-B662-D51FF7004A39}.Release|Any CPU.Build.0 = Release|Any CPU
 		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,6 +37,10 @@ Global
 		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E191CA1A-D35F-409B-A846-65E69CB15744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E191CA1A-D35F-409B-A846-65E69CB15744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E191CA1A-D35F-409B-A846-65E69CB15744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E191CA1A-D35F-409B-A846-65E69CB15744}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}.Release|Any CPU.ActiveCfg = Release|Any CPU

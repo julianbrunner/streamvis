@@ -10,27 +10,27 @@ namespace Receiver
 	{
 		static void Main(string[] args)
 		{
-			Network.init();
-
-			using (BufferedPortBottle port = new BufferedPortBottle())
-			{
-				port.open("/test");
-
-				Network.connect("/write", "/test");
-
-				while (!Console.KeyAvailable)
-				{
-					Bottle bottle = port.read();
-					for (int i = 0; i < 38; i++)
-					{
-						bottle.get(i).asDouble();
-					}
-				}
-
-				port.close();
-			}
-
-			Network.fini();
+//			Network.init();
+//
+//			using (BufferedPortBottle port = new BufferedPortBottle())
+//			{
+//				port.open("/test");
+//
+//				Network.connect("/write", "/test");
+//
+//				while (!Console.KeyAvailable)
+//				{
+//					Bottle bottle = port.read();
+//					for (int i = 0; i < 38; i++)
+//					{
+//						bottle.get(i).asDouble();
+//					}
+//				}
+//
+//				port.close();
+//			}
+//
+//			Network.fini();
 		}
 	}
 }
