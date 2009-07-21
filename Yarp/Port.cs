@@ -5,14 +5,19 @@ namespace Yarp
 {
 	public class Port : IDisposable
 	{
+		readonly string name;
 		readonly IntPtr port;
 		
 		bool disposed = false;
 		
+		public string Name { get { return name; } }
+		
 		public Port(string name)
 		{
+			this.name = name;
+			
 			port = BufferedPort_Bottle_New();
-			BufferedPort_Bottle_Open(port, name);
+			BufferedPort_Bottle_Open(port, this.name);
 		}
 		~Port()
 		{
