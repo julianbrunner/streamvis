@@ -17,10 +17,10 @@ namespace Receiver
 	
 					while (!Console.KeyAvailable)
 					{
-						Bottle bottle = port.Read();
+						List list = (List)port.Read();
 						for (int i = 0; i < 38; i++)
 						{
-							double d = bottle[i];
+							double d = (Value)list[i];
 							if (d == 0) d = 1;
 						}
 					}

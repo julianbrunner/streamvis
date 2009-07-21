@@ -67,7 +67,6 @@
     <None Include="OpenTK.Utilities.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Yarp.Visualizer.jnt" />
     <None Include="Images\CrossMark.png" />
     <None Include="Images\CrossMark.xcf" />
     <None Include="Images\New.png" />
@@ -81,7 +80,7 @@
     <None Include="OpenTK.Utilities.dll" />
     <None Include="OpenTK.Utilities.xml" />
     <None Include="OpenTK.xml" />
-    <None Include="Yarp Warning Fix.pl" />
+    <None Include="Visualizer.jnt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

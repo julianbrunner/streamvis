@@ -78,11 +78,12 @@ Ingo:
 	38x800Hz, local, 38 flat, Receiver, 26%
 	38x800Hz, local, 38 flat, yarp read > /dev/null, 13%
 	
-- compile ACE
+- Compile ACE
 	- Didn't make any difference, still try on Ingo's PC?
-TODO: make own wrapper
-TODO: do line drawing stress test (both in C and C#)
-TODO: software fallback for linestrip
+TODO: Make own wrapper
+TODO: Try eBottle
+TODO: Do line drawing stress test (both in C and C#)
+TODO: Software fallback for linestrip
 
 Version 0.6
 	- Renamed "yarp" to "sharpyarp" (results in "sharpyarp.dll" and "libsharpyarp.so")
