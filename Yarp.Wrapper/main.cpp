@@ -1,20 +1,40 @@
 #include "main.h"
-#include <iostream>
-#include <yarp/os/all.h>
 
-using namespace std;
-using namespace yarp::os;
-
-Network *network = NULL;
-
-void Network_Initialize()
+Network* Network_New()
 {
-	network = new Network();
-	cout << network;
+	return new Network;
 }
-void Network_Dispose()
+void Network_Dispose(Network* network)
 {
-	// TODO: Throw exception if network == NULL
 	delete network;
-	network = NULL;
+}
+void Network_Connect(const char* source, const char* destination)
+{
+	Network::connect(source, destination);
+}
+
+BufferedPort<Bottle>* BufferedPort_Bottle_New()
+{
+	return new BufferedPort<Bottle>;
+}
+void BufferedPort_Bottle_Dispose(BufferedPort<Bottle>* port)
+{
+	delete port;
+}	
+void BufferedPort_Bottle_Open(BufferedPort<Bottle>* port, const char* name)
+{
+	port->open(name);
+}
+void BufferedPort_Bottle_Close(BufferedPort<Bottle>* port)
+{
+	port->close();
+}
+Bottle* BufferedPort_Bottle_Read(BufferedPort<Bottle>* port)
+{
+	return port->read();
+}
+
+double Bottle_GetDouble(Bottle* bottle, int index)
+{
+	return bottle->get(index).asDouble();
 }

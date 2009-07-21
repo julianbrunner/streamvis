@@ -31,8 +31,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Wrapper.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Port.cs" />
+    <Compile Include="Network.cs" />
+    <Compile Include="Bottle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
