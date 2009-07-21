@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}</ProjectGuid>
     <Compiler>
-      <Compiler ctype="GppCompiler" xmlns="" />
+      <Compiler ctype="GppCompiler" />
     </Compiler>
     <Language>CPP</Language>
     <Target>Bin</Target>

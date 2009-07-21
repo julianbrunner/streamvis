@@ -3,11 +3,11 @@ using System.Runtime.InteropServices;
 
 namespace Yarp
 {	
-	static class Wrapper
+	public static class Wrapper
 	{
 		[DllImport("Yarp.Wrapper")]
-		public static extern void Network_Init();
+		public static extern void Network_Initialize();
 		[DllImport("Yarp.Wrapper")]
-		public static extern void Network_Fini();
+		public static extern void Network_Dispose();
 	}
 }

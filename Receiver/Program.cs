@@ -10,6 +10,8 @@ namespace Receiver
 	{
 		static void Main(string[] args)
 		{
+			Wrapper.Network_Initialize();
+			
 //			Network.init();
 //
 //			using (BufferedPortBottle port = new BufferedPortBottle())

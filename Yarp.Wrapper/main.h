@@ -2,6 +2,7 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
-// Add function prototypes here
+extern "C" void Network_Initialize();
+extern "C" void Network_Dispose();
 
 #endif
