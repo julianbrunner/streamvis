@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
@@ -44,7 +45,11 @@ namespace Yarp
 			IntPtr bottle = BufferedPort_Bottle_Prepare(port);
 			Bottle_Clear(bottle);
 			
-			WritePackets(bottle, new[] { packet });
+			IEnumerable<Packet> packets = Enumerable.Empty<Packet>();
+			if (packet is List) packets = (List)packet;
+			if (packet is Value) packets = new[] { packet };
+			
+			WritePackets(bottle, packets);
 			
 			BufferedPort_Bottle_Write(port);
 		}

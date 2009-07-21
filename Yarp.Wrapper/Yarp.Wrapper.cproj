@@ -24,6 +24,13 @@
         <Lib>YARP_OS</Lib>
       </Libs>
     </Libs>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="cp libYarp.Wrapper.so ../../../Receiver/bin/Debug" workingdir="${TargetDir}" />
+        <Command type="AfterBuild" command="cp libYarp.Wrapper.so ../../../Sender/bin/Debug" workingdir="${TargetDir}" />
+        <Command type="AfterBuild" command="cp libYarp.Wrapper.so ../../../Visualizer/bin/Debug" workingdir="${TargetDir}" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release</OutputPath>
