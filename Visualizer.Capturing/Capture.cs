@@ -8,31 +8,37 @@ namespace Visualizer.Capturing
 {
 	public class Capture : Source, IDisposable
 	{
+		readonly Network network;
+		
 		bool disposed = false;
 
-		public Capture(IEnumerable<Data.Port> ports) : base(ports) { }
+		Capture(IEnumerable<Data.Port> ports, Network network) : base(ports)
+		{
+			this.network = network;
+		}
 		~Capture()
 		{
 			Dispose();
 		}
 
-		public static Source Create(IEnumerable<string> portStrings, Timer timer, System.Random random)
+		public static Source Create(IEnumerable<string> portStrings, Timer timer, Random random)
 		{
-			Network.init();
-
-			List<CapturePort> ports = new List<CapturePort>();
+			Network network = new Network();
+			List<Data.Port> ports = new List<Data.Port>();
 
 			try
 			{
-				foreach (string portString in portStrings) ports.Add(CapturePort.Create(portString, timer, random));
+				foreach (string portString in portStrings) ports.Add(CapturePort.Create(portString, network, timer, random));
 			}
-			catch (Exception)
+			catch
 			{
-				foreach (CapturePort port in ports) port.Dispose();
+				foreach (IDisposable port in ports.OfType<IDisposable>()) port.Dispose();
+				network.Dispose();				
+				
 				throw;
 			}
 
-			return new Capture(ports.Cast<Data.Port>());
+			return new Capture(ports, network);
 		}
 
 		public void Dispose()
@@ -42,8 +48,7 @@ namespace Visualizer.Capturing
 				disposed = true;
 
 				foreach (IDisposable port in Ports.OfType<IDisposable>()) port.Dispose();
-
-				Network.fini();
+				network.Dispose();
 			}
 		}
 	}

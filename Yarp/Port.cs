@@ -36,25 +36,21 @@ namespace Yarp
 				BufferedPort_Bottle_Dispose(port);
 			}
 		}
-		public Packet Read()
+		public List Read()
 		{
 			return ParseBottle(BufferedPort_Bottle_Read(port));
 		}
-		public void Write(Packet packet)
+		public void Write(List list)
 		{
 			IntPtr bottle = BufferedPort_Bottle_Prepare(port);
 			Bottle_Clear(bottle);
 			
-			IEnumerable<Packet> packets = Enumerable.Empty<Packet>();
-			if (packet is List) packets = (List)packet;
-			if (packet is Value) packets = new[] { packet };
-			
-			WritePackets(bottle, packets);
+			foreach (Packet packet in list) WritePacket(bottle, packet);
 			
 			BufferedPort_Bottle_Write(port);
 		}
 		
-		static Packet ParseBottle(IntPtr bottle)
+		static List ParseBottle(IntPtr bottle)
 		{
 			int size = Bottle_Size(bottle);
 			Packet[] packets = new Packet[size];
@@ -68,19 +64,16 @@ namespace Yarp
 			if (Value_IsList(value)) return ParseBottle(Value_AsList(value));
 			if (Value_IsDouble(value)) return new Value(Value_AsDouble(value));
 		
-			return new Packet();
+			return Packet.Empty;
 		}
-		static void WritePackets(IntPtr bottle, IEnumerable<Packet> packets)
+		static void WritePacket(IntPtr bottle, Packet packet)
 		{
-			foreach (Packet packet in packets)
+			if (packet is List)
 			{
-				if (packet is List)
-				{
-					IntPtr subBottle = Bottle_AddList(bottle);
-					WritePackets(subBottle, (List)packet);
-				}
-				if (packet is Value) Bottle_AddDouble(bottle, (Value)packet);
+				IntPtr subBottle = Bottle_AddList(bottle);
+				foreach (Packet subPacket in (List)packet) WritePacket(subBottle, subPacket);
 			}
+			if (packet is Value) Bottle_AddDouble(bottle, (Value)packet);
 		}
 		
 		[DllImport("Yarp.Wrapper")]

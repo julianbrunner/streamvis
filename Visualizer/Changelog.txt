@@ -16,6 +16,8 @@ TODO: Resamplig should be specified in DataEntry frequency rather than absolute 
 TODO: Add versioning metadata
 TODO: Bundle into single assembly (mkbundle)
 TODO: Change design so that containers and ports are 1:1, in order to avoid excessive locks
+TODO: Add .Single() and .Concat(item) extension methods, and search for applicable places
+TODO: Extension method doesn't work without reference to System.Core
 
 TODO:	Captured data is resampled immediately, before any permanent storing or other processing takes
 		place
@@ -50,10 +52,10 @@ TODO: Do nesting on .Designer and .resx
 		(Could be improved by finding a faster way to draw a LineStrip than with GL.Vertex2 calls)
 
 Windows:
-	38x1000Hz, local, 38 flat, 10%
-	38x1000Hz, local, 2 flat, 4*9 nested, 30%
-	38x800Hz, network, 2 flat, 4*9 nested, 50%
-	38x1000Hz, local, 38 flat, Receiver, 10%
+	38x1000Hz, local, 38 flat										10%
+	38x1000Hz, local, 2 flat, 4*9 nested							30%
+	38x800Hz, network, 2 flat, 4*9 nested							50%
+	38x1000Hz, local, 38 flat, Receiver								10%
 		37.30%	Yarp.Value.Finalize()
 		27.81%	sharpyarp.dll (many small calls to ACE)
 		20.69%	Yarp.Bottle.get(int32)
@@ -62,24 +64,36 @@ Windows:
 		 1.62%	Yarp.Bottle.Finalize()
 		------
 		93.22%
-	38x1000Hz, local, 38 flat, yarp read > NUL, 0%
+	38x1000Hz, local, 38 flat, yarp read > NUL						 0%
 
 Ubuntu:
-	38x800Hz, local, 38 flat, 60%
-	38x800Hz, local, 38 flat, stub graphics, 33%
-	38x800Hz, local, 38 flat, no graphics, 32%
-	38x800Hz, local, 38 flat, Receiver, 30%
-	38x800Hz, local, 38 flat, yarp read > /dev/null, 16%
+	38x800Hz, local, 38 flat, Visualizer (swig)						60%
+	38x800Hz, local, 38 flat, Stub graphics (swig)					33%
+	38x800Hz, local, 38 flat, No graphics (swig)					32%
+	38x800Hz, local, 38 flat, Receiver (swig)						30%
+	
+	38x800Hz, local, 38 flat, Visualizer (new wrapper)				25%
+	38x800Hz, local, 38 flat, DrawLineStrip: enum (new wrapper)		25%
+	38x800Hz, local, 38 flat, No DrawLineStrip (new wrapper)		18%
+	38x800Hz, local, 38 flat, Stub graphics (new wrapper)			16%
+	38x800Hz, local, 38 flat, No graphics (new wrapper)				15%
+	38x800Hz, local, 38 flat, Receiver (new wrapper)				10%
+	
+	38x800Hz, local, 38 flat, Visualizer from file (new wrapper)	11%
+	
+	38x800Hz, local, 38 flat, yarp read > /dev/null					16%
+	38x800Hz, local, 38 flat, C++ Receiver							 9%
 	
 Ingo:
-	38x800Hz, local, 38 flat, 72%
-	38x800Hz, local, 38 flat, stub graphics, 42%
-	38x800Hz, local, 38 flat, no graphics, 30%
-	38x800Hz, local, 38 flat, Receiver, 26%
-	38x800Hz, local, 38 flat, yarp read > /dev/null, 13%
+	38x800Hz, local, 38 flat, Visualizer (swig)						72%
+	38x800Hz, local, 38 flat, Stub graphics (swig)					42%
+	38x800Hz, local, 38 flat, No graphics (swig)					30%
+	38x800Hz, local, 38 flat, Receiver (swig)						26%
+	
+	38x800Hz, local, 38 flat, yarp read > /dev/null					13%
 	
 - Compile ACE
-	- Didn't make any difference, still try on Ingo's PC?
+	TODO: Didn't make any difference, still try on Ingo's PC?
 TODO: Make own wrapper
 TODO: Profile the new wrapper
 TODO: Try eBottle
@@ -87,6 +101,8 @@ TODO: Do line drawing stress test (both in C and C#)
 TODO: Software fallback for linestrip
 
 Version 0.6
+	- Implemented custom wrapper
+	- Added Receiver to the solution
 	- Renamed "yarp" to "sharpyarp" (results in "sharpyarp.dll" and "libsharpyarp.so")
 	- Rebuilt ACE, yarp and the C# bindings (newer versions, now also using x64 in Windows)
 	- Fixed a spelling error in the startup messages

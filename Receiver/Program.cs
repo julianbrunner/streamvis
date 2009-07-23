@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Yarp;
 
@@ -17,10 +16,10 @@ namespace Receiver
 	
 					while (!Console.KeyAvailable)
 					{
-						List list = (List)port.Read();
+						Packet packet = port.Read();
 						for (int i = 0; i < 38; i++)
 						{
-							double d = (Value)list[i];
+							double d = packet.Get(new[] { i });
 							if (d == 0) d = 1;
 						}
 					}

@@ -38,6 +38,7 @@
     <Compile Include="Packet.cs" />
     <Compile Include="Value.cs" />
     <Compile Include="List.cs" />
+    <Compile Include="Navigation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

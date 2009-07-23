@@ -4,6 +4,8 @@ namespace Yarp
 {
 	public class Packet
 	{
-		internal Packet() { }
+		public static Packet Empty { get { return new Packet(); } }
+			
+		protected Packet() { }
 	}
 }

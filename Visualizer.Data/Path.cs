@@ -5,6 +5,7 @@ using System.Xml.Linq;
 
 namespace Visualizer.Data
 {
+	// TODO: Merge head and tail
 	public struct Path
 	{
 		readonly IEnumerable<int> parts;

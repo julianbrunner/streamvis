@@ -31,6 +31,10 @@ namespace Yarp
 		{
 			Network_Connect(source, destination);
 		}
+		public void Disconnect(string source, string destination)
+		{
+			Network_Disconnect(source, destination);
+		}
 		
 		[DllImport("Yarp.Wrapper")]
 		static extern IntPtr Network_New();
@@ -38,5 +42,7 @@ namespace Yarp
 		static extern void Network_Dispose(IntPtr network);
 		[DllImport("Yarp.Wrapper")]
 		static extern void Network_Connect(string source, string destination);
+		[DllImport("Yarp.Wrapper")]
+		static extern void Network_Disconnect(string source, string destination);
 	}
 }

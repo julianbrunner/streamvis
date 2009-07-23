@@ -9,23 +9,23 @@ namespace Visualizer.Capturing
 {
 	class CapturePort : Data.Port, IDisposable
 	{
+		readonly Network network;
 		readonly Timer timer;
-		readonly BufferedPortBottle port;
+		readonly Yarp.Port port;
 		readonly System.Threading.Thread reader;
 
 		bool disposed = false;
 		bool running = true;
 
-		CapturePort(string name, IEnumerable<Stream> streams, Timer timer)
+		CapturePort(string name, Network network, IEnumerable<Stream> streams, Timer timer)
 			: base(name, streams)
 		{
+			this.network = network;
 			this.timer = timer;
 
-			port = new BufferedPortBottle();
-			port.setStrict();
-			port.open(name + "/visualization");
+			port = new Yarp.Port(name + "/visualization");
 
-			Network.connect(name, name + "/visualization");
+			network.Connect(name, port.Name);
 
 			reader = new System.Threading.Thread(ReadLoop);
 			reader.Start();
@@ -48,20 +48,17 @@ namespace Visualizer.Capturing
 				if (!reader.Join(1000))
 				{
 					Console.WriteLine("Sending a bottle to \"" + Name + "\" in order to join reader thread...");
-					using (Yarp.Port helperPort = new Yarp.Port())
+					using (Yarp.Port helperPort = new Yarp.Port("/portActivator"))
 					{
-						helperPort.open("/portActivator");
-						Network.connect("/portActivator", Name + "/visualization");
-						helperPort.write(new Bottle());
-						Network.disconnect("/portActivator", Name + "/visualization");
-						helperPort.close();
+						network.Connect(helperPort.Name, port.Name);
+						helperPort.Write(new List());
+						network.Disconnect(helperPort.Name, port.Name);
 					}
 
 					reader.Join();
 				}
 
-				Network.disconnect(Name, Name + "/visualization");
-				port.close();
+				network.Disconnect(Name, port.Name);
 
 				port.Dispose();
 			}
@@ -71,28 +68,16 @@ namespace Visualizer.Capturing
 		{
 			while (running)
 			{
-				Bottle bottle = port.read();
+				Packet packet = port.Read();
 				long time = timer.Time;
 
 				if (running)
 					foreach (Stream stream in Streams)
-						stream.Container.Add
-						(
-							new Entry
-							(
-								time,
-								stream.Path.Head.Aggregate
-								(
-									bottle,
-									(current, part) => current.get(part).asList()
-								)
-								.get(stream.Path.Tail).asDouble()
-							)
-						);
+						stream.Container.Add(new Entry(time, packet.Get(stream.Path.Head.Concat(new[] { stream.Path.Tail }))));
 			}
 		}
 
-		public static CapturePort Create(string port, Timer timer, System.Random random)
+		public static CapturePort Create(string port, Network network, Timer timer, System.Random random)
 		{
 			string[] details = port.Split(':');
 
@@ -103,33 +88,29 @@ namespace Visualizer.Capturing
 			{
 				case 1:
 					Console.WriteLine("Getting bottle to test size of \"" + name + "\"...");
-					using (BufferedPortBottle testPort = new BufferedPortBottle())
+					using (Yarp.Port testPort = new Yarp.Port(name + "/test"))
 					{
-						testPort.open(name + "/test");
-						Network.connect(name, name + "/test");
-						paths = GetSubPaths(Enumerable.Empty<int>(), testPort.read()).ToArray();
-						Network.disconnect(name, name + "/test");
-						testPort.close();
+						network.Connect(name, testPort.Name);
+						paths = GetPaths(Enumerable.Empty<int>(), testPort.Read()).ToArray();
+						network.Disconnect(name, testPort.Name);
 					}
 					break;
 				case 2: paths = ParseStreams(details[1]); break;
 				default: throw new InvalidOperationException("Invalid port: \"" + port + "\".");
 			}
-			return new CapturePort(name, from path in paths select new Stream(path, Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100))), timer);
+			return new CapturePort(name, network, from path in paths select new Stream(path, Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100))), timer);
 		}
 
-		static IEnumerable<Path> GetSubPaths(IEnumerable<int> parts, Bottle bottle)
+		static IEnumerable<Path> GetPaths(IEnumerable<int> path, Packet packet)
 		{
-			for (int i = 0; i < bottle.size(); i++)
+			if (packet is List)
 			{
-				Value value = bottle.get(i);
-				IEnumerable<int> current = parts.Concat(new int[] { i });
-
-				if (value.isList())
-					foreach (Path path in GetSubPaths(current, value.asList()))
-						yield return path;
-				else yield return new Path(current);
+				int i = 0;
+				foreach (Packet subPacket in (List)packet)
+					foreach (Path subPath in GetPaths(path.Concat(new[] { i++ }), subPacket))
+						yield return subPath;
 			}
+			if (packet is Value) yield return new Path(path);
 		}
 		static IEnumerable<Path> ParseStreams(string streams)
 		{
