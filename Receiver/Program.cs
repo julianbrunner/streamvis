@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Yarp;
+using Data;
 
 namespace Receiver
 {
@@ -19,7 +20,7 @@ namespace Receiver
 						Packet packet = port.Read();
 						for (int i = 0; i < 38; i++)
 						{
-							double d = packet.Get(new[] { i });
+							double d = packet.Get(i.Single());
 							if (d == 0) d = 1;
 						}
 					}

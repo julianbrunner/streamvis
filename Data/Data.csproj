@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}</ProjectGuid>
+    <ProjectGuid>{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Visualizer.Data</AssemblyName>
+    <AssemblyName>Data</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,31 +28,16 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Compile Include="Enumerable.cs" />
+    <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Container.cs" />
-    <Compile Include="Entry.cs" />
-    <Compile Include="Path.cs" />
-    <Compile Include="Port.cs" />
-    <Compile Include="Source.cs" />
-    <Compile Include="Stream.cs" />
-    <Compile Include="Timer.cs" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <MonoDevelop>
-      <Properties InternalTargetFrameworkVersion="3.5" />
+      <Properties InternalTargetFrameworkVersion="3.5" xmlns="" />
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
-  </ItemGroup>
 </Project>

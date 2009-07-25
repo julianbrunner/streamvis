@@ -16,16 +16,12 @@ TODO: Resamplig should be specified in DataEntry frequency rather than absolute 
 TODO: Add versioning metadata
 TODO: Bundle into single assembly (mkbundle)
 TODO: Change design so that containers and ports are 1:1, in order to avoid excessive locks
-TODO: Add .Single() and .Concat(item) extension methods, and search for applicable places
 TODO: Extension method doesn't work without reference to System.Core
 
-TODO:	Captured data is resampled immediately, before any permanent storing or other processing takes
-		place
+TODO: Captured data is resampled immediately, before any permanent storing or other processing takes place
 		
 TODO: One sample per pixel
-TODO: Test isolated data logging on Linux
 TODO: Memory profiling?
-TODO: Profiling on Linux
 TODO: Do nesting on .Designer and .resx
 
 - Peformance 2
@@ -101,6 +97,8 @@ TODO: Do line drawing stress test (both in C and C#)
 TODO: Software fallback for linestrip
 
 Version 0.6
+	- Added Data Project
+	- Improved Path implementation
 	- Implemented custom wrapper
 	- Added Receiver to the solution
 	- Renamed "yarp" to "sharpyarp" (results in "sharpyarp.dll" and "libsharpyarp.so")

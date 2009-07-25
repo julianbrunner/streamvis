@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Visualizer.Data;
+using Data;
 using Yarp;
 
 namespace Visualizer.Capturing
@@ -73,7 +74,7 @@ namespace Visualizer.Capturing
 
 				if (running)
 					foreach (Stream stream in Streams)
-						stream.Container.Add(new Entry(time, packet.Get(stream.Path.Head.Concat(new[] { stream.Path.Tail }))));
+						stream.Container.Add(new Entry(time, packet.Get(stream.Path)));
 			}
 		}
 
@@ -107,7 +108,7 @@ namespace Visualizer.Capturing
 			{
 				int i = 0;
 				foreach (Packet subPacket in (List)packet)
-					foreach (Path subPath in GetPaths(path.Concat(new[] { i++ }), subPacket))
+					foreach (Path subPath in GetPaths(path.Concat(i++.Single()), subPacket))
 						yield return subPath;
 			}
 			if (packet is Value) yield return new Path(path);
