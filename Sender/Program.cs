@@ -12,19 +12,18 @@ namespace Sender
 	{
 		static void Main(string[] args)
 		{
+			int streams = int.Parse(args[0]);
+			int frequency = int.Parse(args[1]);
+			int ms = 1000 / frequency;
+
+			Random random = new Random();
+
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Reset();
+			stopwatch.Start();
+			int packets = 0;
+
 			using (Network network = new Network())
-			{
-				int streams = int.Parse(args[0]);
-				int frequency = int.Parse(args[1]);
-				int ms = 1000 / frequency;
-	
-				Random random = new Random();
-	
-				Stopwatch stopwatch = new Stopwatch();
-				stopwatch.Reset();
-				stopwatch.Start();
-				int packets = 0;
-	
 				using (Port port = new Port("/write"))
 					while (!Console.KeyAvailable)
 					{
@@ -46,7 +45,6 @@ namespace Sender
 	
 						Thread.Sleep(ms);
 					}
-			}
 		}
 	}
 }

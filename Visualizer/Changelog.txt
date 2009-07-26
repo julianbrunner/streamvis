@@ -60,33 +60,44 @@ Windows:
 		 1.62%	Yarp.Bottle.Finalize()
 		------
 		93.22%
-	38x1000Hz, local, 38 flat, yarp read > NUL						 0%
+	38x1000Hz, local, 38 flat, yarp read > NUL							 0%
 
-Ubuntu:
-	38x800Hz, local, 38 flat, Visualizer (swig)						60%
-	38x800Hz, local, 38 flat, Stub graphics (swig)					33%
-	38x800Hz, local, 38 flat, No graphics (swig)					32%
-	38x800Hz, local, 38 flat, Receiver (swig)						30%
+Ubuntu, SU9400:
+	SWIG, regular Bottle
+		38x800Hz, local, 38 flat, Visualizer							60%
+		38x800Hz, local, 38 flat, Stub graphics							33%
+		38x800Hz, local, 38 flat, No graphics							32%
+		38x800Hz, local, 38 flat, Receiver								30%
 	
-	38x800Hz, local, 38 flat, Visualizer (new wrapper)				25%
-	38x800Hz, local, 38 flat, DrawLineStrip: enum (new wrapper)		25%
-	38x800Hz, local, 38 flat, No DrawLineStrip (new wrapper)		18%
-	38x800Hz, local, 38 flat, Stub graphics (new wrapper)			16%
-	38x800Hz, local, 38 flat, No graphics (new wrapper)				15%
-	38x800Hz, local, 38 flat, Receiver (new wrapper)				10%
+	Custom wrapper, regular Bottle
+		38x800Hz, local, 38 flat, Visualizer							25%
+		38x800Hz, local, 38 flat, DrawLineStrip: enumeration only		25%
+		38x800Hz, local, 38 flat, No DrawLineStrip						18%
+		38x800Hz, local, 38 flat, Stub graphics							16%
+		38x800Hz, local, 38 flat, No graphics							15%
+		38x800Hz, local, 38 flat, Visualizer from file					11%
+		
+		38x800Hz, local, 38 flat, Sender (load)							14%
+		38x800Hz, local, 38 flat, Sender								10%
+		38x800Hz, local, 38 flat, Receiver								12%
+		
+	Custom wrapper, eBottle
+		38x800Hz, local, 38 flat, Sender (load)							14%
+		38x800Hz, local, 38 flat, Sender								 4%
+		38x800Hz, local, 38 flat, Receiver								12%
 	
-	38x800Hz, local, 38 flat, Visualizer from file (new wrapper)	11%
-	
-	38x800Hz, local, 38 flat, yarp read > /dev/null					16%
-	38x800Hz, local, 38 flat, C++ Receiver							 9%
-	
+	Miscellaneous
+		38x800Hz, local, 38 flat, yarp read > /dev/null					16%
+		38x800Hz, local, 38 flat, C++ Receiver, regular Bottle			 9%
+
 Ingo:
-	38x800Hz, local, 38 flat, Visualizer (swig)						72%
-	38x800Hz, local, 38 flat, Stub graphics (swig)					42%
-	38x800Hz, local, 38 flat, No graphics (swig)					30%
-	38x800Hz, local, 38 flat, Receiver (swig)						26%
-	
-	38x800Hz, local, 38 flat, yarp read > /dev/null					13%
+	SWIG, regular Bottle
+		38x800Hz, local, 38 flat, Visualizer (swig)						72%
+		38x800Hz, local, 38 flat, Stub graphics (swig)					42%
+		38x800Hz, local, 38 flat, No graphics (swig)					30%
+		38x800Hz, local, 38 flat, Receiver (swig)						26%
+		
+		38x800Hz, local, 38 flat, yarp read > /dev/null					13%
 	
 - Compile ACE
 	TODO: Didn't make any difference, still try on Ingo's PC?
