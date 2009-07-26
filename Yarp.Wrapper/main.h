@@ -3,6 +3,7 @@
 #define __MAIN_H__
 
 #include <yarp/os/all.h>
+#include "../Yarp.EBottle/compatibility.h"
 
 using namespace yarp::os;
 
