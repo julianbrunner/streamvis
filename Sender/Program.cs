@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Sender
 {
-	class Program
+	static class Program
 	{
 		static void Main(string[] args)
 		{

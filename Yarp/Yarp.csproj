@@ -46,4 +46,19 @@
       <Properties InternalTargetFrameworkVersion="3.5" />
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <None Include="..\Yarp.Wrapper\bin\Debug\libYarp.EBottle.so" />
+    <None Include="libYarp.EBottle.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="libYarp.Wrapper.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Yarp.Wrapper\Yarp.Wrapper.cproj">
+      <Project>{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}</Project>
+      <Name>Yarp.Wrapper</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
