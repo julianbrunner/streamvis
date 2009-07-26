@@ -8,6 +8,7 @@
     <ProjectGuid>{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AssemblyName>Receiver</AssemblyName>
+    <StartupObject>Receiver.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

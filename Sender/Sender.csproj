@@ -8,6 +8,7 @@
     <ProjectGuid>{E577647C-A7BD-4DEC-A723-E01AD0C0200E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AssemblyName>Sender</AssemblyName>
+    <StartupObject>Sender.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -16,7 +17,7 @@
     <OutputPath>bin\Debug</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
