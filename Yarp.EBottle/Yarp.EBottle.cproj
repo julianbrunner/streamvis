@@ -5,30 +5,20 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}</ProjectGuid>
+    <ProjectGuid>{B4D4743B-0536-4917-B180-8F2B5681D263}</ProjectGuid>
     <Compiler>
       <Compiler ctype="GppCompiler" />
     </Compiler>
     <Language>CPP</Language>
     <Target>Bin</Target>
-    <Packages>
-      <Packages>
-        <Package file="/home/julian/Projects/Visualizer/Yarp.EBottle/Yarp.EBottle.md.pc" name="Yarp.EBottle" IsProject="true" />
-      </Packages>
-    </Packages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug</OutputPath>
     <DefineSymbols>DEBUG MONODEVELOP</DefineSymbols>
     <SourceDirectory>.</SourceDirectory>
-    <OutputName>Yarp.Wrapper</OutputName>
+    <OutputName>Yarp.EBottle</OutputName>
     <CompileTarget>SharedLibrary</CompileTarget>
-    <Libs>
-      <Libs>
-        <Lib>YARP_OS</Lib>
-      </Libs>
-    </Libs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release</OutputPath>
@@ -39,9 +29,10 @@
     <CompileTarget>SharedLibrary</CompileTarget>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="main.h" />
+    <None Include="compatibility.h" />
+    <None Include="eBottle.h" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="main.cpp" />
+    <Compile Include="eBottle.cpp" />
   </ItemGroup>
 </Project>
