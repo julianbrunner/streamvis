@@ -11,11 +11,6 @@
     </Compiler>
     <Language>CPP</Language>
     <Target>Bin</Target>
-    <Packages>
-      <Packages>
-        <Package file="/home/julian/Projects/Visualizer/Yarp.EBottle/Yarp.EBottle.md.pc" name="Yarp.EBottle" IsProject="true" />
-      </Packages>
-    </Packages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

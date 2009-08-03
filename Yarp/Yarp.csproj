@@ -48,9 +48,6 @@
   </ProjectExtensions>
   <ItemGroup>
     <None Include="..\Yarp.Wrapper\bin\Debug\libYarp.EBottle.so" />
-    <None Include="libYarp.EBottle.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="libYarp.Wrapper.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -2,7 +2,6 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
-#include <compatibility.h>
 #include <yarp/os/all.h>
 
 using namespace yarp::os;
