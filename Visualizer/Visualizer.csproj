@@ -107,5 +107,9 @@
       <Project>{EBD08DE0-7BF5-4B11-88FD-6677FC37CA23}</Project>
       <Name>Visualizer.Capturing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Yarp\Yarp.csproj">
+      <Project>{0BC9B692-9677-4433-B662-D51FF7004A39}</Project>
+      <Name>Yarp</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
