@@ -98,6 +98,16 @@ Ingo:
 		38x800Hz, local, 38 flat, Receiver (swig)						26%
 		
 		38x800Hz, local, 38 flat, yarp read > /dev/null					13%
+		
+	Custom wrapper, regular Bottle
+		38x800Hz, local, 38 flat, Sender (load)							12%
+		38x800Hz, local, 38 flat, Sender								 8%
+		38x800Hz, local, 38 flat, Receiver								12%
+	
+	Custom wrapper, eBottle
+		38x800Hz, local, 38 flat, Sender (load)							12%
+		38x800Hz, local, 38 flat, Sender								 8%
+		38x800Hz, local, 38 flat, Receiver								12%
 	
 - Compile ACE
 	TODO: Didn't make any difference, still try on Ingo's PC?
@@ -106,6 +116,7 @@ TODO: Profile the new wrapper
 TODO: Try eBottle
 TODO: Do line drawing stress test (both in C and C#)
 TODO: Software fallback for linestrip
+TODO: Relative paths in cproj
 
 Version 0.6
 	- Added Data Project
