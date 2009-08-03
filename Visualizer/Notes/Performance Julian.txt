@@ -1,0 +1,27 @@
+Ubuntu, SU9400:
+	SWIG, regular Bottle
+		38x800Hz, local, 38 flat, Visualizer							60%
+		38x800Hz, local, 38 flat, Stub graphics							33%
+		38x800Hz, local, 38 flat, No graphics							32%
+		38x800Hz, local, 38 flat, Receiver								30%
+	
+	Custom wrapper, regular Bottle
+		38x800Hz, local, 38 flat, Visualizer							25%
+		38x800Hz, local, 38 flat, DrawLineStrip: enumeration only		25%
+		38x800Hz, local, 38 flat, No DrawLineStrip						18%
+		38x800Hz, local, 38 flat, Stub graphics							16%
+		38x800Hz, local, 38 flat, No graphics							15%
+		38x800Hz, local, 38 flat, Visualizer from file					11%
+		
+		38x800Hz, local, 38 flat, Sender (load)							14%
+		38x800Hz, local, 38 flat, Sender								10%
+		38x800Hz, local, 38 flat, Receiver								12%
+		
+	Custom wrapper, eBottle
+		38x800Hz, local, 38 flat, Sender (load)							14%
+		38x800Hz, local, 38 flat, Sender								 4%
+		38x800Hz, local, 38 flat, Receiver								12%
+	
+	Miscellaneous
+		38x800Hz, local, 38 flat, yarp read > /dev/null					16%
+		38x800Hz, local, 38 flat, C++ Receiver, regular Bottle			 9%

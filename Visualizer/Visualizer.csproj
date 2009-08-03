@@ -61,7 +61,6 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <None Include="Changelog.txt" />
     <None Include="OpenTK.dll.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -81,10 +80,16 @@
     <None Include="OpenTK.Utilities.dll" />
     <None Include="OpenTK.Utilities.xml" />
     <None Include="OpenTK.xml" />
-    <None Include="Visualizer.jnt" />
+    <None Include="Notes\Changelog.txt" />
+    <None Include="Notes\Visualizer.jnt" />
+    <None Include="Notes\Performance.txt" />
+    <None Include="Notes\Performance Julian.txt" />
+    <None Include="Notes\Performance Ingo.txt" />
+    <None Include="Notes\Todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="Notes\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">

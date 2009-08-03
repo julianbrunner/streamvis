@@ -1,0 +1,79 @@
+Version 0.6
+	- Added Data Project
+	- Improved Path implementation
+	- Implemented custom wrapper
+	- Added Receiver to the solution
+	- Renamed "yarp" to "sharpyarp" (results in "sharpyarp.dll" and "libsharpyarp.so")
+	- Rebuilt ACE, yarp and the C# bindings (newer versions, now also using x64 in Windows)
+	- Fixed a spelling error in the startup messages
+
+Version 0.5
+	- Added resampling of values before drawing
+	- Added option to set horizontal resolution of plotter
+	- Optimized FittingValueManager
+	- Improved graph extension (better graph cutting, incorporates more data entries for extension)
+	- Fixed a bug causing crashes when trying to plot a stream containing double.NaN values
+	- Removed some unnecessary formatting code
+	- Corrected general program description
+	- Shrinked scope of parameter error try clause so that other InvalidOperationExceptions won't be caught
+	- Fixed a few bugs related to error handling
+
+Version 0.4
+	- Fixed a bug causing exceptions because of different local number styles
+	- Removed frame timer
+	- Added VSync support
+	- Changed "-?" to "--help"
+	- Fixed a bug in "--help" layouting
+	- Added general description on "--help"
+	- Corrected spelling error
+	- Corrected a few errors in the "--help" description
+
+Version 0.3
+	- Better performance when displaying text (custom text printer)
+	- Added proper error handling for invalid command-line parameters
+	- Added proper error handling for invalid capture parameters
+	- Added support for paths to deep streams
+	- Added help display when "-?" is specified
+	- Lines are now antialiased
+	- Increased graph line thickness to 1.5 (looks better)
+	- Minor performance improvements
+	- Fixed issue of lines not being drawn on pixel centers
+	- Interval counts on X and Y axes can be customized
+	- Option to change plotter and background color
+	- Option to disable graph extension
+	- Made more settings accessible from the GUI, also added hotkeys
+	- Moved to OpenTK 0.9.7
+	- Fixed bug of not displaying the last interval caption on the X axis
+	- Fixed bug in "Container.GetIndex" method (picking wrong indices under certain conditions)
+	- Fixed bug in "Container.GetIndex" method (never picked the last index)
+	- Moved more layouting responsibilities to "Layouter"
+	- Removed all unused usings and references
+	- Fixed bug of empty ports being requested when the text box in the "New Capture" dialog is left empty
+	- FittingValueManager now respects graph extension feature
+	- Flipped coordinate system to improve layouting
+	- Removed option to hide labelsp
+	- Went back to old random color generation algorithm
+	- Removed Yarp.Visualizer.Utilities
+	- Fixed a bug in FittingValueManager that caused hidden graphs to cause value fitting
+	- Moved X axis down by 5 pixels
+	- Better internal parameter handling
+	- Proper error handling when YARP is not found
+	- StatusStrip is now hidden in minimal mode aswell
+
+Version 0.2
+	- Major design changes in "Yarp.Visualizer.Plotting"
+	- Substantially improved performance of "Container" by using binary search
+	- Added "Wrapping" plotter type
+	- Added fixed-scale Y-axis option
+	- Substantial performance improvements in various parts of the plotting process
+	- Removed "File" menu
+	- Added "Freeze" function
+	- Fixed potential error of streams containing consecutive entries with identical or wrongly ordered timestamps
+	- Fixed potential error of different streams getting different timestamps on data entries from the same bottle
+	- Graph is extended to known adjacent values on the left and right borders of the coordinate system
+	- Fixed occasionally thrown exception on exit
+	- Application can now be used on machines that do not have YARP installed
+	- Moved more responsibilities to TKDrawer
+
+Version 0.1
+	- Initial version
