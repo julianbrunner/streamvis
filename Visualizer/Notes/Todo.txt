@@ -22,10 +22,9 @@ TODO: One sample per pixel
 TODO: Memory profiling?
 TODO: Do nesting on .Designer and .resx
 TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
+TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
 	
 TODO: Did freshly compiled ACE make a difference on Ingo's PC?
-TODO: Make own wrapper
 TODO: Profile the new wrapper
-TODO: Try eBottle
 TODO: Do line drawing stress test (both in C and C#)
 TODO: Software fallback for linestrip
