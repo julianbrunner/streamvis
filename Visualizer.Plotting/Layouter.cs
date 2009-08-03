@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Graphics;
 
 namespace Visualizer.Plotting
 {
@@ -9,18 +10,18 @@ namespace Visualizer.Plotting
 		const int borderTop = 20;
 		const int borderBottom = 25;
 
-		readonly IDrawer drawer;
+		readonly Viewport viewport;
 
 		Rectangle graphsArea;
 
-		public Layouter(IDrawer drawer)
+		public Layouter(Viewport viewport)
 		{
-			this.drawer = drawer;
+			this.viewport = viewport;
 		}
 
 		public virtual void Update()
 		{
-			Rectangle area = drawer.Area;
+			Rectangle area = viewport.ClientRectangle;
 
 			this.graphsArea = new Rectangle
 			(

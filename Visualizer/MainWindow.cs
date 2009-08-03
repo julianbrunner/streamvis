@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Visualizer.Data;
 using Visualizer.Plotting;
+using Graphics;
 
 namespace Visualizer
 {
@@ -28,7 +29,6 @@ namespace Visualizer
 		const string title = "Yarp Visualizer";
 		const int frameWindow = 20;
 
-		readonly TKDrawer drawer;
 		readonly Plotter plotter;
 		readonly List<Graph> graphs = new List<Graph>();
 		readonly Data.Timer timer = new Data.Timer();
@@ -47,12 +47,10 @@ namespace Visualizer
 			Console.WriteLine("Initializing graphics and user interface...");
 			InitializeComponent();
 
-			drawer = new TKDrawer(viewport, parameters.BackgroundColor);
-
 			Text = title;
 
 			Console.WriteLine("Initializing plotter...");
-			Layouter layouter = new Layouter(drawer);
+			Layouter layouter = new Layouter(viewport);
 			TimeManager timeManager;
 			switch (parameters.PlotterType)
 			{
@@ -64,7 +62,7 @@ namespace Visualizer
 			ValueManager valueManager;
 			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(graphs);
 			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
-			plotter = new Plotter(graphs, drawer, timeManager, valueManager, layouter, parameters.Resolution, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
+			plotter = new Plotter(graphs, viewport, timeManager, valueManager, layouter, parameters.Resolution, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
 
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);
@@ -97,14 +95,14 @@ namespace Visualizer
 				// TODO: Remove drawFrame AutoResetEvent
 				drawFrame.WaitOne();
 
-				drawer.Begin();
+				viewport.Begin();
 
 				plotter.Update();
 				plotter.Draw();
 
-				drawer.DrawNumber(fps, new Point(viewport.Right, viewport.Top), Color.Yellow, Plotting.TextAlignment.Far);
+				viewport.DrawNumber(fps, new Point(viewport.Right, viewport.Top), Color.Yellow, TextAlignment.Far);
 
-				drawer.End();
+				viewport.End();
 
 				if (++frames == frameWindow)
 				{

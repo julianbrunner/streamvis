@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}</ProjectGuid>
+    <ProjectGuid>{D7D149FB-EBB5-47C4-B027-9C671DB886A0}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Visualizer.Plotting</AssemblyName>
+    <AssemblyName>Graphics</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,32 +29,36 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="ContinuousTimeManager.cs" />
-    <Compile Include="FittingValueManager.cs" />
-    <Compile Include="FixedValueManager.cs" />
-    <Compile Include="Graph.cs" />
-    <Compile Include="Layouter.cs" />
-    <Compile Include="Marker.cs" />
-    <Compile Include="Plotter.cs" />
-    <Compile Include="Range.cs" />
-    <Compile Include="ShiftingTimeManager.cs" />
-    <Compile Include="TimeManager.cs" />
-    <Compile Include="ValueManager.cs" />
-    <Compile Include="WrappingTimeManager.cs" />
+    <Compile Include="TextAlignment.cs" />
+    <Compile Include="Viewport.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Visualizer.Data\Visualizer.Data.csproj">
-      <Project>{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}</Project>
-      <Name>Visualizer.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Graphics\Graphics.csproj">
-      <Project>{D7D149FB-EBB5-47C4-B027-9C671DB886A0}</Project>
-      <Name>Graphics</Name>
-    </ProjectReference>
+    <None Include="OpenTK.dll" />
+    <None Include="OpenTK.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OpenTK.Utilities.dll" />
+    <None Include="OpenTK.Utilities.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="OpenTK.Utilities.xml" />
+    <None Include="OpenTK.xml" />
+    <None Include="Text.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Text.xcf" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="OpenTK, Version=0.9.8.1, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.Utilities, Version=0.9.8.1, Culture=neutral, PublicKeyToken=null">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>OpenTK.Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

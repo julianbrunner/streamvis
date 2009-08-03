@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using Graphics;
 
 namespace Visualizer.Plotting
 {
 	public class Plotter
 	{
 		readonly IEnumerable<Graph> graphs;
-		readonly IDrawer drawer;
+		readonly Viewport viewport;
 		readonly TimeManager timeManager;
 		readonly ValueManager valueManager;
 		readonly Layouter layouter;
@@ -16,7 +17,7 @@ namespace Visualizer.Plotting
 		readonly int intervalsY;
 		readonly Color color;
 
-		public IDrawer Drawer { get { return drawer; } }
+		public Viewport Viewport { get { return viewport; } }
 		public TimeManager TimeManager { get { return timeManager; } }
 		public ValueManager ValueManager { get { return valueManager; } }
 		public Layouter Layouter { get { return layouter; } }
@@ -26,10 +27,10 @@ namespace Visualizer.Plotting
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 
-		public Plotter(IEnumerable<Graph> graphs, IDrawer drawer, TimeManager timeManager, ValueManager valueManager, Layouter layouter, int resolution, int intervalsX, int intervalsY, Color color)
+		public Plotter(IEnumerable<Graph> graphs, Viewport viewport, TimeManager timeManager, ValueManager valueManager, Layouter layouter, int resolution, int intervalsX, int intervalsY, Color color)
 		{
 			this.graphs = graphs;
-			this.drawer = drawer;
+			this.viewport = viewport;
 			this.timeManager = timeManager;
 			this.valueManager = valueManager;
 			this.layouter = layouter;
@@ -74,7 +75,7 @@ namespace Visualizer.Plotting
 
 			start.Y += 5;
 			end.Y += 5;
-			drawer.DrawLine(start, end, color, 1);
+			viewport.DrawLine(start, end, color, 1);
 
 			long width = timeRange.End.Value - timeRange.Start.Value;
 			long interval = width / intervalsX;
@@ -86,8 +87,8 @@ namespace Visualizer.Plotting
 					long time = offset + i * interval;
 					PointF position = layouter.TransformGraph(timeRange.Map((float)((double)time / (double)width)), valueRange.Map(0));
 					position.Y += 5;
-					drawer.DrawLine(new PointF(position.X, position.Y + 5), position, color, 1);
-					drawer.DrawNumber(new TimeSpan(timeRange.Start.Value + time).TotalSeconds, new PointF(position.X, position.Y + 7), color, TextAlignment.Center);
+					viewport.DrawLine(new PointF(position.X, position.Y + 5), position, color, 1);
+					viewport.DrawNumber(new TimeSpan(timeRange.Start.Value + time).TotalSeconds, new PointF(position.X, position.Y + 7), color, TextAlignment.Center);
 				}
 		}
 		void DrawAxisY(Range<long> timeRange, Range<double> valueRange)
@@ -95,7 +96,7 @@ namespace Visualizer.Plotting
 			PointF start = layouter.TransformGraph(timeRange.Map(0), valueRange.Map(0));
 			PointF end = layouter.TransformGraph(timeRange.Map(0), valueRange.Map(1));
 
-			drawer.DrawLine(start, end, color, 1);
+			viewport.DrawLine(start, end, color, 1);
 
 			double height = valueRange.End.Value - valueRange.Start.Value;
 			double interval = height / intervalsY;
@@ -105,8 +106,8 @@ namespace Visualizer.Plotting
 				{
 					double value = i * interval;
 					PointF position = layouter.TransformGraph(timeRange.Map(0), valueRange.Map((float)(value / height)));
-					drawer.DrawLine(new PointF(position.X - 5, position.Y), position, color, 1);
-					drawer.DrawNumber(valueRange.Start.Value + value, new PointF(position.X - 7, position.Y - 5), color, TextAlignment.Far);
+					viewport.DrawLine(new PointF(position.X - 5, position.Y), position, color, 1);
+					viewport.DrawNumber(valueRange.Start.Value + value, new PointF(position.X - 7, position.Y - 5), color, TextAlignment.Far);
 				}
 		}
 

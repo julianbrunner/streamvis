@@ -27,14 +27,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenTK, Version=0.9.7.0, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenTK.Utilities, Version=0.9.6.0, Culture=neutral, PublicKeyToken=null">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>OpenTK.Utilities.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -50,7 +42,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="TextDialog.cs" />
     <Compile Include="TextDialog.Designer.cs" />
-    <Compile Include="TKDrawer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
@@ -61,25 +52,11 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <None Include="OpenTK.dll.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="OpenTK.Utilities.dll.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Images\CrossMark.png" />
     <None Include="Images\CrossMark.xcf" />
     <None Include="Images\New.png" />
     <None Include="Images\Open.png" />
     <None Include="Images\Save.png" />
-    <None Include="Images\Text.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Images\Text.xcf" />
-    <None Include="OpenTK.dll" />
-    <None Include="OpenTK.Utilities.dll" />
-    <None Include="OpenTK.Utilities.xml" />
-    <None Include="OpenTK.xml" />
     <None Include="Notes\Changelog.txt" />
     <None Include="Notes\Visualizer.jnt" />
     <None Include="Notes\Performance.txt" />
@@ -115,6 +92,10 @@
     <ProjectReference Include="..\Yarp\Yarp.csproj">
       <Project>{0BC9B692-9677-4433-B662-D51FF7004A39}</Project>
       <Name>Yarp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Graphics\Graphics.csproj">
+      <Project>{D7D149FB-EBB5-47C4-B027-9C671DB886A0}</Project>
+      <Name>Graphics</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

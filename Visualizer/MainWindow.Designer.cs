@@ -16,7 +16,6 @@
 			if (disposing && (components != null))
 			{
 				DisposeSource();
-				drawer.Dispose();
 
 				components.Dispose();
 			}
@@ -41,7 +40,7 @@
 			this.nameColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.streamsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.changeColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.viewport = new OpenTK.GLControl();
+			this.viewport = new Graphics.Viewport();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.captureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -380,7 +379,7 @@
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.ListView streamsListView;
 		private System.Windows.Forms.ColumnHeader nameColumnHeader;
-		private OpenTK.GLControl viewport;
+		private Graphics.Viewport viewport;
 		private System.Windows.Forms.ContextMenuStrip streamsContextMenuStrip;
 		private System.Windows.Forms.ToolStripMenuItem changeColorToolStripMenuItem;
 		private System.Windows.Forms.ColorDialog colorDialog;

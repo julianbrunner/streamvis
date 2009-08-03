@@ -23,6 +23,8 @@ Project("{2857B73E-F847-4B02-9238-064979017E93}") = "Yarp.Wrapper", "Yarp.Wrappe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphics", "Graphics\Graphics.csproj", "{D7D149FB-EBB5-47C4-B027-9C671DB886A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7D149FB-EBB5-47C4-B027-9C671DB886A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7D149FB-EBB5-47C4-B027-9C671DB886A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7D149FB-EBB5-47C4-B027-9C671DB886A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7D149FB-EBB5-47C4-B027-9C671DB886A0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
