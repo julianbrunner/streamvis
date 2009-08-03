@@ -1,5 +1,7 @@
 Version 0.6
-	- Added Data Project
+	- Moved to OpenTK 0.9.8.1
+	- Added Graphics test project
+	- Added Data project
 	- Improved Path implementation
 	- Implemented custom wrapper
 	- Added Receiver to the solution
