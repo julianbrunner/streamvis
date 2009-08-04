@@ -86,18 +86,18 @@ Global
 		version = 0.6
 		StartupItem = Visualizer\Visualizer.csproj
 		Policies = $0
-		$0.StandardHeader = $1
-		$1.Text = 
-		$1.inheritsSet = MITX11License
+		$0.TextStylePolicy = $1
+		$1.FileWidth = 120
+		$1.TabWidth = 4
+		$1.TabsToSpaces = False
+		$1.NoTabsAfterNonTabs = False
+		$1.RemoveTrailingWhitespace = False
+		$1.EolMarker = Native
 		$0.DotNetNamingPolicy = $2
 		$2.DirectoryNamespaceAssociation = None
 		$2.ResourceNamePolicy = FileFormatDefault
-		$0.TextStylePolicy = $3
-		$3.FileWidth = 120
-		$3.TabWidth = 4
-		$3.TabsToSpaces = False
-		$3.NoTabsAfterNonTabs = False
-		$3.RemoveTrailingWhitespace = False
-		$3.EolMarker = Native
+		$0.StandardHeader = $3
+		$3.Text = 
+		$3.inheritsSet = MITX11License
 	EndGlobalSection
 EndGlobal

@@ -48,6 +48,7 @@ namespace Visualizer
 			InitializeComponent();
 
 			Text = title;
+			viewport.ClearColor = parameters.BackgroundColor;
 
 			Console.WriteLine("Initializing plotter...");
 			Layouter layouter = new Layouter(viewport);
