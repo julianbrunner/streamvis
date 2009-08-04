@@ -25,6 +25,19 @@ namespace GraphicsTest
 			Text = "Graphics Test";
 			
 			ResumeLayout(false);
+			
+			Application.Idle += Application_Idle;
+		}
+		
+		void Application_Idle(object sender, EventArgs e)
+		{
+			Application.DoEvents();
+
+			while (viewport.IsIdle)
+			{
+				viewport.Begin();
+				viewport.End();
+			}
 		}
 		
 		protected override void Dispose(bool disposing)
