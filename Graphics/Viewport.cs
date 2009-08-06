@@ -31,10 +31,10 @@ namespace Graphics
 			ClearColor = Color.Black;
 
 			GL.Enable(EnableCap.Texture2D);
-			GL.Enable(EnableCap.LineSmooth);
+			//GL.Enable(EnableCap.LineSmooth);
 			GL.Enable(EnableCap.Blend);
 
-			GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
+			//GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
 			#region Create and initialize text texture

@@ -22,6 +22,12 @@ Ubuntu, SU9400:
 		38x800Hz, local, 38 flat, Sender								 4%
 		38x800Hz, local, 38 flat, Receiver								12%
 	
+	Graphics
+		1x DrawLineStrip(1000)									60	1%	 4%
+		38x DrawLineStrip(1000)									10	3%	 7%
+		
+		1000x DrawLine											60	5%	12%
+	
 	Miscellaneous
 		38x800Hz, local, 38 flat, yarp read > /dev/null					16%
 		38x800Hz, local, 38 flat, C++ Receiver, regular Bottle			 9%

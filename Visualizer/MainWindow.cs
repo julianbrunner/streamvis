@@ -27,7 +27,6 @@ namespace Visualizer
 		}
 
 		const string title = "Yarp Visualizer";
-		const int frameWindow = 20;
 
 		readonly Plotter plotter;
 		readonly List<Graph> graphs = new List<Graph>();
@@ -38,6 +37,8 @@ namespace Visualizer
 		Source source;
 		string filePath;
 
+		// TODO: Remove
+		const int frameWindow = 20;
 		int frames = 0;
 		TimeSpan last = TimeSpan.Zero;
 		double fps = 0;
