@@ -9,7 +9,7 @@ namespace Visualizer.Data
 	{
 		const long sampleTicks = 100 * 10000L;
 
-		//readonly List<Entry> sampleBuffer = new List<Entry>();
+		readonly List<Entry> sampleBuffer = new List<Entry>();
 		readonly List<Entry> entries;
 
 		public static string XElementName { get { return "container"; } }
@@ -66,18 +66,15 @@ namespace Visualizer.Data
 		// TOOD: Resampling should be done in Visualizer.Capturing instead of Visualizer.Data
 		public void Add(Entry entry)
 		{
-//			if (entry.Value != double.NaN && (sampleBuffer.Count == 0 || entry.Time > sampleBuffer[sampleBuffer.Count - 1].Time))
-//				sampleBuffer.Add(entry);
-//
-//			while (sampleBuffer.Count > 1 && sampleBuffer[sampleBuffer.Count - 1].Time - sampleBuffer[0].Time >= sampleTicks)
-//			{
-//				Entry newEntry = AggregateSamples();
-//				// TODO: Do we have to check if the timestamp is correct?
-//				lock (entries) entries.Add(newEntry);
-//			}
-			
-			if (entry.Value != double.NaN && (entries.Count == 0 || entry.Time > entries[entries.Count - 1].Time))
-				lock (entries) entries.Add(entry);
+			if (entry.Value != double.NaN && (sampleBuffer.Count == 0 || entry.Time > sampleBuffer[sampleBuffer.Count - 1].Time))
+				sampleBuffer.Add(entry);
+
+			while (sampleBuffer.Count > 1 && sampleBuffer[sampleBuffer.Count - 1].Time - sampleBuffer[0].Time >= sampleTicks)
+			{
+				Entry newEntry = AggregateSamples();
+				// TODO: Do we have to check if the timestamp is correct?
+				lock (entries) entries.Add(newEntry);
+			}
 		}
 		public int GetIndex(long time)
 		{
@@ -103,37 +100,37 @@ namespace Visualizer.Data
 
 			return index;
 		}
-//		Entry AggregateSamples()
-//		{
-//			Entry start = sampleBuffer[0];
-//
-//			Entry lastInside = sampleBuffer[sampleBuffer.Count - 2];
-//			Entry last = sampleBuffer[sampleBuffer.Count - 1];
-//			long endTime = start.Time + sampleTicks;
-//			double fraction = (double)(endTime - lastInside.Time) / (double)(last.Time - lastInside.Time);
-//
-//			Entry end = new Entry(endTime, Interpolate(lastInside.Value, last.Value, fraction));
-//
-//			sampleBuffer.Insert(sampleBuffer.Count - 1, end);
-//
-//			double value = 0;
-//
-//			for (int i = 0; i < sampleBuffer.Count - 2; i++)
-//			{
-//				Entry a = sampleBuffer[i + 0];
-//				Entry b = sampleBuffer[i + 1];
-//
-//				value += (b.Time - a.Time) * ((a.Value + b.Value) / 2);
-//			}
-//
-//			sampleBuffer.RemoveRange(0, sampleBuffer.Count - 2);
-//
-//			return new Entry((start.Time + end.Time) / 2, value / sampleTicks);
-//		}
+		Entry AggregateSamples()
+		{
+			Entry start = sampleBuffer[0];
 
-//		static double Interpolate(double a, double b, double f)
-//		{
-//			return (1 - f) * a + f * b;
-//		}
+			Entry lastInside = sampleBuffer[sampleBuffer.Count - 2];
+			Entry last = sampleBuffer[sampleBuffer.Count - 1];
+			long endTime = start.Time + sampleTicks;
+			double fraction = (double)(endTime - lastInside.Time) / (double)(last.Time - lastInside.Time);
+
+			Entry end = new Entry(endTime, Interpolate(lastInside.Value, last.Value, fraction));
+
+			sampleBuffer.Insert(sampleBuffer.Count - 1, end);
+
+			double value = 0;
+
+			for (int i = 0; i < sampleBuffer.Count - 2; i++)
+			{
+				Entry a = sampleBuffer[i + 0];
+				Entry b = sampleBuffer[i + 1];
+
+				value += (b.Time - a.Time) * ((a.Value + b.Value) / 2);
+			}
+
+			sampleBuffer.RemoveRange(0, sampleBuffer.Count - 2);
+
+			return new Entry((start.Time + end.Time) / 2, value / sampleTicks);
+		}
+
+		static double Interpolate(double a, double b, double f)
+		{
+			return (1 - f) * a + f * b;
+		}
 	}
 }
