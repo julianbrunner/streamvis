@@ -14,7 +14,8 @@ Ubuntu, SU9400:
 		38x800Hz, local, 38 flat, Visualizer from file					11%
 		
 		38x800Hz, local, 38 flat, Sender (load)							14%
-		38x800Hz, local, 38 flat, Sender								10%
+//		38x800Hz, local, 38 flat, Sender								10%
+		38x800Hz, local, 38 flat, Sender								 8%
 		38x800Hz, local, 38 flat, Receiver								12%
 		
 	Custom wrapper, eBottle
@@ -22,9 +23,9 @@ Ubuntu, SU9400:
 		38x800Hz, local, 38 flat, Sender								 4%
 		38x800Hz, local, 38 flat, Receiver								12%
 	
-	Graphics
-		1x DrawLineStrip(1000)									60	1%	 4%
-		38x DrawLineStrip(1000)									10	3%	 7%
+	Graphics (FPS, mono CPU %, XOrg CPU %)
+		1x DrawLineStrip(1000)									60	 3%	 1%
+		38x DrawLineStrip(1000)									10	 5%	 0%
 		
 		1000x DrawLine											60	5%	12%
 	
