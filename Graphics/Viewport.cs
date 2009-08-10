@@ -30,6 +30,8 @@ namespace Graphics
 			Layout += viewport_Layout;
 			ClearColor = Color.Black;
 
+			GL.EnableClientState(EnableCap.VertexArray);
+			
 			GL.Enable(EnableCap.Texture2D);
 			//GL.Enable(EnableCap.LineSmooth);
 			GL.Enable(EnableCap.Blend);
@@ -141,6 +143,22 @@ namespace Graphics
 		}
 		public void DrawLineStrip(IEnumerable<PointF> points, Color color, float width)
 		{
+//			int i = 0;
+//			float[] vertices = new float[2000];
+//			
+//			foreach (PointF point in points)
+//			{
+//				vertices[i++] = point.X;
+//				vertices[i++] = point.Y;
+//			}
+//			
+//			GL.VertexPointer(2, VertexPointerType.Float, 0, vertices);
+//			
+//			GL.LineWidth(width);
+//			GL.Color3(color);
+//			
+//			GL.DrawArrays(BeginMode.LineStrip, 0, 1000);
+
 			GL.LineWidth(width);
 			GL.Color3(color);
 

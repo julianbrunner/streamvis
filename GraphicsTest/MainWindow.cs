@@ -57,7 +57,7 @@ namespace GraphicsTest
 			{
 				viewport.Begin();
 				
-				for (int stream = 0; stream < 1; stream++)
+				for (int stream = 0; stream < 38; stream++)
 					viewport.DrawLineStrip(streams[stream], Color.White, 1.5f);
 				
 				viewport.DrawNumber(fps, new Point(viewport.Right, viewport.Top), Color.Yellow, TextAlignment.Far);
@@ -92,9 +92,9 @@ namespace GraphicsTest
 		{
 			return new PointF((float)Next(viewport.Left, viewport.Right), (float)Next(viewport.Top, viewport.Bottom));
 		}
-		Color NextColor()
-		{
-			return Color.FromArgb(random.Next(256), random.Next(256), random.Next(256));
-		}
+//		Color NextColor()
+//		{
+//			return Color.FromArgb(random.Next(256), random.Next(256), random.Next(256));
+//		}
 	}
 }
