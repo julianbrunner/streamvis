@@ -301,5 +301,13 @@ namespace Visualizer
 		{
 			GC.Collect();
 		}
+		// TODO: Remove on release
+		private void hideAllGraphsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foreach (ListViewItem item in streamsListView.Items)
+			{
+				item.Checked = false;
+			}
+		}		
 	}
 }

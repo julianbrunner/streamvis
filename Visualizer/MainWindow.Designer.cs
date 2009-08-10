@@ -61,6 +61,7 @@
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.gCCollectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.hideAllGraphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
 			this.toolStripContainer1.ContentPanel.SuspendLayout();
 			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -184,7 +185,8 @@
             this.captureToolStripMenuItem,
             this.plotterToolStripMenuItem,
             this.viewToolStripMenuItem,
-            this.gCCollectToolStripMenuItem});
+            this.gCCollectToolStripMenuItem,
+			this.hideAllGraphsToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(737, 24);
@@ -342,6 +344,12 @@
 			this.gCCollectToolStripMenuItem.Text = "GC.Collect";
 			this.gCCollectToolStripMenuItem.Click += new System.EventHandler(this.gCCollectToolStripMenuItem_Click);
 			// 
+			// hideAllGraphsToolStripMenuItem
+			// 
+			this.hideAllGraphsToolStripMenuItem.Name = "hideAllGraphsToolStripMenuItem";
+			this.hideAllGraphsToolStripMenuItem.Text = "Hide all Graphs";
+			this.hideAllGraphsToolStripMenuItem.Click += new System.EventHandler(this.hideAllGraphsToolStripMenuItem_Click);
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -401,7 +409,8 @@
 		private System.Windows.Forms.ToolStripMenuItem freezeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem graphExtensionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem gCCollectToolStripMenuItem;
-
+		private System.Windows.Forms.ToolStripMenuItem hideAllGraphsToolStripMenuItem;
+		
 	}
 }
 
