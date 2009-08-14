@@ -6,6 +6,8 @@ using System.Globalization;
 using System.Windows.Forms;
 using OpenTK;
 using OpenTK.Graphics;
+// TODO: Remove reference to System.Core once this isn't needed anymore
+using System.Linq;
 
 namespace Graphics
 {
@@ -19,6 +21,10 @@ namespace Graphics
 		int characterLists;
 		Color clearColor;
 		
+		// DEBUG
+		int streamLists;
+		float[] vertices;
+		
 		public Color ClearColor
 		{
 			get { return clearColor; }
@@ -26,17 +32,18 @@ namespace Graphics
 		}
 
 		public Viewport()
-		{
+		{			
 			Layout += viewport_Layout;
 			ClearColor = Color.Black;
 
+			// DEBUG
 			GL.EnableClientState(EnableCap.VertexArray);
 			
 			GL.Enable(EnableCap.Texture2D);
-			//GL.Enable(EnableCap.LineSmooth);
+			GL.Enable(EnableCap.LineSmooth);
 			GL.Enable(EnableCap.Blend);
 
-			//GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
+			GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
 			#region Create and initialize text texture
@@ -87,6 +94,8 @@ namespace Graphics
 				GL.EndList();
 			}
 			#endregion
+			
+			PrintCapabilities();
 		}
 		~Viewport()
 		{
@@ -143,22 +152,6 @@ namespace Graphics
 		}
 		public void DrawLineStrip(IEnumerable<PointF> points, Color color, float width)
 		{
-//			int i = 0;
-//			float[] vertices = new float[2000];
-//			
-//			foreach (PointF point in points)
-//			{
-//				vertices[i++] = point.X;
-//				vertices[i++] = point.Y;
-//			}
-//			
-//			GL.VertexPointer(2, VertexPointerType.Float, 0, vertices);
-//			
-//			GL.LineWidth(width);
-//			GL.Color3(color);
-//			
-//			GL.DrawArrays(BeginMode.LineStrip, 0, 1000);
-
 			GL.LineWidth(width);
 			GL.Color3(color);
 
@@ -169,6 +162,74 @@ namespace Graphics
 			GL.End();
 		}
 
+		public void InitializeStreams(List<List<PointF>> streams)
+		{
+			IEnumerable<float> vertices = from stream in streams
+										  from point in stream
+										  from value in new[] { point.X + 0.5f, point.Y + 0.5f }
+										  select value;
+			
+			// TODO: Apparently, the array gets garbage collected otherwise
+			this.vertices = vertices.ToArray();
+			
+			GL.VertexPointer(2, VertexPointerType.Float, 0, this.vertices);
+			
+			streamLists = GL.GenLists(streams.Count);
+
+			for (int stream = 0; stream < streams.Count; stream++)
+			{
+				GL.NewList(streamLists + stream, ListMode.Compile);
+
+				GL.DrawArrays(BeginMode.LineStrip, stream * 1000, 1000);
+
+				GL.EndList();
+			}
+		}
+		public void DrawStream(int mode, IEnumerable<PointF> points, int stream)
+		{			
+			if (mode == 1) DrawLineStrip(points, Color.Red, 1.5f);
+			else
+			{
+				GL.LineWidth(1.5f);
+				
+				if (mode == 2) { GL.Color3(Color.Lime); GL.DrawArrays(BeginMode.LineStrip, stream * 1000, 1000); }
+				if (mode == 3) { GL.Color3(Color.Blue); GL.CallList(streamLists + stream); }
+			}
+		}
+		public void ToggleTexture2D()
+		{
+			ToggleCapability(EnableCap.Texture2D);
+		}
+		public void ToggleLineSmooth()
+		{
+			ToggleCapability(EnableCap.LineSmooth);
+		}
+		public void ToggleBlend()
+		{
+			ToggleCapability(EnableCap.Blend);
+		}
+		public void ToggleDither()
+		{
+			ToggleCapability(EnableCap.Dither);
+		}
+		public void ToggleMultisample()
+		{
+			ToggleCapability(EnableCap.Multisample);
+		}
+		public void ToggleCapability(EnableCap capability)
+		{
+			if (GL.IsEnabled(capability)) GL.Disable(capability);
+			else GL.Enable(capability);
+		}
+		public void PrintCapabilities()
+		{
+			System.Console.Write("Enabled capabilities: ");
+			foreach (EnableCap capability in Enum.GetValues(typeof(EnableCap)))
+				if (GL.IsEnabled(capability))
+					System.Console.Write(capability + " ");
+			System.Console.WriteLine();
+		}
+		
 		protected override void Dispose(bool disposing)
 		{
 			if (!disposed)

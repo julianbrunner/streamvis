@@ -34,3 +34,4 @@ TODO: Do text stress testing
 TODO: Use glRect for text?
 TODO: Immediate mode?
 TODO: Non-accelerated Vertex Arrays?
+TODO: Make sure the 0.5 pixel offset is handled correctly everywhere
