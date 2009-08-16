@@ -32,6 +32,7 @@ namespace GraphicsTest
 			SuspendLayout();
 			
 			viewport.Dock = DockStyle.Fill;
+			viewport.Size = new Size(1050, 550);
 			viewport.VSync = false;
 			
 			AutoScaleMode = AutoScaleMode.Font;
@@ -63,8 +64,8 @@ namespace GraphicsTest
 				case Keys.D1: mode = 1; System.Console.WriteLine("Drawing Mode: Naïve DrawLineStrip"); break;
 				case Keys.D2: mode = 2; System.Console.WriteLine("Drawing Mode: VertexArray"); break;
 				case Keys.D3: mode = 3; System.Console.WriteLine("Drawing Mode: VertexArray in DisplayList"); break;
-				case Keys.D4: height += 10; InitializeStreams(); break;
-				case Keys.D5: height -= 10; InitializeStreams(); break;
+				case Keys.D4: height -= 10; System.Console.WriteLine("Height: " + height); InitializeStreams(); break;
+				case Keys.D5: height += 10; System.Console.WriteLine("Height: " + height); InitializeStreams(); break;
 			}
 		}
 		void InitializeStreams()

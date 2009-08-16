@@ -32,10 +32,12 @@ namespace Graphics
 			set { GL.ClearColor(clearColor = value); }
 		}
 
-		public Viewport()
-		{			
+		public Viewport() : base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false))
+		{
 			Layout += viewport_Layout;
 			ClearColor = Color.Black;
+			
+			System.Console.WriteLine("GraphicsMode: " + GraphicsMode.ToString());
 
 			// DEBUG
 			GL.EnableClientState(EnableCap.VertexArray);
