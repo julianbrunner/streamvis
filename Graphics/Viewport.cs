@@ -23,6 +23,7 @@ namespace Graphics
 		
 		// DEBUG
 		int streamLists;
+		int streamCount;
 		float[] vertices;
 		
 		public Color ClearColor
@@ -164,6 +165,10 @@ namespace Graphics
 
 		public void InitializeStreams(List<List<PointF>> streams)
 		{
+			if (streamCount > 0) GL.DeleteLists(streamLists, streamCount);
+			
+			streamCount = streams.Count();
+			
 			IEnumerable<float> vertices = from stream in streams
 										  from point in stream
 										  from value in new[] { point.X + 0.5f, point.Y + 0.5f }
@@ -174,9 +179,9 @@ namespace Graphics
 			
 			GL.VertexPointer(2, VertexPointerType.Float, 0, this.vertices);
 			
-			streamLists = GL.GenLists(streams.Count);
+			streamLists = GL.GenLists(streamCount);
 
-			for (int stream = 0; stream < streams.Count; stream++)
+			for (int stream = 0; stream < streamCount; stream++)
 			{
 				GL.NewList(streamLists + stream, ListMode.Compile);
 
@@ -238,6 +243,9 @@ namespace Graphics
 
 				GL.DeleteTextures(1, ref textTexture);
 				GL.DeleteLists(characterLists, characters.Length);
+				
+				// DEBUG
+				GL.DeleteLists(streamLists, streamCount);
 				
 				base.Dispose(disposing);
 			}

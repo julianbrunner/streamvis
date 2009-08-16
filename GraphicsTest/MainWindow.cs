@@ -15,6 +15,7 @@ namespace GraphicsTest
 		Random random = new Random();
 		List<List<PointF>> streams = new List<List<PointF>>(38);
 		int mode = 0;
+		int height = 500;
 		
 		readonly Visualizer.Data.Timer timer = new Visualizer.Data.Timer();
 		const int frameWindow = 20;
@@ -41,14 +42,7 @@ namespace GraphicsTest
 			
 			ResumeLayout(false);
 			
-			for (int stream = 0; stream < 38; stream++)
-			{
-				List<PointF> points = new List<PointF>(1000);
-				for (int i = 0; i < 1000; i++) points.Add(new PointF(25 + i / 1.0f, 25 + (float)Next(0, 500)));
-				streams.Add(points);
-			}
-			
-			viewport.InitializeStreams(streams);
+			InitializeStreams();
 			
 			mode = 1;
 			System.Console.WriteLine("Drawing Mode: Naïve DrawLineStrip");
@@ -59,7 +53,7 @@ namespace GraphicsTest
 
 		void viewport_KeyDown(object sender, KeyEventArgs e)
 		{
-			switch (e.KeyData)
+			switch (e.KeyCode)
 			{
 				case Keys.T: viewport.ToggleTexture2D(); viewport.PrintCapabilities(); break;
 				case Keys.L: viewport.ToggleLineSmooth(); viewport.PrintCapabilities(); break;
@@ -69,7 +63,22 @@ namespace GraphicsTest
 				case Keys.D1: mode = 1; System.Console.WriteLine("Drawing Mode: Naïve DrawLineStrip"); break;
 				case Keys.D2: mode = 2; System.Console.WriteLine("Drawing Mode: VertexArray"); break;
 				case Keys.D3: mode = 3; System.Console.WriteLine("Drawing Mode: VertexArray in DisplayList"); break;
+				case Keys.D4: height += 10; InitializeStreams(); break;
+				case Keys.D5: height -= 10; InitializeStreams(); break;
 			}
+		}
+		void InitializeStreams()
+		{
+			streams.Clear();
+			
+			for (int stream = 0; stream < 38; stream++)
+			{
+				List<PointF> points = new List<PointF>(1000);
+				for (int i = 0; i < 1000; i++) points.Add(new PointF(25 + ((viewport.Width - 50) / 1000f) * i, (viewport.Height - height) / 2 + (float)Next(0, height)));
+				streams.Add(points);
+			}
+			
+			viewport.InitializeStreams(streams);
 		}
 		void Application_Idle(object sender, EventArgs e)
 		{
