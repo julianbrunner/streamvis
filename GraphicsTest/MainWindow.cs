@@ -31,7 +31,7 @@ namespace GraphicsTest
 			SuspendLayout();
 			
 			viewport.Dock = DockStyle.Fill;
-			viewport.VSync = true;
+			viewport.VSync = false;
 			
 			AutoScaleMode = AutoScaleMode.Font;
 			Controls.Add(viewport);
