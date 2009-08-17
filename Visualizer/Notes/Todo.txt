@@ -10,7 +10,7 @@ TODO: Name conflicts when more than one instance of the Visualizer is running
 TODO: Axis labels on Y-Axis can run off screen (use scientific notation?)
 TODO: Caching of Graph Data?
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
-TODO: Resamplig should be specified in DataEntry frequency rather than absolute plotter resolution
+TODO: Resampling should be specified in DataEntry frequency rather than absolute plotter resolution
 TODO: Add versioning metadata
 TODO: Bundle into single assembly (mkbundle)
 TODO: Change design so that containers and ports are 1:1, in order to avoid excessive locks
@@ -20,7 +20,6 @@ TODO: Captured data should be resampled immediately, before any permanent storin
 
 TODO: One sample per pixel
 TODO: Memory profiling?
-TODO: Do nesting on .Designer and .resx
 TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
 
