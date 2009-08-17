@@ -25,12 +25,6 @@ TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does prop
 
 TODO: Profile the new wrapper
 TODO: Do line drawing stress test (both in C and C#)
-TODO: Software fallback for linestrip
-TODO: Disable Z-Buffer?
-TODO: Disable T&L?
-TODO: Disable Texturing after drawing numbers?
 TODO: Do text stress testing
 TODO: Use glRect for text?
-TODO: Immediate mode?
-TODO: Non-accelerated Vertex Arrays?
 TODO: Make sure the 0.5 pixel offset is handled correctly everywhere

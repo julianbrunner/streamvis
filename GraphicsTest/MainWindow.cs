@@ -20,7 +20,6 @@ namespace GraphicsTest
 		readonly Visualizer.Data.Timer timer = new Visualizer.Data.Timer();
 		const int frameWindow = 20;
 		int frames = 0;
-		int totalFrames = 0;
 		TimeSpan last = TimeSpan.Zero;
 		double fps = 0;
 		
@@ -64,8 +63,10 @@ namespace GraphicsTest
 				case Keys.D1: mode = 1; System.Console.WriteLine("Drawing Mode: Naïve DrawLineStrip"); break;
 				case Keys.D2: mode = 2; System.Console.WriteLine("Drawing Mode: VertexArray"); break;
 				case Keys.D3: mode = 3; System.Console.WriteLine("Drawing Mode: VertexArray in DisplayList"); break;
-				case Keys.D4: height -= 10; System.Console.WriteLine("Height: " + height); InitializeStreams(); break;
-				case Keys.D5: height += 10; System.Console.WriteLine("Height: " + height); InitializeStreams(); break;
+				case Keys.D4: mode = 4; System.Console.WriteLine("Drawing Mode: Vertex Buffer Object"); break;
+				case Keys.D5: height -= 10; System.Console.WriteLine("Height: " + height); InitializeStreams(); break;
+				case Keys.D6: height += 10; System.Console.WriteLine("Height: " + height); InitializeStreams(); break;
+				case Keys.R: InitializeStreams(); break;
 			}
 		}
 		void InitializeStreams()
@@ -88,21 +89,14 @@ namespace GraphicsTest
 			while (viewport.IsIdle)
 			{
 				viewport.Begin();
-				
-				for (int stream = 0; stream < 38; stream++)
-					viewport.DrawStream(mode, streams[stream], stream);
-				
-				viewport.DrawNumber(fps, new Point(viewport.Right, viewport.Top), Color.Yellow, TextAlignment.Far);
-				viewport.DrawNumber(totalFrames, new Point(viewport.Right - 50, viewport.Top), Color.Yellow, TextAlignment.Far);
-				
+				viewport.DrawStreams(mode);
 				viewport.End();
-				
-				totalFrames++;
 				
 				if (++frames == frameWindow)
 				{
 					TimeSpan time = new TimeSpan(timer.Time);
 					fps = frameWindow / (time - last).TotalSeconds;
+					Text = "GraphicsTest - FPS : " + fps.ToString("F2");
 					last = time;
 					frames = 0;
 				}

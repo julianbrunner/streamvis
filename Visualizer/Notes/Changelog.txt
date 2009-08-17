@@ -1,4 +1,7 @@
 Version 0.6
+	- Checked various states for OpenGL
+	- Moved texture identifiers into array
+	- Textures are bound less often
 	- Nested .Designer.cs and .resx files
 	- Extracted Graphics
 	- Moved to OpenTK 0.9.8.1

@@ -17,14 +17,15 @@ namespace Graphics
 		static readonly string characters = "+-.0123456789";
 		
 		bool disposed = false;
-		int textTexture;
+		int[] textTextures = new int[1];
 		int characterLists;
 		Color clearColor;
 		
 		// DEBUG
-		int streamLists;
-		int streamCount;
+		List<List<PointF>> streams;
 		float[] vertices;
+		int streamLists;
+		int[] vertexBufferObjects;
 		
 		public Color ClearColor
 		{
@@ -35,6 +36,7 @@ namespace Graphics
 		public Viewport() : base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false))
 		{
 			Layout += viewport_Layout;
+			
 			ClearColor = Color.Black;
 			
 			System.Console.WriteLine("GraphicsMode: " + GraphicsMode.ToString());
@@ -50,9 +52,9 @@ namespace Graphics
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
 			#region Create and initialize text texture
-			GL.GenTextures(1, out textTexture);
+			GL.GenTextures(textTextures.Length, textTextures);
 
-			GL.BindTexture(TextureTarget.Texture2D, textTexture);
+			GL.BindTexture(TextureTarget.Texture2D, textTextures[0]);
 
 			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
 			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
@@ -81,8 +83,6 @@ namespace Graphics
 
 				GL.NewList(characterLists + character, ListMode.Compile);
 
-				GL.BindTexture(TextureTarget.Texture2D, textTexture);
-
 				GL.Begin(BeginMode.Quads);
 
 				GL.TexCoord2(textureBounds.Left, textureBounds.Top); GL.Vertex2(worldBounds.Left, worldBounds.Top);
@@ -91,8 +91,6 @@ namespace Graphics
 				GL.TexCoord2(textureBounds.Left, textureBounds.Bottom); GL.Vertex2(worldBounds.Left, worldBounds.Bottom);
 
 				GL.End();
-
-				GL.BindTexture(TextureTarget.Texture2D, 0);
 
 				GL.EndList();
 			}
@@ -132,12 +130,15 @@ namespace Graphics
 			GL.Translate((int)position.X, (int)position.Y, 0);
 
 			GL.Color3(color);
+			GL.BindTexture(TextureTarget.Texture2D, textTextures[0]);
 
 			foreach (char character in text)
 			{
 				GL.CallList(characterLists + characters.IndexOf(character));
 				GL.Translate(characterSize.Width, 0, 0);
 			}
+			
+			GL.BindTexture(TextureTarget.Texture2D, 0);
 
 			GL.LoadIdentity();
 		}
@@ -167,9 +168,13 @@ namespace Graphics
 
 		public void InitializeStreams(List<List<PointF>> streams)
 		{
-			if (streamCount > 0) GL.DeleteLists(streamLists, streamCount);
+			if (this.streams != null)
+			{
+				GL.DeleteLists(streamLists, 1);
+				GL.DeleteBuffers(vertexBufferObjects.Length, vertexBufferObjects);
+			}
 			
-			streamCount = streams.Count();
+			this.streams = streams;
 			
 			IEnumerable<float> vertices = from stream in streams
 										  from point in stream
@@ -181,26 +186,48 @@ namespace Graphics
 			
 			GL.VertexPointer(2, VertexPointerType.Float, 0, this.vertices);
 			
-			streamLists = GL.GenLists(streamCount);
-
-			for (int stream = 0; stream < streamCount; stream++)
-			{
-				GL.NewList(streamLists + stream, ListMode.Compile);
-
-				GL.DrawArrays(BeginMode.LineStrip, stream * 1000, 1000);
-
-				GL.EndList();
-			}
+			streamLists = GL.GenLists(1);
+			GL.NewList(streamLists, ListMode.Compile);
+			for (int stream = 0; stream < this.streams.Count; stream++) GL.DrawArrays(BeginMode.LineStrip, stream * 1000, 1000);
+			GL.EndList();
+			
+			vertexBufferObjects = new int[1];
+			GL.GenBuffers(vertexBufferObjects.Length, vertexBufferObjects);
+			GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferObjects[0]);
+			GL.BufferData(BufferTarget.ArrayBuffer, new IntPtr(this.vertices.Length * sizeof(float)), this.vertices, BufferUsageHint.StaticDraw);
+			GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
 		}
-		public void DrawStream(int mode, IEnumerable<PointF> points, int stream)
-		{			
-			if (mode == 1) DrawLineStrip(points, Color.Red, 1.5f);
-			else
+		public void DrawStreams(int mode)
+		{
+			switch(mode)
 			{
-				GL.LineWidth(1.5f);
-				
-				if (mode == 2) { GL.Color3(Color.Lime); GL.DrawArrays(BeginMode.LineStrip, stream * 1000, 1000); }
-				if (mode == 3) { GL.Color3(Color.Blue); GL.CallList(streamLists + stream); }
+				case 1:
+					foreach (List<PointF> points in streams) DrawLineStrip(points, Color.Red, 1.5f);
+					break;
+				case 2:
+					GL.LineWidth(1.5f);
+					GL.Color3(Color.Lime);
+					
+					for (int stream = 0; stream < streams.Count; stream++) GL.DrawArrays(BeginMode.LineStrip, stream * 1000, 1000);
+					break;
+				case 3:
+					GL.LineWidth(1.5f);
+					GL.Color3(Color.Blue);
+					
+					GL.CallList(streamLists);
+					break;
+				case 4:
+					GL.LineWidth(1.5f);
+					GL.Color3(Color.Yellow);
+					
+					GL.BindBuffer(BufferTarget.ArrayBuffer, vertexBufferObjects[0]);
+					GL.VertexPointer(2, VertexPointerType.Float, 0, 0);
+					
+					for (int stream = 0; stream < streams.Count; stream++) GL.DrawArrays(BeginMode.LineStrip, stream * 1000, 1000);
+					
+					GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+					GL.VertexPointer(2, VertexPointerType.Float, 0, this.vertices);
+					break;
 			}
 		}
 		public void ToggleTexture2D()
@@ -243,11 +270,11 @@ namespace Graphics
 			{
 				disposed = true;
 
-				GL.DeleteTextures(1, ref textTexture);
+				GL.DeleteTextures(textTextures.Length, textTextures);
 				GL.DeleteLists(characterLists, characters.Length);
 				
 				// DEBUG
-				GL.DeleteLists(streamLists, streamCount);
+				GL.DeleteLists(streamLists, 1);
 				
 				base.Dispose(disposing);
 			}
