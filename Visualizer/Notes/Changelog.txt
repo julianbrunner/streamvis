@@ -1,4 +1,5 @@
 Version 0.6
+	- Font bitmap is now embedded in the Graphics assembly
 	- Checked various states for OpenGL
 	- Moved texture identifiers into array
 	- Textures are bound less often

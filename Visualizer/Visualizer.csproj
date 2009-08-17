@@ -75,11 +75,9 @@
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
-      <LogicalName>Visualizer.MainWindow.resources</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="TextDialog.resx">
       <DependentUpon>TextDialog.cs</DependentUpon>
-      <LogicalName>Visualizer.TextDialog.resources</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

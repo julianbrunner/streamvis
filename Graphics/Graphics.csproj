@@ -43,9 +43,6 @@
     </None>
     <None Include="OpenTK.Utilities.xml" />
     <None Include="OpenTK.xml" />
-    <None Include="Text.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Text.xcf" />
   </ItemGroup>
   <ItemGroup>
@@ -67,4 +64,7 @@
       <Properties InternalTargetFrameworkVersion="3.5" />
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <EmbeddedResource Include="Text.png" />
+  </ItemGroup>
 </Project>

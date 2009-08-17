@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
+using System.Reflection;
+using System.IO;
 using System.Windows.Forms;
 using OpenTK;
 using OpenTK.Graphics;
@@ -59,18 +61,19 @@ namespace Graphics
 			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
 			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
 
-			Bitmap bitmap = new Bitmap("Text.png");
-			BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
-			GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmap.Width, bitmap.Height, 0, OpenTK.Graphics.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
-
-			bitmap.UnlockBits(bitmapData);
+			using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Text.png"))
+			using (Bitmap bitmap = new Bitmap(stream))
+			{
+				BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+				GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmap.Width, bitmap.Height, 0, OpenTK.Graphics.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
+				bitmap.UnlockBits(bitmapData);
+				
+				GL.MatrixMode(MatrixMode.Texture);
+				GL.LoadIdentity();
+				Glu.Ortho2D(-bitmap.Width, bitmap.Width, -bitmap.Height, bitmap.Height);
+			}
 
 			GL.BindTexture(TextureTarget.Texture2D, 0);
-
-			GL.MatrixMode(MatrixMode.Texture);
-			GL.LoadIdentity();
-			Glu.Ortho2D(-bitmap.Width, bitmap.Width, -bitmap.Height, bitmap.Height);
 			#endregion
 
 			#region Create character display lists

@@ -1,6 +1,4 @@
 TODO: Make lines thin when no antialiasing is possible
-TODO: Exception on exit
-TODO: Embed font
 TODO: Correct minimal mode bug in mono WinForms
 TODO: Make hotkeys normal letters
 TODO: Test difference between VSync wait and AutoResetEvent wait
@@ -15,6 +13,7 @@ TODO: Add versioning metadata
 TODO: Bundle into single assembly (mkbundle)
 TODO: Change design so that containers and ports are 1:1, in order to avoid excessive locks
 TODO: Extension method doesn't work without reference to System.Core
+TODO: Complete logging of all received data
 
 TODO: Captured data should be resampled immediately, before any permanent storing or other processing takes place
 

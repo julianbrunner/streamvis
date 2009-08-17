@@ -95,7 +95,7 @@ Global
 		$1.EolMarker = Native
 		$0.DotNetNamingPolicy = $2
 		$2.DirectoryNamespaceAssociation = None
-		$2.ResourceNamePolicy = FileFormatDefault
+		$2.ResourceNamePolicy = FileName
 		$0.StandardHeader = $3
 		$3.Text = 
 		$3.inheritsSet = MITX11License
