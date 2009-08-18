@@ -54,6 +54,7 @@
 			this.freezeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.graphExtensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.hideAllGraphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.showStreamListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.minimalModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gCCollectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,6 @@
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.hideAllGraphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
 			this.toolStripContainer1.ContentPanel.SuspendLayout();
 			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -292,12 +292,20 @@
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hideAllGraphsToolStripMenuItem,
             this.showStreamListToolStripMenuItem,
-            this.minimalModeToolStripMenuItem,
-            this.hideAllGraphsToolStripMenuItem});
+            this.minimalModeToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "&View";
+			// 
+			// hideAllGraphsToolStripMenuItem
+			// 
+			this.hideAllGraphsToolStripMenuItem.Name = "hideAllGraphsToolStripMenuItem";
+			this.hideAllGraphsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
+			this.hideAllGraphsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+			this.hideAllGraphsToolStripMenuItem.Text = "&Hide all Graphs";
+			this.hideAllGraphsToolStripMenuItem.Click += new System.EventHandler(this.hideAllGraphsToolStripMenuItem_Click);
 			// 
 			// showStreamListToolStripMenuItem
 			// 
@@ -344,13 +352,6 @@
 			// 
 			this.exportCaptureFileDialog.DefaultExt = "stream";
 			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
-			// 
-			// hideAllGraphsToolStripMenuItem
-			// 
-			this.hideAllGraphsToolStripMenuItem.Name = "hideAllGraphsToolStripMenuItem";
-			this.hideAllGraphsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
-			this.hideAllGraphsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-			this.hideAllGraphsToolStripMenuItem.Text = "Hide all Graphs";
 			// 
 			// MainWindow
 			// 

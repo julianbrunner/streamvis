@@ -196,6 +196,10 @@ namespace Visualizer
 			if (streamsListView.SelectedItems.Count > 0 && colorDialog.ShowDialog() == DialogResult.OK)
 				SetColor(streamsListView.SelectedItems[0], colorDialog.Color);
 		}
+		private void hideAllGraphsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			foreach (ListViewItem item in streamsListView.Items) item.Checked = false;
+		}
 		private void showStreamListToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			splitContainer1.Panel1Collapsed = !showStreamListToolStripMenuItem.Checked;
@@ -309,13 +313,10 @@ namespace Visualizer
 		{
 			GC.Collect();
 		}
-		// TODO: Remove on release (or make it a regular item)
-		private void hideAllGraphsToolStripMenuItem_Click(object sender, EventArgs e)
+
+		private void viewport_KeyPress(object sender, KeyPressEventArgs e)
 		{
-			foreach (ListViewItem item in streamsListView.Items)
-			{
-				item.Checked = false;
-			}
-		}	
+			e.Handled = true;
+		}
 	}
 }
