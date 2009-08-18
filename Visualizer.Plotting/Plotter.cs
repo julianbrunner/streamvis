@@ -18,6 +18,7 @@ namespace Visualizer.Plotting
 		readonly int intervalsY;
 		readonly Color color;
 
+		public bool IsDrawn { get; set; }
 		public TimeManager TimeManager { get { return timeManager; } }
 		public ValueManager ValueManager { get { return valueManager; } }
 		public Layouter Layouter { get { return layouter; } }
@@ -36,6 +37,8 @@ namespace Visualizer.Plotting
 			this.intervalsX = intervalsX;
 			this.intervalsY = intervalsY;
 			this.color = color;
+
+			IsDrawn = true;
 		}
 
 		public void Update()
@@ -48,13 +51,16 @@ namespace Visualizer.Plotting
 		}
 		public void Draw()
 		{
-			foreach (Graph graph in graphs) graph.Draw();
+			if (IsDrawn)
+			{
+				foreach (Graph graph in graphs) graph.Draw();
 
-			Range<long> timeRange = timeManager.Range;
-			Range<double> valueRange = valueManager.Range;
+				Range<long> timeRange = timeManager.Range;
+				Range<double> valueRange = valueManager.Range;
 
-			DrawAxisX(timeRange, valueRange);
-			DrawAxisY(timeRange, valueRange);
+				DrawAxisX(timeRange, valueRange);
+				DrawAxisY(timeRange, valueRange);
+			}
 		}
 
 		void DrawAxisX(Range<long> timeRange, Range<double> valueRange)

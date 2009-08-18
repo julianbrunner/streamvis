@@ -7,9 +7,9 @@ namespace Graphics
 		readonly Drawer drawer;
 		readonly Color color;
 		readonly TextAlignment alignment;
-		
-		public PointF Position { get; set; }
+
 		public bool IsDrawn { get; set; }
+		public PointF Position { get; set; }
 		
 		public VisibleFrameCounter(Drawer drawer, Color color, TextAlignment alignment)
 		{

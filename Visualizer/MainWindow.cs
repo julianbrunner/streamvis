@@ -79,6 +79,10 @@ namespace Visualizer
 			showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
 			minimalModeToolStripMenuItem.Checked = parameters.MinimalMode;
 			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
+			showPlotterToolStripMenuItem.Checked = true;
+			showPlotterToolStripMenuItem_Click(this, EventArgs.Empty);
+			showFrameCounterToolStripMenuItem.Checked = true;
+			showFrameCounterToolStripMenuItem_Click(this, EventArgs.Empty);
 
 			viewport.VSync = false;
 			viewport.AddComponent(plotter);
@@ -184,6 +188,10 @@ namespace Visualizer
 		private void hideAllGraphsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			foreach (ListViewItem item in streamsListView.Items) item.Checked = false;
+		}
+		private void showPlotterToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			plotter.IsDrawn = showPlotterToolStripMenuItem.Checked;
 		}
 		private void showFrameCounterToolStripMenuItem_Click(object sender, EventArgs e)
 		{

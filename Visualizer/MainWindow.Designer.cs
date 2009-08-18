@@ -57,8 +57,7 @@
 			this.showStreamListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.minimalModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.hideAllGraphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.showPlotterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.showFrameCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gCCollectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
@@ -296,8 +295,7 @@
             this.showStreamListToolStripMenuItem,
             this.minimalModeToolStripMenuItem,
             this.toolStripSeparator2,
-            this.hideAllGraphsToolStripMenuItem,
-            this.toolStripSeparator3,
+            this.showPlotterToolStripMenuItem,
             this.showFrameCounterToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -324,17 +322,13 @@
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
 			this.toolStripSeparator2.Size = new System.Drawing.Size(182, 6);
 			// 
-			// hideAllGraphsToolStripMenuItem
+			// showPlotterToolStripMenuItem
 			// 
-			this.hideAllGraphsToolStripMenuItem.Name = "hideAllGraphsToolStripMenuItem";
-			this.hideAllGraphsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-			this.hideAllGraphsToolStripMenuItem.Text = "&Hide all Graphs";
-			this.hideAllGraphsToolStripMenuItem.Click += new System.EventHandler(this.hideAllGraphsToolStripMenuItem_Click);
-			// 
-			// toolStripSeparator3
-			// 
-			this.toolStripSeparator3.Name = "toolStripSeparator3";
-			this.toolStripSeparator3.Size = new System.Drawing.Size(182, 6);
+			this.showPlotterToolStripMenuItem.CheckOnClick = true;
+			this.showPlotterToolStripMenuItem.Name = "showPlotterToolStripMenuItem";
+			this.showPlotterToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+			this.showPlotterToolStripMenuItem.Text = "Show &Plotter";
+			this.showPlotterToolStripMenuItem.Click += new System.EventHandler(this.showPlotterToolStripMenuItem_Click);
 			// 
 			// showFrameCounterToolStripMenuItem
 			// 
@@ -431,10 +425,9 @@
 		private System.Windows.Forms.ToolStripMenuItem freezeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem graphExtensionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem gCCollectToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem hideAllGraphsToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem showFrameCounterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem showPlotterToolStripMenuItem;
 		
 	}
 }
