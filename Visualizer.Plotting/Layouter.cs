@@ -5,7 +5,7 @@ namespace Visualizer.Plotting
 {
 	public class Layouter
 	{
-		const int borderLeft = 50;
+		const int borderLeft = 80;
 		const int borderRight = 0;
 		const int borderTop = 20;
 		const int borderBottom = 25;

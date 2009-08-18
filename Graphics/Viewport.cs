@@ -16,7 +16,7 @@ namespace Graphics
 	public class Viewport : GLControl
 	{
 		static readonly Size characterSize = new Size(7, 12);
-		static readonly string characters = "+-.0123456789";
+		static readonly string characters = "+-.0123456789E";
 		
 		bool disposed = false;
 		int[] textTextures = new int[1];
@@ -116,7 +116,9 @@ namespace Graphics
 		}
 		public void DrawNumber(double number, PointF position, Color color, TextAlignment alignment)
 		{
-			string text = number.ToString("F2", CultureInfo.InvariantCulture);
+			string decimalString = number.ToString("0.##", CultureInfo.InvariantCulture);
+			string scientificString = number.ToString("0.##E+0", CultureInfo.InvariantCulture);
+			string text = decimalString.Length <= scientificString.Length ? decimalString : scientificString;
 
 			int width = text.Length * characterSize.Width;
 

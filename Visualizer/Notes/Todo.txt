@@ -3,8 +3,8 @@ TODO: Make hotkeys normal letters
 TODO: Test difference between VSync wait and AutoResetEvent wait
 TODO: Make frame counter an option (and a class)
 TODO: Text on Linux is blurry
+TODO: Make Layouter adaptive to width of the Y-Axis labels
 TODO: Name conflicts when more than one instance of the Visualizer is running
-TODO: Axis labels on Y-Axis can run off screen (use scientific notation?)
 TODO: Caching of Graph Data?
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 TODO: Resampling should be specified in DataEntry frequency rather than absolute plotter resolution

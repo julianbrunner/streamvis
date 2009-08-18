@@ -37,7 +37,7 @@ namespace Sender
 						}
 	
 						List<Packet> values = new List<Packet>();
-						for (int i = 0; i < streams; i++) values.Add(new Value(random.NextDouble()));
+						for (int i = 0; i < streams; i++) values.Add(new Value(NextDouble(random, -1, 1)));
 						
 						port.Write(new List(values));
 	
@@ -45,6 +45,10 @@ namespace Sender
 	
 						Thread.Sleep(ms);
 					}
+		}
+		static double NextDouble(Random random, double min, double max)
+		{
+			return min + random.NextDouble() * (max - min);
 		}
 	}
 }
