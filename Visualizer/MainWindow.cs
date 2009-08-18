@@ -185,10 +185,6 @@ namespace Visualizer
 			toolStripContainer1.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 			toolStripContainer1.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 		}
-		private void hideAllGraphsToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			foreach (ListViewItem item in streamsListView.Items) item.Checked = false;
-		}
 		private void showPlotterToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			plotter.IsDrawn = showPlotterToolStripMenuItem.Checked;
