@@ -57,11 +57,11 @@
 			this.showStreamListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.minimalModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gCCollectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.hideAllGraphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.hideAllGraphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
 			this.toolStripContainer1.ContentPanel.SuspendLayout();
 			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -186,8 +186,7 @@
             this.captureToolStripMenuItem,
             this.plotterToolStripMenuItem,
             this.viewToolStripMenuItem,
-            this.gCCollectToolStripMenuItem,
-            this.hideAllGraphsToolStripMenuItem});
+            this.gCCollectToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(737, 24);
@@ -294,7 +293,8 @@
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showStreamListToolStripMenuItem,
-            this.minimalModeToolStripMenuItem});
+            this.minimalModeToolStripMenuItem,
+            this.hideAllGraphsToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "&View";
@@ -324,13 +324,6 @@
 			this.gCCollectToolStripMenuItem.Text = "GC.Collect";
 			this.gCCollectToolStripMenuItem.Click += new System.EventHandler(this.gCCollectToolStripMenuItem_Click);
 			// 
-			// hideAllGraphsToolStripMenuItem
-			// 
-			this.hideAllGraphsToolStripMenuItem.Name = "hideAllGraphsToolStripMenuItem";
-			this.hideAllGraphsToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
-			this.hideAllGraphsToolStripMenuItem.Text = "Hide all Graphs";
-			this.hideAllGraphsToolStripMenuItem.Click += new System.EventHandler(this.hideAllGraphsToolStripMenuItem_Click);
-			// 
 			// colorDialog
 			// 
 			this.colorDialog.AnyColor = true;
@@ -352,6 +345,13 @@
 			this.exportCaptureFileDialog.DefaultExt = "stream";
 			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
 			// 
+			// hideAllGraphsToolStripMenuItem
+			// 
+			this.hideAllGraphsToolStripMenuItem.Name = "hideAllGraphsToolStripMenuItem";
+			this.hideAllGraphsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
+			this.hideAllGraphsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+			this.hideAllGraphsToolStripMenuItem.Text = "Hide all Graphs";
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -361,6 +361,7 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainWindow";
 			this.Text = "<Title>";
+			this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainWindow_KeyPress);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyDown);
 			this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
 			this.toolStripContainer1.BottomToolStripPanel.PerformLayout();

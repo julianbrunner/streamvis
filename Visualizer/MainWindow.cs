@@ -209,7 +209,11 @@ namespace Visualizer
 		}
 		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
 		{
-
+			Console.WriteLine("down");
+		}
+		private void MainWindow_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			Console.WriteLine("press");
 		}
 
 		void NewSource(IEnumerable<string> ports)
@@ -312,6 +316,6 @@ namespace Visualizer
 			{
 				item.Checked = false;
 			}
-		}		
+		}	
 	}
 }
