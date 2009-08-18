@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sender", "Sender\Sender.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receiver", "Receiver\Receiver.csproj", "{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphicsTest", "GraphicsTest\GraphicsTest.csproj", "{075A707F-E838-4F21-B171-6B50568D564D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarp", "Yarp\Yarp.csproj", "{0BC9B692-9677-4433-B662-D51FF7004A39}"
 EndProject
 Project("{2857B73E-F847-4B02-9238-064979017E93}") = "Yarp.Wrapper", "Yarp.Wrapper\Yarp.Wrapper.cproj", "{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}"
@@ -31,10 +29,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{075A707F-E838-4F21-B171-6B50568D564D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{075A707F-E838-4F21-B171-6B50568D564D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{075A707F-E838-4F21-B171-6B50568D564D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{075A707F-E838-4F21-B171-6B50568D564D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0BC9B692-9677-4433-B662-D51FF7004A39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0BC9B692-9677-4433-B662-D51FF7004A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BC9B692-9677-4433-B662-D51FF7004A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -79,25 +73,24 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E577647C-A7BD-4DEC-A723-E01AD0C0200E} = {924D57ED-FFC8-43D4-9AC4-2DCFB27867F6}
 		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2} = {924D57ED-FFC8-43D4-9AC4-2DCFB27867F6}
-		{075A707F-E838-4F21-B171-6B50568D564D} = {924D57ED-FFC8-43D4-9AC4-2DCFB27867F6}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		description = An application that can be used to plot, capture and replay streams received on Yarp ports.
 		version = 0.6
 		StartupItem = Visualizer\Visualizer.csproj
 		Policies = $0
-		$0.TextStylePolicy = $1
-		$1.FileWidth = 120
-		$1.TabWidth = 4
-		$1.TabsToSpaces = False
-		$1.NoTabsAfterNonTabs = False
-		$1.RemoveTrailingWhitespace = False
-		$1.EolMarker = Native
+		$0.StandardHeader = $1
+		$1.Text = 
+		$1.inheritsSet = MITX11License
 		$0.DotNetNamingPolicy = $2
 		$2.DirectoryNamespaceAssociation = None
 		$2.ResourceNamePolicy = FileName
-		$0.StandardHeader = $3
-		$3.Text = 
-		$3.inheritsSet = MITX11License
+		$0.TextStylePolicy = $3
+		$3.FileWidth = 120
+		$3.TabWidth = 4
+		$3.TabsToSpaces = False
+		$3.NoTabsAfterNonTabs = False
+		$3.RemoveTrailingWhitespace = False
+		$3.EolMarker = Native
 	EndGlobalSection
 EndGlobal
