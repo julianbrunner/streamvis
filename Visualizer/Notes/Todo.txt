@@ -1,28 +1,28 @@
-TODO: Make lines thin when no antialiasing is possible
-TODO: Make hotkeys normal letters
+TODO: Make hotkeys normal letters?
 TODO: Test difference between VSync wait and AutoResetEvent wait
 TODO: Make frame counter an option (and a class)
-TODO: Text on Linux is blurry
 TODO: Make Layouter adaptive to width of the Y-Axis labels
+
 TODO: Name conflicts when more than one instance of the Visualizer is running
-TODO: Caching of Graph Data?
+
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
+
 TODO: Resampling should be specified in DataEntry frequency rather than absolute plotter resolution
-TODO: Add versioning metadata
-TODO: Bundle into single assembly (mkbundle)
-TODO: Change design so that containers and ports are 1:1, in order to avoid excessive locks
-TODO: Extension method doesn't work without reference to System.Core
-TODO: Complete logging of all received data
-
 TODO: Captured data should be resampled immediately, before any permanent storing or other processing takes place
-
+TODO: Caching of Graph Data?
 TODO: One sample per pixel
-TODO: Memory profiling?
-TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
-TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
+
+TODO: Make sure the 0.5 pixel offset is handled correctly everywhere (after doing various improvements to the drawing procedure)
+TODO: Make lines thin when no antialiasing is possible
+TODO: Text on Linux is blurry
 
 TODO: Profile the new wrapper
-TODO: Do line drawing stress test (both in C and C#)
-TODO: Do text stress testing
-TODO: Use glRect for text?
-TODO: Make sure the 0.5 pixel offset is handled correctly everywhere
+TODO: Memory profiling?
+TODO: Complete logging of all received data
+TODO: Change design so that containers and ports are 1:1, in order to avoid excessive locks and duplicate data in memory
+
+TODO: Bundle into single assembly (mkbundle)
+
+TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
+TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
+TODO: Extension method doesn't work without reference to System.Core

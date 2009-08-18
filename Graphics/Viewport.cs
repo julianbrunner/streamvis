@@ -47,11 +47,11 @@ namespace Graphics
 			GL.EnableClientState(EnableCap.VertexArray);
 			
 			GL.Enable(EnableCap.Texture2D);
-			GL.Enable(EnableCap.LineSmooth);
-			GL.Enable(EnableCap.Blend);
+			//GL.Enable(EnableCap.LineSmooth);
+			//GL.Enable(EnableCap.Blend);
 
-			GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
-			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+			//GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
+			//GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
 			#region Create and initialize text texture
 			GL.GenTextures(textTextures.Length, textTextures);

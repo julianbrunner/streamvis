@@ -60,7 +60,7 @@ namespace Visualizer.Plotting
 						)
 					);
 
-					plotter.Viewport.DrawLineStrip(points, stream.Color, 1.5f);
+					plotter.Viewport.DrawLineStrip(points, stream.Color, 1f);
 				}
 			}
 		}
