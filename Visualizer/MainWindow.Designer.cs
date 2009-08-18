@@ -56,12 +56,12 @@
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.showStreamListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.minimalModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.gCCollectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.hideAllGraphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.gCCollectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.hideAllGraphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
 			this.toolStripContainer1.ContentPanel.SuspendLayout();
 			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -171,6 +171,7 @@
 			// viewport
 			// 
 			this.viewport.BackColor = System.Drawing.Color.Black;
+			this.viewport.ClearColor = System.Drawing.Color.Black;
 			this.viewport.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.viewport.Location = new System.Drawing.Point(0, 0);
 			this.viewport.Name = "viewport";
@@ -186,7 +187,7 @@
             this.plotterToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.gCCollectToolStripMenuItem,
-			this.hideAllGraphsToolStripMenuItem});
+            this.hideAllGraphsToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(737, 24);
@@ -316,6 +317,20 @@
 			this.minimalModeToolStripMenuItem.Text = "&Minimal Mode";
 			this.minimalModeToolStripMenuItem.Click += new System.EventHandler(this.minimalModeToolStripMenuItem_Click);
 			// 
+			// gCCollectToolStripMenuItem
+			// 
+			this.gCCollectToolStripMenuItem.Name = "gCCollectToolStripMenuItem";
+			this.gCCollectToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+			this.gCCollectToolStripMenuItem.Text = "GC.Collect";
+			this.gCCollectToolStripMenuItem.Click += new System.EventHandler(this.gCCollectToolStripMenuItem_Click);
+			// 
+			// hideAllGraphsToolStripMenuItem
+			// 
+			this.hideAllGraphsToolStripMenuItem.Name = "hideAllGraphsToolStripMenuItem";
+			this.hideAllGraphsToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+			this.hideAllGraphsToolStripMenuItem.Text = "Hide all Graphs";
+			this.hideAllGraphsToolStripMenuItem.Click += new System.EventHandler(this.hideAllGraphsToolStripMenuItem_Click);
+			// 
 			// colorDialog
 			// 
 			this.colorDialog.AnyColor = true;
@@ -336,19 +351,6 @@
 			// 
 			this.exportCaptureFileDialog.DefaultExt = "stream";
 			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
-			// 
-			// gCCollectToolStripMenuItem
-			// 
-			this.gCCollectToolStripMenuItem.Name = "gCCollectToolStripMenuItem";
-			this.gCCollectToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
-			this.gCCollectToolStripMenuItem.Text = "GC.Collect";
-			this.gCCollectToolStripMenuItem.Click += new System.EventHandler(this.gCCollectToolStripMenuItem_Click);
-			// 
-			// hideAllGraphsToolStripMenuItem
-			// 
-			this.hideAllGraphsToolStripMenuItem.Name = "hideAllGraphsToolStripMenuItem";
-			this.hideAllGraphsToolStripMenuItem.Text = "Hide all Graphs";
-			this.hideAllGraphsToolStripMenuItem.Click += new System.EventHandler(this.hideAllGraphsToolStripMenuItem_Click);
 			// 
 			// MainWindow
 			// 
