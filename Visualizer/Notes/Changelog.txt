@@ -1,4 +1,5 @@
 Version 0.6
+	- Added option to toggle vertical synchronization
 	- Added default values for the various show items
 	- Transformed the "Hide all graphs" command into an option to show the Plotter
 	- Frame counter can be turned on and off

@@ -43,10 +43,10 @@ namespace Visualizer
 			InitializeComponent();
 
 			Text = title;
-			
+
 			viewport.ClearColor = parameters.BackgroundColor;
 			viewport.Layout += viewport_Layout;
-			
+
 			drawer = new Drawer();
 
 			Console.WriteLine("Initializing plotter...");
@@ -63,10 +63,10 @@ namespace Visualizer
 			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(graphs);
 			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
 			plotter = new Plotter(graphs, drawer, timeManager, valueManager, layouter, parameters.Resolution, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
-			
+
 			System.Console.WriteLine("Initializing frame counter");
 			frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
-			
+
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);
 
@@ -83,8 +83,9 @@ namespace Visualizer
 			showPlotterToolStripMenuItem_Click(this, EventArgs.Empty);
 			showFrameCounterToolStripMenuItem.Checked = true;
 			showFrameCounterToolStripMenuItem_Click(this, EventArgs.Empty);
+			verticalSynchronizationToolStripMenuItem.Checked = true;
+			verticalSynchronizationToolStripMenuItem_Click(this, EventArgs.Empty);
 
-			viewport.VSync = false;
 			viewport.AddComponent(plotter);
 			viewport.AddComponent(frameCounter);
 		}
@@ -193,6 +194,10 @@ namespace Visualizer
 		{
 			frameCounter.IsDrawn = showFrameCounterToolStripMenuItem.Checked;
 		}
+		private void verticalSynchronizationToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			viewport.VSync = verticalSynchronizationToolStripMenuItem.Checked;
+		}
 
 		void NewSource(IEnumerable<string> ports)
 		{
@@ -279,7 +284,7 @@ namespace Visualizer
 		{
 			GC.Collect();
 		}
-		
+
 		static string EscapeFilename(string filename)
 		{
 			foreach (char invalidChar in System.IO.Path.GetInvalidFileNameChars())

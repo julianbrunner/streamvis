@@ -59,6 +59,8 @@
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.showPlotterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.showFrameCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.verticalSynchronizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gCCollectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -296,7 +298,9 @@
             this.minimalModeToolStripMenuItem,
             this.toolStripSeparator2,
             this.showPlotterToolStripMenuItem,
-            this.showFrameCounterToolStripMenuItem});
+            this.showFrameCounterToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.verticalSynchronizationToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "&View";
@@ -305,7 +309,7 @@
 			// 
 			this.showStreamListToolStripMenuItem.CheckOnClick = true;
 			this.showStreamListToolStripMenuItem.Name = "showStreamListToolStripMenuItem";
-			this.showStreamListToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+			this.showStreamListToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
 			this.showStreamListToolStripMenuItem.Text = "Show &Stream List";
 			this.showStreamListToolStripMenuItem.Click += new System.EventHandler(this.showStreamListToolStripMenuItem_Click);
 			// 
@@ -313,20 +317,20 @@
 			// 
 			this.minimalModeToolStripMenuItem.CheckOnClick = true;
 			this.minimalModeToolStripMenuItem.Name = "minimalModeToolStripMenuItem";
-			this.minimalModeToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+			this.minimalModeToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
 			this.minimalModeToolStripMenuItem.Text = "&Minimal Mode";
 			this.minimalModeToolStripMenuItem.Click += new System.EventHandler(this.minimalModeToolStripMenuItem_Click);
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(182, 6);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
 			// 
 			// showPlotterToolStripMenuItem
 			// 
 			this.showPlotterToolStripMenuItem.CheckOnClick = true;
 			this.showPlotterToolStripMenuItem.Name = "showPlotterToolStripMenuItem";
-			this.showPlotterToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+			this.showPlotterToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
 			this.showPlotterToolStripMenuItem.Text = "Show &Plotter";
 			this.showPlotterToolStripMenuItem.Click += new System.EventHandler(this.showPlotterToolStripMenuItem_Click);
 			// 
@@ -334,9 +338,22 @@
 			// 
 			this.showFrameCounterToolStripMenuItem.CheckOnClick = true;
 			this.showFrameCounterToolStripMenuItem.Name = "showFrameCounterToolStripMenuItem";
-			this.showFrameCounterToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+			this.showFrameCounterToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
 			this.showFrameCounterToolStripMenuItem.Text = "Show &Frame Counter";
 			this.showFrameCounterToolStripMenuItem.Click += new System.EventHandler(this.showFrameCounterToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(198, 6);
+			// 
+			// verticalSynchronizationToolStripMenuItem
+			// 
+			this.verticalSynchronizationToolStripMenuItem.CheckOnClick = true;
+			this.verticalSynchronizationToolStripMenuItem.Name = "verticalSynchronizationToolStripMenuItem";
+			this.verticalSynchronizationToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+			this.verticalSynchronizationToolStripMenuItem.Text = "&Vertical Synchronization";
+			this.verticalSynchronizationToolStripMenuItem.Click += new System.EventHandler(this.verticalSynchronizationToolStripMenuItem_Click);
 			// 
 			// gCCollectToolStripMenuItem
 			// 
@@ -428,6 +445,8 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem showFrameCounterToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem showPlotterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripMenuItem verticalSynchronizationToolStripMenuItem;
 		
 	}
 }
