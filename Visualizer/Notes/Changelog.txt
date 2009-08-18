@@ -1,4 +1,6 @@
 Version 0.6
+	- Frame counter can be turned on and off
+	- Backend improvements
 	- When sensible, scientific notation is used for drawing numbers
 	- Fixed a bug causing clearing of capture data not to work correctly
 	- Fixed a bug causing minimal mode not to work correctly on mono's WinForms implementation

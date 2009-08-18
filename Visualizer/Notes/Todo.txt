@@ -1,4 +1,3 @@
-TODO: Enable turning frame counter on and off
 TODO: Make Layouter adaptive to width of the Y-Axis labels
 
 TODO: Name conflicts when more than one instance of the Visualizer is running

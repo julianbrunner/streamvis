@@ -185,6 +185,10 @@ namespace Visualizer
 		{
 			foreach (ListViewItem item in streamsListView.Items) item.Checked = false;
 		}
+		private void showFrameCounterToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			frameCounter.IsDrawn = showFrameCounterToolStripMenuItem.Checked;
+		}
 
 		void NewSource(IEnumerable<string> ports)
 		{
