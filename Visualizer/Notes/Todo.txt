@@ -1,7 +1,6 @@
-TODO: Make frame counter an option (and a class)
-TODO: Make Layouter adaptive to width of the Y-Axis labels
-TODO: Enable turning frame counter on and off
 TODO: Create component model for VisibleFrameCounter, Plotter, etc.
+TODO: Enable turning frame counter on and off
+TODO: Make Layouter adaptive to width of the Y-Axis labels
 
 TODO: Name conflicts when more than one instance of the Visualizer is running
 

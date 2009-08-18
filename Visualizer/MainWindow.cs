@@ -28,12 +28,11 @@ namespace Visualizer
 
 		const string title = "Yarp Visualizer";
 
+		readonly Drawer drawer;
 		readonly Data.Timer timer = new Data.Timer();
 		readonly List<Graph> graphs = new List<Graph>();
 		readonly Plotter plotter;
 		readonly VisibleFrameCounter frameCounter;
-		readonly System.Timers.Timer frameTimer = new System.Timers.Timer(10);
-		readonly AutoResetEvent drawFrame = new AutoResetEvent(false);
 
 		Source source;
 		string filePath;
@@ -47,6 +46,8 @@ namespace Visualizer
 			
 			viewport.ClearColor = parameters.BackgroundColor;
 			viewport.Layout += viewport_Layout;
+			
+			drawer = new Drawer();
 
 			Console.WriteLine("Initializing plotter...");
 			Layouter layouter = new Layouter(viewport);
@@ -56,15 +57,15 @@ namespace Visualizer
 				case PlotterType.Continuous: timeManager = new ContinuousTimeManager(timer, parameters.PlotterWidth); break;
 				case PlotterType.Shiftting: timeManager = new ShiftingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
 				case PlotterType.Wrapping: timeManager = new WrappingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
-				default: throw new ArgumentOutOfRangeException("plotterType");
+				default: throw new InvalidOperationException();
 			}
 			ValueManager valueManager;
 			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(graphs);
 			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
-			plotter = new Plotter(graphs, viewport, timeManager, valueManager, layouter, parameters.Resolution, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
+			plotter = new Plotter(graphs, drawer, timeManager, valueManager, layouter, parameters.Resolution, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
 			
 			System.Console.WriteLine("Initializing frame counter");
-			frameCounter = new VisibleFrameCounter(viewport, Color.Yellow, TextAlignment.Far);
+			frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
 			
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);
@@ -79,38 +80,14 @@ namespace Visualizer
 			minimalModeToolStripMenuItem.Checked = parameters.MinimalMode;
 			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
 
-			Console.WriteLine("Starting render loop...");
-
 			viewport.VSync = false;
-			frameTimer.Elapsed += delegate(object sender, System.Timers.ElapsedEventArgs e) { drawFrame.Set(); };
-			frameTimer.Start();
-
-			Application.Idle += Application_Idle;
+			viewport.AddComponent(plotter);
+			viewport.AddComponent(frameCounter);
 		}
 
 		void viewport_Layout(object sender, LayoutEventArgs e)
 		{
 			frameCounter.Position = new Point(viewport.Right, viewport.Top);
-		}
-		void Application_Idle(object sender, EventArgs e)
-		{
-			Application.DoEvents();
-
-			while (viewport.IsIdle)
-			{
-				// TODO: Remove drawFrame AutoResetEvent
-				drawFrame.WaitOne();
-
-				viewport.Begin();
-
-				plotter.Update();
-				frameCounter.Update();
-				
-				plotter.Draw();
-				frameCounter.Draw();
-
-				viewport.End();
-			}
 		}
 
 		private void streamsListView_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -264,7 +241,7 @@ namespace Visualizer
 				streamsListView.Groups.Add(group);
 				foreach (Stream stream in port.Streams)
 				{
-					Graph graph = new Graph(plotter, stream);
+					Graph graph = new Graph(plotter, drawer, stream);
 					graphs.Add(graph);
 
 					ListViewItem item = new ListViewItem();
@@ -289,18 +266,18 @@ namespace Visualizer
 			item.ForeColor = item.BackColor.R * 0.299 + item.BackColor.G * 0.587 + item.BackColor.B * 0.114 >= 0x80 ? Color.Black : Color.White;
 		}
 
+		// TODO: Remove on release
+		private void gCCollectToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			GC.Collect();
+		}
+		
 		static string EscapeFilename(string filename)
 		{
 			foreach (char invalidChar in System.IO.Path.GetInvalidFileNameChars())
 				filename = filename.Replace(invalidChar.ToString(), string.Empty);
 
 			return filename;
-		}
-
-		// TODO: Remove on release
-		private void gCCollectToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			GC.Collect();
 		}
 	}
 }

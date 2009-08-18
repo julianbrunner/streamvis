@@ -33,6 +33,10 @@
     <Compile Include="Viewport.cs" />
     <Compile Include="FrameCounter.cs" />
     <Compile Include="VisibleFrameCounter.cs" />
+    <Compile Include="IComponent.cs" />
+    <Compile Include="IDrawable.cs" />
+    <Compile Include="IUpdateable.cs" />
+    <Compile Include="Drawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OpenTK.dll" />
@@ -58,8 +62,8 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Core" />
     <Reference Include="System" />
+    <Reference Include="System.Core" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

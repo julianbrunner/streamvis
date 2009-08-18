@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Graphics
 {
-	public class FrameCounter
+	public class FrameCounter : IComponent, IUpdateable
 	{
 		const int frameWindow = 20;
 		

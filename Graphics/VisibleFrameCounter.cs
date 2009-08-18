@@ -2,24 +2,24 @@ using System.Drawing;
 
 namespace Graphics
 {
-	public class VisibleFrameCounter : FrameCounter
+	public class VisibleFrameCounter : FrameCounter, IDrawable
 	{
-		readonly Viewport viewport;
+		readonly Drawer drawer;
 		readonly Color color;
 		readonly TextAlignment alignment;
 		
 		public PointF Position { get; set; }
 		
-		public VisibleFrameCounter(Viewport viewport, Color color, TextAlignment alignment)
+		public VisibleFrameCounter(Drawer drawer, Color color, TextAlignment alignment)
 		{
-			this.viewport = viewport;
+			this.drawer = drawer;
 			this.color = color;
 			this.alignment = alignment;
 		}
 		
 		public void Draw()
 		{
-			viewport.DrawNumber(FramesPerSecond, Position, color, alignment);
+			drawer.DrawNumber(FramesPerSecond, Position, color, alignment);
 		}
 	}
 }

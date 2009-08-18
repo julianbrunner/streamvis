@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Graphics;
 using Visualizer.Data;
 
 namespace Visualizer.Plotting
@@ -9,6 +10,7 @@ namespace Visualizer.Plotting
 	public class Graph
 	{
 		readonly Plotter plotter;
+		readonly Drawer drawer;
 		readonly Stream stream;
 
 		public bool IsUpdated { get; set; }
@@ -23,23 +25,24 @@ namespace Visualizer.Plotting
 			}
 		}
 
-		public Graph(Plotter plotter, Stream stream)
+		public Graph(Plotter plotter, Drawer drawer, Stream stream)
 		{
 			this.plotter = plotter;
+			this.drawer = drawer;
 			this.stream = stream;
 
 			IsUpdated = true;
 			IsDrawn = true;
 		}
 
-		public virtual void Update()
+		public void Update()
 		{
 			if (IsUpdated)
 			{
 
 			}
 		}
-		public virtual void Draw()
+		public void Draw()
 		{
 			if (IsDrawn && !stream.Container.IsEmpty)
 			{
@@ -60,7 +63,7 @@ namespace Visualizer.Plotting
 						)
 					);
 
-					plotter.Viewport.DrawLineStrip(points, stream.Color, 1f);
+					drawer.DrawLineStrip(points, stream.Color, 1f);
 				}
 			}
 		}
