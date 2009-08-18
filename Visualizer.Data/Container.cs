@@ -61,19 +61,23 @@ namespace Visualizer.Data
 
 		public void Clear()
 		{
-			lock (entries) entries.Clear();
+			lock (entries)
+			{
+				sampleBuffer.Clear();
+				entries.Clear();
+			}
 		}
 		// TOOD: Resampling should be done in Visualizer.Capturing instead of Visualizer.Data
 		public void Add(Entry entry)
 		{
-			if (entry.Value != double.NaN && (sampleBuffer.Count == 0 || entry.Time > sampleBuffer[sampleBuffer.Count - 1].Time))
-				sampleBuffer.Add(entry);
-
-			while (sampleBuffer.Count > 1 && sampleBuffer[sampleBuffer.Count - 1].Time - sampleBuffer[0].Time >= sampleTicks)
+			lock (entries)
 			{
-				Entry newEntry = AggregateSamples();
-				// TODO: Do we have to check if the timestamp is correct?
-				lock (entries) entries.Add(newEntry);
+				if (entry.Value != double.NaN && (sampleBuffer.Count == 0 || entry.Time > sampleBuffer[sampleBuffer.Count - 1].Time))
+					sampleBuffer.Add(entry);
+	
+				while (sampleBuffer.Count > 1 && sampleBuffer[sampleBuffer.Count - 1].Time - sampleBuffer[0].Time >= sampleTicks)
+					// TODO: Do we have to check if the timestamp is correct?
+					entries.Add(AggregateSamples());
 			}
 		}
 		public int GetIndex(long time)

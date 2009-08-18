@@ -180,8 +180,8 @@ namespace Visualizer
 		}
 		private void clearDataToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			source.ClearData();
 			timer.Reset();
+			source.ClearData();
 		}
 		private void freezeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -301,7 +301,7 @@ namespace Visualizer
 		{
 			GC.Collect();
 		}
-		// TODO: Remove on release
+		// TODO: Remove on release (or make it a regular item)
 		private void hideAllGraphsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			foreach (ListViewItem item in streamsListView.Items)
