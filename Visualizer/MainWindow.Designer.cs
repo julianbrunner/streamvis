@@ -361,6 +361,7 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainWindow";
 			this.Text = "<Title>";
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyDown);
 			this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
 			this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
 			this.toolStripContainer1.ContentPanel.ResumeLayout(false);

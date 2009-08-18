@@ -207,6 +207,10 @@ namespace Visualizer
 			toolStripContainer1.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 			toolStripContainer1.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 		}
+		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+		{
+
+		}
 
 		void NewSource(IEnumerable<string> ports)
 		{
