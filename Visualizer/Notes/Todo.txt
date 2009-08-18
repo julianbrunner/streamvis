@@ -1,5 +1,4 @@
 TODO: Make lines thin when no antialiasing is possible
-TODO: Correct minimal mode bug in mono WinForms
 TODO: Make hotkeys normal letters
 TODO: Test difference between VSync wait and AutoResetEvent wait
 TODO: Make frame counter an option (and a class)

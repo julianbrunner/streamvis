@@ -204,8 +204,8 @@ namespace Visualizer
 		{
 			showStreamListToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
 			showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
-			menuStrip1.Visible = !minimalModeToolStripMenuItem.Checked;
-			statusStrip1.Visible = !minimalModeToolStripMenuItem.Checked;
+			toolStripContainer1.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
+			toolStripContainer1.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 		}
 
 		void NewSource(IEnumerable<string> ports)
