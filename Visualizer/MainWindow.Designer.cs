@@ -178,6 +178,8 @@
 			this.viewport.Size = new System.Drawing.Size(488, 512);
 			this.viewport.TabIndex = 0;
 			this.viewport.VSync = true;
+			this.viewport.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.viewport_KeyPress);
+			this.viewport.KeyDown += new System.Windows.Forms.KeyEventHandler(this.viewport_KeyDown);
 			// 
 			// menuStrip1
 			// 

@@ -314,8 +314,14 @@ namespace Visualizer
 			GC.Collect();
 		}
 
+		private void viewport_KeyDown(object sender, KeyEventArgs e)
+		{
+			Console.WriteLine("vd");
+		}
+
 		private void viewport_KeyPress(object sender, KeyPressEventArgs e)
 		{
+			Console.WriteLine("vp");
 			e.Handled = true;
 		}
 	}
