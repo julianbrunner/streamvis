@@ -28,20 +28,15 @@ namespace Visualizer
 
 		const string title = "Yarp Visualizer";
 
-		readonly Plotter plotter;
-		readonly List<Graph> graphs = new List<Graph>();
 		readonly Data.Timer timer = new Data.Timer();
+		readonly List<Graph> graphs = new List<Graph>();
+		readonly Plotter plotter;
+		readonly VisibleFrameCounter frameCounter;
 		readonly System.Timers.Timer frameTimer = new System.Timers.Timer(10);
 		readonly AutoResetEvent drawFrame = new AutoResetEvent(false);
 
 		Source source;
 		string filePath;
-
-		// TODO: Remove
-		const int frameWindow = 20;
-		int frames = 0;
-		TimeSpan last = TimeSpan.Zero;
-		double fps = 0;
 
 		public MainWindow(Parameters parameters)
 		{
@@ -49,7 +44,9 @@ namespace Visualizer
 			InitializeComponent();
 
 			Text = title;
+			
 			viewport.ClearColor = parameters.BackgroundColor;
+			viewport.Layout += viewport_Layout;
 
 			Console.WriteLine("Initializing plotter...");
 			Layouter layouter = new Layouter(viewport);
@@ -65,7 +62,10 @@ namespace Visualizer
 			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(graphs);
 			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
 			plotter = new Plotter(graphs, viewport, timeManager, valueManager, layouter, parameters.Resolution, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
-
+			
+			System.Console.WriteLine("Initializing frame counter");
+			frameCounter = new VisibleFrameCounter(viewport, Color.Yellow, TextAlignment.Far);
+			
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);
 
@@ -88,6 +88,10 @@ namespace Visualizer
 			Application.Idle += Application_Idle;
 		}
 
+		void viewport_Layout(object sender, LayoutEventArgs e)
+		{
+			frameCounter.Position = new Point(viewport.Right, viewport.Top);
+		}
 		void Application_Idle(object sender, EventArgs e)
 		{
 			Application.DoEvents();
@@ -100,19 +104,12 @@ namespace Visualizer
 				viewport.Begin();
 
 				plotter.Update();
+				frameCounter.Update();
+				
 				plotter.Draw();
-
-				viewport.DrawNumber(fps, new Point(viewport.Right, viewport.Top), Color.Yellow, TextAlignment.Far);
+				frameCounter.Draw();
 
 				viewport.End();
-
-				if (++frames == frameWindow)
-				{
-					TimeSpan time = new TimeSpan(timer.Time);
-					fps = frameWindow / (time - last).TotalSeconds;
-					last = time;
-					frames = 0;
-				}
 			}
 		}
 

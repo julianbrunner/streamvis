@@ -9,25 +9,41 @@ namespace GraphicsTest
 {
 	class MainWindow : Form
 	{
-		IContainer components;
-		Viewport viewport;
+		readonly IContainer components;
+		readonly Viewport viewport;
+
+		readonly Random random = new Random();
+		readonly List<List<PointF>> streams = new List<List<PointF>>(38);
+		readonly FrameCounter frameCounter = new FrameCounter();
 		
-		Random random = new Random();
-		List<List<PointF>> streams = new List<List<PointF>>(38);
 		int mode = 0;
 		int height = 500;
-		
-		readonly Visualizer.Data.Timer timer = new Visualizer.Data.Timer();
-		const int frameWindow = 20;
-		int frames = 0;
-		TimeSpan last = TimeSpan.Zero;
-		double fps = 0;
-		
+				
 		public MainWindow()
 		{
 			components = new Container();
 			viewport = new Viewport();
 			
+			InitializeComponent();
+			
+			InitializeStreams();
+			
+			mode = 1;
+			System.Console.WriteLine("Drawing Mode: Naïve DrawLineStrip");
+			
+			viewport.KeyDown += viewport_KeyDown;
+			Application.Idle += Application_Idle;
+		}
+
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing && components != null) components.Dispose();
+			
+			base.Dispose(disposing);
+		}
+		
+		void InitializeComponent()
+		{
 			SuspendLayout();
 			
 			viewport.Dock = DockStyle.Fill;
@@ -41,16 +57,21 @@ namespace GraphicsTest
 			ClientSize = new Size(1050, 550);
 			
 			ResumeLayout(false);
-			
-			InitializeStreams();
-			
-			mode = 1;
-			System.Console.WriteLine("Drawing Mode: Naïve DrawLineStrip");
-			
-			viewport.KeyDown += viewport_KeyDown;
-			Application.Idle += Application_Idle;
 		}
-
+		void InitializeStreams()
+		{
+			streams.Clear();
+			
+			for (int stream = 0; stream < 38; stream++)
+			{
+				List<PointF> points = new List<PointF>(1000);
+				for (int i = 0; i < 1000; i++) points.Add(new PointF(25 + ((viewport.Width - 50) / 1000f) * i, (viewport.Height - height) / 2 + (float)Next(0, height)));
+				streams.Add(points);
+			}
+			
+			viewport.InitializeStreams(streams);
+		}
+		
 		void viewport_KeyDown(object sender, KeyEventArgs e)
 		{
 			switch (e.KeyCode)
@@ -69,19 +90,6 @@ namespace GraphicsTest
 				case Keys.R: InitializeStreams(); break;
 			}
 		}
-		void InitializeStreams()
-		{
-			streams.Clear();
-			
-			for (int stream = 0; stream < 38; stream++)
-			{
-				List<PointF> points = new List<PointF>(1000);
-				for (int i = 0; i < 1000; i++) points.Add(new PointF(25 + ((viewport.Width - 50) / 1000f) * i, (viewport.Height - height) / 2 + (float)Next(0, height)));
-				streams.Add(points);
-			}
-			
-			viewport.InitializeStreams(streams);
-		}
 		void Application_Idle(object sender, EventArgs e)
 		{
 			Application.DoEvents();
@@ -92,35 +100,14 @@ namespace GraphicsTest
 				viewport.DrawStreams(mode);
 				viewport.End();
 				
-				if (++frames == frameWindow)
-				{
-					TimeSpan time = new TimeSpan(timer.Time);
-					fps = frameWindow / (time - last).TotalSeconds;
-					Text = "GraphicsTest - FPS : " + fps.ToString("F2");
-					last = time;
-					frames = 0;
-				}
+				frameCounter.Update();
+				Text = "GraphicsTest - FPS : " + frameCounter.FramesPerSecond.ToString("F2");
 			}
-		}
-		
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && components != null) components.Dispose();
-			
-			base.Dispose(disposing);
 		}
 					
 		double Next(double start, double end)
 		{
 			return start + random.NextDouble() * (end - start);
 		}
-//		PointF NextPoint()
-//		{
-//			return new PointF((float)Next(viewport.Left, viewport.Right), (float)Next(viewport.Top, viewport.Bottom));
-//		}
-//		Color NextColor()
-//		{
-//			return Color.FromArgb(random.Next(256), random.Next(256), random.Next(256));
-//		}
 	}
 }

@@ -36,11 +36,10 @@ namespace Graphics
 		}
 
 		public Viewport() : base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false))
-		{
-			Layout += viewport_Layout;
-			
+		{			
 			ClearColor = Color.Black;
 			
+			// DEBUG
 			System.Console.WriteLine("GraphicsMode: " + GraphicsMode.ToString());
 
 			// DEBUG
@@ -284,14 +283,15 @@ namespace Graphics
 				base.Dispose(disposing);
 			}
 		}
-		
-		void viewport_Layout(object sender, LayoutEventArgs e)
+		protected override void OnLayout(LayoutEventArgs e)
 		{
 			GL.Viewport(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width, ClientRectangle.Height);
 
 			GL.MatrixMode(MatrixMode.Projection);
 			GL.LoadIdentity();
 			Glu.Ortho2D(ClientRectangle.Left, ClientRectangle.Right, ClientRectangle.Bottom, ClientRectangle.Top);
+			
+			base.OnLayout(e);
 		}
 	}
 }
