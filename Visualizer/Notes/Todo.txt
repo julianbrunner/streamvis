@@ -1,4 +1,3 @@
-TODO: Create component model for VisibleFrameCounter, Plotter, etc.
 TODO: Enable turning frame counter on and off
 TODO: Make Layouter adaptive to width of the Y-Axis labels
 

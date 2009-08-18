@@ -12,6 +12,7 @@ namespace Visualizer.Plotting
 		readonly TimeManager timeManager;
 		readonly ValueManager valueManager;
 		readonly Layouter layouter;
+		// TODO: Is this even used?
 		readonly int resolution;
 		readonly int intervalsX;
 		readonly int intervalsY;
@@ -23,8 +24,6 @@ namespace Visualizer.Plotting
 		public int Resolution { get { return resolution; } }
 		public bool ExtendGraphs { get; set; }
 		public bool Frozen { get; set; }
-		public bool IsUpdated { get; set; }
-		public bool IsDrawn { get; set; }
 
 		public Plotter(IEnumerable<Graph> graphs, Drawer drawer, TimeManager timeManager, ValueManager valueManager, Layouter layouter, int resolution, int intervalsX, int intervalsY, Color color)
 		{
@@ -37,34 +36,25 @@ namespace Visualizer.Plotting
 			this.intervalsX = intervalsX;
 			this.intervalsY = intervalsY;
 			this.color = color;
-
-			IsUpdated = true;
-			IsDrawn = true;
 		}
 
 		public void Update()
 		{
-			if (IsUpdated)
-			{
-				if (!Frozen) timeManager.Update();
-				valueManager.Update();
-				layouter.Update();
+			if (!Frozen) timeManager.Update();
+			valueManager.Update();
+			layouter.Update();
 
-				foreach (Graph graph in graphs) graph.Update();
-			}
+			foreach (Graph graph in graphs) graph.Update();
 		}
 		public void Draw()
 		{
-			if (IsDrawn)
-			{
-				foreach (Graph graph in graphs) graph.Draw();
+			foreach (Graph graph in graphs) graph.Draw();
 
-				Range<long> timeRange = timeManager.Range;
-				Range<double> valueRange = valueManager.Range;
+			Range<long> timeRange = timeManager.Range;
+			Range<double> valueRange = valueManager.Range;
 
-				DrawAxisX(timeRange, valueRange);
-				DrawAxisY(timeRange, valueRange);
-			}
+			DrawAxisX(timeRange, valueRange);
+			DrawAxisY(timeRange, valueRange);
 		}
 
 		void DrawAxisX(Range<long> timeRange, Range<double> valueRange)

@@ -13,7 +13,6 @@ namespace Visualizer.Plotting
 		readonly Drawer drawer;
 		readonly Stream stream;
 
-		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 		public IEnumerable<double> Values
 		{
@@ -31,17 +30,10 @@ namespace Visualizer.Plotting
 			this.drawer = drawer;
 			this.stream = stream;
 
-			IsUpdated = true;
 			IsDrawn = true;
 		}
 
-		public void Update()
-		{
-			if (IsUpdated)
-			{
-
-			}
-		}
+		public void Update() { }
 		public void Draw()
 		{
 			if (IsDrawn && !stream.Container.IsEmpty)
@@ -83,10 +75,8 @@ namespace Visualizer.Plotting
 
 				if (startIndex == endIndex)
 				{
-					if (endIndex == stream.Container.Count) 
-						head = tail = stream.Container[endIndex - 1].Value;
-					else
-						head = tail = stream.Container[startIndex].Value;
+					if (endIndex == stream.Container.Count) head = tail = stream.Container[endIndex - 1].Value;
+					else head = tail = stream.Container[startIndex].Value;
 				}
 				else
 				{
