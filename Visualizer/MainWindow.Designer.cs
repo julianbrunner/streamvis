@@ -54,9 +54,10 @@
 			this.freezeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.graphExtensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.hideAllGraphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.showStreamListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.minimalModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.hideAllGraphsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gCCollectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -178,8 +179,6 @@
 			this.viewport.Size = new System.Drawing.Size(488, 512);
 			this.viewport.TabIndex = 0;
 			this.viewport.VSync = true;
-			this.viewport.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.viewport_KeyPress);
-			this.viewport.KeyDown += new System.Windows.Forms.KeyEventHandler(this.viewport_KeyDown);
 			// 
 			// menuStrip1
 			// 
@@ -259,7 +258,6 @@
 			// 
 			this.clearDataToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearDataToolStripMenuItem.Image")));
 			this.clearDataToolStripMenuItem.Name = "clearDataToolStripMenuItem";
-			this.clearDataToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
 			this.clearDataToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
 			this.clearDataToolStripMenuItem.Text = "&Clear Data";
 			this.clearDataToolStripMenuItem.Click += new System.EventHandler(this.clearDataToolStripMenuItem_Click);
@@ -277,8 +275,8 @@
 			// 
 			this.freezeToolStripMenuItem.CheckOnClick = true;
 			this.freezeToolStripMenuItem.Name = "freezeToolStripMenuItem";
-			this.freezeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-			this.freezeToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+			this.freezeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+			this.freezeToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
 			this.freezeToolStripMenuItem.Text = "&Freeze";
 			this.freezeToolStripMenuItem.Click += new System.EventHandler(this.freezeToolStripMenuItem_Click);
 			// 
@@ -286,35 +284,26 @@
 			// 
 			this.graphExtensionToolStripMenuItem.CheckOnClick = true;
 			this.graphExtensionToolStripMenuItem.Name = "graphExtensionToolStripMenuItem";
-			this.graphExtensionToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-			this.graphExtensionToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+			this.graphExtensionToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
 			this.graphExtensionToolStripMenuItem.Text = "Graph &Extension";
 			this.graphExtensionToolStripMenuItem.Click += new System.EventHandler(this.graphExtensionToolStripMenuItem_Click);
 			// 
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hideAllGraphsToolStripMenuItem,
             this.showStreamListToolStripMenuItem,
-            this.minimalModeToolStripMenuItem});
+            this.minimalModeToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.hideAllGraphsToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "&View";
-			// 
-			// hideAllGraphsToolStripMenuItem
-			// 
-			this.hideAllGraphsToolStripMenuItem.Name = "hideAllGraphsToolStripMenuItem";
-			this.hideAllGraphsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F10;
-			this.hideAllGraphsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-			this.hideAllGraphsToolStripMenuItem.Text = "&Hide all Graphs";
-			this.hideAllGraphsToolStripMenuItem.Click += new System.EventHandler(this.hideAllGraphsToolStripMenuItem_Click);
 			// 
 			// showStreamListToolStripMenuItem
 			// 
 			this.showStreamListToolStripMenuItem.CheckOnClick = true;
 			this.showStreamListToolStripMenuItem.Name = "showStreamListToolStripMenuItem";
-			this.showStreamListToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11;
-			this.showStreamListToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+			this.showStreamListToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.showStreamListToolStripMenuItem.Text = "Show &Stream List";
 			this.showStreamListToolStripMenuItem.Click += new System.EventHandler(this.showStreamListToolStripMenuItem_Click);
 			// 
@@ -322,10 +311,21 @@
 			// 
 			this.minimalModeToolStripMenuItem.CheckOnClick = true;
 			this.minimalModeToolStripMenuItem.Name = "minimalModeToolStripMenuItem";
-			this.minimalModeToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F12;
-			this.minimalModeToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+			this.minimalModeToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
 			this.minimalModeToolStripMenuItem.Text = "&Minimal Mode";
 			this.minimalModeToolStripMenuItem.Click += new System.EventHandler(this.minimalModeToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(161, 6);
+			// 
+			// hideAllGraphsToolStripMenuItem
+			// 
+			this.hideAllGraphsToolStripMenuItem.Name = "hideAllGraphsToolStripMenuItem";
+			this.hideAllGraphsToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+			this.hideAllGraphsToolStripMenuItem.Text = "&Hide all Graphs";
+			this.hideAllGraphsToolStripMenuItem.Click += new System.EventHandler(this.hideAllGraphsToolStripMenuItem_Click);
 			// 
 			// gCCollectToolStripMenuItem
 			// 
@@ -364,8 +364,6 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainWindow";
 			this.Text = "<Title>";
-			this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MainWindow_KeyPress);
-			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyDown);
 			this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
 			this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
 			this.toolStripContainer1.ContentPanel.ResumeLayout(false);
@@ -417,6 +415,7 @@
 		private System.Windows.Forms.ToolStripMenuItem graphExtensionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem gCCollectToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem hideAllGraphsToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		
 	}
 }

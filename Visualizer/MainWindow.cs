@@ -196,10 +196,6 @@ namespace Visualizer
 			if (streamsListView.SelectedItems.Count > 0 && colorDialog.ShowDialog() == DialogResult.OK)
 				SetColor(streamsListView.SelectedItems[0], colorDialog.Color);
 		}
-		private void hideAllGraphsToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			foreach (ListViewItem item in streamsListView.Items) item.Checked = false;
-		}
 		private void showStreamListToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			splitContainer1.Panel1Collapsed = !showStreamListToolStripMenuItem.Checked;
@@ -211,13 +207,9 @@ namespace Visualizer
 			toolStripContainer1.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 			toolStripContainer1.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 		}
-		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+		private void hideAllGraphsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Console.WriteLine("down");
-		}
-		private void MainWindow_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			Console.WriteLine("press");
+			foreach (ListViewItem item in streamsListView.Items) item.Checked = false;
 		}
 
 		void NewSource(IEnumerable<string> ports)
@@ -312,17 +304,6 @@ namespace Visualizer
 		private void gCCollectToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			GC.Collect();
-		}
-
-		private void viewport_KeyDown(object sender, KeyEventArgs e)
-		{
-			Console.WriteLine("vd");
-		}
-
-		private void viewport_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			Console.WriteLine("vp");
-			e.Handled = true;
 		}
 	}
 }
