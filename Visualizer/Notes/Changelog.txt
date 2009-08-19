@@ -2,6 +2,7 @@ Version 0.7
 	- Multiple Visualizers can now be bound to a single Yarp port
 	- Added a method to check if a specified port exists to the Yarp wrapper
 	- Added a method to find an available port with a chosen prefix
+	- Minor cleanups in files
 
 Version 0.6
 	- Set yarp ports to use strict behaviour

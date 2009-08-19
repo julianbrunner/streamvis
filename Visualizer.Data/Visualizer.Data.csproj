@@ -42,6 +42,7 @@
     <Compile Include="Source.cs" />
     <Compile Include="Stream.cs" />
     <Compile Include="Timer.cs" />
+    <Compile Include="Time.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
