@@ -5,13 +5,13 @@ void		Network_Dispose(Network* network)								{ delete network;;							}
 void		Network_Connect(const char* source, const char* destination)	{ Network::connect(source, destination);	}
 void		Network_Disconnect(const char* source, const char* destination)	{ Network::disconnect(source, destination);	}
 
-BufferedPort<Bottle>*	BufferedPort_Bottle_New()												{ return new BufferedPort<Bottle>;	}
-void					BufferedPort_Bottle_Dispose(BufferedPort<Bottle>* port)					{ delete port;						}
-void					BufferedPort_Bottle_Open(BufferedPort<Bottle>* port, const char* name)	{ port->open(name);					}
-void					BufferedPort_Bottle_Close(BufferedPort<Bottle>* port)					{ port->close();					}
-Bottle*					BufferedPort_Bottle_Prepare(BufferedPort<Bottle>* port)					{ return &port->prepare();			}
-Bottle*					BufferedPort_Bottle_Read(BufferedPort<Bottle>* port)					{ return port->read();				}
-void					BufferedPort_Bottle_Write(BufferedPort<Bottle>* port)					{ port->write();					}
+BufferedPort<Bottle>*	BufferedPort_Bottle_New()												{ return new BufferedPort<Bottle>;		}
+void					BufferedPort_Bottle_Dispose(BufferedPort<Bottle>* port)					{ delete port;							}
+void					BufferedPort_Bottle_Open(BufferedPort<Bottle>* port, const char* name)	{ port->open(name);	port->setStrict();	}
+void					BufferedPort_Bottle_Close(BufferedPort<Bottle>* port)					{ port->close();						}
+Bottle*					BufferedPort_Bottle_Prepare(BufferedPort<Bottle>* port)					{ return &port->prepare();				}
+Bottle*					BufferedPort_Bottle_Read(BufferedPort<Bottle>* port)					{ return port->read();					}
+void					BufferedPort_Bottle_Write(BufferedPort<Bottle>* port)					{ port->writeStrict();					}
 
 void	Bottle_Clear(Bottle* bottle)					{ bottle->clear();				}
 int		Bottle_Size(Bottle* bottle)						{ return bottle->size();		}

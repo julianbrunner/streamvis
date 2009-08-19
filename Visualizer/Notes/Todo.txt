@@ -1,5 +1,3 @@
-TODO: Make Layouter adaptive to width of the Y-Axis labels
-
 TODO: Name conflicts when more than one instance of the Visualizer is running
 
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
@@ -17,6 +15,8 @@ TODO: Profile the new wrapper
 TODO: Memory profiling?
 TODO: Complete logging of all received data
 TODO: Change design so that containers and ports are 1:1, in order to avoid excessive locks and duplicate data in memory
+
+TODO: Make Layouter adaptive to width of the Y-Axis labels
 
 TODO: Bundle into single assembly (mkbundle)
 
