@@ -25,5 +25,13 @@ namespace Data
 		{
 			return source.Concat(item.Single());
 		}
+		public static IEnumerable<string> ToStrings<T>(this IEnumerable<T> source)
+		{
+			foreach (T item in source) yield return item.ToString();
+		}
+		public static string AggregateString<T>(this IEnumerable<T> source)
+		{
+			return source.Aggregate(string.Empty, (seed, current) => seed + current);
+		}
 	}
 }

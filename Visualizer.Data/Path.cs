@@ -35,7 +35,7 @@ namespace Visualizer.Data
 
 		public override string ToString()
 		{
-			return (from node in nodes select node.ToString()).Separate(".").Aggregate((path, current) => path + current);
+			return nodes.ToStrings().Separate(".").AggregateString();
 		}		
 		public IEnumerator<int> GetEnumerator ()
 		{

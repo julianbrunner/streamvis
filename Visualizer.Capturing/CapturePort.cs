@@ -70,7 +70,7 @@ namespace Visualizer.Capturing
 			while (running)
 			{
 				Packet packet = port.Read();
-				TimeSpan time = timer.Time;
+				Time time = timer.Time;
 
 				if (running)
 					foreach (Stream stream in Streams)

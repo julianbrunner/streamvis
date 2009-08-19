@@ -8,13 +8,13 @@ namespace Visualizer.Plotting
 	{
 		readonly double gap;
 
-		Range<TimeSpan> range;
-		IEnumerable<Range<TimeSpan>> graphRanges;
+		Range<Time> range;
+		IEnumerable<Range<Time>> graphRanges;
 
-		public override Range<TimeSpan> Range { get { return range; } }
-		public override IEnumerable<Range<TimeSpan>> GraphRanges { get { return graphRanges; } }
+		public override Range<Time> Range { get { return range; } }
+		public override IEnumerable<Range<Time>> GraphRanges { get { return graphRanges; } }
 
-		public WrappingTimeManager(Timer timer, TimeSpan width, double gap)
+		public WrappingTimeManager(Timer timer, Time width, double gap)
 			: base(timer, width)
 		{
 			this.gap = gap;
@@ -24,46 +24,46 @@ namespace Visualizer.Plotting
 		{
 			base.Update();
 
-			double intervals = (double)Time.Ticks / (double)Width.Ticks;
+			double intervals = Time / Width;
 			int wholeIntervals = (int)intervals;
 			double fractionalIntervals = intervals - wholeIntervals;
 
-			TimeSpan startTime = Time - Width + new TimeSpan((long)(gap * Width.Ticks));
+			Time startTime = Time - (1 - gap) * Width;
 			float startPosition = (float)(fractionalIntervals + gap) % 1;
-			TimeSpan endTime = Time;
+			Time endTime = Time;
 			float endPosition = startPosition + (float)(1 - gap);
 
-			if (startTime >= new TimeSpan(wholeIntervals * Width.Ticks))
-				graphRanges = new Range<TimeSpan>[]
+			if (startTime >= wholeIntervals * Width)
+				graphRanges = new Range<Time>[]
 				{
-					new Range<TimeSpan>
+					new Range<Time>
 					(
-						new Marker<TimeSpan>(startTime, startPosition),
-						new Marker<TimeSpan>(endTime, endPosition)
+						new Marker<Time>(startTime, startPosition),
+						new Marker<Time>(endTime, endPosition)
 					)
 				};
 			else
 			{
 
-				graphRanges = new Range<TimeSpan>[]
+				graphRanges = new Range<Time>[]
 				{
-					new Range<TimeSpan>
+					new Range<Time>
 					(
-						new Marker<TimeSpan>(startTime, startPosition),
-						new Marker<TimeSpan>(new TimeSpan(wholeIntervals * Width.Ticks), 1)
+						new Marker<Time>(startTime, startPosition),
+						new Marker<Time>(wholeIntervals * Width, 1)
 					),
-					new Range<TimeSpan>
+					new Range<Time>
 					(
-						new Marker<TimeSpan>(new TimeSpan(wholeIntervals * Width.Ticks), 0),
-						new Marker<TimeSpan>(endTime, endPosition - 1)
+						new Marker<Time>(wholeIntervals * Width, 0),
+						new Marker<Time>(endTime, endPosition - 1)
 					)
 				};
 			}
 
-			range = new Range<TimeSpan>
+			range = new Range<Time>
 			(
-				new Marker<TimeSpan>(new TimeSpan((wholeIntervals + 0) * Width.Ticks), 0),
-				new Marker<TimeSpan>(new TimeSpan((wholeIntervals + 1) * Width.Ticks), 1)
+				new Marker<Time>((wholeIntervals + 0) * Width, 0),
+				new Marker<Time>((wholeIntervals + 1) * Width, 1)
 			);
 		}
 	}

@@ -33,7 +33,7 @@ namespace Visualizer.Capturing
 			catch
 			{
 				foreach (IDisposable port in ports.OfType<IDisposable>()) port.Dispose();
-				network.Dispose();				
+				network.Dispose();
 				
 				throw;
 			}

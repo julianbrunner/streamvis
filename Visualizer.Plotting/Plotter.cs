@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Graphics;
+using Visualizer.Data;
 
 namespace Visualizer.Plotting
 {
@@ -55,7 +56,7 @@ namespace Visualizer.Plotting
 			{
 				foreach (Graph graph in graphs) graph.Draw();
 
-				Range<TimeSpan> timeRange = timeManager.Range;
+				Range<Time> timeRange = timeManager.Range;
 				Range<double> valueRange = valueManager.Range;
 
 				DrawAxisX(timeRange, valueRange);
@@ -63,7 +64,7 @@ namespace Visualizer.Plotting
 			}
 		}
 
-		void DrawAxisX(Range<TimeSpan> timeRange, Range<double> valueRange)
+		void DrawAxisX(Range<Time> timeRange, Range<double> valueRange)
 		{
 			PointF start = layouter.TransformGraph(timeRange.Map(0), valueRange.Map(0));
 			PointF end = layouter.TransformGraph(timeRange.Map(1), valueRange.Map(0));
@@ -72,21 +73,21 @@ namespace Visualizer.Plotting
 			end.Y += 5;
 			drawer.DrawLine(start, end, color, 1);
 
-			TimeSpan width = timeRange.End.Value - timeRange.Start.Value;
-			TimeSpan interval = new TimeSpan(width.Ticks / intervalsX);
-			TimeSpan offset = interval - Modulo(timeRange.Start.Value, interval);
+			Time width = timeRange.End.Value - timeRange.Start.Value;
+			Time interval = width / intervalsX;
+			Time offset = interval - timeRange.Start.Value % interval;
 
-			if (width > TimeSpan.Zero)
+			if (width > Time.Zero)
 				for (int i = 0; i < intervalsX + 1; i++)
 				{
-					TimeSpan time = offset + new TimeSpan(i * interval.Ticks);
-					PointF position = layouter.TransformGraph(timeRange.Map((float)((double)time.Ticks / (double)width.Ticks)), valueRange.Map(0));
+					Time time = offset + i * interval;
+					PointF position = layouter.TransformGraph(timeRange.Map((float)(time / width)), valueRange.Map(0));
 					position.Y += 5;
 					drawer.DrawLine(new PointF(position.X, position.Y + 5), position, color, 1);
-					drawer.DrawNumber((timeRange.Start.Value + time).TotalSeconds, new PointF(position.X, position.Y + 7), color, TextAlignment.Center);
+					drawer.DrawNumber((timeRange.Start.Value + time).Seconds, new PointF(position.X, position.Y + 7), color, TextAlignment.Center);
 				}
 		}
-		void DrawAxisY(Range<TimeSpan> timeRange, Range<double> valueRange)
+		void DrawAxisY(Range<Time> timeRange, Range<double> valueRange)
 		{
 			PointF start = layouter.TransformGraph(timeRange.Map(0), valueRange.Map(0));
 			PointF end = layouter.TransformGraph(timeRange.Map(0), valueRange.Map(1));
@@ -104,13 +105,6 @@ namespace Visualizer.Plotting
 					drawer.DrawLine(new PointF(position.X - 5, position.Y), position, color, 1);
 					drawer.DrawNumber(valueRange.Start.Value + value, new PointF(position.X - 7, position.Y - 5), color, TextAlignment.Far);
 				}
-		}
-
-		static TimeSpan Modulo(TimeSpan a, TimeSpan b)
-		{
-			TimeSpan rest = new TimeSpan(a.Ticks % b.Ticks);
-			if (rest <= TimeSpan.Zero) rest += b;
-			return rest;
 		}
 	}
 }

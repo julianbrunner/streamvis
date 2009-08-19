@@ -6,6 +6,9 @@ namespace Visualizer.Data
 	{
 		readonly long ticks;
 		
+		public static Time Zero { get { return new Time(); } }
+		
+		public long Ticks { get { return ticks; } }
 		public double Seconds { get { return ticks / 10000000.0; } }
 		
 		public Time(long ticks)
@@ -81,9 +84,20 @@ namespace Visualizer.Data
 		{
 			return new Time((long)(d * a.ticks));
 		}
+		public static Time operator /(Time a, double d)
+		{
+			return new Time((long)(a.ticks / d));
+		}
 		public static double operator /(Time a, Time b)
 		{
 			return (double)a.ticks / (double)b.ticks;
+		}
+		
+		public static Time operator %(Time a, Time b)
+		{
+			long rest = a.ticks % b.ticks;
+			if (rest < 0) rest += b.ticks;
+			return new Time(rest);
 		}
 		
 		static bool Equals(Time a, Time b)

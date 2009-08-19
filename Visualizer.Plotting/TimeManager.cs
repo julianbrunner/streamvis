@@ -7,21 +7,21 @@ namespace Visualizer.Plotting
 	public abstract class TimeManager
 	{
 		readonly Timer timer;
-		readonly TimeSpan width;
+		readonly Time width;
 
-		protected TimeSpan Time { get; private set; }
-		protected TimeSpan Width { get { return width; } }
+		protected Time Time { get; private set; }
+		protected Time Width { get { return width; } }
 
 		/// <summary>
 		/// Gets the overall Range, in which graphs are drawn.
 		/// </summary>
-		public abstract Range<TimeSpan> Range { get; }
+		public abstract Range<Time> Range { get; }
 		/// <summary>
 		/// Gets the specific sub Ranges, in which the graphs are drawn.
 		/// </summary>
-		public abstract IEnumerable<Range<TimeSpan>> GraphRanges { get; }
+		public abstract IEnumerable<Range<Time>> GraphRanges { get; }
 
-		protected TimeManager(Timer timer, TimeSpan width)
+		protected TimeManager(Timer timer, Time width)
 		{
 			this.timer = timer;
 			this.width = width;

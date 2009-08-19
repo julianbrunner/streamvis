@@ -7,12 +7,12 @@ namespace Visualizer.Data
 {
 	public class Entry
 	{
-		readonly TimeSpan time;
+		readonly Time time;
 		readonly double value;
 
 		public static string XElementName { get { return "entry"; } }
 
-		public TimeSpan Time { get { return time; } }
+		public Time Time { get { return time; } }
 		public double Value { get { return value; } }
 		public XElement XElement
 		{
@@ -29,10 +29,10 @@ namespace Visualizer.Data
 
 		public Entry(XElement entry)
 		{
-			this.time = new TimeSpan((long)entry.Element("time"));
+			this.time = new Time((long)entry.Element("time"));
 			this.value = (double)entry.Element("value");
 		}
-		public Entry(TimeSpan time, double value)
+		public Entry(Time time, double value)
 		{
 			this.time = time;
 			this.value = value;

@@ -145,7 +145,7 @@ namespace Visualizer
 								if (enumerators.All(enumerator => enumerator.MoveNext()))
 								{
 									StringBuilder stringBuilder = new StringBuilder();
-									stringBuilder.Append(leadEntry.Time.TotalSeconds);
+									stringBuilder.Append(leadEntry.Time.Seconds);
 									stringBuilder.Append(" ");
 									foreach (Entry entry in from enumerator in enumerators select enumerator.Current)
 									{

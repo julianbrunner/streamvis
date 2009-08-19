@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using Visualizer.Data;
 
 namespace Visualizer
 {
@@ -9,7 +10,7 @@ namespace Visualizer
 	{
 		readonly List<string> ports = new List<string>();
 		readonly bool minimalMode = false;
-		readonly TimeSpan plotterWidth = new TimeSpan(0, 0, 10);
+		readonly Time plotterWidth = new Time(10.0);
 		readonly bool extendGraphs = true;
 		readonly PlotterType plotterType = PlotterType.Continuous;
 		readonly double plotterTypeParameter = 0;
@@ -23,7 +24,7 @@ namespace Visualizer
 
 		public IEnumerable<string> Ports { get { return ports; } }
 		public bool MinimalMode { get { return minimalMode; } }
-		public TimeSpan PlotterWidth { get { return plotterWidth; } }
+		public Time PlotterWidth { get { return plotterWidth; } }
 		public bool ExtendGraphs { get { return extendGraphs; } }
 		public PlotterType PlotterType { get { return plotterType; } }
 		public double PlotterTypeParameter { get { return plotterTypeParameter; } }
@@ -48,7 +49,7 @@ namespace Visualizer
 						break;
 					case "-w":
 						if (details.Length != 2) InvalidParameter(parameter);
-						try { plotterWidth = new TimeSpan((long)(double.Parse(details[1]) * 10000000.0)); }
+						try { plotterWidth = new Time(double.Parse(details[1])); }
 						catch (FormatException) { InvalidParameter(parameter); }
 						break;
 					case "-de":

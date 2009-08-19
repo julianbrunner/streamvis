@@ -7,7 +7,7 @@ namespace Visualizer.Data
 {
 	public class Container
 	{
-		static readonly TimeSpan sampleLength = new TimeSpan(0, 0, 0, 0, 100);
+		static readonly Time sampleLength = new Time(0.1);
 
 		readonly List<Entry> sampleBuffer = new List<Entry>();
 		readonly List<Entry> entries;
@@ -80,7 +80,7 @@ namespace Visualizer.Data
 					entries.Add(AggregateSamples());
 			}
 		}
-		public int GetIndex(TimeSpan time)
+		public int GetIndex(Time time)
 		{
 			lock (entries) return GetIndex(0, entries.Count, time);
 		}
@@ -93,7 +93,7 @@ namespace Visualizer.Data
 		/// <param name="end">The end index of the range to search.</param>
 		/// <param name="time">The time to search for.</param>
 		/// <returns>The index of the first item which has a timestamp that is greater than or equal to <paramref name="time"/>.</returns>
-		int GetIndex(int start, int end, TimeSpan time)
+		int GetIndex(int start, int end, Time time)
 		{
 			if (start == end) return start;
 
@@ -110,8 +110,8 @@ namespace Visualizer.Data
 
 			Entry lastInside = sampleBuffer[sampleBuffer.Count - 2];
 			Entry last = sampleBuffer[sampleBuffer.Count - 1];
-			TimeSpan endTime = start.Time + sampleLength;
-			double fraction = (double)(endTime - lastInside.Time).Ticks / (double)(last.Time - lastInside.Time).Ticks;
+			Time endTime = start.Time + sampleLength;
+			double fraction = (endTime - lastInside.Time) / (last.Time - lastInside.Time);
 
 			Entry end = new Entry(endTime, Interpolate(lastInside.Value, last.Value, fraction));
 
@@ -124,12 +124,12 @@ namespace Visualizer.Data
 				Entry a = sampleBuffer[i + 0];
 				Entry b = sampleBuffer[i + 1];
 
-				value += (b.Time - a.Time).Ticks * ((a.Value + b.Value) / 2);
+				value += (b.Time - a.Time).Seconds * 0.5 * (a.Value + b.Value);
 			}
 
 			sampleBuffer.RemoveRange(0, sampleBuffer.Count - 2);
 
-			return new Entry(new TimeSpan((start.Time + end.Time).Ticks / 2), value / sampleLength.Ticks);
+			return new Entry(0.5 * (start.Time + end.Time), value / sampleLength.Seconds);
 		}
 
 		static double Interpolate(double a, double b, double f)

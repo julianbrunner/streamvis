@@ -7,7 +7,7 @@ namespace Visualizer.Data
 	{
 		readonly Stopwatch stopwatch = new Stopwatch();
 
-		public TimeSpan Time { get { lock (stopwatch) return stopwatch.Elapsed; } }
+		public Time Time { get { lock (stopwatch) return new Time(stopwatch.Elapsed.Ticks); } }
 
 		public Timer()
 		{
