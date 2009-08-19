@@ -1,4 +1,4 @@
-﻿namespace Visualizer
+namespace Visualizer
 {
 	partial class MainWindow
 	{

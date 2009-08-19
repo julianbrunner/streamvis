@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Xml.Linq;
 
 namespace Visualizer.Data

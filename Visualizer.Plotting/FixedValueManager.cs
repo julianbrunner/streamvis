@@ -1,4 +1,4 @@
-﻿namespace Visualizer.Plotting
+namespace Visualizer.Plotting
 {
 	public class FixedValueManager : ValueManager
 	{
