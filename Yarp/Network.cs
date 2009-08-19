@@ -35,6 +35,17 @@ namespace Yarp
 		{
 			Network_Disconnect(source, destination);
 		}
+		public bool Exists(string name)
+		{
+			return Network_Exists(name);
+		}
+		public string FindName(string prefix)
+		{
+			int i = 0;
+			while (Exists(prefix + "/" + i)) i++;
+			
+			return prefix + "/" + i;
+		}
 		
 		[DllImport("Yarp.Wrapper")]
 		static extern IntPtr Network_New();
@@ -44,5 +55,7 @@ namespace Yarp
 		static extern void Network_Connect(string source, string destination);
 		[DllImport("Yarp.Wrapper")]
 		static extern void Network_Disconnect(string source, string destination);
+		[DllImport("Yarp.Wrapper")]
+		static extern bool Network_Exists(string name);
 	}
 }

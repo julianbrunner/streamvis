@@ -76,21 +76,21 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		description = An application that can be used to plot, capture and replay streams received on Yarp ports.
-		version = 0.6
+		version = 0.7
 		StartupItem = Visualizer\Visualizer.csproj
 		Policies = $0
-		$0.StandardHeader = $1
-		$1.Text = 
-		$1.inheritsSet = MITX11License
-		$0.DotNetNamingPolicy = $2
-		$2.DirectoryNamespaceAssociation = None
-		$2.ResourceNamePolicy = FileName
-		$0.TextStylePolicy = $3
-		$3.FileWidth = 120
-		$3.TabWidth = 4
-		$3.TabsToSpaces = False
-		$3.NoTabsAfterNonTabs = False
-		$3.RemoveTrailingWhitespace = False
-		$3.EolMarker = Native
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = None
+		$1.ResourceNamePolicy = FileName
+		$0.TextStylePolicy = $2
+		$2.FileWidth = 120
+		$2.TabWidth = 4
+		$2.TabsToSpaces = False
+		$2.NoTabsAfterNonTabs = False
+		$2.RemoveTrailingWhitespace = False
+		$2.EolMarker = Native
+		$0.StandardHeader = $3
+		$3.Text = 
+		$3.inheritsSet = MITX11License
 	EndGlobalSection
 EndGlobal

@@ -12,6 +12,7 @@ extern "C"
 	void		Network_Dispose(Network* network);
 	void		Network_Connect(const char* source, const char* destination);
 	void		Network_Disconnect(const char* source, const char* destination);
+	bool		Network_Exists(const char* name);
 	
 	BufferedPort<Bottle>*	BufferedPort_Bottle_New();
 	void					BufferedPort_Bottle_Dispose(BufferedPort<Bottle>* port);

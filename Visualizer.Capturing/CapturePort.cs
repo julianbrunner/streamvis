@@ -24,7 +24,7 @@ namespace Visualizer.Capturing
 			this.network = network;
 			this.timer = timer;
 
-			port = new Yarp.Port(name + "/visualization");
+			port = new Yarp.Port(network.FindName(name + "/visualization"));
 
 			network.Connect(name, port.Name);
 
@@ -49,7 +49,7 @@ namespace Visualizer.Capturing
 				if (!reader.Join(1000))
 				{
 					Console.WriteLine("Sending a bottle to \"" + Name + "\" in order to join reader thread...");
-					using (Yarp.Port helperPort = new Yarp.Port("/portActivator"))
+					using (Yarp.Port helperPort = new Yarp.Port(network.FindName(Name + "/activator")))
 					{
 						network.Connect(helperPort.Name, port.Name);
 						helperPort.Write(new List());
@@ -89,7 +89,7 @@ namespace Visualizer.Capturing
 			{
 				case 1:
 					Console.WriteLine("Getting bottle to test size of \"" + name + "\"...");
-					using (Yarp.Port testPort = new Yarp.Port(name + "/test"))
+					using (Yarp.Port testPort = new Yarp.Port(network.FindName(name + "/tester")))
 					{
 						network.Connect(name, testPort.Name);
 						paths = GetPaths(Enumerable.Empty<int>(), testPort.Read()).ToArray();

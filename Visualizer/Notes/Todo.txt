@@ -1,5 +1,3 @@
-TODO: Name conflicts when more than one instance of the Visualizer is running
-
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 
 TODO: Resampling should be specified in DataEntry frequency rather than absolute plotter resolution

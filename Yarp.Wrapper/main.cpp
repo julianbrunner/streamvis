@@ -1,9 +1,10 @@
 #include "main.h"
 
-Network*	Network_New()													{ return new Network;						}
-void		Network_Dispose(Network* network)								{ delete network;;							}
-void		Network_Connect(const char* source, const char* destination)	{ Network::connect(source, destination);	}
-void		Network_Disconnect(const char* source, const char* destination)	{ Network::disconnect(source, destination);	}
+Network*	Network_New()													{ return new Network;							}
+void		Network_Dispose(Network* network)								{ delete network;;								}
+void		Network_Connect(const char* source, const char* destination)	{ Network::connect(source, destination);		}
+void		Network_Disconnect(const char* source, const char* destination)	{ Network::disconnect(source, destination);		}
+bool		Network_Exists(const char* name)								{ return Network::queryName(name).isValid();	}
 
 BufferedPort<Bottle>*	BufferedPort_Bottle_New()												{ return new BufferedPort<Bottle>;		}
 void					BufferedPort_Bottle_Dispose(BufferedPort<Bottle>* port)					{ delete port;							}
