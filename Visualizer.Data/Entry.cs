@@ -1,17 +1,18 @@
-﻿using System.Collections.Generic;
+using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace Visualizer.Data
 {
 	public class Entry
 	{
-		readonly long time;
+		readonly TimeSpan time;
 		readonly double value;
 
 		public static string XElementName { get { return "entry"; } }
 
-		public long Time { get { return time; } }
+		public TimeSpan Time { get { return time; } }
 		public double Value { get { return value; } }
 		public XElement XElement
 		{
@@ -20,7 +21,7 @@ namespace Visualizer.Data
 				return new XElement
 				(
 					XElementName,
-					new XElement("time", time),
+					new XElement("time", time.Ticks),
 					new XElement("value", value)
 				);
 			}
@@ -28,51 +29,13 @@ namespace Visualizer.Data
 
 		public Entry(XElement entry)
 		{
-			this.time = (long)entry.Element("time");
+			this.time = new TimeSpan((long)entry.Element("time"));
 			this.value = (double)entry.Element("value");
 		}
-		public Entry(long time, double value)
+		public Entry(TimeSpan time, double value)
 		{
 			this.time = time;
 			this.value = value;
 		}
 	}
 }
-
-//namespace Visualizer.Data
-//{
-//    public class Entry
-//    {
-//        readonly long time;
-//        readonly IEnumerable<double> values;
-
-//        public static string XElementName { get { return "entry"; } }
-
-//        public long Time { get { return time; } }
-//        public IEnumerable<double> Values { get { return values; } }
-//        public XElement XElement
-//        {
-//            get
-//            {
-//                return new XElement
-//                (
-//                    XElementName,
-//                    new XElement("time", time),
-//                    from value in values select new XElement("value", value)
-//                );
-//            }
-//        }
-
-//        public Entry(XElement entry)
-//        {
-//            this.time = (long)entry.Element("time");
-//            this.values = (from value in entry.Elements("value") select (double)value).ToArray();
-//        }
-//        public Entry(long time, IEnumerable<double> values)
-//        {
-//            this.time = time;
-//            this.values = values;
-//        }
-//    }
-//}
-

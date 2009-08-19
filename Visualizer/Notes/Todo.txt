@@ -1,20 +1,19 @@
-TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
-
 TODO: Resampling should be specified in DataEntry frequency rather than absolute plotter resolution
 TODO: Captured data should be resampled immediately, before any permanent storing or other processing takes place
 TODO: Caching of Graph Data?
 TODO: One sample per pixel
-
-TODO: Make sure the 0.5 pixel offset is handled correctly everywhere (after doing various improvements to the drawing procedure)
-TODO: Make lines thin when no antialiasing is possible
-TODO: Text on Linux is blurry
 
 TODO: Profile the new wrapper
 TODO: Memory profiling?
 TODO: Complete logging of all received data
 TODO: Change design so that containers and ports are 1:1, in order to avoid excessive locks and duplicate data in memory
 
+TODO: Make sure the 0.5 pixel offset is handled correctly everywhere (after doing various improvements to the drawing procedure)
+TODO: Make lines thin when no antialiasing is possible
+TODO: Text on Linux is blurry
+
 TODO: Make Layouter adaptive to width of the Y-Axis labels
+TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 
 TODO: Bundle into single assembly (mkbundle)
 

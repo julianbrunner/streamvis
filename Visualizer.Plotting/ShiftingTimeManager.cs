@@ -8,13 +8,13 @@ namespace Visualizer.Plotting
 	{
 		readonly double shiftLength;
 
-		Range<long> range;
-		Range<long> graphRange;
+		Range<TimeSpan> range;
+		Range<TimeSpan> graphRange;
 
-		public override Range<long> Range { get { return range; } }
-		public override IEnumerable<Range<long>> GraphRanges { get { yield return graphRange; } }
+		public override Range<TimeSpan> Range { get { return range; } }
+		public override IEnumerable<Range<TimeSpan>> GraphRanges { get { yield return graphRange; } }
 
-		public ShiftingTimeManager(Timer timer, long width, double shiftLength)
+		public ShiftingTimeManager(Timer timer, TimeSpan width, double shiftLength)
 			: base(timer, width)
 		{
 			this.shiftLength = shiftLength;
@@ -24,27 +24,27 @@ namespace Visualizer.Plotting
 		{
 			base.Update();
 
-			long interval = (long)(Width * shiftLength);
+			TimeSpan interval = new TimeSpan((long)(Width.Ticks * shiftLength));
 
-			double intervals = (double)Time / (double)interval;
+			double intervals = (double)Time.Ticks / (double)interval.Ticks;
 			int wholeIntervals = (int)intervals;
 			double fractionalIntervals = intervals - wholeIntervals;
 
-			long startTime = interval * (wholeIntervals + 1) - Width;
+			TimeSpan startTime = new TimeSpan(interval.Ticks * (wholeIntervals + 1)) - Width;
 			float startPosition = 0;
-			long endTime = Time;
+			TimeSpan endTime = Time;
 			float endPosition = (float)((1 - shiftLength) + shiftLength * fractionalIntervals);
 
-			graphRange = new Range<long>
+			graphRange = new Range<TimeSpan>
 			(
-				new Marker<long>(startTime, startPosition),
-				new Marker<long>(endTime, endPosition)
+				new Marker<TimeSpan>(startTime, startPosition),
+				new Marker<TimeSpan>(endTime, endPosition)
 			);
 
-			range = new Range<long>
+			range = new Range<TimeSpan>
 			(
-				new Marker<long>(startTime, 0),
-				new Marker<long>(startTime + Width, 1)
+				new Marker<TimeSpan>(startTime, 0),
+				new Marker<TimeSpan>(startTime + Width, 1)
 			);
 		}
 	}

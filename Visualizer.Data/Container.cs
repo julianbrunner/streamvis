@@ -7,7 +7,7 @@ namespace Visualizer.Data
 {
 	public class Container
 	{
-		const long sampleTicks = 100 * 10000L;
+		static readonly TimeSpan sampleLength = new TimeSpan(0, 0, 0, 0, 100);
 
 		readonly List<Entry> sampleBuffer = new List<Entry>();
 		readonly List<Entry> entries;
@@ -75,12 +75,12 @@ namespace Visualizer.Data
 				if (entry.Value != double.NaN && (sampleBuffer.Count == 0 || entry.Time > sampleBuffer[sampleBuffer.Count - 1].Time))
 					sampleBuffer.Add(entry);
 	
-				while (sampleBuffer.Count > 1 && sampleBuffer[sampleBuffer.Count - 1].Time - sampleBuffer[0].Time >= sampleTicks)
+				while (sampleBuffer.Count > 1 && sampleBuffer[sampleBuffer.Count - 1].Time - sampleBuffer[0].Time >= sampleLength)
 					// TODO: Do we have to check if the timestamp is correct?
 					entries.Add(AggregateSamples());
 			}
 		}
-		public int GetIndex(long time)
+		public int GetIndex(TimeSpan time)
 		{
 			lock (entries) return GetIndex(0, entries.Count, time);
 		}
@@ -93,7 +93,7 @@ namespace Visualizer.Data
 		/// <param name="end">The end index of the range to search.</param>
 		/// <param name="time">The time to search for.</param>
 		/// <returns>The index of the first item which has a timestamp that is greater than or equal to <paramref name="time"/>.</returns>
-		int GetIndex(int start, int end, long time)
+		int GetIndex(int start, int end, TimeSpan time)
 		{
 			if (start == end) return start;
 
@@ -110,8 +110,8 @@ namespace Visualizer.Data
 
 			Entry lastInside = sampleBuffer[sampleBuffer.Count - 2];
 			Entry last = sampleBuffer[sampleBuffer.Count - 1];
-			long endTime = start.Time + sampleTicks;
-			double fraction = (double)(endTime - lastInside.Time) / (double)(last.Time - lastInside.Time);
+			TimeSpan endTime = start.Time + sampleLength;
+			double fraction = (double)(endTime - lastInside.Time).Ticks / (double)(last.Time - lastInside.Time).Ticks;
 
 			Entry end = new Entry(endTime, Interpolate(lastInside.Value, last.Value, fraction));
 
@@ -124,12 +124,12 @@ namespace Visualizer.Data
 				Entry a = sampleBuffer[i + 0];
 				Entry b = sampleBuffer[i + 1];
 
-				value += (b.Time - a.Time) * ((a.Value + b.Value) / 2);
+				value += (b.Time - a.Time).Ticks * ((a.Value + b.Value) / 2);
 			}
 
 			sampleBuffer.RemoveRange(0, sampleBuffer.Count - 2);
 
-			return new Entry((start.Time + end.Time) / 2, value / sampleTicks);
+			return new Entry(new TimeSpan((start.Time + end.Time).Ticks / 2), value / sampleLength.Ticks);
 		}
 
 		static double Interpolate(double a, double b, double f)

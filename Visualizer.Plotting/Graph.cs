@@ -41,16 +41,16 @@ namespace Visualizer.Plotting
 				Range<double> valueRange = plotter.ValueManager.Range;
 				double height = valueRange.End.Value - valueRange.Start.Value;
 
-				foreach (Range<long> timeRange in plotter.TimeManager.GraphRanges)
+				foreach (Range<TimeSpan> timeRange in plotter.TimeManager.GraphRanges)
 				{
-					double width = timeRange.End.Value - timeRange.Start.Value;
+					double width = (timeRange.End.Value - timeRange.Start.Value).Ticks;
 
 					IEnumerable<PointF> points =
 					(
 						from entry in GetEntries(timeRange.Start.Value, timeRange.End.Value)
 						select plotter.Layouter.TransformGraph
 						(
-							timeRange.Map((float)((entry.Time - timeRange.Start.Value) / width)),
+							timeRange.Map((float)((entry.Time - timeRange.Start.Value).Ticks / width)),
 							valueRange.Map((float)((entry.Value - valueRange.Start.Value) / height))
 						)
 					);
@@ -60,8 +60,7 @@ namespace Visualizer.Plotting
 			}
 		}
 
-		// TODO: Change longs back to DateTime if possible
-		IEnumerable<Entry> GetEntries(long start, long end)
+		IEnumerable<Entry> GetEntries(TimeSpan start, TimeSpan end)
 		{
 			if (stream.Container.IsEmpty) yield break;
 

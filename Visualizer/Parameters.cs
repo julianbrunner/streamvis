@@ -9,7 +9,7 @@ namespace Visualizer
 	{
 		readonly List<string> ports = new List<string>();
 		readonly bool minimalMode = false;
-		readonly long plotterWidth = 100000000L;
+		readonly TimeSpan plotterWidth = new TimeSpan(0, 0, 10);
 		readonly bool extendGraphs = true;
 		readonly PlotterType plotterType = PlotterType.Continuous;
 		readonly double plotterTypeParameter = 0;
@@ -23,7 +23,7 @@ namespace Visualizer
 
 		public IEnumerable<string> Ports { get { return ports; } }
 		public bool MinimalMode { get { return minimalMode; } }
-		public long PlotterWidth { get { return plotterWidth; } }
+		public TimeSpan PlotterWidth { get { return plotterWidth; } }
 		public bool ExtendGraphs { get { return extendGraphs; } }
 		public PlotterType PlotterType { get { return plotterType; } }
 		public double PlotterTypeParameter { get { return plotterTypeParameter; } }
@@ -48,7 +48,7 @@ namespace Visualizer
 						break;
 					case "-w":
 						if (details.Length != 2) InvalidParameter(parameter);
-						try { plotterWidth = (long)(double.Parse(details[1]) * 10000000.0); }
+						try { plotterWidth = new TimeSpan((long)(double.Parse(details[1]) * 10000000.0)); }
 						catch (FormatException) { InvalidParameter(parameter); }
 						break;
 					case "-de":

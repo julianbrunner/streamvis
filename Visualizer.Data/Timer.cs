@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+using System;
+using System.Diagnostics;
 
 namespace Visualizer.Data
 {
@@ -6,7 +7,7 @@ namespace Visualizer.Data
 	{
 		readonly Stopwatch stopwatch = new Stopwatch();
 
-		public long Time { get { lock (stopwatch) return stopwatch.Elapsed.Ticks; } }
+		public TimeSpan Time { get { lock (stopwatch) return stopwatch.Elapsed; } }
 
 		public Timer()
 		{
