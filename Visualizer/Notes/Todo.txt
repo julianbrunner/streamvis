@@ -12,6 +12,7 @@ TODO: Make sure the 0.5 pixel offset is handled correctly everywhere (after doin
 TODO: Make lines thin when no antialiasing is possible
 TODO: Text on Linux is blurry
 
+TODO: Change exposed fields back to properties if it won't hurt performance
 TODO: Make Layouter adaptive to width of the Y-Axis labels
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 

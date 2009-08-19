@@ -67,7 +67,7 @@ namespace Visualizer.Data
 				entries.Clear();
 			}
 		}
-		// TOOD: Resampling should be done in Visualizer.Capturing instead of Visualizer.Data
+		// TODO: Resampling should be done in Visualizer.Capturing instead of Visualizer.Data
 		public void Add(Entry entry)
 		{
 			lock (entries)
@@ -110,11 +110,10 @@ namespace Visualizer.Data
 
 			Entry lastInside = sampleBuffer[sampleBuffer.Count - 2];
 			Entry last = sampleBuffer[sampleBuffer.Count - 1];
+			
 			Time endTime = start.Time + sampleLength;
 			double fraction = (endTime - lastInside.Time) / (last.Time - lastInside.Time);
-
 			Entry end = new Entry(endTime, Interpolate(lastInside.Value, last.Value, fraction));
-
 			sampleBuffer.Insert(sampleBuffer.Count - 1, end);
 
 			double value = 0;

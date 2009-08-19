@@ -28,8 +28,11 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Enumerable.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Entry.cs" />
+    <Compile Include="Time.cs" />
+    <Compile Include="Streams\IStream.cs" />
+    <Compile Include="Streams\ResampleProjection.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
@@ -40,4 +43,7 @@
       <Properties InternalTargetFrameworkVersion="3.5" />
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="Streams\" />
+  </ItemGroup>
 </Project>

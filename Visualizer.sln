@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer", "Visualizer\Visualizer.csproj", "{F4356332-01E9-4114-B551-52912D6D86F8}"
@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphics", "Graphics\Graphics.csproj", "{D7D149FB-EBB5-47C4-B027-9C671DB886A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -79,9 +85,9 @@ Global
 		version = 0.7
 		StartupItem = Visualizer\Visualizer.csproj
 		Policies = $0
-		$0.DotNetNamingPolicy = $1
-		$1.DirectoryNamespaceAssociation = None
-		$1.ResourceNamePolicy = FileName
+		$0.StandardHeader = $1
+		$1.Text = 
+		$1.inheritsSet = MITX11License
 		$0.TextStylePolicy = $2
 		$2.FileWidth = 120
 		$2.TabWidth = 4
@@ -89,8 +95,8 @@ Global
 		$2.NoTabsAfterNonTabs = False
 		$2.RemoveTrailingWhitespace = False
 		$2.EolMarker = Native
-		$0.StandardHeader = $3
-		$3.Text = 
-		$3.inheritsSet = MITX11License
+		$0.DotNetNamingPolicy = $3
+		$3.DirectoryNamespaceAssociation = None
+		$3.ResourceNamePolicy = FileName
 	EndGlobalSection
 EndGlobal

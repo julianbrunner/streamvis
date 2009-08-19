@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Visualizer.Data;
-using Data;
+using Extensions;
 using Yarp;
 
 namespace Visualizer.Capturing
