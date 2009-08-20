@@ -30,6 +30,9 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Enumerable.cs" />
+    <Compile Include="IIndexed.cs" />
+    <Compile Include="ICounted.cs" />
+    <Compile Include="Pair.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />

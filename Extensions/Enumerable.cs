@@ -25,6 +25,26 @@ namespace Extensions
 		{
 			return source.Concat(item.Single());
 		}
+		public static IEnumerable<Pair<T>> Pairs<T>(this IEnumerable<T> source)
+		{			
+			IEnumerator<T> enumerator = source.GetEnumerator();
+			
+			if (!enumerator.MoveNext()) yield break;
+			
+			T a = enumerator.Current;
+			T b = default(T);
+			
+			while (enumerator.MoveNext())
+			{
+				b = enumerator.Current;
+				yield return new Pair<T>(a, b);
+				a = enumerator.Current;
+			}
+		}
+//		public static IEnumerable<T> Range<T>(this IIndexed<T, int> source, int startIndex, int endIndex)
+//		{
+//			for (int i = startIndex; i < endIndex; i++) yield return source[i];
+//		}
 		public static IEnumerable<string> ToStrings<T>(this IEnumerable<T> source)
 		{
 			foreach (T item in source) yield return item.ToString();

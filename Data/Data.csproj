@@ -33,6 +33,11 @@
     <Compile Include="Time.cs" />
     <Compile Include="Streams\IStream.cs" />
     <Compile Include="Streams\ResampleProjection.cs" />
+    <Compile Include="Buffer.cs" />
+    <Compile Include="Cache.cs" />
+    <Compile Include="BinarySearcher.cs" />
+    <Compile Include="DifferenceStream.cs" />
+    <Compile Include="IBinarySearchable.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
@@ -45,5 +50,11 @@
   </ProjectExtensions>
   <ItemGroup>
     <Folder Include="Streams\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Extensions\Extensions.csproj">
+      <Project>{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}</Project>
+      <Name>Extensions</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
