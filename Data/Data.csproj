@@ -31,8 +31,6 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Time.cs" />
-    <Compile Include="Streams\IStream.cs" />
-    <Compile Include="Streams\ResampleProjection.cs" />
     <Compile Include="Buffer.cs" />
     <Compile Include="Cache.cs" />
     <Compile Include="BinarySearcher.cs" />
@@ -48,9 +46,6 @@
       <Properties InternalTargetFrameworkVersion="3.5" />
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup>
-    <Folder Include="Streams\" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Extensions\Extensions.csproj">
       <Project>{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}</Project>

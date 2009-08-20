@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Extensions
 {
-	public static class Enumeraable
+	public static class EnumerablePlus
 	{
 		public static IEnumerable<T> Separate<T>(this IEnumerable<T> source, T separator)
 		{
@@ -16,10 +16,6 @@ namespace Extensions
 				else yield return separator;
 				yield return item;
 			}
-		}
-		public static IEnumerable<T> Single<T>(this T item)
-		{
-			yield return item;
 		}
 		public static IEnumerable<T> Concat<T>(this IEnumerable<T> source, T item)
 		{
@@ -41,10 +37,6 @@ namespace Extensions
 				a = enumerator.Current;
 			}
 		}
-//		public static IEnumerable<T> Range<T>(this IIndexed<T, int> source, int startIndex, int endIndex)
-//		{
-//			for (int i = startIndex; i < endIndex; i++) yield return source[i];
-//		}
 		public static IEnumerable<string> ToStrings<T>(this IEnumerable<T> source)
 		{
 			foreach (T item in source) yield return item.ToString();
@@ -52,6 +44,16 @@ namespace Extensions
 		public static string AggregateString<T>(this IEnumerable<T> source)
 		{
 			return source.Aggregate(string.Empty, (seed, current) => seed + current);
+		}
+		public static IEnumerable<T> Construct<T>(params IEnumerable<T>[] sources)
+		{
+			foreach (IEnumerable<T> source in sources)
+				foreach (T item in source)
+					yield return item;
+		}
+		public static IEnumerable<T> Single<T>(this T item)
+		{
+			yield return item;
 		}
 	}
 }

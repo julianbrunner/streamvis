@@ -29,10 +29,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Enumerable.cs" />
     <Compile Include="IIndexed.cs" />
     <Compile Include="ICounted.cs" />
     <Compile Include="Pair.cs" />
+    <Compile Include="Indexed.cs" />
+    <Compile Include="EnumerablePlus.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
