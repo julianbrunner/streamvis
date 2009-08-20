@@ -4,6 +4,7 @@ Version 0.7
 	- Added a method to find an available port with a chosen prefix
 	- Minor cleanups in files
 	- Added new timestamp implementation
+	- Improved deployment (building now creates Visualizer/bin/Debug/vis bundled executable)
 
 Version 0.6
 	- Set yarp ports to use strict behaviour
