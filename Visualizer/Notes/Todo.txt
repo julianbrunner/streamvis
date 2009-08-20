@@ -1,3 +1,5 @@
+TODO: Move Cache.Aggregate methods to an appropriate sampling class
+
 TODO: Resampling should be specified in DataEntry frequency rather than absolute plotter resolution
 TODO: Captured data should be resampled immediately, before any permanent storing or other processing takes place
 TODO: Caching of Graph Data?

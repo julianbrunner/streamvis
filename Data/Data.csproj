@@ -34,7 +34,6 @@
     <Compile Include="Buffer.cs" />
     <Compile Include="Cache.cs" />
     <Compile Include="BinarySearcher.cs" />
-    <Compile Include="DifferenceStream.cs" />
     <Compile Include="IBinarySearchable.cs" />
   </ItemGroup>
   <ItemGroup>
