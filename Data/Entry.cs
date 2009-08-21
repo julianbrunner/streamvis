@@ -2,7 +2,7 @@ using System;
 
 namespace Data
 {
-	public class Entry
+	public class Entry : IPositioned<Time>
 	{
 		readonly Time time;
 		readonly double value;
@@ -15,5 +15,7 @@ namespace Data
 			this.time = time;
 			this.value = value;
 		}
+		
+		Time IPositioned<Time>.Position { get { return Time; } }
 	}
 }

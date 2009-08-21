@@ -33,10 +33,11 @@
     <Compile Include="Time.cs" />
     <Compile Include="Buffer.cs" />
     <Compile Include="BinarySearcher.cs" />
-    <Compile Include="IBinarySearchable.cs" />
     <Compile Include="EntryCache.cs" />
     <Compile Include="Transformation.cs" />
     <Compile Include="EntryResampler.cs" />
+    <Compile Include="IRanged.cs" />
+    <Compile Include="IPositioned.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />

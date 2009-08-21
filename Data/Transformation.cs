@@ -2,8 +2,9 @@ using System.Collections.Generic;
 
 namespace Data
 {
-	public abstract class Transformation<TItem, TPosition>
+	// TODO: Remove if not needed any more.
+	public abstract class Transformation
 	{
-		public abstract IEnumerable<TItem> this[TPosition start, TPosition end] { get; }
+		
 	}
 }
