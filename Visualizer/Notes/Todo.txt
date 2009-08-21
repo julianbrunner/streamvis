@@ -1,3 +1,4 @@
+TODO: Enforce ordering of enries of IBinarySearchable
 TODO: Move Cache.Aggregate methods to an appropriate sampling class
 
 TODO: Resampling should be specified in DataEntry frequency rather than absolute plotter resolution

@@ -5,30 +5,45 @@ using Extensions;
 
 namespace Data
 {
-	public class Cache
+	public class EntryCache : Transformation<Entry, Time>
 	{
 		readonly Buffer source;
 		readonly Time sampleDistance;
 		readonly List<Entry> buffer = new List<Entry>();
+
+		public override IEnumerable<Entry> this[Time startTime, Time endTime]
+		{
+			get
+			{
+				throw new System.NotImplementedException ();
+			}
+		}
+
 		
-		public Cache(Buffer source, Time sampleDistance)
+		public EntryCache(Buffer source, Time sampleDistance)
 		{
 			this.source = source;
 			this.sampleDistance = sampleDistance;
 		}
 		
-		public void Refresh()
-		{
-			while (true)
-			{
-				Time startTime = buffer.Count == 0 ? Time.Zero : buffer[buffer.Count - 1].Time + 0.5 * sampleDistance;
-				
-				if (startTime + sampleDistance > source[source.Count - 1].Time) break;
-				
-				buffer.Add(Aggregate(source, startTime, startTime + sampleDistance));
-			}
-		}
+//		public void Refresh()
+//		{
+//			while (true)
+//			{
+//				Time startTime = buffer.Count == 0 ? Time.Zero : buffer[buffer.Count - 1].Time + 0.5 * sampleDistance;
+//				
+//				if (startTime + sampleDistance > source[source.Count - 1].Time) break;
+//				
+//				buffer.Add(Aggregate(source, startTime, startTime + sampleDistance));
+//			}
+//		}
 		
+		// TODO:	A cache is an entity which manages access to expensive resources by storing parts of them.
+		//			In this case, the expensive resource is a resampled version of the source stream
+		//			(resampling being expensive). So the way in which the cache should get its data
+		//			is by retrieving it from a ResampledStream enclosure around the source stream.
+		//			The cache should not know anything about the cached resource other than that it
+		//			is expensive and how to retrieve data from it.
 		static Entry Aggregate(Buffer source, Time startTime, Time endTime)
 		{
 			if (source.Count == 0)
