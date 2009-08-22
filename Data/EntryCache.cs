@@ -17,7 +17,6 @@ namespace Data
 				throw new System.NotImplementedException ();
 			}
 		}
-
 		
 		public EntryCache(IRanged<Entry, Time> source)
 		{
