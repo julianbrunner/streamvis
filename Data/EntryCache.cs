@@ -5,9 +5,9 @@ using Extensions;
 
 namespace Data
 {
-	public class EntryCache : IRanged<Entry, Time>
+	public class EntryCache
 	{
-		readonly IRanged<Entry, Time> source;
+		readonly EntryResampler source;
 		readonly List<Entry> buffer = new List<Entry>();
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
@@ -18,7 +18,7 @@ namespace Data
 			}
 		}
 		
-		public EntryCache(IRanged<Entry, Time> source)
+		public EntryCache(EntryResampler source)
 		{
 			this.source = source;
 		}

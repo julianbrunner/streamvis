@@ -6,21 +6,19 @@ using Data.Searching;
 
 namespace Data
 {
-	public class Buffer<TItem, TPosition> : IIndexed<TItem, int>, IRanged<TItem, TPosition>
-		where TItem : IPositioned<TPosition>
-		where TPosition : IComparable<TPosition>
+	public class EntryBuffer : IIndexed<Entry, int>
 	{
-		readonly List<TItem> items = new List<TItem>();
+		readonly List<Entry> items = new List<Entry>();
 		
-		public TItem this[int index] { get { return items[index]; } }
-		public IEnumerable<TItem> this[TPosition start, TPosition end]
+		public Entry this[int index] { get { return items[index]; } }
+		public IEnumerable<Entry> this[Time start, Time end]
 		{
 			get
 			{
 				int startIndex = this.GetIndex(start);
 				int endIndex = this.GetIndex(start);
 				
-				TItem[] buffer = new TItem[endIndex - startIndex];
+				Entry[] buffer = new Entry[endIndex - startIndex];
 				
 				items.CopyTo(startIndex, buffer, 0, endIndex - startIndex);
 				
@@ -30,12 +28,12 @@ namespace Data
 
 		public int Count { get { return items.Count; } }
 
-		public void Add(TItem item)
+		public void Add(Entry item)
 		{
 			// TODO: Check for ordering violation
 			items.Add(item);
 		}
-		public IEnumerator<TItem> GetEnumerator()
+		public IEnumerator<Entry> GetEnumerator()
 		{
 			return items.GetEnumerator();
 		}

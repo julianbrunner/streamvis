@@ -31,12 +31,11 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Time.cs" />
-    <Compile Include="Buffer.cs" />
     <Compile Include="EntryCache.cs" />
     <Compile Include="EntryResampler.cs" />
-    <Compile Include="IRanged.cs" />
     <Compile Include="Searching\IPositioned.cs" />
     <Compile Include="Searching\Search.cs" />
+    <Compile Include="EntryBuffer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />

@@ -6,20 +6,24 @@ using Data.Searching;
 
 namespace Data
 {
-	public class EntryResampler : IRanged<Entry, Time>
+	public class EntryResampler
 	{
-		readonly IRanged<Entry, Time> source;
+		readonly EntryBuffer source;
 		readonly Time sampleDistance;
 		
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
 		{
 			get
 			{
-				throw new System.NotImplementedException ();
+				Time firstBorder = startTime.Ceiling(sampleDistance);
+				Time lastBorder = endTime.Floor(sampleDistance);
+				
+				for (Time time = firstBorder; time < lastBorder; time += sampleDistance)
+					yield return Aggregate(source, time, time + sampleDistance);
 			}
 		}
 		
-		public EntryResampler(IRanged<Entry, Time> source, Time sampleDistance)
+		public EntryResampler(EntryBuffer source, Time sampleDistance)
 		{
 			this.source = source;
 			this.sampleDistance = sampleDistance;
