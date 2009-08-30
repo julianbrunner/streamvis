@@ -1,16 +1,18 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Extensions;
 
 namespace Data
 {
-	public class Buffer<TItem, TPosition> : IRanged<TItem, TPosition>, IIndexed<TItem, int>, ICounted
+	public class Buffer<TItem, TPosition> : IIndexed<TItem, int>, IRanged<TItem, TPosition>
 		where TItem : IPositioned<TPosition>
 		where TPosition : IComparable<TPosition>
 	{
 		readonly List<TItem> items = new List<TItem>();
 		readonly BinarySearcher<Buffer<TItem, TPosition>, TItem, TPosition> searcher;
 		
+		public TItem this[int index] { get { return items[index]; } }
 		public IEnumerable<TItem> this[TPosition start, TPosition end]
 		{
 			get
@@ -25,15 +27,14 @@ namespace Data
 				return buffer;
 			}
 		}
-		public TItem this[int index] { get { return items[index]; } }
+
+		public int Count { get { return items.Count; } }
 		
 		public Buffer()
 		{
 			searcher = new BinarySearcher<Buffer<TItem, TPosition>, TItem, TPosition>(this);
 		}
-		
-		public int Count { get { return items.Count; } }
-		
+
 		public void Add(TItem item)
 		{
 			// TODO: Check for ordering violation
@@ -42,6 +43,15 @@ namespace Data
 		public int GetIndex(TPosition position)
 		{
 			return searcher.GetIndex(position);
+		}
+		public IEnumerator<TItem> GetEnumerator()
+		{
+			return items.GetEnumerator();
+		}
+		
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return GetEnumerator();
 		}
 	}
 }

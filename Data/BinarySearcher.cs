@@ -4,7 +4,7 @@ using Extensions;
 namespace Data
 {
 	public class BinarySearcher<TSource, TItem, TPosition>
-		where TSource : IIndexed<TItem, int>, ICounted
+		where TSource : IIndexed<TItem, int>
 		where TItem : IPositioned<TPosition>
 		where TPosition : IComparable<TPosition>
 	{

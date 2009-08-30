@@ -34,7 +34,6 @@
     <Compile Include="Buffer.cs" />
     <Compile Include="BinarySearcher.cs" />
     <Compile Include="EntryCache.cs" />
-    <Compile Include="Transformation.cs" />
     <Compile Include="EntryResampler.cs" />
     <Compile Include="IRanged.cs" />
     <Compile Include="IPositioned.cs" />

@@ -46,12 +46,9 @@ namespace Data
 			double endValue = Interpolate(beforeEnd.Value, afterEnd.Value, endFraction);			
 			Entry end = new Entry(endTime, endValue);
 			
-			return Aggregate(EnumerablePlus.Construct(start.Single(), source.Range(startIndex, endIndex), end.Single()), start, end);
-		}
-		static Entry Aggregate(IEnumerable<Entry> source, Entry start, Entry end)
-		{
-			double value = source.Pairs().Sum(range => (range.B.Time - range.A.Time).Seconds * 0.5 * (range.A.Value + range.B.Value));			
-			return new Entry(0.5 * (start.Time + end.Time), value / (end.Time - start.Time).Seconds);
+			IEnumerable<Entry> entries = EnumerablePlus.Construct(start.Single(), source.Range(startIndex, endIndex), end.Single());
+			double area = entries.Pairs().Sum(range => (range.B.Time - range.A.Time).Seconds * 0.5 * (range.A.Value + range.B.Value));
+			return new Entry(0.5 * (start.Time + end.Time), area / (end.Time - start.Time).Seconds);
 		}
 		static double Interpolate(double a, double b, double f)
 		{
