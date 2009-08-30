@@ -1,7 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using Extensions;
+using Data.Searching;
 
 namespace Data
 {
@@ -27,7 +28,7 @@ namespace Data
 		static Entry Aggregate(IIndexed<Entry, int> source, Time startTime, Time endTime)
 		{
 			if (source.Count == 0)
-				throw new ArgumentException("The source stream was empty.");
+				throw new ArgumentException("The source stream is empty.");
 			if (source[0].Time > startTime || source[source.Count - 1].Time < endTime)
 				throw new ArgumentException("The specified range isn't fully covered with data.");
 			

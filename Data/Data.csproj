@@ -35,8 +35,8 @@
     <Compile Include="EntryCache.cs" />
     <Compile Include="EntryResampler.cs" />
     <Compile Include="IRanged.cs" />
-    <Compile Include="IPositioned.cs" />
-    <Compile Include="Searching.cs" />
+    <Compile Include="Searching\IPositioned.cs" />
+    <Compile Include="Searching\Search.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core" />
@@ -52,5 +52,8 @@
       <Project>{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}</Project>
       <Name>Extensions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Searching\" />
   </ItemGroup>
 </Project>

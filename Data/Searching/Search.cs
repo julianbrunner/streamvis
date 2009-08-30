@@ -1,9 +1,9 @@
 using System;
 using Extensions;
 
-namespace Data
+namespace Data.Searching
 {
-	public static class Searching
+	public static class Search
 	{
 		public static int GetIndex<TItem, TPosition>(this IIndexed<TItem, int> source, TPosition position)
 			where TItem : IPositioned<TPosition>
