@@ -24,7 +24,7 @@ namespace Data
 			this.sampleDistance = sampleDistance;
 		}
 
-		static Entry Aggregate(Buffer<Entry, Time> source, Time startTime, Time endTime)
+		static Entry Aggregate(IIndexed<Entry, int> source, Time startTime, Time endTime)
 		{
 			if (source.Count == 0)
 				throw new ArgumentException("The source stream was empty.");
