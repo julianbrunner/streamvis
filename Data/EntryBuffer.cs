@@ -8,7 +8,7 @@ namespace Data
 {
 	public class EntryBuffer : IIndexed<Entry, int>
 	{
-		readonly List<Entry> items = new List<Entry>();
+		readonly List<Entry> items;
 		
 		public Entry this[int index] { get { return items[index]; } }
 		public IEnumerable<Entry> this[Time start, Time end]
@@ -27,11 +27,24 @@ namespace Data
 		}
 
 		public int Count { get { return items.Count; } }
+		
+		public EntryBuffer()
+		{
+			items = new List<Entry>();
+		}
+		public EntryBuffer(IEnumerable<Entry> items)
+		{
+			items = new List<Entry>(items);
+		}
 
 		public void Add(Entry item)
 		{
-			// TODO: Check for ordering violation
+			// TODO: Check for ordering violation?
 			items.Add(item);
+		}
+		public void Clear()
+		{
+			items.Clear();
 		}
 		public IEnumerator<Entry> GetEnumerator()
 		{
