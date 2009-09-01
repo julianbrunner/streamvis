@@ -12,6 +12,7 @@ namespace Graphics
 		TimeSpan lastOverflow = TimeSpan.Zero;
 		int frames = 0;
 		
+		public bool IsUpdated { get; set; }
 		public double FramesPerSecond { get; private set; }
 		
 		public FrameCounter()
@@ -19,16 +20,21 @@ namespace Graphics
 			stopwatch = new Stopwatch();
 			stopwatch.Reset();
 			stopwatch.Start();
+			
+			IsUpdated = true;
 		}
 		
 		public void Update()
 		{
-			if (++frames == frameWindow)
+			if (IsUpdated)
 			{
-				TimeSpan time =  stopwatch.Elapsed;
-				FramesPerSecond = frameWindow / (time - lastOverflow).TotalSeconds;
-				lastOverflow = time;
-				frames = 0;
+				if (++frames == frameWindow)
+				{
+					TimeSpan time =  stopwatch.Elapsed;
+					FramesPerSecond = frameWindow / (time - lastOverflow).TotalSeconds;
+					lastOverflow = time;
+					frames = 0;
+				}
 			}
 		}
 	}

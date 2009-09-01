@@ -13,7 +13,7 @@ namespace Visualizer.Data
 
 		public static string XElementName { get { return "container"; } }
 
-		public IEnumerable<Entry> this[Time startTime, Time endTime] { get { lock (entryBuffer) return resampler[startTime, endTime]; } }
+		public IEnumerable<Entry> this[Time startTime, Time endTime] { get { lock (entryBuffer) return resampler[startTime, endTime].ToArray(); } }
 
 		public XElement XElement
 		{
@@ -31,17 +31,16 @@ namespace Visualizer.Data
 					);
 			}
 		}
-		public bool IsEmpty { get { lock (entryBuffer) return !entryBuffer.Any(); } }
 
 		public Container(XElement container)
 		{
 			entryBuffer = new EntryBuffer(from entry in container.Elements(Entry.XElementName) select new Entry(entry));
-			resampler = new EntryResampler(entryBuffer, new Time(0.1));
+			resampler = new EntryResampler(entryBuffer, new Time(1.0));
 		}
 		public Container()
 		{
 			entryBuffer = new EntryBuffer();
-			resampler = new EntryResampler(entryBuffer, new Time(0.1));
+			resampler = new EntryResampler(entryBuffer, new Time(1.0));
 		}
 
 		public void Clear()

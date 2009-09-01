@@ -30,11 +30,11 @@ namespace Visualizer.Data.Transformations
 		
 		public EntryBuffer()
 		{
-			items = new List<Entry>();
+			this.items = new List<Entry>();
 		}
 		public EntryBuffer(IEnumerable<Entry> items)
 		{
-			items = new List<Entry>(items);
+			this.items = new List<Entry>(items);
 		}
 
 		public void Add(Entry item)

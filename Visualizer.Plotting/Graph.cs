@@ -36,7 +36,7 @@ namespace Visualizer.Plotting
 		public void Update() { }
 		public void Draw()
 		{
-			if (IsDrawn && !stream.Container.IsEmpty)
+			if (IsDrawn)
 			{
 				Range<double> valueRange = plotter.ValueManager.Range;
 				double height = valueRange.End.Value - valueRange.Start.Value;

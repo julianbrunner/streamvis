@@ -19,6 +19,7 @@ namespace Visualizer.Plotting
 		readonly int intervalsY;
 		readonly Color color;
 
+		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 		public TimeManager TimeManager { get { return timeManager; } }
 		public ValueManager ValueManager { get { return valueManager; } }
@@ -39,16 +40,20 @@ namespace Visualizer.Plotting
 			this.intervalsY = intervalsY;
 			this.color = color;
 
+			IsUpdated = true;
 			IsDrawn = true;
 		}
 
 		public void Update()
 		{
-			if (!Frozen) timeManager.Update();
-			valueManager.Update();
-			layouter.Update();
-
-			foreach (Graph graph in graphs) graph.Update();
+			if (IsUpdated)
+			{
+				if (!Frozen) timeManager.Update();
+				valueManager.Update();
+				layouter.Update();
+	
+				foreach (Graph graph in graphs) graph.Update();
+			}
 		}
 		public void Draw()
 		{

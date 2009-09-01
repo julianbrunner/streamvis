@@ -190,11 +190,11 @@ namespace Visualizer
 		}
 		private void showPlotterToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			plotter.IsDrawn = showPlotterToolStripMenuItem.Checked;
+			plotter.IsUpdated = plotter.IsDrawn = showPlotterToolStripMenuItem.Checked;
 		}
 		private void showFrameCounterToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			frameCounter.IsDrawn = showFrameCounterToolStripMenuItem.Checked;
+			frameCounter.IsUpdated = frameCounter.IsDrawn = showFrameCounterToolStripMenuItem.Checked;
 		}
 		private void verticalSynchronizationToolStripMenuItem_Click(object sender, EventArgs e)
 		{
