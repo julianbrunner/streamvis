@@ -8,13 +8,13 @@ namespace Data
 	public class EntryCache
 	{
 		readonly EntryResampler source;
-		readonly List<Entry> buffer = new List<Entry>();
+		//readonly List<Entry> buffer = new List<Entry>();
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
 		{
 			get
 			{
-				throw new System.NotImplementedException ();
+				return source[startTime, endTime];
 			}
 		}
 		
