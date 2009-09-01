@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarp", "Yarp\Yarp.csproj", 
 EndProject
 Project("{2857B73E-F847-4B02-9238-064979017E93}") = "Yarp.Wrapper", "Yarp.Wrapper\Yarp.Wrapper.cproj", "{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphics", "Graphics\Graphics.csproj", "{D7D149FB-EBB5-47C4-B027-9C671DB886A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}"
@@ -39,10 +37,6 @@ Global
 		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{618E0ECE-B676-451F-A45E-6A1E6F68D9B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8617FA7B-31A3-43A9-A9D8-EE54E6BFB937}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -88,15 +82,15 @@ Global
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = None
 		$1.ResourceNamePolicy = FileName
-		$0.StandardHeader = $2
-		$2.Text = 
-		$2.inheritsSet = MITX11License
-		$0.TextStylePolicy = $3
-		$3.FileWidth = 120
-		$3.TabWidth = 4
-		$3.TabsToSpaces = False
-		$3.NoTabsAfterNonTabs = False
-		$3.RemoveTrailingWhitespace = False
-		$3.EolMarker = Native
+		$0.TextStylePolicy = $2
+		$2.FileWidth = 120
+		$2.TabWidth = 4
+		$2.TabsToSpaces = False
+		$2.NoTabsAfterNonTabs = False
+		$2.RemoveTrailingWhitespace = False
+		$2.EolMarker = Native
+		$0.StandardHeader = $3
+		$3.Text = 
+		$3.inheritsSet = MITX11License
 	EndGlobalSection
 EndGlobal

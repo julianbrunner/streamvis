@@ -2,138 +2,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System;
+using Visualizer.Data.Transformations;
 
 namespace Visualizer.Data
 {
 	public class Container
 	{
-		static readonly Time sampleLength = new Time(0.1);
-
-		readonly List<Entry> sampleBuffer = new List<Entry>();
-		readonly List<Entry> entries;
+		readonly EntryBuffer entryBuffer;
+		readonly EntryResampler resampler;
 
 		public static string XElementName { get { return "container"; } }
 
-		public Entry this[int index] { get { lock (entries) return entries[index]; } }
-		public Entry[] this[int startIndex, int endIndex]
-		{
-			get
-			{
-				Entry[] buffer = new Entry[endIndex - startIndex];
-				lock (entries) entries.CopyTo(startIndex, buffer, 0, endIndex - startIndex);
-				return buffer;
-			}
-		}
+		public IEnumerable<Entry> this[Time startTime, Time endTime] { get { lock (entryBuffer) return resampler[startTime, endTime]; } }
 
 		public XElement XElement
 		{
 			get
 			{
-				lock (entries)
+				lock (entryBuffer)
 					return new XElement
 					(
 						XElementName,
 						(
-							from entry in entries
+							from entry in entryBuffer
 							select entry.XElement
 						)
 						.ToArray()
 					);
 			}
 		}
-		public Entry[] Data { get { lock (entries) return entries.ToArray(); } }
-		public bool IsEmpty { get { lock (entries) return entries.Count == 0; } }
-		public int Count { get { lock (entries) return entries.Count; } }
+		public bool IsEmpty { get { lock (entryBuffer) return !entryBuffer.Any(); } }
 
 		public Container(XElement container)
 		{
-			this.entries =
-			(
-				from entry in container.Elements(Entry.XElementName)
-				select new Entry(entry)
-			)
-			.ToList();
+			entryBuffer = new EntryBuffer(from entry in container.Elements(Entry.XElementName) select new Entry(entry));
+			resampler = new EntryResampler(entryBuffer, new Time(0.1));
 		}
 		public Container()
 		{
-			this.entries = new List<Entry>();
+			entryBuffer = new EntryBuffer();
+			resampler = new EntryResampler(entryBuffer, new Time(0.1));
 		}
 
 		public void Clear()
 		{
-			lock (entries)
-			{
-				sampleBuffer.Clear();
-				entries.Clear();
-			}
+			lock (entryBuffer) entryBuffer.Clear();
 		}
-		// TODO: Resampling should be done in Visualizer.Capturing instead of Visualizer.Data
 		public void Add(Entry entry)
 		{
-			lock (entries)
-			{
-				if (entry.Value != double.NaN && (sampleBuffer.Count == 0 || entry.Time > sampleBuffer[sampleBuffer.Count - 1].Time))
-					sampleBuffer.Add(entry);
-	
-				while (sampleBuffer.Count > 1 && sampleBuffer[sampleBuffer.Count - 1].Time - sampleBuffer[0].Time >= sampleLength)
-					// TODO: Do we have to check if the timestamp is correct?
-					entries.Add(AggregateSamples());
-			}
-		}
-		public int GetIndex(Time time)
-		{
-			lock (entries) return GetIndex(0, entries.Count, time);
-		}
-
-		/// <summary>
-		/// Returns the index of the first item which has a timestamp that is greater than or equal to <paramref name="time"/>.
-		/// If no such item is found, <paramref name="end"/> is returned.
-		/// </summary>
-		/// <param name="start">The start index of the range to search.</param>
-		/// <param name="end">The end index of the range to search.</param>
-		/// <param name="time">The time to search for.</param>
-		/// <returns>The index of the first item which has a timestamp that is greater than or equal to <paramref name="time"/>.</returns>
-		int GetIndex(int start, int end, Time time)
-		{
-			if (start == end) return start;
-
-			int index = (start + end) / 2;
-
-			if (entries[index].Time > time) return GetIndex(start, index, time);
-			if (entries[index].Time < time) return GetIndex(index + 1, end, time);
-
-			return index;
-		}
-		Entry AggregateSamples()
-		{
-			Entry start = sampleBuffer[0];
-
-			Entry lastInside = sampleBuffer[sampleBuffer.Count - 2];
-			Entry last = sampleBuffer[sampleBuffer.Count - 1];
-			
-			Time endTime = start.Time + sampleLength;
-			double fraction = (endTime - lastInside.Time) / (last.Time - lastInside.Time);
-			Entry end = new Entry(endTime, Interpolate(lastInside.Value, last.Value, fraction));
-			sampleBuffer.Insert(sampleBuffer.Count - 1, end);
-
-			double value = 0;
-
-			for (int i = 0; i < sampleBuffer.Count - 2; i++)
-			{
-				Entry a = sampleBuffer[i + 0];
-				Entry b = sampleBuffer[i + 1];
-
-				value += (b.Time - a.Time).Seconds * 0.5 * (a.Value + b.Value);
-			}
-
-			sampleBuffer.RemoveRange(0, sampleBuffer.Count - 2);
-
-			return new Entry(0.5 * (start.Time + end.Time), value / sampleLength.Seconds);
-		}
-
-		static double Interpolate(double a, double b, double f)
-		{
-			return (1 - f) * a + f * b;
+			lock (entryBuffer)
+				if (entry.Value != double.NaN)
+					entryBuffer.Add(entry);
 		}
 	}
 }

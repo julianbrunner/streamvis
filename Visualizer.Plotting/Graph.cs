@@ -60,36 +60,39 @@ namespace Visualizer.Plotting
 			}
 		}
 
-		IEnumerable<Entry> GetEntries(Time start, Time end)
+		IEnumerable<Entry> GetEntries(Time startTime, Time endTime)
 		{
-			if (stream.Container.IsEmpty) yield break;
-
-			int startIndex = stream.Container.GetIndex(start);
-			int endIndex = stream.Container.GetIndex(end);
-
-			if (plotter.ExtendGraphs)
-			{
-				double head;
-				double tail;
-
-				if (startIndex == endIndex)
-				{
-					if (endIndex == stream.Container.Count) head = tail = stream.Container[endIndex - 1].Value;
-					else head = tail = stream.Container[startIndex].Value;
-				}
-				else
-				{
-					head = stream.Container[startIndex].Value;
-					tail = stream.Container[endIndex - 1].Value;
-				}
-
-				yield return new Entry(start, head);
-				foreach (Entry entry in stream.Container[startIndex, endIndex]) yield return entry;
-				yield return new Entry(end, tail);
-			}
-			else
-				foreach (Entry entry in stream.Container[startIndex, endIndex])
-					yield return entry;
+			return stream.Container[startTime, endTime];
+			
+			// TODO: Reenable graph extension
+//			if (stream.Container.IsEmpty) yield break;
+//
+//			int startIndex = stream.Container.GetIndex(start);
+//			int endIndex = stream.Container.GetIndex(end);
+//
+//			if (plotter.ExtendGraphs)
+//			{
+//				double head;
+//				double tail;
+//
+//				if (startIndex == endIndex)
+//				{
+//					if (endIndex == stream.Container.Count) head = tail = stream.Container[endIndex - 1].Value;
+//					else head = tail = stream.Container[startIndex].Value;
+//				}
+//				else
+//				{
+//					head = stream.Container[startIndex].Value;
+//					tail = stream.Container[endIndex - 1].Value;
+//				}
+//
+//				yield return new Entry(start, head);
+//				foreach (Entry entry in stream.Container[startIndex, endIndex]) yield return entry;
+//				yield return new Entry(end, tail);
+//			}
+//			else
+//				foreach (Entry entry in stream.Container[startIndex, endIndex])
+//					yield return entry;
 		}
 	}
 }

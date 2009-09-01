@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Extensions;
 
-namespace Data
+namespace Visualizer.Data.Transformations
 {
 	public class EntryCache
 	{

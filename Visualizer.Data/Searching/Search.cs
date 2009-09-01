@@ -1,7 +1,7 @@
 using System;
 using Extensions;
 
-namespace Data.Searching
+namespace Visualizer.Data.Searching
 {
 	public static class Search
 	{

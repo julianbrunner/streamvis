@@ -23,6 +23,7 @@
         <Command type="AfterBuild" command="Tools/MakeBundle vis" workingdir="${TargetDir}" />
       </CustomCommands>
     </CustomCommands>
+    <Commandlineparameters>/write</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>

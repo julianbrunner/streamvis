@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Extensions;
-using Data.Searching;
+using Visualizer.Data.Searching;
 
-namespace Data
+namespace Visualizer.Data.Transformations
 {
 	public class EntryBuffer : IIndexed<Entry, int>
 	{

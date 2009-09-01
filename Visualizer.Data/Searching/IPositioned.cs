@@ -1,6 +1,6 @@
 using System;
 
-namespace Data.Searching
+namespace Visualizer.Data.Searching
 {
 	public interface IPositioned<TPosition>
 	{

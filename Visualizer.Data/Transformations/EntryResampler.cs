@@ -1,10 +1,10 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Visualizer.Data.Searching;
 using Extensions;
-using Data.Searching;
 
-namespace Data
+namespace Visualizer.Data.Transformations
 {
 	public class EntryResampler
 	{
@@ -15,11 +15,19 @@ namespace Data
 		{
 			get
 			{
+				if (source.Count == 0) yield break;
+				
 				Time firstBorder = startTime.Ceiling(sampleDistance);
 				Time lastBorder = endTime.Floor(sampleDistance);
 				
 				for (Time time = firstBorder; time < lastBorder; time += sampleDistance)
-					yield return Aggregate(source, time, time + sampleDistance);
+				{
+					Time intervalStartTime = time;
+					Time intervalEndTime = time + sampleDistance;
+					
+					if (source[0].Time <= intervalStartTime && source[source.Count - 1].Time >= intervalEndTime)
+						yield return Aggregate(source, intervalStartTime, intervalEndTime);
+				}
 			}
 		}
 		

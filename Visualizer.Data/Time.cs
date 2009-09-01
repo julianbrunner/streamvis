@@ -41,6 +41,16 @@ namespace Visualizer.Data
 		{
 			return Seconds.ToString();
 		}
+		public Time Floor(Time interval)
+		{			
+			Time remainder = this % interval;
+			return remainder == Zero ? this : this - remainder + 0 * interval;
+		}
+		public Time Ceiling(Time interval)
+		{
+			Time remainder = this % interval;
+			return remainder == Zero ? this : this - remainder + 1 * interval;
+		}
 		
 		public static bool operator ==(Time a, Time b)
 		{
@@ -95,9 +105,9 @@ namespace Visualizer.Data
 		
 		public static Time operator %(Time a, Time b)
 		{
-			long rest = a.ticks % b.ticks;
-			if (rest < 0) rest += b.ticks;
-			return new Time(rest);
+			long remainder = a.ticks % b.ticks;
+			if (remainder < 0) remainder += b.ticks;
+			return new Time(remainder);
 		}
 		
 		static bool Equals(Time a, Time b)
