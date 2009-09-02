@@ -49,8 +49,6 @@
     <Compile Include="Timer.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="Entry.cs" />
-    <Compile Include="Searching\IPositioned.cs" />
-    <Compile Include="Searching\Search.cs" />
     <Compile Include="Transformations\EntryBuffer.cs" />
     <Compile Include="Transformations\EntryCache.cs" />
     <Compile Include="Transformations\EntryResampler.cs" />

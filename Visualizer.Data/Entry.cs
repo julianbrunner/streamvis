@@ -1,6 +1,5 @@
-using System;
 using System.Xml.Linq;
-using Visualizer.Data.Searching;
+using Extensions.Searching;
 
 namespace Visualizer.Data
 {
@@ -8,7 +7,7 @@ namespace Visualizer.Data
 	{
 		readonly Time time;
 		readonly double value;
-		
+
 		public static string XElementName { get { return "entry"; } }
 
 		public Time Time { get { return time; } }
@@ -25,7 +24,7 @@ namespace Visualizer.Data
 				);
 			}
 		}
-		
+
 		public Entry(Time time, double value)
 		{
 			this.time = time;
@@ -36,7 +35,7 @@ namespace Visualizer.Data
 			this.time = new Time((long)entry.Element("time"));
 			this.value = (double)entry.Element("value");
 		}
-		
+
 		Time IPositioned<Time>.Position { get { return Time; } }
 	}
 }

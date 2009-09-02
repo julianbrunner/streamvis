@@ -44,6 +44,10 @@
     <Compile Include="WrappingTimeManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Extensions\Extensions.csproj">
+      <Project>{B87F0AC6-EF86-464D-9D03-6A03AAB187F2}</Project>
+      <Name>Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Visualizer.Data\Visualizer.Data.csproj">
       <Project>{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}</Project>
       <Name>Visualizer.Data</Name>

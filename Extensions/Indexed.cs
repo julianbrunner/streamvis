@@ -5,7 +5,7 @@ namespace Extensions
 {
 	public static class Indexed
 	{
-		public static IEnumerable<T> Range<T>(this IIndexed<T, int> source, int startIndex, int endIndex)
+		public static IEnumerable<T> GetRange<T>(this IIndexed<T, int> source, int startIndex, int endIndex)
 		{
 			if (source == null) throw new ArgumentNullException("source");
 			if (startIndex < 0 || startIndex >= source.Count) throw new ArgumentOutOfRangeException("startIndex");

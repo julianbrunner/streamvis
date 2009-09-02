@@ -1,19 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Extensions;
-using Visualizer.Data.Searching;
 
 namespace Visualizer.Data.Transformations
 {
 	public class EntryBuffer : IIndexed<Entry, int>
 	{
 		readonly List<Entry> items;
-		
+
 		public Entry this[int index] { get { return items[index]; } }
 
 		public int Count { get { return items.Count; } }
-		
+
 		public EntryBuffer()
 		{
 			this.items = new List<Entry>();
@@ -36,7 +34,7 @@ namespace Visualizer.Data.Transformations
 		{
 			return items.GetEnumerator();
 		}
-		
+
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();

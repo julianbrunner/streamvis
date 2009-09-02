@@ -1,11 +1,23 @@
 using System;
-using Extensions;
+using System.Collections.Generic;
 
-namespace Visualizer.Data.Searching
+namespace Extensions.Searching
 {
 	public static class Search
 	{
-		public static int GetIndex<TItem, TPosition>(this IIndexed<TItem, int> source, TPosition position)
+		public static IEnumerable<TItem> FindRange<TItem, TPosition>(this IIndexed<TItem, int> source, Pair<TPosition> range)
+			where TItem : IPositioned<TPosition>
+			where TPosition : IComparable<TPosition>
+		{
+			return source.GetRange(source.FindIndex(range.A), source.FindIndex(range.B));
+		}
+		public static IEnumerable<TItem> FindRange<TItem, TPosition>(this IIndexed<TItem, int> source, TPosition startPosition, TPosition endPosition)
+			where TItem : IPositioned<TPosition>
+			where TPosition : IComparable<TPosition>
+		{
+			return source.GetRange(source.FindIndex(startPosition), source.FindIndex(endPosition));
+		}
+		public static int FindIndex<TItem, TPosition>(this IIndexed<TItem, int> source, TPosition position)
 			where TItem : IPositioned<TPosition>
 			where TPosition : IComparable<TPosition>
 		{

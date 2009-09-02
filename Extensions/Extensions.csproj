@@ -34,6 +34,8 @@
     <Compile Include="Pair.cs" />
     <Compile Include="Indexed.cs" />
     <Compile Include="EnumerablePlus.cs" />
+    <Compile Include="Searching\IPositioned.cs" />
+    <Compile Include="Searching\Search.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core">
