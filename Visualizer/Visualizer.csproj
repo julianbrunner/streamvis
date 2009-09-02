@@ -72,7 +72,6 @@
     <None Include="Images\Open.png" />
     <None Include="Images\Save.png" />
     <None Include="Notes\Changelog.txt" />
-    <None Include="Notes\Visualizer.jnt" />
     <None Include="Notes\Performance.txt" />
     <None Include="Notes\Performance Julian.txt" />
     <None Include="Notes\Performance Ingo.txt" />
