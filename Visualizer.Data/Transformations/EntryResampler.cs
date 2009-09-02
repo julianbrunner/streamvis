@@ -59,7 +59,7 @@ namespace Visualizer.Data.Transformations
 			double endValue = Interpolate(beforeEnd.Value, afterEnd.Value, endFraction);
 			Entry end = new Entry(endTime, endValue);
 
-			IEnumerable<Entry> entries = EnumerablePlus.Construct(start.Single(), source.GetRange(startIndex, endIndex), end.Single());
+			IEnumerable<Entry> entries = EnumerablePlus.Construct(start.Single(), source[startIndex, endIndex], end.Single());
 			double area = entries.GetRanges().Sum(range => (range.End.Time - range.Start.Time).Seconds * 0.5 * (range.Start.Value + range.End.Value));
 			return new Entry(0.5 * (start.Time + end.Time), area / (end.Time - start.Time).Seconds);
 		}
