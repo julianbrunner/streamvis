@@ -77,6 +77,8 @@
     <None Include="Notes\Performance Ingo.txt" />
     <None Include="Notes\Todo.txt" />
     <None Include="Tools\MakeBundle" />
+    <None Include="Notes\Resampling and Caching.pdf" />
+    <None Include="Notes\Visualizer.pdf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
