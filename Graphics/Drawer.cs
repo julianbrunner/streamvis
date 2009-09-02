@@ -116,7 +116,7 @@ namespace Graphics
 			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
 			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
 
-			using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Text.png"))
+			using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Graphics.Text.png"))
 			using (Bitmap bitmap = new Bitmap(stream))
 			{
 				BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
