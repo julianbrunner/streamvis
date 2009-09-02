@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Extensions;
 using Extensions.Searching;
 
@@ -13,23 +14,25 @@ namespace Visualizer.Data.Transformations
 		{
 			get
 			{
-				List<Pair<Time>> requestRanges = new List<Pair<Time>>();
-				requestRanges.Add(new Pair<Time>(startTime, endTime));
+				//List<Pair<Time>> requestRanges = new List<Pair<Time>>();
+				//requestRanges.Add(new Pair<Time>(startTime, endTime));
 
-				List<IEnumerable<Entry>> entries = new List<IEnumerable<Entry>>();
+				//List<IEnumerable<Entry>> entries = new List<IEnumerable<Entry>>();
 
-				foreach (CacheFragment fragment in fragments)
-					foreach (Pair<Time> requestRange in requestRanges.ToArray())
-					{
-						Pair<Time> intersection = Intersect(requestRange, fragment.Range);
+				//foreach (CacheFragment fragment in fragments)
+				//    foreach (Pair<Time> requestRange in requestRanges.ToArray())
+				//    {
+				//        Pair<Time> intersection = Intersect(requestRange, fragment.Range);
 
-						if (intersection.B - intersection.A > Time.Zero)
-						{
-							entries.Add(fragment.FindRange(intersection));
-							requestRanges.Remove(requestRange);
-							requestRanges.AddRange(Subtract(requestRange, intersection));
-						}
-					}
+				//        if (intersection.B - intersection.A > Time.Zero)
+				//        {
+				//            entries.Add(fragment.FindRange(intersection));
+				//            requestRanges.Remove(requestRange);
+				//            requestRanges.AddRange(Remove(requestRange, intersection));
+				//        }
+				//    }
+
+
 
 				return source[startTime, endTime];
 			}
@@ -40,17 +43,30 @@ namespace Visualizer.Data.Transformations
 			this.source = source;
 		}
 
-		static Pair<Time> Intersect(Pair<Time> a, Pair<Time> b)
+		static IEnumerable<Pair<Time>> Remove(IEnumerable<Pair<Time>> ranges, IEnumerable<Pair<Time>> exclusions)
 		{
-			return new Pair<Time>(Time.Max(a.A, b.A), Time.Min(a.B, b.B));
+			List<Pair<Time>> rangeList = new List<Pair<Time>>(ranges);
+
+			foreach (Pair<Time> exclusion in exclusions)
+				foreach (Pair<Time> range in rangeList.ToArray())
+				{
+					rangeList.Remove(range);
+					rangeList.AddRange(Remove(range, exclusion));
+				}
+
+			return rangeList;
 		}
-		static IEnumerable<Pair<Time>> Subtract(Pair<Time> a, Pair<Time> b)
+		static IEnumerable<Pair<Time>> Remove(Pair<Time> range, Pair<Time> exclusion)
 		{
-			Pair<Time> range1 = new Pair<Time>(a.A, b.A);
-			Pair<Time> range2 = new Pair<Time>(b.B, a.B);
+			Pair<Time> range1 = new Pair<Time>(range.A, exclusion.A);
+			Pair<Time> range2 = new Pair<Time>(exclusion.B, range.B);
 
 			if (range1.B - range1.A > Time.Zero) yield return range1;
 			if (range2.B - range2.A > Time.Zero) yield return range2;
+		}
+		static Pair<Time> Intersect(Pair<Time> a, Pair<Time> b)
+		{
+			return new Pair<Time>(Time.Max(a.A, b.A), Time.Min(a.B, b.B));
 		}
 	}
 }
