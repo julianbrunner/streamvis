@@ -32,7 +32,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="IIndexed.cs" />
-    <Compile Include="IndexedBuffer.cs" />
+    <Compile Include="IndexedList.cs" />
     <Compile Include="Pair.cs" />
     <Compile Include="Indexed.cs" />
     <Compile Include="EnumerablePlus.cs" />

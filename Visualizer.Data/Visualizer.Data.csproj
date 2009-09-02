@@ -50,10 +50,8 @@
     <Compile Include="Timer.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="Entry.cs" />
-    <Compile Include="Transformations\EntryBuffer.cs" />
     <Compile Include="Transformations\EntryCache.cs" />
     <Compile Include="Transformations\EntryResampler.cs" />
-    <Compile Include="Transformations\CacheFragment.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

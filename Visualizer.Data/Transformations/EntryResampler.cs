@@ -8,7 +8,7 @@ namespace Visualizer.Data.Transformations
 {
 	public class EntryResampler
 	{
-		readonly EntryBuffer source;
+		readonly IIndexed<Entry, int> source;
 		readonly Time sampleDistance;
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
@@ -31,7 +31,7 @@ namespace Visualizer.Data.Transformations
 			}
 		}
 
-		public EntryResampler(EntryBuffer source, Time sampleDistance)
+		public EntryResampler(IIndexed<Entry, int> source, Time sampleDistance)
 		{
 			this.source = source;
 			this.sampleDistance = sampleDistance;
