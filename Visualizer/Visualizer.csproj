@@ -10,6 +10,7 @@
     <AssemblyName>Visualizer</AssemblyName>
     <StartupObject>Visualizer.Program</StartupObject>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>Visualizer</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

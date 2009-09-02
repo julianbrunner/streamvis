@@ -8,7 +8,7 @@ namespace Visualizer.Data.Transformations
 	public class EntryCache
 	{
 		readonly EntryResampler source;
-		readonly List<CacheFragment> fragments = new List<CacheFragment>();
+		readonly List<Pair<Time>> fragmentRanges = new List<Pair<Time>>();
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
 		{
@@ -32,7 +32,11 @@ namespace Visualizer.Data.Transformations
 				//        }
 				//    }
 
+				Pair<Time> requestRange = new Pair<Time>(startTime, endTime);
 
+				// TODO: Defragment on insertion
+				fragmentRanges.AddRange(Remove(requestRange.Single(), fragmentRanges));
+				
 
 				return source[startTime, endTime];
 			}
