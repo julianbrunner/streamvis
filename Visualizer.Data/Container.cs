@@ -10,10 +10,11 @@ namespace Visualizer.Data
 	{
 		readonly EntryBuffer entryBuffer;
 		readonly EntryResampler resampler;
+		readonly EntryCache cache;
 
 		public static string XElementName { get { return "container"; } }
 
-		public IEnumerable<Entry> this[Time startTime, Time endTime] { get { lock (entryBuffer) return resampler[startTime, endTime].ToArray(); } }
+		public IEnumerable<Entry> this[Time startTime, Time endTime] { get { lock (entryBuffer) return cache[startTime, endTime].ToArray(); } }
 
 		public XElement XElement
 		{
@@ -36,11 +37,13 @@ namespace Visualizer.Data
 		{
 			entryBuffer = new EntryBuffer(from entry in container.Elements(Entry.XElementName) select new Entry(entry));
 			resampler = new EntryResampler(entryBuffer, new Time(1.0));
+			cache = new EntryCache(resampler);
 		}
 		public Container()
 		{
 			entryBuffer = new EntryBuffer();
 			resampler = new EntryResampler(entryBuffer, new Time(1.0));
+			cache = new EntryCache(resampler);
 		}
 
 		public void Clear()

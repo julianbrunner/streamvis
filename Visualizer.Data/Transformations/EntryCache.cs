@@ -8,7 +8,7 @@ namespace Visualizer.Data.Transformations
 	public class EntryCache
 	{
 		readonly EntryResampler source;
-		//readonly List<Entry> buffer = new List<Entry>();
+		readonly List<CacheFragment> fragments = new List<CacheFragment>();
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
 		{

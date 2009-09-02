@@ -19,6 +19,8 @@ TODO: Change exposed fields back to properties if it won't hurt performance
 TODO: Make Layouter adaptive to width of the Y-Axis labels
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 
+TODO: Remove unused usings and references
+
 TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
 TODO: Extension method doesn't work without reference to System.Core
