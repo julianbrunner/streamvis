@@ -11,20 +11,6 @@ namespace Visualizer.Data.Transformations
 		readonly List<Entry> items;
 		
 		public Entry this[int index] { get { return items[index]; } }
-		public IEnumerable<Entry> this[Time start, Time end]
-		{
-			get
-			{
-				int startIndex = this.GetIndex(start);
-				int endIndex = this.GetIndex(start);
-				
-				Entry[] buffer = new Entry[endIndex - startIndex];
-				
-				items.CopyTo(startIndex, buffer, 0, endIndex - startIndex);
-				
-				return buffer;
-			}
-		}
 
 		public int Count { get { return items.Count; } }
 		

@@ -14,6 +14,24 @@ namespace Visualizer.Data.Transformations
 		{
 			get
 			{
+				List<Pair<Time>> requestRanges = new List<Pair<Time>>();
+				requestRanges.Add(new Pair<Time>(startTime, endTime));
+				
+				List<IEnumerable<Entry>> entries = new List<IEnumerable<Entry>>();
+				
+				foreach (CacheFragment fragment in fragments)
+					foreach (Pair<Time> requestRange in requestRanges.ToArray())
+					{
+						Pair<Time> intersection = Intersect(requestRange, fragment.Range);
+						
+						if (intersection.B - intersection.A > Time.Zero)
+						{
+							entries.Add(fragment[intersection]);
+							requestRanges.Remove(requestRange);
+							requestRanges.AddRange(Subtract(requestRange, intersection));
+						}
+					}
+				
 				return source[startTime, endTime];
 			}
 		}
@@ -23,16 +41,17 @@ namespace Visualizer.Data.Transformations
 			this.source = source;
 		}
 		
-//		public void Refresh()
-//		{
-//			while (true)
-//			{
-//				Time startTime = buffer.Count == 0 ? Time.Zero : buffer[buffer.Count - 1].Time + 0.5 * sampleDistance;
-//				
-//				if (startTime + sampleDistance > source[source.Count - 1].Time) break;
-//				
-//				buffer.Add(Aggregate(source, startTime, startTime + sampleDistance));
-//			}
-//		}
+		static Pair<Time> Intersect(Pair<Time> a, Pair<Time> b)
+		{
+			return new Pair<Time>(Time.Max(a.A, b.A), Time.Min(a.B, b.B));
+		}
+		static IEnumerable<Pair<Time>> Subtract(Pair<Time> a, Pair<Time> b)
+		{
+			Pair<Time> range1 = new Pair<Time>(a.A, b.A);
+			Pair<Time> range2 = new Pair<Time>(b.B, a.B);
+			
+			if (range1.B - range1.A > Time.Zero) yield return range1;
+			if (range2.B - range2.A > Time.Zero) yield return range2;
+		}
 	}
 }

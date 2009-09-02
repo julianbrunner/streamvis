@@ -52,6 +52,15 @@ namespace Visualizer.Data
 			return remainder == Zero ? this : this - remainder + 1 * interval;
 		}
 		
+		public static Time Min(Time a, Time b)
+		{
+			return a > b ? b : a;
+		}
+		public static Time Max(Time a, Time b)
+		{
+			return a < b ? b : a;
+		}
+		
 		public static bool operator ==(Time a, Time b)
 		{
 			return Equals(a, b);

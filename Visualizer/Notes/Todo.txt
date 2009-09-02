@@ -5,6 +5,8 @@ TODO: Resampling should be specified in DataEntry frequency rather than absolute
 TODO: Captured data should be resampled immediately, before any permanent storing or other processing takes place
 TODO: Caching of Graph Data?
 TODO: One sample per pixel
+TODO: Check for correctness of pipeline (i.e. examine the output on manual data insertion)
+TODO: Use Pair<Time> or other instances of Pair<T> where appropriate
 
 TODO: Profile the new wrapper
 TODO: Memory profiling?
