@@ -1,22 +1,24 @@
 using System.Collections.Generic;
 using Extensions;
+using Extensions.Searching;
 
 namespace Visualizer.Data.Transformations
 {
 	public class EntryCache
 	{
 		readonly EntryResampler source;
-		readonly IndexedList<Entry> entries = new IndexedList<Entry>();
-		readonly List<Pair<Time>> fragmentRanges = new List<Pair<Time>>();
+		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>();
+		readonly List<Range<Time>> fragmentRanges = new List<Range<Time>>();
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
 		{
 			get
 			{
-				Pair<Time> requestRange = new Pair<Time>(startTime, endTime);
+				Range<Time> requestRange = new Range<Time>(startTime, endTime);
+				IEnumerable<Range<Time>> missingRanges = Exclude(requestRange.Single(), fragmentRanges);
 
 				// TODO: Defragment on insertion
-				fragmentRanges.AddRange(Remove(requestRange.Single(), fragmentRanges));
+				fragmentRanges.AddRange(missingRanges);
 
 				return source[startTime, endTime];
 			}
@@ -27,30 +29,30 @@ namespace Visualizer.Data.Transformations
 			this.source = source;
 		}
 
-		static IEnumerable<Pair<Time>> Remove(IEnumerable<Pair<Time>> ranges, IEnumerable<Pair<Time>> exclusions)
+		static IEnumerable<Range<Time>> Exclude(IEnumerable<Range<Time>> ranges, IEnumerable<Range<Time>> exclusions)
 		{
-			List<Pair<Time>> rangeList = new List<Pair<Time>>(ranges);
+			List<Range<Time>> rangeList = new List<Range<Time>>(ranges);
 
-			foreach (Pair<Time> exclusion in exclusions)
-				foreach (Pair<Time> range in rangeList.ToArray())
+			foreach (Range<Time> exclusion in exclusions)
+				foreach (Range<Time> range in rangeList.ToArray())
 				{
 					rangeList.Remove(range);
-					rangeList.AddRange(Remove(range, exclusion));
+					rangeList.AddRange(Exclude(range, exclusion));
 				}
 
 			return rangeList;
 		}
-		static IEnumerable<Pair<Time>> Remove(Pair<Time> range, Pair<Time> exclusion)
+		static IEnumerable<Range<Time>> Exclude(Range<Time> range, Range<Time> exclusion)
 		{
-			Pair<Time> range1 = new Pair<Time>(range.A, exclusion.A);
-			Pair<Time> range2 = new Pair<Time>(exclusion.B, range.B);
+			Range<Time> range1 = new Range<Time>(range.Start, exclusion.Start);
+			Range<Time> range2 = new Range<Time>(exclusion.End, range.End);
 
-			if (range1.B - range1.A > Time.Zero) yield return range1;
-			if (range2.B - range2.A > Time.Zero) yield return range2;
+			if (range1.End - range1.Start > Time.Zero) yield return range1;
+			if (range2.End - range2.Start > Time.Zero) yield return range2;
 		}
-		static Pair<Time> Intersect(Pair<Time> a, Pair<Time> b)
+		static Range<Time> Intersect(Range<Time> a, Range<Time> b)
 		{
-			return new Pair<Time>(Time.Max(a.A, b.A), Time.Min(a.B, b.B));
+			return new Range<Time>(Time.Max(a.Start, b.Start), Time.Min(a.End, b.End));
 		}
 	}
 }

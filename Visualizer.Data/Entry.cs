@@ -3,7 +3,7 @@ using Extensions.Searching;
 
 namespace Visualizer.Data
 {
-	public class Entry : IPositioned<Time>
+	public class Entry : IKeyed<Time>
 	{
 		readonly Time time;
 		readonly double value;
@@ -36,6 +36,6 @@ namespace Visualizer.Data
 			this.value = (double)entry.Element("value");
 		}
 
-		Time IPositioned<Time>.Position { get { return Time; } }
+		Time IKeyed<Time>.Key { get { return Time; } }
 	}
 }

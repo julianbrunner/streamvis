@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Extensions;
+using Extensions.Searching;
 using Visualizer.Data.Transformations;
 
 namespace Visualizer.Data
 {
 	public class Container
 	{
-		readonly IndexedList<Entry> entries;
+		readonly SearchList<Entry,Time> entries;
 		readonly EntryResampler resampler;
 		readonly EntryCache cache;
 
@@ -35,13 +35,13 @@ namespace Visualizer.Data
 
 		public Container(XElement container)
 		{
-			entries = new IndexedList<Entry>(from entry in container.Elements(Entry.XElementName) select new Entry(entry));
+			entries = new SearchList<Entry, Time>(from entry in container.Elements(Entry.XElementName) select new Entry(entry));
 			resampler = new EntryResampler(entries, new Time(1.0));
 			cache = new EntryCache(resampler);
 		}
 		public Container()
 		{
-			entries = new IndexedList<Entry>();
+			entries = new SearchList<Entry, Time>();
 			resampler = new EntryResampler(entries, new Time(1.0));
 			cache = new EntryCache(resampler);
 		}

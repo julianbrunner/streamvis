@@ -8,7 +8,7 @@ namespace Visualizer.Data.Transformations
 {
 	public class EntryResampler
 	{
-		readonly IIndexed<Entry, int> source;
+		readonly SearchList<Entry, Time> source;
 		readonly Time sampleDistance;
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
@@ -31,13 +31,13 @@ namespace Visualizer.Data.Transformations
 			}
 		}
 
-		public EntryResampler(IIndexed<Entry, int> source, Time sampleDistance)
+		public EntryResampler(SearchList<Entry, Time> source, Time sampleDistance)
 		{
 			this.source = source;
 			this.sampleDistance = sampleDistance;
 		}
 
-		static Entry Aggregate(IIndexed<Entry, int> source, Time startTime, Time endTime)
+		static Entry Aggregate(SearchList<Entry, Time> source, Time startTime, Time endTime)
 		{
 			if (source.Count == 0)
 				throw new ArgumentException("The source stream is empty.");
@@ -60,7 +60,7 @@ namespace Visualizer.Data.Transformations
 			Entry end = new Entry(endTime, endValue);
 
 			IEnumerable<Entry> entries = EnumerablePlus.Construct(start.Single(), source.GetRange(startIndex, endIndex), end.Single());
-			double area = entries.Pairs().Sum(range => (range.B.Time - range.A.Time).Seconds * 0.5 * (range.A.Value + range.B.Value));
+			double area = entries.GetRanges().Sum(range => (range.End.Time - range.Start.Time).Seconds * 0.5 * (range.Start.Value + range.End.Value));
 			return new Entry(0.5 * (start.Time + end.Time), area / (end.Time - start.Time).Seconds);
 		}
 		static double Interpolate(double a, double b, double f)

@@ -25,7 +25,7 @@ namespace Extensions
 			
 			return source.Concat(item.Single());
 		}
-		public static IEnumerable<Pair<T>> Pairs<T>(this IEnumerable<T> source)
+		public static IEnumerable<Range<T>> GetRanges<T>(this IEnumerable<T> source)
 		{
 			if (source == null) throw new ArgumentNullException("source");
 			
@@ -33,14 +33,14 @@ namespace Extensions
 			
 			if (!enumerator.MoveNext()) yield break;
 			
-			T a = enumerator.Current;
-			T b = default(T);
+			T start = enumerator.Current;
+			T end = default(T);
 			
 			while (enumerator.MoveNext())
 			{
-				b = enumerator.Current;
-				yield return new Pair<T>(a, b);
-				a = enumerator.Current;
+				end = enumerator.Current;
+				yield return new Range<T>(start, end);
+				start = enumerator.Current;
 			}
 		}
 		public static IEnumerable<string> ToStrings<T>(this IEnumerable<T> source)

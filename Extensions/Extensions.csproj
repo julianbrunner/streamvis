@@ -31,13 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="IIndexed.cs" />
-    <Compile Include="IndexedList.cs" />
-    <Compile Include="Pair.cs" />
-    <Compile Include="Indexed.cs" />
+    <Compile Include="Range.cs" />
     <Compile Include="EnumerablePlus.cs" />
-    <Compile Include="Searching\IPositioned.cs" />
-    <Compile Include="Searching\Search.cs" />
+    <Compile Include="Searching\IKeyed.cs" />
+    <Compile Include="Searching\SearchList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core">
