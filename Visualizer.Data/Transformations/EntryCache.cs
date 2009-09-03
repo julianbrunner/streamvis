@@ -20,6 +20,7 @@ namespace Visualizer.Data.Transformations
 				foreach (Range<Time> missingRange in Exclude(requestRange.Single(), cachedRanges))
 				{
 					cachedRanges.Add(missingRange);
+					// TODO: This doesn't work yet since source[a, b] will not yield any resampled entries if a and b are too close together
 					entries.Insert(source[missingRange.Start, missingRange.End]);
 				}
 
