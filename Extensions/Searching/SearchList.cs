@@ -73,9 +73,25 @@ namespace Extensions.Searching
 
 			items.Add(item);
 		}
+		public void Append(IEnumerable<TValue> items)
+		{
+			foreach (TValue item in items) Append(item);
+		}
 		public void Insert(TValue item)
 		{
 			items.Insert(FindIndex(item.Key), item);
+		}
+		public void Insert(IEnumerable<TValue> items)
+		{
+			foreach (TValue item in items) Insert(item);
+		}
+		public void Remove(TValue item)
+		{
+			items.Remove(item);
+		}
+		public void Remove(IEnumerable<TValue> items)
+		{
+			foreach (TValue item in items) Remove(item);
 		}
 		public int FindIndex(TKey key)
 		{
