@@ -55,7 +55,7 @@ namespace Visualizer.Data
 			// TODO: Check for ordering violation?
 			lock (entries)
 				if (entry.Value != double.NaN)
-					entries.Add(entry);
+					entries.Append(entry);
 		}
 	}
 }

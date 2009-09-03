@@ -7,8 +7,8 @@ namespace Visualizer.Data.Transformations
 	public class EntryCache
 	{
 		readonly EntryResampler source;
-		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>();
 		readonly List<Range<Time>> fragmentRanges = new List<Range<Time>>();
+		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>();
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
 		{
