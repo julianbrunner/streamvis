@@ -11,8 +11,26 @@ namespace Extensions.Searching
 		readonly IComparer<TKey> comparer;
 		readonly List<TValue> items;
 
-		public TValue this[int index] { get { return items[index]; } }
-		public TValue this[TKey key] { get { return items[FindIndex(key)]; } }
+		public TValue this[int index]
+		{
+			get
+			{
+				if (index < 0 || index >= items.Count) throw new ArgumentOutOfRangeException("index");
+				
+				return items[index];
+			}
+		}
+		public TValue this[TKey key]
+		{
+			get
+			{
+				int index = FindIndex(key);
+				
+				if (index < 0 || index >= items.Count) throw new KeyNotFoundException();
+				
+				return items[index];
+			}
+		}
 		public IEnumerable<TValue> this[int startIndex, int endIndex]
 		{
 			get
@@ -23,7 +41,18 @@ namespace Extensions.Searching
 				for (int i = startIndex; i < endIndex; i++) yield return items[i];
 			}
 		}
-		public IEnumerable<TValue> this[TKey startKey, TKey endKey] { get { return this[FindIndex(startKey), FindIndex(endKey)]; } }
+		public IEnumerable<TValue> this[TKey startKey, TKey endKey]
+		{
+			get
+			{
+				int startIndex = FindIndex(startKey);
+				int endIndex = FindIndex(endKey);
+				
+				if (startIndex == endIndex) return Enumerable.Empty<TValue>();
+				
+				return this[startIndex, endIndex];
+			}
+		}
 		public IEnumerable<TValue> this[Range<TKey> range] { get { return this[range.Start, range.End]; } }
 
 		public int Count { get { return items.Count; } }
@@ -35,11 +64,15 @@ namespace Extensions.Searching
 		}
 		public SearchList(int capacity)
 		{
+			if (capacity < 0) throw new ArgumentOutOfRangeException("capacity");
+			
 			this.items = new List<TValue>(capacity);
 			this.comparer = Comparer<TKey>.Default;
 		}
 		public SearchList(IEnumerable<TValue> items)
 		{
+			if (items == null) throw new ArgumentNullException("items");
+			
 			if (!AreOrdered(items, Comparer<TKey>.Default)) throw new ArgumentException("items");
 
 			this.items = new List<TValue>(items);
@@ -47,16 +80,24 @@ namespace Extensions.Searching
 		}
 		public SearchList(IComparer<TKey> comparer)
 		{
+			if (comparer == null) throw new ArgumentNullException("comparer");
+			
 			this.items = new List<TValue>();
 			this.comparer = comparer;
 		}
 		public SearchList(int capacity, IComparer<TKey> comparer)
 		{
+			if (capacity < 0) throw new ArgumentOutOfRangeException("capacity");
+			if (comparer == null) throw new ArgumentNullException("comparer");
+			
 			this.items = new List<TValue>(capacity);
 			this.comparer = comparer;
 		}
 		public SearchList(IEnumerable<TValue> items, IComparer<TKey> comparer)
 		{
+			if (items == null) throw new ArgumentNullException("items");
+			if (comparer == null) throw new ArgumentNullException("comparer");
+			
 			if (!AreOrdered(items, comparer)) throw new ArgumentException("items");
 
 			this.items = new List<TValue>(items);
@@ -69,7 +110,7 @@ namespace Extensions.Searching
 		}
 		public void Append(TValue item)
 		{
-			if (comparer.Compare(item.Key, items[items.Count - 1].Key) < 0) throw new ArgumentException("item");
+			if (items.Any() && comparer.Compare(item.Key, items[items.Count - 1].Key) < 0) throw new ArgumentException("item");
 
 			items.Add(item);
 		}
@@ -129,6 +170,9 @@ namespace Extensions.Searching
 
 		static bool AreOrdered(IEnumerable<TValue> items, IComparer<TKey> comparer)
 		{
+			if (items == null) throw new ArgumentNullException("items");
+			if (comparer == null) throw new ArgumentNullException("comparer");
+			
 			if (!items.Any()) return true;
 
 			TKey lastKey = items.First().Key;

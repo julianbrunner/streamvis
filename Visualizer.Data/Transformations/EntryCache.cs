@@ -53,9 +53,5 @@ namespace Visualizer.Data.Transformations
 			if (range1.End - range1.Start > Time.Zero) yield return range1;
 			if (range2.End - range2.Start > Time.Zero) yield return range2;
 		}
-		static Range<Time> Intersect(Range<Time> a, Range<Time> b)
-		{
-			return new Range<Time>(Time.Max(a.Start, b.Start), Time.Min(a.End, b.End));
-		}
 	}
 }
