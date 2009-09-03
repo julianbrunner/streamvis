@@ -37,7 +37,7 @@ namespace Yarp
 		}
 		public bool Exists(string name)
 		{
-			return Network_Exists(name);
+			return Network_Exists(name) > 0;
 		}
 		public string FindName(string prefix)
 		{
@@ -56,6 +56,6 @@ namespace Yarp
 		[DllImport("Yarp.Wrapper")]
 		static extern void Network_Disconnect(string source, string destination);
 		[DllImport("Yarp.Wrapper")]
-		static extern bool Network_Exists(string name);
+		static extern byte Network_Exists(string name);
 	}
 }

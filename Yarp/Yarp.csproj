@@ -44,6 +44,9 @@
     <Compile Include="List.cs" />
     <Compile Include="Navigation.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Notes.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="libYarp.Wrapper.so">

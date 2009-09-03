@@ -211,9 +211,10 @@ namespace Visualizer
 			if (ports.Any())
 				try { source = Capturing.Capture.Create(ports, timer, new Random()); }
 				catch (InvalidOperationException e) { MessageBox.Show(e.Message, "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+				// TODO: Check beforehand if Yarp is available
 				catch (Exception e)
 				{
-					if (e.InnerException.InnerException is DllNotFoundException)
+					if (e.InnerException != null && e.InnerException.InnerException != null && e.InnerException.InnerException is DllNotFoundException)
 						MessageBox.Show(e.InnerException.InnerException.Message, "Library not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					else throw;
 				}

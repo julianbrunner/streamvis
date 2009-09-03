@@ -1,0 +1,5 @@
+﻿Managed Wrapper		<->		Native Yarp
+---------------------------------------
+Packet				<->		Value
+List				<->		Bottle
+Value				<->		double

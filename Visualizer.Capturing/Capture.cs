@@ -23,19 +23,26 @@ namespace Visualizer.Capturing
 
 		public static Source Create(IEnumerable<string> portStrings, Timer timer, Random random)
 		{
+			// TODO: Can this be done in a nicer way?
+
 			Network network = new Network();
 			List<Data.Port> ports = new List<Data.Port>();
+
+			bool finished = false;
 
 			try
 			{
 				foreach (string portString in portStrings) ports.Add(CapturePort.Create(portString, network, timer, random));
+
+				finished = true;
 			}
-			catch
+			finally
 			{
-				foreach (IDisposable port in ports.OfType<IDisposable>()) port.Dispose();
-				network.Dispose();
-				
-				throw;
+				if (!finished)
+				{
+					foreach (IDisposable port in ports.OfType<IDisposable>()) port.Dispose();
+					network.Dispose();
+				}
 			}
 
 			return new Capture(ports, network);

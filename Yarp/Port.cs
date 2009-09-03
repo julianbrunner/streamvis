@@ -9,15 +9,15 @@ namespace Yarp
 	{
 		readonly string name;
 		readonly IntPtr port;
-		
+
 		bool disposed = false;
-		
+
 		public string Name { get { return name; } }
-		
+
 		public Port(string name)
 		{
 			this.name = name;
-			
+
 			port = BufferedPort_Bottle_New();
 			BufferedPort_Bottle_Open(port, this.name);
 		}
@@ -25,13 +25,13 @@ namespace Yarp
 		{
 			Dispose();
 		}
-		
+
 		public void Dispose()
 		{
 			if (!disposed)
 			{
 				disposed = true;
-				
+
 				BufferedPort_Bottle_Close(port);
 				BufferedPort_Bottle_Dispose(port);
 			}
@@ -44,26 +44,26 @@ namespace Yarp
 		{
 			IntPtr bottle = BufferedPort_Bottle_Prepare(port);
 			Bottle_Clear(bottle);
-			
+
 			foreach (Packet packet in list) WritePacket(bottle, packet);
-			
+
 			BufferedPort_Bottle_Write(port);
 		}
-		
+
 		static List ParseBottle(IntPtr bottle)
 		{
 			int size = Bottle_Size(bottle);
 			Packet[] packets = new Packet[size];
-			
+
 			for (int i = 0; i < size; i++) packets[i] = ParseValue(Bottle_GetValue(bottle, i));
-			
+
 			return new List(packets);
 		}
 		static Packet ParseValue(IntPtr value)
 		{
-			if (Value_IsList(value)) return ParseBottle(Value_AsList(value));
-			if (Value_IsDouble(value)) return new Value(Value_AsDouble(value));
-		
+			if (Value_IsList(value) > 0) return ParseBottle(Value_AsList(value));
+			if (Value_IsDouble(value) > 0) return new Value(Value_AsDouble(value));
+
 			return Packet.Empty;
 		}
 		static void WritePacket(IntPtr bottle, Packet packet)
@@ -75,7 +75,7 @@ namespace Yarp
 			}
 			if (packet is Value) Bottle_AddDouble(bottle, (Value)packet);
 		}
-		
+
 		[DllImport("Yarp.Wrapper")]
 		static extern IntPtr BufferedPort_Bottle_New();
 		[DllImport("Yarp.Wrapper")]
@@ -90,7 +90,7 @@ namespace Yarp
 		static extern IntPtr BufferedPort_Bottle_Read(IntPtr port);
 		[DllImport("Yarp.Wrapper")]
 		static extern void BufferedPort_Bottle_Write(IntPtr port);
-		
+
 		[DllImport("Yarp.Wrapper")]
 		static extern void Bottle_Clear(IntPtr bottle);
 		[DllImport("Yarp.Wrapper")]
@@ -101,11 +101,11 @@ namespace Yarp
 		static extern IntPtr Bottle_AddList(IntPtr bottle);
 		[DllImport("Yarp.Wrapper")]
 		static extern void Bottle_AddDouble(IntPtr bottle, double value);
-		
+
 		[DllImport("Yarp.Wrapper")]
-		static extern bool Value_IsList(IntPtr value);
+		static extern byte Value_IsList(IntPtr value);
 		[DllImport("Yarp.Wrapper")]
-		static extern bool Value_IsDouble(IntPtr value);
+		static extern byte Value_IsDouble(IntPtr value);
 		[DllImport("Yarp.Wrapper")]
 		static extern IntPtr Value_AsList(IntPtr value);
 		[DllImport("Yarp.Wrapper")]

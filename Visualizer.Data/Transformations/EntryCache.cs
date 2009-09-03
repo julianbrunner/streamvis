@@ -7,7 +7,7 @@ namespace Visualizer.Data.Transformations
 	public class EntryCache
 	{
 		readonly EntryResampler source;
-		readonly List<Range<Time>> fragmentRanges = new List<Range<Time>>();
+		readonly List<Range<Time>> cachedRanges = new List<Range<Time>>();
 		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>();
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
@@ -17,15 +17,15 @@ namespace Visualizer.Data.Transformations
 				Range<Time> requestRange = new Range<Time>(startTime, endTime);
 
 				// TODO: Defragment on insertion
-				foreach (Range<Time> missingRange in Exclude(requestRange.Single(), fragmentRanges))
+				foreach (Range<Time> missingRange in Exclude(requestRange.Single(), cachedRanges))
 				{
-					fragmentRanges.Add(missingRange);
+					cachedRanges.Add(missingRange);
 					entries.Insert(source[missingRange.Start, missingRange.End]);
 				}
 
 				return entries[requestRange];
 			}
-		}
+		}	
 
 		public EntryCache(EntryResampler source)
 		{
