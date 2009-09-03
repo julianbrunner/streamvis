@@ -15,12 +15,15 @@ namespace Visualizer.Data.Transformations
 			get
 			{
 				Range<Time> requestRange = new Range<Time>(startTime, endTime);
-				IEnumerable<Range<Time>> missingRanges = Exclude(requestRange.Single(), fragmentRanges);
 
 				// TODO: Defragment on insertion
-				fragmentRanges.AddRange(missingRanges);
+				foreach (Range<Time> missingRange in Exclude(requestRange.Single(), fragmentRanges))
+				{
+					fragmentRanges.Add(missingRange);
+					entries.Insert(source[missingRange.Start, missingRange.End]);
+				}
 
-				return source[startTime, endTime];
+				return entries[requestRange];
 			}
 		}
 
