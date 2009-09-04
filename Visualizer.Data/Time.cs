@@ -41,14 +41,14 @@ namespace Visualizer.Data
 		{
 			return Seconds.ToString();
 		}
-		public Time Floor(Time interval)
-		{			
-			Time remainder = this % interval;
+		public Time Floor(Time interval, Time offset)
+		{
+			Time remainder = (this - offset) % interval;
 			return remainder == Zero ? this : this - remainder + 0 * interval;
 		}
-		public Time Ceiling(Time interval)
+		public Time Ceiling(Time interval, Time offset)
 		{
-			Time remainder = this % interval;
+			Time remainder = (this - offset) % interval;
 			return remainder == Zero ? this : this - remainder + 1 * interval;
 		}
 		

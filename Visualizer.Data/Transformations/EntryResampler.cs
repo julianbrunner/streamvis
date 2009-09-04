@@ -16,9 +16,11 @@ namespace Visualizer.Data.Transformations
 			get
 			{
 				if (source.Count == 0) yield break;
+				
+				Time firstEntryTime = startTime.Ceiling(sampleDistance, 0.5 * sampleDistance);
 
-				Time firstBorder = startTime.Ceiling(sampleDistance);
-				Time lastBorder = endTime.Floor(sampleDistance);
+				Time firstBorder = startTime.Ceiling(sampleDistance, Time.Zero);
+				Time lastBorder = endTime.Floor(sampleDistance, Time.Zero);
 
 				for (Time time = firstBorder; time < lastBorder; time += sampleDistance)
 				{
