@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Extensions;
 using Extensions.Searching;
 
@@ -16,17 +17,21 @@ namespace Visualizer.Data.Transformations
 			{
 				Range<Time> requestRange = new Range<Time>(startTime, endTime);
 
+				IEnumerable<Fragment> fragments = from missingRange in Exclude(requestRange.Single(), cachedRanges)
+												  let fragment = source[missingRange.Start, missingRange.End]
+												  where !fragment.IsEmpty
+												  select fragment;
+
 				// TODO: Defragment on insertion
-				foreach (Range<Time> missingRange in Exclude(requestRange.Single(), cachedRanges))
+				foreach (Fragment fragment in fragments)
 				{
-					cachedRanges.Add(missingRange);
-					// TODO: This doesn't work yet since source[a, b] will not yield any resampled entries if a and b are too close together
-					entries.Insert(source[missingRange.Start, missingRange.End]);
+					cachedRanges.Add(fragment.Range);
+					entries.Insert(fragment.Entries);
 				}
 
 				return entries[requestRange];
 			}
-		}	
+		}
 
 		public EntryCache(EntryResampler source)
 		{

@@ -50,6 +50,7 @@
     <Compile Include="Timer.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="Entry.cs" />
+    <Compile Include="Transformations\Fragment.cs" />
     <Compile Include="Transformations\EntryCache.cs" />
     <Compile Include="Transformations\EntryResampler.cs" />
   </ItemGroup>

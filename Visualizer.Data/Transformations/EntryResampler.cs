@@ -11,22 +11,31 @@ namespace Visualizer.Data.Transformations
 		readonly SearchList<Entry, Time> source;
 		readonly Time sampleDistance;
 
-		public IEnumerable<Entry> this[Time startTime, Time endTime]
+		public Fragment this[Time startTime, Time endTime]
 		{
 			get
 			{
-				if (source.Count == 0) yield break;
-				
-				Time firstEntryTime = startTime.Ceiling(sampleDistance, 0.5 * sampleDistance);
-				
-				for (Time time = firstEntryTime; time <= endTime; time += sampleDistance)
-				{
-					Time intervalStartTime = time - 0.5 * sampleDistance;
-					Time intervalEndTime = time + 0.5 * sampleDistance;
+				if (source.Count == 0) return Fragment.Empty;
 
-					if (source[0].Time <= intervalStartTime && source[source.Count - 1].Time >= intervalEndTime)
-						yield return Aggregate(source, intervalStartTime, intervalEndTime);
+				startTime = Time.Max(startTime, source[0].Time);
+				endTime = Time.Min(endTime, source[source.Count - 1].Time);
+
+				startTime = startTime.Ceiling(sampleDistance, Time.Zero);
+				endTime = endTime.Floor(sampleDistance, Time.Zero);
+
+				List<Entry> entries = new List<Entry>();
+
+				for (Time time = startTime; time < endTime; time += sampleDistance)
+				{
+					Time intervalStartTime = time;
+					Time intervalEndTime = time + sampleDistance;
+
+					entries.Add(Aggregate(source, intervalStartTime, intervalEndTime));
 				}
+
+				if (entries.Count == 0) return Fragment.Empty;
+
+				return new Fragment(new Range<Time>(startTime, endTime), entries);
 			}
 		}
 
