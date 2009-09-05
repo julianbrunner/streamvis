@@ -48,11 +48,12 @@ namespace Visualizer.Data.Transformations
 			List<Range<Time>> rangeList = new List<Range<Time>>(ranges);
 
 			foreach (Range<Time> exclusion in exclusions)
-				foreach (Range<Time> range in rangeList.ToArray())
-				{
-					rangeList.Remove(range);
-					rangeList.AddRange(Exclude(range, exclusion));
-				}
+			{
+				IEnumerable<Range<Time>> currentRanges = rangeList.ToArray();
+
+				rangeList.Clear();
+				foreach (Range<Time> range in currentRanges) rangeList.AddRange(Exclude(range, exclusion));
+			}
 
 			return rangeList;
 		}
