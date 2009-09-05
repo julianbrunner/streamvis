@@ -18,14 +18,11 @@ namespace Visualizer.Data.Transformations
 				if (source.Count == 0) yield break;
 				
 				Time firstEntryTime = startTime.Ceiling(sampleDistance, 0.5 * sampleDistance);
-
-				Time firstBorder = startTime.Ceiling(sampleDistance, Time.Zero);
-				Time lastBorder = endTime.Floor(sampleDistance, Time.Zero);
-
-				for (Time time = firstBorder; time < lastBorder; time += sampleDistance)
+				
+				for (Time time = firstEntryTime; time <= endTime; time += sampleDistance)
 				{
-					Time intervalStartTime = time;
-					Time intervalEndTime = time + sampleDistance;
+					Time intervalStartTime = time - 0.5 * sampleDistance;
+					Time intervalEndTime = time + 0.5 * sampleDistance;
 
 					if (source[0].Time <= intervalStartTime && source[source.Count - 1].Time >= intervalEndTime)
 						yield return Aggregate(source, intervalStartTime, intervalEndTime);
