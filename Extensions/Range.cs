@@ -7,7 +7,6 @@ namespace Extensions
 
 		public T Start { get { return start; } }
 		public T End { get { return end; } }
-		public bool IsEmpty { get { return object.Equals(start, end); } }
 
 		public Range(T start, T end)
 		{

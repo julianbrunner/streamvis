@@ -31,8 +31,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Ranges.cs" />
     <Compile Include="Range.cs" />
-    <Compile Include="EnumerablePlus.cs" />
+    <Compile Include="Enumerables.cs" />
     <Compile Include="Searching\IKeyed.cs" />
     <Compile Include="Searching\SearchList.cs" />
   </ItemGroup>

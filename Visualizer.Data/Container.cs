@@ -14,7 +14,7 @@ namespace Visualizer.Data
 
 		public static string XElementName { get { return "container"; } }
 
-		public IEnumerable<Entry> this[Time startTime, Time endTime] { get { lock (entries) return cache[startTime, endTime].ToArray(); } }
+		public IEnumerable<Entry> this[Time startTime, Time endTime] { get { lock (entries) return cache[startTime, endTime]; } }
 
 		public XElement XElement
 		{

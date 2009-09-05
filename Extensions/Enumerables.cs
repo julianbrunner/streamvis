@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Extensions
 {
-	public static class EnumerablePlus
+	public static class Enumerables
 	{
 		public static IEnumerable<T> Separate<T>(this IEnumerable<T> source, T separator)
 		{

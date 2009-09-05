@@ -20,19 +20,21 @@ namespace Visualizer.Data.Transformations
 			{
 				Range<Time> requestRange = new Range<Time>(startTime, endTime);
 
-				IEnumerable<Fragment> fragments = from missingRange in Exclude(requestRange.Single(), cachedRanges)
-												  let fragment = source[missingRange.Start, missingRange.End]
-												  where !fragment.IsEmpty
-												  select fragment;
+				IEnumerable<Range<Time>> missingRanges = Exclude(requestRange.Single(), cachedRanges);
 
-				// TODO: Defragment on insertion
-				foreach (Fragment fragment in fragments)
+				foreach (Range<Time> missingRange in missingRanges)
 				{
-					cachedRanges.Add(fragment.Range);
-					entries.Insert(fragment.Entries);
+					Fragment fragment = source[missingRange.Start, missingRange.End];
+
+					// TODO: Defragment on insertion
+					if (!fragment.IsEmpty)
+					{
+						cachedRanges.Add(fragment.Range);
+						entries.Insert(fragment.Entries);
+					}
 				}
 
-				return entries[requestRange];
+				return entries[requestRange].ToArray();
 			}
 		}
 
@@ -56,11 +58,21 @@ namespace Visualizer.Data.Transformations
 		}
 		static IEnumerable<Range<Time>> Exclude(Range<Time> range, Range<Time> exclusion)
 		{
-			Range<Time> range1 = new Range<Time>(range.Start, exclusion.Start);
-			Range<Time> range2 = new Range<Time>(exclusion.End, range.End);
+			exclusion = Intersect(range, exclusion);
 
-			if (range1.End - range1.Start > Time.Zero) yield return range1;
-			if (range2.End - range2.Start > Time.Zero) yield return range2;
+			if (exclusion.IsEmpty()) yield return range;
+			else
+			{
+				Range<Time> range1 = new Range<Time>(range.Start, exclusion.Start);
+				Range<Time> range2 = new Range<Time>(exclusion.End, range.End);
+
+				if (!range1.IsEmpty()) yield return range1;
+				if (!range2.IsEmpty()) yield return range2;
+			} 
+		}
+		static Range<Time> Intersect(Range<Time> a, Range<Time> b)
+		{
+			return new Range<Time>(Time.Max(a.Start, b.Start), Time.Min(a.End, b.End));
 		}
 	}
 }

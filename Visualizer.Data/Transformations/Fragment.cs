@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using Extensions;
-using System;
 
 namespace Visualizer.Data.Transformations
 {
@@ -13,11 +13,11 @@ namespace Visualizer.Data.Transformations
 
 		public Range<Time> Range { get { return range; } }
 		public IEnumerable<Entry> Entries { get { return entries; } }
-		public bool IsEmpty { get { return range.IsEmpty; } }
+		public bool IsEmpty { get { return range.IsEmpty(); } }
 
 		public Fragment(Range<Time> range, IEnumerable<Entry> entries)
 		{
-			if (range.IsEmpty) throw new ArgumentException("range");
+			if (range.IsEmpty()) throw new ArgumentException("range");
 			if (entries == null) throw new ArgumentNullException("entries");
 
 			this.range = range;
