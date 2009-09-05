@@ -52,7 +52,6 @@ namespace Visualizer.Data
 		}
 		public void Add(Entry entry)
 		{
-			// TODO: Check for ordering violation?
 			lock (entries)
 				if (entry.Value != double.NaN)
 					entries.Append(entry);
