@@ -17,7 +17,7 @@ namespace Extensions
 
 		public override string ToString()
 		{
-			return start + "-" + end;
+			return start + " - " + end;
 		}
 	}
 }

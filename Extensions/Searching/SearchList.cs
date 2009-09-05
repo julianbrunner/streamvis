@@ -35,8 +35,9 @@ namespace Extensions.Searching
 		{
 			get
 			{
-				if (startIndex < 0 || startIndex >= items.Count) throw new ArgumentOutOfRangeException("startIndex");
-				if (endIndex < 0 || endIndex >= items.Count) throw new ArgumentOutOfRangeException("endIndex");
+				if (startIndex < 0 || startIndex > items.Count) throw new ArgumentOutOfRangeException("startIndex");
+				if (endIndex < 0 || endIndex > items.Count) throw new ArgumentOutOfRangeException("endIndex");
+				if (endIndex - startIndex < 0) throw new ArgumentException();
 
 				for (int i = startIndex; i < endIndex; i++) yield return items[i];
 			}
