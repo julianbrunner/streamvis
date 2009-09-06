@@ -76,7 +76,7 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		description = An application that can be used to plot, capture and replay streams received on Yarp ports.
-		version = 0.7
+		version = 0.8
 		StartupItem = Visualizer\Visualizer.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
