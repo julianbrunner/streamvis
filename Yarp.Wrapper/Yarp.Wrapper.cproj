@@ -30,7 +30,7 @@
     <DefineSymbols>MONODEVELOP</DefineSymbols>
     <SourceDirectory>.</SourceDirectory>
     <OptimizationLevel>3</OptimizationLevel>
-    <OutputName>Yarp</OutputName>
+    <OutputName>Yarp.Wrapper</OutputName>
     <CompileTarget>SharedLibrary</CompileTarget>
   </PropertyGroup>
   <ItemGroup>
