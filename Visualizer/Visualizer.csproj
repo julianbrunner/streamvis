@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenTK, Version=0.9.8.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OpenTK, Version=0.9.8.1, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\OpenTK\OpenTK.dll</HintPath>
     </Reference>
@@ -69,13 +69,9 @@
     <None Include="Images\New.png" />
     <None Include="Images\Open.png" />
     <None Include="Images\Save.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Images\CrossMark.xcf" />
     <None Include="Notes\Resampling and Caching.pdf" />
     <None Include="Notes\Visualizer.pdf" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Notes\Changelog.txt" />
     <None Include="Notes\Performance Ingo.txt" />
     <None Include="Notes\Performance Julian.txt" />

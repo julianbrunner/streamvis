@@ -29,4 +29,4 @@ TODO: Look for places to use LINQ queries
 
 TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
-TODO: Extension method doesn't work without reference to System.Core
+TODO: Extension methods don't work without reference to System.Core?!
