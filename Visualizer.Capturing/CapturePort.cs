@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using Visualizer.Data;
 using Extensions;
+using Visualizer.Data;
 using Yarp;
 
 namespace Visualizer.Capturing

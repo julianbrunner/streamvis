@@ -8,13 +8,19 @@ namespace Visualizer.Data
 {
 	public class Container
 	{
-		readonly SearchList<Entry,Time> entries;
+		readonly SearchList<Entry, Time> entries;
 		readonly EntryResampler resampler;
 		readonly EntryCache cache;
 
 		public static string XElementName { get { return "container"; } }
 
-		public IEnumerable<Entry> this[Time startTime, Time endTime] { get { lock (entries) return cache[startTime, endTime]; } }
+		public IEnumerable<Entry> this[Time startTime, Time endTime]
+		{
+			get
+			{
+				lock (entries) return cache[startTime, endTime];
+			}
+		}
 
 		public XElement XElement
 		{
@@ -48,12 +54,13 @@ namespace Visualizer.Data
 
 		public void Clear()
 		{
-			lock (entries) entries.Clear();
+			lock (entries)
+				entries.Clear();
 		}
 		public void Add(Entry entry)
 		{
-			lock (entries)
-				if (entry.Value != double.NaN)
+			if (entry.Value != double.NaN)
+				lock (entries)
 					entries.Append(entry);
 		}
 	}

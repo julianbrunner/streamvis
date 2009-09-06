@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 
 namespace Visualizer.Data
@@ -11,14 +10,16 @@ namespace Visualizer.Data
 
 		public Timer()
 		{
-			stopwatch.Reset();
-			stopwatch.Start();
+			Reset();
 		}
 
 		public void Reset()
 		{
-			stopwatch.Reset();
-			stopwatch.Start();
+			lock (stopwatch)
+			{
+				stopwatch.Reset();
+				stopwatch.Start();
+			}
 		}
 	}
 }

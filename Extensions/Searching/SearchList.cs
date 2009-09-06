@@ -16,7 +16,7 @@ namespace Extensions.Searching
 			get
 			{
 				if (index < 0 || index >= items.Count) throw new ArgumentOutOfRangeException("index");
-				
+
 				return items[index];
 			}
 		}
@@ -25,9 +25,9 @@ namespace Extensions.Searching
 			get
 			{
 				int index = FindIndex(key);
-				
+
 				if (index < 0 || index >= items.Count) throw new KeyNotFoundException();
-				
+
 				return items[index];
 			}
 		}
@@ -48,9 +48,9 @@ namespace Extensions.Searching
 			{
 				int startIndex = FindIndex(startKey);
 				int endIndex = FindIndex(endKey);
-				
+
 				if (startIndex == endIndex) return Enumerable.Empty<TValue>();
-				
+
 				return this[startIndex, endIndex];
 			}
 		}
@@ -66,14 +66,14 @@ namespace Extensions.Searching
 		public SearchList(int capacity)
 		{
 			if (capacity < 0) throw new ArgumentOutOfRangeException("capacity");
-			
+
 			this.items = new List<TValue>(capacity);
 			this.comparer = Comparer<TKey>.Default;
 		}
 		public SearchList(IEnumerable<TValue> items)
 		{
 			if (items == null) throw new ArgumentNullException("items");
-			
+
 			if (!AreOrdered(items, Comparer<TKey>.Default)) throw new ArgumentException("items");
 
 			this.items = new List<TValue>(items);
@@ -82,7 +82,7 @@ namespace Extensions.Searching
 		public SearchList(IComparer<TKey> comparer)
 		{
 			if (comparer == null) throw new ArgumentNullException("comparer");
-			
+
 			this.items = new List<TValue>();
 			this.comparer = comparer;
 		}
@@ -90,7 +90,7 @@ namespace Extensions.Searching
 		{
 			if (capacity < 0) throw new ArgumentOutOfRangeException("capacity");
 			if (comparer == null) throw new ArgumentNullException("comparer");
-			
+
 			this.items = new List<TValue>(capacity);
 			this.comparer = comparer;
 		}
@@ -98,7 +98,7 @@ namespace Extensions.Searching
 		{
 			if (items == null) throw new ArgumentNullException("items");
 			if (comparer == null) throw new ArgumentNullException("comparer");
-			
+
 			if (!AreOrdered(items, comparer)) throw new ArgumentException("items");
 
 			this.items = new List<TValue>(items);
@@ -173,7 +173,7 @@ namespace Extensions.Searching
 		{
 			if (items == null) throw new ArgumentNullException("items");
 			if (comparer == null) throw new ArgumentNullException("comparer");
-			
+
 			if (!items.Any()) return true;
 
 			TKey lastKey = items.First().Key;

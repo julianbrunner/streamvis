@@ -7,6 +7,7 @@ using Extensions;
 
 namespace Visualizer.Data
 {
+	// TODO: Move to Yarp?
 	public struct Path : IEnumerable<int>
 	{
 		readonly IEnumerable<int> nodes;
