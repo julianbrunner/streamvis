@@ -111,7 +111,7 @@ namespace Extensions.Searching
 		}
 		public void Append(TValue item)
 		{
-			if (items.Any() && comparer.Compare(item.Key, items[items.Count - 1].Key) < 0) throw new ArgumentException("item");
+			if (items.Count > 0 && comparer.Compare(item.Key, items[items.Count - 1].Key) < 0) throw new ArgumentException("item");
 
 			items.Add(item);
 		}
