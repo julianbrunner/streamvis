@@ -1,62 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F4356332-01E9-4114-B551-52912D6D86F8}</ProjectGuid>
+    <ProjectGuid>{0251F686-E89D-4529-82AD-4C8D467C0765}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <AssemblyName>Visualizer</AssemblyName>
-    <StartupObject>Visualizer.Program</StartupObject>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Visualizer</RootNamespace>
+    <AssemblyName>Visualizer</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>3</WarningLevel>
-    <CustomCommands>
-      <CustomCommands>
-        <Command type="AfterBuild" command="Tools/MakeBundle vis" workingdir="${TargetDir}" />
-      </CustomCommands>
-    </CustomCommands>
-    <Commandlineparameters>/write</Commandlineparameters>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Release</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CustomCommands>
-      <CustomCommands>
-        <Command type="AfterBuild" command="Tools/MakeBundle vis" workingdir="${TargetDir}" />
-      </CustomCommands>
-    </CustomCommands>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenTK, Version=0.9.8.1, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="OpenTK, Version=0.9.8.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Graphics\OpenTK.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+      <HintPath>..\OpenTK\OpenTK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +56,7 @@
     <Compile Include="Parameters.cs" />
     <Compile Include="PlotterType.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,29 +64,24 @@
       <DependentUpon>TextDialog.cs</DependentUpon>
     </Compile>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ProjectExtensions>
-    <MonoDevelop>
-      <Properties>
-        <Deployment.LinuxDeployData scriptName="vis" />
-      </Properties>
-    </MonoDevelop>
-    <VisualStudio />
-  </ProjectExtensions>
   <ItemGroup>
     <None Include="Images\CrossMark.png" />
-    <None Include="Images\CrossMark.xcf" />
     <None Include="Images\New.png" />
     <None Include="Images\Open.png" />
     <None Include="Images\Save.png" />
-    <None Include="Notes\Changelog.txt" />
-    <None Include="Notes\Performance.txt" />
-    <None Include="Notes\Performance Julian.txt" />
-    <None Include="Notes\Performance Ingo.txt" />
-    <None Include="Notes\Todo.txt" />
-    <None Include="Tools\MakeBundle" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\CrossMark.xcf" />
     <None Include="Notes\Resampling and Caching.pdf" />
     <None Include="Notes\Visualizer.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Notes\Changelog.txt" />
+    <None Include="Notes\Performance Ingo.txt" />
+    <None Include="Notes\Performance Julian.txt" />
+    <None Include="Notes\Performance.txt" />
+    <None Include="Notes\Todo.txt" />
+    <None Include="Tools\MakeBundle" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
@@ -106,25 +92,33 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Visualizer.Plotting\Visualizer.Plotting.csproj">
-      <Project>{CBD0C789-7144-4CE7-8DD6-57F1B841DA79}</Project>
-      <Name>Visualizer.Plotting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Visualizer.Data\Visualizer.Data.csproj">
-      <Project>{E2335BA8-80D7-4BA7-ACC5-7750F37F72DD}</Project>
-      <Name>Visualizer.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Visualizer.Capturing\Visualizer.Capturing.csproj">
-      <Project>{EBD08DE0-7BF5-4B11-88FD-6677FC37CA23}</Project>
-      <Name>Visualizer.Capturing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Yarp\Yarp.csproj">
-      <Project>{0BC9B692-9677-4433-B662-D51FF7004A39}</Project>
-      <Name>Yarp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Graphics\Graphics.csproj">
-      <Project>{D7D149FB-EBB5-47C4-B027-9C671DB886A0}</Project>
+      <Project>{9CFCF6A1-6763-4108-851F-E2A8869968B2}</Project>
       <Name>Graphics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Visualizer.Capturing\Visualizer.Capturing.csproj">
+      <Project>{1A1D9F99-88B7-41A8-A084-8762DC16963C}</Project>
+      <Name>Visualizer.Capturing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Visualizer.Data\Visualizer.Data.csproj">
+      <Project>{188C1B70-DD61-4EEA-B733-8379A3866CF2}</Project>
+      <Name>Visualizer.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Visualizer.Plotting\Visualizer.Plotting.csproj">
+      <Project>{B86C20E8-6D5D-4110-8333-B4B0EC707862}</Project>
+      <Name>Visualizer.Plotting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Yarp\Yarp.csproj">
+      <Project>{88377E30-410B-40ED-8D90-BE90D7831933}</Project>
+      <Name>Yarp</Name>
+    </ProjectReference>
   </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>

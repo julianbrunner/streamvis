@@ -21,6 +21,8 @@ TODO: Change exposed fields back to properties if it won't hurt performance
 TODO: Make Layouter adaptive to width of the Y-Axis labels
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 
+TODO: Hide OpenTK members sufficiently so that a reference to Graphics doesn't result in a dependency reference to OpenTK
+
 TODO: Remove unused usings and references
 TODO: Make classes internal which don't have to be public
 TODO: Look for places to use LINQ queries
