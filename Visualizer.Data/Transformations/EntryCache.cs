@@ -10,7 +10,7 @@ namespace Visualizer.Data.Transformations
 	public class EntryCache
 	{
 		readonly EntryResampler source;
-		readonly List<Range<Time>> cachedRanges = new List<Range<Time>>();
+		readonly SearchList<Range<Time>, Time> ranges = new SearchList<Range<Time>, Time>(range => range.Start);
 		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time);
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
@@ -19,20 +19,33 @@ namespace Visualizer.Data.Transformations
 			{
 				Range<Time> requestRange = new Range<Time>(startTime, endTime);
 
-				IEnumerable<Range<Time>> missingRanges = Exclude(requestRange.Single(), cachedRanges);
-
-				foreach (Range<Time> missingRange in missingRanges)
+				foreach (Range<Time> missingRange in Exclude(requestRange.Single(), ranges))
 				{
 					Fragment fragment = source[missingRange.Start, missingRange.End];
 
 					if (!fragment.IsEmpty)
 					{
-						cachedRanges.Add(fragment.Range);
+						Time start = fragment.Range.Start;
+						Time end = fragment.Range.End;
+
+						int index = ranges.FindIndex(start);
+
+						if (index > 0 && ranges[index - 1].End == start)
+						{
+							start = ranges[index - 1].Start;
+							ranges.Remove(ranges[index - 1]);
+						}
+						if (index < ranges.Count && ranges[index].Start == end)
+						{
+							end = ranges[index].End;
+							ranges.Remove(ranges[index]);
+						}
+
+						ranges.Insert(new Range<Time>(start, end));
+
 						entries.Insert(fragment.Entries);
 					}
 				}
-
-				//Defragment();
 
 				return entries[requestRange].ToArray();
 			}
@@ -42,20 +55,6 @@ namespace Visualizer.Data.Transformations
 		{
 			this.source = source;
 		}
-
-		//void Defragment()
-		//{
-		//    IEnumerable<Range<Time>> ranges = cachedRanges.OrderBy(range => range.Start).ToArray();
-
-		//    cachedRanges.Clear();
-
-		//    Range<Time> currentRange = ranges.First();
-
-		//    foreach (Range<Time> range in ranges.Skip(1))
-		//    {
-
-		//    }
-		//}
 
 		static IEnumerable<Range<Time>> Exclude(IEnumerable<Range<Time>> ranges, IEnumerable<Range<Time>> exclusions)
 		{
