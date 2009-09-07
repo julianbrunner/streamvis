@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Extensions.Searching
+namespace Extensions
 {
 	public class SearchList<TValue, TKey> : IEnumerable<TValue>
-		where TValue : IKeyed<TKey>
 	{
+		readonly Func<TValue, TKey> keySelector;
 		readonly IComparer<TKey> comparer;
 		readonly List<TValue> items;
 
@@ -58,52 +58,16 @@ namespace Extensions.Searching
 
 		public int Count { get { return items.Count; } }
 
-		public SearchList()
+		public SearchList(Func<TValue, TKey> keySelector, IComparer<TKey> comparer)
 		{
+			if (keySelector == null) throw new ArgumentNullException("keySelector");
+			if (comparer == null) throw new ArgumentNullException("comparer");
+
+			this.keySelector = keySelector;
+			this.comparer = comparer;
 			this.items = new List<TValue>();
-			this.comparer = Comparer<TKey>.Default;
 		}
-		public SearchList(int capacity)
-		{
-			if (capacity < 0) throw new ArgumentOutOfRangeException("capacity");
-
-			this.items = new List<TValue>(capacity);
-			this.comparer = Comparer<TKey>.Default;
-		}
-		public SearchList(IEnumerable<TValue> items)
-		{
-			if (items == null) throw new ArgumentNullException("items");
-
-			if (!AreOrdered(items, Comparer<TKey>.Default)) throw new ArgumentException("items");
-
-			this.items = new List<TValue>(items);
-			this.comparer = Comparer<TKey>.Default;
-		}
-		public SearchList(IComparer<TKey> comparer)
-		{
-			if (comparer == null) throw new ArgumentNullException("comparer");
-
-			this.items = new List<TValue>();
-			this.comparer = comparer;
-		}
-		public SearchList(int capacity, IComparer<TKey> comparer)
-		{
-			if (capacity < 0) throw new ArgumentOutOfRangeException("capacity");
-			if (comparer == null) throw new ArgumentNullException("comparer");
-
-			this.items = new List<TValue>(capacity);
-			this.comparer = comparer;
-		}
-		public SearchList(IEnumerable<TValue> items, IComparer<TKey> comparer)
-		{
-			if (items == null) throw new ArgumentNullException("items");
-			if (comparer == null) throw new ArgumentNullException("comparer");
-
-			if (!AreOrdered(items, comparer)) throw new ArgumentException("items");
-
-			this.items = new List<TValue>(items);
-			this.comparer = comparer;
-		}
+		public SearchList(Func<TValue, TKey> keySelector) : this(keySelector, Comparer<TKey>.Default) { }
 
 		public void Clear()
 		{
@@ -111,7 +75,7 @@ namespace Extensions.Searching
 		}
 		public void Append(TValue item)
 		{
-			if (items.Count > 0 && comparer.Compare(item.Key, items[items.Count - 1].Key) < 0) throw new ArgumentException("item");
+			if (items.Count > 0 && Compare(item, items[items.Count - 1]) < 0) throw new ArgumentException("item");
 
 			items.Add(item);
 		}
@@ -121,7 +85,7 @@ namespace Extensions.Searching
 		}
 		public void Insert(TValue item)
 		{
-			items.Insert(FindIndex(item.Key), item);
+			items.Insert(FindIndex(keySelector(item)), item);
 		}
 		public void Insert(IEnumerable<TValue> items)
 		{
@@ -163,26 +127,26 @@ namespace Extensions.Searching
 
 			int index = (startIndex + endIndex) / 2;
 
-			if (comparer.Compare(items[index].Key, key) > 0) return FindIndex(key, startIndex, index);
-			if (comparer.Compare(items[index].Key, key) < 0) return FindIndex(key, index + 1, endIndex);
+			if (Compare(items[index], key) > 0) return FindIndex(key, startIndex, index);
+			if (Compare(items[index], key) < 0) return FindIndex(key, index + 1, endIndex);
 
 			return index;
 		}
-
-		static bool AreOrdered(IEnumerable<TValue> items, IComparer<TKey> comparer)
+		int Compare(TValue a, TValue b)
 		{
-			if (items == null) throw new ArgumentNullException("items");
-			if (comparer == null) throw new ArgumentNullException("comparer");
-
-			if (!items.Any()) return true;
-
-			TKey lastKey = items.First().Key;
-
-			foreach (TValue item in items.Skip(1))
-				if (comparer.Compare(lastKey, item.Key) > 0)
-					return false;
-
-			return true;
+			return comparer.Compare(keySelector(a), keySelector(b));
+		}
+		int Compare(TKey a, TValue b)
+		{
+			return comparer.Compare(a, keySelector(b));
+		}
+		int Compare(TValue a, TKey b)
+		{
+			return comparer.Compare(keySelector(a), b);
+		}
+		int Compare(TKey a, TKey b)
+		{
+			return comparer.Compare(a, b);
 		}
 	}
 }

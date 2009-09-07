@@ -1,9 +1,8 @@
 using System.Xml.Linq;
-using Extensions.Searching;
 
 namespace Visualizer.Data
 {
-	public class Entry : IKeyed<Time>
+	public class Entry
 	{
 		readonly Time time;
 		readonly double value;
@@ -35,7 +34,5 @@ namespace Visualizer.Data
 			this.time = new Time((long)entry.Element("time"));
 			this.value = (double)entry.Element("value");
 		}
-
-		Time IKeyed<Time>.Key { get { return Time; } }
 	}
 }

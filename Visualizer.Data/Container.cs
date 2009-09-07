@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Extensions.Searching;
+using Extensions;
 using Visualizer.Data.Transformations;
 
 namespace Visualizer.Data
@@ -39,23 +39,21 @@ namespace Visualizer.Data
 			}
 		}
 
-		public Container(XElement container)
+		public Container()
 		{
-			entries = new SearchList<Entry, Time>(from entry in container.Elements(Entry.XElementName) select new Entry(entry));
+			entries = new SearchList<Entry, Time>(entry => entry.Time);
 			resampler = new EntryResampler(entries, new Time(0.1));
 			cache = new EntryCache(resampler);
 		}
-		public Container()
+		public Container(XElement container)
+			: this()
 		{
-			entries = new SearchList<Entry, Time>();
-			resampler = new EntryResampler(entries, new Time(0.1));
-			cache = new EntryCache(resampler);
+			entries.Append(from entry in container.Elements(Entry.XElementName) select new Entry(entry));
 		}
 
 		public void Clear()
 		{
-			lock (entries)
-				entries.Clear();
+			lock (entries) entries.Clear();
 		}
 		public void Add(Entry entry)
 		{

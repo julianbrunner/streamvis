@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Extensions;
-using Extensions.Searching;
 
 namespace Visualizer.Data.Transformations
 {

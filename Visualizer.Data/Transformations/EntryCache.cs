@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Extensions;
-using Extensions.Searching;
 
 namespace Visualizer.Data.Transformations
 {
@@ -12,7 +11,7 @@ namespace Visualizer.Data.Transformations
 	{
 		readonly EntryResampler source;
 		readonly List<Range<Time>> cachedRanges = new List<Range<Time>>();
-		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>();
+		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time);
 
 		public IEnumerable<Entry> this[Time startTime, Time endTime]
 		{
