@@ -26,13 +26,14 @@ namespace Visualizer.Data.Transformations
 				{
 					Fragment fragment = source[missingRange.Start, missingRange.End];
 
-					// TODO: Defragment on insertion
 					if (!fragment.IsEmpty)
 					{
 						cachedRanges.Add(fragment.Range);
 						entries.Insert(fragment.Entries);
 					}
 				}
+
+				//Defragment();
 
 				return entries[requestRange].ToArray();
 			}
@@ -42,6 +43,20 @@ namespace Visualizer.Data.Transformations
 		{
 			this.source = source;
 		}
+
+		//void Defragment()
+		//{
+		//    IEnumerable<Range<Time>> ranges = cachedRanges.OrderBy(range => range.Start).ToArray();
+
+		//    cachedRanges.Clear();
+
+		//    Range<Time> currentRange = ranges.First();
+
+		//    foreach (Range<Time> range in ranges.Skip(1))
+		//    {
+
+		//    }
+		//}
 
 		static IEnumerable<Range<Time>> Exclude(IEnumerable<Range<Time>> ranges, IEnumerable<Range<Time>> exclusions)
 		{
@@ -69,7 +84,7 @@ namespace Visualizer.Data.Transformations
 
 				if (!range1.IsEmpty()) yield return range1;
 				if (!range2.IsEmpty()) yield return range2;
-			} 
+			}
 		}
 		static Range<Time> Intersect(Range<Time> a, Range<Time> b)
 		{

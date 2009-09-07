@@ -42,13 +42,13 @@ namespace Visualizer.Data
 		public Container(XElement container)
 		{
 			entries = new SearchList<Entry, Time>(from entry in container.Elements(Entry.XElementName) select new Entry(entry));
-			resampler = new EntryResampler(entries, new Time(1.0));
+			resampler = new EntryResampler(entries, new Time(0.1));
 			cache = new EntryCache(resampler);
 		}
 		public Container()
 		{
 			entries = new SearchList<Entry, Time>();
-			resampler = new EntryResampler(entries, new Time(1.0));
+			resampler = new EntryResampler(entries, new Time(0.1));
 			cache = new EntryCache(resampler);
 		}
 
