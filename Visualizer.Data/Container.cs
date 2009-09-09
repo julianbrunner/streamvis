@@ -18,7 +18,8 @@ namespace Visualizer.Data
 		{
 			get
 			{
-				lock (entries) return cache[startTime, endTime];
+				lock (entries)
+					return cache[startTime, endTime];
 			}
 		}
 
@@ -53,7 +54,8 @@ namespace Visualizer.Data
 
 		public void Clear()
 		{
-			lock (entries) entries.Clear();
+			lock (entries)
+				entries.Clear();
 		}
 		public void Add(Entry entry)
 		{

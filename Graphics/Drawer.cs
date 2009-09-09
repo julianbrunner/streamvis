@@ -1,10 +1,10 @@
 using System;
-using System.IO;
-using System.Reflection;
-using System.Globalization;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
 using OpenTK.Graphics;
 
 namespace Graphics
@@ -13,11 +13,11 @@ namespace Graphics
 	{
 		static readonly Size characterSize = new Size(7, 12);
 		static readonly string characters = "+-.0123456789E";
-		
+
 		bool disposed = false;
 		int[] textTextures = new int[1];
 		int characterLists;
-		
+
 		public Drawer()
 		{
 			GL.Enable(EnableCap.Texture2D);
@@ -26,7 +26,7 @@ namespace Graphics
 
 			//GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
-			
+
 			InitializeTextTexture();
 			InitializeCharacterDisplayLists();
 		}
@@ -34,7 +34,7 @@ namespace Graphics
 		{
 			Dispose(false);
 		}
-		
+
 		public void Dispose()
 		{
 			Dispose(true);
@@ -67,7 +67,7 @@ namespace Graphics
 				GL.CallList(characterLists + characters.IndexOf(character));
 				GL.Translate(characterSize.Width, 0, 0);
 			}
-			
+
 			GL.BindTexture(TextureTarget.Texture2D, 0);
 
 			GL.LoadIdentity();
@@ -95,7 +95,7 @@ namespace Graphics
 
 			GL.End();
 		}
-		
+
 		protected virtual void Dispose(bool disposing)
 		{
 			if (!disposed)
@@ -106,7 +106,7 @@ namespace Graphics
 				GL.DeleteLists(characterLists, characters.Length);
 			}
 		}
-		
+
 		void InitializeTextTexture()
 		{
 			GL.GenTextures(textTextures.Length, textTextures);
@@ -122,7 +122,7 @@ namespace Graphics
 				BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 				GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmap.Width, bitmap.Height, 0, OpenTK.Graphics.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
 				bitmap.UnlockBits(bitmapData);
-				
+
 				GL.MatrixMode(MatrixMode.Texture);
 				GL.LoadIdentity();
 				Glu.Ortho2D(-bitmap.Width, bitmap.Width, -bitmap.Height, bitmap.Height);

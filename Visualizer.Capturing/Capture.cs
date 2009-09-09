@@ -9,10 +9,11 @@ namespace Visualizer.Capturing
 	public class Capture : Source, IDisposable
 	{
 		readonly Network network;
-		
+
 		bool disposed = false;
 
-		Capture(IEnumerable<Data.Port> ports, Network network) : base(ports)
+		Capture(IEnumerable<Data.Port> ports, Network network)
+			: base(ports)
 		{
 			this.network = network;
 		}
