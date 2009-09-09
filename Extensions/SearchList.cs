@@ -39,7 +39,11 @@ namespace Extensions
 				if (endIndex < 0 || endIndex > items.Count) throw new ArgumentOutOfRangeException("endIndex");
 				if (endIndex - startIndex < 0) throw new ArgumentException();
 
-				for (int i = startIndex; i < endIndex; i++) yield return items[i];
+				TValue[] buffer = new TValue[endIndex - startIndex];
+
+				items.CopyTo(startIndex, buffer, 0, buffer.Length);
+
+				return buffer;
 			}
 		}
 		public IEnumerable<TValue> this[TKey startKey, TKey endKey]

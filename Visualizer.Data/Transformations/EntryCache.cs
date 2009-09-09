@@ -9,7 +9,7 @@ namespace Visualizer.Data.Transformations
 	// Consider removing those constructs in performance critical areas.
 	public class EntryCache
 	{
-		readonly EntryResampler source;
+		readonly EntryResampler resampler;
 		readonly SearchList<Range<Time>, Time> ranges = new SearchList<Range<Time>, Time>(range => range.Start);
 		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time);
 
@@ -21,7 +21,7 @@ namespace Visualizer.Data.Transformations
 
 				foreach (Range<Time> missingRange in Exclude(requestRange.Single(), ranges))
 				{
-					Fragment fragment = source[missingRange.Start, missingRange.End];
+					Fragment fragment = resampler[missingRange.Start, missingRange.End];
 
 					if (!fragment.IsEmpty)
 					{
@@ -47,13 +47,13 @@ namespace Visualizer.Data.Transformations
 					}
 				}
 
-				return entries[requestRange].ToArray();
+				return entries[requestRange];
 			}
 		}
 
 		public EntryCache(EntryResampler source)
 		{
-			this.source = source;
+			this.resampler = source;
 		}
 
 		static IEnumerable<Range<Time>> Exclude(IEnumerable<Range<Time>> ranges, IEnumerable<Range<Time>> exclusions)
