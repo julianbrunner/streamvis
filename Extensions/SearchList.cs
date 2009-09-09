@@ -75,7 +75,7 @@ namespace Extensions
 		}
 		public void Append(TValue item)
 		{
-			if (items.Count > 0 && Compare(item, items[items.Count - 1]) < 0) throw new ArgumentException("item");
+			if (items.Count > 0 && comparer.Compare(keySelector(item), keySelector(items[items.Count - 1])) < 0) throw new ArgumentException("item");
 
 			items.Add(item);
 		}
@@ -127,26 +127,10 @@ namespace Extensions
 
 			int index = (startIndex + endIndex) / 2;
 
-			if (Compare(items[index], key) > 0) return FindIndex(key, startIndex, index);
-			if (Compare(items[index], key) < 0) return FindIndex(key, index + 1, endIndex);
+			if (comparer.Compare(keySelector(items[index]), key) > 0) return FindIndex(key, startIndex, index);
+			if (comparer.Compare(keySelector(items[index]), key) < 0) return FindIndex(key, index + 1, endIndex);
 
 			return index;
-		}
-		int Compare(TValue a, TValue b)
-		{
-			return comparer.Compare(keySelector(a), keySelector(b));
-		}
-		int Compare(TKey a, TValue b)
-		{
-			return comparer.Compare(a, keySelector(b));
-		}
-		int Compare(TValue a, TKey b)
-		{
-			return comparer.Compare(keySelector(a), b);
-		}
-		int Compare(TKey a, TKey b)
-		{
-			return comparer.Compare(a, b);
 		}
 	}
 }

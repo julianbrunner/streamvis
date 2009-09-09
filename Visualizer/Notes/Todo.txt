@@ -1,5 +1,4 @@
-TODO: Enforce ordering of enries of IBinarySearchable
-TODO: Make Data.Entry* classes generic?
+TODO: Test the stop'n'go issue on Ingo's PC
 
 TODO: Resampling should be specified in DataEntry frequency rather than absolute plotter resolution
 TODO: Captured data should be resampled immediately, before any permanent storing or other processing takes place

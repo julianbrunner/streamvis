@@ -34,3 +34,10 @@ Ubuntu, SU9400:
 	Miscellaneous
 		38x800Hz, local, 38 flat, yarp read > /dev/null					16%
 		38x800Hz, local, 38 flat, C++ Receiver, regular Bottle			 9%
+		
+Windows, E8500:
+	38x800Hz, local, 38 flat, sampling interval 0.1, Visualizer
+		- Render Loop												64.27%
+		- Yarp and below											15.98%
+		- CapturePort.ReadLoop										14.76%
+		- Memory Management											 4.26%

@@ -43,7 +43,7 @@ namespace Visualizer.Data
 		public Container()
 		{
 			entries = new SearchList<Entry, Time>(entry => entry.Time);
-			resampler = new EntryResampler(entries, new Time(0.1));
+			resampler = new EntryResampler(entries, new Time(0.02));
 			cache = new EntryCache(resampler);
 		}
 		public Container(XElement container)
