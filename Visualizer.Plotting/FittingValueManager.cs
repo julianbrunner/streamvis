@@ -1,18 +1,21 @@
 using System.Collections.Generic;
 using System.Linq;
+using Visualizer.Data;
 
 namespace Visualizer.Plotting
 {
 	public class FittingValueManager : ValueManager
 	{
+		readonly DataManager dataManager;
 		readonly IEnumerable<Graph> graphs;
 
 		Range<double> range;
 
 		public override Range<double> Range { get { return range; } }
 
-		public FittingValueManager(IEnumerable<Graph> graphs)
+		public FittingValueManager(DataManager dataManager, IEnumerable<Graph> graphs)
 		{
+			this.dataManager = dataManager;
 			this.graphs = graphs;
 		}
 
@@ -24,11 +27,12 @@ namespace Visualizer.Plotting
 			double maximum = double.NaN;
 
 			foreach (Graph graph in graphs.Where(graph => graph.IsDrawn))
-				foreach (double value in graph.Values)
-				{
-					if (double.IsNaN(minimum) || value < minimum) minimum = value;
-					if (double.IsNaN(maximum) || value > maximum) maximum = value;
-				}
+				foreach (DataSegment graphSegment in dataManager[graph.Stream])
+					foreach (Entry entry in graphSegment.Entries)
+					{
+						if (double.IsNaN(minimum) || entry.Value < minimum) minimum = entry.Value;
+						if (double.IsNaN(maximum) || entry.Value > maximum) maximum = entry.Value;
+					}
 
 			range = new Range<double>
 			(

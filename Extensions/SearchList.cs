@@ -40,7 +40,6 @@ namespace Extensions
 				if (endIndex - startIndex < 0) throw new ArgumentException();
 
 				TValue[] buffer = new TValue[endIndex - startIndex];
-
 				items.CopyTo(startIndex, buffer, 0, buffer.Length);
 
 				return buffer;

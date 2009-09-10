@@ -11,6 +11,7 @@ namespace Visualizer.Plotting
 		readonly IEnumerable<Graph> graphs;
 		readonly Drawer drawer;
 		readonly TimeManager timeManager;
+		readonly DataManager dataManager;
 		readonly ValueManager valueManager;
 		readonly Layouter layouter;
 		// TODO: Is this even used?
@@ -22,17 +23,18 @@ namespace Visualizer.Plotting
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 		public TimeManager TimeManager { get { return timeManager; } }
+		public DataManager DataManager { get { return dataManager; } }
 		public ValueManager ValueManager { get { return valueManager; } }
 		public Layouter Layouter { get { return layouter; } }
 		public int Resolution { get { return resolution; } }
 		public bool ExtendGraphs { get; set; }
-		public bool Frozen { get; set; }
 
-		public Plotter(IEnumerable<Graph> graphs, Drawer drawer, TimeManager timeManager, ValueManager valueManager, Layouter layouter, int resolution, int intervalsX, int intervalsY, Color color)
+		public Plotter(IEnumerable<Graph> graphs, Drawer drawer, TimeManager timeManager, DataManager dataManager, ValueManager valueManager, Layouter layouter, int resolution, int intervalsX, int intervalsY, Color color)
 		{
 			this.graphs = graphs;
 			this.drawer = drawer;
 			this.timeManager = timeManager;
+			this.dataManager = dataManager;
 			this.valueManager = valueManager;
 			this.layouter = layouter;
 			this.resolution = resolution;
@@ -48,10 +50,11 @@ namespace Visualizer.Plotting
 		{
 			if (IsUpdated)
 			{
-				if (!Frozen) timeManager.Update();
+				timeManager.Update();
+				dataManager.Update();
 				valueManager.Update();
 				layouter.Update();
-	
+
 				foreach (Graph graph in graphs) graph.Update();
 			}
 		}

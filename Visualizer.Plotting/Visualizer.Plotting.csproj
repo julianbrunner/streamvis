@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -44,15 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContinuousTimeManager.cs" />
+    <Compile Include="DataManager.cs" />
     <Compile Include="FittingValueManager.cs" />
     <Compile Include="FixedValueManager.cs" />
     <Compile Include="Graph.cs" />
+    <Compile Include="DataSegment.cs" />
     <Compile Include="Layouter.cs" />
     <Compile Include="Marker.cs" />
     <Compile Include="Plotter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="ShiftingTimeManager.cs" />
+    <Compile Include="SimpleDataManager.cs" />
     <Compile Include="TimeManager.cs" />
     <Compile Include="ValueManager.cs" />
     <Compile Include="WrappingTimeManager.cs" />

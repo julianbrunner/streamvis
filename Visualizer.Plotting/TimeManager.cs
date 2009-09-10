@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Visualizer.Data;
 
@@ -12,6 +11,7 @@ namespace Visualizer.Plotting
 		protected Time Time { get; private set; }
 		protected Time Width { get { return width; } }
 
+		public bool Frozen { get; set; }
 		/// <summary>
 		/// Gets the overall Range, in which graphs are drawn.
 		/// </summary>
@@ -29,7 +29,7 @@ namespace Visualizer.Plotting
 
 		public virtual void Update()
 		{
-			Time = timer.Time;
+			if (!Frozen) Time = timer.Time;
 		}
 	}
 }

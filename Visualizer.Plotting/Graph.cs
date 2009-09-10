@@ -14,15 +14,7 @@ namespace Visualizer.Plotting
 		readonly Stream stream;
 
 		public bool IsDrawn { get; set; }
-		public IEnumerable<double> Values
-		{
-			get
-			{
-				return from timeRange in plotter.TimeManager.GraphRanges
-					   from entry in GetEntries(timeRange.Start.Value, timeRange.End.Value)
-					   select entry.Value;
-			}
-		}
+		public Stream Stream { get { return stream; } }
 
 		public Graph(Plotter plotter, Drawer drawer, Stream stream)
 		{
@@ -41,58 +33,64 @@ namespace Visualizer.Plotting
 				Range<double> valueRange = plotter.ValueManager.Range;
 				double height = valueRange.End.Value - valueRange.Start.Value;
 
-				foreach (Range<Time> timeRange in plotter.TimeManager.GraphRanges)
+				foreach (DataSegment segment in plotter.DataManager[stream])
 				{
-					Time width = timeRange.End.Value - timeRange.Start.Value;
+					Time width = segment.TimeRange.End.Value - segment.TimeRange.Start.Value;
 
-					IEnumerable<PointF> points =
-					(
-						from entry in GetEntries(timeRange.Start.Value, timeRange.End.Value)
-						select plotter.Layouter.TransformGraph
-						(
-							timeRange.Map((float)((entry.Time - timeRange.Start.Value) / width)),
-							valueRange.Map((float)((entry.Value - valueRange.Start.Value) / height))
-						)
-					);
+					IEnumerable<PointF> points = from entry in segment.Entries
+												 select plotter.Layouter.TransformGraph
+												 (
+													segment.TimeRange.Map((float)((entry.Time - segment.TimeRange.Start.Value) / width)),
+													valueRange.Map((float)((entry.Value - valueRange.Start.Value) / height))
+												 );
 
 					drawer.DrawLineStrip(points, stream.Color, 1f);
 				}
 			}
 		}
 
-		IEnumerable<Entry> GetEntries(Time startTime, Time endTime)
-		{
-			return stream.Container[startTime, endTime];
-			
-			// TODO: Reenable graph extension
-//			if (stream.Container.IsEmpty) yield break;
-//
-//			int startIndex = stream.Container.GetIndex(start);
-//			int endIndex = stream.Container.GetIndex(end);
-//
-//			if (plotter.ExtendGraphs)
-//			{
-//				double head;
-//				double tail;
-//
-//				if (startIndex == endIndex)
-//				{
-//					if (endIndex == stream.Container.Count) head = tail = stream.Container[endIndex - 1].Value;
-//					else head = tail = stream.Container[startIndex].Value;
-//				}
-//				else
-//				{
-//					head = stream.Container[startIndex].Value;
-//					tail = stream.Container[endIndex - 1].Value;
-//				}
-//
-//				yield return new Entry(start, head);
-//				foreach (Entry entry in stream.Container[startIndex, endIndex]) yield return entry;
-//				yield return new Entry(end, tail);
-//			}
-//			else
-//				foreach (Entry entry in stream.Container[startIndex, endIndex])
-//					yield return entry;
-		}
+		//public PointF <Draw>b__0(Entry entry)
+		//{
+		//    return this.<>4__this.plotter.Layouter.TransformGraph
+		//    (
+		//        this.CS$<>8__locals4.segment.TimeRange.Map((float) ((entry.Time - this.CS$<>8__locals4.segment.TimeRange.Start.Value) / this.width)),
+		//        this.CS$<>8__locals2.valueRange.Map((float) ((entry.Value - this.CS$<>8__locals2.valueRange.Start.Value) / this.CS$<>8__locals2.height))
+		//    );
+		//}
+
+
+
+		// TODO: Reenable graph extension
+		//IEnumerable<Entry> GetEntries(Time startTime, Time endTime)
+		//{
+		//    if (stream.Container.IsEmpty) yield break;
+
+		//    int startIndex = stream.Container.GetIndex(start);
+		//    int endIndex = stream.Container.GetIndex(end);
+
+		//    if (plotter.ExtendGraphs)
+		//    {
+		//        double head;
+		//        double tail;
+
+		//        if (startIndex == endIndex)
+		//        {
+		//            if (endIndex == stream.Container.Count) head = tail = stream.Container[endIndex - 1].Value;
+		//            else head = tail = stream.Container[startIndex].Value;
+		//        }
+		//        else
+		//        {
+		//            head = stream.Container[startIndex].Value;
+		//            tail = stream.Container[endIndex - 1].Value;
+		//        }
+
+		//        yield return new Entry(start, head);
+		//        foreach (Entry entry in stream.Container[startIndex, endIndex]) yield return entry;
+		//        yield return new Entry(end, tail);
+		//    }
+		//    else
+		//        foreach (Entry entry in stream.Container[startIndex, endIndex])
+		//            yield return entry;
+		//}
 	}
 }

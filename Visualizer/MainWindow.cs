@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Graphics;
 using Visualizer.Data;
 using Visualizer.Plotting;
-using Graphics;
 
 namespace Visualizer
 {
@@ -59,10 +57,11 @@ namespace Visualizer
 				case PlotterType.Wrapping: timeManager = new WrappingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
 				default: throw new InvalidOperationException();
 			}
+			DataManager dataManager = new SimpleDataManager(timeManager, from graph in graphs select graph.Stream);
 			ValueManager valueManager;
-			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(graphs);
+			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(dataManager, graphs);
 			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
-			plotter = new Plotter(graphs, drawer, timeManager, valueManager, layouter, parameters.Resolution, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
+			plotter = new Plotter(graphs, drawer, timeManager, dataManager, valueManager, layouter, parameters.Resolution, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
 
 			System.Console.WriteLine("Initializing frame counter");
 			frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
@@ -166,7 +165,7 @@ namespace Visualizer
 		}
 		private void freezeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			plotter.Frozen = freezeToolStripMenuItem.Checked;
+			plotter.TimeManager.Frozen = freezeToolStripMenuItem.Checked;
 		}
 		private void graphExtensionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
