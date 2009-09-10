@@ -16,6 +16,7 @@ namespace Visualizer
 			if (disposing && (components != null))
 			{
 				DisposeSource();
+				drawer.Dispose();
 
 				components.Dispose();
 			}
