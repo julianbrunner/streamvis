@@ -45,7 +45,7 @@ namespace Visualizer
 				case PlotterType.Wrapping: timeManager = new WrappingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
 				default: throw new InvalidOperationException();
 			}
-			DataManager dataManager = new SimpleDataManager(timeManager, from graph in graphs select graph.Stream);
+			DataManager dataManager = new SimpleDataManager(timeManager, from graph in graphs select graph.EntryData);
 			ValueManager valueManager;
 			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(dataManager, graphs);
 			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
@@ -246,7 +246,7 @@ namespace Visualizer
 				streamsListView.Groups.Add(group);
 				foreach (Stream stream in port.Streams)
 				{
-					Graph graph = new Graph(plotter, drawer, stream, Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100)));
+					Graph graph = new Graph(plotter, drawer, stream.EntryData, Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100)));
 					graphs.Add(graph);
 
 					ListViewItem item = new ListViewItem();

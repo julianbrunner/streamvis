@@ -10,17 +10,17 @@ namespace Visualizer.Plotting
 	{
 		readonly Plotter plotter;
 		readonly Drawer drawer;
-		readonly Stream stream;
+		readonly EntryData entryData;
 
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
-		public Stream Stream { get { return stream; } }
+		public EntryData EntryData { get { return entryData; } }
 
-		public Graph(Plotter plotter, Drawer drawer, Stream stream, Color color)
+		public Graph(Plotter plotter, Drawer drawer, EntryData entryData, Color color)
 		{
 			this.plotter = plotter;
 			this.drawer = drawer;
-			this.stream = stream;
+			this.entryData = entryData;
 
 			IsDrawn = true;
 			Color = color;
@@ -34,7 +34,7 @@ namespace Visualizer.Plotting
 				Range<double> valueRange = plotter.ValueManager.Range;
 				double height = valueRange.End.Value - valueRange.Start.Value;
 
-				foreach (DataSegment segment in plotter.DataManager[stream])
+				foreach (DataSegment segment in plotter.DataManager[entryData])
 				{
 					Time width = segment.TimeRange.End.Value - segment.TimeRange.Start.Value;
 

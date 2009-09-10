@@ -6,20 +6,20 @@ namespace Visualizer.Plotting
 {
 	public class SimpleDataManager : DataManager
 	{
-		Dictionary<Stream, IEnumerable<DataSegment>> segments = new Dictionary<Stream, IEnumerable<DataSegment>>();
+		Dictionary<EntryData, IEnumerable<DataSegment>> segments = new Dictionary<EntryData, IEnumerable<DataSegment>>();
 
-		public override IEnumerable<DataSegment> this[Stream stream] { get { return segments[stream]; } }
+		public override IEnumerable<DataSegment> this[EntryData entryData] { get { return segments[entryData]; } }
 
-		public SimpleDataManager(TimeManager timeManager, IEnumerable<Stream> streams) : base(timeManager, streams) { }
+		public SimpleDataManager(TimeManager timeManager, IEnumerable<EntryData> entryData) : base(timeManager, entryData) { }
 
 		public override void Update()
 		{
-			foreach (Stream stream in Streams)
+			foreach (EntryData entryData in EntryData)
 			{
-				segments[stream] =
+				segments[entryData] =
 				(
 				    from timeRange in TimeManager.GraphRanges
-				    select new DataSegment(timeRange, stream.EntryData[timeRange.Start.Value, timeRange.End.Value])
+				    select new DataSegment(timeRange, entryData[timeRange.Start.Value, timeRange.End.Value])
 				)
 				.ToArray();
 			}

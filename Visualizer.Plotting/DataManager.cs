@@ -6,17 +6,17 @@ namespace Visualizer.Plotting
 	public abstract class DataManager
 	{
 		readonly TimeManager timeManager;
-		readonly IEnumerable<Stream> streams;
+		readonly IEnumerable<EntryData> entryData;
 
 		protected TimeManager TimeManager { get { return timeManager; } }
-		protected IEnumerable<Stream> Streams { get { return streams; } }
+		protected IEnumerable<EntryData> EntryData { get { return entryData; } }
 
-		public abstract IEnumerable<DataSegment> this[Stream stream] { get; }
+		public abstract IEnumerable<DataSegment> this[EntryData entryData] { get; }
 
-		protected DataManager(TimeManager timeManager, IEnumerable<Stream> streams)
+		protected DataManager(TimeManager timeManager, IEnumerable<EntryData> entryData)
 		{
 			this.timeManager = timeManager;
-			this.streams = streams;
+			this.entryData = entryData;
 		}
 
 		public abstract void Update();
