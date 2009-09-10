@@ -24,6 +24,11 @@
         <Lib>YARP_OS</Lib>
       </Libs>
     </Libs>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="cp ${TargetName} .." workingdir="${TargetDir}" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release</OutputPath>
@@ -32,6 +37,16 @@
     <OptimizationLevel>3</OptimizationLevel>
     <OutputName>Yarp.Wrapper</OutputName>
     <CompileTarget>SharedLibrary</CompileTarget>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="cp ${TargetName} .." workingdir="${TargetDir}" />
+      </CustomCommands>
+    </CustomCommands>
+    <Libs>
+      <Libs>
+        <Lib>YARP_OS</Lib>
+      </Libs>
+    </Libs>
   </PropertyGroup>
   <ItemGroup>
     <None Include="main.h" />
