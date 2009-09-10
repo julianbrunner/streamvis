@@ -49,7 +49,7 @@ namespace Visualizer
 			ValueManager valueManager;
 			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(dataManager, graphs);
 			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
-			plotter = new Plotter(graphs, drawer, timeManager, dataManager, valueManager, layouter, parameters.Resolution, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
+			plotter = new Plotter(drawer, graphs, timeManager, dataManager, valueManager, layouter, parameters.Resolution, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
 
 			System.Console.WriteLine("Initializing frame counter");
 			frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);

@@ -7,7 +7,7 @@ namespace Visualizer.Data
 		readonly Time time;
 		readonly double value;
 
-		public static string XElementName { get { return "entry"; } }
+		public static string XElementName { get { return "Entry"; } }
 
 		public Time Time { get { return time; } }
 		public double Value { get { return value; } }

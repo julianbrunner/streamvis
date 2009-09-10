@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Container.cs" />
+    <Compile Include="EntryData.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Path.cs" />
     <Compile Include="Port.cs" />
@@ -50,9 +50,9 @@
     <Compile Include="Stream.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="Timer.cs" />
-    <Compile Include="Transformations\EntryCache.cs" />
-    <Compile Include="Transformations\EntryResampler.cs" />
-    <Compile Include="Transformations\Fragment.cs" />
+    <Compile Include="EntryCache.cs" />
+    <Compile Include="EntryResampler.cs" />
+    <Compile Include="Fragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Extensions\Extensions.csproj">

@@ -9,7 +9,7 @@ namespace Visualizer.Data
 		readonly string name;
 		readonly IEnumerable<Stream> streams;
 
-		public static string XElementName { get { return "port"; } }
+		public static string XElementName { get { return "Port"; } }
 
 		public XElement XElement { get { return new XElement(XElementName, new XElement("name", name), from stream in streams select stream.XElement); } }
 		public string Name { get { return name; } }
@@ -28,7 +28,7 @@ namespace Visualizer.Data
 
 		public void ClearData()
 		{
-			foreach (Stream stream in streams) stream.Container.Clear();
+			foreach (Stream stream in streams) stream.EntryData.Clear();
 		}
 	}
 }

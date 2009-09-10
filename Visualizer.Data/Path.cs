@@ -12,7 +12,7 @@ namespace Visualizer.Data
 	{
 		readonly IEnumerable<int> nodes;
 
-		public static string XElementName { get { return "path"; } }
+		public static string XElementName { get { return "Path"; } }
 
 		public XElement XElement { get { return new XElement(XElementName, ToString()); } }
 		public IEnumerable<int> Head { get { return nodes.Take(nodes.Count() - 1); } }

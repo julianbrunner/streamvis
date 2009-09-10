@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Extensions;
 
-namespace Visualizer.Data.Transformations
+namespace Visualizer.Data
 {
 	public class EntryCache
 	{

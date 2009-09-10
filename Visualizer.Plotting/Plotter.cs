@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using Graphics;
@@ -8,8 +7,8 @@ namespace Visualizer.Plotting
 {
 	public class Plotter : IComponent, IUpdateable, IDrawable
 	{
-		readonly IEnumerable<Graph> graphs;
 		readonly Drawer drawer;
+		readonly IEnumerable<Graph> graphs;
 		readonly TimeManager timeManager;
 		readonly DataManager dataManager;
 		readonly ValueManager valueManager;
@@ -29,10 +28,10 @@ namespace Visualizer.Plotting
 		public int Resolution { get { return resolution; } }
 		public bool ExtendGraphs { get; set; }
 
-		public Plotter(IEnumerable<Graph> graphs, Drawer drawer, TimeManager timeManager, DataManager dataManager, ValueManager valueManager, Layouter layouter, int resolution, int intervalsX, int intervalsY, Color color)
+		public Plotter(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, DataManager dataManager, ValueManager valueManager, Layouter layouter, int resolution, int intervalsX, int intervalsY, Color color)
 		{
-			this.graphs = graphs;
 			this.drawer = drawer;
+			this.graphs = graphs;
 			this.timeManager = timeManager;
 			this.dataManager = dataManager;
 			this.valueManager = valueManager;

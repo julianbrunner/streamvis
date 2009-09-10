@@ -5,9 +5,9 @@ namespace Visualizer.Data
 	public class Stream
 	{
 		readonly Path path;
-		readonly Container container;
+		readonly EntryData entryData;
 
-		public static string XElementName { get { return "stream"; } }
+		public static string XElementName { get { return "Stream"; } }
 
 		public XElement XElement
 		{
@@ -17,22 +17,22 @@ namespace Visualizer.Data
 				(
 					XElementName,
 					path.XElement,
-					container.XElement
+					entryData.XElement
 				);
 			}
 		}
 		public Path Path { get { return path; } }
-		public Container Container { get { return container; } }
+		public EntryData EntryData { get { return entryData; } }
 
 		public Stream(XElement stream)
 		{
 			this.path = new Path(stream.Element(Path.XElementName));
-			this.container = new Container(stream.Element(Container.XElementName));
+			this.entryData = new EntryData(stream.Element(EntryData.XElementName));
 		}
 		public Stream(Path path)
 		{
 			this.path = path;
-			this.container = new Container();
+			this.entryData = new EntryData();
 		}
 	}
 }

@@ -19,7 +19,7 @@ namespace Visualizer.Plotting
 				segments[stream] =
 				(
 				    from timeRange in TimeManager.GraphRanges
-				    select new DataSegment(timeRange, stream.Container[timeRange.Start.Value, timeRange.End.Value])
+				    select new DataSegment(timeRange, stream.EntryData[timeRange.Start.Value, timeRange.End.Value])
 				)
 				.ToArray();
 			}

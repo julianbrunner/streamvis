@@ -73,7 +73,7 @@ namespace Visualizer.Capturing
 
 				if (running)
 					foreach (Stream stream in Streams)
-						stream.Container.Add(new Entry(time, packet.Get(stream.Path)));
+						stream.EntryData.Add(new Entry(time, packet.Get(stream.Path)));
 			}
 		}
 

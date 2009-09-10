@@ -8,7 +8,7 @@ namespace Visualizer.Data
 	{
 		readonly IEnumerable<Port> ports;
 
-		public static string XElementName { get { return "source"; } }
+		public static string XElementName { get { return "Source"; } }
 
 		public XElement XElement { get { return new XElement(XElementName, from port in ports select port.XElement); } }
 		public IEnumerable<Port> Ports { get { return ports; } }
