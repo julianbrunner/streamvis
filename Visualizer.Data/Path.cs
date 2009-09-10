@@ -17,7 +17,7 @@ namespace Visualizer.Data
 		public XElement XElement { get { return new XElement(XElementName, ToString()); } }
 		public IEnumerable<int> Head { get { return nodes.Take(nodes.Count() - 1); } }
 		public int Tail { get { return nodes.Last(); } }
-		
+
 		public Path(XElement path)
 		{
 			this.nodes = (from node in ((string)path).Split('.') select int.Parse(node)).ToArray();
@@ -37,12 +37,12 @@ namespace Visualizer.Data
 		public override string ToString()
 		{
 			return nodes.ToStrings().Separate(".").AggregateString();
-		}		
-		public IEnumerator<int> GetEnumerator ()
+		}
+		public IEnumerator<int> GetEnumerator()
 		{
 			return nodes.GetEnumerator();
 		}
-		IEnumerator IEnumerable.GetEnumerator ()
+		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
 		}

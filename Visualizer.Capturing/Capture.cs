@@ -22,7 +22,7 @@ namespace Visualizer.Capturing
 			Dispose();
 		}
 
-		public static Source Create(IEnumerable<string> portStrings, Timer timer, Random random)
+		public static Source Create(IEnumerable<string> portStrings, Timer timer)
 		{
 			// TODO: Can this be done in a nicer way?
 
@@ -33,7 +33,7 @@ namespace Visualizer.Capturing
 
 			try
 			{
-				foreach (string portString in portStrings) ports.Add(CapturePort.Create(portString, network, timer, random));
+				foreach (string portString in portStrings) ports.Add(CapturePort.Create(portString, network, timer));
 
 				finished = true;
 			}

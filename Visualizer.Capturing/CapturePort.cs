@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using Extensions;
 using Visualizer.Data;
@@ -78,7 +77,7 @@ namespace Visualizer.Capturing
 			}
 		}
 
-		public static CapturePort Create(string port, Network network, Timer timer, System.Random random)
+		public static CapturePort Create(string port, Network network, Timer timer)
 		{
 			string[] details = port.Split(':');
 
@@ -99,7 +98,7 @@ namespace Visualizer.Capturing
 				case 2: paths = ParseStreams(details[1]); break;
 				default: throw new InvalidOperationException("Invalid port: \"" + port + "\".");
 			}
-			return new CapturePort(name, network, from path in paths select new Stream(path, Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100))), timer);
+			return new CapturePort(name, network, from path in paths select new Stream(path), timer);
 		}
 
 		static IEnumerable<Path> GetPaths(IEnumerable<int> path, Packet packet)

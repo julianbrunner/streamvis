@@ -12,21 +12,6 @@ namespace Visualizer
 {
 	partial class MainWindow : Form
 	{
-		struct ItemTag
-		{
-			readonly Stream stream;
-			readonly Graph graph;
-
-			public Stream Stream { get { return stream; } }
-			public Graph Graph { get { return graph; } }
-
-			public ItemTag(Stream stream, Graph graph)
-			{
-				this.stream = stream;
-				this.graph = graph;
-			}
-		}
-
 		const string title = "Yarp Visualizer";
 
 		readonly Drawer drawer;
@@ -99,8 +84,8 @@ namespace Visualizer
 
 		private void streamsListView_ItemChecked(object sender, ItemCheckedEventArgs e)
 		{
-			ItemTag tag = (ItemTag)e.Item.Tag;
-			tag.Graph.IsDrawn = e.Item.Checked;
+			Graph graph = (Graph)e.Item.Tag;
+			graph.IsDrawn = e.Item.Checked;
 		}
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -211,7 +196,7 @@ namespace Visualizer
 			timer.Reset();
 			source = new Source();
 			if (ports.Any())
-				try { source = Capturing.Capture.Create(ports, timer, new Random()); }
+				try { source = Capturing.Capture.Create(ports, timer); }
 				catch (InvalidOperationException e) { MessageBox.Show(e.Message, "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 				// TODO: Check beforehand if Yarp is available
 				//catch (Exception e)
@@ -249,6 +234,8 @@ namespace Visualizer
 		}
 		void RebuildList()
 		{
+			Random random = new Random();
+
 			graphs.Clear();
 			streamsListView.Groups.Clear();
 			streamsListView.Items.Clear();
@@ -259,7 +246,7 @@ namespace Visualizer
 				streamsListView.Groups.Add(group);
 				foreach (Stream stream in port.Streams)
 				{
-					Graph graph = new Graph(plotter, drawer, stream);
+					Graph graph = new Graph(plotter, drawer, stream, Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100)));
 					graphs.Add(graph);
 
 					ListViewItem item = new ListViewItem();
@@ -267,9 +254,9 @@ namespace Visualizer
 					item.Text = "Stream " + stream.Path;
 					item.Group = group;
 					item.Checked = true;
-					item.Tag = new ItemTag(stream, graph);
+					item.Tag = graph;
 
-					SetColor(item, stream.Color);
+					SetColor(item, graph.Color);
 
 					streamsListView.Items.Add(item);
 				}
@@ -277,9 +264,9 @@ namespace Visualizer
 		}
 		void SetColor(ListViewItem item, Color color)
 		{
-			ItemTag tag = (ItemTag)item.Tag;
+			Graph graph = (Graph)item.Tag;
 
-			tag.Stream.Color = color;
+			graph.Color = color;
 			item.BackColor = color;
 			item.ForeColor = item.BackColor.R * 0.299 + item.BackColor.G * 0.587 + item.BackColor.B * 0.114 >= 0x80 ? Color.Black : Color.White;
 		}

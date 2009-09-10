@@ -1,12 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 using Extensions;
 
 namespace Visualizer.Data.Transformations
 {
-	// TODO:
-	// Deferred execution (iterators and LINQ) make it extremely difficult to spot performance bottlenecks.
-	// Consider removing those constructs in performance critical areas.
 	public class EntryCache
 	{
 		readonly EntryResampler resampler;

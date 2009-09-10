@@ -5,18 +5,18 @@ namespace Visualizer.Data
 	public struct Time : IEquatable<Time>, IComparable, IComparable<Time>
 	{
 		readonly long ticks;
-		
+
 		public static Time Zero { get { return new Time(); } }
-		
+
 		public long Ticks { get { return ticks; } }
 		public double Seconds { get { return ticks / 10000000.0; } }
-		
+
 		public Time(long ticks)
 		{
 			this.ticks = ticks;
 		}
 		public Time(double seconds) : this((long)(seconds * 10000000)) { }
-		
+
 		public override bool Equals(object obj)
 		{
 			return obj is Time ? Equals((Time)obj) : false;
@@ -33,7 +33,7 @@ namespace Visualizer.Data
 		{
 			return Compare(this, other);
 		}
-		public override int GetHashCode ()
+		public override int GetHashCode()
 		{
 			return ticks.GetHashCode();
 		}
@@ -51,7 +51,7 @@ namespace Visualizer.Data
 			Time remainder = (this - offset) % interval;
 			return remainder == Zero ? this : this - remainder + 1 * interval;
 		}
-		
+
 		public static Time Min(Time a, Time b)
 		{
 			return a > b ? b : a;
@@ -60,7 +60,7 @@ namespace Visualizer.Data
 		{
 			return a < b ? b : a;
 		}
-		
+
 		public static bool operator ==(Time a, Time b)
 		{
 			return Equals(a, b);
@@ -69,7 +69,7 @@ namespace Visualizer.Data
 		{
 			return !Equals(a, b);
 		}
-		
+
 		public static bool operator <(Time a, Time b)
 		{
 			return Compare(a, b) < 0;
@@ -86,7 +86,7 @@ namespace Visualizer.Data
 		{
 			return Compare(a, b) >= 0;
 		}
-		
+
 		public static Time operator +(Time a, Time b)
 		{
 			return new Time(a.ticks + b.ticks);
@@ -111,14 +111,14 @@ namespace Visualizer.Data
 		{
 			return (double)a.ticks / (double)b.ticks;
 		}
-		
+
 		public static Time operator %(Time a, Time b)
 		{
 			long remainder = a.ticks % b.ticks;
 			if (remainder < 0) remainder += b.ticks;
 			return new Time(remainder);
 		}
-		
+
 		static bool Equals(Time a, Time b)
 		{
 			return a.ticks == b.ticks;
@@ -126,10 +126,10 @@ namespace Visualizer.Data
 		static int Compare(Time a, Time b)
 		{
 			long difference = a.ticks - b.ticks;
-			
+
 			if (difference < int.MinValue) difference = int.MinValue;
 			if (difference > int.MaxValue) difference = int.MaxValue;
-			
+
 			return (int)difference;
 		}
 	}

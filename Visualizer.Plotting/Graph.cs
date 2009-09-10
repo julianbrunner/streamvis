@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -14,15 +13,17 @@ namespace Visualizer.Plotting
 		readonly Stream stream;
 
 		public bool IsDrawn { get; set; }
+		public Color Color { get; set; }
 		public Stream Stream { get { return stream; } }
 
-		public Graph(Plotter plotter, Drawer drawer, Stream stream)
+		public Graph(Plotter plotter, Drawer drawer, Stream stream, Color color)
 		{
 			this.plotter = plotter;
 			this.drawer = drawer;
 			this.stream = stream;
 
 			IsDrawn = true;
+			Color = color;
 		}
 
 		public void Update() { }
@@ -44,7 +45,7 @@ namespace Visualizer.Plotting
 													valueRange.Map((float)((entry.Value - valueRange.Start.Value) / height))
 												 );
 
-					drawer.DrawLineStrip(points, stream.Color, 1f);
+					drawer.DrawLineStrip(points, Color, 1f);
 				}
 			}
 		}
