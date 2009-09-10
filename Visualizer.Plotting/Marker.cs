@@ -2,13 +2,16 @@ namespace Visualizer.Plotting
 {
 	public struct Marker<T>
 	{
-		public readonly T Value;
-		public readonly float Position;
+		readonly T value;
+		readonly float position;
+
+		public T Value { get { return value; } }
+		public float Position { get { return position; } }
 
 		public Marker(T value, float position)
 		{
-			this.Value = value;
-			this.Position = position;
+			this.value = value;
+			this.position = position;
 		}
 	}
 }

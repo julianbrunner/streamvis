@@ -28,6 +28,8 @@ namespace Visualizer.Data.Transformations
 						Time start = fragment.Range.Start;
 						Time end = fragment.Range.End;
 
+						// TODO: Is this slow?
+						// TODO: Can this be implemented in a more readable way?
 						int index = ranges.FindIndex(start);
 
 						if (index > 0 && ranges[index - 1].End == start)

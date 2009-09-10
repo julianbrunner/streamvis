@@ -14,8 +14,11 @@ namespace Visualizer
 	{
 		struct ItemTag
 		{
-			public readonly Stream stream;
-			public readonly Graph graph;
+			readonly Stream stream;
+			readonly Graph graph;
+
+			public Stream Stream { get { return stream; } }
+			public Graph Graph { get { return graph; } }
 
 			public ItemTag(Stream stream, Graph graph)
 			{
@@ -97,7 +100,7 @@ namespace Visualizer
 		private void streamsListView_ItemChecked(object sender, ItemCheckedEventArgs e)
 		{
 			ItemTag tag = (ItemTag)e.Item.Tag;
-			tag.graph.IsDrawn = e.Item.Checked;
+			tag.Graph.IsDrawn = e.Item.Checked;
 		}
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -276,7 +279,7 @@ namespace Visualizer
 		{
 			ItemTag tag = (ItemTag)item.Tag;
 
-			tag.stream.Color = color;
+			tag.Stream.Color = color;
 			item.BackColor = color;
 			item.ForeColor = item.BackColor.R * 0.299 + item.BackColor.G * 0.587 + item.BackColor.B * 0.114 >= 0x80 ? Color.Black : Color.White;
 		}

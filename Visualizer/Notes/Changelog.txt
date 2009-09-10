@@ -2,6 +2,9 @@ Version 0.8
 	- Moved to a more flexible dynamic caching solution
 	- Fixed various bugs
 	- Refactoring
+	- Various optimizations to the new caching
+	- Went back to using properties
+	- Extended the Visualizer.Plotting design
 
 Version 0.7
 	- Multiple Visualizers can now be bound to a single Yarp port

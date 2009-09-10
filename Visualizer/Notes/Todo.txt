@@ -1,11 +1,9 @@
 TODO: Test the stop'n'go issue on Ingo's PC
 
-TODO: Resampling should be specified in DataEntry frequency rather than absolute plotter resolution
-TODO: Captured data should be resampled immediately, before any permanent storing or other processing takes place
-TODO: Caching of Graph Data?
-TODO: One sample per pixel
+TODO: Resampling can be parametrized, specify either as samples/pixel or samples/second
+TODO: Caching should take place on multiple level (i.e. resampling, minimum/maximum finding, graph transformations, maybe even rendered graphs)
 TODO: Check for correctness of pipeline (i.e. examine the output on manual data insertion)
-TODO: Use Pair<Time> or other instances of Pair<T> where appropriate
+TODO: Use Range<Time> or other instances of Range<T> where appropriate
 
 TODO: Profile the new wrapper
 TODO: Memory profiling?
@@ -16,7 +14,6 @@ TODO: Make sure the 0.5 pixel offset is handled correctly everywhere (after doin
 TODO: Make lines thin when no antialiasing is possible
 TODO: Text on Linux is blurry
 
-TODO: Change exposed fields back to properties if it won't hurt performance
 TODO: Make Layouter adaptive to width of the Y-Axis labels
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 
