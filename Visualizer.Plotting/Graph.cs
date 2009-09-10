@@ -16,14 +16,13 @@ namespace Visualizer.Plotting
 		public Color Color { get; set; }
 		public EntryData EntryData { get { return entryData; } }
 
-		public Graph(Plotter plotter, Drawer drawer, EntryData entryData, Color color)
+		public Graph(Plotter plotter, Drawer drawer, EntryData entryData)
 		{
 			this.plotter = plotter;
 			this.drawer = drawer;
 			this.entryData = entryData;
 
 			IsDrawn = true;
-			Color = color;
 		}
 
 		public void Update() { }
@@ -49,17 +48,6 @@ namespace Visualizer.Plotting
 				}
 			}
 		}
-
-		//public PointF <Draw>b__0(Entry entry)
-		//{
-		//    return this.<>4__this.plotter.Layouter.TransformGraph
-		//    (
-		//        this.CS$<>8__locals4.segment.TimeRange.Map((float) ((entry.Time - this.CS$<>8__locals4.segment.TimeRange.Start.Value) / this.width)),
-		//        this.CS$<>8__locals2.valueRange.Map((float) ((entry.Value - this.CS$<>8__locals2.valueRange.Start.Value) / this.CS$<>8__locals2.height))
-		//    );
-		//}
-
-
 
 		// TODO: Reenable graph extension
 		//IEnumerable<Entry> GetEntries(Time startTime, Time endTime)
