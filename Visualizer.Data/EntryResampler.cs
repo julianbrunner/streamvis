@@ -7,40 +7,40 @@ namespace Visualizer.Data
 {
 	public class EntryResampler
 	{
-		readonly SearchList<Entry, Time> source;
+		readonly SearchList<Entry, Time> entries;
 		readonly Time sampleDistance;
 
 		public Fragment this[Time startTime, Time endTime]
 		{
 			get
 			{
-				if (source.Count == 0) return Fragment.Empty;
+				if (entries.Count == 0) return Fragment.Empty;
 
-				startTime = Time.Max(startTime, source[0].Time);
-				endTime = Time.Min(endTime, source[source.Count - 1].Time);
+				startTime = Time.Max(startTime, entries[0].Time);
+				endTime = Time.Min(endTime, entries[entries.Count - 1].Time);
 
 				startTime = startTime.Ceiling(sampleDistance, Time.Zero);
 				endTime = endTime.Floor(sampleDistance, Time.Zero);
 
-				List<Entry> entries = new List<Entry>();
+				List<Entry> samples = new List<Entry>();
 
 				for (Time time = startTime; time < endTime; time += sampleDistance)
 				{
 					Time intervalStartTime = time;
 					Time intervalEndTime = time + sampleDistance;
 
-					entries.Add(Aggregate(source, intervalStartTime, intervalEndTime));
+					samples.Add(Aggregate(entries, intervalStartTime, intervalEndTime));
 				}
 
-				if (entries.Count == 0) return Fragment.Empty;
+				if (samples.Count == 0) return Fragment.Empty;
 
-				return new Fragment(new Range<Time>(startTime, endTime), entries);
+				return new Fragment(new Range<Time>(startTime, endTime), samples);
 			}
 		}
 
 		public EntryResampler(SearchList<Entry, Time> source, Time sampleDistance)
 		{
-			this.source = source;
+			this.entries = source;
 			this.sampleDistance = sampleDistance;
 		}
 

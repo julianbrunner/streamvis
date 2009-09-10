@@ -8,7 +8,6 @@ namespace Visualizer.Data
 	public class EntryData
 	{
 		readonly SearchList<Entry, Time> entries;
-		readonly EntryResampler resampler;
 		readonly EntryCache cache;
 
 		public static string XElementName { get { return "EntryData"; } }
@@ -42,8 +41,7 @@ namespace Visualizer.Data
 		public EntryData()
 		{
 			entries = new SearchList<Entry, Time>(entry => entry.Time);
-			resampler = new EntryResampler(entries, new Time(0.02));
-			cache = new EntryCache(resampler);
+			cache = new EntryCache(new EntryResampler(entries, new Time(0.02)));
 		}
 		public EntryData(XElement entryData)
 			: this()
