@@ -1,5 +1,6 @@
 TODO: Find reason for stop'n'go on Windows (maybe it's the same as on Linux?)
 TODO: Test the stop'n'go issue on Ingo's PC
+TODO: Test difference between Debug and Release builds on different machines
 
 TODO: Resampling can be parametrized, specify either as samples/pixel or samples/second
 TODO: Caching should take place on multiple level (i.e. resampling, minimum/maximum finding, graph transformations, maybe even rendered graphs)
