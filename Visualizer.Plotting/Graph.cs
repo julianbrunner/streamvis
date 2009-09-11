@@ -30,18 +30,27 @@ namespace Visualizer.Plotting
 		{
 			if (IsDrawn)
 			{
+				Layouter layouter = plotter.Layouter;
+
 				Range<double> valueRange = plotter.ValueManager.Range;
-				double height = valueRange.End.Value - valueRange.Start.Value;
+
+				double startValue = valueRange.Start.Value;
+				double endValue = valueRange.End.Value;
+				double height = endValue - startValue;
 
 				foreach (DataSegment segment in plotter.DataManager[entryData])
 				{
-					Time width = segment.TimeRange.End.Value - segment.TimeRange.Start.Value;
+					Range<Time> timeRange = segment.TimeRange;
+
+					Time startTime = segment.TimeRange.Start.Value;
+					Time endTime = segment.TimeRange.End.Value;
+					Time width = endTime - startTime;
 
 					IEnumerable<PointF> points = from entry in segment.Entries
-												 select plotter.Layouter.TransformGraph
+												 select layouter.TransformGraph
 												 (
-													segment.TimeRange.Map((float)((entry.Time - segment.TimeRange.Start.Value) / width)),
-													valueRange.Map((float)((entry.Value - valueRange.Start.Value) / height))
+													timeRange.Map((float)((entry.Time - startTime) / width)),
+													valueRange.Map((float)((entry.Value - startValue) / height))
 												 );
 
 					drawer.DrawLineStrip(points, Color, 1f);
