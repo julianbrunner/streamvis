@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer", "Visualizer\Visualizer.csproj", "{0251F686-E89D-4529-82AD-4C8D467C0765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{0A695C12-A6F0-45E9-9BD8-2948681C074A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphics", "Graphics\Graphics.csproj", "{9CFCF6A1-6763-4108-851F-E2A8869968B2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{F4AC6BD8-8B9C-40B8-AE7D-55C695BE988B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sender", "Sender\Sender.csproj", "{55285EE5-B27A-44F4-A22D-8ADD6AB09284}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receiver", "Receiver\Receiver.csproj", "{70C434B4-EC61-4050-A6F8-77A846E8B2D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarp", "Yarp\Yarp.csproj", "{88377E30-410B-40ED-8D90-BE90D7831933}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer.Data", "Visualizer.Data\Visualizer.Data.csproj", "{188C1B70-DD61-4EEA-B733-8379A3866CF2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer.Capturing", "Visualizer.Capturing\Visualizer.Capturing.csproj", "{1A1D9F99-88B7-41A8-A084-8762DC16963C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer.Plotting", "Visualizer.Plotting\Visualizer.Plotting.csproj", "{B86C20E8-6D5D-4110-8333-B4B0EC707862}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{7B60F588-1AA5-4123-8CCA-1907A036564E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{0A695C12-A6F0-45E9-9BD8-2948681C074A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphics", "Graphics\Graphics.csproj", "{9CFCF6A1-6763-4108-851F-E2A8869968B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarp", "Yarp\Yarp.csproj", "{88377E30-410B-40ED-8D90-BE90D7831933}"
 EndProject
 Project("{2857B73E-F847-4B02-9238-064979017E93}") = "Yarp.Wrapper", "Yarp.Wrapper\Yarp.Wrapper.cproj", "{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}"
 EndProject
@@ -73,6 +75,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{55285EE5-B27A-44F4-A22D-8ADD6AB09284} = {F4AC6BD8-8B9C-40B8-AE7D-55C695BE988B}
 		{70C434B4-EC61-4050-A6F8-77A846E8B2D6} = {F4AC6BD8-8B9C-40B8-AE7D-55C695BE988B}
+		{0A695C12-A6F0-45E9-9BD8-2948681C074A} = {7B60F588-1AA5-4123-8CCA-1907A036564E}
+		{9CFCF6A1-6763-4108-851F-E2A8869968B2} = {7B60F588-1AA5-4123-8CCA-1907A036564E}
+		{88377E30-410B-40ED-8D90-BE90D7831933} = {7B60F588-1AA5-4123-8CCA-1907A036564E}
+		{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5} = {7B60F588-1AA5-4123-8CCA-1907A036564E}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		description = An application that can be used to plot, capture and replay streams received on Yarp ports.
