@@ -13,6 +13,8 @@ namespace Visualizer.Plotting
 		readonly Viewport viewport;
 
 		Rectangle graphsArea;
+		
+		public Rectangle GraphsArea { get { return graphsArea; } }
 
 		public Layouter(Viewport viewport)
 		{
@@ -21,6 +23,8 @@ namespace Visualizer.Plotting
 
 		public virtual void Update()
 		{
+			// TODO: Try and do this in a more straightforward way if performance allows it
+			
 			Rectangle area = viewport.ClientRectangle;
 
 			this.graphsArea = new Rectangle

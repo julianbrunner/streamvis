@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Graphics;
+using Graphics.Transformations;
 using Visualizer.Data;
 
 namespace Visualizer.Plotting
@@ -46,14 +47,38 @@ namespace Visualizer.Plotting
 					Time endTime = segment.TimeRange.End.Value;
 					Time width = endTime - startTime;
 
+//					IEnumerable<PointF> points = from entry in segment.Entries
+//												 select layouter.TransformGraph
+//												 (
+//													timeRange.Map((float)((entry.Time - startTime) / width)),
+//													valueRange.Map((float)((entry.Value - startValue) / height))
+//												 );
+//					
+//					drawer.DrawLineStrip(points, Color, 1f);
+					
 					IEnumerable<PointF> points = from entry in segment.Entries
-												 select layouter.TransformGraph
-												 (
-													timeRange.Map((float)((entry.Time - startTime) / width)),
-													valueRange.Map((float)((entry.Value - startValue) / height))
-												 );
-
-					drawer.DrawLineStrip(points, Color, 1f);
+												 select new PointF((float)entry.Time.Seconds, (float)entry.Value);
+					
+					Transformation entryTranslation = new Translation(new PointF((float)-startTime.Seconds, (float)-startValue));
+					Transformation entryScaling = new Scaling(new PointF((float)(1.0 / width.Seconds), (float)(1.0 / height)));
+					
+					Transformation rangeScaling = new Scaling(new PointF(timeRange.End.Position - timeRange.Start.Position, valueRange.End.Position - valueRange.Start.Position));
+					Transformation rangeTranslation = new Translation(new PointF(timeRange.Start.Position, valueRange.Start.Position));
+					
+					Transformation layouterScaling = new Scaling(new PointF(layouter.GraphsArea.Width, -layouter.GraphsArea.Height));
+					Transformation layouterTranslation = new Translation(new PointF(layouter.GraphsArea.Left, layouter.GraphsArea.Bottom));
+					
+					IEnumerable<Transformation> transformations = new[]
+					{
+						entryTranslation,
+						entryScaling,
+						rangeScaling,
+						rangeTranslation,
+						layouterScaling,
+						layouterTranslation
+					};
+					
+					drawer.DrawLineStrip(points, transformations, Color, 1f);
 				}
 			}
 		}

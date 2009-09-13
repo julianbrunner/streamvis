@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using OpenTK.Graphics;
+using Graphics.Transformations;
 
 namespace Graphics
 {
@@ -20,6 +21,8 @@ namespace Graphics
 
 		public Drawer()
 		{
+			// TODO: Reenable anti-aliasing
+			
 			GL.Enable(EnableCap.Texture2D);
 			//GL.Enable(EnableCap.LineSmooth);
 			GL.Enable(EnableCap.Blend);
@@ -56,6 +59,7 @@ namespace Graphics
 			}
 
 			GL.MatrixMode(MatrixMode.Modelview);
+			
 			GL.LoadIdentity();
 			GL.Translate((int)position.X, (int)position.Y, 0);
 
@@ -72,20 +76,25 @@ namespace Graphics
 
 			GL.LoadIdentity();
 		}
-		public void DrawLine(PointF from, PointF to, Color color, float width)
+		public void DrawLine(PointF start, PointF end, Color color, float width)
 		{
 			GL.LineWidth(width);
 			GL.Color3(color);
 
 			GL.Begin(BeginMode.Lines);
 
-			GL.Vertex2(from.X + 0.5f, from.Y + 0.5f);
-			GL.Vertex2(to.X + 0.5f, to.Y + 0.5f);
+			GL.Vertex2(start.X + 0.5f, start.Y + 0.5f);
+			GL.Vertex2(end.X + 0.5f, end.Y + 0.5f);
 
 			GL.End();
 		}
-		public void DrawLineStrip(IEnumerable<PointF> points, Color color, float width)
+		public void DrawLineStrip(IEnumerable<PointF> points, IEnumerable<Transformation> transformations, Color color, float width)
 		{
+			GL.MatrixMode(MatrixMode.Modelview);
+			
+			GL.LoadIdentity();
+			transformations.Apply();
+			
 			GL.LineWidth(width);
 			GL.Color3(color);
 
@@ -94,6 +103,8 @@ namespace Graphics
 			foreach (PointF point in points) GL.Vertex2(point.X + 0.5f, point.Y + 0.5f);
 
 			GL.End();
+			
+			GL.LoadIdentity();
 		}
 
 		protected virtual void Dispose(bool disposing)

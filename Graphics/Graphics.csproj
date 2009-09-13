@@ -54,6 +54,10 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="VisibleFrameCounter.cs" />
+    <Compile Include="Transformations\Transformation.cs" />
+    <Compile Include="Transformations\Translation.cs" />
+    <Compile Include="Transformations\Scaling.cs" />
+    <Compile Include="Transformations\Transformations.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\Text.png" />
@@ -69,4 +73,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Transformations\" />
+  </ItemGroup>
 </Project>
