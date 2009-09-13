@@ -5,8 +5,8 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using OpenTK.Graphics;
 using Graphics.Transformations;
+using OpenTK.Graphics;
 
 namespace Graphics
 {

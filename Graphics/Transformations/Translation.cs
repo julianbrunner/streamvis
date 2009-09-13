@@ -1,5 +1,5 @@
-using OpenTK.Graphics;
 using System.Drawing;
+using OpenTK.Graphics;
 
 namespace Graphics.Transformations
 {

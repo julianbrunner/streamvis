@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using OpenTK.Graphics;
 
 namespace Graphics.Transformations
 {
