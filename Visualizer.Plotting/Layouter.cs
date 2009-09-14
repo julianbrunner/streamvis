@@ -13,9 +13,20 @@ namespace Visualizer.Plotting
 
 		readonly Viewport viewport;
 
-		Rectangle graphsArea;
+		public PointF this[double x, double y]
+		{
+			get
+			{
+				return new PointF
+				(
+					(float)(Area.Left + x * Area.Width),
+					(float)(Area.Bottom - y * Area.Height)
+				);
+			}
+		}
 
-		public Matrix4 GraphTransformation { get; private set; }
+		public Rectangle Area { get; private set; }
+		public Matrix4 Transformation { get; private set; }
 
 		public Layouter(Viewport viewport)
 		{
@@ -24,27 +35,17 @@ namespace Visualizer.Plotting
 
 		public virtual void Update()
 		{
-			// TODO: Try and do this in a more straightforward way if performance allows it
+			Rectangle clientArea = viewport.ClientRectangle;
 
-			Rectangle area = viewport.ClientRectangle;
-
-			graphsArea = new Rectangle
+			Area = new Rectangle
 			(
-				area.Left + borderLeft,
-				area.Top + borderTop,
-				area.Width - borderLeft - borderRight,
-				area.Height - borderTop - borderBottom
+				clientArea.Left + borderLeft,
+				clientArea.Top + borderTop,
+				clientArea.Width - borderLeft - borderRight,
+				clientArea.Height - borderTop - borderBottom
 			);
 
-			GraphTransformation = Matrix4.Scale(graphsArea.Width, -graphsArea.Height, 1) * Matrix4.CreateTranslation(graphsArea.Left, graphsArea.Bottom, 0);
-		}
-		public PointF TransformGraph(double x, double y)
-		{
-			return new PointF
-			(
-				(float)(graphsArea.Left + x * graphsArea.Width),
-				(float)(graphsArea.Bottom - y * graphsArea.Height)
-			);
+			Transformation = Matrix4.Scale(Area.Width, -Area.Height, 1) * Matrix4.CreateTranslation(Area.Left, Area.Bottom, 0);
 		}
 	}
 }

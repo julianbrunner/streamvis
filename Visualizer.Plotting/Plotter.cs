@@ -73,8 +73,8 @@ namespace Visualizer.Plotting
 
 		void DrawAxisX(TimeRange timeRange, ValueRange valueRange)
 		{
-			PointF start = layouter.TransformGraph(0, 0);
-			PointF end = layouter.TransformGraph(1, 0);
+			PointF start = layouter[0, 0];
+			PointF end = layouter[1, 0];
 
 			start.Y += 5;
 			end.Y += 5;
@@ -88,7 +88,7 @@ namespace Visualizer.Plotting
 				for (int i = 0; i < intervalsX + 1; i++)
 				{
 					Time time = offset + i * interval;
-					PointF position = layouter.TransformGraph(time / width, 0);
+					PointF position = layouter[time / width, 0];
 					position.Y += 5;
 					drawer.DrawLine(new PointF(position.X, position.Y + 5), position, color, 1);
 					drawer.DrawNumber((timeRange.Range.Start + time).Seconds, new PointF(position.X, position.Y + 7), color, TextAlignment.Center);
@@ -96,8 +96,8 @@ namespace Visualizer.Plotting
 		}
 		void DrawAxisY(TimeRange timeRange, ValueRange valueRange)
 		{
-			PointF start = layouter.TransformGraph(0, 0);
-			PointF end = layouter.TransformGraph(0, 1);
+			PointF start = layouter[0, 0];
+			PointF end = layouter[0, 1];
 
 			drawer.DrawLine(start, end, color, 1);
 
@@ -108,7 +108,7 @@ namespace Visualizer.Plotting
 				for (int i = 0; i < intervalsY + 1; i++)
 				{
 					double value = i * interval;
-					PointF position = layouter.TransformGraph(0, value / height);
+					PointF position = layouter[0, value / height];
 					drawer.DrawLine(new PointF(position.X - 5, position.Y), position, color, 1);
 					drawer.DrawNumber(valueRange.Range.Start + value, new PointF(position.X - 7, position.Y - 5), color, TextAlignment.Far);
 				}

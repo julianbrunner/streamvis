@@ -37,7 +37,7 @@ namespace Visualizer.Plotting
 				{
 					TimeRange timeRange = segment.TimeRange;
 
-					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * plotter.Layouter.GraphTransformation;
+					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * plotter.Layouter.Transformation;
 
 					drawer.DrawLineStrip(GetVertices(segment.Entries), transformation, Color, 1f);
 				}
