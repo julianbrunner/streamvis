@@ -8,6 +8,9 @@ namespace Visualizer.Plotting
 		readonly Range<Time> range;
 		readonly LinearMapping mapping;
 
+		public Range<Time> Range { get { return range; } }
+		public LinearMapping Mapping { get { return mapping; } }
+
 		public TimeRange(Range<Time> range, Range<double> output)
 		{
 			this.range = range;

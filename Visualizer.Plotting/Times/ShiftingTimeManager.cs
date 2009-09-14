@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using Extensions;
 using Visualizer.Data;
 
 namespace Visualizer.Plotting
@@ -8,11 +8,11 @@ namespace Visualizer.Plotting
 	{
 		readonly double shiftLength;
 
-		_Range<Time> range;
-		_Range<Time> graphRange;
+		TimeRange range;
+		TimeRange graphRange;
 
-		public override _Range<Time> Range { get { return range; } }
-		public override IEnumerable<_Range<Time>> GraphRanges { get { yield return graphRange; } }
+		public override TimeRange Range { get { return range; } }
+		public override IEnumerable<TimeRange> GraphRanges { get { yield return graphRange; } }
 
 		public ShiftingTimeManager(Timer timer, Time width, double shiftLength)
 			: base(timer, width)
@@ -31,21 +31,12 @@ namespace Visualizer.Plotting
 			double fractionalIntervals = intervals - wholeIntervals;
 
 			Time startTime = interval * (wholeIntervals + 1) - Width;
-			float startPosition = 0;
+			double startPosition = 0;
 			Time endTime = Time;
-			float endPosition = (float)((1 - shiftLength) + shiftLength * fractionalIntervals);
+			double endPosition = (1 - shiftLength) + shiftLength * fractionalIntervals;
 
-			graphRange = new _Range<Time>
-			(
-				new Marker<Time>(startTime, startPosition),
-				new Marker<Time>(endTime, endPosition)
-			);
-
-			range = new _Range<Time>
-			(
-				new Marker<Time>(startTime, 0),
-				new Marker<Time>(startTime + Width, 1)
-			);
+			range = new TimeRange(new Range<Time>(startTime, startTime + Width));
+			graphRange = new TimeRange(new Range<Time>(startTime, endTime), new Range<double>(startPosition, endPosition));
 		}
 	}
 }

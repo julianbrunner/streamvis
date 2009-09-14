@@ -7,6 +7,9 @@ namespace Visualizer.Plotting
 		readonly Range<double> range;
 		readonly LinearMapping mapping;
 
+		public Range<double> Range { get { return range; } }
+		public LinearMapping Mapping { get { return mapping; } }
+
 		public ValueRange(Range<double> range, Range<double> output)
 		{
 			this.range = range;

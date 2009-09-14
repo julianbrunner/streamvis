@@ -18,8 +18,8 @@ namespace Visualizer.Plotting
 			{
 				segments[entryData] =
 				(
-				    from timeRange in TimeManager.GraphRanges
-				    select new DataSegment(timeRange, entryData[timeRange.Start.Value, timeRange.End.Value])
+					from timeRange in TimeManager.GraphRanges
+					select new DataSegment(timeRange, entryData[timeRange.Range.Start, timeRange.Range.End])
 				)
 				.ToArray();
 			}

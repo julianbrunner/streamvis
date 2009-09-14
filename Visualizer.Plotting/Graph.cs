@@ -35,11 +35,7 @@ namespace Visualizer.Plotting
 
 				foreach (DataSegment segment in plotter.DataManager[entryData])
 				{
-					_Range<Time> timeRange = segment.TimeRange;
-
-					Time startTime = segment.TimeRange.Start.Value;
-					Time endTime = segment.TimeRange.End.Value;
-					Time width = endTime - startTime;
+					TimeRange timeRange = segment.TimeRange;
 
 					Matrix4 transformation = Matrix4.Identity;
 

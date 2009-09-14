@@ -43,7 +43,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Marker.cs" />
     <Compile Include="Times\ContinuousTimeManager.cs" />
     <Compile Include="Times\TimeRange.cs" />
     <Compile Include="Values\ValueRange.cs" />
@@ -60,7 +59,6 @@
     <Compile Include="Times\TimeManager.cs" />
     <Compile Include="Values\ValueManager.cs" />
     <Compile Include="Times\WrappingTimeManager.cs" />
-    <Compile Include="_Range.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Extensions\Extensions.csproj">

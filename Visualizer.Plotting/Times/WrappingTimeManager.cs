@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using Extensions;
 using Visualizer.Data;
 
 namespace Visualizer.Plotting
@@ -8,11 +8,11 @@ namespace Visualizer.Plotting
 	{
 		readonly double gap;
 
-		_Range<Time> range;
-		IEnumerable<_Range<Time>> graphRanges;
+		TimeRange range;
+		IEnumerable<TimeRange> graphRanges;
 
-		public override _Range<Time> Range { get { return range; } }
-		public override IEnumerable<_Range<Time>> GraphRanges { get { return graphRanges; } }
+		public override TimeRange Range { get { return range; } }
+		public override IEnumerable<TimeRange> GraphRanges { get { return graphRanges; } }
 
 		public WrappingTimeManager(Timer timer, Time width, double gap)
 			: base(timer, width)
@@ -29,42 +29,23 @@ namespace Visualizer.Plotting
 			double fractionalIntervals = intervals - wholeIntervals;
 
 			Time startTime = Time - (1 - gap) * Width;
-			float startPosition = (float)(fractionalIntervals + gap) % 1;
+			double startPosition = (fractionalIntervals + gap) % 1;
 			Time endTime = Time;
-			float endPosition = startPosition + (float)(1 - gap);
+			double endPosition = startPosition + (1 - gap);
+
+			range = new TimeRange(new Range<Time>((wholeIntervals + 0) * Width, (wholeIntervals + 1) * Width));
 
 			if (startTime >= wholeIntervals * Width)
-				graphRanges = new _Range<Time>[]
+				graphRanges = new TimeRange[]
 				{
-					new _Range<Time>
-					(
-						new Marker<Time>(startTime, startPosition),
-						new Marker<Time>(endTime, endPosition)
-					)
+					new TimeRange(new Range<Time>(startTime, endTime), new Range<double>(startPosition,endPosition))
 				};
 			else
-			{
-
-				graphRanges = new _Range<Time>[]
+				graphRanges = new TimeRange[]
 				{
-					new _Range<Time>
-					(
-						new Marker<Time>(startTime, startPosition),
-						new Marker<Time>(wholeIntervals * Width, 1)
-					),
-					new _Range<Time>
-					(
-						new Marker<Time>(wholeIntervals * Width, 0),
-						new Marker<Time>(endTime, endPosition - 1)
-					)
+					new TimeRange(new Range<Time>(startTime, wholeIntervals * Width), new Range<double>(startPosition, 1)),
+					new TimeRange(new Range<Time>(wholeIntervals * Width, endTime), new Range<double>(0, endPosition - 1))
 				};
-			}
-
-			range = new _Range<Time>
-			(
-				new Marker<Time>((wholeIntervals + 0) * Width, 0),
-				new Marker<Time>((wholeIntervals + 1) * Width, 1)
-			);
 		}
 	}
 }
