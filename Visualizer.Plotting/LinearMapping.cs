@@ -11,6 +11,8 @@ namespace Visualizer.Plotting
 
 		public Range<double> Input { get { return input; } }
 		public Range<double> Output { get { return output; } }
+		public double Offset { get { return offset; } }
+		public double Factor { get { return factor; } }
 
 		public double this[double value] { get { return offset + value * factor; } }
 
