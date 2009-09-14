@@ -6,25 +6,22 @@ namespace Visualizer.Plotting
 	{
 		readonly Range<double> input;
 		readonly Range<double> output;
+		readonly double offset;
+		readonly double factor;
 
 		public Range<double> Input { get { return input; } }
 		public Range<double> Output { get { return output; } }
 
-		public double this[double value] { get { return ToOutput(FromInput(value)); } }
+		public double this[double value] { get { return offset + value * factor; } }
 
 		public LinearMapping(Range<double> input, Range<double> output)
 		{
 			this.input = input;
 			this.output = output;
-		}
 
-		public double FromInput(double value)
-		{
-			return (value - input.Start) / (input.End - input.Start);
-		}
-		public double ToOutput(double value)
-		{
-			return output.Start + value * (output.End - output.Start);
+			double divisor = input.End - input.Start;
+			this.offset = (input.End * output.Start - input.Start * output.End) / divisor;
+			this.factor = (output.End - output.Start) / divisor;
 		}
 	}
 }

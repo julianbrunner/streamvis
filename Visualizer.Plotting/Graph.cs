@@ -65,6 +65,7 @@ namespace Visualizer.Plotting
 			int position = 0;
 			float[] vertices = new float[entries.Count() * 2];
 
+			// TODO: Does an array foreach improve performance significantly?
 			foreach (Entry entry in entries)
 			{
 				vertices[position++] = (float)entry.Time.Seconds;
