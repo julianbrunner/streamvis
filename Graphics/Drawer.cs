@@ -145,10 +145,10 @@ namespace Graphics
 
 			for (int character = 0; character < characters.Length; character++)
 			{
+				GL.NewList(characterLists + character, ListMode.Compile);
+				
 				Rectangle textureBounds = new Rectangle(new Point(character * characterSize.Width, 0), characterSize);
 				Rectangle worldBounds = new Rectangle(Point.Empty, characterSize);
-
-				GL.NewList(characterLists + character, ListMode.Compile);
 
 				GL.Begin(BeginMode.Quads);
 
