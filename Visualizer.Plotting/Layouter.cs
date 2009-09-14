@@ -38,12 +38,12 @@ namespace Visualizer.Plotting
 
 			GraphTransformation = Matrix4.Scale(graphsArea.Width, -graphsArea.Height, 1) * Matrix4.CreateTranslation(graphsArea.Left, graphsArea.Bottom, 0);
 		}
-		public PointF TransformGraph(float x, float y)
+		public PointF TransformGraph(double x, double y)
 		{
 			return new PointF
 			(
-				graphsArea.Left + x * graphsArea.Width,
-				graphsArea.Bottom - y * graphsArea.Height
+				(float)(graphsArea.Left + x * graphsArea.Width),
+				(float)(graphsArea.Bottom - y * graphsArea.Height)
 			);
 		}
 	}
