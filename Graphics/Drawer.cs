@@ -88,19 +88,19 @@ namespace Graphics
 
 			GL.End();
 		}
-		public void DrawLineStrip(IEnumerable<PointF> points, Matrix4 transformations, Color color, float width)
+		public void DrawLineStrip(IEnumerable<PointF> points, Matrix4 transformation, Color color, float width)
 		{
 			GL.MatrixMode(MatrixMode.Modelview);
-
 			GL.LoadIdentity();
-			GL.LoadMatrix(ref transformations);
+			GL.Translate(0.5f, 0.5f, 0);
+			GL.MultMatrix(ref transformation);
 
 			GL.LineWidth(width);
 			GL.Color3(color);
 
 			GL.Begin(BeginMode.LineStrip);
 
-			foreach (PointF point in points) GL.Vertex2(point.X + 0.5f, point.Y + 0.5f);
+			foreach (PointF point in points) GL.Vertex2(point.X, point.Y);
 
 			GL.End();
 

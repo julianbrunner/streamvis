@@ -47,14 +47,12 @@ namespace Visualizer.Plotting
 					Time endTime = segment.TimeRange.End.Value;
 					Time width = endTime - startTime;
 
-					//					IEnumerable<PointF> points = from entry in segment.Entries
-					//												 select layouter.TransformGraph
-					//												 (
-					//													timeRange.Map((float)((entry.Time - startTime) / width)),
-					//													valueRange.Map((float)((entry.Value - startValue) / height))
-					//												 );
-					//					
-					//					drawer.DrawLineStrip(points, Color, 1f);
+					//IEnumerable<PointF> points = from entry in segment.Entries
+					//                             select layouter.TransformGraph
+					//                             (
+					//                                timeRange.Map((float)((entry.Time - startTime) / width)),
+					//                                valueRange.Map((float)((entry.Value - startValue) / height))
+					//                             );
 
 					IEnumerable<PointF> points = from entry in segment.Entries
 												 select new PointF((float)entry.Time, (float)entry.Value);

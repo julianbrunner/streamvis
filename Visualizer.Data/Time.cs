@@ -109,7 +109,7 @@ namespace Visualizer.Data
 		}
 		public static double operator /(Time a, Time b)
 		{
-			return (double)a.ticks / (double)b.ticks;
+			return (double)a / (double)b;
 		}
 
 		public static Time operator %(Time a, Time b)
