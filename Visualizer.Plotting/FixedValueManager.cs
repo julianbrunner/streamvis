@@ -1,26 +1,16 @@
+using Extensions;
+
 namespace Visualizer.Plotting
 {
 	public class FixedValueManager : ValueManager
 	{
-		readonly double rangeLow;
-		readonly double rangeHigh;
+		readonly ValueRange range;
 
-		public override _Range<double> Range
-		{
-			get
-			{
-				return new _Range<double>
-				(
-					new Marker<double>(rangeLow, 0),
-					new Marker<double>(rangeHigh, 1)
-				);
-			}
-		}
+		public override ValueRange Range { get { return range; } }
 
 		public FixedValueManager(double rangeLow, double rangeHigh)
 		{
-			this.rangeLow = rangeLow;
-			this.rangeHigh = rangeHigh;
+			this.range = new ValueRange(new Range<double>(rangeLow, rangeHigh));
 		}
 	}
 }

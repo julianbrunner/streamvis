@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Extensions;
 using Visualizer.Data;
 
 namespace Visualizer.Plotting
@@ -9,9 +10,9 @@ namespace Visualizer.Plotting
 		readonly DataManager dataManager;
 		readonly IEnumerable<Graph> graphs;
 
-		_Range<double> range;
+		ValueRange range;
 
-		public override _Range<double> Range { get { return range; } }
+		public override ValueRange Range { get { return range; } }
 
 		public FittingValueManager(DataManager dataManager, IEnumerable<Graph> graphs)
 		{
@@ -34,11 +35,7 @@ namespace Visualizer.Plotting
 						if (double.IsNaN(maximum) || entry.Value > maximum) maximum = entry.Value;
 					}
 
-			range = new _Range<double>
-			(
-				new Marker<double>(minimum, 0),
-				new Marker<double>(maximum, 1)
-			);
+			range = new ValueRange(new Range<double>(minimum, maximum));
 		}
 	}
 }
