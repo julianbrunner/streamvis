@@ -34,7 +34,7 @@ namespace Visualizer.Plotting
 			{
 				ValueRange valueRange = plotter.ValueManager.Range;
 
-				foreach (DataSegment segment in plotter.DataManager[entryData])
+				foreach (DataSegment segment in plotter.DataManager[this])
 				{
 					TimeRange timeRange = segment.TimeRange;
 

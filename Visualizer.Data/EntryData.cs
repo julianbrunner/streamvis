@@ -11,7 +11,7 @@ namespace Visualizer.Data
 
 		public static string XElementName { get { return "EntryData"; } }
 
-		public Entry[] this[Time startTime, Time endTime] { get { lock (entries) return cache[startTime, endTime]; } }
+		public Entry[] this[Range<Time> range] { get { lock (entries) return cache[range]; } }
 
 		public XElement XElement
 		{
@@ -33,7 +33,7 @@ namespace Visualizer.Data
 		public EntryData()
 		{
 			entries = new SearchList<Entry, Time>(entry => entry.Time);
-			cache = new EntryCache(new EntryResampler(entries, new Time(0.02)));
+			cache = new EntryCache(new EntryResampler(entries, new Time(0.1)));
 		}
 		public EntryData(XElement entryData)
 			: this()

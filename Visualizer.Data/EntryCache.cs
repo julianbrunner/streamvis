@@ -9,15 +9,13 @@ namespace Visualizer.Data
 		readonly SearchList<Range<Time>, Time> ranges = new SearchList<Range<Time>, Time>(range => range.Start);
 		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time);
 
-		public Entry[] this[Time startTime, Time endTime]
+		public Entry[] this[Range<Time> range]
 		{
 			get
 			{
-				Range<Time> requestRange = new Range<Time>(startTime, endTime);
-
-				foreach (Range<Time> missingRange in Exclude(requestRange.Single(), ranges))
+				foreach (Range<Time> missingRange in Exclude(range.Single(), ranges))
 				{
-					Fragment fragment = resampler[missingRange.Start, missingRange.End];
+					Fragment fragment = resampler[missingRange];
 
 					if (!fragment.IsEmpty)
 					{
@@ -45,7 +43,7 @@ namespace Visualizer.Data
 					}
 				}
 
-				return entries[requestRange];
+				return entries[range];
 			}
 		}
 

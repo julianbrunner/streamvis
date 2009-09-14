@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Visualizer.Data;
 using Visualizer.Plotting.Timing;
 
 namespace Visualizer.Plotting.Data
@@ -7,17 +6,17 @@ namespace Visualizer.Plotting.Data
 	public abstract class DataManager
 	{
 		readonly TimeManager timeManager;
-		readonly IEnumerable<EntryData> entryData;
+		readonly IEnumerable<Graph> graphs;
 
 		protected TimeManager TimeManager { get { return timeManager; } }
-		protected IEnumerable<EntryData> EntryData { get { return entryData; } }
+		protected IEnumerable<Graph> Graphs { get { return graphs; } }
 
-		public abstract IEnumerable<DataSegment> this[EntryData entryData] { get; }
+		public abstract IEnumerable<DataSegment> this[Graph graph] { get; }
 
-		protected DataManager(TimeManager timeManager, IEnumerable<EntryData> entryData)
+		protected DataManager(TimeManager timeManager, IEnumerable<Graph> graphs)
 		{
 			this.timeManager = timeManager;
-			this.entryData = entryData;
+			this.graphs = graphs;
 		}
 
 		public abstract void Update();

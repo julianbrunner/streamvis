@@ -10,11 +10,14 @@ namespace Visualizer.Data
 		readonly SearchList<Entry, Time> entries;
 		readonly Time sampleDistance;
 
-		public Fragment this[Time startTime, Time endTime]
+		public Fragment this[Range<Time> range]
 		{
 			get
 			{
 				if (entries.Count == 0) return Fragment.Empty;
+
+				Time startTime = range.Start;
+				Time endTime = range.End;
 
 				startTime = Time.Max(startTime, entries[0].Time);
 				endTime = Time.Min(endTime, entries[entries.Count - 1].Time);

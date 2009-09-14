@@ -48,7 +48,7 @@ namespace Visualizer
 				case PlotterType.Wrapping: timeManager = new WrappingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
 				default: throw new InvalidOperationException();
 			}
-			DataManager dataManager = new SimpleDataManager(timeManager, from graph in graphs select graph.EntryData);
+			DataManager dataManager = new SimpleDataManager(timeManager, graphs);
 			ValueManager valueManager;
 			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(dataManager, graphs);
 			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);

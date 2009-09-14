@@ -29,7 +29,7 @@ namespace Visualizer.Plotting.Values
 			double maximum = double.NaN;
 
 			foreach (Graph graph in graphs.Where(graph => graph.IsDrawn))
-				foreach (DataSegment graphSegment in dataManager[graph.EntryData])
+				foreach (DataSegment graphSegment in dataManager[graph])
 					foreach (Entry entry in graphSegment.Entries)
 					{
 						if (double.IsNaN(minimum) || entry.Value < minimum) minimum = entry.Value;
