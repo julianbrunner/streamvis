@@ -4,6 +4,7 @@ TODO: Review Range/Marker and transformation pipeline design.
 TODO: Rename Graphics to Graphics2D
 TODO: Find a better name for Extensions
 TODO: Search for leftover floats
+TODO: Check namespace-folder mapping
 TODO:	Enforce strict conventions on naming and content of Extension method classes (i.e. only extension methods that extend
 		the class after which the extension method class is named can go in there)
 
