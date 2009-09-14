@@ -33,7 +33,7 @@ namespace Visualizer.Plotting
 			{
 				Layouter layouter = plotter.Layouter;
 
-				Range<double> valueRange = plotter.ValueManager.Range;
+				_Range<double> valueRange = plotter.ValueManager.Range;
 
 				double startValue = valueRange.Start.Value;
 				double endValue = valueRange.End.Value;
@@ -41,7 +41,7 @@ namespace Visualizer.Plotting
 
 				foreach (DataSegment segment in plotter.DataManager[entryData])
 				{
-					Range<Time> timeRange = segment.TimeRange;
+					_Range<Time> timeRange = segment.TimeRange;
 
 					Time startTime = segment.TimeRange.Start.Value;
 					Time endTime = segment.TimeRange.End.Value;
@@ -49,8 +49,8 @@ namespace Visualizer.Plotting
 
 					Matrix4 transformation = Matrix4.Identity;
 
-					transformation *= Matrix4.CreateTranslation(-(float)startTime, -(float)startValue, 0);
-					transformation *= Matrix4.Scale(1 / (float)width, 1 / (float)height, 0);
+					transformation *= Matrix4.CreateTranslation(-(float)startTime.Seconds, -(float)startValue, 0);
+					transformation *= Matrix4.Scale(1 / (float)width.Seconds, 1 / (float)height, 0);
 					transformation *= Matrix4.Scale(timeRange.End.Position - timeRange.Start.Position, valueRange.End.Position - valueRange.Start.Position, 0);
 					transformation *= Matrix4.CreateTranslation(timeRange.Start.Position, valueRange.Start.Position, 0);
 					transformation *= layouter.GraphTransformation;
@@ -67,7 +67,7 @@ namespace Visualizer.Plotting
 
 			foreach (Entry entry in entries)
 			{
-				vertices[position++] = (float)entry.Time;
+				vertices[position++] = (float)entry.Time.Seconds;
 				vertices[position++] = (float)entry.Value;
 			}
 

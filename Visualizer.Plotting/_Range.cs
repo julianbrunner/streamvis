@@ -1,6 +1,6 @@
 namespace Visualizer.Plotting
 {
-	public struct Range<T>
+	public struct _Range<T>
 	{
 		readonly Marker<T> start;
 		readonly Marker<T> end;
@@ -8,7 +8,7 @@ namespace Visualizer.Plotting
 		public Marker<T> Start { get { return start; } }
 		public Marker<T> End { get { return end; } }
 
-		public Range(Marker<T> start, Marker<T> end)
+		public _Range(Marker<T> start, Marker<T> end)
 		{
 			this.start = start;
 			this.end = end;

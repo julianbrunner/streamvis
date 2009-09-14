@@ -6,22 +6,22 @@ namespace Visualizer.Plotting
 {
 	public class ContinuousTimeManager : TimeManager
 	{
-		public override Range<Time> Range
+		public override _Range<Time> Range
 		{
 			get
 			{
-				return new Range<Time>
+				return new _Range<Time>
 				(
 					new Marker<Time>(Time - Width, 0),
 					new Marker<Time>(Time, 1)
 				);
 			}
 		}
-		public override IEnumerable<Range<Time>> GraphRanges
+		public override IEnumerable<_Range<Time>> GraphRanges
 		{
 			get
 			{
-				yield return new Range<Time>
+				yield return new _Range<Time>
 				(
 					new Marker<Time>(Time - Width, 0),
 					new Marker<Time>(Time, 1)

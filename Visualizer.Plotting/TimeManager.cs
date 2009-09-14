@@ -15,11 +15,11 @@ namespace Visualizer.Plotting
 		/// <summary>
 		/// Gets the overall Range, in which graphs are drawn.
 		/// </summary>
-		public abstract Range<Time> Range { get; }
+		public abstract _Range<Time> Range { get; }
 		/// <summary>
 		/// Gets the specific sub Ranges, in which the graphs are drawn.
 		/// </summary>
-		public abstract IEnumerable<Range<Time>> GraphRanges { get; }
+		public abstract IEnumerable<_Range<Time>> GraphRanges { get; }
 
 		protected TimeManager(Timer timer, Time width)
 		{

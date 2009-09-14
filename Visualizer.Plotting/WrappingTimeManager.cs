@@ -8,11 +8,11 @@ namespace Visualizer.Plotting
 	{
 		readonly double gap;
 
-		Range<Time> range;
-		IEnumerable<Range<Time>> graphRanges;
+		_Range<Time> range;
+		IEnumerable<_Range<Time>> graphRanges;
 
-		public override Range<Time> Range { get { return range; } }
-		public override IEnumerable<Range<Time>> GraphRanges { get { return graphRanges; } }
+		public override _Range<Time> Range { get { return range; } }
+		public override IEnumerable<_Range<Time>> GraphRanges { get { return graphRanges; } }
 
 		public WrappingTimeManager(Timer timer, Time width, double gap)
 			: base(timer, width)
@@ -34,9 +34,9 @@ namespace Visualizer.Plotting
 			float endPosition = startPosition + (float)(1 - gap);
 
 			if (startTime >= wholeIntervals * Width)
-				graphRanges = new Range<Time>[]
+				graphRanges = new _Range<Time>[]
 				{
-					new Range<Time>
+					new _Range<Time>
 					(
 						new Marker<Time>(startTime, startPosition),
 						new Marker<Time>(endTime, endPosition)
@@ -45,14 +45,14 @@ namespace Visualizer.Plotting
 			else
 			{
 
-				graphRanges = new Range<Time>[]
+				graphRanges = new _Range<Time>[]
 				{
-					new Range<Time>
+					new _Range<Time>
 					(
 						new Marker<Time>(startTime, startPosition),
 						new Marker<Time>(wholeIntervals * Width, 1)
 					),
-					new Range<Time>
+					new _Range<Time>
 					(
 						new Marker<Time>(wholeIntervals * Width, 0),
 						new Marker<Time>(endTime, endPosition - 1)
@@ -60,7 +60,7 @@ namespace Visualizer.Plotting
 				};
 			}
 
-			range = new Range<Time>
+			range = new _Range<Time>
 			(
 				new Marker<Time>((wholeIntervals + 0) * Width, 0),
 				new Marker<Time>((wholeIntervals + 1) * Width, 1)

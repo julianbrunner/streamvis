@@ -5,11 +5,11 @@ namespace Visualizer.Plotting
 		readonly double rangeLow;
 		readonly double rangeHigh;
 
-		public override Range<double> Range
+		public override _Range<double> Range
 		{
 			get
 			{
-				return new Range<double>
+				return new _Range<double>
 				(
 					new Marker<double>(rangeLow, 0),
 					new Marker<double>(rangeHigh, 1)

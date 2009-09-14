@@ -63,15 +63,15 @@ namespace Visualizer.Plotting
 			{
 				foreach (Graph graph in graphs) graph.Draw();
 
-				Range<Time> timeRange = timeManager.Range;
-				Range<double> valueRange = valueManager.Range;
+				_Range<Time> timeRange = timeManager.Range;
+				_Range<double> valueRange = valueManager.Range;
 
 				DrawAxisX(timeRange, valueRange);
 				DrawAxisY(timeRange, valueRange);
 			}
 		}
 
-		void DrawAxisX(Range<Time> timeRange, Range<double> valueRange)
+		void DrawAxisX(_Range<Time> timeRange, _Range<double> valueRange)
 		{
 			PointF start = layouter.TransformGraph(timeRange.Map(0), valueRange.Map(0));
 			PointF end = layouter.TransformGraph(timeRange.Map(1), valueRange.Map(0));
@@ -94,7 +94,7 @@ namespace Visualizer.Plotting
 					drawer.DrawNumber((timeRange.Start.Value + time).Seconds, new PointF(position.X, position.Y + 7), color, TextAlignment.Center);
 				}
 		}
-		void DrawAxisY(Range<Time> timeRange, Range<double> valueRange)
+		void DrawAxisY(_Range<Time> timeRange, _Range<double> valueRange)
 		{
 			PointF start = layouter.TransformGraph(timeRange.Map(0), valueRange.Map(0));
 			PointF end = layouter.TransformGraph(timeRange.Map(0), valueRange.Map(1));

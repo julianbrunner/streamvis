@@ -9,9 +9,9 @@ namespace Visualizer.Plotting
 		readonly DataManager dataManager;
 		readonly IEnumerable<Graph> graphs;
 
-		Range<double> range;
+		_Range<double> range;
 
-		public override Range<double> Range { get { return range; } }
+		public override _Range<double> Range { get { return range; } }
 
 		public FittingValueManager(DataManager dataManager, IEnumerable<Graph> graphs)
 		{
@@ -34,7 +34,7 @@ namespace Visualizer.Plotting
 						if (double.IsNaN(maximum) || entry.Value > maximum) maximum = entry.Value;
 					}
 
-			range = new Range<double>
+			range = new _Range<double>
 			(
 				new Marker<double>(minimum, 0),
 				new Marker<double>(maximum, 1)

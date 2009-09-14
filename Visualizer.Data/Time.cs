@@ -109,7 +109,7 @@ namespace Visualizer.Data
 		}
 		public static double operator /(Time a, Time b)
 		{
-			return (double)a / (double)b;
+			return a.Seconds / b.Seconds;
 		}
 
 		public static Time operator %(Time a, Time b)
@@ -117,15 +117,6 @@ namespace Visualizer.Data
 			long remainder = a.ticks % b.ticks;
 			if (remainder < 0) remainder += b.ticks;
 			return new Time(remainder);
-		}
-
-		public static explicit operator float(Time time)
-		{
-			return (float)time.Seconds;
-		}
-		public static explicit operator double(Time time)
-		{
-			return time.Seconds;
 		}
 
 		static bool Equals(Time a, Time b)
