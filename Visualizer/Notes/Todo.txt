@@ -1,5 +1,5 @@
 TODO: See what limits performance at lower sample rates
-TODO: Fix 6E+1 bug
+
 TODO: Rename Graphics to Graphics2D
 TODO: Find a better name for Extensions
 TODO: Search for leftover floats

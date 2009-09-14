@@ -47,7 +47,7 @@ namespace Graphics
 		{
 			string decimalString = number.ToString("0.##", CultureInfo.InvariantCulture);
 			string scientificString = number.ToString("0.##E+0", CultureInfo.InvariantCulture);
-			string text = decimalString.Length <= scientificString.Length ? decimalString : scientificString;
+			string text = decimalString.Length <= 10 ? decimalString : scientificString;
 
 			int width = text.Length * characterSize.Width;
 
