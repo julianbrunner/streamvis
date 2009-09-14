@@ -2,7 +2,7 @@ using System;
 
 namespace Utility
 {
-	public static class Ranges
+	public static class RangeExtensions
 	{
 		public static bool IsEmpty<T>(this Range<T> range) where T : IComparable<T>
 		{

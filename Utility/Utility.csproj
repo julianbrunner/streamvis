@@ -36,11 +36,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enumerables.cs" />
+    <Compile Include="EnumerableUtility.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="LinearMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Range.cs" />
-    <Compile Include="Ranges.cs" />
+    <Compile Include="RangeExtensions.cs" />
     <Compile Include="SearchList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

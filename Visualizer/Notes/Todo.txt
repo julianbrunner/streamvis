@@ -1,8 +1,5 @@
 TODO: See what limits performance at lower sample rates
 
-TODO:	Enforce strict conventions on naming and content of Extension method classes (i.e. only extension methods that extend
-		the class after which the extension method class is named can go in there)
-
 TODO: Find reason for stop'n'go on Windows (maybe it's the same as on Linux?)
 TODO: Test the stop'n'go issue on Ingo's PC
 TODO: Test difference between Debug and Release builds on different machines

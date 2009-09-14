@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Utility
 {
-	public static class Enumerables
+	public static class EnumerableExtensions
 	{
 		public static IEnumerable<T> Separate<T>(this IEnumerable<T> source, T separator)
 		{
@@ -54,22 +54,6 @@ namespace Utility
 			if (source == null) throw new ArgumentNullException("source");
 
 			return source.Aggregate(string.Empty, (seed, current) => seed + current);
-		}
-		public static IEnumerable<T> Construct<T>(params IEnumerable<T>[] sources)
-		{
-			if (sources == null) throw new ArgumentNullException("sources");
-
-			foreach (IEnumerable<T> source in sources)
-			{
-				if (source == null) throw new ArgumentException("sources");
-
-				foreach (T item in source)
-					yield return item;
-			}
-		}
-		public static IEnumerable<T> Single<T>(this T item)
-		{
-			yield return item;
 		}
 	}
 }
