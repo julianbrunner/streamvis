@@ -101,9 +101,26 @@ namespace Utility
 		{
 			foreach (TValue item in items) Remove(item);
 		}
+		/// <summary>
+		/// Returns the index of the first item which has a key that is greater than or equal to <paramref name="key"/>.
+		/// If no such item is found, Count is returned.
+		/// </summary>
+		/// <param name="key">The key to search for.</param>
+		/// <returns>The index of the first item which has a key that is greater than or equal to <paramref name="key"/>.</returns>
 		public int FindIndex(TKey key)
 		{
-			return FindIndex(key, 0, items.Count);
+			int startIndex = 0;
+			int endIndex = items.Count;
+
+			while (startIndex != endIndex)
+			{
+				int index = (startIndex + endIndex) / 2;
+
+				if (comparer.Compare(keySelector(items[index]), key) >= 0) endIndex = index;
+				else startIndex = index + 1;
+			}
+
+			return startIndex;
 		}
 		public IEnumerator<TValue> GetEnumerator()
 		{
@@ -113,26 +130,6 @@ namespace Utility
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			return GetEnumerator();
-		}
-
-		/// <summary>
-		/// Returns the index of the first item which has a key that is greater than or equal to <paramref name="key"/>.
-		/// If no such item is found, <paramref name="endIndex"/> is returned.
-		/// </summary>
-		/// <param name="key">The key to search for.</param>
-		/// <param name="startIndex">The start index of the range to search.</param>
-		/// <param name="endIndex">The end index of the range to search.</param>
-		/// <returns>The index of the first item which has a key that is greater than or equal to <paramref name="key"/>.</returns>
-		int FindIndex(TKey key, int startIndex, int endIndex)
-		{
-			if (startIndex == endIndex) return startIndex;
-
-			int index = (startIndex + endIndex) / 2;
-
-			if (comparer.Compare(keySelector(items[index]), key) > 0) return FindIndex(key, startIndex, index);
-			if (comparer.Compare(keySelector(items[index]), key) < 0) return FindIndex(key, index + 1, endIndex);
-
-			return index;
 		}
 	}
 }

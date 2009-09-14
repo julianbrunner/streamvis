@@ -33,15 +33,9 @@ namespace Utility
 
 			if (!enumerator.MoveNext()) yield break;
 
-			T start = enumerator.Current;
-			T end = default(T);
+			T last = enumerator.Current;
 
-			while (enumerator.MoveNext())
-			{
-				end = enumerator.Current;
-				yield return new Range<T>(start, end);
-				start = enumerator.Current;
-			}
+			while (enumerator.MoveNext()) yield return new Range<T>(last, last = enumerator.Current);
 		}
 		public static IEnumerable<string> ToStrings<T>(this IEnumerable<T> source)
 		{
