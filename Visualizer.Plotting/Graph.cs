@@ -39,10 +39,8 @@ namespace Visualizer.Plotting
 
 					Matrix4 transformation = Matrix4.Identity;
 
-					//transformation *= Matrix4.CreateTranslation(-(float)startTime.Seconds, -(float)startValue, 0);
-					//transformation *= Matrix4.Scale(1 / (float)width.Seconds, 1 / (float)height, 0);
-					//transformation *= Matrix4.Scale(timeRange.End.Position - timeRange.Start.Position, valueRange.End.Position - valueRange.Start.Position, 0);
-					//transformation *= Matrix4.CreateTranslation(timeRange.Start.Position, valueRange.Start.Position, 0);
+					transformation *= Matrix4.Scale((float)timeRange.Mapping.Factor, (float)valueRange.Mapping.Factor, 0);
+					transformation *= Matrix4.CreateTranslation((float)timeRange.Mapping.Offset, (float)valueRange.Mapping.Offset, 0);
 					transformation *= plotter.Layouter.GraphTransformation;
 
 					drawer.DrawLineStrip(GetVertices(segment.Entries), transformation, Color, 1f);
