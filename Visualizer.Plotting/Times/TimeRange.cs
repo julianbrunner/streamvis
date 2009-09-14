@@ -1,4 +1,5 @@
 ﻿using Extensions;
+using OpenTK.Math;
 using Visualizer.Data;
 
 namespace Visualizer.Plotting
@@ -10,6 +11,7 @@ namespace Visualizer.Plotting
 
 		public Range<Time> Range { get { return range; } }
 		public LinearMapping Mapping { get { return mapping; } }
+		public Matrix4 Transformation { get { return Matrix4.Scale((float)mapping.Factor, 1, 1) * Matrix4.CreateTranslation((float)mapping.Offset, 0, 0); } }
 
 		public TimeRange(Range<Time> range, Range<double> output)
 		{

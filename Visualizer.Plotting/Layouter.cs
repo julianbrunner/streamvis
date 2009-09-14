@@ -36,7 +36,7 @@ namespace Visualizer.Plotting
 				area.Height - borderTop - borderBottom
 			);
 
-			GraphTransformation = Matrix4.Scale(graphsArea.Width, -graphsArea.Height, 0) * Matrix4.CreateTranslation(graphsArea.Left, graphsArea.Bottom, 0);
+			GraphTransformation = Matrix4.Scale(graphsArea.Width, -graphsArea.Height, 1) * Matrix4.CreateTranslation(graphsArea.Left, graphsArea.Bottom, 0);
 		}
 		public PointF TransformGraph(float x, float y)
 		{

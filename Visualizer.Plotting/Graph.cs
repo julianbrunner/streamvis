@@ -37,11 +37,7 @@ namespace Visualizer.Plotting
 				{
 					TimeRange timeRange = segment.TimeRange;
 
-					Matrix4 transformation = Matrix4.Identity;
-
-					transformation *= Matrix4.Scale((float)timeRange.Mapping.Factor, (float)valueRange.Mapping.Factor, 0);
-					transformation *= Matrix4.CreateTranslation((float)timeRange.Mapping.Offset, (float)valueRange.Mapping.Offset, 0);
-					transformation *= plotter.Layouter.GraphTransformation;
+					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * plotter.Layouter.GraphTransformation;
 
 					drawer.DrawLineStrip(GetVertices(segment.Entries), transformation, Color, 1f);
 				}
