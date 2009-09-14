@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using Graphics;
 using OpenTK.Math;
 using Visualizer.Data;
@@ -37,26 +35,20 @@ namespace Visualizer.Plotting
 				{
 					TimeRange timeRange = segment.TimeRange;
 
+					float[] vertices = new float[segment.Entries.Length * 2];
+
+					int position = 0;
+					foreach (Entry entry in segment.Entries)
+					{
+						vertices[position++] = (float)entry.Time.Seconds;
+						vertices[position++] = (float)entry.Value;
+					}
+
 					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * plotter.Layouter.Transformation;
 
-					drawer.DrawLineStrip(GetVertices(segment.Entries), transformation, Color, 1f);
+					drawer.DrawLineStrip(vertices, transformation, Color, 1);
 				}
 			}
-		}
-
-		static float[] GetVertices(IEnumerable<Entry> entries)
-		{
-			int position = 0;
-			float[] vertices = new float[entries.Count() * 2];
-
-			// TODO: Does an array foreach improve performance significantly?
-			foreach (Entry entry in entries)
-			{
-				vertices[position++] = (float)entry.Time.Seconds;
-				vertices[position++] = (float)entry.Value;
-			}
-
-			return vertices;
 		}
 
 		// TODO: Reenable graph extension

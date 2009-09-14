@@ -12,14 +12,7 @@ namespace Visualizer.Data
 
 		public static string XElementName { get { return "EntryData"; } }
 
-		public IEnumerable<Entry> this[Time startTime, Time endTime]
-		{
-			get
-			{
-				lock (entries)
-					return cache[startTime, endTime];
-			}
-		}
+		public Entry[] this[Time startTime, Time endTime] { get { lock (entries) return cache[startTime, endTime]; } }
 
 		public XElement XElement
 		{
@@ -51,8 +44,7 @@ namespace Visualizer.Data
 
 		public void Clear()
 		{
-			lock (entries)
-				entries.Clear();
+			lock (entries) entries.Clear();
 		}
 		public void Add(Entry entry)
 		{

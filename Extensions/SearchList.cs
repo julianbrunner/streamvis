@@ -31,7 +31,7 @@ namespace Extensions
 				return items[index];
 			}
 		}
-		public IEnumerable<TValue> this[int startIndex, int endIndex]
+		public TValue[] this[int startIndex, int endIndex]
 		{
 			get
 			{
@@ -45,19 +45,19 @@ namespace Extensions
 				return buffer;
 			}
 		}
-		public IEnumerable<TValue> this[TKey startKey, TKey endKey]
+		public TValue[] this[TKey startKey, TKey endKey]
 		{
 			get
 			{
 				int startIndex = FindIndex(startKey);
 				int endIndex = FindIndex(endKey);
 
-				if (startIndex == endIndex) return Enumerable.Empty<TValue>();
+				if (startIndex == endIndex) return new TValue[0];
 
 				return this[startIndex, endIndex];
 			}
 		}
-		public IEnumerable<TValue> this[Range<TKey> range] { get { return this[range.Start, range.End]; } }
+		public TValue[] this[Range<TKey> range] { get { return this[range.Start, range.End]; } }
 
 		public int Count { get { return items.Count; } }
 

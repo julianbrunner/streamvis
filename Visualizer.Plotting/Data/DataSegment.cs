@@ -6,12 +6,12 @@ namespace Visualizer.Plotting
 	public class DataSegment
 	{
 		readonly TimeRange timeRange;
-		readonly IEnumerable<Entry> entries;
+		readonly Entry[] entries;
 
 		public TimeRange TimeRange { get { return timeRange; } }
-		public IEnumerable<Entry> Entries { get { return entries; } }
+		public Entry[] Entries { get { return entries; } }
 
-		public DataSegment(TimeRange timeRange, IEnumerable<Entry> entries)
+		public DataSegment(TimeRange timeRange, Entry[] entries)
 		{
 			this.timeRange = timeRange;
 			this.entries = entries;

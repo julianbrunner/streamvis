@@ -9,7 +9,7 @@ namespace Visualizer.Data
 		readonly SearchList<Range<Time>, Time> ranges = new SearchList<Range<Time>, Time>(range => range.Start);
 		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time);
 
-		public IEnumerable<Entry> this[Time startTime, Time endTime]
+		public Entry[] this[Time startTime, Time endTime]
 		{
 			get
 			{
