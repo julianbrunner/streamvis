@@ -61,13 +61,13 @@
     <Compile Include="Times\WrappingTimeManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Extensions\Extensions.csproj">
-      <Project>{0A695C12-A6F0-45E9-9BD8-2948681C074A}</Project>
-      <Name>Extensions</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Graphics\Graphics.csproj">
       <Project>{9CFCF6A1-6763-4108-851F-E2A8869968B2}</Project>
       <Name>Graphics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}</Project>
+      <Name>Utility</Name>
     </ProjectReference>
     <ProjectReference Include="..\Visualizer.Data\Visualizer.Data.csproj">
       <Project>{188C1B70-DD61-4EEA-B733-8379A3866CF2}</Project>

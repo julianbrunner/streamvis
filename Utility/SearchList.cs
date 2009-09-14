@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
-namespace Extensions
+namespace Utility
 {
 	public class SearchList<TValue, TKey> : IEnumerable<TValue>
 	{

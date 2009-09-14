@@ -1,4 +1,4 @@
-﻿namespace Extensions
+﻿namespace Utility
 {
 	public struct LinearMapping
 	{

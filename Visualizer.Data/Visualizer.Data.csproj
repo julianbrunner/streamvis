@@ -55,9 +55,9 @@
     <Compile Include="Fragment.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Extensions\Extensions.csproj">
-      <Project>{0A695C12-A6F0-45E9-9BD8-2948681C074A}</Project>
-      <Name>Extensions</Name>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}</Project>
+      <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

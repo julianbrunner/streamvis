@@ -1,5 +1,5 @@
-﻿using Extensions;
-using OpenTK.Math;
+﻿using OpenTK.Math;
+using Utility;
 
 namespace Visualizer.Plotting
 {

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Extensions;
+using Utility;
 using Visualizer.Data;
 
 namespace Visualizer.Plotting

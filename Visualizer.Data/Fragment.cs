@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Extensions;
+using Utility;
 
 namespace Visualizer.Data
 {

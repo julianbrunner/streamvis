@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Extensions;
+using Utility;
 using Visualizer.Data;
 
 namespace Visualizer.Plotting
@@ -14,7 +14,7 @@ namespace Visualizer.Plotting
 		public ContinuousTimeManager(Timer timer, Time width) : base(timer, width) { }
 
 		public override void Update()
-		{			
+		{
 			base.Update();
 
 			range = new TimeRange(new Range<Time>(Time - Width, Time));

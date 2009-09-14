@@ -1,6 +1,6 @@
 using System;
 
-namespace Extensions
+namespace Utility
 {
 	public static class Ranges
 	{

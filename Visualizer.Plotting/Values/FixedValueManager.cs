@@ -1,4 +1,4 @@
-using Extensions;
+using Utility;
 
 namespace Visualizer.Plotting
 {
