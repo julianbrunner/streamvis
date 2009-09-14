@@ -1,6 +1,4 @@
-﻿using Extensions;
-
-namespace Visualizer.Plotting
+﻿namespace Extensions
 {
 	public struct LinearMapping
 	{

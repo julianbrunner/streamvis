@@ -46,7 +46,6 @@
     <Compile Include="ContinuousTimeManager.cs" />
     <Compile Include="TimeRange.cs" />
     <Compile Include="ValueRange.cs" />
-    <Compile Include="LinearMapping.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="FittingValueManager.cs" />
     <Compile Include="FixedValueManager.cs" />
