@@ -47,15 +47,7 @@ namespace Visualizer.Plotting
 					Time endTime = segment.TimeRange.End.Value;
 					Time width = endTime - startTime;
 
-					//IEnumerable<PointF> points = from entry in segment.Entries
-					//                             select layouter.TransformGraph
-					//                             (
-					//                                timeRange.Map((float)((entry.Time - startTime) / width)),
-					//                                valueRange.Map((float)((entry.Value - startValue) / height))
-					//                             );
-
-					IEnumerable<PointF> points = from entry in segment.Entries
-												 select new PointF((float)entry.Time, (float)entry.Value);
+					float[] vertices = GetVertices(segment);
 
 					Matrix4 transformation = Matrix4.Identity;
 
@@ -66,9 +58,23 @@ namespace Visualizer.Plotting
 					transformation *= Matrix4.Scale(layouter.GraphsArea.Width, -layouter.GraphsArea.Height, 0);
 					transformation *= Matrix4.CreateTranslation(layouter.GraphsArea.Left, layouter.GraphsArea.Bottom, 0);
 
-					drawer.DrawLineStrip(points, transformation, Color, 1f);
+					drawer.DrawLineStrip(vertices, transformation, Color, 1f);
 				}
 			}
+		}
+
+		private static float[] GetVertices(DataSegment segment)
+		{
+			int position = 0;
+			float[] vertices = new float[segment.Entries.Count() * 2];
+
+			foreach (Entry entry in segment.Entries)
+			{
+				vertices[position++] = (float)entry.Time;
+				vertices[position++] = (float)entry.Value;
+			}
+
+			return vertices;
 		}
 
 		// TODO: Reenable graph extension

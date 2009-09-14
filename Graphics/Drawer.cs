@@ -21,7 +21,9 @@ namespace Graphics
 
 		public Drawer()
 		{
-			// TODO: Reenable anti-aliasing
+			// TODO: Reenable anti-aliasing, set line width to 1.5f
+
+			GL.EnableClientState(EnableCap.VertexArray);
 
 			GL.Enable(EnableCap.Texture2D);
 			//GL.Enable(EnableCap.LineSmooth);
@@ -88,7 +90,7 @@ namespace Graphics
 
 			GL.End();
 		}
-		public void DrawLineStrip(IEnumerable<PointF> points, Matrix4 transformation, Color color, float width)
+		public void DrawLineStrip(float[] vertices, Matrix4 transformation, Color color, float width)
 		{
 			GL.MatrixMode(MatrixMode.Modelview);
 			GL.LoadIdentity();
@@ -98,11 +100,8 @@ namespace Graphics
 			GL.LineWidth(width);
 			GL.Color3(color);
 
-			GL.Begin(BeginMode.LineStrip);
-
-			foreach (PointF point in points) GL.Vertex2(point.X, point.Y);
-
-			GL.End();
+			GL.VertexPointer(2, VertexPointerType.Float, 0, vertices);
+			GL.DrawArrays(BeginMode.LineStrip, 0, vertices.Length / 2);
 
 			GL.LoadIdentity();
 		}
