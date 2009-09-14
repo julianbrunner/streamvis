@@ -57,12 +57,12 @@ namespace Visualizer.Plotting
 					//					drawer.DrawLineStrip(points, Color, 1f);
 
 					IEnumerable<PointF> points = from entry in segment.Entries
-												 select new PointF((float)entry.Time.Seconds, (float)entry.Value);
+												 select new PointF((float)entry.Time, (float)entry.Value);
 
 					Matrix4 transformation = Matrix4.Identity;
 
-					transformation *= Matrix4.CreateTranslation((float)-startTime.Seconds, (float)-startValue, 0);
-					transformation *= Matrix4.Scale((float)(1.0 / width.Seconds), (float)(1.0 / height), 0);
+					transformation *= Matrix4.CreateTranslation(-(float)startTime, -(float)startValue, 0);
+					transformation *= Matrix4.Scale(1 / (float)width, 1 / (float)height, 0);
 					transformation *= Matrix4.Scale(timeRange.End.Position - timeRange.Start.Position, valueRange.End.Position - valueRange.Start.Position, 0);
 					transformation *= Matrix4.CreateTranslation(timeRange.Start.Position, valueRange.Start.Position, 0);
 					transformation *= Matrix4.Scale(layouter.GraphsArea.Width, -layouter.GraphsArea.Height, 0);

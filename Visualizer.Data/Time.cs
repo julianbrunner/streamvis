@@ -119,6 +119,15 @@ namespace Visualizer.Data
 			return new Time(remainder);
 		}
 
+		public static explicit operator float(Time time)
+		{
+			return (float)time.Seconds;
+		}
+		public static explicit operator double(Time time)
+		{
+			return time.Seconds;
+		}
+
 		static bool Equals(Time a, Time b)
 		{
 			return a.ticks == b.ticks;
