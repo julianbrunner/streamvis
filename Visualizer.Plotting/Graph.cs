@@ -47,28 +47,25 @@ namespace Visualizer.Plotting
 					Time endTime = segment.TimeRange.End.Value;
 					Time width = endTime - startTime;
 
-					float[] vertices = GetVertices(segment);
-
 					Matrix4 transformation = Matrix4.Identity;
 
 					transformation *= Matrix4.CreateTranslation(-(float)startTime, -(float)startValue, 0);
 					transformation *= Matrix4.Scale(1 / (float)width, 1 / (float)height, 0);
 					transformation *= Matrix4.Scale(timeRange.End.Position - timeRange.Start.Position, valueRange.End.Position - valueRange.Start.Position, 0);
 					transformation *= Matrix4.CreateTranslation(timeRange.Start.Position, valueRange.Start.Position, 0);
-					transformation *= Matrix4.Scale(layouter.GraphsArea.Width, -layouter.GraphsArea.Height, 0);
-					transformation *= Matrix4.CreateTranslation(layouter.GraphsArea.Left, layouter.GraphsArea.Bottom, 0);
+					transformation *= layouter.GraphTransformation;
 
-					drawer.DrawLineStrip(vertices, transformation, Color, 1f);
+					drawer.DrawLineStrip(GetVertices(segment.Entries), transformation, Color, 1f);
 				}
 			}
 		}
 
-		private static float[] GetVertices(DataSegment segment)
+		static float[] GetVertices(IEnumerable<Entry> entries)
 		{
 			int position = 0;
-			float[] vertices = new float[segment.Entries.Count() * 2];
+			float[] vertices = new float[entries.Count() * 2];
 
-			foreach (Entry entry in segment.Entries)
+			foreach (Entry entry in entries)
 			{
 				vertices[position++] = (float)entry.Time;
 				vertices[position++] = (float)entry.Value;

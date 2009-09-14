@@ -1,5 +1,6 @@
 using System.Drawing;
 using Graphics;
+using OpenTK.Math;
 
 namespace Visualizer.Plotting
 {
@@ -13,8 +14,8 @@ namespace Visualizer.Plotting
 		readonly Viewport viewport;
 
 		Rectangle graphsArea;
-		
-		public Rectangle GraphsArea { get { return graphsArea; } }
+
+		public Matrix4 GraphTransformation { get; private set; }
 
 		public Layouter(Viewport viewport)
 		{
@@ -24,16 +25,18 @@ namespace Visualizer.Plotting
 		public virtual void Update()
 		{
 			// TODO: Try and do this in a more straightforward way if performance allows it
-			
+
 			Rectangle area = viewport.ClientRectangle;
 
-			this.graphsArea = new Rectangle
+			graphsArea = new Rectangle
 			(
 				area.Left + borderLeft,
 				area.Top + borderTop,
 				area.Width - borderLeft - borderRight,
 				area.Height - borderTop - borderBottom
 			);
+
+			GraphTransformation = Matrix4.Scale(graphsArea.Width, -graphsArea.Height, 0) * Matrix4.CreateTranslation(graphsArea.Left, graphsArea.Bottom, 0);
 		}
 		public PointF TransformGraph(float x, float y)
 		{
