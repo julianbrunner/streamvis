@@ -1,7 +1,7 @@
 ﻿using OpenTK.Math;
 using Utility;
 
-namespace Visualizer.Plotting
+namespace Visualizer.Plotting.Values
 {
 	public struct ValueRange
 	{

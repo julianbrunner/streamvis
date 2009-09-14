@@ -1,6 +1,6 @@
 using Utility;
 
-namespace Visualizer.Plotting
+namespace Visualizer.Plotting.Values
 {
 	public class FixedValueManager : ValueManager
 	{

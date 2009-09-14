@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Utility;
 using Visualizer.Data;
 
-namespace Visualizer.Plotting
+namespace Visualizer.Plotting.Timing
 {
 	public class WrappingTimeManager : TimeManager
 	{

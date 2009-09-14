@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Visualizer.Data;
+﻿using Visualizer.Data;
+using Visualizer.Plotting.Timing;
 
-namespace Visualizer.Plotting
+namespace Visualizer.Plotting.Data
 {
 	public class DataSegment
 	{

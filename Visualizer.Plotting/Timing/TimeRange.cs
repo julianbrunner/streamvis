@@ -2,7 +2,7 @@
 using Utility;
 using Visualizer.Data;
 
-namespace Visualizer.Plotting
+namespace Visualizer.Plotting.Timing
 {
 	public struct TimeRange
 	{

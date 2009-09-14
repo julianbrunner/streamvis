@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Visualizer.Data;
+using Visualizer.Plotting.Timing;
 
-namespace Visualizer.Plotting
+namespace Visualizer.Plotting.Data
 {
 	public class SimpleDataManager : DataManager
 	{

@@ -2,6 +2,9 @@ using System.Drawing;
 using Graphics;
 using OpenTK.Math;
 using Visualizer.Data;
+using Visualizer.Plotting.Data;
+using Visualizer.Plotting.Timing;
+using Visualizer.Plotting.Values;
 
 namespace Visualizer.Plotting
 {

@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using Graphics;
 using Visualizer.Data;
+using Visualizer.Plotting.Data;
+using Visualizer.Plotting.Timing;
+using Visualizer.Plotting.Values;
 
 namespace Visualizer.Plotting
 {

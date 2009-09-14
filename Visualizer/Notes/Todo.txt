@@ -1,7 +1,5 @@
 TODO: See what limits performance at lower sample rates
 
-TODO: Search for leftover floats
-TODO: Check namespace-folder mapping
 TODO:	Enforce strict conventions on naming and content of Extension method classes (i.e. only extension methods that extend
 		the class after which the extension method class is named can go in there)
 

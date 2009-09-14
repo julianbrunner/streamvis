@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Utility;
 using Visualizer.Data;
+using Visualizer.Plotting.Data;
 
-namespace Visualizer.Plotting
+namespace Visualizer.Plotting.Values
 {
 	public class FittingValueManager : ValueManager
 	{
