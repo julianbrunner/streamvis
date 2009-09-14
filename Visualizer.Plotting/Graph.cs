@@ -31,8 +31,6 @@ namespace Visualizer.Plotting
 		{
 			if (IsDrawn)
 			{
-				Layouter layouter = plotter.Layouter;
-
 				_Range<double> valueRange = plotter.ValueManager.Range;
 
 				double startValue = valueRange.Start.Value;
@@ -53,7 +51,7 @@ namespace Visualizer.Plotting
 					transformation *= Matrix4.Scale(1 / (float)width.Seconds, 1 / (float)height, 0);
 					transformation *= Matrix4.Scale(timeRange.End.Position - timeRange.Start.Position, valueRange.End.Position - valueRange.Start.Position, 0);
 					transformation *= Matrix4.CreateTranslation(timeRange.Start.Position, valueRange.Start.Position, 0);
-					transformation *= layouter.GraphTransformation;
+					transformation *= plotter.Layouter.GraphTransformation;
 
 					drawer.DrawLineStrip(GetVertices(segment.Entries), transformation, Color, 1f);
 				}
