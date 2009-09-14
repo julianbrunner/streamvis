@@ -5,8 +5,8 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using Graphics.Transformations;
 using OpenTK.Graphics;
+using OpenTK.Math;
 
 namespace Graphics
 {
@@ -22,7 +22,7 @@ namespace Graphics
 		public Drawer()
 		{
 			// TODO: Reenable anti-aliasing
-			
+
 			GL.Enable(EnableCap.Texture2D);
 			//GL.Enable(EnableCap.LineSmooth);
 			GL.Enable(EnableCap.Blend);
@@ -59,7 +59,7 @@ namespace Graphics
 			}
 
 			GL.MatrixMode(MatrixMode.Modelview);
-			
+
 			GL.LoadIdentity();
 			GL.Translate((int)position.X, (int)position.Y, 0);
 
@@ -88,13 +88,13 @@ namespace Graphics
 
 			GL.End();
 		}
-		public void DrawLineStrip(IEnumerable<PointF> points, IEnumerable<Transformation> transformations, Color color, float width)
+		public void DrawLineStrip(IEnumerable<PointF> points, Matrix4 transformations, Color color, float width)
 		{
 			GL.MatrixMode(MatrixMode.Modelview);
-			
+
 			GL.LoadIdentity();
-			transformations.Apply();
-			
+			GL.LoadMatrix(ref transformations);
+
 			GL.LineWidth(width);
 			GL.Color3(color);
 
@@ -103,7 +103,7 @@ namespace Graphics
 			foreach (PointF point in points) GL.Vertex2(point.X + 0.5f, point.Y + 0.5f);
 
 			GL.End();
-			
+
 			GL.LoadIdentity();
 		}
 

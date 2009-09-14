@@ -50,10 +50,6 @@
     <Compile Include="IUpdateable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextAlignment.cs" />
-    <Compile Include="Transformations\Scaling.cs" />
-    <Compile Include="Transformations\Transformation.cs" />
-    <Compile Include="Transformations\Transformations.cs" />
-    <Compile Include="Transformations\Translation.cs" />
     <Compile Include="Viewport.cs">
       <SubType>UserControl</SubType>
     </Compile>
