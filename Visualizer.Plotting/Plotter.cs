@@ -48,12 +48,12 @@ namespace Visualizer.Plotting
 		{
 			if (IsUpdated)
 			{
+				// TODO: This looks random
+				layouter.Update();
 				timeManager.Update();
+				foreach (Graph graph in graphs) graph.Update();
 				segmentManager.Update();
 				valueManager.Update();
-				layouter.Update();
-
-				foreach (Graph graph in graphs) graph.Update();
 			}
 		}
 		public void Draw()
