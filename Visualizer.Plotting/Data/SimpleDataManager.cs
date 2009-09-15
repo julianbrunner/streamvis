@@ -22,7 +22,7 @@ namespace Visualizer.Plotting.Data
 			{
 				List<DataSegment> segmentList = new List<DataSegment>();
 
-				foreach (TimeRange timeRange in graphRanges) segmentList.Add(new DataSegment(timeRange, graph.EntryData[timeRange.Range]));
+				foreach (TimeRange timeRange in graphRanges) segmentList.Add(new DataSegment(timeRange, graph.EntryCache[timeRange.Range]));
 
 				segments[graph] = segmentList;
 			}

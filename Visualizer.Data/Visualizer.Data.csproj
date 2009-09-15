@@ -50,9 +50,6 @@
     <Compile Include="Stream.cs" />
     <Compile Include="Time.cs" />
     <Compile Include="Timer.cs" />
-    <Compile Include="EntryCache.cs" />
-    <Compile Include="EntryResampler.cs" />
-    <Compile Include="Fragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utility\Utility.csproj">

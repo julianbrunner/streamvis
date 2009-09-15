@@ -13,10 +13,14 @@ namespace Visualizer.Plotting
 		readonly Plotter plotter;
 		readonly Drawer drawer;
 		readonly EntryData entryData;
+		readonly EntryResampler entryResampler;
+		readonly EntryCache entryCache;
 
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
 		public EntryData EntryData { get { return entryData; } }
+		public EntryResampler EntryResampler { get { return entryResampler; } }
+		public EntryCache EntryCache { get { return entryCache; } }
 
 		// TODO: Pass the components one-by-one, removed properties from Plotter
 		public Graph(Plotter plotter, Drawer drawer, EntryData entryData)
@@ -24,6 +28,8 @@ namespace Visualizer.Plotting
 			this.plotter = plotter;
 			this.drawer = drawer;
 			this.entryData = entryData;
+			this.entryResampler = new EntryResampler(entryData.Entries, new Time(0.1));
+			this.entryCache = new EntryCache(entryResampler);
 
 			IsDrawn = true;
 		}

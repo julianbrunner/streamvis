@@ -43,6 +43,9 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\EntryCache.cs" />
+    <Compile Include="Data\EntryResampler.cs" />
+    <Compile Include="Data\Fragment.cs" />
     <Compile Include="Data\PerPixelEntryData.cs" />
     <Compile Include="Data\PerSecondEntryData.cs" />
     <Compile Include="Timing\ContinuousTimeManager.cs" />
