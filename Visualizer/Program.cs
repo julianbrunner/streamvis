@@ -17,7 +17,7 @@ namespace Visualizer
 				const int column1 = 0;
 				const int column2 = 2;
 				const int column3 = 6;
-				const int column4 = 22;
+				const int column4 = 25;
 
 				#region Help Message
 				Console.WriteLine();
@@ -62,12 +62,12 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-de");
+				Write(column2, "-noe");
 				Write(column4, "Disables the graph extension feature. When graph extension is enabled, all graphs that have at least one data entry are extended across the whole width of the coordinate system using known adjacent values.");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-t:(c|s:<c>|w:<c>)");
+				Write(column2, "-t:(c|s:[<c>]|w:[<c>])");
 				Write(column4, "Lets you specify the type of plotter that is used. The default value is \"c\".");
 				Console.WriteLine();
 				Console.WriteLine();
@@ -75,12 +75,12 @@ namespace Visualizer
 				Write(column4, "Continuous plotter. The graphs are drawn across the entire plotting-area, the most recent data entry lies on the right border of the plotting-area.");
 				Console.WriteLine();
 				Console.WriteLine();
-				Write(column3, "s:<c>");
-				Write(column4, "Shifting plotter. The graphs will shift <c> times the plotting-area width to the left whenever the most recent data entry reaches the right border of the plotting-area.");
+				Write(column3, "s:[<c>]");
+				Write(column4, "Shifting plotter. The graphs will shift <c> times the plotting-area width to the left whenever the most recent data entry reaches the right border of the plotting-area. The default value for <c> is \"0.8\".");
 				Console.WriteLine();
 				Console.WriteLine();
-				Write(column3, "w:<c>");
-				Write(column4, "Wrapping plotter. The graphs don't move at all, once the most recent data entry reaches the right border, the graphs wrap around and draw over the oldest entries starting from the left. The most recent data entry will push a gap of <c> times the plotting-area width in front of it.");
+				Write(column3, "w:[<c>]");
+				Write(column4, "Wrapping plotter. The graphs don't move at all, once the most recent data entry reaches the right border, the graphs wrap around and draw over the oldest entries starting from the left. The most recent data entry will push a gap of <c> times the plotting-area width in front of it. The default value for <c> is \"0.2\".");
 				Console.WriteLine();
 				Console.WriteLine();
 
@@ -89,16 +89,16 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-s:(s:<c>|p:<c>)");
+				Write(column2, "-s:(s:[<c>]|p:[<c>])");
 				Write(column4, "Lets you specify the sampler type and settings used for drawing graphs. The default value is \"s:0.1\".");
 				Console.WriteLine();
 				Console.WriteLine();
-				Write(column3, "s:<c>");
-				Write(column4, "Per-Second sampler. The data will be resampled to <c> entries per second.");
+				Write(column3, "s:[<c>]");
+				Write(column4, "Per-Second sampler. The data will be resampled to <c> entries per second. The default value for <c> is \"10\".");
 				Console.WriteLine();
 				Console.WriteLine();
-				Write(column3, "p:<c>");
-				Write(column4, "Per-Pixel sampler. The data will be resampled to <c> entries per pixel.");
+				Write(column3, "p:[<c>]");
+				Write(column4, "Per-Pixel sampler. The data will be resampled to <c> entries per pixel. The default value for <c> is \"0.1\".");
 				Console.WriteLine();
 				Console.WriteLine();
 

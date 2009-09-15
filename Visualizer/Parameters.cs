@@ -54,7 +54,7 @@ namespace Visualizer
 						try { plotterWidth = new Time(double.Parse(details[1])); }
 						catch (FormatException) { InvalidParameter(parameter); }
 						break;
-					case "-de":
+					case "-noe":
 						if (details.Length != 1) InvalidParameter(parameter);
 						extendGraphs = false;
 						break;
@@ -63,17 +63,17 @@ namespace Visualizer
 						switch (details[1])
 						{
 							case "c":
-								if (details.Length != 2) InvalidParameter(parameter);
+								if (details.Length > 2) InvalidParameter(parameter);
 								plotterType = PlotterType.Continuous;
 								break;
 							case "s":
-								if (details.Length != 3) InvalidParameter(parameter);
+								if (details.Length > 3) InvalidParameter(parameter);
 								plotterType = PlotterType.Shiftting;
 								try { plotterTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.8; }
 								catch (FormatException) { InvalidParameter(parameter); }
 								break;
 							case "w":
-								if (details.Length != 3) InvalidParameter(parameter);
+								if (details.Length > 3) InvalidParameter(parameter);
 								plotterType = PlotterType.Wrapping;
 								try { plotterTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.2; }
 								catch (FormatException) { InvalidParameter(parameter); }
@@ -95,13 +95,13 @@ namespace Visualizer
 						switch (details[1])
 						{
 							case "s":
-								if (details.Length != 3) InvalidParameter(parameter);
+								if (details.Length > 3) InvalidParameter(parameter);
 								samplerType = SamplerType.PerSecond;
 								try { samplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 10; }
 								catch (FormatException) { InvalidParameter(parameter); }
 								break;
 							case "p":
-								if (details.Length != 3) InvalidParameter(parameter);
+								if (details.Length > 3) InvalidParameter(parameter);
 								samplerType = SamplerType.PerPixel;
 								try { samplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 0.1; }
 								catch (FormatException) { InvalidParameter(parameter); }
