@@ -20,8 +20,6 @@ namespace Graphics
 
 		public Drawer()
 		{
-			// TODO: Reenable anti-aliasing, set line width to 1.5f
-
 			GL.EnableClientState(EnableCap.VertexArray);
 
 			GL.Enable(EnableCap.Texture2D);
@@ -66,7 +64,7 @@ namespace Graphics
 
 			GL.Color3(color);
 			GL.BindTexture(TextureTarget.Texture2D, textTextures[0]);
-						
+
 			foreach (char character in text) GL.CallList(characterLists + characters.IndexOf(character));
 
 			GL.BindTexture(TextureTarget.Texture2D, 0);
@@ -143,22 +141,22 @@ namespace Graphics
 			for (int character = 0; character < characters.Length; character++)
 			{
 				GL.NewList(characterLists + character, ListMode.Compile);
-				
+
 				GL.Begin(BeginMode.Quads);
 				DrawCharacter(character);
 				GL.End();
-				
+
 				GL.Translate(characterSize.Width, 0, 0);
 
 				GL.EndList();
 			}
 		}
-		
+
 		static void DrawCharacter(int character)
 		{
 			Rectangle textureBounds = new Rectangle(new Point(character * characterSize.Width, 0), characterSize);
 			Rectangle worldBounds = new Rectangle(Point.Empty, characterSize);
-			
+
 			GL.TexCoord2(textureBounds.Left, textureBounds.Top); GL.Vertex2(worldBounds.Left, worldBounds.Top);
 			GL.TexCoord2(textureBounds.Right, textureBounds.Top); GL.Vertex2(worldBounds.Right, worldBounds.Top);
 			GL.TexCoord2(textureBounds.Right, textureBounds.Bottom); GL.Vertex2(worldBounds.Right, worldBounds.Bottom);
