@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Utility;
+using System.Linq;
 
 namespace Visualizer.Data
 {
@@ -59,27 +60,27 @@ namespace Visualizer.Data
 
 			foreach (Range<Time> exclusion in exclusions)
 			{
-				IEnumerable<Range<Time>> currentRanges = rangeList.ToArray();
+				Range<Time>[] oldRanges = rangeList.ToArray();
 
 				rangeList.Clear();
-				foreach (Range<Time> range in currentRanges) rangeList.AddRange(Exclude(range, exclusion));
+
+				foreach (Range<Time> range in oldRanges)
+				{
+					Range<Time> intersection = Intersect(range, exclusion);
+
+					if (intersection.IsEmpty()) rangeList.Add(range);
+					else
+					{
+						Range<Time> range1 = new Range<Time>(range.Start, exclusion.Start);
+						Range<Time> range2 = new Range<Time>(exclusion.End, range.End);
+
+						if (!range1.IsEmpty()) rangeList.Add(range1);
+						if (!range2.IsEmpty()) rangeList.Add(range2);
+					}
+				}
 			}
 
 			return rangeList;
-		}
-		static IEnumerable<Range<Time>> Exclude(Range<Time> range, Range<Time> exclusion)
-		{
-			exclusion = Intersect(range, exclusion);
-
-			if (exclusion.IsEmpty()) yield return range;
-			else
-			{
-				Range<Time> range1 = new Range<Time>(range.Start, exclusion.Start);
-				Range<Time> range2 = new Range<Time>(exclusion.End, range.End);
-
-				if (!range1.IsEmpty()) yield return range1;
-				if (!range2.IsEmpty()) yield return range2;
-			}
 		}
 		static Range<Time> Intersect(Range<Time> a, Range<Time> b)
 		{
