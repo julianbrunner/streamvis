@@ -106,6 +106,7 @@ namespace Visualizer
 								try { samplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 0.1; }
 								catch (FormatException) { InvalidParameter(parameter); }
 								break;
+							default: throw new InvalidOperationException("Invalid sampler type: " + details[1]);
 						}
 						break;
 					case "-ix":

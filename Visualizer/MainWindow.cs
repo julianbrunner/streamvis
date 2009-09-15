@@ -20,12 +20,12 @@ namespace Visualizer
 		readonly Drawer drawer;
 		readonly Data.Timer timer;
 		readonly Parameters parameters;
+		readonly List<Graph> graphs;
 		readonly Layouter layouter;
 		readonly TimeManager timeManager;
 		readonly SegmentManager segmentManager;
 		readonly ValueManager valueManager;
 		readonly Plotter plotter;
-		readonly List<Graph> graphs;
 		readonly VisibleFrameCounter frameCounter;
 
 		Source source;
@@ -48,6 +48,7 @@ namespace Visualizer
 			this.parameters = parameters;
 
 			Console.WriteLine("Initializing plotter...");
+			this.graphs = new List<Graph>();
 			this.layouter = new Layouter(viewport);
 			switch (parameters.PlotterType)
 			{
@@ -60,7 +61,6 @@ namespace Visualizer
 			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(segmentManager, graphs);
 			else this.valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
 			this.plotter = new Plotter(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
-			this.graphs = new List<Graph>();
 
 			System.Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
