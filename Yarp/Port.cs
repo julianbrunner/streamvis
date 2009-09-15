@@ -50,10 +50,9 @@ namespace Yarp
 
 		static List ParseBottle(IntPtr bottle)
 		{
-			int size = Bottle_Size(bottle);
-			Packet[] packets = new Packet[size];
+			Packet[] packets = new Packet[Bottle_Size(bottle)];
 
-			for (int i = 0; i < size; i++) packets[i] = ParseValue(Bottle_GetValue(bottle, i));
+			for (int i = 0; i < packets.Length; i++) packets[i] = ParseValue(Bottle_GetValue(bottle, i));
 
 			return new List(packets);
 		}

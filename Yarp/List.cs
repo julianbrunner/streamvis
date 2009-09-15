@@ -18,6 +18,10 @@ namespace Yarp
 		{
 			this.packets = packets.ToArray();
 		}
+		internal List(Packet[] packets)
+		{
+			this.packets = packets;
+		}
 		
 		public IEnumerator<Packet> GetEnumerator()
 		{
