@@ -21,5 +21,7 @@ namespace Visualizer.Plotting.Data
 			this.entryResampler = new EntryResampler(entryData.Entries);
 			this.entryCache = new EntryCache(entryResampler);
 		}
+
+		public virtual void Update() { }
 	}
 }

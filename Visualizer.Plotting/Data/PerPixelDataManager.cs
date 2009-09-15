@@ -1,5 +1,4 @@
-﻿using System;
-using Visualizer.Data;
+﻿using Visualizer.Data;
 using Visualizer.Plotting.Timing;
 
 namespace Visualizer.Plotting.Data
@@ -16,17 +15,14 @@ namespace Visualizer.Plotting.Data
 			this.sampleFrequency = sampleFrequency;
 			this.layouter = layouter;
 			this.timeManager = timeManager;
-
-			this.layouter.ViewportChanged += layouter_ViewportChanged;
-
-			layouter_ViewportChanged(this, EventArgs.Empty);
 		}
 
-		void layouter_ViewportChanged(object sender, EventArgs e)
+		public override void Update()
 		{
+			base.Update();
+
 			int width = layouter.Area.Width;
 			Time time = timeManager.Range.Range.End - timeManager.Range.Range.Start;
-
 			double pixelsPerSecond = width / time.Seconds;
 
 			EntryResampler.SampleDistance = new Time(1.0) / (sampleFrequency * pixelsPerSecond);

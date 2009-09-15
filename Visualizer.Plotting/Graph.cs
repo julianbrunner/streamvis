@@ -28,7 +28,10 @@ namespace Visualizer.Plotting
 			IsDrawn = true;
 		}
 
-		public void Update() { }
+		public void Update()
+		{
+			dataManager.Update();
+		}
 		public void Draw()
 		{
 			if (IsDrawn)

@@ -16,7 +16,14 @@ namespace Visualizer.Plotting.Data
 		public Time SampleDistance
 		{
 			get { return sampleDistance; }
-			set { sampleDistance = value; OnSampleDistanceChanged(); }
+			set
+			{
+				if (sampleDistance != value)
+				{
+					sampleDistance = value;
+					OnSampleDistanceChanged();
+				}
+			}
 		}
 
 		public CacheFragment this[Range<Time> range]
