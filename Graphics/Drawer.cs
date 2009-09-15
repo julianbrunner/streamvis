@@ -97,6 +97,7 @@ namespace Graphics
 
 			GL.VertexPointer(2, VertexPointerType.Float, 0, vertices);
 			GL.DrawArrays(BeginMode.LineStrip, 0, vertices.Length / 2);
+			GL.VertexPointer(2, VertexPointerType.Float, 0, IntPtr.Zero);
 
 			GL.LoadIdentity();
 		}

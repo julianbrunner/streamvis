@@ -33,7 +33,7 @@ namespace Visualizer.Data
 		public EntryData()
 		{
 			entries = new SearchList<Entry, Time>(entry => entry.Time);
-			cache = new EntryCache(new EntryResampler(entries, new Time(0.1)));
+			cache = new EntryCache(new EntryResampler(entries, new Time(0.02)));
 		}
 		public EntryData(XElement entryData)
 			: this()
