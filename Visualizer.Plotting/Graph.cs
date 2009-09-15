@@ -5,6 +5,7 @@ using Visualizer.Data;
 using Visualizer.Plotting.Data;
 using Visualizer.Plotting.Timing;
 using Visualizer.Plotting.Values;
+using Utility;
 
 namespace Visualizer.Plotting
 {
@@ -16,11 +17,10 @@ namespace Visualizer.Plotting
 		readonly EntryResampler entryResampler;
 		readonly EntryCache entryCache;
 
+		public Entry[] this[Range<Time> range] { get { lock (entryData.Entries) return entryCache[range]; } }
+
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
-		public EntryData EntryData { get { return entryData; } }
-		public EntryResampler EntryResampler { get { return entryResampler; } }
-		public EntryCache EntryCache { get { return entryCache; } }
 
 		// TODO: Pass the components one-by-one, removed properties from Plotter
 		public Graph(Plotter plotter, Drawer drawer, EntryData entryData)
