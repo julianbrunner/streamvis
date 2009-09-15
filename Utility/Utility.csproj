@@ -36,6 +36,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArrayBuffer.cs" />
     <Compile Include="EnumerableUtility.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="LinearMapping.cs" />
