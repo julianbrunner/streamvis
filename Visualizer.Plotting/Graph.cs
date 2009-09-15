@@ -10,7 +10,9 @@ namespace Visualizer.Plotting
 {
 	public class Graph
 	{
-		readonly Plotter plotter;
+		readonly Layouter layouter;
+		readonly ValueManager valueManager;
+		readonly SegmentManager segmentManager;
 		readonly Drawer drawer;
 		readonly DataManager dataManager;
 
@@ -18,10 +20,11 @@ namespace Visualizer.Plotting
 		public Color Color { get; set; }
 		public DataManager DataManager { get { return dataManager; } }
 
-		// TODO: Pass the components one-by-one, remove properties from Plotter
-		public Graph(Plotter plotter, Drawer drawer, DataManager dataManager)
+		public Graph(Layouter layouter, ValueManager valueManager, SegmentManager segmentManager, Drawer drawer, DataManager dataManager)
 		{
-			this.plotter = plotter;
+			this.layouter = layouter;
+			this.valueManager = valueManager;
+			this.segmentManager = segmentManager;
 			this.drawer = drawer;
 			this.dataManager = dataManager;
 
@@ -36,9 +39,9 @@ namespace Visualizer.Plotting
 		{
 			if (IsDrawn)
 			{
-				ValueRange valueRange = plotter.ValueManager.Range;
+				ValueRange valueRange = valueManager.Range;
 
-				foreach (DataSegment segment in plotter.SegmentManager[this])
+				foreach (DataSegment segment in segmentManager[this])
 				{
 					TimeRange timeRange = segment.TimeRange;
 
@@ -51,7 +54,7 @@ namespace Visualizer.Plotting
 						vertices[position++] = (float)entry.Value;
 					}
 
-					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * plotter.Layouter.Transformation;
+					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * layouter.Transformation;
 
 					drawer.DrawLineStrip(vertices, transformation, Color, 1);
 				}

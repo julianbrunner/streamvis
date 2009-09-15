@@ -252,7 +252,7 @@ namespace Visualizer
 
 				foreach (Stream stream in port.Streams)
 				{
-					Graph graph = new Graph(plotter, drawer, new PerPixelDataManager(stream.EntryData, 0.1, layouter, timeManager));
+					Graph graph = new Graph(layouter, valueManager, segmentManager, drawer, new PerPixelDataManager(stream.EntryData, 0.1, layouter, timeManager));
 					graph.Color = Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100));
 					graphs.Add(graph);
 
