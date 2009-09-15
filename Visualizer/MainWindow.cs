@@ -247,6 +247,7 @@ namespace Visualizer
 			{
 				ListViewGroup group = new ListViewGroup(port.Name);
 				streamsListView.Groups.Add(group);
+
 				foreach (Stream stream in port.Streams)
 				{
 					Graph graph = new Graph(plotter, drawer, stream.EntryData);

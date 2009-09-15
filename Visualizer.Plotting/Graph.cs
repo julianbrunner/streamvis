@@ -18,6 +18,7 @@ namespace Visualizer.Plotting
 		public Color Color { get; set; }
 		public EntryData EntryData { get { return entryData; } }
 
+		// TODO: Pass the components one-by-one, removed properties from Plotter
 		public Graph(Plotter plotter, Drawer drawer, EntryData entryData)
 		{
 			this.plotter = plotter;
