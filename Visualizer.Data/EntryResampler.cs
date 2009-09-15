@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Utility;
 
 namespace Visualizer.Data
@@ -44,11 +42,6 @@ namespace Visualizer.Data
 
 		static Entry Aggregate(SearchList<Entry, Time> source, Time startTime, Time endTime)
 		{
-			if (source.Count == 0)
-				throw new ArgumentException("The source stream is empty.");
-			if (source[0].Time > startTime || source[source.Count - 1].Time < endTime)
-				throw new ArgumentException("The specified range isn't fully covered with data.");
-
 			int startIndex = source.FindIndex(startTime);
 			int endIndex = source.FindIndex(endTime);
 
@@ -58,19 +51,22 @@ namespace Visualizer.Data
 			Entry afterEnd = source[endIndex];
 
 			double startFraction = (startTime - beforeStart.Time) / (afterStart.Time - beforeStart.Time);
-			double startValue = Interpolate(beforeStart.Value, afterStart.Value, startFraction);
+			double startValue = (1 - startFraction) * beforeStart.Value + startFraction * afterStart.Value;
 			Entry start = new Entry(startTime, startValue);
 			double endFraction = (endTime - beforeEnd.Time) / (afterEnd.Time - beforeEnd.Time);
-			double endValue = Interpolate(beforeEnd.Value, afterEnd.Value, endFraction);
+			double endValue = (1 - endFraction) * beforeEnd.Value + endFraction * afterEnd.Value;
 			Entry end = new Entry(endTime, endValue);
 
-			IEnumerable<Entry> entries = EnumerableUtility.Construct(start.Single(), source[startIndex, endIndex], end.Single());
-			double area = entries.GetRanges().Sum(range => (range.End.Time - range.Start.Time).Seconds * 0.5 * (range.Start.Value + range.End.Value));
+			double area = 0;
+			Entry last = start;
+			foreach (Entry entry in source[startIndex, endIndex]) area += GetArea(last, last = entry);
+			area += GetArea(last, end);
+
 			return new Entry(0.5 * (start.Time + end.Time), area / (end.Time - start.Time).Seconds);
 		}
-		static double Interpolate(double a, double b, double f)
+		static double GetArea(Entry start, Entry end)
 		{
-			return (1 - f) * a + f * b;
+			return 0.5 * (start.Value + end.Value) * (end.Time - start.Time).Seconds;
 		}
 	}
 }
