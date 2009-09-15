@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Windows.Forms;
 using Graphics;
 using OpenTK.Math;
 
@@ -31,9 +32,11 @@ namespace Visualizer.Plotting
 		public Layouter(Viewport viewport)
 		{
 			this.viewport = viewport;
+
+			this.viewport.Layout += viewport_Layout;
 		}
 
-		public virtual void Update()
+		void viewport_Layout(object sender, LayoutEventArgs e)
 		{
 			Rectangle clientArea = viewport.ClientRectangle;
 

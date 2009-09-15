@@ -47,8 +47,8 @@
     <Compile Include="Data\EntryCache.cs" />
     <Compile Include="Data\EntryResampler.cs" />
     <Compile Include="Data\CacheFragment.cs" />
-    <Compile Include="Data\PerPixelEntryData.cs" />
-    <Compile Include="Data\PerSecondEntryData.cs" />
+    <Compile Include="Data\PerPixelDataManager.cs" />
+    <Compile Include="Data\PerSecondDataManager.cs" />
     <Compile Include="Timing\ContinuousTimeManager.cs" />
     <Compile Include="Timing\ShiftingTimeManager.cs" />
     <Compile Include="Timing\TimeManager.cs" />
