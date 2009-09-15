@@ -1,6 +1,4 @@
-using System;
 using System.Drawing;
-using System.Windows.Forms;
 using Graphics;
 using OpenTK.Math;
 
@@ -14,8 +12,6 @@ namespace Visualizer.Plotting
 		const int borderBottom = 25;
 
 		readonly Viewport viewport;
-
-		public event EventHandler ViewportChanged;
 
 		public PointF this[double x, double y]
 		{
@@ -35,11 +31,9 @@ namespace Visualizer.Plotting
 		public Layouter(Viewport viewport)
 		{
 			this.viewport = viewport;
-
-			this.viewport.Layout += viewport_Layout;
 		}
 
-		void viewport_Layout(object sender, LayoutEventArgs e)
+		public virtual void Update()
 		{
 			Rectangle clientArea = viewport.ClientRectangle;
 
@@ -52,11 +46,6 @@ namespace Visualizer.Plotting
 			);
 
 			Transformation = Matrix4.Scale(Area.Width, -Area.Height, 1) * Matrix4.CreateTranslation(Area.Left, Area.Bottom, 0);
-		}
-
-		protected virtual void OnViewportChanged()
-		{
-			if (ViewportChanged != null) ViewportChanged(this, EventArgs.Empty);
 		}
 	}
 }

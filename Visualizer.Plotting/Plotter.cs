@@ -51,6 +51,7 @@ namespace Visualizer.Plotting
 				timeManager.Update();
 				segmentManager.Update();
 				valueManager.Update();
+				layouter.Update();
 
 				foreach (Graph graph in graphs) graph.Update();
 			}
