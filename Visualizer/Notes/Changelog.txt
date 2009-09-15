@@ -1,8 +1,12 @@
 Version 0.8
+	- Added new resampling options
+	- All incoming data is now captured and logged
+	- Various optimizations in all parts of the application
+	- Moved to VertexArrays for drawing LineStrips
 	- Moved to a more flexible dynamic caching solution
 	- Fixed various bugs
 	- Refactoring
-	- Various optimizations to the new caching
+	- Various optimizations in the new caching
 	- Went back to using properties
 	- Extended the Visualizer.Plotting design
 
