@@ -13,23 +13,18 @@ namespace Visualizer.Plotting
 	{
 		readonly Plotter plotter;
 		readonly Drawer drawer;
-		readonly EntryData entryData;
-		readonly EntryResampler entryResampler;
-		readonly EntryCache entryCache;
-
-		public Entry[] this[Range<Time> range] { get { lock (entryData.Entries) return entryCache[range]; } }
+		readonly DataManager dataManager;
 
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
+		public DataManager DataManager { get { return dataManager; } }
 
 		// TODO: Pass the components one-by-one, remove properties from Plotter
-		public Graph(Plotter plotter, Drawer drawer, EntryData entryData)
+		public Graph(Plotter plotter, Drawer drawer, DataManager dataManager)
 		{
 			this.plotter = plotter;
 			this.drawer = drawer;
-			this.entryData = entryData;
-			this.entryResampler = new EntryResampler(entryData.Entries, new Time(0.1));
-			this.entryCache = new EntryCache(entryResampler);
+			this.dataManager = dataManager;
 
 			IsDrawn = true;
 		}

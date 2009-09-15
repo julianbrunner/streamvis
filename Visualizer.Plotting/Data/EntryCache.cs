@@ -16,7 +16,7 @@ namespace Visualizer.Plotting.Data
 			{
 				foreach (Range<Time> missingRange in Exclude(range.Single(), ranges))
 				{
-					Fragment fragment = resampler[missingRange];
+					CacheFragment fragment = resampler[missingRange];
 
 					if (!fragment.IsEmpty)
 					{

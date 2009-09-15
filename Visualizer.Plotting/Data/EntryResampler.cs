@@ -9,11 +9,11 @@ namespace Visualizer.Plotting.Data
 		readonly SearchList<Entry, Time> entries;
 		readonly Time sampleDistance;
 
-		public Fragment this[Range<Time> range]
+		public CacheFragment this[Range<Time> range]
 		{
 			get
 			{
-				if (entries.Count == 0) return Fragment.Empty;
+				if (entries.Count == 0) return CacheFragment.Empty;
 
 				Time startTime = range.Start;
 				Time endTime = range.End;
@@ -24,14 +24,14 @@ namespace Visualizer.Plotting.Data
 				startTime = startTime.Ceiling(sampleDistance, Time.Zero);
 				endTime = endTime.Floor(sampleDistance, Time.Zero);
 
-				if (startTime >= endTime) return Fragment.Empty;
+				if (startTime >= endTime) return CacheFragment.Empty;
 
 				List<Entry> samples = new List<Entry>();
 
 				for (Time time = startTime; time < endTime; time += sampleDistance)
 					samples.Add(Aggregate(entries, time, time + sampleDistance));
 
-				return new Fragment(new Range<Time>(startTime, endTime), samples);
+				return new CacheFragment(new Range<Time>(startTime, endTime), samples);
 			}
 		}
 

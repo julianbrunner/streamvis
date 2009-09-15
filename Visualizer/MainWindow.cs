@@ -250,7 +250,7 @@ namespace Visualizer
 
 				foreach (Stream stream in port.Streams)
 				{
-					Graph graph = new Graph(plotter, drawer, stream.EntryData);
+					Graph graph = new Graph(plotter, drawer, null);
 					graph.Color = Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100));
 					graphs.Add(graph);
 

@@ -1,0 +1,23 @@
+using System.Collections.Generic;
+using Utility;
+using Visualizer.Data;
+
+namespace Visualizer.Plotting.Data
+{
+	public abstract class DataManager
+	{
+		readonly EntryData entryData;
+		readonly EntryResampler entryResampler;
+		readonly EntryCache entryCache;
+
+		public Entry[] this[Range<Time> range] { get { lock (entryData.Entries) return entryCache[range]; } }
+
+		protected DataManager(EntryData entryData)
+		{
+			this.entryData = entryData;
+			// TODO:
+			this.entryResampler = new EntryResampler(entryData.Entries, Time.Zero);
+			this.entryCache = new EntryCache(entryResampler);
+		}
+	}
+}
