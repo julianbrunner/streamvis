@@ -24,6 +24,7 @@ namespace Visualizer.Data
 
 						// TODO: Is this slow?
 						// TODO: Can this be implemented in a more readable way?
+						// TODO: Removing an item changes the indices!
 						int index = ranges.FindIndex(start);
 
 						if (index > 0 && ranges[index - 1].End == start)

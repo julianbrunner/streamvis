@@ -25,17 +25,12 @@ namespace Visualizer.Data
 				startTime = startTime.Ceiling(sampleDistance, Time.Zero);
 				endTime = endTime.Floor(sampleDistance, Time.Zero);
 
+				if (startTime >= endTime) return Fragment.Empty;
+
 				List<Entry> samples = new List<Entry>();
 
 				for (Time time = startTime; time < endTime; time += sampleDistance)
-				{
-					Time intervalStartTime = time;
-					Time intervalEndTime = time + sampleDistance;
-
-					samples.Add(Aggregate(entries, intervalStartTime, intervalEndTime));
-				}
-
-				if (samples.Count == 0) return Fragment.Empty;
+					samples.Add(Aggregate(entries, time, time + sampleDistance));
 
 				return new Fragment(new Range<Time>(startTime, endTime), samples);
 			}
