@@ -18,13 +18,14 @@ namespace Visualizer
 		const string title = "Yarp Visualizer";
 
 		readonly Drawer drawer;
-		readonly Data.Timer timer = new Data.Timer();
+		readonly Data.Timer timer;
+		readonly Parameters parameters;
 		readonly Layouter layouter;
 		readonly TimeManager timeManager;
 		readonly SegmentManager segmentManager;
 		readonly ValueManager valueManager;
 		readonly Plotter plotter;
-		readonly List<Graph> graphs = new List<Graph>();
+		readonly List<Graph> graphs;
 		readonly VisibleFrameCounter frameCounter;
 
 		Source source;
@@ -40,24 +41,29 @@ namespace Visualizer
 			viewport.ClearColor = parameters.BackgroundColor;
 			viewport.Layout += viewport_Layout;
 
-			drawer = new Drawer();
+			this.drawer = new Drawer();
+
+			this.timer = new Data.Timer();
+
+			this.parameters = parameters;
 
 			Console.WriteLine("Initializing plotter...");
-			layouter = new Layouter(viewport);
+			this.layouter = new Layouter(viewport);
 			switch (parameters.PlotterType)
 			{
-				case PlotterType.Continuous: timeManager = new ContinuousTimeManager(timer, parameters.PlotterWidth); break;
-				case PlotterType.Shiftting: timeManager = new ShiftingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
-				case PlotterType.Wrapping: timeManager = new WrappingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
+				case PlotterType.Continuous: this.timeManager = new ContinuousTimeManager(timer, parameters.PlotterWidth); break;
+				case PlotterType.Shiftting: this.timeManager = new ShiftingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
+				case PlotterType.Wrapping: this.timeManager = new WrappingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
 				default: throw new InvalidOperationException();
 			}
-			segmentManager = new SimpleSegmentManager(timeManager, graphs);
-			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(segmentManager, graphs);
-			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
-			plotter = new Plotter(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
+			this.segmentManager = new SimpleSegmentManager(timeManager, graphs);
+			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(segmentManager, graphs);
+			else this.valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
+			this.plotter = new Plotter(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
+			this.graphs = new List<Graph>();
 
 			System.Console.WriteLine("Initializing frame counter");
-			frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
+			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
 
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);
@@ -252,7 +258,15 @@ namespace Visualizer
 
 				foreach (Stream stream in port.Streams)
 				{
-					Graph graph = new Graph(layouter, valueManager, segmentManager, drawer, new PerPixelDataManager(stream.EntryData, 0.1, layouter, timeManager));
+					DataManager dataManager;
+					switch (parameters.SamplerType)
+					{
+						case SamplerType.PerSecond: dataManager = new PerSecondDataManager(stream.EntryData, parameters.SamplerFrequency); break;
+						case SamplerType.PerPixel: dataManager = new PerPixelDataManager(stream.EntryData, parameters.SamplerFrequency, layouter, timeManager); break;
+						default: throw new InvalidOperationException();
+					}
+
+					Graph graph = new Graph(layouter, valueManager, segmentManager, drawer, dataManager);
 					graph.Color = Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100));
 					graphs.Add(graph);
 
