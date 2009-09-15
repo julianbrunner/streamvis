@@ -19,8 +19,12 @@ namespace Visualizer
 
 		readonly Drawer drawer;
 		readonly Data.Timer timer = new Data.Timer();
-		readonly List<Graph> graphs = new List<Graph>();
+		readonly Layouter layouter;
+		readonly TimeManager timeManager;
+		readonly SegmentManager segmentManager;
+		readonly ValueManager valueManager;
 		readonly Plotter plotter;
+		readonly List<Graph> graphs = new List<Graph>();
 		readonly VisibleFrameCounter frameCounter;
 
 		Source source;
@@ -39,8 +43,7 @@ namespace Visualizer
 			drawer = new Drawer();
 
 			Console.WriteLine("Initializing plotter...");
-			Layouter layouter = new Layouter(viewport);
-			TimeManager timeManager;
+			layouter = new Layouter(viewport);
 			switch (parameters.PlotterType)
 			{
 				case PlotterType.Continuous: timeManager = new ContinuousTimeManager(timer, parameters.PlotterWidth); break;
@@ -48,8 +51,7 @@ namespace Visualizer
 				case PlotterType.Wrapping: timeManager = new WrappingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
 				default: throw new InvalidOperationException();
 			}
-			SegmentManager segmentManager = new SimpleSegmentManager(timeManager, graphs);
-			ValueManager valueManager;
+			segmentManager = new SimpleSegmentManager(timeManager, graphs);
 			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(segmentManager, graphs);
 			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
 			plotter = new Plotter(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
@@ -250,7 +252,7 @@ namespace Visualizer
 
 				foreach (Stream stream in port.Streams)
 				{
-					Graph graph = new Graph(plotter, drawer, null);
+					Graph graph = new Graph(plotter, drawer, new PerPixelDataManager(stream.EntryData, 0.1, layouter, timeManager));
 					graph.Color = Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100));
 					graphs.Add(graph);
 

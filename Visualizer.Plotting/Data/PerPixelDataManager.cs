@@ -1,24 +1,35 @@
-﻿using System.Windows.Forms;
-using Graphics;
+﻿using System;
 using Visualizer.Data;
+using Visualizer.Plotting.Timing;
 
 namespace Visualizer.Plotting.Data
 {
 	public class PerPixelDataManager : DataManager
 	{
-		double sampleFrequency;
+		readonly double sampleFrequency;
+		readonly Layouter layouter;
+		readonly TimeManager timeManager;
 
-		public PerPixelDataManager(EntryData entryData, double sampleFrequency, Viewport viewport)
+		public PerPixelDataManager(EntryData entryData, double sampleFrequency, Layouter layouter, TimeManager timeManager)
 			: base(entryData)
 		{
 			this.sampleFrequency = sampleFrequency;
+			this.layouter = layouter;
+			this.timeManager = timeManager;
 
-			viewport.Layout += viewport_Layout;
+			this.layouter.ViewportChanged += layouter_ViewportChanged;
+
+			layouter_ViewportChanged(this, EventArgs.Empty);
 		}
 
-		void viewport_Layout(object sender, LayoutEventArgs e)
+		void layouter_ViewportChanged(object sender, EventArgs e)
 		{
-			
+			int width = layouter.Area.Width;
+			Time time = timeManager.Range.Range.End - timeManager.Range.Range.Start;
+
+			double pixelsPerSecond = width / time.Seconds;
+
+			EntryResampler.SampleDistance = new Time(1.0) / (sampleFrequency * pixelsPerSecond);
 		}
 	}
 }

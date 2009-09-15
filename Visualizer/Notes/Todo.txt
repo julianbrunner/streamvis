@@ -1,3 +1,5 @@
+TODO: Maybe use more events? (i.e. why is the Layout event from the Viewport propagated but hardly any other events take place?)
+
 TODO: Find reason for stop'n'go on Windows (maybe it's the same as on Linux?)
 TODO: Test the stop'n'go issue on Ingo's PC
 TODO: Test difference between Debug and Release builds on different machines
