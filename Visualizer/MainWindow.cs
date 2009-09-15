@@ -48,11 +48,11 @@ namespace Visualizer
 				case PlotterType.Wrapping: timeManager = new WrappingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
 				default: throw new InvalidOperationException();
 			}
-			DataManager dataManager = new SimpleDataManager(timeManager, graphs);
+			SegmentManager segmentManager = new SimpleSegmentManager(timeManager, graphs);
 			ValueManager valueManager;
-			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(dataManager, graphs);
+			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(segmentManager, graphs);
 			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
-			plotter = new Plotter(drawer, graphs, timeManager, dataManager, valueManager, layouter, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
+			plotter = new Plotter(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
 
 			System.Console.WriteLine("Initializing frame counter");
 			frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);

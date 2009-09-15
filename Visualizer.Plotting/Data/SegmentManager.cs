@@ -3,7 +3,7 @@ using Visualizer.Plotting.Timing;
 
 namespace Visualizer.Plotting.Data
 {
-	public abstract class DataManager
+	public abstract class SegmentManager
 	{
 		readonly TimeManager timeManager;
 		readonly IEnumerable<Graph> graphs;
@@ -13,7 +13,7 @@ namespace Visualizer.Plotting.Data
 
 		public abstract IEnumerable<DataSegment> this[Graph graph] { get; }
 
-		protected DataManager(TimeManager timeManager, IEnumerable<Graph> graphs)
+		protected SegmentManager(TimeManager timeManager, IEnumerable<Graph> graphs)
 		{
 			this.timeManager = timeManager;
 			this.graphs = graphs;

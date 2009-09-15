@@ -4,13 +4,13 @@ using Visualizer.Plotting.Timing;
 
 namespace Visualizer.Plotting.Data
 {
-	public class SimpleDataManager : DataManager
+	public class SimpleSegmentManager : SegmentManager
 	{
 		Dictionary<Graph, IEnumerable<DataSegment>> segments = new Dictionary<Graph, IEnumerable<DataSegment>>();
 
 		public override IEnumerable<DataSegment> this[Graph graph] { get { return segments[graph]; } }
 
-		public SimpleDataManager(TimeManager timeManager, IEnumerable<Graph> graphs) : base(timeManager, graphs) { }
+		public SimpleSegmentManager(TimeManager timeManager, IEnumerable<Graph> graphs) : base(timeManager, graphs) { }
 
 		public override void Update()
 		{

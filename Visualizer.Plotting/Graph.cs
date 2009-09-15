@@ -22,7 +22,7 @@ namespace Visualizer.Plotting
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
 
-		// TODO: Pass the components one-by-one, removed properties from Plotter
+		// TODO: Pass the components one-by-one, remove properties from Plotter
 		public Graph(Plotter plotter, Drawer drawer, EntryData entryData)
 		{
 			this.plotter = plotter;
@@ -41,7 +41,7 @@ namespace Visualizer.Plotting
 			{
 				ValueRange valueRange = plotter.ValueManager.Range;
 
-				foreach (DataSegment segment in plotter.DataManager[this])
+				foreach (DataSegment segment in plotter.SegmentManager[this])
 				{
 					TimeRange timeRange = segment.TimeRange;
 

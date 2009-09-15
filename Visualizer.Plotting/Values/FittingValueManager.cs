@@ -8,16 +8,16 @@ namespace Visualizer.Plotting.Values
 {
 	public class FittingValueManager : ValueManager
 	{
-		readonly DataManager dataManager;
+		readonly SegmentManager segmentManager;
 		readonly IEnumerable<Graph> graphs;
 
 		ValueRange range;
 
 		public override ValueRange Range { get { return range; } }
 
-		public FittingValueManager(DataManager dataManager, IEnumerable<Graph> graphs)
+		public FittingValueManager(SegmentManager segmentManager, IEnumerable<Graph> graphs)
 		{
-			this.dataManager = dataManager;
+			this.segmentManager = segmentManager;
 			this.graphs = graphs;
 		}
 
@@ -29,7 +29,7 @@ namespace Visualizer.Plotting.Values
 			double maximum = double.NaN;
 
 			foreach (Graph graph in graphs.Where(graph => graph.IsDrawn))
-				foreach (DataSegment graphSegment in dataManager[graph])
+				foreach (DataSegment graphSegment in segmentManager[graph])
 					foreach (Entry entry in graphSegment.Entries)
 					{
 						if (double.IsNaN(minimum) || entry.Value < minimum) minimum = entry.Value;

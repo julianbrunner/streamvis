@@ -13,7 +13,7 @@ namespace Visualizer.Plotting
 		readonly Drawer drawer;
 		readonly IEnumerable<Graph> graphs;
 		readonly TimeManager timeManager;
-		readonly DataManager dataManager;
+		readonly SegmentManager segmentManager;
 		readonly ValueManager valueManager;
 		readonly Layouter layouter;
 		readonly int intervalsX;
@@ -23,17 +23,17 @@ namespace Visualizer.Plotting
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 		public TimeManager TimeManager { get { return timeManager; } }
-		public DataManager DataManager { get { return dataManager; } }
+		public SegmentManager SegmentManager { get { return segmentManager; } }
 		public ValueManager ValueManager { get { return valueManager; } }
 		public Layouter Layouter { get { return layouter; } }
 		public bool ExtendGraphs { get; set; }
 
-		public Plotter(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, DataManager dataManager, ValueManager valueManager, Layouter layouter, int intervalsX, int intervalsY, Color color)
+		public Plotter(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, SegmentManager segmentManager, ValueManager valueManager, Layouter layouter, int intervalsX, int intervalsY, Color color)
 		{
 			this.drawer = drawer;
 			this.graphs = graphs;
 			this.timeManager = timeManager;
-			this.dataManager = dataManager;
+			this.segmentManager = segmentManager;
 			this.valueManager = valueManager;
 			this.layouter = layouter;
 			this.intervalsX = intervalsX;
@@ -49,7 +49,7 @@ namespace Visualizer.Plotting
 			if (IsUpdated)
 			{
 				timeManager.Update();
-				dataManager.Update();
+				segmentManager.Update();
 				valueManager.Update();
 				layouter.Update();
 
