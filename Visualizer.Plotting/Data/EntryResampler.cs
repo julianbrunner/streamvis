@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Utility;
 using Visualizer.Data;
@@ -8,7 +9,15 @@ namespace Visualizer.Plotting.Data
 	{
 		readonly SearchList<Entry, Time> entries;
 
-		public Time SampleDistance { get; set; }
+		Time sampleDistance;
+
+		public event EventHandler SampleDistanceChanged;
+
+		public Time SampleDistance
+		{
+			get { return sampleDistance; }
+			set { sampleDistance = value; OnSampleDistanceChanged(); }
+		}
 
 		public CacheFragment this[Range<Time> range]
 		{
@@ -22,15 +31,15 @@ namespace Visualizer.Plotting.Data
 				startTime = Time.Max(startTime, entries[0].Time);
 				endTime = Time.Min(endTime, entries[entries.Count - 1].Time);
 
-				startTime = startTime.Ceiling(SampleDistance, Time.Zero);
-				endTime = endTime.Floor(SampleDistance, Time.Zero);
+				startTime = startTime.Ceiling(sampleDistance, Time.Zero);
+				endTime = endTime.Floor(sampleDistance, Time.Zero);
 
 				if (startTime >= endTime) return CacheFragment.Empty;
 
 				List<Entry> samples = new List<Entry>();
 
-				for (Time time = startTime; time < endTime; time += SampleDistance)
-					samples.Add(Aggregate(entries, time, time + SampleDistance));
+				for (Time time = startTime; time < endTime; time += sampleDistance)
+					samples.Add(Aggregate(entries, time, time + sampleDistance));
 
 				return new CacheFragment(new Range<Time>(startTime, endTime), samples);
 			}
@@ -39,6 +48,11 @@ namespace Visualizer.Plotting.Data
 		public EntryResampler(SearchList<Entry, Time> source)
 		{
 			this.entries = source;
+		}
+
+		protected virtual void OnSampleDistanceChanged()
+		{
+			if (SampleDistanceChanged != null) SampleDistanceChanged(this, EventArgs.Empty);
 		}
 
 		static Entry Aggregate(SearchList<Entry, Time> source, Time startTime, Time endTime)

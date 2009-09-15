@@ -11,10 +11,13 @@ namespace Visualizer.Plotting.Data
 
 		public Entry[] this[Range<Time> range] { get { lock (entryData.Entries) return entryCache[range]; } }
 
+		protected EntryData EntryData { get { return entryData; } }
+		protected EntryResampler EntryResampler { get { return entryResampler; } }
+		protected EntryCache EntryCache { get { return entryCache; } }
+
 		protected DataManager(EntryData entryData)
 		{
 			this.entryData = entryData;
-			// TODO:
 			this.entryResampler = new EntryResampler(entryData.Entries);
 			this.entryCache = new EntryCache(entryResampler);
 		}

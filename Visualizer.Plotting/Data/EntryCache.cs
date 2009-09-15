@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Utility;
 using Visualizer.Data;
@@ -6,7 +7,7 @@ namespace Visualizer.Plotting.Data
 {
 	public class EntryCache
 	{
-		readonly EntryResampler resampler;
+		readonly EntryResampler entryResampler;
 		readonly SearchList<Range<Time>, Time> ranges = new SearchList<Range<Time>, Time>(range => range.Start);
 		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time);
 
@@ -16,7 +17,7 @@ namespace Visualizer.Plotting.Data
 			{
 				foreach (Range<Time> missingRange in Exclude(range.Single(), ranges))
 				{
-					CacheFragment fragment = resampler[missingRange];
+					CacheFragment fragment = entryResampler[missingRange];
 
 					if (!fragment.IsEmpty)
 					{
@@ -48,7 +49,20 @@ namespace Visualizer.Plotting.Data
 
 		public EntryCache(EntryResampler source)
 		{
-			this.resampler = source;
+			this.entryResampler = source;
+
+			this.entryResampler.SampleDistanceChanged += entryResampler_SampleDistanceChanged;
+		}
+
+		public void Clear()
+		{
+			ranges.Clear();
+			entries.Clear();
+		}
+
+		void entryResampler_SampleDistanceChanged(object sender, EventArgs e)
+		{
+			Clear();
 		}
 
 		static IEnumerable<Range<Time>> Exclude(IEnumerable<Range<Time>> ranges, IEnumerable<Range<Time>> exclusions)
