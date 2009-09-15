@@ -89,8 +89,16 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-res:<n>");
-				Write(column4, "Sets the horizontal resolution of the plotter (how many line segments are drawn). The default value is \"100\".");
+				Write(column2, "-s:(s:<c>|p:<c>)");
+				Write(column4, "Lets you specify the sampler type and settings used for drawing graphs. The default value is \"s:0.1\".");
+				Console.WriteLine();
+				Console.WriteLine();
+				Write(column3, "s:<c>");
+				Write(column4, "Per-Second sampler. The data will be resampled to <c> entries per second.");
+				Console.WriteLine();
+				Console.WriteLine();
+				Write(column3, "p:<c>");
+				Write(column4, "Per-Pixel sampler. The data will be resampled to <c> entries per pixel.");
 				Console.WriteLine();
 				Console.WriteLine();
 

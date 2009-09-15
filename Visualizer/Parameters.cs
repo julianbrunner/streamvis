@@ -16,7 +16,8 @@ namespace Visualizer
 		readonly double plotterTypeParameter = 0;
 		readonly double rangeLow = 0;
 		readonly double rangeHigh = 0;
-		readonly int resolution = 100;
+		readonly SamplerType samplerType = SamplerType.PerSecond;
+		readonly double samplerFrequency = 10;
 		readonly int intervalsX = 5;
 		readonly int intervalsY = 5;
 		readonly Color plotterColor = Color.White;
@@ -30,7 +31,8 @@ namespace Visualizer
 		public double PlotterTypeParameter { get { return plotterTypeParameter; } }
 		public double RangeLow { get { return rangeLow; } }
 		public double RangeHigh { get { return rangeHigh; } }
-		public int Resolution { get { return resolution; } }
+		public SamplerType SamplerType { get { return samplerType; } }
+		public double SamplerFrequency { get { return samplerFrequency; } }
 		public int IntervalsX { get { return intervalsX; } }
 		public int IntervalsY { get { return intervalsY; } }
 		public Color PlotterColor { get { return plotterColor; } }
@@ -88,10 +90,23 @@ namespace Visualizer
 						}
 						catch (FormatException) { InvalidParameter(parameter); }
 						break;
-					case "-res":
-						if (details.Length != 2) InvalidParameter(parameter);
-						try { resolution = int.Parse(details[1]); }
-						catch (FormatException) { InvalidParameter(parameter); }
+					case "-s":
+						if (details.Length < 2) InvalidParameter(parameter);
+						switch (details[1])
+						{
+							case "s":
+								if (details.Length != 3) InvalidParameter(parameter);
+								samplerType = SamplerType.PerSecond;
+								try { samplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 10; }
+								catch (FormatException) { InvalidParameter(parameter); }
+								break;
+							case "p":
+								if (details.Length != 3) InvalidParameter(parameter);
+								samplerType = SamplerType.PerPixel;
+								try { samplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 0.1; }
+								catch (FormatException) { InvalidParameter(parameter); }
+								break;
+						}
 						break;
 					case "-ix":
 						if (details.Length != 2) InvalidParameter(parameter);

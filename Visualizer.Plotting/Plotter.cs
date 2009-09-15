@@ -16,8 +16,6 @@ namespace Visualizer.Plotting
 		readonly DataManager dataManager;
 		readonly ValueManager valueManager;
 		readonly Layouter layouter;
-		// TODO: Is this even used?
-		readonly int resolution;
 		readonly int intervalsX;
 		readonly int intervalsY;
 		readonly Color color;
@@ -28,10 +26,9 @@ namespace Visualizer.Plotting
 		public DataManager DataManager { get { return dataManager; } }
 		public ValueManager ValueManager { get { return valueManager; } }
 		public Layouter Layouter { get { return layouter; } }
-		public int Resolution { get { return resolution; } }
 		public bool ExtendGraphs { get; set; }
 
-		public Plotter(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, DataManager dataManager, ValueManager valueManager, Layouter layouter, int resolution, int intervalsX, int intervalsY, Color color)
+		public Plotter(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, DataManager dataManager, ValueManager valueManager, Layouter layouter, int intervalsX, int intervalsY, Color color)
 		{
 			this.drawer = drawer;
 			this.graphs = graphs;
@@ -39,7 +36,6 @@ namespace Visualizer.Plotting
 			this.dataManager = dataManager;
 			this.valueManager = valueManager;
 			this.layouter = layouter;
-			this.resolution = resolution;
 			this.intervalsX = intervalsX;
 			this.intervalsY = intervalsY;
 			this.color = color;
