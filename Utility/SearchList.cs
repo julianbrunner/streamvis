@@ -101,6 +101,10 @@ namespace Utility
 		{
 			foreach (TValue item in items) Remove(item);
 		}
+		public void Remove(int index)
+		{
+			items.RemoveAt(index);
+		}
 		/// <summary>
 		/// Returns the index of the first item which has a key that is greater than or equal to <paramref name="key"/>.
 		/// If no such item is found, Count is returned.

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Utility;
-using System.Linq;
 
 namespace Visualizer.Data
 {
@@ -23,24 +22,21 @@ namespace Visualizer.Data
 						Time start = fragment.Range.Start;
 						Time end = fragment.Range.End;
 
-						// TODO: Is this slow?
-						// TODO: Can this be implemented in a more readable way?
-						// TODO: Removing an item changes the indices!
-						int index = ranges.FindIndex(start);
+						int indexAfter = ranges.FindIndex(start);
+						int indexBefore = indexAfter - 1;
 
-						if (index > 0 && ranges[index - 1].End == start)
+						if (indexAfter >= 0 && indexAfter < ranges.Count && ranges[indexAfter].Start == end)
 						{
-							start = ranges[index - 1].Start;
-							ranges.Remove(ranges[index - 1]);
+							end = ranges[indexAfter].End;
+							ranges.Remove(indexAfter);
 						}
-						if (index < ranges.Count && ranges[index].Start == end)
+						if (indexBefore >= 0 && indexBefore < ranges.Count && ranges[indexBefore].End == start)
 						{
-							end = ranges[index].End;
-							ranges.Remove(ranges[index]);
+							start = ranges[indexBefore].Start;
+							ranges.Remove(indexBefore);
 						}
 
 						ranges.Insert(new Range<Time>(start, end));
-
 						entries.Insert(fragment.Entries);
 					}
 				}
