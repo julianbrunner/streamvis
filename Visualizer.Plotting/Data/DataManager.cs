@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Utility;
 using Visualizer.Data;
 
@@ -16,7 +15,7 @@ namespace Visualizer.Plotting.Data
 		{
 			this.entryData = entryData;
 			// TODO:
-			this.entryResampler = new EntryResampler(entryData.Entries, Time.Zero);
+			this.entryResampler = new EntryResampler(entryData.Entries);
 			this.entryCache = new EntryCache(entryResampler);
 		}
 	}

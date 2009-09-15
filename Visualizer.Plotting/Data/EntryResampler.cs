@@ -7,7 +7,8 @@ namespace Visualizer.Plotting.Data
 	public class EntryResampler
 	{
 		readonly SearchList<Entry, Time> entries;
-		readonly Time sampleDistance;
+
+		public Time SampleDistance { get; set; }
 
 		public CacheFragment this[Range<Time> range]
 		{
@@ -21,24 +22,23 @@ namespace Visualizer.Plotting.Data
 				startTime = Time.Max(startTime, entries[0].Time);
 				endTime = Time.Min(endTime, entries[entries.Count - 1].Time);
 
-				startTime = startTime.Ceiling(sampleDistance, Time.Zero);
-				endTime = endTime.Floor(sampleDistance, Time.Zero);
+				startTime = startTime.Ceiling(SampleDistance, Time.Zero);
+				endTime = endTime.Floor(SampleDistance, Time.Zero);
 
 				if (startTime >= endTime) return CacheFragment.Empty;
 
 				List<Entry> samples = new List<Entry>();
 
-				for (Time time = startTime; time < endTime; time += sampleDistance)
-					samples.Add(Aggregate(entries, time, time + sampleDistance));
+				for (Time time = startTime; time < endTime; time += SampleDistance)
+					samples.Add(Aggregate(entries, time, time + SampleDistance));
 
 				return new CacheFragment(new Range<Time>(startTime, endTime), samples);
 			}
 		}
 
-		public EntryResampler(SearchList<Entry, Time> source, Time sampleDistance)
+		public EntryResampler(SearchList<Entry, Time> source)
 		{
 			this.entries = source;
-			this.sampleDistance = sampleDistance;
 		}
 
 		static Entry Aggregate(SearchList<Entry, Time> source, Time startTime, Time endTime)
