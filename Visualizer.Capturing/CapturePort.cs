@@ -77,9 +77,9 @@ namespace Visualizer.Capturing
 			}
 		}
 
-		public static CapturePort Create(string port, Network network, Timer timer)
+		public static CapturePort Create(string portString, Network network, Timer timer)
 		{
-			string[] details = port.Split(':');
+			string[] details = portString.Split(':');
 
 			string name = details[0];
 
@@ -96,7 +96,7 @@ namespace Visualizer.Capturing
 					}
 					break;
 				case 2: paths = ParseStreams(details[1]); break;
-				default: throw new InvalidOperationException("Invalid port: \"" + port + "\".");
+				default: throw new InvalidOperationException("Invalid port: \"" + portString + "\".");
 			}
 			return new CapturePort(name, from path in paths select new Stream(path), network, timer);
 		}
