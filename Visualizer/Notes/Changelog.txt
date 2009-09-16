@@ -1,4 +1,6 @@
 Version 0.8
+	- Reduced thread synchronization overhead
+	- Timestamps are less prone to being screwed up because the reader thread is blocked
 	- Added new resampling options
 	- All incoming data is now captured and logged
 	- Various optimizations in all parts of the application

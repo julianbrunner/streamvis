@@ -9,7 +9,7 @@ namespace Visualizer.Plotting.Data
 		readonly EntryResampler entryResampler;
 		readonly EntryCache entryCache;
 
-		public Entry[] this[Range<Time> range] { get { lock (entryData.Entries) return entryCache[range]; } }
+		public Entry[] this[Range<Time> range] { get { return entryCache[range]; } }
 
 		protected EntryData EntryData { get { return entryData; } }
 		protected EntryResampler EntryResampler { get { return entryResampler; } }
@@ -22,6 +22,9 @@ namespace Visualizer.Plotting.Data
 			this.entryCache = new EntryCache(entryResampler);
 		}
 
-		public virtual void Update() { }
+		public virtual void Update()
+		{
+			entryData.Update();
+		}
 	}
 }

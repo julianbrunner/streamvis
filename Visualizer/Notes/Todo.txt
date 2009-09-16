@@ -3,10 +3,9 @@ TODO: Test the stop'n'go issue on Ingo's PC
 TODO: Test difference between Debug and Release builds on different machines
 
 TODO: Check for correctness of pipeline (i.e. examine the output on manual data insertion)
-TODO: Make sure ReadLoop is never blocked so that timestamps don't get screwed
 
 TODO: Memory profiling?
-TODO: Change design so that containers and ports are 1:1, in order to avoid excessive locks and duplicate data in memory
+TODO: Change design so that containers and ports are 1:1, in order to avoid and duplicate data in memory
 
 TODO: Reenable antialiasing (make it an option?), make lines thin when no antialiasing is possible
 TODO: Text on Linux is blurry
