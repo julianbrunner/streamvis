@@ -17,7 +17,7 @@ namespace Visualizer.Capturing
 		bool disposed = false;
 		bool running = true;
 
-		CapturePort(string name, Network network, IEnumerable<Stream> streams, Timer timer)
+		CapturePort(string name, IEnumerable<Stream> streams, Network network, Timer timer)
 			: base(name, streams)
 		{
 			this.network = network;
@@ -98,7 +98,7 @@ namespace Visualizer.Capturing
 				case 2: paths = ParseStreams(details[1]); break;
 				default: throw new InvalidOperationException("Invalid port: \"" + port + "\".");
 			}
-			return new CapturePort(name, network, from path in paths select new Stream(path), timer);
+			return new CapturePort(name, from path in paths select new Stream(path), network, timer);
 		}
 
 		static IEnumerable<Path> GetPaths(IEnumerable<int> path, Packet packet)
