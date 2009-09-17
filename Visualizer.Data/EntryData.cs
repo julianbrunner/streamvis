@@ -7,7 +7,7 @@ namespace Visualizer.Data
 {
 	public class EntryData
 	{
-		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time, 4000000);
+		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time);
 		readonly List<Entry> bufferLow = new List<Entry>();
 		readonly List<Entry> bufferHigh = new List<Entry>();
 

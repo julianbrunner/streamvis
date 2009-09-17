@@ -1,4 +1,3 @@
-TODO: Find out if stop'n'go is really caused by relocations - yes
 TODO: Find out what causes the heap to grow when entries are regularly cleared
 
 TODO: Find reason for stop'n'go on Windows (maybe it's the same as on Linux?)
