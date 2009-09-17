@@ -1,9 +1,6 @@
-TODO: Test difference between Debug and Release builds on different machines
-
 TODO: Check for correctness of pipeline (i.e. examine the output on manual data insertion)
 
-TODO: Memory profiling?
-TODO: Change design so that containers and ports are 1:1, in order to avoid and duplicate data in memory
+TODO: Fix massive memory consumption on Save (XML)
 
 TODO: Reenable antialiasing (make it an option?), make lines thin when no antialiasing is possible
 TODO: Text on Linux is blurry
