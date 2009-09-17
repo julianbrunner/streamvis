@@ -1,7 +1,5 @@
 TODO: Find out what causes the heap to grow when entries are regularly cleared
 
-TODO: Find reason for stop'n'go on Windows (maybe it's the same as on Linux?)
-TODO: Test the stop'n'go issue on Ingo's PC
 TODO: Test difference between Debug and Release builds on different machines
 
 TODO: Check for correctness of pipeline (i.e. examine the output on manual data insertion)

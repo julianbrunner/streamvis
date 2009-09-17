@@ -1,4 +1,5 @@
 Version 0.8
+	- Resolved issue causing the plotter to hang at regular intervals
 	- Significantly reduced memory consumption and relocations
 	- Reduced thread synchronization overhead
 	- Timestamps are less prone to being screwed up because the reader thread is blocked
