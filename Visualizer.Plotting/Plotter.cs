@@ -22,11 +22,6 @@ namespace Visualizer.Plotting
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
-		public TimeManager TimeManager { get { return timeManager; } }
-		public SegmentManager SegmentManager { get { return segmentManager; } }
-		public ValueManager ValueManager { get { return valueManager; } }
-		public Layouter Layouter { get { return layouter; } }
-		public bool ExtendGraphs { get; set; }
 
 		public Plotter(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, SegmentManager segmentManager, ValueManager valueManager, Layouter layouter, int intervalsX, int intervalsY, Color color)
 		{

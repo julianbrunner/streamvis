@@ -129,11 +129,11 @@ namespace Visualizer
 		}
 		private void freezeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			plotter.TimeManager.Frozen = freezeToolStripMenuItem.Checked;
+			timeManager.Frozen = freezeToolStripMenuItem.Checked;
 		}
 		private void graphExtensionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			plotter.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
+			segmentManager.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
 		}
 		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{

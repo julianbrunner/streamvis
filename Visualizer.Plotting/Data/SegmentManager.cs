@@ -12,6 +12,7 @@ namespace Visualizer.Plotting.Data
 		protected IEnumerable<Graph> Graphs { get { return graphs; } }
 
 		public abstract IEnumerable<DataSegment> this[Graph graph] { get; }
+		public bool ExtendGraphs { get; set; }
 
 		protected SegmentManager(TimeManager timeManager, IEnumerable<Graph> graphs)
 		{
