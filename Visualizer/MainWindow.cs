@@ -120,42 +120,7 @@ namespace Visualizer
 		}
 		private void exportToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			// TODO: Reenable exporting
-			// TODO: This should be moved
-			//			if (exportCaptureFileDialog.ShowDialog() == DialogResult.OK)
-			//				foreach (Port port in source.Ports)
-			//					using (System.IO.StreamWriter streamWriter = new System.IO.StreamWriter(System.IO.Path.ChangeExtension(exportCaptureFileDialog.FileName, EscapeFilename(port.Name) + ".stream")))
-			//						if (port.Streams.Any())
-			//						{
-			//							IEnumerable<IEnumerable<Entry>> streams =
-			//							(
-			//								from stream in port.Streams
-			//								select stream.Container.Data
-			//							)
-			//							.ToArray();
-			//
-			//							IEnumerable<IEnumerator<Entry>> enumerators =
-			//							(
-			//								from stream in streams
-			//								select stream.GetEnumerator()
-			//							)
-			//							.ToArray();
-			//
-			//							foreach (Entry leadEntry in streams.First())
-			//								if (enumerators.All(enumerator => enumerator.MoveNext()))
-			//								{
-			//									StringBuilder stringBuilder = new StringBuilder();
-			//									stringBuilder.Append(leadEntry.Time.Seconds);
-			//									stringBuilder.Append(" ");
-			//									foreach (Entry entry in from enumerator in enumerators select enumerator.Current)
-			//									{
-			//										stringBuilder.Append(entry.Value);
-			//										stringBuilder.Append(" ");
-			//									}
-			//									stringBuilder.Remove(stringBuilder.Length - 1, 1);
-			//									streamWriter.WriteLine(stringBuilder.ToString());
-			//								}
-			//						}
+			if (exportCaptureFileDialog.ShowDialog() == DialogResult.OK) source.ExportGNUPlot(exportCaptureFileDialog.FileName);
 		}
 		private void clearDataToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -297,13 +262,5 @@ namespace Visualizer
 		{
 			GC.Collect();
 		}
-
-		//		static string EscapeFilename(string filename)
-		//		{
-		//			foreach (char invalidChar in System.IO.Path.GetInvalidFileNameChars())
-		//				filename = filename.Replace(invalidChar.ToString(), string.Empty);
-		//
-		//			return filename;
-		//		}
 	}
 }
