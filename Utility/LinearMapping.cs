@@ -1,6 +1,6 @@
 ﻿namespace Utility
 {
-	public struct LinearMapping
+	public class LinearMapping
 	{
 		readonly Range<double> input;
 		readonly Range<double> output;

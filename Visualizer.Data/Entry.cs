@@ -2,7 +2,7 @@ using System.Xml.Linq;
 
 namespace Visualizer.Data
 {
-	public class Entry
+	public struct Entry
 	{
 		readonly Time time;
 		readonly double value;

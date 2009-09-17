@@ -3,7 +3,7 @@ using Utility;
 
 namespace Visualizer.Plotting.Values
 {
-	public struct ValueRange
+	public class ValueRange
 	{
 		readonly Range<double> range;
 		readonly LinearMapping mapping;

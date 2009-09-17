@@ -5,7 +5,7 @@ using Visualizer.Data;
 
 namespace Visualizer.Plotting.Data
 {
-	public struct CacheFragment
+	public class CacheFragment
 	{
 		readonly Range<Time> range;
 		readonly IEnumerable<Entry> entries;
@@ -16,6 +16,7 @@ namespace Visualizer.Plotting.Data
 		public IEnumerable<Entry> Entries { get { return entries; } }
 		public bool IsEmpty { get { return range.IsEmpty(); } }
 
+		public CacheFragment() { }
 		public CacheFragment(Range<Time> range, IEnumerable<Entry> entries)
 		{
 			if (range.IsEmpty()) throw new ArgumentException("range");

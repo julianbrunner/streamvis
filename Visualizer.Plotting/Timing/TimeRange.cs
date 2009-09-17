@@ -4,7 +4,7 @@ using Visualizer.Data;
 
 namespace Visualizer.Plotting.Timing
 {
-	public struct TimeRange
+	public class TimeRange
 	{
 		readonly Range<Time> range;
 		readonly LinearMapping mapping;
