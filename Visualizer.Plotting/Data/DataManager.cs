@@ -25,6 +25,12 @@ namespace Visualizer.Plotting.Data
 		public virtual void Update()
 		{
 			entryData.Update();
+
+			//if (entryData.Entries.Count > 4000)
+			//{
+			//    entryData.Entries.Clear();
+			//    //entryCache.Clear();
+			//}
 		}
 	}
 }

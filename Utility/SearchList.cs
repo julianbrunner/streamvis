@@ -60,16 +60,17 @@ namespace Utility
 
 		public int Count { get { return items.Count; } }
 
-		public SearchList(Func<TValue, TKey> keySelector, IComparer<TKey> comparer)
+		public SearchList(Func<TValue, TKey> keySelector, IComparer<TKey> comparer, int capacity)
 		{
 			if (keySelector == null) throw new ArgumentNullException("keySelector");
 			if (comparer == null) throw new ArgumentNullException("comparer");
 
 			this.keySelector = keySelector;
 			this.comparer = comparer;
-			this.items = new List<TValue>();
+			this.items = new List<TValue>(capacity);
 		}
-		public SearchList(Func<TValue, TKey> keySelector) : this(keySelector, Comparer<TKey>.Default) { }
+		public SearchList(Func<TValue, TKey> keySelector, int capacity) : this(keySelector, Comparer<TKey>.Default, capacity) { }
+		public SearchList(Func<TValue, TKey> keySelector) : this(keySelector, Comparer<TKey>.Default, 0) { }
 
 		public void Clear()
 		{
