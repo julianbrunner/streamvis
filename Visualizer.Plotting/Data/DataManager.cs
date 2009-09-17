@@ -26,9 +26,9 @@ namespace Visualizer.Plotting.Data
 		{
 			entryData.Update();
 
-			//if (entryData.Entries.Count > 4000)
+			//if (entryData.Entries.Count > 12000)
 			//{
-			//    entryData.Entries.Clear();
+			//    entryData.Entries.Remove(0, 8000);
 			//    //entryCache.Clear();
 			//}
 		}

@@ -101,6 +101,10 @@ namespace Utility
 		{
 			foreach (TValue item in items) Remove(item);
 		}
+		public void Remove(int startIndex, int endIndex)
+		{
+			items.RemoveRange(startIndex, endIndex - startIndex);
+		}
 		public void Remove(int index)
 		{
 			items.RemoveAt(index);
