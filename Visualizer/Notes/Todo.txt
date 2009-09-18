@@ -1,4 +1,5 @@
 TODO: Check for correctness of pipeline (i.e. examine the output on manual data insertion)
+TODO: See if graph is plotted correctly when the entire time range lies between two entries
 TODO: Fix bug causing some packets not to appear on the graph immediately but only after another packet is sent
 
 TODO: Fix massive memory consumption on Save (XML)
