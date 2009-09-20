@@ -40,6 +40,7 @@ namespace Visualizer.Data
 		{
 			entries.Clear();
 		}
+		// TODO: Profile with and without buffering
 		public void Add(Entry entry)
 		{
 			if (entry.Value != double.NaN) bufferLow.Add(entry);
