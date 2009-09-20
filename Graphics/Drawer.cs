@@ -18,15 +18,17 @@ namespace Graphics
 		int[] textTextures = new int[1];
 		int characterLists;
 
-		public Drawer()
+		public Drawer(bool lineSmoothing)
 		{
 			GL.EnableClientState(EnableCap.VertexArray);
 
 			GL.Enable(EnableCap.Texture2D);
-			//GL.Enable(EnableCap.LineSmooth);
+			if (lineSmoothing)
+			{
+				GL.Enable(EnableCap.LineSmooth);
+				GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
+			}
 			GL.Enable(EnableCap.Blend);
-
-			//GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
 			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
 			InitializeTextTexture();

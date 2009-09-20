@@ -1,6 +1,6 @@
 TODO: Fix massive memory consumption on Save (XML)
 
-TODO: Reenable antialiasing (make it an option?), make lines thin when no antialiasing is possible
+TODO: Add option to specify line thickness
 TODO: Text on Linux is blurry
 
 TODO: Make Layouter adaptive to width of the Y-Axis labels

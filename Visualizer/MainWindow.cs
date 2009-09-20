@@ -41,7 +41,7 @@ namespace Visualizer
 			viewport.ClearColor = parameters.BackgroundColor;
 			viewport.Layout += viewport_Layout;
 
-			this.drawer = new Drawer();
+			this.drawer = new Drawer(parameters.LineSmoothing);
 
 			this.timer = new Data.Timer();
 

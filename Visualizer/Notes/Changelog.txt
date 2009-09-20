@@ -1,3 +1,6 @@
+Version 0.9
+	- Added option to specify whether antialiasing should be used for graph lines
+
 Version 0.8
 	- Simpler entry buffering system
 	- More frequent entry buffer updates

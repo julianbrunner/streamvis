@@ -63,7 +63,12 @@ namespace Visualizer
 				Console.WriteLine();
 
 				Write(column2, "-noe");
-				Write(column4, "Disables the graph extension feature. When graph extension is enabled, all graphs that have at least one data entry are extended across the whole width of the coordinate system using known adjacent values.");
+				Write(column4, "Disables the graph extension feature. When graph extension is enabled, all graphs that have at least one sampled data entry are extended across the whole width of the coordinate system using known adjacent values.");
+				Console.WriteLine();
+				Console.WriteLine();
+
+				Write(column2, "-noa");
+				Write(column4, "Disables antialiasing of graph lines.");
 				Console.WriteLine();
 				Console.WriteLine();
 

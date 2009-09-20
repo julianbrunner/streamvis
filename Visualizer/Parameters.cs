@@ -12,6 +12,7 @@ namespace Visualizer
 		readonly bool minimalMode = false;
 		readonly Time plotterWidth = new Time(10.0);
 		readonly bool extendGraphs = true;
+		readonly bool lineSmoothing = true;
 		readonly PlotterType plotterType = PlotterType.Continuous;
 		readonly double plotterTypeParameter = 0;
 		readonly double rangeLow = 0;
@@ -27,6 +28,7 @@ namespace Visualizer
 		public bool MinimalMode { get { return minimalMode; } }
 		public Time PlotterWidth { get { return plotterWidth; } }
 		public bool ExtendGraphs { get { return extendGraphs; } }
+		public bool LineSmoothing { get { return lineSmoothing; } }
 		public PlotterType PlotterType { get { return plotterType; } }
 		public double PlotterTypeParameter { get { return plotterTypeParameter; } }
 		public double RangeLow { get { return rangeLow; } }
@@ -57,6 +59,10 @@ namespace Visualizer
 					case "-noe":
 						if (details.Length != 1) InvalidParameter(parameter);
 						extendGraphs = false;
+						break;
+					case "-noa":
+						if (details.Length != 1) InvalidParameter(parameter);
+						lineSmoothing = false;
 						break;
 					case "-t":
 						if (details.Length < 2) InvalidParameter(parameter);
