@@ -62,6 +62,11 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 
+				Write(column2, "-l:<width>");
+				Write(column4, "Lets you specify the width (thickness) of the graph lines in pixels. The default value is \"1.0\".");
+				Console.WriteLine();
+				Console.WriteLine();
+
 				Write(column2, "-noe");
 				Write(column4, "Disables the graph extension feature. When graph extension is enabled, all graphs that have at least one sampled data entry are extended across the whole width of the coordinate system using known adjacent values.");
 				Console.WriteLine();

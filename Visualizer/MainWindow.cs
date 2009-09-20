@@ -231,7 +231,7 @@ namespace Visualizer
 						default: throw new InvalidOperationException();
 					}
 
-					Graph graph = new Graph(layouter, valueManager, segmentManager, drawer, dataManager);
+					Graph graph = new Graph(layouter, valueManager, segmentManager, drawer, dataManager, parameters.LineWidth);
 					graph.Color = Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100));
 					graphs.Add(graph);
 

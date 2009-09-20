@@ -15,18 +15,20 @@ namespace Visualizer.Plotting
 		readonly SegmentManager segmentManager;
 		readonly Drawer drawer;
 		readonly DataManager dataManager;
+		readonly double lineWidth;
 
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
 		public DataManager DataManager { get { return dataManager; } }
 
-		public Graph(Layouter layouter, ValueManager valueManager, SegmentManager segmentManager, Drawer drawer, DataManager dataManager)
+		public Graph(Layouter layouter, ValueManager valueManager, SegmentManager segmentManager, Drawer drawer, DataManager dataManager, double lineWidth)
 		{
 			this.layouter = layouter;
 			this.valueManager = valueManager;
 			this.segmentManager = segmentManager;
 			this.drawer = drawer;
 			this.dataManager = dataManager;
+			this.lineWidth = lineWidth;
 
 			IsDrawn = true;
 		}
@@ -90,7 +92,7 @@ namespace Visualizer.Plotting
 
 					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * layouter.Transformation;
 
-					drawer.DrawLineStrip(vertices, transformation, Color, 1);
+					drawer.DrawLineStrip(vertices, transformation, Color, (float)lineWidth);
 				}
 			}
 		}

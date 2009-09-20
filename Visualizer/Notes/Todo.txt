@@ -1,6 +1,5 @@
 TODO: Fix massive memory consumption on Save (XML)
 
-TODO: Add option to specify line thickness
 TODO: Text on Linux is blurry
 
 TODO: Make Layouter adaptive to width of the Y-Axis labels

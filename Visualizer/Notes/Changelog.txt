@@ -1,5 +1,6 @@
 Version 0.9
-	- Added option to specify whether antialiasing should be used for graph lines
+	- Added an option to specify whether antialiasing should be used for graph lines
+	- Added an option to specify the width (thickness) of the graph lines
 
 Version 0.8
 	- Simpler entry buffering system

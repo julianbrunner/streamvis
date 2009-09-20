@@ -11,6 +11,7 @@ namespace Visualizer
 		readonly List<string> ports = new List<string>();
 		readonly bool minimalMode = false;
 		readonly Time plotterWidth = new Time(10.0);
+		readonly double lineWidth = 1;
 		readonly bool extendGraphs = true;
 		readonly bool lineSmoothing = true;
 		readonly PlotterType plotterType = PlotterType.Continuous;
@@ -27,6 +28,7 @@ namespace Visualizer
 		public IEnumerable<string> Ports { get { return ports; } }
 		public bool MinimalMode { get { return minimalMode; } }
 		public Time PlotterWidth { get { return plotterWidth; } }
+		public double LineWidth { get { return lineWidth; } }
 		public bool ExtendGraphs { get { return extendGraphs; } }
 		public bool LineSmoothing { get { return lineSmoothing; } }
 		public PlotterType PlotterType { get { return plotterType; } }
@@ -54,6 +56,11 @@ namespace Visualizer
 					case "-w":
 						if (details.Length != 2) InvalidParameter(parameter);
 						try { plotterWidth = new Time(double.Parse(details[1])); }
+						catch (FormatException) { InvalidParameter(parameter); }
+						break;
+					case "-l":
+						if (details.Length != 2) InvalidParameter(parameter);
+						try { lineWidth = double.Parse(details[1]); }
 						catch (FormatException) { InvalidParameter(parameter); }
 						break;
 					case "-noe":
