@@ -47,8 +47,25 @@ namespace Visualizer.Plotting.Data
 			}
 		}
 
-		// TODO: Can this exposition be avoided
-		public SearchList<Entry, Time> Entries { get { return entries; } }
+		public bool IsEmpty { get { return entries.Count == 0; } }
+		public Entry FirstEntry
+		{
+			get
+			{
+				if (entries.Count == 0) throw new InvalidOperationException();
+
+				return entries[0];
+			}
+		}
+		public Entry LastEntry
+		{
+			get
+			{
+				if (entries.Count == 0) throw new InvalidOperationException();
+
+				return entries[entries.Count - 1];
+			}
+		}
 
 		public EntryCache(EntryResampler source)
 		{

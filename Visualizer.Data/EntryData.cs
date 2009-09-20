@@ -12,7 +12,6 @@ namespace Visualizer.Data
 
 		public static string XElementName { get { return "EntryData"; } }
 
-		// TODO: Can this exposition be avoided
 		public SearchList<Entry, Time> Entries { get { return entries; } }
 		public XElement XElement
 		{
