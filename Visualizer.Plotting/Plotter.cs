@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Graphics;
+using Utility;
 using Visualizer.Data;
 using Visualizer.Plotting.Data;
 using Visualizer.Plotting.Timing;
@@ -55,10 +56,12 @@ namespace Visualizer.Plotting
 		{
 			if (IsDrawn)
 			{
-				foreach (Graph graph in graphs) graph.Draw();
-
 				TimeRange timeRange = timeManager.Range;
 				ValueRange valueRange = valueManager.Range;
+
+				if (!timeRange.Range.IsEmpty() && !valueManager.Range.Range.IsEmpty())
+					foreach (Graph graph in graphs)
+						graph.Draw();
 
 				DrawAxisX(timeRange, valueRange);
 				DrawAxisY(timeRange, valueRange);

@@ -1,5 +1,3 @@
-TODO: Is a value range of length 0 handled correctly?
-
 TODO: Fix massive memory consumption on Save (XML)
 
 TODO: Reenable antialiasing (make it an option?), make lines thin when no antialiasing is possible
