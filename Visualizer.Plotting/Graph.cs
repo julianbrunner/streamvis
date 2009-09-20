@@ -37,44 +37,61 @@ namespace Visualizer.Plotting
 		}
 		public void Draw()
 		{
-			if (IsDrawn)
+			if (IsDrawn && !dataManager.IsEmpty)
 			{
 				ValueRange valueRange = valueManager.Range;
 
+				Entry firstEntry = dataManager.FirstEntry;
+				Entry lastEntry = dataManager.LastEntry;
+
 				foreach (DataSegment segment in segmentManager[this])
-					if (segment.Entries.Length > 0)
+				{
+					TimeRange timeRange = segment.TimeRange;
+
+					Entry? startEntry = null;
+					Entry? endEntry = null;
+
+					if (segmentManager.ExtendGraphs)
 					{
-						TimeRange timeRange = segment.TimeRange;
-
-						int vertexCount = segment.Entries.Length;
-
-						if (segmentManager.ExtendGraphs) vertexCount += 2;
-
-						float[] vertices = new float[vertexCount * 2];
-						int position = 0;
-
-						if (segmentManager.ExtendGraphs)
+						if (firstEntry.Time - timeRange.Range.Start > 1.5 * dataManager.SampleDistance) startEntry = new Entry(timeRange.Range.Start, firstEntry.Value);
+						if (timeRange.Range.End - lastEntry.Time > 1.5 * dataManager.SampleDistance) endEntry = new Entry(timeRange.Range.End, lastEntry.Value);
+						if (segment.Entries.Length == 0)
 						{
-							vertices[position++] = (float)timeRange.Range.Start.Seconds;
-							vertices[position++] = (float)segment.Entries[0].Value;
+							if (startEntry == null) startEntry = new Entry(timeRange.Range.Start, endEntry.Value.Value);
+							if (endEntry == null) endEntry = new Entry(timeRange.Range.End, startEntry.Value.Value);
 						}
-
-						foreach (Entry entry in segment.Entries)
-						{
-							vertices[position++] = (float)entry.Time.Seconds;
-							vertices[position++] = (float)entry.Value;
-						}
-
-						if (segmentManager.ExtendGraphs)
-						{
-							vertices[position++] = (float)timeRange.Range.End.Seconds;
-							vertices[position++] = (float)segment.Entries[segment.Entries.Length - 1].Value;
-						}
-
-						Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * layouter.Transformation;
-
-						drawer.DrawLineStrip(vertices, transformation, Color, 1);
 					}
+
+					int vertexCount = segment.Entries.Length;
+
+					if (startEntry.HasValue) vertexCount++;
+					if (endEntry.HasValue) vertexCount++;
+
+					float[] vertices = new float[vertexCount * 2];
+					int position = 0;
+
+					if (startEntry.HasValue)
+					{
+						vertices[position++] = (float)startEntry.Value.Time.Seconds;
+						vertices[position++] = (float)startEntry.Value.Value;
+					}
+
+					foreach (Entry entry in segment.Entries)
+					{
+						vertices[position++] = (float)entry.Time.Seconds;
+						vertices[position++] = (float)entry.Value;
+					}
+
+					if (endEntry.HasValue)
+					{
+						vertices[position++] = (float)endEntry.Value.Time.Seconds;
+						vertices[position++] = (float)endEntry.Value.Value;
+					}
+
+					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * layouter.Transformation;
+
+					drawer.DrawLineStrip(vertices, transformation, Color, 1);
+				}
 			}
 		}
 	}

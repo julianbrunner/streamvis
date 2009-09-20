@@ -47,6 +47,9 @@ namespace Visualizer.Plotting.Data
 			}
 		}
 
+		// TODO: Can this exposition be avoided
+		public SearchList<Entry, Time> Entries { get { return entries; } }
+
 		public EntryCache(EntryResampler source)
 		{
 			this.entryResampler = source;

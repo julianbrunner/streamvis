@@ -1,5 +1,6 @@
 Version 0.8
-	- Reenabled graph extension
+	- Improved behaviour of graph extension feature
+	- Reenabled graph extension feature
 	- Reenabled exporting into GNU Plot compatible format
 	- Resolved issue causing the plotter to hang at regular intervals
 	- Significantly reduced memory consumption and relocations
