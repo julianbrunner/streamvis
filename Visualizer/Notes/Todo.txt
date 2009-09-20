@@ -1,7 +1,7 @@
-TODO: Fix massive memory consumption on Save (XML)
-
 TODO: Text on Linux is blurry
 
+TODO: Do some staged testing on Linux to see where most of the CPU time is spent
+TODO: Fix massive memory consumption on save (XML)
 TODO: Make Layouter adaptive to width of the Y-Axis labels
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 
@@ -13,3 +13,10 @@ TODO: Look for places to use LINQ queries
 TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
 TODO: Extension methods don't work without reference to System.Core?!
+
+Organization:
+	- Choose license
+		Compatibility with Yarp/ACE license?
+		Does mono make any difference?
+	- Pick name (will sources other than YARP be added later?)
+	- Create SF.net project
