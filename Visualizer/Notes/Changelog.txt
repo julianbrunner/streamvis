@@ -1,4 +1,6 @@
 Version 0.8
+	- Simpler entry buffering system
+	- More frequent entry buffer updates
 	- Improved behaviour of graph extension feature
 	- Reenabled graph extension feature
 	- Reenabled exporting into GNU Plot compatible format

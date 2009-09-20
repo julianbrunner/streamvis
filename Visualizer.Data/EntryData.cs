@@ -8,8 +8,7 @@ namespace Visualizer.Data
 	public class EntryData
 	{
 		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time);
-		readonly List<Entry> bufferLow = new List<Entry>();
-		readonly List<Entry> bufferHigh = new List<Entry>();
+		readonly List<Entry> buffer = new List<Entry>();
 
 		public static string XElementName { get { return "EntryData"; } }
 
@@ -41,25 +40,20 @@ namespace Visualizer.Data
 		{
 			entries.Clear();
 		}
-		// TODO: Profile with and without buffering
 		public void Add(Entry entry)
 		{
-			if (entry.Value != double.NaN) bufferLow.Add(entry);
-
-			if ((entry.Time - bufferLow[0].Time).Seconds > 0.1)
-			{
-				lock (bufferHigh) bufferHigh.AddRange(bufferLow);
-				bufferLow.Clear();
-			}
+			if (entry.Value != double.NaN)
+				lock (buffer)
+					buffer.Add(entry);
 		}
 		public void Update()
 		{
 			IEnumerable<Entry> bufferedEntries;
 
-			lock (bufferHigh)
+			lock (buffer)
 			{
-				bufferedEntries = bufferHigh.ToArray();
-				bufferHigh.Clear();
+				bufferedEntries = buffer.ToArray();
+				buffer.Clear();
 			}
 
 			entries.Append(bufferedEntries);
