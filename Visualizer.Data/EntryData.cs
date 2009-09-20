@@ -13,21 +13,7 @@ namespace Visualizer.Data
 		public static string XElementName { get { return "EntryData"; } }
 
 		public SearchList<Entry, Time> Entries { get { return entries; } }
-		public XElement XElement
-		{
-			get
-			{
-				return new XElement
-				(
-					XElementName,
-					(
-						from entry in entries
-						select entry.XElement
-					)
-					.ToArray()
-				);
-			}
-		}
+		public XElement XElement { get { return new XElement(XElementName, from entry in entries select entry.XElement); } }
 
 		public EntryData() { }
 		public EntryData(XElement entryData)
