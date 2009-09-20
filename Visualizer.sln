@@ -21,9 +21,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphics", "Graphics\Graphi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Yarp", "Yarp\Yarp.csproj", "{88377E30-410B-40ED-8D90-BE90D7831933}"
 EndProject
-Project("{2857B73E-F847-4B02-9238-064979017E93}") = "Yarp.Wrapper", "Yarp.Wrapper\Yarp.Wrapper.cproj", "{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}"
+EndProject
+Project("{2857B73E-F847-4B02-9238-064979017E93}") = "Yarp.Wrapper", "Yarp.Wrapper\Yarp.Wrapper.cproj", "{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,14 +35,6 @@ Global
 		{0251F686-E89D-4529-82AD-4C8D467C0765}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0251F686-E89D-4529-82AD-4C8D467C0765}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0251F686-E89D-4529-82AD-4C8D467C0765}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55285EE5-B27A-44F4-A22D-8ADD6AB09284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{55285EE5-B27A-44F4-A22D-8ADD6AB09284}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{55285EE5-B27A-44F4-A22D-8ADD6AB09284}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{55285EE5-B27A-44F4-A22D-8ADD6AB09284}.Release|Any CPU.Build.0 = Release|Any CPU
-		{70C434B4-EC61-4050-A6F8-77A846E8B2D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{70C434B4-EC61-4050-A6F8-77A846E8B2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{70C434B4-EC61-4050-A6F8-77A846E8B2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{70C434B4-EC61-4050-A6F8-77A846E8B2D6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{188C1B70-DD61-4EEA-B733-8379A3866CF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{188C1B70-DD61-4EEA-B733-8379A3866CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{188C1B70-DD61-4EEA-B733-8379A3866CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,29 +43,34 @@ Global
 		{1A1D9F99-88B7-41A8-A084-8762DC16963C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A1D9F99-88B7-41A8-A084-8762DC16963C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A1D9F99-88B7-41A8-A084-8762DC16963C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B86C20E8-6D5D-4110-8333-B4B0EC707862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B86C20E8-6D5D-4110-8333-B4B0EC707862}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B86C20E8-6D5D-4110-8333-B4B0EC707862}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B86C20E8-6D5D-4110-8333-B4B0EC707862}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{88377E30-410B-40ED-8D90-BE90D7831933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88377E30-410B-40ED-8D90-BE90D7831933}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88377E30-410B-40ED-8D90-BE90D7831933}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88377E30-410B-40ED-8D90-BE90D7831933}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
+		{55285EE5-B27A-44F4-A22D-8ADD6AB09284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55285EE5-B27A-44F4-A22D-8ADD6AB09284}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55285EE5-B27A-44F4-A22D-8ADD6AB09284}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55285EE5-B27A-44F4-A22D-8ADD6AB09284}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70C434B4-EC61-4050-A6F8-77A846E8B2D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70C434B4-EC61-4050-A6F8-77A846E8B2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70C434B4-EC61-4050-A6F8-77A846E8B2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70C434B4-EC61-4050-A6F8-77A846E8B2D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88377E30-410B-40ED-8D90-BE90D7831933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88377E30-410B-40ED-8D90-BE90D7831933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88377E30-410B-40ED-8D90-BE90D7831933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88377E30-410B-40ED-8D90-BE90D7831933}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B86C20E8-6D5D-4110-8333-B4B0EC707862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B86C20E8-6D5D-4110-8333-B4B0EC707862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B86C20E8-6D5D-4110-8333-B4B0EC707862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B86C20E8-6D5D-4110-8333-B4B0EC707862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{55285EE5-B27A-44F4-A22D-8ADD6AB09284} = {F4AC6BD8-8B9C-40B8-AE7D-55C695BE988B}
@@ -84,7 +81,10 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		description = An application that can be used to plot, capture and replay streams received on Yarp ports.
-		version = 0.8
+		version = 0.9
 		StartupItem = Visualizer\Visualizer.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
