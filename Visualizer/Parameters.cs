@@ -18,7 +18,7 @@ namespace Visualizer
 		readonly double plotterTypeParameter = 0;
 		readonly double rangeLow = 0;
 		readonly double rangeHigh = 0;
-		readonly SamplerType samplerType = SamplerType.PerSecond;
+		readonly SamplerType samplerType = SamplerType.PerPixel;
 		readonly double samplerFrequency = 1;
 		readonly int intervalsX = 5;
 		readonly int intervalsY = 5;
