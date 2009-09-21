@@ -51,14 +51,14 @@ namespace Visualizer
 			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.clearDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.plotterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.diagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.freezeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.graphExtensionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.showStreamListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.minimalModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.showPlotterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.showDiagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.showFrameCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.verticalSynchronizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -189,7 +189,7 @@ namespace Visualizer
 			this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.captureToolStripMenuItem,
-            this.plotterToolStripMenuItem,
+            this.diagramToolStripMenuItem,
             this.viewToolStripMenuItem,
             this.gCCollectToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -266,14 +266,14 @@ namespace Visualizer
 			this.clearDataToolStripMenuItem.Text = "&Clear Data";
 			this.clearDataToolStripMenuItem.Click += new System.EventHandler(this.clearDataToolStripMenuItem_Click);
 			// 
-			// plotterToolStripMenuItem
+			// diagramToolStripMenuItem
 			// 
-			this.plotterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.diagramToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.freezeToolStripMenuItem,
             this.graphExtensionToolStripMenuItem});
-			this.plotterToolStripMenuItem.Name = "plotterToolStripMenuItem";
-			this.plotterToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-			this.plotterToolStripMenuItem.Text = "&Plotter";
+			this.diagramToolStripMenuItem.Name = "diagramToolStripMenuItem";
+			this.diagramToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+			this.diagramToolStripMenuItem.Text = "&Diagram";
 			// 
 			// freezeToolStripMenuItem
 			// 
@@ -298,7 +298,7 @@ namespace Visualizer
             this.showStreamListToolStripMenuItem,
             this.minimalModeToolStripMenuItem,
             this.toolStripSeparator2,
-            this.showPlotterToolStripMenuItem,
+            this.showDiagramToolStripMenuItem,
             this.showFrameCounterToolStripMenuItem,
             this.toolStripSeparator3,
             this.verticalSynchronizationToolStripMenuItem});
@@ -327,13 +327,13 @@ namespace Visualizer
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
 			this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
 			// 
-			// showPlotterToolStripMenuItem
+			// showDiagramToolStripMenuItem
 			// 
-			this.showPlotterToolStripMenuItem.CheckOnClick = true;
-			this.showPlotterToolStripMenuItem.Name = "showPlotterToolStripMenuItem";
-			this.showPlotterToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-			this.showPlotterToolStripMenuItem.Text = "Show &Plotter";
-			this.showPlotterToolStripMenuItem.Click += new System.EventHandler(this.showPlotterToolStripMenuItem_Click);
+			this.showDiagramToolStripMenuItem.CheckOnClick = true;
+			this.showDiagramToolStripMenuItem.Name = "showDiagramToolStripMenuItem";
+			this.showDiagramToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+			this.showDiagramToolStripMenuItem.Text = "Show &Diagram";
+			this.showDiagramToolStripMenuItem.Click += new System.EventHandler(this.showDiagramToolStripMenuItem_Click);
 			// 
 			// showFrameCounterToolStripMenuItem
 			// 
@@ -439,13 +439,13 @@ namespace Visualizer
 		private System.Windows.Forms.SaveFileDialog exportCaptureFileDialog;
 		private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem minimalModeToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem plotterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem diagramToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem freezeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem graphExtensionToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem gCCollectToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem showFrameCounterToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem showPlotterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem showDiagramToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem verticalSynchronizationToolStripMenuItem;
 		

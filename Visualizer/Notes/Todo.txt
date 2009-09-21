@@ -1,5 +1,4 @@
 TODO: Rename Plotter do Diagram
-TODO: Move Yarp.Wrapper to Libraries
 
 TODO: Fix massive memory consumption on save (XML)
 TODO: Make Layouter adaptive to width of the Y-Axis labels
@@ -27,8 +26,6 @@ TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does prop
 TODO: Extension methods don't work without reference to System.Core?!
 
 Organization:
-	- Choose license
-		Compatibility with Yarp/ACE license?
-		Does mono make any difference?
+	- License: GPL v3
 	- Pick name (will sources other than YARP be added later?)
 	- Create SF.net project

@@ -25,7 +25,7 @@ namespace Visualizer
 		readonly TimeManager timeManager;
 		readonly SegmentManager segmentManager;
 		readonly ValueManager valueManager;
-		readonly Plotter plotter;
+		readonly Diagram diagram;
 		readonly VisibleFrameCounter frameCounter;
 
 		Source source;
@@ -47,20 +47,20 @@ namespace Visualizer
 
 			this.parameters = parameters;
 
-			Console.WriteLine("Initializing plotter...");
+			Console.WriteLine("Initializing diagram...");
 			this.graphs = new List<Graph>();
 			this.layouter = new Layouter(viewport);
-			switch (parameters.PlotterType)
+			switch (parameters.DiagramType)
 			{
-				case PlotterType.Continuous: this.timeManager = new ContinuousTimeManager(timer, parameters.PlotterWidth); break;
-				case PlotterType.Shiftting: this.timeManager = new ShiftingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
-				case PlotterType.Wrapping: this.timeManager = new WrappingTimeManager(timer, parameters.PlotterWidth, parameters.PlotterTypeParameter); break;
+				case DiagramType.Continuous: this.timeManager = new ContinuousTimeManager(timer, parameters.DiagramWidth); break;
+				case DiagramType.Shiftting: this.timeManager = new ShiftingTimeManager(timer, parameters.DiagramWidth, parameters.DiagramTypeParameter); break;
+				case DiagramType.Wrapping: this.timeManager = new WrappingTimeManager(timer, parameters.DiagramWidth, parameters.DiagramTypeParameter); break;
 				default: throw new InvalidOperationException();
 			}
 			this.segmentManager = new SimpleSegmentManager(timeManager, graphs);
 			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(segmentManager, graphs);
 			else this.valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
-			this.plotter = new Plotter(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.IntervalsX, parameters.IntervalsY, parameters.PlotterColor);
+			this.diagram = new Diagram(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.IntervalsX, parameters.IntervalsY, parameters.DiagramColor);
 
 			System.Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
@@ -77,14 +77,14 @@ namespace Visualizer
 			showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
 			minimalModeToolStripMenuItem.Checked = parameters.MinimalMode;
 			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
-			showPlotterToolStripMenuItem.Checked = true;
-			showPlotterToolStripMenuItem_Click(this, EventArgs.Empty);
+			showDiagramToolStripMenuItem.Checked = true;
+			showDiagramToolStripMenuItem_Click(this, EventArgs.Empty);
 			showFrameCounterToolStripMenuItem.Checked = true;
 			showFrameCounterToolStripMenuItem_Click(this, EventArgs.Empty);
 			verticalSynchronizationToolStripMenuItem.Checked = true;
 			verticalSynchronizationToolStripMenuItem_Click(this, EventArgs.Empty);
 
-			viewport.AddComponent(plotter);
+			viewport.AddComponent(diagram);
 			viewport.AddComponent(frameCounter);
 		}
 
@@ -151,9 +151,9 @@ namespace Visualizer
 			toolStripContainer1.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 			toolStripContainer1.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 		}
-		private void showPlotterToolStripMenuItem_Click(object sender, EventArgs e)
+		private void showDiagramToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			plotter.IsUpdated = plotter.IsDrawn = showPlotterToolStripMenuItem.Checked;
+			diagram.IsUpdated = diagram.IsDrawn = showDiagramToolStripMenuItem.Checked;
 		}
 		private void showFrameCounterToolStripMenuItem_Click(object sender, EventArgs e)
 		{

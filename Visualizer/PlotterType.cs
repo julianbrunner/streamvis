@@ -1,4 +1,4 @@
 namespace Visualizer
 {
-	enum PlotterType { Continuous, Shiftting, Wrapping }
+	enum DiagramType { Continuous, Shiftting, Wrapping }
 }

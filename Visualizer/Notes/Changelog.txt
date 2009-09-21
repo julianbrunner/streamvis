@@ -9,7 +9,7 @@ Version 0.8
 	- Improved behaviour of graph extension feature
 	- Reenabled graph extension feature
 	- Reenabled exporting into GNU Plot compatible format
-	- Resolved issue causing the plotter to hang at regular intervals
+	- Resolved issue causing the visualizer to hang at regular intervals
 	- Significantly reduced memory consumption and relocations
 	- Reduced thread synchronization overhead
 	- Timestamps are less prone to being screwed up because the reader thread is blocked
@@ -36,7 +36,7 @@ Version 0.6
 	- Set yarp ports to use strict behaviour
 	- Added option to toggle vertical synchronization
 	- Added default values for the various show items
-	- Transformed the "Hide all graphs" command into an option to show the Plotter
+	- Transformed the "Hide all graphs" command into an option to show the Diagram
 	- Frame counter can be turned on and off
 	- Backend improvements
 	- When sensible, scientific notation is used for drawing numbers
@@ -60,7 +60,7 @@ Version 0.6
 
 Version 0.5
 	- Added resampling of values before drawing
-	- Added option to set horizontal resolution of plotter
+	- Added option to set horizontal resolution of the Diagram
 	- Optimized FittingValueManager
 	- Improved graph extension (better graph cutting, incorporates more data entries for extension)
 	- Fixed a bug causing crashes when trying to plot a stream containing double.NaN values
@@ -90,7 +90,7 @@ Version 0.3
 	- Minor performance improvements
 	- Fixed issue of lines not being drawn on pixel centers
 	- Interval counts on X and Y axes can be customized
-	- Option to change plotter and background color
+	- Option to change diagram color and background color
 	- Option to disable graph extension
 	- Made more settings accessible from the GUI, also added hotkeys
 	- Moved to OpenTK 0.9.7
@@ -114,7 +114,7 @@ Version 0.3
 Version 0.2
 	- Major design changes in "Yarp.Visualizer.Plotting"
 	- Substantially improved performance of "Container" by using binary search
-	- Added "Wrapping" plotter type
+	- Added "Wrapping" diagram type
 	- Added fixed-scale Y-axis option
 	- Substantial performance improvements in various parts of the plotting process
 	- Removed "File" menu

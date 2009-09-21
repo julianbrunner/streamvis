@@ -78,24 +78,24 @@ namespace Visualizer
 				Console.WriteLine();
 
 				Write(column2, "-t:(c|s:[<c>]|w:[<c>])");
-				Write(column4, "Lets you specify the type of plotter that is used. The default value is \"c\".");
+				Write(column4, "Lets you specify the type of diagram that is used. The default value is \"c\".");
 				Console.WriteLine();
 				Console.WriteLine();
 				Write(column3, "c");
-				Write(column4, "Continuous plotter. The graphs are drawn across the entire plotting-area, the most recent data entry lies on the right border of the plotting-area.");
+				Write(column4, "Continuous diagram. The graphs are drawn across the entire plotting-area, the most recent data entry lies on the right border of the plotting-area.");
 				Console.WriteLine();
 				Console.WriteLine();
 				Write(column3, "s:[<c>]");
-				Write(column4, "Shifting plotter. The graphs will shift <c> times the plotting-area width to the left whenever the most recent data entry reaches the right border of the plotting-area. The default value for <c> is \"0.8\".");
+				Write(column4, "Shifting diagram. The graphs will shift <c> times the plotting-area width to the left whenever the most recent data entry reaches the right border of the plotting-area. The default value for <c> is \"0.8\".");
 				Console.WriteLine();
 				Console.WriteLine();
 				Write(column3, "w:[<c>]");
-				Write(column4, "Wrapping plotter. The graphs don't move at all, once the most recent data entry reaches the right border, the graphs wrap around and draw over the oldest entries starting from the left. The most recent data entry will push a gap of <c> times the plotting-area width in front of it. The default value for <c> is \"0.2\".");
+				Write(column4, "Wrapping diagram. The graphs don't move at all, once the most recent data entry reaches the right border, the graphs wrap around and draw over the oldest entries starting from the left. The most recent data entry will push a gap of <c> times the plotting-area width in front of it. The default value for <c> is \"0.2\".");
 				Console.WriteLine();
 				Console.WriteLine();
 
 				Write(column2, "-r:<low>:<high>");
-				Write(column4, "Fixes the value range of the plotter. By default, the value range is automatically fitted to the displayed graphs.");
+				Write(column4, "Fixes the value range of the diagram. By default, the value range is automatically fitted to the displayed graphs.");
 				Console.WriteLine();
 				Console.WriteLine();
 
@@ -123,7 +123,7 @@ namespace Visualizer
 				Console.WriteLine();
 
 				Write(column2, "-pc:<color>");
-				Write(column4, "Sets the plotter color (coordinate system and labels) in HTML notation. The default value is \"FFFFFF\".");
+				Write(column4, "Sets the diagram color (coordinate system and labels) in HTML notation. The default value is \"FFFFFF\".");
 				Console.WriteLine();
 				Console.WriteLine();
 

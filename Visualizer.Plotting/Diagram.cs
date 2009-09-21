@@ -9,7 +9,7 @@ using Visualizer.Plotting.Values;
 
 namespace Visualizer.Plotting
 {
-	public class Plotter : IComponent, IUpdateable, IDrawable
+	public class Diagram : IComponent, IUpdateable, IDrawable
 	{
 		readonly Drawer drawer;
 		readonly IEnumerable<Graph> graphs;
@@ -24,7 +24,7 @@ namespace Visualizer.Plotting
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 
-		public Plotter(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, SegmentManager segmentManager, ValueManager valueManager, Layouter layouter, int intervalsX, int intervalsY, Color color)
+		public Diagram(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, SegmentManager segmentManager, ValueManager valueManager, Layouter layouter, int intervalsX, int intervalsY, Color color)
 		{
 			this.drawer = drawer;
 			this.graphs = graphs;

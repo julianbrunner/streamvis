@@ -10,36 +10,36 @@ namespace Visualizer
 	{
 		readonly List<string> ports = new List<string>();
 		readonly bool minimalMode = false;
-		readonly Time plotterWidth = new Time(10.0);
+		readonly Time diagramWidth = new Time(10.0);
 		readonly double lineWidth = 1;
 		readonly bool extendGraphs = true;
 		readonly bool lineSmoothing = true;
-		readonly PlotterType plotterType = PlotterType.Continuous;
-		readonly double plotterTypeParameter = 0;
+		readonly DiagramType diagramType = DiagramType.Continuous;
+		readonly double diagramTypeParameter = 0;
 		readonly double rangeLow = 0;
 		readonly double rangeHigh = 0;
 		readonly SamplerType samplerType = SamplerType.PerPixel;
 		readonly double samplerFrequency = 1;
 		readonly int intervalsX = 5;
 		readonly int intervalsY = 5;
-		readonly Color plotterColor = Color.White;
+		readonly Color diagramColor = Color.White;
 		readonly Color backgroundColor = Color.Black;
 
 		public IEnumerable<string> Ports { get { return ports; } }
 		public bool MinimalMode { get { return minimalMode; } }
-		public Time PlotterWidth { get { return plotterWidth; } }
+		public Time DiagramWidth { get { return diagramWidth; } }
 		public double LineWidth { get { return lineWidth; } }
 		public bool ExtendGraphs { get { return extendGraphs; } }
 		public bool LineSmoothing { get { return lineSmoothing; } }
-		public PlotterType PlotterType { get { return plotterType; } }
-		public double PlotterTypeParameter { get { return plotterTypeParameter; } }
+		public DiagramType DiagramType { get { return diagramType; } }
+		public double DiagramTypeParameter { get { return diagramTypeParameter; } }
 		public double RangeLow { get { return rangeLow; } }
 		public double RangeHigh { get { return rangeHigh; } }
 		public SamplerType SamplerType { get { return samplerType; } }
 		public double SamplerFrequency { get { return samplerFrequency; } }
 		public int IntervalsX { get { return intervalsX; } }
 		public int IntervalsY { get { return intervalsY; } }
-		public Color PlotterColor { get { return plotterColor; } }
+		public Color DiagramColor { get { return diagramColor; } }
 		public Color BackgroundColor { get { return backgroundColor; } }
 
 		public Parameters(IEnumerable<string> parameters)
@@ -55,7 +55,7 @@ namespace Visualizer
 						break;
 					case "-w":
 						if (details.Length != 2) InvalidParameter(parameter);
-						try { plotterWidth = new Time(double.Parse(details[1])); }
+						try { diagramWidth = new Time(double.Parse(details[1])); }
 						catch (FormatException) { InvalidParameter(parameter); }
 						break;
 					case "-l":
@@ -77,21 +77,21 @@ namespace Visualizer
 						{
 							case "c":
 								if (details.Length > 2) InvalidParameter(parameter);
-								plotterType = PlotterType.Continuous;
+								diagramType = DiagramType.Continuous;
 								break;
 							case "s":
 								if (details.Length > 3) InvalidParameter(parameter);
-								plotterType = PlotterType.Shiftting;
-								try { plotterTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.8; }
+								diagramType = DiagramType.Shiftting;
+								try { diagramTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.8; }
 								catch (FormatException) { InvalidParameter(parameter); }
 								break;
 							case "w":
 								if (details.Length > 3) InvalidParameter(parameter);
-								plotterType = PlotterType.Wrapping;
-								try { plotterTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.2; }
+								diagramType = DiagramType.Wrapping;
+								try { diagramTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.2; }
 								catch (FormatException) { InvalidParameter(parameter); }
 								break;
-							default: throw new InvalidOperationException("Invalid plotter type: " + details[1]);
+							default: throw new InvalidOperationException("Invalid diagram type: " + details[1]);
 						}
 						break;
 					case "-r":
@@ -134,7 +134,7 @@ namespace Visualizer
 						break;
 					case "-pc":
 						if (details.Length != 2) InvalidParameter(parameter);
-						try { plotterColor = HtmlStringToColor(details[1]); }
+						try { diagramColor = HtmlStringToColor(details[1]); }
 						catch (FormatException) { InvalidParameter(parameter); }
 						catch (ArgumentOutOfRangeException) { InvalidParameter(parameter); }
 						break;
