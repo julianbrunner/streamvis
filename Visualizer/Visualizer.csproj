@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -112,9 +112,9 @@
       <Project>{188C1B70-DD61-4EEA-B733-8379A3866CF2}</Project>
       <Name>Visualizer.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Visualizer.Plotting\Visualizer.Plotting.csproj">
-      <Project>{B86C20E8-6D5D-4110-8333-B4B0EC707862}</Project>
-      <Name>Visualizer.Plotting</Name>
+    <ProjectReference Include="..\Visualizer.Drawing\Visualizer.Drawing.csproj">
+      <Project>{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}</Project>
+      <Name>Visualizer.Drawing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Yarp\Yarp.csproj">
       <Project>{88377E30-410B-40ED-8D90-BE90D7831933}</Project>

@@ -22,7 +22,7 @@ namespace Visualizer
 				#region Help Message
 				Console.WriteLine();
 
-				Write(column1, "Can be used to plot, capture and replay streams received on Yarp ports.");
+				Write(column1, "Can be used to visualize, capture and replay streams received on Yarp ports.");
 				Console.WriteLine();
 				Console.WriteLine();
 
@@ -31,7 +31,7 @@ namespace Visualizer
 				Console.WriteLine();
 
 				Write(column2, "<port>");
-				Write(column4, "Specifies that all streams of <port> should be included in the stream selection list. A test bottle will be retrieved from the specified port to build a list of possible streams before the plotting begins.");
+				Write(column4, "Specifies that all streams of <port> should be included in the stream selection list. A test bottle will be retrieved from the specified port to build a list of possible streams before the visualization begins.");
 				Console.WriteLine();
 				Console.WriteLine();
 
@@ -53,12 +53,12 @@ namespace Visualizer
 				Console.WriteLine();
 
 				Write(column2, "-m");
-				Write(column4, "Enables minimal mode. In minimal mode, everything except for the graph area is hidden from the user interface to maximize the available plotting-space.");
+				Write(column4, "Enables minimal mode. In minimal mode, everything except for the graph area is hidden from the user interface to maximize the available drawing-space.");
 				Console.WriteLine();
 				Console.WriteLine();
 
 				Write(column2, "-w:<width>");
-				Write(column4, "Lets you specify the width of the plotting-area in total seconds. The default value is \"10\".");
+				Write(column4, "Lets you specify the width of the drawing-area in total seconds. The default value is \"10\".");
 				Console.WriteLine();
 				Console.WriteLine();
 
@@ -82,15 +82,15 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 				Write(column3, "c");
-				Write(column4, "Continuous diagram. The graphs are drawn across the entire plotting-area, the most recent data entry lies on the right border of the plotting-area.");
+				Write(column4, "Continuous diagram. The graphs are drawn across the entire drawing-area, the most recent data entry lies on the right border of the drawing-area.");
 				Console.WriteLine();
 				Console.WriteLine();
 				Write(column3, "s:[<c>]");
-				Write(column4, "Shifting diagram. The graphs will shift <c> times the plotting-area width to the left whenever the most recent data entry reaches the right border of the plotting-area. The default value for <c> is \"0.8\".");
+				Write(column4, "Shifting diagram. The graphs will shift <c> times the drawing-area width to the left whenever the most recent data entry reaches the right border of the drawing-area. The default value for <c> is \"0.8\".");
 				Console.WriteLine();
 				Console.WriteLine();
 				Write(column3, "w:[<c>]");
-				Write(column4, "Wrapping diagram. The graphs don't move at all, once the most recent data entry reaches the right border, the graphs wrap around and draw over the oldest entries starting from the left. The most recent data entry will push a gap of <c> times the plotting-area width in front of it. The default value for <c> is \"0.2\".");
+				Write(column4, "Wrapping diagram. The graphs don't move at all, once the most recent data entry reaches the right border, the graphs wrap around and draw over the oldest entries starting from the left. The most recent data entry will push a gap of <c> times the drawing-area width in front of it. The default value for <c> is \"0.2\".");
 				Console.WriteLine();
 				Console.WriteLine();
 

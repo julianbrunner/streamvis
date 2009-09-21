@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Visualizer.Plotting")]
+[assembly: AssemblyTitle("Visualizer.Drawing")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("Visualizer.Plotting")]
+[assembly: AssemblyProduct("Visualizer.Drawing")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("c9cf6457-7078-4e3e-9f5a-52003adc214f")]
+[assembly: Guid("e3b7affb-e4ca-426f-945b-0e74619814c7")]
 
 // Version information for an assembly consists of the following four values:
 //
