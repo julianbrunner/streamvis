@@ -100,7 +100,7 @@ namespace Visualizer
 				Console.WriteLine();
 
 				Write(column2, "-s:(s:[<c>]|p:[<c>])");
-				Write(column4, "Lets you specify the sampler type and settings used for drawing graphs. The default value is \"s:0.1\".");
+				Write(column4, "Lets you specify the sampler type and settings used for drawing graphs. The default value is \"p:1\".");
 				Console.WriteLine();
 				Console.WriteLine();
 				Write(column3, "s:[<c>]");

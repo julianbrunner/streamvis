@@ -19,7 +19,7 @@ namespace Visualizer
 		readonly double rangeLow = 0;
 		readonly double rangeHigh = 0;
 		readonly SamplerType samplerType = SamplerType.PerSecond;
-		readonly double samplerFrequency = 10;
+		readonly double samplerFrequency = 1;
 		readonly int intervalsX = 5;
 		readonly int intervalsY = 5;
 		readonly Color plotterColor = Color.White;
