@@ -1,3 +1,5 @@
+TODO: Rename Plotter do Diagram
+
 TODO: Text on Linux is blurry
 
 TODO: Do some staged testing on Linux to see where most of the CPU time is spent

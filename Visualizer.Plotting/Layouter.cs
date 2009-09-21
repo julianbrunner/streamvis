@@ -8,7 +8,7 @@ namespace Visualizer.Plotting
 	{
 		const int borderLeft = 80;
 		const int borderRight = 0;
-		const int borderTop = 20;
+		const int borderTop = 7;
 		const int borderBottom = 25;
 
 		readonly Viewport viewport;
