@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -84,11 +84,8 @@
     <None Include="Images\CrossMark.xcf" />
     <None Include="Notes\Resampling and Caching.pdf" />
     <None Include="Notes\Visualizer.pdf" />
-    <None Include="Notes\Changelog.txt" />
-    <None Include="Notes\Performance Ingo.txt" />
-    <None Include="Notes\Performance Julian.txt" />
-    <None Include="Notes\Performance.txt" />
-    <None Include="Notes\Todo.txt" />
+    <None Include="Documentation\Changelog.txt" />
+    <None Include="Documentation\Todo.txt" />
     <None Include="Tools\MakeBundle" />
   </ItemGroup>
   <ItemGroup>
@@ -120,6 +117,9 @@
       <Project>{88377E30-410B-40ED-8D90-BE90D7831933}</Project>
       <Name>Yarp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Legal\GPL v3.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
