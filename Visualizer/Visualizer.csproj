@@ -82,7 +82,7 @@
     <None Include="Images\Open.png" />
     <None Include="Images\Save.png" />
     <None Include="Images\CrossMark.xcf" />
-    <None Include="Legal\GPL v3.txt" />
+    <None Include="Legal\GNU GPL v3.txt" />
     <None Include="Legal\OpenTK License.txt" />
     <None Include="Notes\Resampling and Caching.pdf" />
     <None Include="Notes\Visualizer.pdf" />
