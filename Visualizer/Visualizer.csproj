@@ -82,6 +82,8 @@
     <None Include="Images\Open.png" />
     <None Include="Images\Save.png" />
     <None Include="Images\CrossMark.xcf" />
+    <None Include="Legal\GPL v3.txt" />
+    <None Include="Legal\OpenTK License.txt" />
     <None Include="Notes\Resampling and Caching.pdf" />
     <None Include="Notes\Visualizer.pdf" />
     <None Include="Documentation\Changelog.txt" />
@@ -117,9 +119,6 @@
       <Project>{88377E30-410B-40ED-8D90-BE90D7831933}</Project>
       <Name>Yarp</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Legal\GPL v3.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
