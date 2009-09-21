@@ -1,8 +1,6 @@
 TODO: Rename Plotter do Diagram
+TODO: Move Yarp.Wrapper to Libraries
 
-TODO: Text on Linux is blurry
-
-TODO: Do some staged testing on Linux to see where most of the CPU time is spent
 TODO: Fix massive memory consumption on save (XML)
 TODO: Make Layouter adaptive to width of the Y-Axis labels
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
@@ -10,6 +8,14 @@ TODO: Add command line argument to specify VSync
 TODO: Add command line argument to prevent logging
 TODO: Clear cache regularly
 TODO: Give higher priority to reader thread
+TODO: Add option to disable alpha blending
+TODO: Set value intervals to "nicer" values
+TODO: Better playback controls
+TODO: Vertical/Horizontal zoom (in Freeze mode)
+TODO: Add ability to switch Value-/TimeManagers through GUI while plotting
+TODO: Add coordinate display in status bar
+TODO: Improve random colors
+TODO: Add possibility to name individual streams
 
 TODO: Hide OpenTK members sufficiently so that a reference to Graphics doesn't result in a dependency reference to OpenTK
 TODO: Remove unused usings and references
