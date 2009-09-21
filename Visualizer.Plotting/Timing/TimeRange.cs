@@ -2,7 +2,7 @@
 using Utility;
 using Visualizer.Data;
 
-namespace Visualizer.Plotting.Timing
+namespace Visualizer.Drawing.Timing
 {
 	public class TimeRange
 	{

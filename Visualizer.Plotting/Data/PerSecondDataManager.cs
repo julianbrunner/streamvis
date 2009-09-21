@@ -1,6 +1,6 @@
 ﻿using Visualizer.Data;
 
-namespace Visualizer.Plotting.Data
+namespace Visualizer.Drawing.Data
 {
 	public class PerSecondDataManager : DataManager
 	{

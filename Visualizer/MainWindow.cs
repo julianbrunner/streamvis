@@ -6,10 +6,10 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Graphics;
 using Visualizer.Data;
-using Visualizer.Plotting;
-using Visualizer.Plotting.Data;
-using Visualizer.Plotting.Timing;
-using Visualizer.Plotting.Values;
+using Visualizer.Drawing;
+using Visualizer.Drawing.Data;
+using Visualizer.Drawing.Timing;
+using Visualizer.Drawing.Values;
 
 namespace Visualizer
 {

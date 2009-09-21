@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Visualizer.Plotting.Timing;
+using Visualizer.Drawing.Timing;
 
-namespace Visualizer.Plotting.Data
+namespace Visualizer.Drawing.Data
 {
 	public class SimpleSegmentManager : SegmentManager
 	{

@@ -1,4 +1,4 @@
-namespace Visualizer.Plotting.Values
+namespace Visualizer.Drawing.Values
 {
 	public abstract class ValueManager
 	{

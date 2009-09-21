@@ -3,11 +3,11 @@ using System.Drawing;
 using Graphics;
 using Utility;
 using Visualizer.Data;
-using Visualizer.Plotting.Data;
-using Visualizer.Plotting.Timing;
-using Visualizer.Plotting.Values;
+using Visualizer.Drawing.Data;
+using Visualizer.Drawing.Timing;
+using Visualizer.Drawing.Values;
 
-namespace Visualizer.Plotting
+namespace Visualizer.Drawing
 {
 	public class Diagram : IComponent, IUpdateable, IDrawable
 	{

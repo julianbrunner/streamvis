@@ -2,7 +2,7 @@ using System.Drawing;
 using Graphics;
 using OpenTK.Math;
 
-namespace Visualizer.Plotting
+namespace Visualizer.Drawing
 {
 	public class Layouter
 	{

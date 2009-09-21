@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Visualizer.Data;
 
-namespace Visualizer.Plotting.Timing
+namespace Visualizer.Drawing.Timing
 {
 	public abstract class TimeManager
 	{

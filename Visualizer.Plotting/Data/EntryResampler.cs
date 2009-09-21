@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Utility;
 using Visualizer.Data;
 
-namespace Visualizer.Plotting.Data
+namespace Visualizer.Drawing.Data
 {
 	public class EntryResampler
 	{
