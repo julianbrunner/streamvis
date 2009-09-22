@@ -1,4 +1,4 @@
-﻿// Copyright � Julian Brunner 2009
+﻿// Copyright © Julian Brunner 2009
 
 // This file is part of Stream Visualizer (streamvis).
 // 
