@@ -1,6 +1,23 @@
 #!/bin/sh
 
+referenceHeader=`cat Header.txt`
+
+output=""
+
 for sourcePath in `find $1 -name *.cs`
 do
-echo $sourcePath.awesome
+	testHeader=`head -16 $sourcePath`
+	if [ "$testHeader" != "$referenceHeader" ]
+	then
+		output="$output${sourcePath#../}\n"
+	fi
 done
+
+if [ "$output" != "" ]
+then
+	echo "Files with incorrect headers:"
+	echo "$output"
+	return 1
+else
+	echo "Headers checked successfully."
+fi
