@@ -1,0 +1,6 @@
+#!/bin/sh
+
+for sourcePath in `find $1 -name *.cs`
+do
+echo $sourcePath.awesome
+done
