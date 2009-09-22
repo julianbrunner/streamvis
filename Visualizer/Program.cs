@@ -22,7 +22,7 @@ namespace Visualizer
 				#region Help Message
 				Console.WriteLine();
 
-				Write(column1, "Can be used to visualize, capture and replay streams received on Yarp ports.");
+				Write(column1, "Stream Visualizer is an application that can be used to visualize, capture and replay data streams.");
 				Console.WriteLine();
 				Console.WriteLine();
 

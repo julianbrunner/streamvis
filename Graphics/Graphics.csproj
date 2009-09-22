@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenTK, Version=0.9.8.1, Culture=neutral, PublicKeyToken=null">
+    <Reference Include="OpenTK, Version=0.9.8.3, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\OpenTK\OpenTK.dll</HintPath>
     </Reference>
