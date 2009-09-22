@@ -12,8 +12,10 @@ Stream Visualizer (sometimes called "streamvis" or "Visualizer" is an applicatio
 
 2. Legal
 --------------------------------------------------------------------------------
-Unless stated otherwise, files in Stream Visualizer (streamvis) are:
+Unless stated otherwise, Stream Visualizer (streamvis) and the files that it is consists of are:
 	Copyright © Julian Brunner 2009
 	Released under the terms of the GNU GPL v3. See "Legal/GNU GPL v3.txt" for details.
+	
+The Open Toolkit Library (OpenTK) is licensed under the terms of the The Open Toolkit Library license. See "Legal/OpenTK License.txt" for details.
 
-The Open Toolkit Library (OpenTK) is licensed under the terms of the 
+Yet Another Robot Platform (YARP) is licensed under the terms of the GNU GPL v2. See "Legal/GNU GPL v2.txt" for details.
