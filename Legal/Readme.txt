@@ -4,6 +4,7 @@ Stream Visualizer Readme
 Table of Contents
 1. About
 2. Legal
+3. Contact
 ================================================================================
 
 1. About
@@ -19,3 +20,7 @@ Unless stated otherwise, Stream Visualizer (streamvis) and the files that it is 
 The Open Toolkit Library (OpenTK) is licensed under the terms of the The Open Toolkit Library license. See "Legal/OpenTK License.txt" for details.
 
 Yet Another Robot Platform (YARP) is licensed under the terms of the GNU GPL v2. See "Legal/GNU GPL v2.txt" for details.
+
+3. Contact
+--------------------------------------------------------------------------------
+Julian Brunner	JulianBrunner@gmx.net
