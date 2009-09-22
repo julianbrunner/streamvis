@@ -82,7 +82,6 @@
     <None Include="Images\Open.png" />
     <None Include="Images\Save.png" />
     <None Include="Images\CrossMark.xcf" />
-    <None Include="Tools\MakeBundle" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
