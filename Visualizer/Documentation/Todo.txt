@@ -23,8 +23,3 @@ TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file c
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
 TODO: Extension methods don't work without reference to System.Core?!
 TODO: Move Yarp.Wrapper to Libraries solution folder once either Visual Studio supports it or isn't used anymore
-
-Organization:
-	- License: GPL v3
-	- Pick name (will sources other than YARP be added later?)
-	- Create SF.net project
