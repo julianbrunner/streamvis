@@ -27,6 +27,8 @@ namespace Visualizer.Drawing.Timing
 		readonly LinearMapping mapping;
 		readonly Matrix4 transformation;
 
+		public double this[Time time] { get { return mapping[time.Seconds]; } }
+
 		public Range<Time> Range { get { return range; } }
 		public LinearMapping Mapping { get { return mapping; } }
 		public Matrix4 Transformation { get { return transformation; } }

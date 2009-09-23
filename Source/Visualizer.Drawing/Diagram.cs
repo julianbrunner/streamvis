@@ -94,19 +94,13 @@ namespace Visualizer.Drawing
 			end.Y += 5;
 			drawer.DrawLine(start, end, color, 1);
 
-			Time width = timeRange.Range.End - timeRange.Range.Start;
-			Time interval = width / intervalsX;
-			Time offset = interval - timeRange.Range.Start % interval;
-
-			if (width > Time.Zero)
-				for (int i = 0; i < intervalsX + 1; i++)
-				{
-					Time time = offset + i * interval;
-					PointF position = layouter[time / width, 0];
-					position.Y += 5;
-					drawer.DrawLine(new PointF(position.X, position.Y + 5), position, color, 1);
-					drawer.DrawNumber((timeRange.Range.Start + time).Seconds, new PointF(position.X, position.Y + 7), color, TextAlignment.Center);
-				}
+			foreach (Time time in GetTimes(timeRange, intervalsX))
+			{
+				PointF position = layouter[timeRange[time], 0];
+				position.Y += 5;
+				drawer.DrawLine(new PointF(position.X, position.Y + 5), position, color, 1);
+				drawer.DrawNumber(time.Seconds, new PointF(position.X, position.Y + 7), color, TextAlignment.Center);
+			}
 		}
 		void DrawAxisY(TimeRange timeRange, ValueRange valueRange)
 		{
@@ -115,17 +109,33 @@ namespace Visualizer.Drawing
 
 			drawer.DrawLine(start, end, color, 1);
 
-			double height = valueRange.Range.End - valueRange.Range.Start;
-			double interval = height / intervalsY;
+			foreach (double value in GetValues(valueRange, intervalsY))
+			{
+				PointF position = layouter[0, valueRange[value]];
+				drawer.DrawLine(new PointF(position.X - 5, position.Y), position, color, 1);
+				drawer.DrawNumber(value, new PointF(position.X - 7, position.Y - 5), color, TextAlignment.Far);
+			}
+		}
 
-			if (height > 0)
-				for (int i = 0; i < intervalsY + 1; i++)
-				{
-					double value = i * interval;
-					PointF position = layouter[0, value / height];
-					drawer.DrawLine(new PointF(position.X - 5, position.Y), position, color, 1);
-					drawer.DrawNumber(valueRange.Range.Start + value, new PointF(position.X - 7, position.Y - 5), color, TextAlignment.Far);
-				}
+		static IEnumerable<Time> GetTimes(TimeRange timeRange, int count)
+		{
+			Time width = timeRange.Range.End - timeRange.Range.Start;
+			Time interval = width / count;
+			Time offset = timeRange.Range.Start + interval - timeRange.Range.Start % interval;
+
+			if (width == Time.Zero) yield break;
+
+			for (int i = 0; i < count + 1; i++) yield return offset + i * interval;
+		}
+		static IEnumerable<double> GetValues(ValueRange valueRange, int count)
+		{
+			double height = valueRange.Range.End - valueRange.Range.Start;
+			double interval = height / count;
+			double offset = valueRange.Range.Start;
+
+			if (height == 0) yield break;
+
+			for (int i = 0; i < count + 1; i++) yield return offset + i * interval;
 		}
 	}
 }

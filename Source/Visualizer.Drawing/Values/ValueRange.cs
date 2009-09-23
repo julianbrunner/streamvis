@@ -26,6 +26,8 @@ namespace Visualizer.Drawing.Values
 		readonly LinearMapping mapping;
 		readonly Matrix4 transformation;
 
+		public double this[double value] { get { return mapping[value]; } }
+
 		public Range<double> Range { get { return range; } }
 		public LinearMapping Mapping { get { return mapping; } }
 		public Matrix4 Transformation { get { return transformation; } }
