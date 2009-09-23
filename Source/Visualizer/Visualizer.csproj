@@ -24,7 +24,7 @@
     <WarningLevel>4</WarningLevel>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="../../Tools/MakeBundle vis" workingdir="${TargetDir}" />
+        <Command type="AfterBuild" command="../../Tools/MakeBundle streamvis" workingdir="${TargetDir}" />
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="../../Tools/MakeBundle vis" workingdir="${TargetDir}" />
+        <Command type="AfterBuild" command="../../Tools/MakeBundle streamvis" workingdir="${TargetDir}" />
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
