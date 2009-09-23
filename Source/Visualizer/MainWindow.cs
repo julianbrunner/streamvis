@@ -79,7 +79,7 @@ namespace Visualizer
 			this.segmentManager = new SimpleSegmentManager(timeManager, graphs);
 			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(segmentManager, graphs);
 			else this.valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
-			this.diagram = new Diagram(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.IntervalsX, parameters.IntervalsY, parameters.DiagramColor);
+			this.diagram = new Diagram(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.MarkersX, parameters.MarkersY, parameters.DiagramColor);
 
 			System.Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);

@@ -42,8 +42,8 @@ namespace Visualizer
 		public double RangeHigh { get; private set; }
 		public SamplerType SamplerType { get; private set; }
 		public double SamplerFrequency { get; private set; }
-		public int IntervalsX { get; private set; }
-		public int IntervalsY { get; private set; }
+		public int MarkersX { get; private set; }
+		public int MarkersY { get; private set; }
 		public Color DiagramColor { get; private set; }
 		public Color BackgroundColor { get; private set; }
 
@@ -63,8 +63,8 @@ namespace Visualizer
 			RangeHigh = 0;
 			SamplerType = SamplerType.PerPixel;
 			SamplerFrequency = 1;
-			IntervalsX = 5;
-			IntervalsY = 5;
+			MarkersX = 5;
+			MarkersY = 5;
 			DiagramColor = Color.White;
 			BackgroundColor = Color.Black;
 
@@ -154,14 +154,14 @@ namespace Visualizer
 						default: throw new InvalidOperationException("Invalid sampler type: " + details[1]);
 					}
 					break;
-				case "ix":
+				case "mx":
 					if (details.Length != 2) InvalidParameter(option);
-					try { IntervalsX = int.Parse(details[1]); }
+					try { MarkersX = int.Parse(details[1]); }
 					catch (FormatException) { InvalidParameter(option); }
 					break;
-				case "iy":
+				case "my":
 					if (details.Length != 2) InvalidParameter(option);
-					try { IntervalsY = int.Parse(details[1]); }
+					try { MarkersY = int.Parse(details[1]); }
 					catch (FormatException) { InvalidParameter(option); }
 					break;
 				case "pc":

@@ -36,14 +36,14 @@ namespace Visualizer.Drawing
 		readonly SegmentManager segmentManager;
 		readonly ValueManager valueManager;
 		readonly Layouter layouter;
-		readonly int intervalsX;
-		readonly int intervalsY;
+		readonly int markersX;
+		readonly int markersY;
 		readonly Color color;
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 
-		public Diagram(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, SegmentManager segmentManager, ValueManager valueManager, Layouter layouter, int intervalsX, int intervalsY, Color color)
+		public Diagram(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, SegmentManager segmentManager, ValueManager valueManager, Layouter layouter, int markersX, int markersY, Color color)
 		{
 			this.drawer = drawer;
 			this.graphs = graphs;
@@ -51,8 +51,8 @@ namespace Visualizer.Drawing
 			this.segmentManager = segmentManager;
 			this.valueManager = valueManager;
 			this.layouter = layouter;
-			this.intervalsX = intervalsX;
-			this.intervalsY = intervalsY;
+			this.markersX = markersX;
+			this.markersY = markersY;
 			this.color = color;
 
 			IsUpdated = true;
@@ -69,10 +69,10 @@ namespace Visualizer.Drawing
 				segmentManager.Update();
 				valueManager.Update();
 
-				IEnumerable<Time> times = GetTimes(timeManager.Range, intervalsX);
+				IEnumerable<Time> times = GetTimeMarkers(timeManager.Range, markersX);
 				int maxHeight = times.Any() ? times.Max(time => drawer.GetTextSize(time.Seconds).Height) : 0;
 
-				IEnumerable<double> values = GetValues(valueManager.Range, intervalsY);
+				IEnumerable<double> values = GetValueMarkers(valueManager.Range, markersY);
 				int maxWidth = values.Any() ? values.Max(value => drawer.GetTextSize(value).Width) : 0;
 
 				layouter.Update(maxHeight, maxWidth);
@@ -103,7 +103,7 @@ namespace Visualizer.Drawing
 
 			drawer.DrawLine(start, end, color, 1);
 
-			foreach (Time time in GetTimes(timeRange, intervalsX))
+			foreach (Time time in GetTimeMarkers(timeRange, markersX))
 			{
 				Vector2 markerStart = layouter[timeRange[time], 0] + offset;
 				Vector2 markerEnd = markerStart + new Vector2(0, 5);
@@ -120,7 +120,7 @@ namespace Visualizer.Drawing
 
 			drawer.DrawLine(start, end, color, 1);
 
-			foreach (double value in GetValues(valueRange, intervalsY))
+			foreach (double value in GetValueMarkers(valueRange, markersY))
 			{
 				Vector2 markerStart = layouter[0, valueRange[value]] + offset;
 				Vector2 markerEnd = markerStart + new Vector2(-5, 0);
@@ -129,13 +129,13 @@ namespace Visualizer.Drawing
 			}
 		}
 
-		static IEnumerable<Time> GetTimes(TimeRange timeRange, int count)
+		static IEnumerable<Time> GetTimeMarkers(TimeRange timeRange, int count)
 		{
 			if (timeRange.Range.IsEmpty()) yield break;
 
 			foreach (double time in DoubleUtility.GetMarkers(timeRange.Range.Start.Seconds, timeRange.Range.End.Seconds, count)) yield return new Time(time);
 		}
-		static IEnumerable<double> GetValues(ValueRange valueRange, int count)
+		static IEnumerable<double> GetValueMarkers(ValueRange valueRange, int count)
 		{
 			if (valueRange.Range.IsEmpty()) yield break;
 

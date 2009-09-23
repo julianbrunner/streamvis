@@ -144,13 +144,13 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "ix:<n>");
-				Write(column4, "Sets the number of intervals that the X-Axis is divided into. The default value is \"5\".");
+				Write(column2, "mx:<n>");
+				Write(column4, "Sets the number of markers that are displayed on the X-Axis. The default value is \"5\".");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "iy:<n>");
-				Write(column4, "Sets the number of intervals that the Y-Axis is divided into. The default value is \"5\".");
+				Write(column2, "my:<n>");
+				Write(column4, "Sets the number of markers that are displayed on the Y-Axis. The default value is \"5\".");
 				Console.WriteLine();
 				Console.WriteLine();
 
