@@ -22,6 +22,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Graphics;
+using OpenTK.Math;
 using Visualizer.Data;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Data;
@@ -107,7 +108,7 @@ namespace Visualizer
 
 		void viewport_Layout(object sender, LayoutEventArgs e)
 		{
-			frameCounter.Position = new Point(viewport.Right, viewport.Top);
+			frameCounter.Position = new Vector2(viewport.Right, viewport.Top);
 		}
 
 		private void streamsListView_ItemChecked(object sender, ItemCheckedEventArgs e)

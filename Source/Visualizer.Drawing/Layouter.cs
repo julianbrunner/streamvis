@@ -30,11 +30,11 @@ namespace Visualizer.Drawing
 
 		readonly Viewport viewport;
 
-		public PointF this[double x, double y]
+		public Vector2 this[double x, double y]
 		{
 			get
 			{
-				return new PointF
+				return new Vector2
 				(
 					(float)(Area.Left + x * Area.Width),
 					(float)(Area.Bottom - y * Area.Height)

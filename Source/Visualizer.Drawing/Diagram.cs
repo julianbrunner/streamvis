@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Graphics;
+using OpenTK.Math;
 using Utility;
 using Visualizer.Data;
 using Visualizer.Drawing.Data;
@@ -87,33 +88,34 @@ namespace Visualizer.Drawing
 
 		void DrawAxisX(TimeRange timeRange, ValueRange valueRange)
 		{
-			PointF start = layouter[0, 0];
-			PointF end = layouter[1, 0];
+			Vector2 offset = new Vector2(0, 5);
 
-			start.Y += 5;
-			end.Y += 5;
+			Vector2 start = layouter[0, 0] + offset;
+			Vector2 end = layouter[1, 0] + offset;
+
 			drawer.DrawLine(start, end, color, 1);
 
 			foreach (Time time in GetTimes(timeRange, intervalsX))
 			{
-				PointF position = layouter[timeRange[time], 0];
-				position.Y += 5;
-				drawer.DrawLine(new PointF(position.X, position.Y + 5), position, color, 1);
-				drawer.DrawNumber(time.Seconds, new PointF(position.X, position.Y + 7), color, TextAlignment.Center);
+				Vector2 position = layouter[timeRange[time], 0] + offset;
+				drawer.DrawLine(position, position + new Vector2(0, 5), color, 1);
+				drawer.DrawNumber(time.Seconds, position + new Vector2(0, 7), color, TextAlignment.Center);
 			}
 		}
 		void DrawAxisY(TimeRange timeRange, ValueRange valueRange)
 		{
-			PointF start = layouter[0, 0];
-			PointF end = layouter[0, 1];
+			Vector2 offset = new Vector2(0, 0);
+
+			Vector2 start = layouter[0, 0] + offset;
+			Vector2 end = layouter[0, 1] + offset;
 
 			drawer.DrawLine(start, end, color, 1);
 
 			foreach (double value in GetValues(valueRange, intervalsY))
 			{
-				PointF position = layouter[0, valueRange[value]];
-				drawer.DrawLine(new PointF(position.X - 5, position.Y), position, color, 1);
-				drawer.DrawNumber(value, new PointF(position.X - 7, position.Y - 5), color, TextAlignment.Far);
+				Vector2 position = layouter[0, valueRange[value]] + offset;
+				drawer.DrawLine(position, position + new Vector2(-5, 0), color, 1);
+				drawer.DrawNumber(value, position + new Vector2(-7, -5), color, TextAlignment.Far);
 			}
 		}
 

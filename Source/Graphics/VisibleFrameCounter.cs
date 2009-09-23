@@ -16,6 +16,7 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Drawing;
+using OpenTK.Math;
 
 namespace Graphics
 {
@@ -26,18 +27,18 @@ namespace Graphics
 		readonly TextAlignment alignment;
 
 		public bool IsDrawn { get; set; }
-		public PointF Position { get; set; }
-		
+		public Vector2 Position { get; set; }
+
 		public VisibleFrameCounter(Drawer drawer, Color color, TextAlignment alignment)
 		{
 			this.drawer = drawer;
 			this.color = color;
 			this.alignment = alignment;
 
-			Position = Point.Empty;
+			Position = Vector2.Zero;
 			IsDrawn = true;
 		}
-		
+
 		public void Draw()
 		{
 			if (IsDrawn) drawer.DrawNumber(FramesPerSecond, Position, color, alignment);

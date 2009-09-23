@@ -60,7 +60,7 @@ namespace Graphics
 		{
 			Dispose(true);
 		}
-		public void DrawNumber(double number, PointF position, Color color, TextAlignment alignment)
+		public void DrawNumber(double number, Vector2 position, Color color, TextAlignment alignment)
 		{
 			string decimalString = number.ToString("0.##", CultureInfo.InvariantCulture);
 			string scientificString = number.ToString("0.##E+0", CultureInfo.InvariantCulture);
@@ -90,7 +90,7 @@ namespace Graphics
 
 			GL.LoadIdentity();
 		}
-		public void DrawLine(PointF start, PointF end, Color color, float width)
+		public void DrawLine(Vector2 start, Vector2 end, Color color, float width)
 		{
 			GL.LineWidth(width);
 			GL.Color3(color);
