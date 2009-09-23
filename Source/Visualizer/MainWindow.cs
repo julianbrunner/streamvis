@@ -60,7 +60,7 @@ namespace Visualizer
 			viewport.VSync = parameters.VerticalSynchronization;
 			viewport.Layout += viewport_Layout;
 
-			this.drawer = new Drawer(parameters.LineSmoothing);
+			this.drawer = new Drawer(parameters.LineSmoothing, parameters.AlphaBlending);
 
 			this.timer = new Data.Timer();
 

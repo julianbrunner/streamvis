@@ -35,7 +35,7 @@ namespace Graphics
 		int[] textTextures = new int[1];
 		int characterLists;
 
-		public Drawer(bool lineSmoothing)
+		public Drawer(bool lineSmoothing, bool alphaBlending)
 		{
 			GL.EnableClientState(EnableCap.VertexArray);
 
@@ -45,8 +45,11 @@ namespace Graphics
 				GL.Enable(EnableCap.LineSmooth);
 				GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
 			}
-			GL.Enable(EnableCap.Blend);
-			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+			if (alphaBlending)
+			{
+				GL.Enable(EnableCap.Blend);
+				GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+			}
 
 			InitializeTextTexture();
 			InitializeCharacterDisplayLists();

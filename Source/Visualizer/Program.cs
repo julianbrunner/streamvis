@@ -94,6 +94,11 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 
+				Write(column2, "+b|-b");
+				Write(column4, "Enables or disables alpha-blending. The default values is enabled.");
+				Console.WriteLine();
+				Console.WriteLine();
+
 				Write(column2, "+v|-v");
 				Write(column4, "Enables or disables vertical synchronization. The default values is enabled.");
 				Console.WriteLine();

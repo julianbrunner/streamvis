@@ -33,6 +33,7 @@ namespace Visualizer
 		public double LineWidth { get; private set; }
 		public bool ExtendGraphs { get; private set; }
 		public bool LineSmoothing { get; private set; }
+		public bool AlphaBlending { get; private set; }
 		public bool VerticalSynchronization { get; private set; }
 		public bool DataLogging { get; private set; }
 		public DiagramType DiagramType { get; private set; }
@@ -53,6 +54,7 @@ namespace Visualizer
 			LineWidth = 1;
 			ExtendGraphs = true;
 			LineSmoothing = true;
+			AlphaBlending = true;
 			VerticalSynchronization = true;
 			DataLogging = true;
 			DiagramType = DiagramType.Continuous;
@@ -184,6 +186,7 @@ namespace Visualizer
 				case "m": MinimalMode = value; break;
 				case "e": ExtendGraphs = value; break;
 				case "a": LineSmoothing = value; break;
+				case "b": AlphaBlending = value; break;
 				case "v": VerticalSynchronization = value; break;
 				case "l": DataLogging = value; break;
 				default: InvalidParameter((value ? "+" : "-") + name); break;
