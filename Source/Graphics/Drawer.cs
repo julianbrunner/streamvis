@@ -60,11 +60,15 @@ namespace Graphics
 		{
 			Dispose(true);
 		}
+		public Size GetTextSize(double number)
+		{
+			string text = GetNumberString(number);
+
+			return new Size(text.Length * characterSize.Width, characterSize.Height);
+		}
 		public void DrawNumber(double number, Vector2 position, Color color, TextAlignment alignment)
 		{
-			string decimalString = number.ToString("0.##", CultureInfo.InvariantCulture);
-			string scientificString = number.ToString("0.##E+0", CultureInfo.InvariantCulture);
-			string text = decimalString.Length <= 10 ? decimalString : scientificString;
+			string text = GetNumberString(number);
 
 			int width = text.Length * characterSize.Width;
 
@@ -180,6 +184,12 @@ namespace Graphics
 			GL.TexCoord2(textureBounds.Right, textureBounds.Top); GL.Vertex2(worldBounds.Right, worldBounds.Top);
 			GL.TexCoord2(textureBounds.Right, textureBounds.Bottom); GL.Vertex2(worldBounds.Right, worldBounds.Bottom);
 			GL.TexCoord2(textureBounds.Left, textureBounds.Bottom); GL.Vertex2(worldBounds.Left, worldBounds.Bottom);
+		}
+		static string GetNumberString(double number)
+		{
+			string decimalString = number.ToString("0.##", CultureInfo.InvariantCulture);
+			string scientificString = number.ToString("0.##E+0", CultureInfo.InvariantCulture);
+			return decimalString.Length <= 10 ? decimalString : scientificString;
 		}
 	}
 }

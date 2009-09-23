@@ -23,10 +23,10 @@ namespace Visualizer.Drawing
 {
 	public class Layouter
 	{
-		const int borderLeft = 80;
-		const int borderRight = 0;
-		const int borderTop = 7;
-		const int borderBottom = 25;
+		const int baseBorderLeft = 9;
+		const int baseBorderRight = 0;
+		const int baseBorderTop = 8;
+		const int baseBorderBottom = 14;
 
 		readonly Viewport viewport;
 
@@ -50,8 +50,13 @@ namespace Visualizer.Drawing
 			this.viewport = viewport;
 		}
 
-		public virtual void Update()
+		public virtual void Update(int timeLabelsHeight, int valueLabelsWidth)
 		{
+			int borderLeft = baseBorderLeft + valueLabelsWidth;
+			int borderRight = baseBorderRight;
+			int borderTop = baseBorderTop;
+			int borderBottom = baseBorderBottom + timeLabelsHeight;
+
 			Rectangle clientArea = viewport.ClientRectangle;
 
 			Area = new Rectangle

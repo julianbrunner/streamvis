@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Graphics;
 using OpenTK.Math;
 using Utility;
@@ -63,11 +64,18 @@ namespace Visualizer.Drawing
 			if (IsUpdated)
 			{
 				// TODO: This looks random
-				layouter.Update();
 				timeManager.Update();
 				foreach (Graph graph in graphs) graph.Update();
 				segmentManager.Update();
 				valueManager.Update();
+
+				IEnumerable<Time> times = GetTimes(timeManager.Range, intervalsX);
+				int maxHeight = times.Any() ? times.Max(time => drawer.GetTextSize(time.Seconds).Height) : 0;
+
+				IEnumerable<double> values = GetValues(valueManager.Range, intervalsY);
+				int maxWidth = values.Any() ? values.Max(value => drawer.GetTextSize(value).Width) : 0;
+
+				layouter.Update(maxHeight, maxWidth);
 			}
 		}
 		public void Draw()
@@ -97,9 +105,10 @@ namespace Visualizer.Drawing
 
 			foreach (Time time in GetTimes(timeRange, intervalsX))
 			{
-				Vector2 position = layouter[timeRange[time], 0] + offset;
-				drawer.DrawLine(position, position + new Vector2(0, 5), color, 1);
-				drawer.DrawNumber(time.Seconds, position + new Vector2(0, 7), color, TextAlignment.Center);
+				Vector2 markerStart = layouter[timeRange[time], 0] + offset;
+				Vector2 markerEnd = markerStart + new Vector2(0, 5);
+				drawer.DrawLine(markerStart, markerEnd, color, 1);
+				drawer.DrawNumber(time.Seconds, markerEnd + new Vector2(0, 2), color, TextAlignment.Center);
 			}
 		}
 		void DrawAxisY(TimeRange timeRange, ValueRange valueRange)
@@ -113,29 +122,30 @@ namespace Visualizer.Drawing
 
 			foreach (double value in GetValues(valueRange, intervalsY))
 			{
-				Vector2 position = layouter[0, valueRange[value]] + offset;
-				drawer.DrawLine(position, position + new Vector2(-5, 0), color, 1);
-				drawer.DrawNumber(value, position + new Vector2(-7, -5), color, TextAlignment.Far);
+				Vector2 markerStart = layouter[0, valueRange[value]] + offset;
+				Vector2 markerEnd = markerStart + new Vector2(-5, 0);
+				drawer.DrawLine(markerStart, markerEnd, color, 1);
+				drawer.DrawNumber(value, markerEnd + new Vector2(-2, -6), color, TextAlignment.Far);
 			}
 		}
 
 		static IEnumerable<Time> GetTimes(TimeRange timeRange, int count)
 		{
+			if (timeRange.Range.IsEmpty()) yield break;
+
 			Time width = timeRange.Range.End - timeRange.Range.Start;
 			Time interval = width / count;
 			Time offset = timeRange.Range.Start + interval - timeRange.Range.Start % interval;
-
-			if (width == Time.Zero) yield break;
 
 			for (int i = 0; i < count + 1; i++) yield return offset + i * interval;
 		}
 		static IEnumerable<double> GetValues(ValueRange valueRange, int count)
 		{
+			if (valueRange.Range.IsEmpty()) yield break;
+
 			double height = valueRange.Range.End - valueRange.Range.Start;
 			double interval = height / count;
 			double offset = valueRange.Range.Start;
-
-			if (height == 0) yield break;
 
 			for (int i = 0; i < count + 1; i++) yield return offset + i * interval;
 		}

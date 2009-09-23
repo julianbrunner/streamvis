@@ -1,5 +1,4 @@
 TODO: Fix massive memory consumption on save (XML)
-TODO: Make Layouter adaptive to width of the Y-Axis labels
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 TODO: Add command line argument to specify VSync
 TODO: Add command line argument to prevent logging
@@ -13,6 +12,8 @@ TODO: Add ability to switch Value-/TimeManagers through GUI while drawing
 TODO: Add coordinate display in status bar
 TODO: Improve random colors
 TODO: Add possibility to name individual streams
+
+TODO: Test if cache invalidation due to changing value label widths causes hiccups
 
 TODO: Hide OpenTK members sufficiently so that a reference to Graphics doesn't result in a dependency reference to OpenTK
 TODO: Remove unused usings and references
