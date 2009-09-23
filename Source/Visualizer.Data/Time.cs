@@ -122,15 +122,21 @@ namespace Visualizer.Data
 		}
 		public static Time operator /(Time a, double d)
 		{
+			if (d == 0) throw new DivideByZeroException();
+
 			return new Time((long)(a.ticks / d));
 		}
 		public static double operator /(Time a, Time b)
 		{
+			if (b.ticks == 0) throw new DivideByZeroException();
+
 			return a.Seconds / b.Seconds;
 		}
 
 		public static Time operator %(Time a, Time b)
 		{
+			if (b.ticks == 0) throw new DivideByZeroException();
+
 			long remainder = a.ticks % b.ticks;
 			if (remainder < 0) remainder += b.ticks;
 			return new Time(remainder);
