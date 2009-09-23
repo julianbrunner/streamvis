@@ -26,149 +26,164 @@ namespace Visualizer
 	class Parameters
 	{
 		readonly List<string> ports = new List<string>();
-		readonly bool minimalMode = false;
-		readonly Time diagramWidth = new Time(10.0);
-		readonly double lineWidth = 1;
-		readonly bool extendGraphs = true;
-		readonly bool lineSmoothing = true;
-		readonly bool verticalSynchronization = true;
-		readonly DiagramType diagramType = DiagramType.Continuous;
-		readonly double diagramTypeParameter = 0;
-		readonly double rangeLow = 0;
-		readonly double rangeHigh = 0;
-		readonly SamplerType samplerType = SamplerType.PerPixel;
-		readonly double samplerFrequency = 1;
-		readonly int intervalsX = 5;
-		readonly int intervalsY = 5;
-		readonly Color diagramColor = Color.White;
-		readonly Color backgroundColor = Color.Black;
 
 		public IEnumerable<string> Ports { get { return ports; } }
-		public bool MinimalMode { get { return minimalMode; } }
-		public Time DiagramWidth { get { return diagramWidth; } }
-		public double LineWidth { get { return lineWidth; } }
-		public bool ExtendGraphs { get { return extendGraphs; } }
-		public bool LineSmoothing { get { return lineSmoothing; } }
-		public bool VerticalSynchronization { get { return verticalSynchronization; } }
-		public DiagramType DiagramType { get { return diagramType; } }
-		public double DiagramTypeParameter { get { return diagramTypeParameter; } }
-		public double RangeLow { get { return rangeLow; } }
-		public double RangeHigh { get { return rangeHigh; } }
-		public SamplerType SamplerType { get { return samplerType; } }
-		public double SamplerFrequency { get { return samplerFrequency; } }
-		public int IntervalsX { get { return intervalsX; } }
-		public int IntervalsY { get { return intervalsY; } }
-		public Color DiagramColor { get { return diagramColor; } }
-		public Color BackgroundColor { get { return backgroundColor; } }
+		public bool MinimalMode { get; private set; }
+		public Time DiagramWidth { get; private set; }
+		public double LineWidth { get; private set; }
+		public bool ExtendGraphs { get; private set; }
+		public bool LineSmoothing { get; private set; }
+		public bool VerticalSynchronization { get; private set; }
+		public DiagramType DiagramType { get; private set; }
+		public double DiagramTypeParameter { get; private set; }
+		public double RangeLow { get; private set; }
+		public double RangeHigh { get; private set; }
+		public SamplerType SamplerType { get; private set; }
+		public double SamplerFrequency { get; private set; }
+		public int IntervalsX { get; private set; }
+		public int IntervalsY { get; private set; }
+		public Color DiagramColor { get; private set; }
+		public Color BackgroundColor { get; private set; }
 
 		public Parameters(IEnumerable<string> parameters)
 		{
+			MinimalMode = false;
+			DiagramWidth = new Time(10.0);
+			LineWidth = 1;
+			ExtendGraphs = true;
+			LineSmoothing = true;
+			VerticalSynchronization = true;
+			DiagramType = DiagramType.Continuous;
+			DiagramTypeParameter = 0;
+			RangeLow = 0;
+			RangeHigh = 0;
+			SamplerType = SamplerType.PerPixel;
+			SamplerFrequency = 1;
+			IntervalsX = 5;
+			IntervalsY = 5;
+			DiagramColor = Color.White;
+			BackgroundColor = Color.Black;
+
 			foreach (string parameter in parameters)
 			{
 				string[] details = parameter.Split(':');
-				switch (details[0])
+				switch (details[0][0])
 				{
-					case "-m":
+					case '/': ports.Add(parameter); break;
+					case '+':
 						if (details.Length != 1) InvalidParameter(parameter);
-						minimalMode = true;
+						ParseBooleanOption(details[0].Substring(1), true);
 						break;
-					case "-w":
-						if (details.Length != 2) InvalidParameter(parameter);
-						try { diagramWidth = new Time(double.Parse(details[1])); }
-						catch (FormatException) { InvalidParameter(parameter); }
-						break;
-					case "-l":
-						if (details.Length != 2) InvalidParameter(parameter);
-						try { lineWidth = double.Parse(details[1]); }
-						catch (FormatException) { InvalidParameter(parameter); }
-						break;
-					case "-noe":
+					case '-':
 						if (details.Length != 1) InvalidParameter(parameter);
-						extendGraphs = false;
+						ParseBooleanOption(details[0].Substring(1), false);
 						break;
-					case "-noa":
-						if (details.Length != 1) InvalidParameter(parameter);
-						lineSmoothing = false;
-						break;
-					case "-nov":
-						if (details.Length != 1) InvalidParameter(parameter);
-						verticalSynchronization = false;
-						break;
-					case "-t":
-						if (details.Length < 2) InvalidParameter(parameter);
-						switch (details[1])
-						{
-							case "c":
-								if (details.Length > 2) InvalidParameter(parameter);
-								diagramType = DiagramType.Continuous;
-								break;
-							case "s":
-								if (details.Length > 3) InvalidParameter(parameter);
-								diagramType = DiagramType.Shiftting;
-								try { diagramTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.8; }
-								catch (FormatException) { InvalidParameter(parameter); }
-								break;
-							case "w":
-								if (details.Length > 3) InvalidParameter(parameter);
-								diagramType = DiagramType.Wrapping;
-								try { diagramTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.2; }
-								catch (FormatException) { InvalidParameter(parameter); }
-								break;
-							default: throw new InvalidOperationException("Invalid diagram type: " + details[1]);
-						}
-						break;
-					case "-r":
-						if (details.Length != 3) InvalidParameter(parameter);
-						try
-						{
-							rangeLow = double.Parse(details[1]);
-							rangeHigh = double.Parse(details[2]);
-						}
-						catch (FormatException) { InvalidParameter(parameter); }
-						break;
-					case "-s":
-						if (details.Length < 2) InvalidParameter(parameter);
-						switch (details[1])
-						{
-							case "s":
-								if (details.Length > 3) InvalidParameter(parameter);
-								samplerType = SamplerType.PerSecond;
-								try { samplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 10; }
-								catch (FormatException) { InvalidParameter(parameter); }
-								break;
-							case "p":
-								if (details.Length > 3) InvalidParameter(parameter);
-								samplerType = SamplerType.PerPixel;
-								try { samplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 0.1; }
-								catch (FormatException) { InvalidParameter(parameter); }
-								break;
-							default: throw new InvalidOperationException("Invalid sampler type: " + details[1]);
-						}
-						break;
-					case "-ix":
-						if (details.Length != 2) InvalidParameter(parameter);
-						try { intervalsX = int.Parse(details[1]); }
-						catch (FormatException) { InvalidParameter(parameter); }
-						break;
-					case "-iy":
-						if (details.Length != 2) InvalidParameter(parameter);
-						try { intervalsY = int.Parse(details[1]); }
-						catch (FormatException) { InvalidParameter(parameter); }
-						break;
-					case "-pc":
-						if (details.Length != 2) InvalidParameter(parameter);
-						try { diagramColor = HtmlStringToColor(details[1]); }
-						catch (FormatException) { InvalidParameter(parameter); }
-						catch (ArgumentOutOfRangeException) { InvalidParameter(parameter); }
-						break;
-					case "-bc":
-						if (details.Length != 2) InvalidParameter(parameter);
-						try { backgroundColor = HtmlStringToColor(details[1]); }
-						catch (FormatException) { InvalidParameter(parameter); }
-						catch (ArgumentOutOfRangeException) { InvalidParameter(parameter); }
-						break;
-					default: ports.Add(parameter); break;
+					default: ParseOption(parameter); break;
 				}
+			}
+		}
+
+		void ParseOption(string option)
+		{
+			string[] details = option.Split(':');
+
+			switch (details[0])
+			{
+				case "w":
+					if (details.Length != 2) InvalidParameter(option);
+					try { DiagramWidth = new Time(double.Parse(details[1])); }
+					catch (FormatException) { InvalidParameter(option); }
+					break;
+				case "l":
+					if (details.Length != 2) InvalidParameter(option);
+					try { LineWidth = double.Parse(details[1]); }
+					catch (FormatException) { InvalidParameter(option); }
+					break;
+				case "t":
+					if (details.Length < 2) InvalidParameter(option);
+					switch (details[1])
+					{
+						case "c":
+							if (details.Length > 2) InvalidParameter(option);
+							DiagramType = DiagramType.Continuous;
+							break;
+						case "s":
+							if (details.Length > 3) InvalidParameter(option);
+							DiagramType = DiagramType.Shiftting;
+							try { DiagramTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.8; }
+							catch (FormatException) { InvalidParameter(option); }
+							break;
+						case "w":
+							if (details.Length > 3) InvalidParameter(option);
+							DiagramType = DiagramType.Wrapping;
+							try { DiagramTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.2; }
+							catch (FormatException) { InvalidParameter(option); }
+							break;
+						default: throw new InvalidOperationException("Invalid diagram type: " + details[1]);
+					}
+					break;
+				case "r":
+					if (details.Length != 3) InvalidParameter(option);
+					try
+					{
+						RangeLow = double.Parse(details[1]);
+						RangeHigh = double.Parse(details[2]);
+					}
+					catch (FormatException) { InvalidParameter(option); }
+					break;
+				case "s":
+					if (details.Length < 2) InvalidParameter(option);
+					switch (details[1])
+					{
+						case "s":
+							if (details.Length > 3) InvalidParameter(option);
+							SamplerType = SamplerType.PerSecond;
+							try { SamplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 10; }
+							catch (FormatException) { InvalidParameter(option); }
+							break;
+						case "p":
+							if (details.Length > 3) InvalidParameter(option);
+							SamplerType = SamplerType.PerPixel;
+							try { SamplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 0.1; }
+							catch (FormatException) { InvalidParameter(option); }
+							break;
+						default: throw new InvalidOperationException("Invalid sampler type: " + details[1]);
+					}
+					break;
+				case "ix":
+					if (details.Length != 2) InvalidParameter(option);
+					try { IntervalsX = int.Parse(details[1]); }
+					catch (FormatException) { InvalidParameter(option); }
+					break;
+				case "iy":
+					if (details.Length != 2) InvalidParameter(option);
+					try { IntervalsY = int.Parse(details[1]); }
+					catch (FormatException) { InvalidParameter(option); }
+					break;
+				case "pc":
+					if (details.Length != 2) InvalidParameter(option);
+					try { DiagramColor = HtmlStringToColor(details[1]); }
+					catch (FormatException) { InvalidParameter(option); }
+					catch (ArgumentOutOfRangeException) { InvalidParameter(option); }
+					break;
+				case "bc":
+					if (details.Length != 2) InvalidParameter(option);
+					try { BackgroundColor = HtmlStringToColor(details[1]); }
+					catch (FormatException) { InvalidParameter(option); }
+					catch (ArgumentOutOfRangeException) { InvalidParameter(option); }
+					break;
+				default: InvalidParameter(option); break;
+			}
+		}
+		void ParseBooleanOption(string name, bool value)
+		{
+			switch (name)
+			{
+				case "m": MinimalMode = value; break;
+				case "e": ExtendGraphs = value; break;
+				case "a": LineSmoothing = value; break;
+				case "v": VerticalSynchronization = value; break;
+				default: InvalidParameter((value ? "+" : "-") + name); break;
 			}
 		}
 

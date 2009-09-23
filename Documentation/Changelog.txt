@@ -7,6 +7,7 @@ Version 0.9
 	- Refined diagram borders
 	- Added more error checking
 	- Added a command-line switch to turn off vertical synchronization
+	- Streamlined command-line parameter processing
 
 Version 0.8
 	- Simpler entry buffering system

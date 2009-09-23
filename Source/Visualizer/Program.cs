@@ -69,37 +69,37 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-m");
-				Write(column4, "Enables minimal mode. In minimal mode, everything except for the graph area is hidden from the user interface to maximize the available drawing-space.");
+				Write(column2, "+m|-m");
+				Write(column4, "Enables or disables minimal mode. In minimal mode, everything except for the graph area is hidden from the user interface to maximize the available drawing-space. The default values is disabled.");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-w:<width>");
+				Write(column2, "w:<width>");
 				Write(column4, "Lets you specify the width of the drawing-area in total seconds. The default value is \"10\".");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-l:<width>");
+				Write(column2, "l:<width>");
 				Write(column4, "Lets you specify the width (thickness) of the graph lines in pixels. The default value is \"1.0\".");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-noe");
-				Write(column4, "Disables the graph extension feature. When graph extension is enabled, all graphs that have at least one sampled data entry are extended across the whole width of the coordinate system using known adjacent values.");
+				Write(column2, "+e|-e");
+				Write(column4, "Enables or disables the graph extension feature. When graph extension is enabled, all graphs that have at least one sampled data entry are extended across the whole width of the coordinate system using known adjacent values. The default values is enabled.");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-noa");
-				Write(column4, "Disables antialiasing of graph lines.");
+				Write(column2, "+a|-a");
+				Write(column4, "Enables or disables antialiasing of graph lines. The default values is enabled.");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-nov");
-				Write(column4, "Disables vertical synchronization.");
+				Write(column2, "+v|-v");
+				Write(column4, "Disables vertical synchronization. The default values is enabled.");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-t:(c|s:[<c>]|w:[<c>])");
+				Write(column2, "t:(c|s:[<c>]|w:[<c>])");
 				Write(column4, "Lets you specify the type of diagram that is used. The default value is \"c\".");
 				Console.WriteLine();
 				Console.WriteLine();
@@ -116,12 +116,12 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-r:<low>:<high>");
+				Write(column2, "r:<low>:<high>");
 				Write(column4, "Fixes the value range of the diagram. By default, the value range is automatically fitted to the displayed graphs.");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-s:(s:[<c>]|p:[<c>])");
+				Write(column2, "s:(s:[<c>]|p:[<c>])");
 				Write(column4, "Lets you specify the sampler type and settings used for drawing graphs. The default value is \"p:1\".");
 				Console.WriteLine();
 				Console.WriteLine();
@@ -134,22 +134,22 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-ix:<n>");
+				Write(column2, "ix:<n>");
 				Write(column4, "Sets the number of intervals that the X-Axis is divided into. The default value is \"5\".");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-iy:<n>");
+				Write(column2, "iy:<n>");
 				Write(column4, "Sets the number of intervals that the Y-Axis is divided into. The default value is \"5\".");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-pc:<color>");
+				Write(column2, "pc:<color>");
 				Write(column4, "Sets the diagram color (coordinate system and labels) in HTML notation. The default value is \"FFFFFF\".");
 				Console.WriteLine();
 				Console.WriteLine();
 
-				Write(column2, "-bc:<color>");
+				Write(column2, "bc:<color>");
 				Write(column4, "Sets the background color in HTML notation. The default value is \"000000\".");
 				Console.WriteLine();
 				Console.WriteLine();
