@@ -27,7 +27,7 @@ namespace Utility
 			double difference = end - start;
 			int magnitude = (int)Math.Floor(Math.Log10(difference));
 			double rawIntervalLength = difference * Math.Pow(10, -magnitude) / count;
-			double intervalLength = rawIntervalLength.FractionRound() * Math.Pow(10, magnitude);
+			double intervalLength = rawIntervalLength.FractionRound(1, 2, 2.5, 5) * Math.Pow(10, magnitude);
 
 			start = start.Ceiling(intervalLength);
 			end = end.Floor(intervalLength);

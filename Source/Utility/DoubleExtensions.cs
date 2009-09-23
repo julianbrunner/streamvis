@@ -16,15 +16,33 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Linq;
 
 namespace Utility
 {
 	public static class DoubleExtensions
 	{
-		public static double FractionRound(this double value)
+		public static double FractionRound(this double value, params double[] targets)
 		{
+			if (targets == null) throw new ArgumentNullException("targets");
+			if (targets.Length == 0) throw new ArgumentException("Argument \"targets\" cannot be empty.");
+
 			int magnitude = (int)Math.Floor(Math.Log10(value));
-			return Math.Round(value * Math.Pow(10, -magnitude)) * Math.Pow(10, magnitude);
+			double fraction = value * Math.Pow(10, -magnitude);
+			return fraction.Round(targets) * Math.Pow(10, magnitude);
+		}
+		public static double Round(this double value, params double[] targets)
+		{
+			if (targets == null) throw new ArgumentNullException("targets");
+			if (targets.Length == 0) throw new ArgumentException("Argument \"targets\" cannot be empty.");
+
+			return
+			(
+				from target in targets
+				orderby Math.Abs(value - target) ascending
+				select target
+			)
+			.First();
 		}
 		public static double Floor(this double value, double interval)
 		{
