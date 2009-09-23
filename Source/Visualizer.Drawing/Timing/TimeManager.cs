@@ -25,8 +25,8 @@ namespace Visualizer.Drawing.Timing
 		readonly Timer timer;
 		readonly Time width;
 
-		protected Time Time { get; private set; }
-		protected Time Width { get { return width; } }
+		public Time Time { get; private set; }
+		public Time Width { get { return width; } }
 
 		public bool Frozen { get; set; }
 		/// <summary>

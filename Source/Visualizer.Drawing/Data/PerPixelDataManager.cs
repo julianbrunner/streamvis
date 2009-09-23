@@ -29,6 +29,9 @@ namespace Visualizer.Drawing.Data
 		public PerPixelDataManager(EntryData entryData, double samplesPerPixel, Layouter layouter, TimeManager timeManager)
 			: base(entryData)
 		{
+			// TODO: Do error checking (samplesPerPixel could be negative, etc.
+			// TODO: Do error checking like this in other places, too
+
 			this.samplesPerPixel = samplesPerPixel;
 			this.layouter = layouter;
 			this.timeManager = timeManager;
@@ -38,11 +41,9 @@ namespace Visualizer.Drawing.Data
 		{
 			base.Update();
 
-			int width = layouter.Area.Width;
-			Time time = timeManager.Range.Range.End - timeManager.Range.Range.Start;
-			double pixelsPerSecond = width / time.Seconds;
+			double pixelsPerSecond = layouter.Area.Width / timeManager.Width.Seconds;
 
-			if (width > 0) EntryResampler.SampleDistance = new Time(1.0) / (samplesPerPixel * pixelsPerSecond);
+			EntryResampler.SampleDistance = new Time(1.0) / (samplesPerPixel * pixelsPerSecond);
 		}
 	}
 }
