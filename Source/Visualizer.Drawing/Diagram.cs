@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -149,5 +150,58 @@ namespace Visualizer.Drawing
 
 			for (int i = 0; i < count + 1; i++) yield return offset + i * interval;
 		}
+
+		static double Range(double start, double end, int intervalCount)
+		{
+			double difference = end - start;
+			int magnitude = (int)Math.Floor(Math.Log10(difference));
+			double intervalLength = FractionRound(difference * Math.Pow(10, -magnitude) / intervalCount) * Math.Pow(10, magnitude);
+
+			return intervalLength;
+		}
+		static double FractionRound(double value)
+		{
+			int magnitude = (int)Math.Floor(Math.Log10(value));
+			return Round(value * Math.Pow(10, -magnitude)) * Math.Pow(10, magnitude);
+		}
+		static double Round(double value)
+		{
+			return
+			(
+				from target in new double[] { 1, 2, 5 }
+				orderby Math.Abs(target - value) ascending
+				select target
+			)
+			.First();
+		}
 	}
 }
+
+//   0.0000182 -> 1.82 (1 <= x < 10)
+// -> 1.82 / 5 = 0.364 ==> 0.2
+
+
+// 234.1129894
+// ---
+// 234.1129850
+// 234.1129800
+// 234.1129750
+// ---
+// 234.1129712
+
+
+
+
+// 234.1129894
+// ---
+// 234.1129880
+// 234.1129860
+// 234.1129840
+// 234.1129820
+// 234.1129800
+// 234.1129780
+// 234.1129760
+// 234.1129740
+// 234.1129720
+// ---
+// 234.1129712
