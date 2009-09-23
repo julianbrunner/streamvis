@@ -13,6 +13,7 @@ Version 0.9
 	- Gave reader thread a higher priority (not implementing in Mono as of 09/23/2009)
 	- Added a command-line switch to specify whether alpha-blending should be used
 	- Value range markers now use "nicer" values
+	- Nice value algorithms are now used for time markers aswell
 
 Version 0.8
 	- Simpler entry buffering system

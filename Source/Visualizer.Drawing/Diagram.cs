@@ -134,25 +134,25 @@ namespace Visualizer.Drawing
 		{
 			if (timeRange.Range.IsEmpty()) yield break;
 
-			Time width = timeRange.Range.End - timeRange.Range.Start;
-			Time interval = width / count;
-			Time offset = timeRange.Range.Start + interval - timeRange.Range.Start % interval;
-
-			for (int i = 0; i < count + 1; i++) yield return offset + i * interval;
+			foreach (double time in GetMarkers(timeRange.Range.Start.Seconds, timeRange.Range.End.Seconds, count)) yield return new Time(time);
 		}
 		static IEnumerable<double> GetValues(ValueRange valueRange, int count)
 		{
 			if (valueRange.Range.IsEmpty()) yield break;
 
-			double height = valueRange.Range.End - valueRange.Range.Start;
-			int magnitude = (int)Math.Floor(Math.Log10(height));
-			double rawIntervalLength = height * Math.Pow(10, -magnitude) / count;
+			foreach (double value in GetMarkers(valueRange.Range.Start, valueRange.Range.End, count)) yield return value;
+		}
+		static IEnumerable<double> GetMarkers(double start, double end, int count)
+		{
+			double difference = end - start;
+			int magnitude = (int)Math.Floor(Math.Log10(difference));
+			double rawIntervalLength = difference * Math.Pow(10, -magnitude) / count;
 			double intervalLength = rawIntervalLength.FractionRound() * Math.Pow(10, magnitude);
 
-			double startValue = valueRange.Range.Start.Ceiling(intervalLength);
-			double endValue = valueRange.Range.End.Floor(intervalLength);
+			start = start.Ceiling(intervalLength);
+			end = end.Floor(intervalLength);
 
-			for (double value = startValue; value <= endValue; value += intervalLength) yield return value;
+			for (double value = start; value <= end; value += intervalLength) yield return value;
 		}
 	}
 }
