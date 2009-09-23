@@ -6,6 +6,7 @@ Version 0.9
 	- Made Layouter adaptive to label sizes
 	- Refined diagram borders
 	- Added more error checking
+	- Added a command-line switch to turn off vertical synchronization
 
 Version 0.8
 	- Simpler entry buffering system

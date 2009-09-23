@@ -31,6 +31,7 @@ namespace Visualizer
 		readonly double lineWidth = 1;
 		readonly bool extendGraphs = true;
 		readonly bool lineSmoothing = true;
+		readonly bool verticalSynchronization = true;
 		readonly DiagramType diagramType = DiagramType.Continuous;
 		readonly double diagramTypeParameter = 0;
 		readonly double rangeLow = 0;
@@ -48,6 +49,7 @@ namespace Visualizer
 		public double LineWidth { get { return lineWidth; } }
 		public bool ExtendGraphs { get { return extendGraphs; } }
 		public bool LineSmoothing { get { return lineSmoothing; } }
+		public bool VerticalSynchronization { get { return verticalSynchronization; } }
 		public DiagramType DiagramType { get { return diagramType; } }
 		public double DiagramTypeParameter { get { return diagramTypeParameter; } }
 		public double RangeLow { get { return rangeLow; } }
@@ -87,6 +89,10 @@ namespace Visualizer
 					case "-noa":
 						if (details.Length != 1) InvalidParameter(parameter);
 						lineSmoothing = false;
+						break;
+					case "-nov":
+						if (details.Length != 1) InvalidParameter(parameter);
+						verticalSynchronization = false;
 						break;
 					case "-t":
 						if (details.Length < 2) InvalidParameter(parameter);

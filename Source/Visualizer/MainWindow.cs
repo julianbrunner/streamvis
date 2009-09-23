@@ -57,6 +57,7 @@ namespace Visualizer
 			Text = title;
 
 			viewport.ClearColor = parameters.BackgroundColor;
+			viewport.VSync = parameters.VerticalSynchronization;
 			viewport.Layout += viewport_Layout;
 
 			this.drawer = new Drawer(parameters.LineSmoothing);
@@ -99,7 +100,7 @@ namespace Visualizer
 			showDiagramToolStripMenuItem_Click(this, EventArgs.Empty);
 			showFrameCounterToolStripMenuItem.Checked = true;
 			showFrameCounterToolStripMenuItem_Click(this, EventArgs.Empty);
-			verticalSynchronizationToolStripMenuItem.Checked = true;
+			verticalSynchronizationToolStripMenuItem.Checked = parameters.VerticalSynchronization;
 			verticalSynchronizationToolStripMenuItem_Click(this, EventArgs.Empty);
 
 			viewport.AddComponent(diagram);

@@ -94,6 +94,11 @@ namespace Visualizer
 				Console.WriteLine();
 				Console.WriteLine();
 
+				Write(column2, "-nov");
+				Write(column4, "Disables vertical synchronization.");
+				Console.WriteLine();
+				Console.WriteLine();
+
 				Write(column2, "-t:(c|s:[<c>]|w:[<c>])");
 				Write(column4, "Lets you specify the type of diagram that is used. The default value is \"c\".");
 				Console.WriteLine();
