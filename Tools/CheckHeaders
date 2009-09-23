@@ -5,7 +5,7 @@ referenceHeader=`cat Header.txt`
 totalFiles=0
 incorrectFiles=0
 
-for sourcePath in `find $1 -name *.cs`
+for sourcePath in `find $1 -name *.cs -o -name *.h -o -name *.c -o -name *.cpp`
 do
 	totalFiles=`expr $totalFiles + 1`
 	testHeader=`head -16 $sourcePath`
@@ -19,6 +19,6 @@ done
 echo "Files checked:     $totalFiles"
 echo "Incorrect headers: $incorrectFiles"
 
-if [ $incorrectHeaders > 0 ]
-then return 1
+if [ $incorrectFiles -gt 0 ]
+then exit 1
 fi
