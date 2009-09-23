@@ -245,8 +245,8 @@ namespace Visualizer
 					DataManager dataManager;
 					switch (parameters.SamplerType)
 					{
-						case SamplerType.PerSecond: dataManager = new PerSecondDataManager(stream.EntryData, parameters.SamplerFrequency); break;
-						case SamplerType.PerPixel: dataManager = new PerPixelDataManager(stream.EntryData, parameters.SamplerFrequency, layouter, timeManager); break;
+						case SamplerType.PerSecond: dataManager = new PerSecondDataManager(timeManager, stream.EntryData, parameters.SamplerFrequency); break;
+						case SamplerType.PerPixel: dataManager = new PerPixelDataManager(timeManager, stream.EntryData, parameters.SamplerFrequency, layouter); break;
 						default: throw new InvalidOperationException();
 					}
 

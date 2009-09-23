@@ -16,13 +16,14 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using Visualizer.Data;
+using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Drawing.Data
 {
 	public class PerSecondDataManager : DataManager
 	{
-		public PerSecondDataManager(EntryData entryData, double sampleFrequency)
-			: base(entryData)
+		public PerSecondDataManager(TimeManager timeManager, EntryData entryData, double sampleFrequency)
+			: base(timeManager, entryData)
 		{
 			EntryResampler.SampleDistance = new Time(1.0) / sampleFrequency;
 		}

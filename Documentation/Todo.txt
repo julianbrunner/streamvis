@@ -1,7 +1,6 @@
 TODO: Fix massive memory consumption on save (XML)
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 TODO: Add command line argument to prevent logging
-TODO: Clear cache regularly
 TODO: Give higher priority to reader thread
 TODO: Add option to disable alpha blending
 TODO: Set value intervals to "nicer" values
@@ -19,6 +18,7 @@ TODO: Hide OpenTK members sufficiently so that a reference to Graphics doesn't r
 TODO: Remove unused usings and references
 TODO: Make classes internal which don't have to be public
 TODO: Look for places to use LINQ queries
+TODO: Create development policy document
 
 TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution

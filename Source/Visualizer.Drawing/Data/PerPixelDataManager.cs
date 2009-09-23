@@ -24,26 +24,26 @@ namespace Visualizer.Drawing.Data
 	{
 		readonly double samplesPerPixel;
 		readonly Layouter layouter;
-		readonly TimeManager timeManager;
 
-		public PerPixelDataManager(EntryData entryData, double samplesPerPixel, Layouter layouter, TimeManager timeManager)
-			: base(entryData)
+		public PerPixelDataManager(TimeManager timeManager, EntryData entryData, double samplesPerPixel, Layouter layouter)
+			: base(timeManager, entryData)
 		{
-			// TODO: Do error checking (samplesPerPixel could be negative, etc.
-			// TODO: Do error checking like this in other places, too
+			// TODO: Do error checking (samplesPerPixel could be negative, etc.)
+			// TODO: Create and document policy for error checking
 
 			this.samplesPerPixel = samplesPerPixel;
 			this.layouter = layouter;
-			this.timeManager = timeManager;
 		}
 
 		public override void Update()
 		{
 			base.Update();
 
-			double pixelsPerSecond = layouter.Area.Width / timeManager.Width.Seconds;
+			double pixelsPerSecond = layouter.Area.Width / TimeManager.Width.Seconds;
+			double sampleFrequency = samplesPerPixel * pixelsPerSecond;
 
-			EntryResampler.SampleDistance = new Time(1.0) / (samplesPerPixel * pixelsPerSecond);
+			// TODO: Remove silent failure
+			if (sampleFrequency > 0) EntryResampler.SampleDistance = new Time(1.0) / sampleFrequency;
 		}
 	}
 }

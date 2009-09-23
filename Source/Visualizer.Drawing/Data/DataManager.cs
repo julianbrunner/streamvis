@@ -17,17 +17,21 @@
 
 using Utility;
 using Visualizer.Data;
+using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Drawing.Data
 {
 	public abstract class DataManager
 	{
+		readonly TimeManager timeManager;
 		readonly EntryData entryData;
 		readonly EntryResampler entryResampler;
 		readonly EntryCache entryCache;
 
 		public Entry[] this[Range<Time> range] { get { return entryCache[range]; } }
 
+		// TODO: Create and documents visibility policy
+		protected TimeManager TimeManager { get { return timeManager; } }
 		protected EntryData EntryData { get { return entryData; } }
 		protected EntryResampler EntryResampler { get { return entryResampler; } }
 		protected EntryCache EntryCache { get { return entryCache; } }
@@ -37,8 +41,9 @@ namespace Visualizer.Drawing.Data
 		public Entry FirstEntry { get { return entryCache.FirstEntry; } }
 		public Entry LastEntry { get { return entryCache.LastEntry; } }
 
-		protected DataManager(EntryData entryData)
+		protected DataManager(TimeManager timeManager, EntryData entryData)
 		{
+			this.timeManager = timeManager;
 			this.entryData = entryData;
 			this.entryResampler = new EntryResampler(entryData.Entries);
 			this.entryCache = new EntryCache(entryResampler);
@@ -47,6 +52,8 @@ namespace Visualizer.Drawing.Data
 		public virtual void Update()
 		{
 			entryData.Update();
+
+			if (!IsEmpty && timeManager.Time - entryCache.FirstEntry.Time > 10 * timeManager.Width) entryCache.Clear();
 		}
 	}
 }
