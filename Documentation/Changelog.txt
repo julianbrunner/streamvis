@@ -9,6 +9,7 @@ Version 0.9
 	- Added a command-line switch to turn off vertical synchronization
 	- Streamlined command-line parameter processing
 	- Resampler cache is now cleared at regular intervals (every 10 diagram widths)
+	- Added a command-line switch to turn of permanent data logging
 
 Version 0.8
 	- Simpler entry buffering system

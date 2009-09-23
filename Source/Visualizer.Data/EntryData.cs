@@ -48,6 +48,7 @@ namespace Visualizer.Data
 				lock (buffer)
 					buffer.Add(entry);
 		}
+		// TODO: This should be done in Visualizer.Drawing (Components in Visualizer.Data don't even "know" there is an Update/Draw loop
 		public void Update()
 		{
 			IEnumerable<Entry> bufferedEntries;

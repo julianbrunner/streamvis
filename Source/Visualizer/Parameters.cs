@@ -34,6 +34,7 @@ namespace Visualizer
 		public bool ExtendGraphs { get; private set; }
 		public bool LineSmoothing { get; private set; }
 		public bool VerticalSynchronization { get; private set; }
+		public bool DataLogging { get; private set; }
 		public DiagramType DiagramType { get; private set; }
 		public double DiagramTypeParameter { get; private set; }
 		public double RangeLow { get; private set; }
@@ -53,6 +54,7 @@ namespace Visualizer
 			ExtendGraphs = true;
 			LineSmoothing = true;
 			VerticalSynchronization = true;
+			DataLogging = true;
 			DiagramType = DiagramType.Continuous;
 			DiagramTypeParameter = 0;
 			RangeLow = 0;
@@ -183,6 +185,7 @@ namespace Visualizer
 				case "e": ExtendGraphs = value; break;
 				case "a": LineSmoothing = value; break;
 				case "v": VerticalSynchronization = value; break;
+				case "l": DataLogging = value; break;
 				default: InvalidParameter((value ? "+" : "-") + name); break;
 			}
 		}

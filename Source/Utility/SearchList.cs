@@ -21,6 +21,7 @@ using System.Collections.Generic;
 
 namespace Utility
 {
+	// TODO: Add an IsEmpty property and use it where appropriate
 	public class SearchList<TValue, TKey> : IEnumerable<TValue>
 	{
 		readonly Func<TValue, TKey> keySelector;

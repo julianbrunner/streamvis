@@ -22,8 +22,8 @@ namespace Visualizer.Drawing.Data
 {
 	public class PerSecondDataManager : DataManager
 	{
-		public PerSecondDataManager(TimeManager timeManager, EntryData entryData, double sampleFrequency)
-			: base(timeManager, entryData)
+		public PerSecondDataManager(TimeManager timeManager, EntryData entryData, bool dataLogging, double sampleFrequency)
+			: base(timeManager, entryData, dataLogging)
 		{
 			EntryResampler.SampleDistance = new Time(1.0) / sampleFrequency;
 		}

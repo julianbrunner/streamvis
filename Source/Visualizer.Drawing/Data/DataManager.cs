@@ -25,12 +25,13 @@ namespace Visualizer.Drawing.Data
 	{
 		readonly TimeManager timeManager;
 		readonly EntryData entryData;
+		readonly bool dataLogging;
 		readonly EntryResampler entryResampler;
 		readonly EntryCache entryCache;
 
 		public Entry[] this[Range<Time> range] { get { return entryCache[range]; } }
 
-		// TODO: Create and documents visibility policy
+		// TODO: Create and document visibility policy
 		protected TimeManager TimeManager { get { return timeManager; } }
 		protected EntryData EntryData { get { return entryData; } }
 		protected EntryResampler EntryResampler { get { return entryResampler; } }
@@ -41,19 +42,24 @@ namespace Visualizer.Drawing.Data
 		public Entry FirstEntry { get { return entryCache.FirstEntry; } }
 		public Entry LastEntry { get { return entryCache.LastEntry; } }
 
-		protected DataManager(TimeManager timeManager, EntryData entryData)
+		protected DataManager(TimeManager timeManager, EntryData entryData, bool dataLogging)
 		{
 			this.timeManager = timeManager;
 			this.entryData = entryData;
-			this.entryResampler = new EntryResampler(entryData.Entries);
-			this.entryCache = new EntryCache(entryResampler);
+			this.dataLogging = dataLogging;
+
+			entryResampler = new EntryResampler(entryData.Entries);
+			entryCache = new EntryCache(entryResampler);
 		}
 
 		public virtual void Update()
 		{
 			entryData.Update();
 
-			if (!IsEmpty && timeManager.Time - entryCache.FirstEntry.Time > 10 * timeManager.Width) entryCache.Clear();
+			if (!dataLogging && entryData.Entries.Count > 0 && timeManager.Time - entryData.Entries[0].Time > 2 * timeManager.Width)
+				entryData.Entries.Remove(0, entryData.Entries.FindIndex(timeManager.Time - timeManager.Width));
+
+			if (!entryCache.IsEmpty && timeManager.Time - entryCache.FirstEntry.Time > 10 * timeManager.Width) entryCache.Clear();
 		}
 	}
 }

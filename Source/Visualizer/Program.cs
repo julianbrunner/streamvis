@@ -95,7 +95,12 @@ namespace Visualizer
 				Console.WriteLine();
 
 				Write(column2, "+v|-v");
-				Write(column4, "Disables vertical synchronization. The default values is enabled.");
+				Write(column4, "Enables or disables vertical synchronization. The default values is enabled.");
+				Console.WriteLine();
+				Console.WriteLine();
+
+				Write(column2, "+l|-l");
+				Write(column4, "Enables or disables the logging of all received data. Disable if you plan to run the visualizer for a long time and you don't want to save the results. The default values is enabled.");
 				Console.WriteLine();
 				Console.WriteLine();
 

@@ -25,8 +25,8 @@ namespace Visualizer.Drawing.Data
 		readonly double samplesPerPixel;
 		readonly Layouter layouter;
 
-		public PerPixelDataManager(TimeManager timeManager, EntryData entryData, double samplesPerPixel, Layouter layouter)
-			: base(timeManager, entryData)
+		public PerPixelDataManager(TimeManager timeManager, EntryData entryData, bool dataLogging, double samplesPerPixel, Layouter layouter)
+			: base(timeManager, entryData, dataLogging)
 		{
 			// TODO: Do error checking (samplesPerPixel could be negative, etc.)
 			// TODO: Create and document policy for error checking
