@@ -38,6 +38,10 @@ namespace Sender
 			stopwatch.Start();
 			int packets = 0;
 
+			//double value = 0;
+			//double variance = 1;
+			//int counter = 0;
+
 			using (Network network = new Network())
 			using (Port port = new Port("/write"))
 				while (!Console.KeyAvailable)
@@ -50,6 +54,17 @@ namespace Sender
 						stopwatch.Start();
 						packets = 0;
 					}
+
+					//counter++;
+					//if (counter == 15000)
+					//{
+					//    counter = 0;
+					//    variance = Math.Pow(2, NextDouble(random, -10, 6));
+					//}
+					//value += variance * NextDouble(random, -1, 1);
+
+					//List<Packet> values = new List<Packet>();
+					//values.Add(new Value(value));
 
 					List<Packet> values = new List<Packet>();
 					for (int i = 0; i < streams; i++) values.Add(new Value(NextDouble(random, -1, 1)));
