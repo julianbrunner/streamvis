@@ -35,6 +35,8 @@ namespace Visualizer.Drawing.Data
 			get { return sampleDistance; }
 			set
 			{
+				if (value <= Time.Zero) throw new ArgumentOutOfRangeException("value");
+
 				if (sampleDistance != value)
 				{
 					sampleDistance = value;

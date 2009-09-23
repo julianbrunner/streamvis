@@ -42,7 +42,7 @@ namespace Visualizer.Drawing.Data
 			Time time = timeManager.Range.Range.End - timeManager.Range.Range.Start;
 			double pixelsPerSecond = width / time.Seconds;
 
-			EntryResampler.SampleDistance = new Time(1.0) / (samplesPerPixel * pixelsPerSecond);
+			if (width > 0) EntryResampler.SampleDistance = new Time(1.0) / (samplesPerPixel * pixelsPerSecond);
 		}
 	}
 }
