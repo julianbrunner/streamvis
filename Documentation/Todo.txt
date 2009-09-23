@@ -1,11 +1,11 @@
 TODO: Use color coding for numbers (red, blue, green)
 
+TODO: Comparators will treat NaN and NaN as equal while <, <=, ==, >=, > will return false on every comparison. See if this is used in a wrong way in any place
 TODO: Rename bundled executable to streamvis (also update reference to vis in the wiki)
 TODO: Fix massive memory consumption on save (XML)
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 TODO: Fix feedback loop between resampler and graph area resizing upon label size changes
 TODO: Add console output to inform user of currently active options
-TODO: Set value intervals to "nicer" values
 TODO: Better playback controls
 TODO: Vertical/Horizontal zoom (in Freeze mode)
 TODO: Add ability to switch Value-/TimeManagers through GUI while drawing

@@ -12,6 +12,7 @@ Version 0.9
 	- Added a command-line switch to turn off permanent data logging
 	- Gave reader thread a higher priority (not implementing in Mono as of 09/23/2009)
 	- Added a command-line switch to specify whether alpha-blending should be used
+	- Value range markers now use "nicer" values
 
 Version 0.8
 	- Simpler entry buffering system

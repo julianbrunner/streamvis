@@ -132,7 +132,6 @@ namespace Visualizer.Drawing
 
 		static IEnumerable<Time> GetTimes(TimeRange timeRange, int count)
 		{
-			// TODO: This will return false if the range is NaN - NaN (create and document policy and correct all comparisons of this kind)
 			if (timeRange.Range.IsEmpty()) yield break;
 
 			Time width = timeRange.Range.End - timeRange.Range.Start;
@@ -143,53 +142,17 @@ namespace Visualizer.Drawing
 		}
 		static IEnumerable<double> GetValues(ValueRange valueRange, int count)
 		{
-			return Range(valueRange.Range.Start, valueRange.Range.End, count);
+			if (valueRange.Range.IsEmpty()) yield break;
 
-			//if (valueRange.Range.IsEmpty()) yield break;
+			double height = valueRange.Range.End - valueRange.Range.Start;
+			int magnitude = (int)Math.Floor(Math.Log10(height));
+			double rawIntervalLength = height * Math.Pow(10, -magnitude) / count;
+			double intervalLength = rawIntervalLength.FractionRound() * Math.Pow(10, magnitude);
 
-			//double height = valueRange.Range.End - valueRange.Range.Start;
-			//double interval = height / count;
-			//double offset = valueRange.Range.Start;
+			double startValue = valueRange.Range.Start.Ceiling(intervalLength);
+			double endValue = valueRange.Range.End.Floor(intervalLength);
 
-			//for (int i = 0; i < count + 1; i++) yield return offset + i * interval;
-		}
-
-		static IEnumerable<double> Range(double start, double end, int intervalCount)
-		{
-			if (end - start > 0)
-			{
-				double difference = end - start;
-				int magnitude = (int)Math.Floor(Math.Log10(difference));
-				double intervalLength = FractionRound(difference * Math.Pow(10, -magnitude) / intervalCount) * Math.Pow(10, magnitude);
-
-				start = Ceiling(start, intervalLength, 0);
-				end = Floor(end, intervalLength, 0);
-
-				for (double value = start; value <= end; value += intervalLength) yield return value;
-			}
-		}
-		static double FractionRound(double value)
-		{
-			int magnitude = (int)Math.Floor(Math.Log10(value));
-			return Math.Round(value * Math.Pow(10, -magnitude)) * Math.Pow(10, magnitude);
-		}
-		static double Floor(double value, double interval, double offset)
-		{
-			double remainder = Modulo(value - offset, interval);
-			return remainder == 0 ? value : value - remainder + 0 * interval;
-		}
-		static double Ceiling(double value, double interval, double offset)
-		{
-			double remainder = Modulo(value - offset, interval);
-			return remainder == 0 ? value : value - remainder + 1 * interval;
-		}
-		static double Modulo(double a, double b)
-		{
-			if (b == 0) throw new DivideByZeroException();
-
-			double remainder = a % b;
-			if (remainder < 0) remainder += b;
-			return remainder;
+			for (double value = startValue; value <= endValue; value += intervalLength) yield return value;
 		}
 	}
 }
