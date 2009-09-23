@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -134,25 +133,13 @@ namespace Visualizer.Drawing
 		{
 			if (timeRange.Range.IsEmpty()) yield break;
 
-			foreach (double time in GetMarkers(timeRange.Range.Start.Seconds, timeRange.Range.End.Seconds, count)) yield return new Time(time);
+			foreach (double time in DoubleUtility.GetMarkers(timeRange.Range.Start.Seconds, timeRange.Range.End.Seconds, count)) yield return new Time(time);
 		}
 		static IEnumerable<double> GetValues(ValueRange valueRange, int count)
 		{
 			if (valueRange.Range.IsEmpty()) yield break;
 
-			foreach (double value in GetMarkers(valueRange.Range.Start, valueRange.Range.End, count)) yield return value;
-		}
-		static IEnumerable<double> GetMarkers(double start, double end, int count)
-		{
-			double difference = end - start;
-			int magnitude = (int)Math.Floor(Math.Log10(difference));
-			double rawIntervalLength = difference * Math.Pow(10, -magnitude) / count;
-			double intervalLength = rawIntervalLength.FractionRound() * Math.Pow(10, magnitude);
-
-			start = start.Ceiling(intervalLength);
-			end = end.Floor(intervalLength);
-
-			for (double value = start; value <= end; value += intervalLength) yield return value;
+			foreach (double value in DoubleUtility.GetMarkers(valueRange.Range.Start, valueRange.Range.End, count)) yield return value;
 		}
 	}
 }

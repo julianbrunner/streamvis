@@ -16,11 +16,24 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 
 namespace Utility
 {
 	public static class DoubleUtility
 	{
+		public static IEnumerable<double> GetMarkers(double start, double end, int count)
+		{
+			double difference = end - start;
+			int magnitude = (int)Math.Floor(Math.Log10(difference));
+			double rawIntervalLength = difference * Math.Pow(10, -magnitude) / count;
+			double intervalLength = rawIntervalLength.FractionRound() * Math.Pow(10, magnitude);
+
+			start = start.Ceiling(intervalLength);
+			end = end.Floor(intervalLength);
+
+			for (double value = start; value <= end; value += intervalLength) yield return value;
+		}
 		public static double Modulo(double a, double b)
 		{
 			if (b == 0) throw new DivideByZeroException();
