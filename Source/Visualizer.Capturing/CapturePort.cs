@@ -45,6 +45,7 @@ namespace Visualizer.Capturing
 			network.Connect(name, port.Name);
 
 			reader = new System.Threading.Thread(ReadLoop);
+			reader.Priority = System.Threading.ThreadPriority.AboveNormal;
 			reader.Start();
 		}
 		~CapturePort()
