@@ -22,14 +22,14 @@ namespace Visualizer.Drawing.Data
 {
 	public class PerPixelDataManager : DataManager
 	{
-		readonly double sampleFrequency;
+		readonly double samplesPerPixel;
 		readonly Layouter layouter;
 		readonly TimeManager timeManager;
 
-		public PerPixelDataManager(EntryData entryData, double sampleFrequency, Layouter layouter, TimeManager timeManager)
+		public PerPixelDataManager(EntryData entryData, double samplesPerPixel, Layouter layouter, TimeManager timeManager)
 			: base(entryData)
 		{
-			this.sampleFrequency = sampleFrequency;
+			this.samplesPerPixel = samplesPerPixel;
 			this.layouter = layouter;
 			this.timeManager = timeManager;
 		}
@@ -42,7 +42,7 @@ namespace Visualizer.Drawing.Data
 			Time time = timeManager.Range.Range.End - timeManager.Range.Range.Start;
 			double pixelsPerSecond = width / time.Seconds;
 
-			EntryResampler.SampleDistance = new Time(1.0) / (sampleFrequency * pixelsPerSecond);
+			EntryResampler.SampleDistance = new Time(1.0) / (samplesPerPixel * pixelsPerSecond);
 		}
 	}
 }

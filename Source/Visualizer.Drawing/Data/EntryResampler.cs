@@ -89,10 +89,10 @@ namespace Visualizer.Drawing.Data
 			Entry beforeEnd = source[endIndex].Time > endTime ? source[endIndex - 1] : source[endIndex];
 			Entry afterEnd = source[endIndex];
 
-			double startFraction = (startTime - beforeStart.Time) / (afterStart.Time - beforeStart.Time);
+			double startFraction = beforeStart.Time == afterStart.Time ? 0 : (startTime - beforeStart.Time) / (afterStart.Time - beforeStart.Time);
 			double startValue = (1 - startFraction) * beforeStart.Value + startFraction * afterStart.Value;
 			Entry start = new Entry(startTime, startValue);
-			double endFraction = (endTime - beforeEnd.Time) / (afterEnd.Time - beforeEnd.Time);
+			double endFraction = beforeEnd.Time == afterEnd.Time ? 0 : (endTime - beforeEnd.Time) / (afterEnd.Time - beforeEnd.Time);
 			double endValue = (1 - endFraction) * beforeEnd.Value + endFraction * afterEnd.Value;
 			Entry end = new Entry(endTime, endValue);
 
