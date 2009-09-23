@@ -132,6 +132,7 @@ namespace Visualizer.Drawing
 
 		static IEnumerable<Time> GetTimes(TimeRange timeRange, int count)
 		{
+			// TODO: This will return false if the range is NaN - NaN (create and document policy and correct all comparisons of this kind)
 			if (timeRange.Range.IsEmpty()) yield break;
 
 			Time width = timeRange.Range.End - timeRange.Range.Start;
@@ -142,66 +143,53 @@ namespace Visualizer.Drawing
 		}
 		static IEnumerable<double> GetValues(ValueRange valueRange, int count)
 		{
-			if (valueRange.Range.IsEmpty()) yield break;
+			return Range(valueRange.Range.Start, valueRange.Range.End, count);
 
-			double height = valueRange.Range.End - valueRange.Range.Start;
-			double interval = height / count;
-			double offset = valueRange.Range.Start;
+			//if (valueRange.Range.IsEmpty()) yield break;
 
-			for (int i = 0; i < count + 1; i++) yield return offset + i * interval;
+			//double height = valueRange.Range.End - valueRange.Range.Start;
+			//double interval = height / count;
+			//double offset = valueRange.Range.Start;
+
+			//for (int i = 0; i < count + 1; i++) yield return offset + i * interval;
 		}
 
-		static double Range(double start, double end, int intervalCount)
+		static IEnumerable<double> Range(double start, double end, int intervalCount)
 		{
-			double difference = end - start;
-			int magnitude = (int)Math.Floor(Math.Log10(difference));
-			double intervalLength = FractionRound(difference * Math.Pow(10, -magnitude) / intervalCount) * Math.Pow(10, magnitude);
+			if (end - start > 0)
+			{
+				double difference = end - start;
+				int magnitude = (int)Math.Floor(Math.Log10(difference));
+				double intervalLength = FractionRound(difference * Math.Pow(10, -magnitude) / intervalCount) * Math.Pow(10, magnitude);
 
-			return intervalLength;
+				start = Ceiling(start, intervalLength, 0);
+				end = Floor(end, intervalLength, 0);
+
+				for (double value = start; value <= end; value += intervalLength) yield return value;
+			}
 		}
 		static double FractionRound(double value)
 		{
 			int magnitude = (int)Math.Floor(Math.Log10(value));
-			return Round(value * Math.Pow(10, -magnitude)) * Math.Pow(10, magnitude);
+			return Math.Round(value * Math.Pow(10, -magnitude)) * Math.Pow(10, magnitude);
 		}
-		static double Round(double value)
+		static double Floor(double value, double interval, double offset)
 		{
-			return
-			(
-				from target in new double[] { 1, 2, 5 }
-				orderby Math.Abs(target - value) ascending
-				select target
-			)
-			.First();
+			double remainder = Modulo(value - offset, interval);
+			return remainder == 0 ? value : value - remainder + 0 * interval;
+		}
+		static double Ceiling(double value, double interval, double offset)
+		{
+			double remainder = Modulo(value - offset, interval);
+			return remainder == 0 ? value : value - remainder + 1 * interval;
+		}
+		static double Modulo(double a, double b)
+		{
+			if (b == 0) throw new DivideByZeroException();
+
+			double remainder = a % b;
+			if (remainder < 0) remainder += b;
+			return remainder;
 		}
 	}
 }
-
-//   0.0000182 -> 1.82 (1 <= x < 10)
-// -> 1.82 / 5 = 0.364 ==> 0.2
-
-
-// 234.1129894
-// ---
-// 234.1129850
-// 234.1129800
-// 234.1129750
-// ---
-// 234.1129712
-
-
-
-
-// 234.1129894
-// ---
-// 234.1129880
-// 234.1129860
-// 234.1129840
-// 234.1129820
-// 234.1129800
-// 234.1129780
-// 234.1129760
-// 234.1129740
-// 234.1129720
-// ---
-// 234.1129712

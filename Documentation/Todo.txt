@@ -1,3 +1,5 @@
+TODO: Use color coding for numbers (red, blue, green)
+
 TODO: Rename bundled executable to streamvis (also update reference to vis in the wiki)
 TODO: Fix massive memory consumption on save (XML)
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
