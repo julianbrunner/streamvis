@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -91,6 +91,7 @@
     <EmbeddedResource Include="TextDialog.resx">
       <DependentUpon>TextDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Text\Help Message.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Graphics\Graphics.csproj">
@@ -117,9 +118,6 @@
       <Project>{88377E30-410B-40ED-8D90-BE90D7831933}</Project>
       <Name>Yarp</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Text\Help Message.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
