@@ -17,7 +17,7 @@ Version 0.9
 	- Doubleclicking the graph area now toggles minimal mode
 	- Added coordinate display in status bar
 	- Removed some unused code
-	- Fixed a bug causing an exception to be thrown because of the coordinate label
+	- Fixed two bugs causing exceptions to be thrown because of the coordinate label
 	- Moved the X Axis upwards by 5 pixels
 
 Version 0.8

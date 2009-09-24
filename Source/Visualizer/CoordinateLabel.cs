@@ -52,6 +52,8 @@ namespace Visualizer
 
 		public void Draw()
 		{
+			label.Visible = layouter.Area.Contains(mousePosition);
+
 			if (label.Visible)
 			{
 				Vector2 position = layouter.ReverseMap(new Vector2(mousePosition.X, mousePosition.Y));
@@ -77,8 +79,6 @@ namespace Visualizer
 		void viewport_MouseMove(object sender, MouseEventArgs e)
 		{
 			mousePosition = e.Location;
-
-			label.Visible = layouter.Area.Contains(e.Location);
 		}
 	}
 }
