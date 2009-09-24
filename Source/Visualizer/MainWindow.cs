@@ -23,6 +23,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Graphics;
 using OpenTK.Math;
+using Utility;
 using Visualizer.Data;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Data;
@@ -240,7 +241,7 @@ namespace Visualizer
 		}
 		void RebuildList()
 		{
-			Random random = new Random();
+			ColorGenerator colorGenerator = new ColorGenerator();
 
 			graphs.Clear();
 			streamsListView.Groups.Clear();
@@ -262,7 +263,7 @@ namespace Visualizer
 					}
 
 					Graph graph = new Graph(layouter, valueManager, segmentManager, drawer, dataManager, parameters.LineWidth);
-					graph.Color = Color.FromArgb(random.Next(0x100), random.Next(0x100), random.Next(0x100));
+					graph.Color = colorGenerator.NextColor();
 					graphs.Add(graph);
 
 					ListViewItem item = new ListViewItem();

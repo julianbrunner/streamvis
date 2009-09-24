@@ -16,110 +16,44 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Drawing;
-using Utility.Extensions;
-using System.Linq;
 using System.Collections.Generic;
-using Utility.Utilities;
+using System.Drawing;
+using System.Linq;
+using Utility.Extensions;
 
 namespace Utility
 {
 	public class ColorGenerator
 	{
 		readonly Random random = new Random();
-		readonly List<double> hues = new List<double>();
-
-		int position = 0;
-
-		public ColorGenerator()
-		{
-			for (int i = 0; i < 38; i++) hues.Add(GetHue());
-			hues.Sort();
-		}
+		readonly List<ColorPlus> colors = new List<ColorPlus>();
 
 		public Color NextColor()
 		{
-			//double hue = GetHue();
+			ColorPlus color = GetColor();
 
-			//hues.Add(hue);
+			colors.Add(color);
 
-			//return FromHsv(hue, random.NextDouble(1, 1), random.NextDouble(1, 1));
-
-			return FromHsv(hues[position++], random.NextDouble(0.8, 1), random.NextDouble(0.8, 1));
+			return color.ToColor();
 		}
 
-		double GetHue()
+		ColorPlus GetColor()
 		{
-			if (!hues.Any()) 
-				return random.NextDouble(0, 6);
+			if (!colors.Any()) return GetRandomColors(1).Single();
 
 			return
 			(
-				from randomHue in GetRandomHues(100)
-				let distance = hues.Min(hue => HueDifference(hue, randomHue))
+				from randomColor in GetRandomColors(10000)
+				let distance = colors.Min(color => ColorPlus.Distance(randomColor, color))
 				orderby distance descending
-				select randomHue
+				select randomColor
 			)
 			.First();
 		}
-		IEnumerable<double> GetRandomHues(int count)
+		IEnumerable<ColorPlus> GetRandomColors(int count)
 		{
-			for (int i = 0; i < count; i++) yield return random.NextDouble(0, 6);
-		}
-
-		static double HueDifference(double hue1, double hue2)
-		{
-			if (hue1 > hue2)
-			{
-				double temp = hue1;
-				hue1 = hue2;
-				hue2 = temp;
-			}
-
-			return Math.Min(hue2 - hue1, (hue1 + 6) - hue2);
-		}
-		static Color FromHsv(double hue, double saturation, double value)
-		{
-			if (hue < 0 || hue >= 6) throw new ArgumentOutOfRangeException("hue");
-			if (saturation < 0 || saturation > 1) throw new ArgumentOutOfRangeException("saturation");
-			if (value < 0 || value > 1) throw new ArgumentOutOfRangeException("value");
-
-			int hueIndex = (int)hue;
-			double hueFraction = hue - hueIndex;
-
-			double bottom = value * (1 - saturation);
-			double top = value;
-			double rising = value * (1 - (1 - hueFraction) * saturation);
-			double falling = value * (1 - hueFraction * saturation);
-
-			double red, green, blue;
-
-			switch (hueIndex)
-			{
-				case 0: red = top; green = rising; blue = bottom; break;
-				case 1: red = falling; green = top; blue = bottom; break;
-				case 2: red = bottom; green = top; blue = rising; break;
-				case 3: red = bottom; green = falling; blue = top; break;
-				case 4: red = rising; green = bottom; blue = top; break;
-				case 5: red = top; green = bottom; blue = falling; break;
-				default: throw new InvalidOperationException();
-			}
-
-			return FromRgb(red, green, blue);
-		}
-		static Color FromRgb(double red, double green, double blue)
-		{
-			if (red < 0 || red > 1) throw new ArgumentOutOfRangeException("red");
-			if (green < 0 || green > 1) throw new ArgumentOutOfRangeException("green");
-			if (blue < 0 || blue > 1) throw new ArgumentOutOfRangeException("blue");
-
-			return Color.FromArgb(ToByte(red), ToByte(green), ToByte(blue));
-		}
-		static byte ToByte(double value)
-		{
-			if (value < 0 || value > 1) throw new ArgumentOutOfRangeException("value");
-
-			return value == 1 ? (byte)0xFF : (byte)(value * 0x100);
+			for (int i = 0; i < count; i++)
+				yield return ColorPlus.FromHsv(random.NextDouble(0, 6), random.NextDouble(0.5, 1), random.NextDouble(0.5, 1));
 		}
 	}
 }

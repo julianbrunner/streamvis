@@ -19,6 +19,7 @@ Version 0.9
 	- Removed some unused code
 	- Fixed two bugs causing exceptions to be thrown because of the coordinate label
 	- Moved the X Axis upwards by 5 pixels
+	- Improved random color generation
 
 Version 0.8
 	- Simpler entry buffering system
