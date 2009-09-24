@@ -84,6 +84,7 @@ namespace Visualizer
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.coordinateStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
 			this.toolStripContainer1.ContentPanel.SuspendLayout();
 			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -123,7 +124,8 @@ namespace Visualizer
 			// 
 			this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabel});
+            this.statusLabel,
+            this.coordinateStatusLabel});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 0);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
@@ -133,8 +135,10 @@ namespace Visualizer
 			// statusLabel
 			// 
 			this.statusLabel.Name = "statusLabel";
-			this.statusLabel.Size = new System.Drawing.Size(39, 17);
+			this.statusLabel.Size = new System.Drawing.Size(691, 17);
+			this.statusLabel.Spring = true;
 			this.statusLabel.Text = "Ready";
+			this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// splitContainer1
 			// 
@@ -200,6 +204,7 @@ namespace Visualizer
 			this.viewport.Size = new System.Drawing.Size(488, 512);
 			this.viewport.TabIndex = 0;
 			this.viewport.VSync = true;
+			this.viewport.DoubleClick += new System.EventHandler(this.viewport_DoubleClick);
 			// 
 			// menuStrip1
 			// 
@@ -401,6 +406,12 @@ namespace Visualizer
 			this.exportCaptureFileDialog.DefaultExt = "stream";
 			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
 			// 
+			// coordinateStatusLabel
+			// 
+			this.coordinateStatusLabel.Name = "coordinateStatusLabel";
+			this.coordinateStatusLabel.Size = new System.Drawing.Size(0, 17);
+			this.coordinateStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -465,6 +476,7 @@ namespace Visualizer
 		private System.Windows.Forms.ToolStripMenuItem showDiagramToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem verticalSynchronizationToolStripMenuItem;
+		private System.Windows.Forms.ToolStripStatusLabel coordinateStatusLabel;
 		
 	}
 }

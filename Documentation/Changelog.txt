@@ -14,6 +14,7 @@ Version 0.9
 	- Added a command-line switch to specify whether alpha-blending should be used
 	- Value range markers now use "nicer" values
 	- Nice value algorithms are now used for time markers aswell
+	- Doubleclicking the graph area now toggles minimal mode
 
 Version 0.8
 	- Simpler entry buffering system

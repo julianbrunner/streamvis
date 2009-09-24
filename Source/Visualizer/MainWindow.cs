@@ -182,6 +182,11 @@ namespace Visualizer
 		{
 			viewport.VSync = verticalSynchronizationToolStripMenuItem.Checked;
 		}
+		private void viewport_DoubleClick(object sender, EventArgs e)
+		{
+			minimalModeToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
+			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
+		}
 
 		void NewSource(IEnumerable<string> ports)
 		{
