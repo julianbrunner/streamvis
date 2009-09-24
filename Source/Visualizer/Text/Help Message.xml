@@ -25,7 +25,7 @@
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">&lt;port&gt;</Text>
-		<Text Column="Description">Specifies that all streams of &lt;port&gt; should be included in the stream selection list. A test bottle will be retrieved from the specified port to build a list of possible streams before the visualization begins.</Text>
+		<Text Column="Description">Specifies that all streams of &lt;port&gt; should be included in the stream selection list. A test packet will be retrieved from the specified port to build a list of possible streams before the visualization begins.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">&lt;port&gt;:&lt;streams&gt;</Text>
@@ -41,7 +41,7 @@
 		<NewLine />
 		<NewLine />
 		<Text Column="Level2">&lt;path&gt;</Text>
-		<Text Column="Description">A path to the stream, subpaths are seperated by dots. For example &quot;1.2.3&quot; specifies that the stream should be generated from the third value in the second bottle in the first bottle of the port.</Text>
+		<Text Column="Description">A path to the stream, subpaths are seperated by dots. For example &quot;1.2.3&quot; specifies that the stream should be generated from the third value in the second list in the first list of the port.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+m|-m</Text>

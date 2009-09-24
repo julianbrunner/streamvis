@@ -65,7 +65,7 @@ namespace Visualizer.Capturing
 
 				if (!reader.Join(1000))
 				{
-					Console.WriteLine("Sending a bottle to \"" + Name + "\" in order to join reader thread...");
+					Console.WriteLine("Sending a packet to \"" + Name + "\" in order to join reader thread...");
 					using (Yarp.Port helperPort = new Yarp.Port(network.FindName(Name + "/activator")))
 					{
 						network.Connect(helperPort.Name, port.Name);
@@ -105,7 +105,7 @@ namespace Visualizer.Capturing
 			switch (details.Length)
 			{
 				case 1:
-					Console.WriteLine("Getting bottle to test size of \"" + name + "\"...");
+					Console.WriteLine("Getting packet to test size of \"" + name + "\"...");
 					using (Yarp.Port testPort = new Yarp.Port(network.FindName(name + "/tester")))
 					{
 						network.Connect(name, testPort.Name);
