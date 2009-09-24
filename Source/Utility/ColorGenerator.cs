@@ -44,8 +44,7 @@ namespace Utility
 			return
 			(
 				from randomColor in GetRandomColors(10000)
-				let distance = colors.Min(color => ColorPlus.Distance(randomColor, color))
-				orderby distance descending
+				orderby colors.Min(color => ColorPlus.Distance(randomColor, color)) descending
 				select randomColor
 			)
 			.First();
