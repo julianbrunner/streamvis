@@ -18,18 +18,66 @@
 using System;
 using System.Drawing;
 using Utility.Extensions;
+using System.Linq;
+using System.Collections.Generic;
+using Utility.Utilities;
 
 namespace Utility
 {
 	public class ColorGenerator
 	{
 		readonly Random random = new Random();
+		readonly List<double> hues = new List<double>();
+
+		int position = 0;
+
+		public ColorGenerator()
+		{
+			for (int i = 0; i < 38; i++) hues.Add(GetHue());
+			hues.Sort();
+		}
 
 		public Color NextColor()
 		{
-			return FromHsv(random.NextDouble(0, 6), random.NextDouble(), random.NextDouble());
+			//double hue = GetHue();
+
+			//hues.Add(hue);
+
+			//return FromHsv(hue, random.NextDouble(1, 1), random.NextDouble(1, 1));
+
+			return FromHsv(hues[position++], random.NextDouble(0.8, 1), random.NextDouble(0.8, 1));
 		}
 
+		double GetHue()
+		{
+			if (!hues.Any()) 
+				return random.NextDouble(0, 6);
+
+			return
+			(
+				from randomHue in GetRandomHues(100)
+				let distance = hues.Min(hue => HueDifference(hue, randomHue))
+				orderby distance descending
+				select randomHue
+			)
+			.First();
+		}
+		IEnumerable<double> GetRandomHues(int count)
+		{
+			for (int i = 0; i < count; i++) yield return random.NextDouble(0, 6);
+		}
+
+		static double HueDifference(double hue1, double hue2)
+		{
+			if (hue1 > hue2)
+			{
+				double temp = hue1;
+				hue1 = hue2;
+				hue2 = temp;
+			}
+
+			return Math.Min(hue2 - hue1, (hue1 + 6) - hue2);
+		}
 		static Color FromHsv(double hue, double saturation, double value)
 		{
 			if (hue < 0 || hue >= 6) throw new ArgumentOutOfRangeException("hue");
