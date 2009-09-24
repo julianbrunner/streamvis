@@ -1,0 +1,128 @@
+<Document>
+	<Columns>
+		<Column>
+			<Name>Root</Name>
+			<Value>0</Value>
+		</Column>
+		<Column>
+			<Name>Level1</Name>
+			<Value>2</Value>
+		</Column>
+		<Column>
+			<Name>Level2</Name>
+			<Value>6</Value>
+		</Column>
+		<Column>
+			<Name>Description</Name>
+			<Value>25</Value>
+		</Column>
+	</Columns>
+	<Data>
+		<Text Column="Root">Stream Visualizer is an application that can be used to visualize, capture and replay data streams.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Root">Parameters:</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">&lt;port&gt;</Text>
+		<Text Column="Description">Specifies that all streams of &lt;port&gt; should be included in the stream selection list. A test bottle will be retrieved from the specified port to build a list of possible streams before the visualization begins.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">&lt;port&gt;:&lt;streams&gt;</Text>
+		<Text Column="Description">Specifies that the &lt;streams&gt; of &lt;port&gt; should be included in the stream selection list.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">&lt;streams&gt;</Text>
+		<Text Column="Description">&lt;range&gt;,&lt;range&gt;,...</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">&lt;range&gt;</Text>
+		<Text Column="Description">&lt;path&gt;|&lt;path&gt;-&lt;path&gt;</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">&lt;path&gt;</Text>
+		<Text Column="Description">A path to the stream, subpaths are seperated by dots. For example &quot;1.2.3&quot; specifies that the stream should be generated from the third value in the second bottle in the first bottle of the port.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">+m|-m</Text>
+		<Text Column="Description">Enables or disables minimal mode. In minimal mode, everything except for the graph area is hidden from the user interface to maximize the available drawing-space. The default values is disabled.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">+e|-e</Text>
+		<Text Column="Description">Enables or disables the graph extension feature. When graph extension is enabled, all graphs that have at least one sampled data entry are extended across the whole width of the coordinate system using known adjacent values. The default values is enabled.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">+a|-a</Text>
+		<Text Column="Description">Enables or disables antialiasing of graph lines. The default values is enabled.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">+b|-b</Text>
+		<Text Column="Description">Enables or disables alpha-blending. The default values is enabled.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">+v|-v</Text>
+		<Text Column="Description">Enables or disables vertical synchronization. The default values is enabled.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">+l|-l</Text>
+		<Text Column="Description">Enables or disables the logging of all received data. Disable if you plan to run the visualizer for a long time and you don&apos;t want to save the results. The default values is enabled.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">w:&lt;width&gt;</Text>
+		<Text Column="Description">Lets you specify the width of the drawing-area in total seconds. The default value is &quot;10&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">l:&lt;width&gt;</Text>
+		<Text Column="Description">Lets you specify the width (thickness) of the graph lines in pixels. The default value is &quot;1.0&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">t:(c|s:[&lt;c&gt;]|w:[&lt;c&gt;])</Text>
+		<Text Column="Description">Lets you specify the type of diagram that is used. The default value is &quot;c&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">c</Text>
+		<Text Column="Description">Continuous diagram. The graphs are drawn across the entire drawing-area, the most recent data entry lies on the right border of the drawing-area.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">s:[&lt;c&gt;]</Text>
+		<Text Column="Description">Shifting diagram. The graphs will shift &lt;c&gt; times the drawing-area width to the left whenever the most recent data entry reaches the right border of the drawing-area. The default value for &lt;c&gt; is &quot;0.8&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">w:[&lt;c&gt;]</Text>
+		<Text Column="Description">Wrapping diagram. The graphs don&apos;t move at all, once the most recent data entry reaches the right border, the graphs wrap around and draw over the oldest entries starting from the left. The most recent data entry will push a gap of &lt;c&gt; times the drawing-area width in front of it. The default value for &lt;c&gt; is &quot;0.2&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">r:&lt;low&gt;:&lt;high&gt;</Text>
+		<Text Column="Description">Fixes the value range of the diagram. By default, the value range is automatically fitted to the displayed graphs.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">s:(s:[&lt;c&gt;]|p:[&lt;c&gt;])</Text>
+		<Text Column="Description">Lets you specify the sampler type and settings used for drawing graphs. The default value is &quot;p:1&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">s:[&lt;c&gt;]</Text>
+		<Text Column="Description">Per-Second sampler. The data will be resampled to &lt;c&gt; entries per second. The default value for &lt;c&gt; is &quot;10&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">p:[&lt;c&gt;]</Text>
+		<Text Column="Description">Per-Pixel sampler. The data will be resampled to &lt;c&gt; entries per pixel. The default value for &lt;c&gt; is &quot;0.1&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">mx:&lt;n&gt;</Text>
+		<Text Column="Description">Sets the number of markers that are displayed on the X-Axis. The default value is &quot;5&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">my:&lt;n&gt;</Text>
+		<Text Column="Description">Sets the number of markers that are displayed on the Y-Axis. The default value is &quot;5&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">pc:&lt;color&gt;</Text>
+		<Text Column="Description">Sets the diagram color (coordinate system and labels) in HTML notation. The default value is &quot;FFFFFF&quot;.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">bc:&lt;color&gt;</Text>
+		<Text Column="Description">Sets the background color in HTML notation. The default value is &quot;000000&quot;.</Text>
+		<NewLine />
+		<NewLine />
+	</Data>
+</Document>
