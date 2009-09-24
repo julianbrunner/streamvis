@@ -98,14 +98,14 @@ namespace Visualizer.Drawing
 		{
 			Vector2 offset = new Vector2(0, 5);
 
-			Vector2 start = layouter[0, 0] + offset;
-			Vector2 end = layouter[1, 0] + offset;
+			Vector2 start = layouter.ForwardMap(Vector2.Zero) + offset;
+			Vector2 end = layouter.ForwardMap(Vector2.UnitX) + offset;
 
 			drawer.DrawLine(start, end, color, 1);
 
 			foreach (Time time in GetTimeMarkers(timeRange, markersX))
 			{
-				Vector2 markerStart = layouter[timeRange[time], 0] + offset;
+				Vector2 markerStart = layouter.ForwardMap((float)timeRange.ForwardMap(time) * Vector2.UnitX) + offset;
 				Vector2 markerEnd = markerStart + new Vector2(0, 5);
 				drawer.DrawLine(markerStart, markerEnd, color, 1);
 				drawer.DrawNumber(time.Seconds, markerEnd + new Vector2(0, 2), color, TextAlignment.Center);
@@ -115,14 +115,14 @@ namespace Visualizer.Drawing
 		{
 			Vector2 offset = new Vector2(0, 0);
 
-			Vector2 start = layouter[0, 0] + offset;
-			Vector2 end = layouter[0, 1] + offset;
+			Vector2 start = layouter.ForwardMap(Vector2.Zero) + offset;
+			Vector2 end = layouter.ForwardMap(Vector2.UnitY) + offset;
 
 			drawer.DrawLine(start, end, color, 1);
 
 			foreach (double value in GetValueMarkers(valueRange, markersY))
 			{
-				Vector2 markerStart = layouter[0, valueRange[value]] + offset;
+				Vector2 markerStart = layouter.ForwardMap((float)valueRange.ForwardMap(value) * Vector2.UnitY) + offset;
 				Vector2 markerEnd = markerStart + new Vector2(-5, 0);
 				drawer.DrawLine(markerStart, markerEnd, color, 1);
 				drawer.DrawNumber(value, markerEnd + new Vector2(-2, -6), color, TextAlignment.Far);

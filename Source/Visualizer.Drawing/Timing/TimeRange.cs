@@ -27,8 +27,6 @@ namespace Visualizer.Drawing.Timing
 		readonly LinearMapping mapping;
 		readonly Matrix4 transformation;
 
-		public double this[Time time] { get { return mapping[time.Seconds]; } }
-
 		public Range<Time> Range { get { return range; } }
 		public LinearMapping Mapping { get { return mapping; } }
 		public Matrix4 Transformation { get { return transformation; } }
@@ -40,5 +38,8 @@ namespace Visualizer.Drawing.Timing
 			this.transformation = Matrix4.Scale((float)mapping.Factor, 1, 1) * Matrix4.CreateTranslation((float)mapping.Offset, 0, 0);
 		}
 		public TimeRange(Range<Time> range) : this(range, new Range<double>(0, 1)) { }
+
+		public double ForwardMap(Time time) { return mapping.ForwardMap(time.Seconds); }
+		public Time ReverseMap(double value) { return new Time(mapping.ReverseMap(value)); }
 	}
 }

@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Drawing;
 using Graphics;
 using OpenTK.Math;
@@ -30,18 +31,6 @@ namespace Visualizer.Drawing
 
 		readonly Viewport viewport;
 
-		public Vector2 this[double x, double y]
-		{
-			get
-			{
-				return new Vector2
-				(
-					(float)(Area.Left + x * Area.Width),
-					(float)(Area.Bottom - y * Area.Height)
-				);
-			}
-		}
-
 		public Rectangle Area { get; private set; }
 		public Matrix4 Transformation { get; private set; }
 
@@ -50,6 +39,26 @@ namespace Visualizer.Drawing
 			this.viewport = viewport;
 		}
 
+		public Vector2 ForwardMap(Vector2 source)
+		{
+			if (source.X < 0 || source.X > 1 || source.Y < 0 || source.Y > 1) throw new ArgumentOutOfRangeException("source");
+
+			return new Vector2
+			(
+				Area.Left + source.X * Area.Width,
+				Area.Bottom - source.Y * Area.Height
+			);
+		}
+		public Vector2 ReverseMap(Vector2 source)
+		{
+			if (source.X < Area.Left || source.X > Area.Right || source.Y < Area.Top || source.Y > Area.Bottom) throw new ArgumentOutOfRangeException("source");
+
+			return new Vector2
+			(
+				(source.X - Area.Left) / Area.Width,
+				-((source.Y - Area.Bottom) / Area.Height)
+			);
+		}
 		public virtual void Update(int timeLabelsHeight, int valueLabelsWidth)
 		{
 			int borderLeft = baseBorderLeft + valueLabelsWidth;

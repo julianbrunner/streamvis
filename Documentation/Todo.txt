@@ -1,3 +1,5 @@
+TODO: Replace some of the indexers with more descriptive named methods
+
 TODO: Fix massive memory consumption on save (XML)
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 TODO: Fix feedback loop between resampler and graph area resizing upon label size changes

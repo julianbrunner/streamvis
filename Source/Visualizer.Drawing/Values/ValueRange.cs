@@ -26,8 +26,6 @@ namespace Visualizer.Drawing.Values
 		readonly LinearMapping mapping;
 		readonly Matrix4 transformation;
 
-		public double this[double value] { get { return mapping[value]; } }
-
 		public Range<double> Range { get { return range; } }
 		public LinearMapping Mapping { get { return mapping; } }
 		public Matrix4 Transformation { get { return transformation; } }
@@ -39,5 +37,8 @@ namespace Visualizer.Drawing.Values
 			this.transformation = Matrix4.Scale(1, (float)mapping.Factor, 1) * Matrix4.CreateTranslation(0, (float)mapping.Offset, 0);
 		}
 		public ValueRange(Range<double> range) : this(range, new Range<double>(0, 1)) { }
+
+		public double ForwardMap(double value) { return mapping.ForwardMap(value); }
+		public double ReverseMap(double value) { return mapping.ReverseMap(value); }
 	}
 }

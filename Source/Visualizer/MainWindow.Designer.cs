@@ -53,6 +53,7 @@ namespace Visualizer
 			this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			this.coordinateStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.streamsListView = new System.Windows.Forms.ListView();
 			this.nameColumnHeader = new System.Windows.Forms.ColumnHeader();
@@ -84,7 +85,6 @@ namespace Visualizer
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.coordinateStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
 			this.toolStripContainer1.ContentPanel.SuspendLayout();
 			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -135,10 +135,16 @@ namespace Visualizer
 			// statusLabel
 			// 
 			this.statusLabel.Name = "statusLabel";
-			this.statusLabel.Size = new System.Drawing.Size(691, 17);
+			this.statusLabel.Size = new System.Drawing.Size(722, 17);
 			this.statusLabel.Spring = true;
 			this.statusLabel.Text = "Ready";
 			this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// coordinateStatusLabel
+			// 
+			this.coordinateStatusLabel.Name = "coordinateStatusLabel";
+			this.coordinateStatusLabel.Size = new System.Drawing.Size(0, 17);
+			this.coordinateStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// splitContainer1
 			// 
@@ -205,6 +211,9 @@ namespace Visualizer
 			this.viewport.TabIndex = 0;
 			this.viewport.VSync = true;
 			this.viewport.DoubleClick += new System.EventHandler(this.viewport_DoubleClick);
+			this.viewport.MouseLeave += new System.EventHandler(this.viewport_MouseLeave);
+			this.viewport.MouseMove += new System.Windows.Forms.MouseEventHandler(this.viewport_MouseMove);
+			this.viewport.MouseEnter += new System.EventHandler(this.viewport_MouseEnter);
 			// 
 			// menuStrip1
 			// 
@@ -405,12 +414,6 @@ namespace Visualizer
 			// 
 			this.exportCaptureFileDialog.DefaultExt = "stream";
 			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
-			// 
-			// coordinateStatusLabel
-			// 
-			this.coordinateStatusLabel.Name = "coordinateStatusLabel";
-			this.coordinateStatusLabel.Size = new System.Drawing.Size(0, 17);
-			this.coordinateStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// MainWindow
 			// 

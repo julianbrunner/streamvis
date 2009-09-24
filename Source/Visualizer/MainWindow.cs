@@ -187,6 +187,31 @@ namespace Visualizer
 			minimalModeToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
 			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
 		}
+		private void viewport_MouseEnter(object sender, EventArgs e)
+		{
+			coordinateStatusLabel.Visible = true;
+		}
+		private void viewport_MouseLeave(object sender, EventArgs e)
+		{
+			coordinateStatusLabel.Visible = false;
+		}
+		private void viewport_MouseMove(object sender, MouseEventArgs e)
+		{
+			coordinateStatusLabel.Visible = layouter.Area.Contains(e.Location);
+
+			if (coordinateStatusLabel.Visible)
+			{
+				Vector2 position = layouter.ReverseMap(new Vector2(e.X, e.Y));
+
+				TimeRange timeRange = timeManager.Range;
+				ValueRange valueRange = valueManager.Range;
+
+				Time time = timeRange.ReverseMap(position.X);
+				double value = valueRange.ReverseMap(position.Y);
+
+				coordinateStatusLabel.Text = string.Format("Time: {0}, Value: {1}", time, value);
+			}
+		}
 
 		void NewSource(IEnumerable<string> ports)
 		{

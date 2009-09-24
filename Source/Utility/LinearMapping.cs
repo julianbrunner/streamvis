@@ -24,8 +24,6 @@ namespace Utility
 		readonly double offset;
 		readonly double factor;
 
-		public double this[double value] { get { return offset + value * factor; } }
-
 		public Range<double> Input { get { return input; } }
 		public Range<double> Output { get { return output; } }
 		public double Offset { get { return offset; } }
@@ -39,6 +37,15 @@ namespace Utility
 			double divisor = input.End - input.Start;
 			this.offset = (input.End * output.Start - input.Start * output.End) / divisor;
 			this.factor = (output.End - output.Start) / divisor;
+		}
+
+		public double ForwardMap(double value)
+		{
+			return offset + value * factor;
+		}
+		public double ReverseMap(double value)
+		{
+			return (value - offset) / factor;
 		}
 	}
 }
