@@ -22,7 +22,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using Utility;
+using Utility.Utilities;
 
 namespace Visualizer
 {

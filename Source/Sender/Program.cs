@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
-using Utility;
+using Utility.Extensions;
 using Yarp;
 
 namespace Sender

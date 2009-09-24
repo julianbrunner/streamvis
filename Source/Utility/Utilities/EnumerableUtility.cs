@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Utility
+namespace Utility.Utilities
 {
 	public static class EnumerableUtility
 	{

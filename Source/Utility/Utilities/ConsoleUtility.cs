@@ -17,7 +17,7 @@
 
 using System;
 
-namespace Utility
+namespace Utility.Utilities
 {
 	public static class ConsoleUtility
 	{

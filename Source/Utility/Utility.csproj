@@ -37,18 +37,18 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleUtility.cs" />
     <Compile Include="ColorGenerator.cs" />
-    <Compile Include="RandomExtensions.cs" />
-    <Compile Include="DoubleUtility.cs" />
-    <Compile Include="DoubleExtensions.cs" />
-    <Compile Include="EnumerableUtility.cs" />
-    <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="Extensions\DoubleExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
+    <Compile Include="Extensions\RangeExtensions.cs" />
     <Compile Include="LinearMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Range.cs" />
-    <Compile Include="RangeExtensions.cs" />
     <Compile Include="SearchList.cs" />
+    <Compile Include="Utilities\ConsoleUtility.cs" />
+    <Compile Include="Utilities\DoubleUtility.cs" />
+    <Compile Include="Utilities\EnumerableUtility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

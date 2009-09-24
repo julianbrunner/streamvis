@@ -16,7 +16,7 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Utility;
+using Utility.Utilities;
 using Yarp;
 
 namespace Receiver

@@ -17,8 +17,9 @@
 
 using System;
 using System.Collections.Generic;
+using Utility.Extensions;
 
-namespace Utility
+namespace Utility.Utilities
 {
 	public static class DoubleUtility
 	{

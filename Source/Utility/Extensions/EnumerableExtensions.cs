@@ -18,8 +18,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Utility.Utilities;
 
-namespace Utility
+namespace Utility.Extensions
 {
 	public static class EnumerableExtensions
 	{

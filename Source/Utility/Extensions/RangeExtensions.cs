@@ -17,7 +17,7 @@
 
 using System;
 
-namespace Utility
+namespace Utility.Extensions
 {
 	public static class RangeExtensions
 	{

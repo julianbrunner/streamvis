@@ -17,8 +17,9 @@
 
 using System;
 using System.Linq;
+using Utility.Utilities;
 
-namespace Utility
+namespace Utility.Extensions
 {
 	public static class DoubleExtensions
 	{

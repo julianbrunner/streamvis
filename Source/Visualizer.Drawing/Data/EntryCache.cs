@@ -18,6 +18,8 @@
 using System;
 using System.Collections.Generic;
 using Utility;
+using Utility.Extensions;
+using Utility.Utilities;
 using Visualizer.Data;
 
 namespace Visualizer.Drawing.Data

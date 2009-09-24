@@ -17,6 +17,7 @@
 
 using System;
 using System.Drawing;
+using Utility.Extensions;
 
 namespace Utility
 {
