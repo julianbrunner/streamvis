@@ -4,8 +4,9 @@ TODO: Fix feedback loop between resampler and graph area resizing upon label siz
 TODO: Better playback controls
 TODO: Vertical/Horizontal zoom (in Freeze mode)
 TODO: Add ability to switch Value-/TimeManagers through GUI while drawing
-TODO: Add possibility to name individual streams
 TODO: Check for every command-line parameter if it would make sense to add a way to change it thorugh the GUI
+
+TODO: Look through comment TODOs
 
 TODO: Hide OpenTK members sufficiently so that a reference to Graphics doesn't result in a dependency reference to OpenTK
 TODO: Transform static creators into constructor calls in Visualizer.Capturing
@@ -15,6 +16,7 @@ TODO: Make classes internal which don't have to be public
 TODO: Look for places to use LINQ queries
 TODO: Create development policy document
 TODO: Comparators will treat NaN and NaN as equal while <, <=, ==, >=, > will return false on every comparison. See if this is used in a wrong way in any place
+TODO: Check if IDisposable pattern is implementend correctly everywhere
 
 TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution

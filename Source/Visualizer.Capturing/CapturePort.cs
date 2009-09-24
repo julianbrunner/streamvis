@@ -63,6 +63,7 @@ namespace Visualizer.Capturing
 
 				Console.WriteLine("Trying to join reader thread of \"" + Name + "\"...");
 
+				// TODO: If constructor throws an exception, reader could be null. Either do a null test or avoid throwing in constructors (policy!)
 				if (!reader.Join(1000))
 				{
 					Console.WriteLine("Sending a packet to \"" + Name + "\" in order to join reader thread...");
@@ -141,19 +142,31 @@ namespace Visualizer.Capturing
 				switch (delimiters.Length)
 				{
 					case 1:
+						string[] details = delimiters[0].Split('=');
+
 						Path path;
-						try { path = new Path(delimiters[0]); }
+						try { path = new Path(details[0]); }
 						catch (ArgumentOutOfRangeException) { throw new InvalidOperationException("Invalid path: \"" + delimiters[0] + "\"."); }
-						yield return new Stream(path);
+
+						switch (details.Length)
+						{
+							case 1: yield return new Stream(path); break;
+							case 2: yield return new Stream(details[1], path); break;
+							default: throw new InvalidOperationException("Invalid path descriptor: \"" + delimiters[0] + "\".");
+						}
+
 						break;
 					case 2:
 						Path start;
 						Path end;
+
 						try { start = new Path(delimiters[0]); }
 						catch (ArgumentOutOfRangeException) { throw new InvalidOperationException("Invalid path: \"" + delimiters[0] + "\"."); }
 						try { end = new Path(delimiters[1]); }
 						catch (ArgumentOutOfRangeException) { throw new InvalidOperationException("Invalid path: \"" + delimiters[1] + "\"."); }
+
 						foreach (Path currentPath in Path.Range(start, end)) yield return new Stream(currentPath);
+
 						break;
 					default: throw new InvalidOperationException("Invalid range: \"" + range + "\".");
 				}
