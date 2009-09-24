@@ -31,6 +31,7 @@ using Visualizer.Drawing.Values;
 
 namespace Visualizer
 {
+	// TODO: Do some cleanup here
 	partial class MainWindow : Form
 	{
 		const string title = "Yarp Visualizer";

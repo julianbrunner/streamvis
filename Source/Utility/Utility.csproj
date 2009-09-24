@@ -36,7 +36,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayBuffer.cs" />
     <Compile Include="ConsoleUtility.cs" />
     <Compile Include="DoubleUtility.cs" />
     <Compile Include="DoubleExtensions.cs" />
