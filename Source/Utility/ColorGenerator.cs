@@ -28,14 +28,13 @@ namespace Utility
 		public Color NextColor()
 		{
 			return FromHsv(random.NextDouble(0, 6), random.NextDouble(), random.NextDouble());
-
 		}
 
 		static Color FromHsv(double hue, double saturation, double value)
 		{
 			if (hue < 0 || hue >= 6) throw new ArgumentOutOfRangeException("hue");
-			if (saturation < 0 || saturation >= 1) throw new ArgumentOutOfRangeException("saturation");
-			if (value < 0 || value >= 1) throw new ArgumentOutOfRangeException("value");
+			if (saturation < 0 || saturation > 1) throw new ArgumentOutOfRangeException("saturation");
+			if (value < 0 || value > 1) throw new ArgumentOutOfRangeException("value");
 
 			int hueIndex = (int)hue;
 			double hueFraction = hue - hueIndex;
@@ -45,20 +44,34 @@ namespace Utility
 			double rising = value * (1 - (1 - hueFraction) * saturation);
 			double falling = value * (1 - hueFraction * saturation);
 
-			double r, g, b;
+			double red, green, blue;
 
 			switch (hueIndex)
 			{
-				case 0: r = top; g = rising; b = bottom; break;
-				case 1: r = falling; g = top; b = bottom; break;
-				case 2: r = bottom; g = top; b = rising; break;
-				case 3: r = bottom; g = falling; b = top; break;
-				case 4: r = rising; g = bottom; b = top; break;
-				case 5: r = top; g = bottom; b = falling; break;
+				case 0: red = top; green = rising; blue = bottom; break;
+				case 1: red = falling; green = top; blue = bottom; break;
+				case 2: red = bottom; green = top; blue = rising; break;
+				case 3: red = bottom; green = falling; blue = top; break;
+				case 4: red = rising; green = bottom; blue = top; break;
+				case 5: red = top; green = bottom; blue = falling; break;
 				default: throw new InvalidOperationException();
 			}
 
-			return Color.FromArgb((int)(r * 0x100), (int)(g * 0x100), (int)(b * 0x100));
+			return FromRgb(red, green, blue);
+		}
+		static Color FromRgb(double red, double green, double blue)
+		{
+			if (red < 0 || red > 1) throw new ArgumentOutOfRangeException("red");
+			if (green < 0 || green > 1) throw new ArgumentOutOfRangeException("green");
+			if (blue < 0 || blue > 1) throw new ArgumentOutOfRangeException("blue");
+
+			return Color.FromArgb(ToByte(red), ToByte(green), ToByte(blue));
+		}
+		static byte ToByte(double value)
+		{
+			if (value < 0 || value > 1) throw new ArgumentOutOfRangeException("value");
+
+			return value == 1 ? (byte)0xFF : (byte)(value * 0x100);
 		}
 	}
 }
