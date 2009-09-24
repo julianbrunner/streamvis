@@ -43,8 +43,8 @@ namespace Utility
 
 			return
 			(
-				from randomColor in GetRandomColors(10000)
-				orderby colors.Min(color => ColorPlus.Distance(randomColor, color)) descending
+				from randomColor in GetRandomColors(5000)
+				orderby GetMinimumDistance(randomColor) descending
 				select randomColor
 			)
 			.First();
@@ -53,6 +53,10 @@ namespace Utility
 		{
 			for (int i = 0; i < count; i++)
 				yield return ColorPlus.FromHsv(random.NextDouble(0, 6), random.NextDouble(0.5, 1), random.NextDouble(0.5, 1));
+		}
+		double GetMinimumDistance(ColorPlus target)
+		{
+			return colors.Min(color => ColorPlus.Distance(target, color));
 		}
 	}
 }
