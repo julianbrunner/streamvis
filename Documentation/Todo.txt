@@ -21,4 +21,4 @@ TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file c
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
 TODO: Extension methods don't work without reference to System.Core?!
 TODO: Move Yarp.Wrapper to Libraries solution folder once either Visual Studio supports it or isn't used anymore
-TODO: Give higher priority to reader thread once mono supports it
+TODO: Check when mono will support thread priorities

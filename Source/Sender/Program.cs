@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using Utility;
 using Yarp;
 
 namespace Sender
@@ -67,7 +68,7 @@ namespace Sender
 					//values.Add(new Value(value));
 
 					List<Packet> values = new List<Packet>();
-					for (int i = 0; i < streams; i++) values.Add(new Value(NextDouble(random, -1, 1)));
+					for (int i = 0; i < streams; i++) values.Add(new Value(random.NextDouble(-1, 1)));
 
 					port.Write(new List(values));
 
@@ -75,10 +76,6 @@ namespace Sender
 
 					Thread.Sleep(ms);
 				}
-		}
-		static double NextDouble(Random random, double min, double max)
-		{
-			return min + random.NextDouble() * (max - min);
 		}
 	}
 }

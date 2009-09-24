@@ -34,9 +34,12 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleUtility.cs" />
+    <Compile Include="ColorGenerator.cs" />
+    <Compile Include="RandomExtensions.cs" />
     <Compile Include="DoubleUtility.cs" />
     <Compile Include="DoubleExtensions.cs" />
     <Compile Include="EnumerableUtility.cs" />
