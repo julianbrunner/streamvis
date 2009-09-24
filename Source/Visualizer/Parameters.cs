@@ -29,13 +29,13 @@ namespace Visualizer
 
 		public IEnumerable<string> Ports { get { return ports; } }
 		public bool MinimalMode { get; private set; }
-		public Time DiagramWidth { get; private set; }
-		public double LineWidth { get; private set; }
 		public bool ExtendGraphs { get; private set; }
 		public bool LineSmoothing { get; private set; }
 		public bool AlphaBlending { get; private set; }
 		public bool VerticalSynchronization { get; private set; }
 		public bool DataLogging { get; private set; }
+		public Time DiagramWidth { get; private set; }
+		public double LineWidth { get; private set; }
 		public DiagramType DiagramType { get; private set; }
 		public double DiagramTypeParameter { get; private set; }
 		public double RangeLow { get; private set; }

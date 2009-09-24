@@ -36,5 +36,10 @@ namespace Utility
 				Console.Write(" ");
 			}
 		}
+		public static void WriteLine(int column, string text)
+		{
+			Write(column, text);
+			Console.WriteLine();
+		}
 	}
 }
