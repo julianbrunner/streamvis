@@ -9,6 +9,7 @@ TODO: Check for every command-line parameter if it would make sense to add a way
 
 TODO: Hide OpenTK members sufficiently so that a reference to Graphics doesn't result in a dependency reference to OpenTK
 TODO: Transform static creators into constructor calls in Visualizer.Capturing
+TODO: Review if design and relationship of Visualizer.Data and Visualizer.Capturing is still good
 TODO: Remove unused usings and references
 TODO: Make classes internal which don't have to be public
 TODO: Look for places to use LINQ queries

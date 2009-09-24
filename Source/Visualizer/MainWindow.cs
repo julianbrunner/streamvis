@@ -268,7 +268,7 @@ namespace Visualizer
 
 					ListViewItem item = new ListViewItem();
 					item.Name = port.Name + "Stream" + stream.Path;
-					item.Text = "Stream " + stream.Path;
+					item.Text = stream.Name + " (" + stream.Path + ")";
 					item.Group = group;
 					item.Checked = true;
 					item.Tag = graph;

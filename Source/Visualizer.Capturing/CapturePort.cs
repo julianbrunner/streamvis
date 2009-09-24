@@ -101,7 +101,8 @@ namespace Visualizer.Capturing
 
 			string name = details[0];
 
-			IEnumerable<Path> paths;
+			IEnumerable<Stream> streams;
+
 			switch (details.Length)
 			{
 				case 1:
@@ -109,14 +110,15 @@ namespace Visualizer.Capturing
 					using (Yarp.Port testPort = new Yarp.Port(network.FindName(name + "/tester")))
 					{
 						network.Connect(name, testPort.Name);
-						paths = GetPaths(Enumerable.Empty<int>(), testPort.Read()).ToArray();
+						streams = (from path in GetPaths(Enumerable.Empty<int>(), testPort.Read()) select new Stream(path)).ToArray();
 						network.Disconnect(name, testPort.Name);
 					}
 					break;
-				case 2: paths = ParseStreams(details[1]); break;
+				case 2: streams = ParseStreams(details[1]); break;
 				default: throw new InvalidOperationException("Invalid port: \"" + portString + "\".");
 			}
-			return new CapturePort(name, from path in paths select new Stream(path), network, timer);
+
+			return new CapturePort(name, streams, network, timer);
 		}
 
 		static IEnumerable<Path> GetPaths(IEnumerable<int> path, Packet packet)
@@ -124,13 +126,14 @@ namespace Visualizer.Capturing
 			if (packet is List)
 			{
 				int i = 0;
+
 				foreach (Packet subPacket in (List)packet)
 					foreach (Path subPath in GetPaths(path.Concat(i++.Single()), subPacket))
 						yield return subPath;
 			}
 			if (packet is Value) yield return new Path(path);
 		}
-		static IEnumerable<Path> ParseStreams(string streams)
+		static IEnumerable<Stream> ParseStreams(string streams)
 		{
 			foreach (string range in streams.Split(','))
 			{
@@ -141,7 +144,7 @@ namespace Visualizer.Capturing
 						Path path;
 						try { path = new Path(delimiters[0]); }
 						catch (ArgumentOutOfRangeException) { throw new InvalidOperationException("Invalid path: \"" + delimiters[0] + "\"."); }
-						yield return path;
+						yield return new Stream(path);
 						break;
 					case 2:
 						Path start;
@@ -150,7 +153,7 @@ namespace Visualizer.Capturing
 						catch (ArgumentOutOfRangeException) { throw new InvalidOperationException("Invalid path: \"" + delimiters[0] + "\"."); }
 						try { end = new Path(delimiters[1]); }
 						catch (ArgumentOutOfRangeException) { throw new InvalidOperationException("Invalid path: \"" + delimiters[1] + "\"."); }
-						foreach (Path currentPath in Path.Range(start, end)) yield return currentPath;
+						foreach (Path currentPath in Path.Range(start, end)) yield return new Stream(currentPath);
 						break;
 					default: throw new InvalidOperationException("Invalid range: \"" + range + "\".");
 				}

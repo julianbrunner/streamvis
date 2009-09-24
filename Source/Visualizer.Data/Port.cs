@@ -28,7 +28,7 @@ namespace Visualizer.Data
 
 		public static string XElementName { get { return "Port"; } }
 
-		public XElement XElement { get { return new XElement(XElementName, new XElement("name", name), from stream in streams select stream.XElement); } }
+		public XElement XElement { get { return new XElement(XElementName, new XElement("Name", name), from stream in streams select stream.XElement); } }
 		public string Name { get { return name; } }
 		public IEnumerable<Stream> Streams { get { return streams; } }
 
@@ -40,6 +40,7 @@ namespace Visualizer.Data
 		protected Port(string name, IEnumerable<Stream> streams)
 		{
 			this.name = name;
+			// TODO: Create and document policy about who is responsible for calling .ToArray on an expensive or time-critical enumeration
 			this.streams = streams.ToArray();
 		}
 
