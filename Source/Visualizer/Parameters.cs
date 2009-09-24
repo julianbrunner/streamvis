@@ -70,23 +70,29 @@ namespace Visualizer
 
 			foreach (string parameter in parameters)
 			{
-				string[] details = parameter.Split(':');
-				switch (details[0][0])
+				switch (parameter[0])
 				{
 					case '/': ports.Add(parameter); break;
-					case '+':
-						if (details.Length != 1) InvalidParameter(parameter);
-						ParseBooleanOption(details[0].Substring(1), true);
-						break;
-					case '-':
-						if (details.Length != 1) InvalidParameter(parameter);
-						ParseBooleanOption(details[0].Substring(1), false);
-						break;
+					case '+': ParseBooleanOption(parameter.Substring(1), true); break;
+					case '-': ParseBooleanOption(parameter.Substring(1), false); break;
 					default: ParseOption(parameter); break;
 				}
 			}
 		}
 
+		void ParseBooleanOption(string name, bool value)
+		{
+			switch (name)
+			{
+				case "m": MinimalMode = value; break;
+				case "e": ExtendGraphs = value; break;
+				case "a": LineSmoothing = value; break;
+				case "b": AlphaBlending = value; break;
+				case "v": VerticalSynchronization = value; break;
+				case "l": DataLogging = value; break;
+				default: InvalidParameter((value ? "+" : "-") + name); break;
+			}
+		}
 		void ParseOption(string option)
 		{
 			string[] details = option.Split(':');
@@ -177,19 +183,6 @@ namespace Visualizer
 					catch (ArgumentOutOfRangeException) { InvalidParameter(option); }
 					break;
 				default: InvalidParameter(option); break;
-			}
-		}
-		void ParseBooleanOption(string name, bool value)
-		{
-			switch (name)
-			{
-				case "m": MinimalMode = value; break;
-				case "e": ExtendGraphs = value; break;
-				case "a": LineSmoothing = value; break;
-				case "b": AlphaBlending = value; break;
-				case "v": VerticalSynchronization = value; break;
-				case "l": DataLogging = value; break;
-				default: InvalidParameter((value ? "+" : "-") + name); break;
 			}
 		}
 

@@ -7,9 +7,8 @@ TODO: Add ability to switch Value-/TimeManagers through GUI while drawing
 TODO: Add possibility to name individual streams
 TODO: Check for every command-line parameter if it would make sense to add a way to change it thorugh the GUI
 
-TODO: Test if cache invalidation due to changing value label widths causes hiccups
-
 TODO: Hide OpenTK members sufficiently so that a reference to Graphics doesn't result in a dependency reference to OpenTK
+TODO: Transform static creators into constructor calls in Visualizer.Capturing
 TODO: Remove unused usings and references
 TODO: Make classes internal which don't have to be public
 TODO: Look for places to use LINQ queries
