@@ -135,7 +135,7 @@ namespace Visualizer
 			// statusLabel
 			// 
 			this.statusLabel.Name = "statusLabel";
-			this.statusLabel.Size = new System.Drawing.Size(722, 17);
+			this.statusLabel.Size = new System.Drawing.Size(691, 17);
 			this.statusLabel.Spring = true;
 			this.statusLabel.Text = "Ready";
 			this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -145,6 +145,7 @@ namespace Visualizer
 			this.coordinateStatusLabel.Name = "coordinateStatusLabel";
 			this.coordinateStatusLabel.Size = new System.Drawing.Size(0, 17);
 			this.coordinateStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.coordinateStatusLabel.Visible = false;
 			// 
 			// splitContainer1
 			// 

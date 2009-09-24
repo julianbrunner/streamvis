@@ -97,7 +97,7 @@ namespace Visualizer.Drawing
 
 		void DrawAxisX(TimeRange timeRange, ValueRange valueRange)
 		{
-			Vector2 offset = new Vector2(0, 5);
+			Vector2 offset = new Vector2(0, 0);
 
 			Vector2 start = layouter.ForwardMap(Vector2.Zero) + offset;
 			Vector2 end = layouter.ForwardMap(Vector2.UnitX) + offset;

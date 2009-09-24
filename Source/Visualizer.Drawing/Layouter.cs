@@ -27,7 +27,7 @@ namespace Visualizer.Drawing
 		const int baseBorderLeft = 9;
 		const int baseBorderRight = 0;
 		const int baseBorderTop = 8;
-		const int baseBorderBottom = 14;
+		const int baseBorderBottom = 9;
 
 		readonly Viewport viewport;
 
