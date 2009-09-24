@@ -15,6 +15,7 @@ Version 0.9
 	- Value range markers now use "nicer" values
 	- Nice value algorithms are now used for time markers aswell
 	- Doubleclicking the graph area now toggles minimal mode
+	- Added coordinate display in status bar
 
 Version 0.8
 	- Simpler entry buffering system

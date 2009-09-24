@@ -6,7 +6,6 @@ TODO: Fix feedback loop between resampler and graph area resizing upon label siz
 TODO: Better playback controls
 TODO: Vertical/Horizontal zoom (in Freeze mode)
 TODO: Add ability to switch Value-/TimeManagers through GUI while drawing
-TODO: Add coordinate display in status bar
 TODO: Improve random colors
 TODO: Add possibility to name individual streams
 TODO: Check for every command-line parameter if it would make sense to add a way to change it thorugh the GUI

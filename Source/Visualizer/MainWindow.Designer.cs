@@ -211,9 +211,6 @@ namespace Visualizer
 			this.viewport.TabIndex = 0;
 			this.viewport.VSync = true;
 			this.viewport.DoubleClick += new System.EventHandler(this.viewport_DoubleClick);
-			this.viewport.MouseLeave += new System.EventHandler(this.viewport_MouseLeave);
-			this.viewport.MouseMove += new System.Windows.Forms.MouseEventHandler(this.viewport_MouseMove);
-			this.viewport.MouseEnter += new System.EventHandler(this.viewport_MouseEnter);
 			// 
 			// menuStrip1
 			// 

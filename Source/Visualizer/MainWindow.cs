@@ -45,6 +45,7 @@ namespace Visualizer
 		readonly ValueManager valueManager;
 		readonly Diagram diagram;
 		readonly VisibleFrameCounter frameCounter;
+		readonly CoordinateLabel coordinateLabel;
 
 		Source source;
 		string filePath;
@@ -81,8 +82,11 @@ namespace Visualizer
 			else this.valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
 			this.diagram = new Diagram(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.MarkersX, parameters.MarkersY, parameters.DiagramColor);
 
-			System.Console.WriteLine("Initializing frame counter");
+			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
+
+			Console.WriteLine("Initializing coordinate display");
+			this.coordinateLabel = new CoordinateLabel(coordinateStatusLabel, viewport, layouter, timeManager, valueManager);
 
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);
@@ -105,6 +109,7 @@ namespace Visualizer
 
 			viewport.AddComponent(diagram);
 			viewport.AddComponent(frameCounter);
+			viewport.AddComponent(coordinateLabel);
 		}
 
 		void viewport_Layout(object sender, LayoutEventArgs e)
@@ -186,31 +191,6 @@ namespace Visualizer
 		{
 			minimalModeToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
 			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
-		}
-		private void viewport_MouseEnter(object sender, EventArgs e)
-		{
-			coordinateStatusLabel.Visible = true;
-		}
-		private void viewport_MouseLeave(object sender, EventArgs e)
-		{
-			coordinateStatusLabel.Visible = false;
-		}
-		private void viewport_MouseMove(object sender, MouseEventArgs e)
-		{
-			coordinateStatusLabel.Visible = layouter.Area.Contains(e.Location);
-
-			if (coordinateStatusLabel.Visible)
-			{
-				Vector2 position = layouter.ReverseMap(new Vector2(e.X, e.Y));
-
-				TimeRange timeRange = timeManager.Range;
-				ValueRange valueRange = valueManager.Range;
-
-				Time time = timeRange.ReverseMap(position.X);
-				double value = valueRange.ReverseMap(position.Y);
-
-				coordinateStatusLabel.Text = string.Format("Time: {0}, Value: {1}", time, value);
-			}
 		}
 
 		void NewSource(IEnumerable<string> ports)

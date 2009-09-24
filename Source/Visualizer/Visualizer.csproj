@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CoordinateLabel.cs" />
     <Compile Include="SamplerType.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
