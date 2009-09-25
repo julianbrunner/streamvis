@@ -61,6 +61,7 @@ namespace Visualizer
 
 			viewport.ClearColor = parameters.BackgroundColor;
 			viewport.VSync = parameters.VerticalSynchronization;
+			// TODO: Should this be done with the designer?
 			viewport.Layout += viewport_Layout;
 
 			this.drawer = new Drawer(parameters.LineSmoothing, parameters.AlphaBlending);

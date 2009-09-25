@@ -135,7 +135,7 @@ namespace Visualizer
 			// statusLabel
 			// 
 			this.statusLabel.Name = "statusLabel";
-			this.statusLabel.Size = new System.Drawing.Size(691, 17);
+			this.statusLabel.Size = new System.Drawing.Size(722, 17);
 			this.statusLabel.Spring = true;
 			this.statusLabel.Text = "Ready";
 			this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
