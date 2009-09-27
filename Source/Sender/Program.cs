@@ -60,9 +60,9 @@ namespace Sender
 					//if (counter == 15000)
 					//{
 					//    counter = 0;
-					//    variance = Math.Pow(2, NextDouble(random, -10, 6));
+					//    variance = Math.Pow(2, random.NextDouble(-10, 6));
 					//}
-					//value += variance * NextDouble(random, -1, 1);
+					//value += variance * random.NextDouble(-1, 1);
 
 					//List<Packet> values = new List<Packet>();
 					//values.Add(new Value(value));

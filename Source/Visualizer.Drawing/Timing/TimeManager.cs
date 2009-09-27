@@ -23,10 +23,9 @@ namespace Visualizer.Drawing.Timing
 	public abstract class TimeManager
 	{
 		readonly Timer timer;
-		readonly Time width;
 
 		public Time Time { get; private set; }
-		public Time Width { get { return width; } }
+		public Time Width { get; set; }
 
 		public bool Frozen { get; set; }
 		/// <summary>
@@ -38,10 +37,9 @@ namespace Visualizer.Drawing.Timing
 		/// </summary>
 		public abstract IEnumerable<TimeRange> GraphRanges { get; }
 
-		protected TimeManager(Timer timer, Time width)
+		protected TimeManager(Timer timer)
 		{
 			this.timer = timer;
-			this.width = width;
 		}
 
 		public virtual void Update()

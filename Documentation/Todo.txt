@@ -1,5 +1,5 @@
 TODO: Better playback controls
-TODO: Vertical/Horizontal zoom (in Freeze mode)
+TODO: Vertical zoom
 TODO: Add ability to switch Value-/TimeManagers through GUI while drawing
 
 TODO: Fix massive memory consumption on save (XML)

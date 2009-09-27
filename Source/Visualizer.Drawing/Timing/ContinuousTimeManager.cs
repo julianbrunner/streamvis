@@ -28,7 +28,7 @@ namespace Visualizer.Drawing.Timing
 		public override TimeRange Range { get { return range; } }
 		public override IEnumerable<TimeRange> GraphRanges { get { yield return range; } }
 
-		public ContinuousTimeManager(Timer timer, Time width) : base(timer, width) { }
+		public ContinuousTimeManager(Timer timer) : base(timer) { }
 
 		public override void Update()
 		{

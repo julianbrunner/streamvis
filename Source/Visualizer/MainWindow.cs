@@ -32,7 +32,7 @@ using Visualizer.Drawing.Values;
 
 namespace Visualizer
 {
-	// TODO: Do some cleanup here
+	// TODO: Do some cleanup here, extract stuff into extra components
 	partial class MainWindow : Form
 	{
 		const string title = "Yarp Visualizer";
@@ -49,6 +49,8 @@ namespace Visualizer
 		readonly VisibleFrameCounter frameCounter;
 		readonly CoordinateLabel coordinateLabel;
 
+		bool moving;
+		Point position;
 		Source source;
 		string filePath;
 
@@ -63,6 +65,9 @@ namespace Visualizer
 			viewport.VSync = parameters.VerticalSynchronization;
 			// TODO: Should this be done with the designer?
 			viewport.Layout += viewport_Layout;
+			viewport.MouseDown += HandleMouseDown;
+			viewport.MouseUp += HandleMouseUp;
+			viewport.MouseMove += HandleMouseMove;
 
 			this.drawer = new Drawer(parameters.LineSmoothing, parameters.AlphaBlending);
 
@@ -75,11 +80,12 @@ namespace Visualizer
 			this.layouter = new Layouter(viewport);
 			switch (parameters.DiagramType)
 			{
-				case DiagramType.Continuous: this.timeManager = new ContinuousTimeManager(timer, parameters.DiagramWidth); break;
-				case DiagramType.Shiftting: this.timeManager = new ShiftingTimeManager(timer, parameters.DiagramWidth, parameters.DiagramTypeParameter); break;
-				case DiagramType.Wrapping: this.timeManager = new WrappingTimeManager(timer, parameters.DiagramWidth, parameters.DiagramTypeParameter); break;
+				case DiagramType.Continuous: this.timeManager = new ContinuousTimeManager(timer); break;
+				case DiagramType.Shiftting: this.timeManager = new ShiftingTimeManager(timer, parameters.DiagramTypeParameter); break;
+				case DiagramType.Wrapping: this.timeManager = new WrappingTimeManager(timer, parameters.DiagramTypeParameter); break;
 				default: throw new InvalidOperationException();
 			}
+			this.timeManager.Width = parameters.DiagramWidth;
 			this.segmentManager = new SimpleSegmentManager(timeManager, graphs);
 			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(segmentManager, graphs);
 			else this.valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
@@ -118,6 +124,30 @@ namespace Visualizer
 		void viewport_Layout(object sender, LayoutEventArgs e)
 		{
 			frameCounter.Position = new Vector2(viewport.Right, viewport.Top);
+		}
+		void HandleMouseDown(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Right)
+			{
+				moving = true;
+				position = e.Location;
+			}
+		}
+		void HandleMouseUp(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Right)
+			{
+				moving = false;
+				position = Point.Empty;
+			}
+		}
+		void HandleMouseMove(object sender, MouseEventArgs e)
+		{
+			if (moving)
+			{
+				timeManager.Width *= Math.Pow(1.1, e.Location.X - position.X);
+				position = e.Location;
+			}
 		}
 
 		private void streamsListView_ItemChecked(object sender, ItemCheckedEventArgs e)
