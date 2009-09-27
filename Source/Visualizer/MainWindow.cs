@@ -49,8 +49,7 @@ namespace Visualizer
 		readonly VisibleFrameCounter frameCounter;
 		readonly CoordinateLabel coordinateLabel;
 
-		bool moving;
-		Point position;
+		Point oldMousePosition;
 		Source source;
 		string filePath;
 
@@ -63,11 +62,6 @@ namespace Visualizer
 
 			viewport.ClearColor = parameters.BackgroundColor;
 			viewport.VSync = parameters.VerticalSynchronization;
-			// TODO: Should this be done with the designer?
-			viewport.Layout += viewport_Layout;
-			viewport.MouseDown += HandleMouseDown;
-			viewport.MouseUp += HandleMouseUp;
-			viewport.MouseMove += HandleMouseMove;
 
 			this.drawer = new Drawer(parameters.LineSmoothing, parameters.AlphaBlending);
 
@@ -119,35 +113,6 @@ namespace Visualizer
 			viewport.AddComponent(diagram);
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
-		}
-
-		void viewport_Layout(object sender, LayoutEventArgs e)
-		{
-			frameCounter.Position = new Vector2(viewport.Right, viewport.Top);
-		}
-		void HandleMouseDown(object sender, MouseEventArgs e)
-		{
-			if (e.Button == MouseButtons.Right)
-			{
-				moving = true;
-				position = e.Location;
-			}
-		}
-		void HandleMouseUp(object sender, MouseEventArgs e)
-		{
-			if (e.Button == MouseButtons.Right)
-			{
-				moving = false;
-				position = Point.Empty;
-			}
-		}
-		void HandleMouseMove(object sender, MouseEventArgs e)
-		{
-			if (moving)
-			{
-				timeManager.Width *= Math.Pow(1.1, e.Location.X - position.X);
-				position = e.Location;
-			}
 		}
 
 		private void streamsListView_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -220,10 +185,20 @@ namespace Visualizer
 		{
 			viewport.VSync = verticalSynchronizationToolStripMenuItem.Checked;
 		}
+		private void viewport_Layout(object sender, LayoutEventArgs e)
+		{
+			frameCounter.Position = new Vector2(viewport.Right, viewport.Top);
+		}
 		private void viewport_DoubleClick(object sender, EventArgs e)
 		{
 			minimalModeToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
 			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
+		}
+		private void viewport_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Right) timeManager.Width *= Math.Pow(1.1, e.Location.X - oldMousePosition.X);
+
+			oldMousePosition = e.Location;
 		}
 
 		void NewSource(IEnumerable<string> ports)
