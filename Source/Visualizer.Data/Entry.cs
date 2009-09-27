@@ -35,8 +35,8 @@ namespace Visualizer.Data
 				return new XElement
 				(
 					XElementName,
-					new XElement("time", Time.Ticks),
-					new XElement("value", Value)
+					new XElement("Time", Time.Ticks),
+					new XElement("Value", Value)
 				);
 			}
 		}
@@ -48,8 +48,8 @@ namespace Visualizer.Data
 		}
 		public Entry(XElement entry)
 		{
-			this.time = new Time((long)entry.Element("time"));
-			this.value = (double)entry.Element("value");
+			this.time = new Time((long)entry.Element("Time"));
+			this.value = (double)entry.Element("Value");
 		}
 	}
 }
