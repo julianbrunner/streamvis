@@ -19,6 +19,8 @@ TODO: Create development policy document
 TODO: Comparators will treat NaN and NaN as equal while <, <=, ==, >=, > will return false on every comparison. See if this is used in a wrong way in any place
 TODO: Check if IDisposable pattern is implementend correctly everywhere
 
+TODO: Add installation instructions for Linux, Windows and Mac OS X
+
 TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
 TODO: Extension methods don't work without reference to System.Core?!
