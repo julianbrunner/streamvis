@@ -25,16 +25,14 @@ namespace Visualizer.Drawing.Values
 {
 	public class FittingValueManager : ValueManager
 	{
-		readonly DataManager segmentManager;
 		readonly IEnumerable<Graph> graphs;
 
 		ValueRange range;
 
 		public override ValueRange Range { get { return range; } }
 
-		public FittingValueManager(DataManager segmentManager, IEnumerable<Graph> graphs)
+		public FittingValueManager(IEnumerable<Graph> graphs)
 		{
-			this.segmentManager = segmentManager;
 			this.graphs = graphs;
 		}
 

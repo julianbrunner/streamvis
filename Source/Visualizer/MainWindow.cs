@@ -83,7 +83,7 @@ namespace Visualizer
 			}
 			this.timeManager.Width = parameters.DiagramWidth;
 
-			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(dataManager, graphs);
+			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(graphs);
 			else this.valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
 
 			switch (parameters.SamplerType)
