@@ -54,7 +54,7 @@ namespace Visualizer.Drawing.Data
 
 		public virtual void Update()
 		{
-			entryData.Update();
+			entryData.UpdateEntries();
 
 			if (!dataLogging && entryData.Entries.Count > 0 && timeManager.Time - entryData.Entries[0].Time > 2 * timeManager.Width)
 				entryData.Entries.Remove(0, entryData.Entries.FindIndex(timeManager.Time - timeManager.Width));

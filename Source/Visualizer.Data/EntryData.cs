@@ -29,7 +29,7 @@ namespace Visualizer.Data
 
 		public static string XElementName { get { return "EntryData"; } }
 
-		// TODO: Add interface so SearchList doesnt' get exposed
+		// TODO: Add interface so SearchList doesn't get exposed
 		public SearchList<Entry, Time> Entries { get { return entries; } }
 		public XElement XElement { get { return new XElement(XElementName, from entry in entries select entry.XElement); } }
 
@@ -49,8 +49,7 @@ namespace Visualizer.Data
 				lock (buffer)
 					buffer.Add(entry);
 		}
-		// TODO: This should be done in Visualizer.Drawing (Components in Visualizer.Data don't even "know" there is an Update/Draw loop
-		public void Update()
+		public void UpdateEntries()
 		{
 			IEnumerable<Entry> bufferedEntries;
 
