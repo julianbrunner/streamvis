@@ -43,8 +43,8 @@ namespace Visualizer
 		readonly List<Graph> graphs;
 		readonly Layouter layouter;
 		readonly TimeManager timeManager;
-		readonly DataManager segmentManager;
 		readonly ValueManager valueManager;
+		readonly DataManager dataManager;
 		readonly Diagram diagram;
 		readonly VisibleFrameCounter frameCounter;
 		readonly CoordinateLabel coordinateLabel;
@@ -71,7 +71,9 @@ namespace Visualizer
 
 			Console.WriteLine("Initializing diagram...");
 			this.graphs = new List<Graph>();
+
 			this.layouter = new Layouter(viewport);
+
 			switch (parameters.DiagramType)
 			{
 				case DiagramType.Continuous: this.timeManager = new ContinuousTimeManager(timer); break;
@@ -80,11 +82,20 @@ namespace Visualizer
 				default: throw new InvalidOperationException();
 			}
 			this.timeManager.Width = parameters.DiagramWidth;
-			this.segmentManager = new SimpleDataManager(timeManager, graphs);
-			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(segmentManager, graphs);
+
+			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(dataManager, graphs);
 			else this.valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
-			// TODO: Set LineWidth and ExtendGraphs
-			this.diagram = new Diagram(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.MarkersX, parameters.MarkersY, parameters.DiagramColor);
+
+			switch (parameters.SamplerType)
+			{
+				case SamplerType.PerSecond: this.dataManager = new PerSecondDataManager(graphs, timeManager, parameters.DataLogging, parameters.SamplerFrequency); break;
+				case SamplerType.PerPixel: this.dataManager = new PerPixelDataManager(graphs, timeManager, parameters.DataLogging, layouter, parameters.SamplerFrequency); break;
+				default: throw new InvalidOperationException();
+			}
+
+			this.diagram = new Diagram(drawer, graphs, layouter, timeManager, valueManager, dataManager, parameters.MarkersX, parameters.MarkersY, parameters.DiagramColor);
+			this.diagram.ExtendGraphs = parameters.ExtendGraphs;
+			this.diagram.LineWidth = parameters.LineWidth;
 
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
@@ -156,7 +167,7 @@ namespace Visualizer
 		}
 		private void graphExtensionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			segmentManager.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
+			diagram.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
 		}
 		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -261,15 +272,7 @@ namespace Visualizer
 
 				foreach (Stream stream in port.Streams)
 				{
-					StreamManager dataManager;
-					switch (parameters.SamplerType)
-					{
-						case SamplerType.PerSecond: dataManager = new PerSecondDataManager(timeManager, stream.EntryData, parameters.DataLogging, parameters.SamplerFrequency); break;
-						case SamplerType.PerPixel: dataManager = new PerPixelDataManager(timeManager, stream.EntryData, parameters.DataLogging, parameters.SamplerFrequency, layouter); break;
-						default: throw new InvalidOperationException();
-					}
-
-					Graph graph = new Graph(layouter, valueManager, segmentManager, drawer, dataManager, parameters.LineWidth);
+					Graph graph = new Graph(drawer, diagram, layouter, valueManager, new StreamManager(stream.EntryData, timeManager));
 					graph.Color = colorGenerator.NextColor();
 					graphs.Add(graph);
 
