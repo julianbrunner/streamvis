@@ -24,11 +24,12 @@ namespace Visualizer.Drawing.Data
 	public class PerPixelDataManager : DataManager
 	{
 		readonly Layouter layouter;
+		// TODO: Create and document policy for when to fork a parameter and when to get it from the base class
 		readonly TimeManager timeManager;
 		readonly double samplesPerPixel;
 
-		public PerPixelDataManager(IEnumerable<Graph> graphs, bool dataLogging, Layouter layouter, TimeManager timeManager, double samplesPerPixel)
-			: base(graphs, dataLogging)
+		public PerPixelDataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging, Layouter layouter, double samplesPerPixel)
+			: base(graphs, timeManager, dataLogging)
 		{
 			// TODO: Do error checking (samplesPerPixel could be negative, etc.)
 			// TODO: Create and document policy for error checking

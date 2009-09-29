@@ -22,21 +22,27 @@ namespace Visualizer.Drawing.Data
 {
 	public abstract class DataManager
 	{
-		// TODO: Still needed?
 		readonly IEnumerable<Graph> graphs;
+		readonly TimeManager timeManager;
 		readonly bool dataLogging;
 
 		protected IEnumerable<Graph> Graphs { get { return graphs; } }
 
-		protected DataManager(IEnumerable<Graph> graphs, bool dataLogging)
+		protected DataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging)
 		{
 			this.graphs = graphs;
+			this.timeManager = timeManager;
 			this.dataLogging = dataLogging;
 		}
 
 		public virtual void Update()
 		{
-			// Implement DataLogging option
+			if (!dataLogging)
+				foreach (Graph graph in graphs)
+					// TODO: Refactor this
+					if (graph.StreamManager.EntryData.Entries.Count > 0 && timeManager.Time - graph.StreamManager.EntryData.Entries[0].Time > 2 * timeManager.Width)
+						graph.StreamManager.EntryData.Entries.Remove(0, graph.StreamManager.EntryData.Entries.FindIndex(timeManager.Time - timeManager.Width));
+
 		}
 	}
 }

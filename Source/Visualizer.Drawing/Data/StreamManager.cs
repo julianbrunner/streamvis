@@ -31,6 +31,7 @@ namespace Visualizer.Drawing.Data
 
 		public IEnumerable<DataSegment> Segments { get; private set; }
 		// TODO: Create and document policy about when to do deep properties
+		public EntryData EntryData { get { return entryData; } }
 		public EntryResampler EntryResampler { get { return entryResampler; } }
 		public EntryCache EntryCache { get { return entryCache; } }
 
@@ -47,9 +48,6 @@ namespace Visualizer.Drawing.Data
 		public void Update()
 		{
 			entryData.UpdateEntries();
-
-			//if (!dataLogging && entryData.Entries.Count > 0 && timeManager.Time - entryData.Entries[0].Time > 2 * timeManager.Width)
-			//    entryData.Entries.Remove(0, entryData.Entries.FindIndex(timeManager.Time - timeManager.Width));
 
 			if (!entryCache.IsEmpty && timeManager.Time - entryCache.FirstEntry.Time > 10 * timeManager.Width) entryCache.Clear();
 

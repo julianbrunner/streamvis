@@ -17,6 +17,7 @@
 
 using System.Collections.Generic;
 using Visualizer.Data;
+using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Drawing.Data
 {
@@ -24,8 +25,8 @@ namespace Visualizer.Drawing.Data
 	{
 		readonly double samplesPerSecond;
 
-		public PerSecondDataManager(IEnumerable<Graph> graphs, bool dataLogging, double samplesPerSecond)
-			: base(graphs, dataLogging)
+		public PerSecondDataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging, double samplesPerSecond)
+			: base(graphs, timeManager, dataLogging)
 		{
 			this.samplesPerSecond = samplesPerSecond;
 		}
