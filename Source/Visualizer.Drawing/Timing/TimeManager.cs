@@ -24,6 +24,7 @@ namespace Visualizer.Drawing.Timing
 	{
 		readonly Timer timer;
 
+		// TODO: Create and document visibility policy
 		public Time Time { get; private set; }
 		public Time Width { get; set; }
 

@@ -15,18 +15,28 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using Visualizer.Data;
-using Visualizer.Drawing.Timing;
 using System.Collections.Generic;
+using Visualizer.Drawing.Timing;
+using Visualizer.Data;
 
 namespace Visualizer.Drawing.Data
 {
 	public class PerSecondDataManager : DataManager
 	{
-		public PerSecondDataManager(TimeManager timeManager, IEnumerable<Graph> graphs, double sampleFrequency)
-			: base(timeManager, graphs)
+		readonly double samplesPerSecond;
+
+		public PerSecondDataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging, double samplesPerSecond)
+			: base(graphs, timeManager, dataLogging)
 		{
-			//EntryResampler.SampleDistance = new Time(1.0) / sampleFrequency;
+			this.samplesPerSecond = samplesPerSecond;
+		}
+
+		public override void Update()
+		{
+			base.Update();
+
+			// TODO: Does it make sense to have to set the property with the same value over and over?
+			foreach (Graph graph in Graphs) graph.StreamManager.SampleDistance = new Time(1.0) / samplesPerSecond;
 		}
 	}
 }

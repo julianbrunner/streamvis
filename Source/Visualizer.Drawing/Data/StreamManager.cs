@@ -15,40 +15,35 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using Utility;
+using System.Collections.Generic;
 using System.Linq;
 using Visualizer.Data;
 using Visualizer.Drawing.Timing;
-using System.Collections.Generic;
 
 namespace Visualizer.Drawing.Data
 {
 	public class StreamManager
 	{
-		readonly TimeManager timeManager;
 		readonly EntryData entryData;
-		readonly bool dataLogging;
+		readonly TimeManager timeManager;
 		readonly EntryResampler entryResampler;
 		readonly EntryCache entryCache;
 
-		// TODO: Create and document visibility policy
-		protected TimeManager TimeManager { get { return timeManager; } }
-		protected EntryData EntryData { get { return entryData; } }
-		protected EntryResampler EntryResampler { get { return entryResampler; } }
-		protected EntryCache EntryCache { get { return entryCache; } }
-
 		public IEnumerable<DataSegment> Segments { get; private set; }
 		// TODO: Create and document policy about when to do deep properties
-		public Time SampleDistance { get { return entryResampler.SampleDistance; } }
+		public Time SampleDistance
+		{
+			get { return entryResampler.SampleDistance; }
+			set { entryResampler.SampleDistance = value; }
+		}
 		public bool IsEmpty { get { return entryCache.IsEmpty; } }
 		public Entry FirstEntry { get { return entryCache.FirstEntry; } }
 		public Entry LastEntry { get { return entryCache.LastEntry; } }
 
-		protected StreamManager(TimeManager timeManager, EntryData entryData, bool dataLogging)
+		public StreamManager(EntryData entryData, TimeManager timeManager)
 		{
-			this.timeManager = timeManager;
 			this.entryData = entryData;
-			this.dataLogging = dataLogging;
+			this.timeManager = timeManager;
 
 			// TODO: Create and document policy about where to initialize objects
 			entryResampler = new EntryResampler(entryData.Entries);
@@ -59,12 +54,17 @@ namespace Visualizer.Drawing.Data
 		{
 			entryData.UpdateEntries();
 
-			if (!dataLogging && entryData.Entries.Count > 0 && timeManager.Time - entryData.Entries[0].Time > 2 * timeManager.Width)
-				entryData.Entries.Remove(0, entryData.Entries.FindIndex(timeManager.Time - timeManager.Width));
+			//if (!dataLogging && entryData.Entries.Count > 0 && timeManager.Time - entryData.Entries[0].Time > 2 * timeManager.Width)
+			//    entryData.Entries.Remove(0, entryData.Entries.FindIndex(timeManager.Time - timeManager.Width));
 
 			if (!entryCache.IsEmpty && timeManager.Time - entryCache.FirstEntry.Time > 10 * timeManager.Width) entryCache.Clear();
 
-			Segments = (from timeRange in timeManager.GraphRanges select new DataSegment(timeRange, entryCache[timeRange.Range])).ToArray();
+			Segments =
+			(
+				from timeRange in timeManager.GraphRanges
+				select new DataSegment(timeRange, entryCache[timeRange.Range])
+			)
+			.ToArray();
 		}
 	}
 }

@@ -25,16 +25,21 @@ namespace Visualizer.Drawing.Data
 		// TODO: Still needed?
 		readonly TimeManager timeManager;
 		readonly IEnumerable<Graph> graphs;
+		readonly bool dataLogging;
 
-		protected TimeManager TimeManager { get { return timeManager; } }
 		protected IEnumerable<Graph> Graphs { get { return graphs; } }
+		protected TimeManager TimeManager { get { return timeManager; } }
 
-		protected DataManager(TimeManager timeManager, IEnumerable<Graph> graphs)
+		protected DataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging)
 		{
-			this.timeManager = timeManager;
 			this.graphs = graphs;
+			this.timeManager = timeManager;
+			this.dataLogging = dataLogging;
 		}
 
-		public virtual void Update() { }
+		public virtual void Update()
+		{
+
+		}
 	}
 }

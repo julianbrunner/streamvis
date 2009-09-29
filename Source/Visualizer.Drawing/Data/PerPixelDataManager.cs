@@ -15,35 +15,38 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
 using Visualizer.Data;
 using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Drawing.Data
 {
-	//public class PerPixelDataManager : DataManager
-	//{
-	//    readonly double samplesPerPixel;
-	//    readonly Layouter layouter;
+	public class PerPixelDataManager : DataManager
+	{
+		readonly double samplesPerPixel;
+		readonly Layouter layouter;
 
-	//    public PerPixelDataManager(TimeManager timeManager, EntryData entryData, bool dataLogging, double samplesPerPixel, Layouter layouter)
-	//        : base(timeManager, entryData, dataLogging)
-	//    {
-	//        // TODO: Do error checking (samplesPerPixel could be negative, etc.)
-	//        // TODO: Create and document policy for error checking
+		public PerPixelDataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging, double samplesPerPixel, Layouter layouter)
+			: base(graphs, timeManager, dataLogging)
+		{
+			// TODO: Do error checking (samplesPerPixel could be negative, etc.)
+			// TODO: Create and document policy for error checking
 
-	//        this.samplesPerPixel = samplesPerPixel;
-	//        this.layouter = layouter;
-	//    }
+			this.samplesPerPixel = samplesPerPixel;
+			this.layouter = layouter;
+		}
 
-	//    public override void Update()
-	//    {
-	//        base.Update();
+		public override void Update()
+		{
+			base.Update();
 
-	//        double pixelsPerSecond = layouter.Area.Width / TimeManager.Width.Seconds;
-	//        double sampleFrequency = samplesPerPixel * pixelsPerSecond;
+			double pixelsPerSecond = layouter.Area.Width / TimeManager.Width.Seconds;
+			double samplesPerSecond = samplesPerPixel * pixelsPerSecond;
 
-	//        // TODO: Remove silent failure
-	//        if (sampleFrequency > 0) EntryResampler.SampleDistance = new Time(1.0) / sampleFrequency;
-	//    }
-	//}
+			// TODO: Remove silent failure
+			if (samplesPerSecond > 0)
+				foreach (Graph graph in Graphs)
+					graph.StreamManager.SampleDistance = new Time(1.0) / samplesPerSecond;
+		}
+	}
 }
