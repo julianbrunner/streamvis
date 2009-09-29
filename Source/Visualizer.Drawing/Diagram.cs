@@ -69,8 +69,8 @@ namespace Visualizer.Drawing
 			{
 				// TODO: This looks random
 				timeManager.Update();
-				foreach (Graph graph in graphs) graph.Update();
 				dataManager.Update();
+				foreach (Graph graph in graphs) graph.Update();
 				valueManager.Update();
 
 				IEnumerable<Time> times = GetTimeMarkers(timeManager.Range, markersX);

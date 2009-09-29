@@ -49,14 +49,15 @@ namespace Visualizer.Drawing.Data
 		{
 			entryData.UpdateEntries();
 
-			if (!entryCache.IsEmpty && timeManager.Time - entryCache.FirstEntry.Time > 10 * timeManager.Width) entryCache.Clear();
-
+			// TODO: Test if leaving out the whole segment caching is faster
 			Segments =
 			(
 				from timeRange in timeManager.GraphRanges
 				select new DataSegment(timeRange, entryCache[timeRange.Range])
 			)
 			.ToArray();
+
+			if (!entryCache.IsEmpty && timeManager.Time - entryCache.FirstEntry.Time > 10 * timeManager.Width) entryCache.Clear();
 		}
 	}
 }
