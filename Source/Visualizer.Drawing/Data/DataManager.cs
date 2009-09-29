@@ -15,51 +15,26 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using Utility;
-using Visualizer.Data;
+using System.Collections.Generic;
 using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Drawing.Data
 {
 	public abstract class DataManager
 	{
+		// TODO: Still needed?
 		readonly TimeManager timeManager;
-		readonly EntryData entryData;
-		readonly bool dataLogging;
-		readonly EntryResampler entryResampler;
-		readonly EntryCache entryCache;
+		readonly IEnumerable<Graph> graphs;
 
-		public Entry[] this[Range<Time> range] { get { return entryCache[range]; } }
-
-		// TODO: Create and document visibility policy
 		protected TimeManager TimeManager { get { return timeManager; } }
-		protected EntryData EntryData { get { return entryData; } }
-		protected EntryResampler EntryResampler { get { return entryResampler; } }
-		protected EntryCache EntryCache { get { return entryCache; } }
+		protected IEnumerable<Graph> Graphs { get { return graphs; } }
 
-		public Time SampleDistance { get { return entryResampler.SampleDistance; } }
-		public bool IsEmpty { get { return entryCache.IsEmpty; } }
-		public Entry FirstEntry { get { return entryCache.FirstEntry; } }
-		public Entry LastEntry { get { return entryCache.LastEntry; } }
-
-		protected DataManager(TimeManager timeManager, EntryData entryData, bool dataLogging)
+		protected DataManager(TimeManager timeManager, IEnumerable<Graph> graphs)
 		{
 			this.timeManager = timeManager;
-			this.entryData = entryData;
-			this.dataLogging = dataLogging;
-
-			entryResampler = new EntryResampler(entryData.Entries);
-			entryCache = new EntryCache(entryResampler);
+			this.graphs = graphs;
 		}
 
-		public virtual void Update()
-		{
-			entryData.UpdateEntries();
-
-			if (!dataLogging && entryData.Entries.Count > 0 && timeManager.Time - entryData.Entries[0].Time > 2 * timeManager.Width)
-				entryData.Entries.Remove(0, entryData.Entries.FindIndex(timeManager.Time - timeManager.Width));
-
-			if (!entryCache.IsEmpty && timeManager.Time - entryCache.FirstEntry.Time > 10 * timeManager.Width) entryCache.Clear();
-		}
+		public virtual void Update() { }
 	}
 }

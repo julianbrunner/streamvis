@@ -17,15 +17,16 @@
 
 using Visualizer.Data;
 using Visualizer.Drawing.Timing;
+using System.Collections.Generic;
 
 namespace Visualizer.Drawing.Data
 {
 	public class PerSecondDataManager : DataManager
 	{
-		public PerSecondDataManager(TimeManager timeManager, EntryData entryData, bool dataLogging, double sampleFrequency)
-			: base(timeManager, entryData, dataLogging)
+		public PerSecondDataManager(TimeManager timeManager, IEnumerable<Graph> graphs, double sampleFrequency)
+			: base(timeManager, graphs)
 		{
-			EntryResampler.SampleDistance = new Time(1.0) / sampleFrequency;
+			//EntryResampler.SampleDistance = new Time(1.0) / sampleFrequency;
 		}
 	}
 }

@@ -33,25 +33,28 @@ namespace Visualizer.Drawing
 	{
 		readonly Drawer drawer;
 		readonly IEnumerable<Graph> graphs;
-		readonly TimeManager timeManager;
-		readonly SegmentManager segmentManager;
-		readonly ValueManager valueManager;
 		readonly Layouter layouter;
+		readonly TimeManager timeManager;
+		readonly ValueManager valueManager;
+		readonly DataManager dataManager;
 		readonly int markersX;
 		readonly int markersY;
 		readonly Color color;
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
+		// TODO: Move those to a new GraphParameters class
+		public bool ExtendGraphs { get; set; }
+		public double LineWidth { get; set; }
 
-		public Diagram(Drawer drawer, IEnumerable<Graph> graphs, TimeManager timeManager, SegmentManager segmentManager, ValueManager valueManager, Layouter layouter, int markersX, int markersY, Color color)
+		public Diagram(Drawer drawer, IEnumerable<Graph> graphs, Layouter layouter, TimeManager timeManager, ValueManager valueManager, DataManager dataManager, int markersX, int markersY, Color color)
 		{
 			this.drawer = drawer;
 			this.graphs = graphs;
-			this.timeManager = timeManager;
-			this.segmentManager = segmentManager;
-			this.valueManager = valueManager;
 			this.layouter = layouter;
+			this.timeManager = timeManager;
+			this.valueManager = valueManager;
+			this.dataManager = dataManager;
 			this.markersX = markersX;
 			this.markersY = markersY;
 			this.color = color;
@@ -67,7 +70,7 @@ namespace Visualizer.Drawing
 				// TODO: This looks random
 				timeManager.Update();
 				foreach (Graph graph in graphs) graph.Update();
-				segmentManager.Update();
+				dataManager.Update();
 				valueManager.Update();
 
 				IEnumerable<Time> times = GetTimeMarkers(timeManager.Range, markersX);

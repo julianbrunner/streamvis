@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -32,14 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Data\CacheFragment.cs" />
-    <Compile Include="Data\DataManager.cs" />
+    <Compile Include="Data\StreamManager.cs" />
     <Compile Include="Data\DataSegment.cs" />
     <Compile Include="Data\EntryCache.cs" />
     <Compile Include="Data\EntryResampler.cs" />
     <Compile Include="Data\PerPixelDataManager.cs" />
     <Compile Include="Data\PerSecondDataManager.cs" />
-    <Compile Include="Data\SegmentManager.cs" />
-    <Compile Include="Data\SimpleSegmentManager.cs" />
+    <Compile Include="Data\DataManager.cs" />
     <Compile Include="Diagram.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="Layouter.cs" />

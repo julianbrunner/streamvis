@@ -1,3 +1,5 @@
+TODO: Search for inappropriate uses of streamManager/dataManager/segmentManager
+
 TODO: Better playback controls
 TODO: Vertical zoom
 TODO: Add ability to switch Value-/TimeManagers through GUI while drawing

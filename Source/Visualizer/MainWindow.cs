@@ -43,7 +43,7 @@ namespace Visualizer
 		readonly List<Graph> graphs;
 		readonly Layouter layouter;
 		readonly TimeManager timeManager;
-		readonly SegmentManager segmentManager;
+		readonly DataManager segmentManager;
 		readonly ValueManager valueManager;
 		readonly Diagram diagram;
 		readonly VisibleFrameCounter frameCounter;
@@ -80,9 +80,10 @@ namespace Visualizer
 				default: throw new InvalidOperationException();
 			}
 			this.timeManager.Width = parameters.DiagramWidth;
-			this.segmentManager = new SimpleSegmentManager(timeManager, graphs);
+			this.segmentManager = new SimpleDataManager(timeManager, graphs);
 			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(segmentManager, graphs);
 			else this.valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
+			// TODO: Set LineWidth and ExtendGraphs
 			this.diagram = new Diagram(drawer, graphs, timeManager, segmentManager, valueManager, layouter, parameters.MarkersX, parameters.MarkersY, parameters.DiagramColor);
 
 			Console.WriteLine("Initializing frame counter");
@@ -260,7 +261,7 @@ namespace Visualizer
 
 				foreach (Stream stream in port.Streams)
 				{
-					DataManager dataManager;
+					StreamManager dataManager;
 					switch (parameters.SamplerType)
 					{
 						case SamplerType.PerSecond: dataManager = new PerSecondDataManager(timeManager, stream.EntryData, parameters.DataLogging, parameters.SamplerFrequency); break;

@@ -27,53 +27,52 @@ namespace Visualizer.Drawing
 {
 	public class Graph
 	{
+		readonly Drawer drawer;
+		readonly Diagram diagram;
 		readonly Layouter layouter;
 		readonly ValueManager valueManager;
-		readonly SegmentManager segmentManager;
-		readonly Drawer drawer;
-		readonly DataManager dataManager;
-		readonly double lineWidth;
+		readonly StreamManager streamManager;
 
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
-		public DataManager DataManager { get { return dataManager; } }
+		public StreamManager StreamManager { get { return streamManager; } }
 
-		public Graph(Layouter layouter, ValueManager valueManager, SegmentManager segmentManager, Drawer drawer, DataManager dataManager, double lineWidth)
+		public Graph(Drawer drawer, Diagram diagram, Layouter layouter, ValueManager valueManager, StreamManager streamManager)
 		{
+			this.drawer = drawer;
+			this.diagram = diagram;
 			this.layouter = layouter;
 			this.valueManager = valueManager;
-			this.segmentManager = segmentManager;
-			this.drawer = drawer;
-			this.dataManager = dataManager;
-			this.lineWidth = lineWidth;
+			this.streamManager = streamManager;
 
 			IsDrawn = true;
 		}
 
 		public void Update()
 		{
-			dataManager.Update();
+			streamManager.Update();
 		}
 		public void Draw()
 		{
-			if (IsDrawn && !dataManager.IsEmpty)
+			if (IsDrawn && !streamManager.IsEmpty)
 			{
 				ValueRange valueRange = valueManager.Range;
 
-				Entry firstEntry = dataManager.FirstEntry;
-				Entry lastEntry = dataManager.LastEntry;
+				Entry firstEntry = streamManager.FirstEntry;
+				Entry lastEntry = streamManager.LastEntry;
 
-				foreach (DataSegment segment in segmentManager[this])
+				foreach (DataSegment segment in streamManager.Segments)
 				{
 					TimeRange timeRange = segment.TimeRange;
 
 					Entry? startEntry = null;
 					Entry? endEntry = null;
 
-					if (segmentManager.ExtendGraphs)
+					// TODO: Move the ExtendGraphs property so Graph doesn't need a DataManager
+					if (diagram.ExtendGraphs)
 					{
-						if (firstEntry.Time - timeRange.Range.Start > 1.5 * dataManager.SampleDistance) startEntry = new Entry(timeRange.Range.Start, firstEntry.Value);
-						if (timeRange.Range.End - lastEntry.Time > 1.5 * dataManager.SampleDistance) endEntry = new Entry(timeRange.Range.End, lastEntry.Value);
+						if (firstEntry.Time - timeRange.Range.Start > 1.5 * streamManager.SampleDistance) startEntry = new Entry(timeRange.Range.Start, firstEntry.Value);
+						if (timeRange.Range.End - lastEntry.Time > 1.5 * streamManager.SampleDistance) endEntry = new Entry(timeRange.Range.End, lastEntry.Value);
 						if (segment.Entries.Length == 0)
 						{
 							if (startEntry == null) startEntry = new Entry(timeRange.Range.Start, endEntry.Value.Value);
@@ -109,7 +108,7 @@ namespace Visualizer.Drawing
 
 					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * layouter.Transformation;
 
-					drawer.DrawLineStrip(vertices, transformation, Color, (float)lineWidth);
+					drawer.DrawLineStrip(vertices, transformation, Color, (float)diagram.LineWidth);
 				}
 			}
 		}
