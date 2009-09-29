@@ -23,23 +23,20 @@ namespace Visualizer.Drawing.Data
 	public abstract class DataManager
 	{
 		// TODO: Still needed?
-		readonly TimeManager timeManager;
 		readonly IEnumerable<Graph> graphs;
 		readonly bool dataLogging;
 
 		protected IEnumerable<Graph> Graphs { get { return graphs; } }
-		protected TimeManager TimeManager { get { return timeManager; } }
 
-		protected DataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging)
+		protected DataManager(IEnumerable<Graph> graphs, bool dataLogging)
 		{
 			this.graphs = graphs;
-			this.timeManager = timeManager;
 			this.dataLogging = dataLogging;
 		}
 
 		public virtual void Update()
 		{
-
+			// Implement DataLogging option
 		}
 	}
 }

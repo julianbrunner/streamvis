@@ -16,7 +16,6 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using Visualizer.Drawing.Timing;
 using Visualizer.Data;
 
 namespace Visualizer.Drawing.Data
@@ -25,8 +24,8 @@ namespace Visualizer.Drawing.Data
 	{
 		readonly double samplesPerSecond;
 
-		public PerSecondDataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging, double samplesPerSecond)
-			: base(graphs, timeManager, dataLogging)
+		public PerSecondDataManager(IEnumerable<Graph> graphs, bool dataLogging, double samplesPerSecond)
+			: base(graphs, dataLogging)
 		{
 			this.samplesPerSecond = samplesPerSecond;
 		}
@@ -36,7 +35,7 @@ namespace Visualizer.Drawing.Data
 			base.Update();
 
 			// TODO: Does it make sense to have to set the property with the same value over and over?
-			foreach (Graph graph in Graphs) graph.StreamManager.SampleDistance = new Time(1.0) / samplesPerSecond;
+			foreach (Graph graph in Graphs) graph.StreamManager.EntryResampler.SampleDistance = new Time(1.0) / samplesPerSecond;
 		}
 	}
 }

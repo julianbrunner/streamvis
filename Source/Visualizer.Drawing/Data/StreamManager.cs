@@ -31,14 +31,8 @@ namespace Visualizer.Drawing.Data
 
 		public IEnumerable<DataSegment> Segments { get; private set; }
 		// TODO: Create and document policy about when to do deep properties
-		public Time SampleDistance
-		{
-			get { return entryResampler.SampleDistance; }
-			set { entryResampler.SampleDistance = value; }
-		}
-		public bool IsEmpty { get { return entryCache.IsEmpty; } }
-		public Entry FirstEntry { get { return entryCache.FirstEntry; } }
-		public Entry LastEntry { get { return entryCache.LastEntry; } }
+		public EntryResampler EntryResampler { get { return entryResampler; } }
+		public EntryCache EntryCache { get { return entryCache; } }
 
 		public StreamManager(EntryData entryData, TimeManager timeManager)
 		{

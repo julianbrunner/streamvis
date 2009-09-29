@@ -23,30 +23,32 @@ namespace Visualizer.Drawing.Data
 {
 	public class PerPixelDataManager : DataManager
 	{
-		readonly double samplesPerPixel;
 		readonly Layouter layouter;
+		readonly TimeManager timeManager;
+		readonly double samplesPerPixel;
 
-		public PerPixelDataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging, double samplesPerPixel, Layouter layouter)
-			: base(graphs, timeManager, dataLogging)
+		public PerPixelDataManager(IEnumerable<Graph> graphs, bool dataLogging, Layouter layouter, TimeManager timeManager, double samplesPerPixel)
+			: base(graphs, dataLogging)
 		{
 			// TODO: Do error checking (samplesPerPixel could be negative, etc.)
 			// TODO: Create and document policy for error checking
 
-			this.samplesPerPixel = samplesPerPixel;
 			this.layouter = layouter;
+			this.timeManager = timeManager;
+			this.samplesPerPixel = samplesPerPixel;
 		}
 
 		public override void Update()
 		{
 			base.Update();
 
-			double pixelsPerSecond = layouter.Area.Width / TimeManager.Width.Seconds;
+			double pixelsPerSecond = layouter.Area.Width / timeManager.Width.Seconds;
 			double samplesPerSecond = samplesPerPixel * pixelsPerSecond;
 
 			// TODO: Remove silent failure
 			if (samplesPerSecond > 0)
 				foreach (Graph graph in Graphs)
-					graph.StreamManager.SampleDistance = new Time(1.0) / samplesPerSecond;
+					graph.StreamManager.EntryResampler.SampleDistance = new Time(1.0) / samplesPerSecond;
 		}
 	}
 }

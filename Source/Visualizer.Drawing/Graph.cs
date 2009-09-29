@@ -54,12 +54,12 @@ namespace Visualizer.Drawing
 		}
 		public void Draw()
 		{
-			if (IsDrawn && !streamManager.IsEmpty)
+			if (IsDrawn && !streamManager.EntryCache.IsEmpty)
 			{
 				ValueRange valueRange = valueManager.Range;
 
-				Entry firstEntry = streamManager.FirstEntry;
-				Entry lastEntry = streamManager.LastEntry;
+				Entry firstEntry = streamManager.EntryCache.FirstEntry;
+				Entry lastEntry = streamManager.EntryCache.LastEntry;
 
 				foreach (DataSegment segment in streamManager.Segments)
 				{
@@ -68,11 +68,10 @@ namespace Visualizer.Drawing
 					Entry? startEntry = null;
 					Entry? endEntry = null;
 
-					// TODO: Move the ExtendGraphs property so Graph doesn't need a DataManager
 					if (diagram.ExtendGraphs)
 					{
-						if (firstEntry.Time - timeRange.Range.Start > 1.5 * streamManager.SampleDistance) startEntry = new Entry(timeRange.Range.Start, firstEntry.Value);
-						if (timeRange.Range.End - lastEntry.Time > 1.5 * streamManager.SampleDistance) endEntry = new Entry(timeRange.Range.End, lastEntry.Value);
+						if (firstEntry.Time - timeRange.Range.Start > 1.5 * streamManager.EntryResampler.SampleDistance) startEntry = new Entry(timeRange.Range.Start, firstEntry.Value);
+						if (timeRange.Range.End - lastEntry.Time > 1.5 * streamManager.EntryResampler.SampleDistance) endEntry = new Entry(timeRange.Range.End, lastEntry.Value);
 						if (segment.Entries.Length == 0)
 						{
 							if (startEntry == null) startEntry = new Entry(timeRange.Range.Start, endEntry.Value.Value);
