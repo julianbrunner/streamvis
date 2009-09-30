@@ -29,11 +29,10 @@ namespace Visualizer.Drawing.Data
 		readonly EntryResampler entryResampler;
 		readonly EntryCache entryCache;
 
-		public IEnumerable<DataSegment> Segments { get; private set; }
 		// TODO: Create and document policy about when to do deep properties
-		public EntryData EntryData { get { return entryData; } }
 		public EntryResampler EntryResampler { get { return entryResampler; } }
 		public EntryCache EntryCache { get { return entryCache; } }
+		public IEnumerable<DataSegment> Segments { get; private set; }
 
 		public StreamManager(EntryData entryData, TimeManager timeManager)
 		{

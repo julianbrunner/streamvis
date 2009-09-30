@@ -11,6 +11,7 @@ TODO: Check for every command-line parameter if it would make sense to add a way
 
 TODO: Look through comment TODOs
 
+TODO: TimeManager.Range is not always the range from TimeManager.Time - Width to TimeManager.Time, look for places where this is assumed
 TODO: Hide OpenTK members sufficiently so that a reference to Graphics doesn't result in a dependency reference to OpenTK
 TODO: Transform static creators into constructor calls in Visualizer.Capturing
 TODO: Review if design and relationship of Visualizer.Data and Visualizer.Capturing is still good
@@ -28,4 +29,4 @@ TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does prop
 TODO: Extension methods don't work without reference to System.Core?!
 TODO: Move Yarp.Wrapper to Libraries solution folder once either Visual Studio supports it or isn't used anymore
 TODO: Check when mono will support thread priorities
-TODO: Reintegrate ColorGenerator.GetMinimumDistance into query once the mono compiler carsh because of it anymore
+TODO: Reintegrate ColorGenerator.GetMinimumDistance into query once the mono compiler doesn't crash because of it anymore

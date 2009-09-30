@@ -17,6 +17,8 @@
 
 using System.Collections.Generic;
 using Visualizer.Drawing.Timing;
+using Visualizer.Data;
+using Utility;
 
 namespace Visualizer.Drawing.Data
 {
@@ -39,10 +41,12 @@ namespace Visualizer.Drawing.Data
 		{
 			if (!dataLogging)
 				foreach (Graph graph in graphs)
-					// TODO: Refactor this
-					if (graph.StreamManager.EntryData.Entries.Count > 0 && timeManager.Time - graph.StreamManager.EntryData.Entries[0].Time > 2 * timeManager.Width)
-						graph.StreamManager.EntryData.Entries.Remove(0, graph.StreamManager.EntryData.Entries.FindIndex(timeManager.Time - timeManager.Width));
+				{
+					SearchList<Entry, Time> entries = graph.EntryData.Entries;
 
+					if (entries.Count > 0 && timeManager.Time - entries[0].Time > 2 * timeManager.Width)
+						entries.Remove(0, entries.FindIndex(timeManager.Time - timeManager.Width));
+				}
 		}
 	}
 }

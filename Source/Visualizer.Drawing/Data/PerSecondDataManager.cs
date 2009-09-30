@@ -35,8 +35,8 @@ namespace Visualizer.Drawing.Data
 		{
 			base.Update();
 
-			// TODO: Does it make sense to have to set the property with the same value over and over?
-			foreach (Graph graph in Graphs) graph.StreamManager.EntryResampler.SampleDistance = new Time(1.0) / samplesPerSecond;
+			foreach (Graph graph in Graphs)
+				graph.StreamManager.EntryResampler.SampleDistance = new Time(1.0) / samplesPerSecond;
 		}
 	}
 }

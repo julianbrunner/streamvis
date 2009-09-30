@@ -31,19 +31,23 @@ namespace Visualizer.Drawing
 		readonly Diagram diagram;
 		readonly Layouter layouter;
 		readonly ValueManager valueManager;
+		readonly EntryData entryData;
 		readonly StreamManager streamManager;
 
+		public EntryData EntryData { get { return entryData; } }
+		public StreamManager StreamManager { get { return streamManager; } }
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
-		public StreamManager StreamManager { get { return streamManager; } }
 
-		public Graph(Drawer drawer, Diagram diagram, Layouter layouter, ValueManager valueManager, StreamManager streamManager)
+		public Graph(Drawer drawer, Diagram diagram, Layouter layouter, TimeManager timeManager, ValueManager valueManager, EntryData entryData)
 		{
 			this.drawer = drawer;
 			this.diagram = diagram;
 			this.layouter = layouter;
 			this.valueManager = valueManager;
-			this.streamManager = streamManager;
+			this.entryData = entryData;
+			
+			streamManager = new StreamManager(entryData, timeManager);
 
 			IsDrawn = true;
 		}
@@ -61,6 +65,7 @@ namespace Visualizer.Drawing
 				Entry firstEntry = streamManager.EntryCache.FirstEntry;
 				Entry lastEntry = streamManager.EntryCache.LastEntry;
 
+				// TODO: Maybe screw the segment manager and do it the old way, would also be more symmetric with the timeManager
 				foreach (DataSegment segment in streamManager.Segments)
 				{
 					TimeRange timeRange = segment.TimeRange;
