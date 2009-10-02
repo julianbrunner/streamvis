@@ -200,7 +200,8 @@ namespace Visualizer
 		}
 		private void viewport_Layout(object sender, LayoutEventArgs e)
 		{
-			frameCounter.Position = new Vector2(viewport.Right, viewport.Top);
+			// TODO: Find a cleaner way to avoid a crash if layout is called before frameCounter is initialized
+			if (frameCounter != null) frameCounter.Position = new Vector2(viewport.Right, viewport.Top);
 		}
 		private void viewport_DoubleClick(object sender, EventArgs e)
 		{
