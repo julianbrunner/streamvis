@@ -128,10 +128,26 @@ namespace Visualizer
 			viewport.AddComponent(coordinateLabel);
 		}
 
-		private void streamsListView_ItemChecked(object sender, ItemCheckedEventArgs e)
+		private void streamsList_ItemChecked(object sender, ItemCheckedEventArgs e)
 		{
 			Graph graph = (Graph)e.Item.Tag;
 			graph.IsDrawn = e.Item.Checked;
+		}
+		private void viewport_Layout(object sender, LayoutEventArgs e)
+		{
+			// TODO: Find a cleaner way to avoid a crash if layout is called before frameCounter is initialized
+			if (frameCounter != null) frameCounter.Position = new Vector2(viewport.Right, viewport.Top);
+		}
+		private void viewport_DoubleClick(object sender, EventArgs e)
+		{
+			minimalModeToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
+			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
+		}
+		private void viewport_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (e.Button == MouseButtons.Right) timeManager.Width *= Math.Pow(1.1, e.Location.X - oldMousePosition.X);
+
+			oldMousePosition = e.Location;
 		}
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -172,19 +188,19 @@ namespace Visualizer
 		}
 		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (streamsListView.SelectedItems.Count > 0 && colorDialog.ShowDialog() == DialogResult.OK)
-				SetColor(streamsListView.SelectedItems[0], colorDialog.Color);
+			if (streamsList.SelectedItems.Count > 0 && colorDialog.ShowDialog() == DialogResult.OK)
+				SetColor(streamsList.SelectedItems[0], colorDialog.Color);
 		}
 		private void showStreamListToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			splitContainer1.Panel1Collapsed = !showStreamListToolStripMenuItem.Checked;
+			streamsListContainer.Panel1Collapsed = !showStreamListToolStripMenuItem.Checked;
 		}
 		private void minimalModeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			showStreamListToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
 			showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
-			toolStripContainer1.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
-			toolStripContainer1.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
+			mainContainer.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
+			mainContainer.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 		}
 		private void showDiagramToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -197,22 +213,6 @@ namespace Visualizer
 		private void verticalSynchronizationToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			viewport.VSync = verticalSynchronizationToolStripMenuItem.Checked;
-		}
-		private void viewport_Layout(object sender, LayoutEventArgs e)
-		{
-			// TODO: Find a cleaner way to avoid a crash if layout is called before frameCounter is initialized
-			if (frameCounter != null) frameCounter.Position = new Vector2(viewport.Right, viewport.Top);
-		}
-		private void viewport_DoubleClick(object sender, EventArgs e)
-		{
-			minimalModeToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
-			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
-		}
-		private void viewport_MouseMove(object sender, MouseEventArgs e)
-		{
-			if (e.Button == MouseButtons.Right) timeManager.Width *= Math.Pow(1.1, e.Location.X - oldMousePosition.X);
-
-			oldMousePosition = e.Location;
 		}
 
 		void NewSource(IEnumerable<string> ports)
@@ -264,13 +264,13 @@ namespace Visualizer
 			ColorGenerator colorGenerator = new ColorGenerator();
 
 			graphs.Clear();
-			streamsListView.Groups.Clear();
-			streamsListView.Items.Clear();
+			streamsList.Groups.Clear();
+			streamsList.Items.Clear();
 
 			foreach (Port port in source.Ports)
 			{
 				ListViewGroup group = new ListViewGroup(port.Name);
-				streamsListView.Groups.Add(group);
+				streamsList.Groups.Add(group);
 
 				foreach (Stream stream in port.Streams)
 				{
@@ -287,7 +287,7 @@ namespace Visualizer
 
 					SetColor(item, graph.Color);
 
-					streamsListView.Items.Add(item);
+					streamsList.Items.Add(item);
 				}
 			}
 		}
@@ -298,12 +298,6 @@ namespace Visualizer
 			graph.Color = color;
 			item.BackColor = color;
 			item.ForeColor = item.BackColor.R * 0.299 + item.BackColor.G * 0.587 + item.BackColor.B * 0.114 >= 0x80 ? Color.Black : Color.White;
-		}
-
-		// TODO: Remove on release
-		private void gCCollectToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			GC.Collect();
 		}
 	}
 }

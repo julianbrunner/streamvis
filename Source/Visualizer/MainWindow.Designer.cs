@@ -50,19 +50,20 @@ namespace Visualizer
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-			this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.mainContainer = new System.Windows.Forms.ToolStripContainer();
+			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.coordinateStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.streamsListView = new System.Windows.Forms.ListView();
+			this.streamsListContainer = new System.Windows.Forms.SplitContainer();
+			this.streamsList = new System.Windows.Forms.ListView();
 			this.nameColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.streamsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.changeColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+			this.propertiesContainer = new System.Windows.Forms.SplitContainer();
 			this.viewport = new Graphics.Viewport();
-			this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+			this.properties = new System.Windows.Forms.PropertyGrid();
+			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.mainMenu = new System.Windows.Forms.MenuStrip();
 			this.captureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,60 +83,58 @@ namespace Visualizer
 			this.showFrameCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.verticalSynchronizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.gCCollectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
-			this.toolStripContainer1.ContentPanel.SuspendLayout();
-			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
-			this.toolStripContainer1.SuspendLayout();
-			this.statusStrip1.SuspendLayout();
-			this.splitContainer1.Panel1.SuspendLayout();
-			this.splitContainer1.Panel2.SuspendLayout();
-			this.splitContainer1.SuspendLayout();
+			this.mainContainer.BottomToolStripPanel.SuspendLayout();
+			this.mainContainer.ContentPanel.SuspendLayout();
+			this.mainContainer.TopToolStripPanel.SuspendLayout();
+			this.mainContainer.SuspendLayout();
+			this.statusStrip.SuspendLayout();
+			this.streamsListContainer.Panel1.SuspendLayout();
+			this.streamsListContainer.Panel2.SuspendLayout();
+			this.streamsListContainer.SuspendLayout();
 			this.streamsContextMenuStrip.SuspendLayout();
-			this.splitContainer2.Panel1.SuspendLayout();
-			this.splitContainer2.Panel2.SuspendLayout();
-			this.splitContainer2.SuspendLayout();
-			this.menuStrip1.SuspendLayout();
+			this.propertiesContainer.Panel1.SuspendLayout();
+			this.propertiesContainer.Panel2.SuspendLayout();
+			this.propertiesContainer.SuspendLayout();
+			this.mainMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
-			// toolStripContainer1
+			// mainContainer
 			// 
 			// 
-			// toolStripContainer1.BottomToolStripPanel
+			// mainContainer.BottomToolStripPanel
 			// 
-			this.toolStripContainer1.BottomToolStripPanel.Controls.Add(this.statusStrip1);
+			this.mainContainer.BottomToolStripPanel.Controls.Add(this.statusStrip);
 			// 
-			// toolStripContainer1.ContentPanel
+			// mainContainer.ContentPanel
 			// 
-			this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
-			this.toolStripContainer1.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-			this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1073, 608);
-			this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
-			this.toolStripContainer1.Name = "toolStripContainer1";
-			this.toolStripContainer1.Size = new System.Drawing.Size(1073, 654);
-			this.toolStripContainer1.TabIndex = 0;
-			this.toolStripContainer1.Text = "toolStripContainer1";
+			this.mainContainer.ContentPanel.Controls.Add(this.streamsListContainer);
+			this.mainContainer.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
+			this.mainContainer.ContentPanel.Size = new System.Drawing.Size(1073, 608);
+			this.mainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.mainContainer.Location = new System.Drawing.Point(0, 0);
+			this.mainContainer.Name = "mainContainer";
+			this.mainContainer.Size = new System.Drawing.Size(1073, 654);
+			this.mainContainer.TabIndex = 0;
+			this.mainContainer.Text = "toolStripContainer1";
 			// 
-			// toolStripContainer1.TopToolStripPanel
+			// mainContainer.TopToolStripPanel
 			// 
-			this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
+			this.mainContainer.TopToolStripPanel.Controls.Add(this.mainMenu);
 			// 
-			// statusStrip1
+			// statusStrip
 			// 
-			this.statusStrip1.Dock = System.Windows.Forms.DockStyle.None;
-			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.statusStrip.Dock = System.Windows.Forms.DockStyle.None;
+			this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusLabel,
             this.coordinateStatusLabel});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 0);
-			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-			this.statusStrip1.Size = new System.Drawing.Size(1073, 22);
-			this.statusStrip1.TabIndex = 0;
+			this.statusStrip.Location = new System.Drawing.Point(0, 0);
+			this.statusStrip.Name = "statusStrip";
+			this.statusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
+			this.statusStrip.Size = new System.Drawing.Size(1073, 22);
+			this.statusStrip.TabIndex = 0;
 			// 
 			// statusLabel
 			// 
@@ -152,40 +151,40 @@ namespace Visualizer
 			this.coordinateStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.coordinateStatusLabel.Visible = false;
 			// 
-			// splitContainer1
+			// streamsListContainer
 			// 
-			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-			this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer1.Name = "splitContainer1";
+			this.streamsListContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.streamsListContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+			this.streamsListContainer.Location = new System.Drawing.Point(0, 0);
+			this.streamsListContainer.Name = "streamsListContainer";
 			// 
-			// splitContainer1.Panel1
+			// streamsListContainer.Panel1
 			// 
-			this.splitContainer1.Panel1.Controls.Add(this.streamsListView);
+			this.streamsListContainer.Panel1.Controls.Add(this.streamsList);
 			// 
-			// splitContainer1.Panel2
+			// streamsListContainer.Panel2
 			// 
-			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-			this.splitContainer1.Size = new System.Drawing.Size(1073, 608);
-			this.splitContainer1.SplitterDistance = 245;
-			this.splitContainer1.TabIndex = 0;
+			this.streamsListContainer.Panel2.Controls.Add(this.propertiesContainer);
+			this.streamsListContainer.Size = new System.Drawing.Size(1073, 608);
+			this.streamsListContainer.SplitterDistance = 245;
+			this.streamsListContainer.TabIndex = 0;
 			// 
-			// streamsListView
+			// streamsList
 			// 
-			this.streamsListView.CheckBoxes = true;
-			this.streamsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+			this.streamsList.CheckBoxes = true;
+			this.streamsList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.nameColumnHeader});
-			this.streamsListView.ContextMenuStrip = this.streamsContextMenuStrip;
-			this.streamsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.streamsListView.FullRowSelect = true;
-			this.streamsListView.Location = new System.Drawing.Point(0, 0);
-			this.streamsListView.Name = "streamsListView";
-			this.streamsListView.Size = new System.Drawing.Size(245, 608);
-			this.streamsListView.TabIndex = 1;
-			this.streamsListView.UseCompatibleStateImageBehavior = false;
-			this.streamsListView.View = System.Windows.Forms.View.Details;
-			this.streamsListView.ItemActivate += new System.EventHandler(this.changeColorToolStripMenuItem_Click);
-			this.streamsListView.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.streamsListView_ItemChecked);
+			this.streamsList.ContextMenuStrip = this.streamsContextMenuStrip;
+			this.streamsList.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.streamsList.FullRowSelect = true;
+			this.streamsList.Location = new System.Drawing.Point(0, 0);
+			this.streamsList.Name = "streamsList";
+			this.streamsList.Size = new System.Drawing.Size(245, 608);
+			this.streamsList.TabIndex = 1;
+			this.streamsList.UseCompatibleStateImageBehavior = false;
+			this.streamsList.View = System.Windows.Forms.View.Details;
+			this.streamsList.ItemActivate += new System.EventHandler(this.changeColorToolStripMenuItem_Click);
+			this.streamsList.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.streamsList_ItemChecked);
 			// 
 			// nameColumnHeader
 			// 
@@ -206,23 +205,23 @@ namespace Visualizer
 			this.changeColorToolStripMenuItem.Text = "&Change Color";
 			this.changeColorToolStripMenuItem.Click += new System.EventHandler(this.changeColorToolStripMenuItem_Click);
 			// 
-			// splitContainer2
+			// propertiesContainer
 			// 
-			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-			this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer2.Name = "splitContainer2";
+			this.propertiesContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.propertiesContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+			this.propertiesContainer.Location = new System.Drawing.Point(0, 0);
+			this.propertiesContainer.Name = "propertiesContainer";
 			// 
-			// splitContainer2.Panel1
+			// propertiesContainer.Panel1
 			// 
-			this.splitContainer2.Panel1.Controls.Add(this.viewport);
+			this.propertiesContainer.Panel1.Controls.Add(this.viewport);
 			// 
-			// splitContainer2.Panel2
+			// propertiesContainer.Panel2
 			// 
-			this.splitContainer2.Panel2.Controls.Add(this.propertyGrid1);
-			this.splitContainer2.Size = new System.Drawing.Size(824, 608);
-			this.splitContainer2.SplitterDistance = 567;
-			this.splitContainer2.TabIndex = 1;
+			this.propertiesContainer.Panel2.Controls.Add(this.properties);
+			this.propertiesContainer.Size = new System.Drawing.Size(824, 608);
+			this.propertiesContainer.SplitterDistance = 567;
+			this.propertiesContainer.TabIndex = 1;
 			// 
 			// viewport
 			// 
@@ -238,29 +237,33 @@ namespace Visualizer
 			this.viewport.Layout += new System.Windows.Forms.LayoutEventHandler(this.viewport_Layout);
 			this.viewport.MouseMove += new System.Windows.Forms.MouseEventHandler(this.viewport_MouseMove);
 			// 
-			// propertyGrid1
+			// properties
 			// 
-			this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-			this.propertyGrid1.Name = "propertyGrid1";
-			this.propertyGrid1.SelectedObject = this.exportCaptureFileDialog;
-			this.propertyGrid1.Size = new System.Drawing.Size(253, 608);
-			this.propertyGrid1.TabIndex = 0;
-			this.propertyGrid1.ToolbarVisible = false;
+			this.properties.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.properties.Location = new System.Drawing.Point(0, 0);
+			this.properties.Name = "properties";
+			this.properties.SelectedObject = this.exportCaptureFileDialog;
+			this.properties.Size = new System.Drawing.Size(253, 608);
+			this.properties.TabIndex = 0;
+			this.properties.ToolbarVisible = false;
 			// 
-			// menuStrip1
+			// exportCaptureFileDialog
 			// 
-			this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.exportCaptureFileDialog.DefaultExt = "stream";
+			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
+			// 
+			// mainMenu
+			// 
+			this.mainMenu.Dock = System.Windows.Forms.DockStyle.None;
+			this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.captureToolStripMenuItem,
             this.diagramToolStripMenuItem,
-            this.viewToolStripMenuItem,
-            this.gCCollectToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(1073, 24);
-			this.menuStrip1.TabIndex = 0;
-			this.menuStrip1.Text = "menuStrip1";
+            this.viewToolStripMenuItem});
+			this.mainMenu.Location = new System.Drawing.Point(0, 0);
+			this.mainMenu.Name = "mainMenu";
+			this.mainMenu.Size = new System.Drawing.Size(1073, 24);
+			this.mainMenu.TabIndex = 0;
+			this.mainMenu.Text = "menuStrip1";
 			// 
 			// captureToolStripMenuItem
 			// 
@@ -420,13 +423,6 @@ namespace Visualizer
 			this.verticalSynchronizationToolStripMenuItem.Text = "&Vertical Synchronization";
 			this.verticalSynchronizationToolStripMenuItem.Click += new System.EventHandler(this.verticalSynchronizationToolStripMenuItem_Click);
 			// 
-			// gCCollectToolStripMenuItem
-			// 
-			this.gCCollectToolStripMenuItem.Name = "gCCollectToolStripMenuItem";
-			this.gCCollectToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
-			this.gCCollectToolStripMenuItem.Text = "GC.Collect";
-			this.gCCollectToolStripMenuItem.Click += new System.EventHandler(this.gCCollectToolStripMenuItem_Click);
-			// 
 			// colorDialog
 			// 
 			this.colorDialog.AnyColor = true;
@@ -443,50 +439,45 @@ namespace Visualizer
 			this.saveCaptureFileDialog.DefaultExt = "capture";
 			this.saveCaptureFileDialog.Filter = "Capture Files|*.capture|All Files|*.*";
 			// 
-			// exportCaptureFileDialog
-			// 
-			this.exportCaptureFileDialog.DefaultExt = "stream";
-			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
-			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1073, 654);
-			this.Controls.Add(this.toolStripContainer1);
-			this.MainMenuStrip = this.menuStrip1;
+			this.Controls.Add(this.mainContainer);
+			this.MainMenuStrip = this.mainMenu;
 			this.Name = "MainWindow";
 			this.Text = "<Title>";
-			this.toolStripContainer1.BottomToolStripPanel.ResumeLayout(false);
-			this.toolStripContainer1.BottomToolStripPanel.PerformLayout();
-			this.toolStripContainer1.ContentPanel.ResumeLayout(false);
-			this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
-			this.toolStripContainer1.TopToolStripPanel.PerformLayout();
-			this.toolStripContainer1.ResumeLayout(false);
-			this.toolStripContainer1.PerformLayout();
-			this.statusStrip1.ResumeLayout(false);
-			this.statusStrip1.PerformLayout();
-			this.splitContainer1.Panel1.ResumeLayout(false);
-			this.splitContainer1.Panel2.ResumeLayout(false);
-			this.splitContainer1.ResumeLayout(false);
+			this.mainContainer.BottomToolStripPanel.ResumeLayout(false);
+			this.mainContainer.BottomToolStripPanel.PerformLayout();
+			this.mainContainer.ContentPanel.ResumeLayout(false);
+			this.mainContainer.TopToolStripPanel.ResumeLayout(false);
+			this.mainContainer.TopToolStripPanel.PerformLayout();
+			this.mainContainer.ResumeLayout(false);
+			this.mainContainer.PerformLayout();
+			this.statusStrip.ResumeLayout(false);
+			this.statusStrip.PerformLayout();
+			this.streamsListContainer.Panel1.ResumeLayout(false);
+			this.streamsListContainer.Panel2.ResumeLayout(false);
+			this.streamsListContainer.ResumeLayout(false);
 			this.streamsContextMenuStrip.ResumeLayout(false);
-			this.splitContainer2.Panel1.ResumeLayout(false);
-			this.splitContainer2.Panel2.ResumeLayout(false);
-			this.splitContainer2.ResumeLayout(false);
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
+			this.propertiesContainer.Panel1.ResumeLayout(false);
+			this.propertiesContainer.Panel2.ResumeLayout(false);
+			this.propertiesContainer.ResumeLayout(false);
+			this.mainMenu.ResumeLayout(false);
+			this.mainMenu.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.ToolStripContainer toolStripContainer1;
-		private System.Windows.Forms.StatusStrip statusStrip1;
+		private System.Windows.Forms.ToolStripContainer mainContainer;
+		private System.Windows.Forms.StatusStrip statusStrip;
 		private System.Windows.Forms.ToolStripStatusLabel statusLabel;
-		private System.Windows.Forms.MenuStrip menuStrip1;
-		private System.Windows.Forms.SplitContainer splitContainer1;
-		private System.Windows.Forms.ListView streamsListView;
+		private System.Windows.Forms.MenuStrip mainMenu;
+		private System.Windows.Forms.SplitContainer streamsListContainer;
+		private System.Windows.Forms.ListView streamsList;
 		private System.Windows.Forms.ColumnHeader nameColumnHeader;
 		private Graphics.Viewport viewport;
 		private System.Windows.Forms.ContextMenuStrip streamsContextMenuStrip;
@@ -509,15 +500,14 @@ namespace Visualizer
 		private System.Windows.Forms.ToolStripMenuItem diagramToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem freezeToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem graphExtensionToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem gCCollectToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem showFrameCounterToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem showDiagramToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem verticalSynchronizationToolStripMenuItem;
 		private System.Windows.Forms.ToolStripStatusLabel coordinateStatusLabel;
-		private System.Windows.Forms.SplitContainer splitContainer2;
-		private System.Windows.Forms.PropertyGrid propertyGrid1;
+		private System.Windows.Forms.SplitContainer propertiesContainer;
+		private System.Windows.Forms.PropertyGrid properties;
 		
 	}
 }
