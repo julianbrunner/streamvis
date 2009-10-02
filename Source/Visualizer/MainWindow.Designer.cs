@@ -110,7 +110,7 @@ namespace Visualizer
 			// 
 			// mainContainer.ContentPanel
 			// 
-			this.mainContainer.ContentPanel.Controls.Add(this.streamsListContainer);
+			this.mainContainer.ContentPanel.Controls.Add(this.propertiesContainer);
 			this.mainContainer.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
 			this.mainContainer.ContentPanel.Size = new System.Drawing.Size(1073, 608);
 			this.mainContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -164,8 +164,8 @@ namespace Visualizer
 			// 
 			// streamsListContainer.Panel2
 			// 
-			this.streamsListContainer.Panel2.Controls.Add(this.propertiesContainer);
-			this.streamsListContainer.Size = new System.Drawing.Size(1073, 608);
+			this.streamsListContainer.Panel2.Controls.Add(this.viewport);
+			this.streamsListContainer.Size = new System.Drawing.Size(816, 608);
 			this.streamsListContainer.SplitterDistance = 245;
 			this.streamsListContainer.TabIndex = 0;
 			// 
@@ -214,13 +214,13 @@ namespace Visualizer
 			// 
 			// propertiesContainer.Panel1
 			// 
-			this.propertiesContainer.Panel1.Controls.Add(this.viewport);
+			this.propertiesContainer.Panel1.Controls.Add(this.streamsListContainer);
 			// 
 			// propertiesContainer.Panel2
 			// 
 			this.propertiesContainer.Panel2.Controls.Add(this.properties);
-			this.propertiesContainer.Size = new System.Drawing.Size(824, 608);
-			this.propertiesContainer.SplitterDistance = 567;
+			this.propertiesContainer.Size = new System.Drawing.Size(1073, 608);
+			this.propertiesContainer.SplitterDistance = 816;
 			this.propertiesContainer.TabIndex = 1;
 			// 
 			// viewport
