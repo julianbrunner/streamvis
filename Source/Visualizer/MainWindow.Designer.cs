@@ -85,6 +85,8 @@ namespace Visualizer
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+			this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
 			this.toolStripContainer1.ContentPanel.SuspendLayout();
 			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -95,6 +97,9 @@ namespace Visualizer
 			this.splitContainer1.SuspendLayout();
 			this.streamsContextMenuStrip.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
+			this.splitContainer2.Panel1.SuspendLayout();
+			this.splitContainer2.Panel2.SuspendLayout();
+			this.splitContainer2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStripContainer1
@@ -108,11 +113,11 @@ namespace Visualizer
 			// 
 			this.toolStripContainer1.ContentPanel.Controls.Add(this.splitContainer1);
 			this.toolStripContainer1.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-			this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(737, 512);
+			this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1073, 608);
 			this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
 			this.toolStripContainer1.Name = "toolStripContainer1";
-			this.toolStripContainer1.Size = new System.Drawing.Size(737, 558);
+			this.toolStripContainer1.Size = new System.Drawing.Size(1073, 654);
 			this.toolStripContainer1.TabIndex = 0;
 			this.toolStripContainer1.Text = "toolStripContainer1";
 			// 
@@ -129,7 +134,7 @@ namespace Visualizer
 			this.statusStrip1.Location = new System.Drawing.Point(0, 0);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-			this.statusStrip1.Size = new System.Drawing.Size(737, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(1073, 22);
 			this.statusStrip1.TabIndex = 0;
 			// 
 			// statusLabel
@@ -160,8 +165,8 @@ namespace Visualizer
 			// 
 			// splitContainer1.Panel2
 			// 
-			this.splitContainer1.Panel2.Controls.Add(this.viewport);
-			this.splitContainer1.Size = new System.Drawing.Size(737, 512);
+			this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+			this.splitContainer1.Size = new System.Drawing.Size(1073, 608);
 			this.splitContainer1.SplitterDistance = 245;
 			this.splitContainer1.TabIndex = 0;
 			// 
@@ -175,7 +180,7 @@ namespace Visualizer
 			this.streamsListView.FullRowSelect = true;
 			this.streamsListView.Location = new System.Drawing.Point(0, 0);
 			this.streamsListView.Name = "streamsListView";
-			this.streamsListView.Size = new System.Drawing.Size(245, 512);
+			this.streamsListView.Size = new System.Drawing.Size(245, 608);
 			this.streamsListView.TabIndex = 1;
 			this.streamsListView.UseCompatibleStateImageBehavior = false;
 			this.streamsListView.View = System.Windows.Forms.View.Details;
@@ -208,7 +213,7 @@ namespace Visualizer
 			this.viewport.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.viewport.Location = new System.Drawing.Point(0, 0);
 			this.viewport.Name = "viewport";
-			this.viewport.Size = new System.Drawing.Size(488, 512);
+			this.viewport.Size = new System.Drawing.Size(567, 608);
 			this.viewport.TabIndex = 0;
 			this.viewport.VSync = true;
 			this.viewport.DoubleClick += new System.EventHandler(this.viewport_DoubleClick);
@@ -225,7 +230,7 @@ namespace Visualizer
             this.gCCollectToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(737, 24);
+			this.menuStrip1.Size = new System.Drawing.Size(1073, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -415,11 +420,38 @@ namespace Visualizer
 			this.exportCaptureFileDialog.DefaultExt = "stream";
 			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
 			// 
+			// splitContainer2
+			// 
+			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+			this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+			this.splitContainer2.Name = "splitContainer2";
+			// 
+			// splitContainer2.Panel1
+			// 
+			this.splitContainer2.Panel1.Controls.Add(this.viewport);
+			// 
+			// splitContainer2.Panel2
+			// 
+			this.splitContainer2.Panel2.Controls.Add(this.propertyGrid1);
+			this.splitContainer2.Size = new System.Drawing.Size(824, 608);
+			this.splitContainer2.SplitterDistance = 567;
+			this.splitContainer2.TabIndex = 1;
+			// 
+			// propertyGrid1
+			// 
+			this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
+			this.propertyGrid1.Name = "propertyGrid1";
+			this.propertyGrid1.Size = new System.Drawing.Size(253, 608);
+			this.propertyGrid1.TabIndex = 0;
+			this.propertyGrid1.ToolbarVisible = false;
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(737, 558);
+			this.ClientSize = new System.Drawing.Size(1073, 654);
 			this.Controls.Add(this.toolStripContainer1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "MainWindow";
@@ -439,6 +471,9 @@ namespace Visualizer
 			this.streamsContextMenuStrip.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
+			this.splitContainer2.Panel1.ResumeLayout(false);
+			this.splitContainer2.Panel2.ResumeLayout(false);
+			this.splitContainer2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -480,6 +515,8 @@ namespace Visualizer
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 		private System.Windows.Forms.ToolStripMenuItem verticalSynchronizationToolStripMenuItem;
 		private System.Windows.Forms.ToolStripStatusLabel coordinateStatusLabel;
+		private System.Windows.Forms.SplitContainer splitContainer2;
+		private System.Windows.Forms.PropertyGrid propertyGrid1;
 		
 	}
 }
