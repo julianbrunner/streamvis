@@ -15,10 +15,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using Visualizer.Drawing;
+
 namespace Visualizer
 {
 	class Settings
 	{
+		readonly Diagram diagram;
 
+
+		public Diagram Diagram { get { return diagram; } }
+
+		public Settings(Diagram diagram)
+		{
+			this.diagram = diagram;
+		}
 	}
 }

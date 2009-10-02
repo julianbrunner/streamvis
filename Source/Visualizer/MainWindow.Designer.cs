@@ -62,7 +62,6 @@ namespace Visualizer
 			this.propertiesContainer = new System.Windows.Forms.SplitContainer();
 			this.viewport = new Graphics.Viewport();
 			this.properties = new System.Windows.Forms.PropertyGrid();
-			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.mainMenu = new System.Windows.Forms.MenuStrip();
 			this.captureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,6 +82,7 @@ namespace Visualizer
 			this.showFrameCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.verticalSynchronizationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -242,15 +242,10 @@ namespace Visualizer
 			this.properties.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.properties.Location = new System.Drawing.Point(0, 0);
 			this.properties.Name = "properties";
-			this.properties.SelectedObject = this.exportCaptureFileDialog;
 			this.properties.Size = new System.Drawing.Size(253, 608);
 			this.properties.TabIndex = 0;
 			this.properties.ToolbarVisible = false;
-			// 
-			// exportCaptureFileDialog
-			// 
-			this.exportCaptureFileDialog.DefaultExt = "stream";
-			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
+			this.properties.Click += new System.EventHandler(this.properties_Click);
 			// 
 			// mainMenu
 			// 
@@ -422,6 +417,11 @@ namespace Visualizer
 			this.verticalSynchronizationToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
 			this.verticalSynchronizationToolStripMenuItem.Text = "&Vertical Synchronization";
 			this.verticalSynchronizationToolStripMenuItem.Click += new System.EventHandler(this.verticalSynchronizationToolStripMenuItem_Click);
+			// 
+			// exportCaptureFileDialog
+			// 
+			this.exportCaptureFileDialog.DefaultExt = "stream";
+			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
 			// 
 			// colorDialog
 			// 

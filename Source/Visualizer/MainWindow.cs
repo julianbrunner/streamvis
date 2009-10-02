@@ -98,6 +98,9 @@ namespace Visualizer
 			this.diagram.ExtendGraphs = parameters.ExtendGraphs;
 			this.diagram.LineWidth = parameters.LineWidth;
 
+			settings = new Settings(diagram);
+			properties.SelectedObject = settings;
+
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
 
@@ -298,6 +301,11 @@ namespace Visualizer
 			graph.Color = color;
 			item.BackColor = color;
 			item.ForeColor = item.BackColor.R * 0.299 + item.BackColor.G * 0.587 + item.BackColor.B * 0.114 >= 0x80 ? Color.Black : Color.White;
+		}
+
+		private void properties_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
