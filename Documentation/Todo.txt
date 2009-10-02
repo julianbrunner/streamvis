@@ -27,6 +27,5 @@ TODO: Add installation instructions for Linux, Windows and Mac OS X
 TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
 TODO: Extension methods don't work without reference to System.Core?!
-TODO: Move Yarp.Wrapper to Libraries solution folder once either Visual Studio supports it or isn't used anymore
 TODO: Check when mono will support thread priorities
 TODO: Reintegrate ColorGenerator.GetMinimumDistance into query once the mono compiler doesn't crash because of it anymore

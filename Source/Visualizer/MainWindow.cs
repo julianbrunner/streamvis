@@ -37,6 +37,7 @@ namespace Visualizer
 	{
 		const string title = "Yarp Visualizer";
 
+		readonly Settings settings;
 		readonly Drawer drawer;
 		readonly Data.Timer timer;
 		readonly Parameters parameters;

@@ -59,7 +59,9 @@ namespace Visualizer
 			this.nameColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.streamsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.changeColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.viewport = new Graphics.Viewport();
+			this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.captureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,8 +87,6 @@ namespace Visualizer
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-			this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
 			this.toolStripContainer1.BottomToolStripPanel.SuspendLayout();
 			this.toolStripContainer1.ContentPanel.SuspendLayout();
 			this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -96,10 +96,10 @@ namespace Visualizer
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
 			this.streamsContextMenuStrip.SuspendLayout();
-			this.menuStrip1.SuspendLayout();
 			this.splitContainer2.Panel1.SuspendLayout();
 			this.splitContainer2.Panel2.SuspendLayout();
 			this.splitContainer2.SuspendLayout();
+			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// toolStripContainer1
@@ -140,7 +140,7 @@ namespace Visualizer
 			// statusLabel
 			// 
 			this.statusLabel.Name = "statusLabel";
-			this.statusLabel.Size = new System.Drawing.Size(722, 17);
+			this.statusLabel.Size = new System.Drawing.Size(1058, 17);
 			this.statusLabel.Spring = true;
 			this.statusLabel.Text = "Ready";
 			this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -206,6 +206,24 @@ namespace Visualizer
 			this.changeColorToolStripMenuItem.Text = "&Change Color";
 			this.changeColorToolStripMenuItem.Click += new System.EventHandler(this.changeColorToolStripMenuItem_Click);
 			// 
+			// splitContainer2
+			// 
+			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+			this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+			this.splitContainer2.Name = "splitContainer2";
+			// 
+			// splitContainer2.Panel1
+			// 
+			this.splitContainer2.Panel1.Controls.Add(this.viewport);
+			// 
+			// splitContainer2.Panel2
+			// 
+			this.splitContainer2.Panel2.Controls.Add(this.propertyGrid1);
+			this.splitContainer2.Size = new System.Drawing.Size(824, 608);
+			this.splitContainer2.SplitterDistance = 567;
+			this.splitContainer2.TabIndex = 1;
+			// 
 			// viewport
 			// 
 			this.viewport.BackColor = System.Drawing.Color.Black;
@@ -219,6 +237,16 @@ namespace Visualizer
 			this.viewport.DoubleClick += new System.EventHandler(this.viewport_DoubleClick);
 			this.viewport.Layout += new System.Windows.Forms.LayoutEventHandler(this.viewport_Layout);
 			this.viewport.MouseMove += new System.Windows.Forms.MouseEventHandler(this.viewport_MouseMove);
+			// 
+			// propertyGrid1
+			// 
+			this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
+			this.propertyGrid1.Name = "propertyGrid1";
+			this.propertyGrid1.SelectedObject = this.exportCaptureFileDialog;
+			this.propertyGrid1.Size = new System.Drawing.Size(253, 608);
+			this.propertyGrid1.TabIndex = 0;
+			this.propertyGrid1.ToolbarVisible = false;
 			// 
 			// menuStrip1
 			// 
@@ -420,33 +448,6 @@ namespace Visualizer
 			this.exportCaptureFileDialog.DefaultExt = "stream";
 			this.exportCaptureFileDialog.Filter = "Text Stream|*.stream|All Files|*.*";
 			// 
-			// splitContainer2
-			// 
-			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-			this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer2.Name = "splitContainer2";
-			// 
-			// splitContainer2.Panel1
-			// 
-			this.splitContainer2.Panel1.Controls.Add(this.viewport);
-			// 
-			// splitContainer2.Panel2
-			// 
-			this.splitContainer2.Panel2.Controls.Add(this.propertyGrid1);
-			this.splitContainer2.Size = new System.Drawing.Size(824, 608);
-			this.splitContainer2.SplitterDistance = 567;
-			this.splitContainer2.TabIndex = 1;
-			// 
-			// propertyGrid1
-			// 
-			this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-			this.propertyGrid1.Name = "propertyGrid1";
-			this.propertyGrid1.Size = new System.Drawing.Size(253, 608);
-			this.propertyGrid1.TabIndex = 0;
-			this.propertyGrid1.ToolbarVisible = false;
-			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -469,11 +470,11 @@ namespace Visualizer
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			this.splitContainer1.ResumeLayout(false);
 			this.streamsContextMenuStrip.ResumeLayout(false);
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
 			this.splitContainer2.Panel1.ResumeLayout(false);
 			this.splitContainer2.Panel2.ResumeLayout(false);
 			this.splitContainer2.ResumeLayout(false);
+			this.menuStrip1.ResumeLayout(false);
+			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
 
 		}
