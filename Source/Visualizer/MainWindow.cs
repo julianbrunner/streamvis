@@ -285,6 +285,7 @@ namespace Visualizer
 			diagram.GraphSettings.LineWidth = parameters.LineWidth;
 
 			diagram.Layouter = new Layouter(viewport);
+			diagram.Layouter.BaseMargin = new Padding(9, 8, 0, 9);
 
 			switch (parameters.TimeManagerType)
 			{

@@ -17,6 +17,7 @@
 
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 using Graphics;
 using OpenTK.Math;
 
@@ -24,13 +25,9 @@ namespace Visualizer.Drawing
 {
 	public class Layouter
 	{
-		const int baseBorderLeft = 9;
-		const int baseBorderRight = 0;
-		const int baseBorderTop = 8;
-		const int baseBorderBottom = 9;
-
 		readonly Viewport viewport;
 
+		public Padding BaseMargin { get; set; }
 		public Rectangle Area { get; private set; }
 		public Matrix4 Transformation { get; private set; }
 
@@ -61,10 +58,10 @@ namespace Visualizer.Drawing
 		}
 		public virtual void Update(int valueLabelsWidth, int timeLabelsHeight)
 		{
-			int borderLeft = baseBorderLeft + valueLabelsWidth;
-			int borderRight = baseBorderRight;
-			int borderTop = baseBorderTop;
-			int borderBottom = baseBorderBottom + timeLabelsHeight;
+			int borderLeft = BaseMargin.Left + valueLabelsWidth;
+			int borderRight = BaseMargin.Right;
+			int borderTop = BaseMargin.Top;
+			int borderBottom = BaseMargin.Bottom + timeLabelsHeight;
 
 			Rectangle clientArea = viewport.ClientRectangle;
 
