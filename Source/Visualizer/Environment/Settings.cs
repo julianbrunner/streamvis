@@ -16,19 +16,25 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
+using Visualizer.Drawing;
 
 namespace Visualizer.Environment
 {
 	class Settings
 	{
 		readonly DiagramSettings diagramSettings = new DiagramSettings();
-		readonly GraphSettingsSettings graphSettings = new GraphSettingsSettings();
+		readonly GraphSettingsSettings graphSettingsSettings;
 
 		[Description("Contains settings concerning the Diagram.")]
 		[DisplayName("Diagram")]
 		public DiagramSettings DiagramSettings { get { return diagramSettings; } }
 		[Description("Contains settings concerning the Graphs.")]
-		[DisplayName("Graphs")]
-		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
+		[DisplayName("Graph Settings")]
+		public GraphSettingsSettings GraphSettingsSettings { get { return graphSettingsSettings; } }
+
+		public Settings(GraphSettings graphSettings)
+		{
+			graphSettingsSettings = new GraphSettingsSettings(graphSettings);
+		}
 	}
 }

@@ -246,7 +246,6 @@ namespace Visualizer
 			this.properties.Size = new System.Drawing.Size(253, 608);
 			this.properties.TabIndex = 0;
 			this.properties.ToolbarVisible = false;
-			this.properties.Click += new System.EventHandler(this.properties_Click);
 			// 
 			// mainMenu
 			// 

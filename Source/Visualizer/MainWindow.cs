@@ -38,7 +38,6 @@ namespace Visualizer
 	{
 		const string title = "Yarp Visualizer";
 
-		readonly Settings settings;
 		readonly Drawer drawer;
 		readonly Data.Timer timer;
 		readonly List<Graph> graphs;
@@ -50,6 +49,7 @@ namespace Visualizer
 		readonly Diagram diagram;
 		readonly VisibleFrameCounter frameCounter;
 		readonly CoordinateLabel coordinateLabel;
+		readonly Settings settings;
 
 		Point oldMousePosition;
 		Source source;
@@ -64,10 +64,6 @@ namespace Visualizer
 
 			viewport.ClearColor = parameters.BackgroundColor;
 			viewport.VSync = parameters.VerticalSynchronization;
-
-			this.settings = new Settings();
-
-			properties.SelectedObject = settings;
 
 			this.drawer = new Drawer(parameters.LineSmoothing, parameters.AlphaBlending);
 
@@ -134,6 +130,10 @@ namespace Visualizer
 			viewport.AddComponent(diagram);
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
+
+			this.settings = new Settings(graphSettings);
+
+			properties.SelectedObject = settings;
 		}
 
 		private void streamsList_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -307,11 +307,6 @@ namespace Visualizer
 			graph.Color = color;
 			item.BackColor = color;
 			item.ForeColor = item.BackColor.R * 0.299 + item.BackColor.G * 0.587 + item.BackColor.B * 0.114 >= 0x80 ? Color.Black : Color.White;
-		}
-
-		private void properties_Click(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

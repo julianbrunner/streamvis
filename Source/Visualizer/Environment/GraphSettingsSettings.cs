@@ -16,6 +16,7 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
+using Visualizer.Drawing;
 
 namespace Visualizer.Environment
 {
@@ -23,9 +24,24 @@ namespace Visualizer.Environment
 	[TypeConverter(typeof(ExpandableObjectConverter))]
 	class GraphSettingsSettings
 	{
+		readonly GraphSettings graphSettings;
+
 		[DisplayName("Extend Graphs")]
-		public bool ExtendGraphs { get; set; }
+		public bool ExtendGraphs
+		{
+			get { return graphSettings.ExtendGraphs; }
+			set { graphSettings.ExtendGraphs = value; }
+		}
 		[DisplayName("Line Width")]
-		public double LineWidth { get; set; }
+		public double LineWidth
+		{
+			get { return graphSettings.LineWidth; }
+			set { graphSettings.LineWidth = value; }
+		}
+
+		public GraphSettingsSettings(GraphSettings graphSettings)
+		{
+			this.graphSettings = graphSettings;
+		}
 	}
 }
