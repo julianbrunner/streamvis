@@ -13,7 +13,7 @@ Stream Visualizer (sometimes called "streamvis" or "Visualizer" is an applicatio
 
 2. Legal
 --------------------------------------------------------------------------------
-Unless stated otherwise, Stream Visualizer (streamvis) and the files that it is consists of are:
+Unless stated otherwise, Stream Visualizer (streamvis) and the files that it consists of are:
 	Copyright © Julian Brunner 2009
 	Released under the terms of the GNU GPL v3. See "Legal/GNU GPL v3.txt" for details.
 	

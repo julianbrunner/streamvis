@@ -1,0 +1,16 @@
+TODO: Move this to Wiki (policy document)
+
+Visualizer.Environment.Settings object:
+	- Contains all available settings
+	- Reflects the current settings at all times after initialization
+
+Settings pane in main window:
+	- Completely reflects state of the Visualizer.Environment.Settings object
+
+Default settings:
+	- A set of values that are used to initialize the Visualizer.Environment.Settings object
+	- Can be edited using a settings/preferences dialog
+	- Are saved persistently in a settings file
+
+Command-line parameters:
+	- A set of values that are used to override the default settings (are written to the Visualizer.Environment.Settings object after initialization)
