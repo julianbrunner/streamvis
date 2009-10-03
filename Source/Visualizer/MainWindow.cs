@@ -131,7 +131,7 @@ namespace Visualizer
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
 
-			this.settings = new Settings(graphSettings);
+			this.settings = new Settings(diagram, graphSettings);
 
 			properties.SelectedObject = settings;
 		}

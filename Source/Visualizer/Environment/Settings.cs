@@ -22,7 +22,7 @@ namespace Visualizer.Environment
 {
 	class Settings
 	{
-		readonly DiagramSettings diagramSettings = new DiagramSettings();
+		readonly DiagramSettings diagramSettings;
 		readonly GraphSettingsSettings graphSettingsSettings;
 
 		[Description("Contains settings concerning the Diagram.")]
@@ -32,9 +32,10 @@ namespace Visualizer.Environment
 		[DisplayName("Graph Settings")]
 		public GraphSettingsSettings GraphSettingsSettings { get { return graphSettingsSettings; } }
 
-		public Settings(GraphSettings graphSettings)
+		public Settings(Diagram diagram, GraphSettings graphSettings)
 		{
-			graphSettingsSettings = new GraphSettingsSettings(graphSettings);
+			this.diagramSettings = new DiagramSettings(diagram);
+			this.graphSettingsSettings = new GraphSettingsSettings(graphSettings);
 		}
 	}
 }

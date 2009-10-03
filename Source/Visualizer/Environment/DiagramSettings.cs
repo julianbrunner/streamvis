@@ -17,6 +17,7 @@
 
 using System.ComponentModel;
 using System.Drawing;
+using Visualizer.Drawing;
 
 namespace Visualizer.Environment
 {
@@ -24,16 +25,43 @@ namespace Visualizer.Environment
 	[TypeConverter(typeof(ExpandableObjectConverter))]
 	class DiagramSettings
 	{
+		readonly Diagram diagram;
+
 		[DisplayName("Update")]
-		public bool IsUpdated { get; set; }
+		public bool IsUpdated
+		{
+			get { return diagram.IsUpdated; }
+			set { diagram.IsUpdated = value; }
+		}
 		[DisplayName("Draw")]
-		public bool IsDrawn { get; set; }
+		public bool IsDrawn
+		{
+			get { return diagram.IsDrawn; }
+			set { diagram.IsDrawn = value; }
+		}
 
 		[DisplayName("X-Axis Markers")]
-		public int MarkersX { get; set; }
+		public int MarkersX
+		{
+			get { return diagram.MarkersX; }
+			set { diagram.MarkersX = value; }
+		}
 		[DisplayName("Y-Axis Markers")]
-		public int MarkersY { get; set; }
+		public int MarkersY
+		{
+			get { return diagram.MarkersY; }
+			set { diagram.MarkersY = value; }
+		}
 		[DisplayName("Color")]
-		public Color Color { get; set; }
+		public Color Color
+		{
+			get { return diagram.Color; }
+			set { diagram.Color = value; }
+		}
+
+		public DiagramSettings(Diagram diagram)
+		{
+			this.diagram = diagram;
+		}
 	}
 }
