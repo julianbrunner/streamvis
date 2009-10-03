@@ -22,8 +22,9 @@ namespace Visualizer.Environment
 {
 	class Settings
 	{
-		readonly DiagramSettings diagramSettings;
+		readonly DiagramSettings diagramSettings = new DiagramSettings();
 
+		[Description("Contains settings concerning the Diagram.")]
 		[Category("Appearance")]
 		[DisplayName("Diagram")]
 		public DiagramSettings DiagramSettings { get { return diagramSettings; } }

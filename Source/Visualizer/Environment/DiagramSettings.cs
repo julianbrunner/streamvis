@@ -16,10 +16,38 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using Visualizer.Drawing;
+using System.Drawing;
+using System.ComponentModel;
 
 namespace Visualizer.Environment
 {
+	// TODO: Add description for properties
+	[TypeConverter(typeof(ExpandableObjectConverter))]
 	class DiagramSettings
 	{
+		[Category("Behaviour")]
+		[DisplayName("Update")]
+		public bool IsUpdated { get; set; }
+		[Category("Behaviour")]
+		[DisplayName("Draw")]
+		public bool IsDrawn { get; set; }
+
+		[Category("Appearance")]
+		[DisplayName("Extend Graphs")]
+		public bool ExtendGraphs { get; set; }
+		[Category("Appearance")]
+		[DisplayName("Line Width")]
+		public double LineWidth { get; set; }
+		[Category("Appearance")]
+		[DisplayName("X-Axis Markers")]
+		public int MarkersX { get; set; }
+		[Category("Appearance")]
+		[DisplayName("Y-Axis Markers")]
+		public int MarkersY { get; set; }
+		[Category("Appearance")]
+		[DisplayName("Color")]
+		public Color Color { get; set; }
+
+
 	}
 }

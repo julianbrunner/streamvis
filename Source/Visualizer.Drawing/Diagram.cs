@@ -43,8 +43,9 @@ namespace Visualizer.Drawing
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
-		// TODO: Move those to a new GraphParameters class
+		// TODO: Move this to a new GraphParameters class
 		public bool ExtendGraphs { get; set; }
+		// TODO: Move this to a new GraphParameters class
 		public double LineWidth { get; set; }
 
 		public Diagram(Drawer drawer, IEnumerable<Graph> graphs, Layouter layouter, TimeManager timeManager, ValueManager valueManager, DataManager dataManager, int markersX, int markersY, Color color)
