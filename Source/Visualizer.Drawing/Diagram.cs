@@ -36,6 +36,8 @@ namespace Visualizer.Drawing
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
+		public Axis AxisX { get { return axisX; } }
+		public Axis AxisY { get { return axisY; } }
 
 		public Diagram(IEnumerable<Graph> graphs, Layouter layouter, TimeManager timeManager, ValueManager valueManager, DataManager dataManager, Axis axisX, Axis axisY)
 		{
@@ -61,8 +63,6 @@ namespace Visualizer.Drawing
 				foreach (Graph graph in graphs) graph.Update();
 				valueManager.Update();
 				layouter.Update(axisY.MaximumCaptionSize.Width, axisX.MaximumCaptionSize.Height);
-				axisX.Update();
-				axisY.Update();
 			}
 		}
 		public void Draw()

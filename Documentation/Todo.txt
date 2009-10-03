@@ -1,11 +1,10 @@
-TODO: Can TimeRange and ValueRange be merged? Why not handle Times as doubles?
-
 TODO: Better playback controls
 TODO: Vertical zoom
 TODO: Add ability to switch Value-/TimeManagers through GUI while drawing
 
 TODO: Make settings pane collapsible
 TODO: Degrade obscure settings from command-line parameters to default settings
+TODO: Can TimeRange and ValueRange be merged? Why not handle Times as doubles?
 
 TODO: Move documentation to Wiki
 

@@ -63,7 +63,7 @@ namespace Visualizer.Drawing.Axes
 
 			Drawer.DrawLine(lineStart, lineEnd, Color, 1);
 
-			// TODO: Remove the selector once TimeManager and ValueManager are unified
+			// TODO: Remove the selector once TimeRange and ValueRange are unified
 			foreach (Time time in Markers.Select(time => new Time(time)))
 			{
 				Vector2 markerStart = Layouter.ForwardMap((float)timeRange.ForwardMap(time) * Vector2.UnitX) + offset;

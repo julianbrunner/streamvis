@@ -22,20 +22,20 @@ namespace Visualizer.Environment
 {
 	class Settings
 	{
-		readonly DiagramSettings diagramSettings;
-		readonly GraphSettingsSettings graphSettingsSettings;
+		readonly DiagramSettings diagram;
+		readonly GraphSettingsSettings graphSettings;
 
 		[Description("Contains settings concerning the Diagram.")]
 		[DisplayName("Diagram")]
-		public DiagramSettings DiagramSettings { get { return diagramSettings; } }
+		public DiagramSettings Diagram { get { return diagram; } }
 		[Description("Contains settings concerning the Graphs.")]
 		[DisplayName("Graph Settings")]
-		public GraphSettingsSettings GraphSettingsSettings { get { return graphSettingsSettings; } }
+		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
 
 		public Settings(Diagram diagram, GraphSettings graphSettings)
 		{
-			this.diagramSettings = new DiagramSettings(diagram);
-			this.graphSettingsSettings = new GraphSettingsSettings(graphSettings);
+			this.diagram = new DiagramSettings(diagram);
+			this.graphSettings = new GraphSettingsSettings(graphSettings);
 		}
 	}
 }

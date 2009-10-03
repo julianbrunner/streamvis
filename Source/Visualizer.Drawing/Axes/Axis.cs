@@ -52,7 +52,6 @@ namespace Visualizer.Drawing.Axes
 			this.layouter = layouter;
 		}
 
-		public virtual void Update() { }
 		public virtual void Draw() { }
 	}
 }
