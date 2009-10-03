@@ -17,5 +17,5 @@
 
 namespace Visualizer
 {
-	enum DiagramType { Continuous, Shiftting, Wrapping }
+	enum TimeManagerType { Continuous, Shiftting, Wrapping }
 }

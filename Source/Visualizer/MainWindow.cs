@@ -286,17 +286,21 @@ namespace Visualizer
 
 			diagram.Layouter = new Layouter(viewport);
 
-			switch (parameters.DiagramType)
+			switch (parameters.TimeManagerType)
 			{
-				case DiagramType.Continuous: diagram.TimeManager = new ContinuousTimeManager(timer); break;
-				case DiagramType.Shiftting: diagram.TimeManager = new ShiftingTimeManager(timer, parameters.DiagramTypeParameter); break;
-				case DiagramType.Wrapping: diagram.TimeManager = new WrappingTimeManager(timer, parameters.DiagramTypeParameter); break;
+				case TimeManagerType.Continuous: diagram.TimeManager = new ContinuousTimeManager(timer); break;
+				case TimeManagerType.Shiftting: diagram.TimeManager = new ShiftingTimeManager(timer, parameters.TimeManagerParameter); break;
+				case TimeManagerType.Wrapping: diagram.TimeManager = new WrappingTimeManager(timer, parameters.TimeManagerParameter); break;
 				default: throw new InvalidOperationException();
 			}
 			diagram.TimeManager.Width = parameters.DiagramWidth;
 
-			if (parameters.RangeLow == parameters.RangeHigh) diagram.ValueManager = new FittingValueManager(diagram);
-			else diagram.ValueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
+			switch (parameters.ValueManagerType)
+			{
+				case ValueManagerType.Fitting: diagram.ValueManager = new FittingValueManager(diagram); break;
+				case ValueManagerType.Fixed: diagram.ValueManager = new FixedValueManager(parameters.ValueRange); break;
+				default: throw new InvalidOperationException();
+			}
 
 			switch (parameters.SamplerType)
 			{
@@ -306,11 +310,11 @@ namespace Visualizer
 			}
 
 			diagram.AxisX = new AxisX(drawer, diagram);
-			diagram.AxisX.MarkerCount = parameters.MarkersX;
+			diagram.AxisX.MarkerCount = parameters.MarkerCountX;
 			diagram.AxisX.Color = parameters.DiagramColor;
 
 			diagram.AxisY = new AxisY(drawer, diagram);
-			diagram.AxisY.MarkerCount = parameters.MarkersY;
+			diagram.AxisY.MarkerCount = parameters.MarkerCountY;
 			diagram.AxisY.Color = parameters.DiagramColor;
 
 			return diagram;

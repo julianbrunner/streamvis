@@ -15,19 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using Utility;
-
-namespace Visualizer.Drawing.Values
+namespace Visualizer
 {
-	public class FixedValueManager : ValueManager
-	{
-		readonly ValueRange range;
-
-		public override ValueRange Range { get { return range; } }
-
-		public FixedValueManager(Range<double> range)
-		{
-			this.range = new ValueRange(range);
-		}
-	}
+	enum ValueManagerType { Fixed, Fitting }
 }

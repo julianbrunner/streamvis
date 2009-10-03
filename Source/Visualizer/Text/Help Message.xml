@@ -69,44 +69,52 @@
 		<Text Column="Description">Enables or disables the logging of all received data. Disable if you plan to run the visualizer for a long time and you don't want to save the results. The default values is enabled.</Text>
 		<NewLine />
 		<NewLine />
+		<Text Column="Level1">t:(c|s[:&lt;c&gt;]|w[:&lt;c&gt;])</Text>
+		<Text Column="Description">Lets you specify the type of time manager that is used. The default value is "c".</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">c</Text>
+		<Text Column="Description">Continuous time manager. The graphs are drawn across the entire drawing-area, the most recent data entry lies on the right border of the drawing-area.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">s[:&lt;c&gt;]</Text>
+		<Text Column="Description">Shifting time manager. The graphs will shift &lt;c&gt; times the drawing-area width to the left whenever the most recent data entry reaches the right border of the drawing-area. The default value for &lt;c&gt; is "0.8".</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">w[:&lt;c&gt;]</Text>
+		<Text Column="Description">Wrapping time manager. The graphs don't move at all, once the most recent data entry reaches the right border, the graphs wrap around and draw over the oldest entries starting from the left. The most recent data entry will push a gap of &lt;c&gt; times the drawing-area width in front of it. The default value for &lt;c&gt; is "0.2".</Text>
+		<NewLine />
+		<NewLine />
 		<Text Column="Level1">w:&lt;width&gt;</Text>
 		<Text Column="Description">Lets you specify the width of the drawing-area in total seconds. The default value is "10".</Text>
+		<NewLine />
+		<NewLine />		
+		<Text Column="Level1">v:(d|s[:&lt;low&gt;:&lt;high&gt;]</Text>
+		<Text Column="Description">Lets you specify the type of value manager that is used. The default value is "d".</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">d</Text>
+		<Text Column="Description">Fitting (dynamic) value manager. The Y-Axis will be automatically scaled to fit all the values that are currently visualized.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">s[:&lt;low&gt;:&lt;high&gt;]</Text>
+		<Text Column="Description">Fixed (static) value manager. You can manually specify the range of values along the Y-Axis. The default value for &lt;low&gt;:&lt;high&gt; is "0:1".</Text>
+		<NewLine />
+		<NewLine />		
+		<Text Column="Level1">s:(s[:&lt;c&gt;]|p[:&lt;c&gt;])</Text>
+		<Text Column="Description">Lets you specify the sampler type and settings used for drawing graphs. The default value is "p:1".</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">s[:&lt;c&gt;]</Text>
+		<Text Column="Description">Per-Second sampler. The data will be resampled to &lt;c&gt; entries per second. The default value for &lt;c&gt; is "10".</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level2">p[:&lt;c&gt;]</Text>
+		<Text Column="Description">Per-Pixel sampler. The data will be resampled to &lt;c&gt; entries per pixel. The default value for &lt;c&gt; is "0.1".</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">l:&lt;width&gt;</Text>
 		<Text Column="Description">Lets you specify the width (thickness) of the graph lines in pixels. The default value is "1.0".</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level1">t:(c|s:[&lt;c&gt;]|w:[&lt;c&gt;])</Text>
-		<Text Column="Description">Lets you specify the type of diagram that is used. The default value is "c".</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level2">c</Text>
-		<Text Column="Description">Continuous diagram. The graphs are drawn across the entire drawing-area, the most recent data entry lies on the right border of the drawing-area.</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level2">s:[&lt;c&gt;]</Text>
-		<Text Column="Description">Shifting diagram. The graphs will shift &lt;c&gt; times the drawing-area width to the left whenever the most recent data entry reaches the right border of the drawing-area. The default value for &lt;c&gt; is "0.8".</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level2">w:[&lt;c&gt;]</Text>
-		<Text Column="Description">Wrapping diagram. The graphs don't move at all, once the most recent data entry reaches the right border, the graphs wrap around and draw over the oldest entries starting from the left. The most recent data entry will push a gap of &lt;c&gt; times the drawing-area width in front of it. The default value for &lt;c&gt; is "0.2".</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level1">r:&lt;low&gt;:&lt;high&gt;</Text>
-		<Text Column="Description">Fixes the value range of the diagram. By default, the value range is automatically fitted to the displayed graphs.</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level1">s:(s:[&lt;c&gt;]|p:[&lt;c&gt;])</Text>
-		<Text Column="Description">Lets you specify the sampler type and settings used for drawing graphs. The default value is "p:1".</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level2">s:[&lt;c&gt;]</Text>
-		<Text Column="Description">Per-Second sampler. The data will be resampled to &lt;c&gt; entries per second. The default value for &lt;c&gt; is "10".</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level2">p:[&lt;c&gt;]</Text>
-		<Text Column="Description">Per-Pixel sampler. The data will be resampled to &lt;c&gt; entries per pixel. The default value for &lt;c&gt; is "0.1".</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">mx:&lt;n&gt;</Text>

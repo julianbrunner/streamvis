@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using Utility;
 using Visualizer.Data;
 
 namespace Visualizer
@@ -34,37 +35,37 @@ namespace Visualizer
 		public bool AlphaBlending { get; private set; }
 		public bool VerticalSynchronization { get; private set; }
 		public bool DataLogging { get; private set; }
+		public TimeManagerType TimeManagerType { get; private set; }
+		public double TimeManagerParameter { get; private set; }
 		public Time DiagramWidth { get; private set; }
-		public double LineWidth { get; private set; }
-		public DiagramType DiagramType { get; private set; }
-		public double DiagramTypeParameter { get; private set; }
-		public double RangeLow { get; private set; }
-		public double RangeHigh { get; private set; }
+		public ValueManagerType ValueManagerType { get; private set; }
+		public Range<double> ValueRange { get; private set; }
 		public SamplerType SamplerType { get; private set; }
 		public double SamplerFrequency { get; private set; }
-		public int MarkersX { get; private set; }
-		public int MarkersY { get; private set; }
+		public double LineWidth { get; private set; }
+		public int MarkerCountX { get; private set; }
+		public int MarkerCountY { get; private set; }
 		public Color DiagramColor { get; private set; }
 		public Color BackgroundColor { get; private set; }
 
 		public Parameters(IEnumerable<string> parameters)
 		{
 			MinimalMode = false;
-			DiagramWidth = new Time(10.0);
-			LineWidth = 1;
 			ExtendGraphs = true;
 			LineSmoothing = true;
 			AlphaBlending = true;
 			VerticalSynchronization = true;
 			DataLogging = true;
-			DiagramType = DiagramType.Continuous;
-			DiagramTypeParameter = 0;
-			RangeLow = 0;
-			RangeHigh = 0;
+			TimeManagerType = TimeManagerType.Continuous;
+			TimeManagerParameter = 0;
+			DiagramWidth = new Time(10.0);
+			ValueManagerType = ValueManagerType.Fitting;
+			ValueRange = new Range<double>();
 			SamplerType = SamplerType.PerPixel;
 			SamplerFrequency = 1;
-			MarkersX = 5;
-			MarkersY = 5;
+			LineWidth = 1;
+			MarkerCountX = 5;
+			MarkerCountY = 5;
 			DiagramColor = Color.White;
 			BackgroundColor = Color.Black;
 
@@ -99,47 +100,50 @@ namespace Visualizer
 
 			switch (details[0])
 			{
-				case "w":
-					if (details.Length != 2) InvalidParameter(option);
-					try { DiagramWidth = new Time(double.Parse(details[1])); }
-					catch (FormatException) { InvalidParameter(option); }
-					break;
-				case "l":
-					if (details.Length != 2) InvalidParameter(option);
-					try { LineWidth = double.Parse(details[1]); }
-					catch (FormatException) { InvalidParameter(option); }
-					break;
 				case "t":
 					if (details.Length < 2) InvalidParameter(option);
 					switch (details[1])
 					{
 						case "c":
 							if (details.Length > 2) InvalidParameter(option);
-							DiagramType = DiagramType.Continuous;
+							TimeManagerType = TimeManagerType.Continuous;
 							break;
 						case "s":
 							if (details.Length > 3) InvalidParameter(option);
-							DiagramType = DiagramType.Shiftting;
-							try { DiagramTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.8; }
+							TimeManagerType = TimeManagerType.Shiftting;
+							try { TimeManagerParameter = details.Length > 2 ? double.Parse(details[2]) : 0.8; }
 							catch (FormatException) { InvalidParameter(option); }
 							break;
 						case "w":
 							if (details.Length > 3) InvalidParameter(option);
-							DiagramType = DiagramType.Wrapping;
-							try { DiagramTypeParameter = details.Length > 2 ? double.Parse(details[2]) : 0.2; }
+							TimeManagerType = TimeManagerType.Wrapping;
+							try { TimeManagerParameter = details.Length > 2 ? double.Parse(details[2]) : 0.2; }
 							catch (FormatException) { InvalidParameter(option); }
 							break;
-						default: throw new InvalidOperationException("Invalid diagram type: " + details[1]);
+						default: throw new InvalidOperationException("Invalid time manager type: " + details[1]);
 					}
 					break;
-				case "r":
-					if (details.Length != 3) InvalidParameter(option);
-					try
-					{
-						RangeLow = double.Parse(details[1]);
-						RangeHigh = double.Parse(details[2]);
-					}
+				case "w":
+					if (details.Length != 2) InvalidParameter(option);
+					try { DiagramWidth = new Time(double.Parse(details[1])); }
 					catch (FormatException) { InvalidParameter(option); }
+					break;
+				case "v":
+					if (details.Length < 2) InvalidParameter(option);
+					switch (details[1])
+					{
+						case "d":
+							if (details.Length > 2) InvalidParameter(option);
+							ValueManagerType = ValueManagerType.Fitting;
+							break;
+						case "s":
+							if (details.Length != 2 && details.Length != 4) InvalidParameter(option);
+							ValueManagerType = ValueManagerType.Fixed;
+							try { ValueRange = details.Length == 4 ? new Range<double>(double.Parse(details[2]), double.Parse(details[3])) : new Range<double>(0, 1); }
+							catch (FormatException) { InvalidParameter(option); }
+							break;
+						default: throw new InvalidOperationException("Invalid value manager type: " + details[1]);
+					}
 					break;
 				case "s":
 					if (details.Length < 2) InvalidParameter(option);
@@ -160,14 +164,19 @@ namespace Visualizer
 						default: throw new InvalidOperationException("Invalid sampler type: " + details[1]);
 					}
 					break;
+				case "l":
+					if (details.Length != 2) InvalidParameter(option);
+					try { LineWidth = double.Parse(details[1]); }
+					catch (FormatException) { InvalidParameter(option); }
+					break;
 				case "mx":
 					if (details.Length != 2) InvalidParameter(option);
-					try { MarkersX = int.Parse(details[1]); }
+					try { MarkerCountX = int.Parse(details[1]); }
 					catch (FormatException) { InvalidParameter(option); }
 					break;
 				case "my":
 					if (details.Length != 2) InvalidParameter(option);
-					try { MarkersY = int.Parse(details[1]); }
+					try { MarkerCountY = int.Parse(details[1]); }
 					catch (FormatException) { InvalidParameter(option); }
 					break;
 				case "pc":

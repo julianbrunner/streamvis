@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoordinateLabel.cs" />
+    <Compile Include="ValueManagerType.cs" />
     <Compile Include="Environment\AxisSettings.cs" />
     <Compile Include="Environment\GraphSettingsSettings.cs" />
     <Compile Include="Environment\DiagramSettings.cs" />
@@ -71,7 +72,7 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Parameters.cs" />
-    <Compile Include="PlotterType.cs" />
+    <Compile Include="TimeManagerType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextDialog.cs">
