@@ -41,14 +41,6 @@ namespace Visualizer
 
 		readonly Drawer drawer;
 		readonly Data.Timer timer;
-		readonly List<Graph> graphs;
-		readonly GraphSettings graphSettings;
-		readonly Layouter layouter;
-		readonly TimeManager timeManager;
-		readonly ValueManager valueManager;
-		readonly DataManager dataManager;
-		readonly Axis axisX;
-		readonly Axis axisY;
 		readonly Diagram diagram;
 		readonly VisibleFrameCounter frameCounter;
 		readonly CoordinateLabel coordinateLabel;
@@ -73,39 +65,43 @@ namespace Visualizer
 			this.timer = new Data.Timer();
 
 			Console.WriteLine("Initializing diagram...");
-			this.graphs = new List<Graph>();
+			List<Graph>  graphs = new List<Graph>();
 
-			this.graphSettings = new GraphSettings();
-			this.graphSettings.ExtendGraphs = parameters.ExtendGraphs;
-			this.graphSettings.LineWidth = parameters.LineWidth;
+			GraphSettings graphSettings = new GraphSettings();
+			graphSettings.ExtendGraphs = parameters.ExtendGraphs;
+			graphSettings.LineWidth = parameters.LineWidth;
 
-			this.layouter = new Layouter(viewport);
+			Layouter layouter = new Layouter(viewport);
 
+			TimeManager timeManager;
 			switch (parameters.DiagramType)
 			{
-				case DiagramType.Continuous: this.timeManager = new ContinuousTimeManager(timer); break;
-				case DiagramType.Shiftting: this.timeManager = new ShiftingTimeManager(timer, parameters.DiagramTypeParameter); break;
-				case DiagramType.Wrapping: this.timeManager = new WrappingTimeManager(timer, parameters.DiagramTypeParameter); break;
+				case DiagramType.Continuous: timeManager = new ContinuousTimeManager(timer); break;
+				case DiagramType.Shiftting: timeManager = new ShiftingTimeManager(timer, parameters.DiagramTypeParameter); break;
+				case DiagramType.Wrapping: timeManager = new WrappingTimeManager(timer, parameters.DiagramTypeParameter); break;
 				default: throw new InvalidOperationException();
 			}
-			this.timeManager.Width = parameters.DiagramWidth;
+			timeManager.Width = parameters.DiagramWidth;
 
-			if (parameters.RangeLow == parameters.RangeHigh) this.valueManager = new FittingValueManager(graphs);
-			else this.valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
+			ValueManager valueManager;
+			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(graphs);
+			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
 
+			DataManager dataManager;
 			switch (parameters.SamplerType)
 			{
-				case SamplerType.PerSecond: this.dataManager = new PerSecondDataManager(graphs, timeManager, parameters.DataLogging, parameters.SamplerFrequency); break;
-				case SamplerType.PerPixel: this.dataManager = new PerPixelDataManager(graphs, timeManager, parameters.DataLogging, layouter, parameters.SamplerFrequency); break;
+				case SamplerType.PerSecond: dataManager = new PerSecondDataManager(graphs, timeManager, parameters.DataLogging, parameters.SamplerFrequency); break;
+				case SamplerType.PerPixel: dataManager = new PerPixelDataManager(graphs, timeManager, parameters.DataLogging, layouter, parameters.SamplerFrequency); break;
 				default: throw new InvalidOperationException();
 			}
 
-			this.axisX = new AxisX(drawer, layouter, timeManager);
-			this.axisX.MarkerCount = parameters.MarkersX;
-			this.axisX.Color = parameters.DiagramColor;
-			this.axisY = new AxisY(drawer, layouter, valueManager);
-			this.axisY.MarkerCount = parameters.MarkersY;
-			this.axisY.Color = parameters.DiagramColor;
+			Axis axisX = new AxisX(drawer, layouter, timeManager);
+			axisX.MarkerCount = parameters.MarkersX;
+			axisX.Color = parameters.DiagramColor;
+
+			Axis axisY = new AxisY(drawer, layouter, valueManager);
+			axisY.MarkerCount = parameters.MarkersY;
+			axisY.Color = parameters.DiagramColor;
 
 			this.diagram = new Diagram(graphs, graphSettings, layouter, timeManager, valueManager, dataManager, axisX, axisY);
 
@@ -161,7 +157,7 @@ namespace Visualizer
 		private void viewport_MouseMove(object sender, MouseEventArgs e)
 		{
 			// TODO: This should be extracted into a ZoomComponent
-			if (e.Button == MouseButtons.Right) timeManager.Width *= Math.Pow(1.1, e.Location.X - oldMousePosition.X);
+			if (e.Button == MouseButtons.Right) diagram.TimeManager.Width *= Math.Pow(1.1, e.Location.X - oldMousePosition.X);
 
 			oldMousePosition = e.Location;
 		}
@@ -196,11 +192,11 @@ namespace Visualizer
 		}
 		private void freezeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			timeManager.Frozen = freezeToolStripMenuItem.Checked;
+			diagram.TimeManager.Frozen = freezeToolStripMenuItem.Checked;
 		}
 		private void graphExtensionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			graphSettings.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
+			diagram.GraphSettings.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
 		}
 		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -279,7 +275,7 @@ namespace Visualizer
 		{
 			ColorGenerator colorGenerator = new ColorGenerator();
 
-			graphs.Clear();
+			diagram.Graphs.Clear();
 			streamsList.Groups.Clear();
 			streamsList.Items.Clear();
 
@@ -292,7 +288,7 @@ namespace Visualizer
 				{
 					Graph graph = new Graph(drawer, diagram, stream.EntryData);
 					graph.Color = colorGenerator.NextColor();
-					graphs.Add(graph);
+					diagram.Graphs.Add(graph);
 
 					ListViewItem item = new ListViewItem();
 					item.Name = port.Name + "Stream" + stream.Path;
