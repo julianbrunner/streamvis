@@ -65,42 +65,7 @@ namespace Visualizer
 			this.timer = new Data.Timer();
 
 			Console.WriteLine("Initializing diagram...");
-			diagram = new Diagram();
-
-			diagram.Graphs = new List<Graph>();
-
-			diagram.GraphSettings = new GraphSettings();
-			diagram.GraphSettings.ExtendGraphs = parameters.ExtendGraphs;
-			diagram.GraphSettings.LineWidth = parameters.LineWidth;
-
-			diagram.Layouter = new Layouter(viewport);
-
-			switch (parameters.DiagramType)
-			{
-				case DiagramType.Continuous: diagram.TimeManager = new ContinuousTimeManager(timer); break;
-				case DiagramType.Shiftting: diagram.TimeManager = new ShiftingTimeManager(timer, parameters.DiagramTypeParameter); break;
-				case DiagramType.Wrapping: diagram.TimeManager = new WrappingTimeManager(timer, parameters.DiagramTypeParameter); break;
-				default: throw new InvalidOperationException();
-			}
-			diagram.TimeManager.Width = parameters.DiagramWidth;
-
-			if (parameters.RangeLow == parameters.RangeHigh) diagram.ValueManager = new FittingValueManager(diagram);
-			else diagram.ValueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
-
-			switch (parameters.SamplerType)
-			{
-				case SamplerType.PerSecond: diagram.DataManager = new PerSecondDataManager(diagram, parameters.DataLogging, parameters.SamplerFrequency); break;
-				case SamplerType.PerPixel: diagram.DataManager = new PerPixelDataManager(diagram, parameters.DataLogging, parameters.SamplerFrequency); break;
-				default: throw new InvalidOperationException();
-			}
-
-			diagram.AxisX = new AxisX(drawer, diagram);
-			diagram.AxisX.MarkerCount = parameters.MarkersX;
-			diagram.AxisX.Color = parameters.DiagramColor;
-
-			diagram.AxisY = new AxisY(drawer, diagram);
-			diagram.AxisY.MarkerCount = parameters.MarkersY;
-			diagram.AxisY.Color = parameters.DiagramColor;
+			this.diagram = CreateDiagram(viewport, drawer, timer, parameters);
 
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
@@ -307,6 +272,48 @@ namespace Visualizer
 			graph.Color = color;
 			item.BackColor = color;
 			item.ForeColor = item.BackColor.R * 0.299 + item.BackColor.G * 0.587 + item.BackColor.B * 0.114 >= 0x80 ? Color.Black : Color.White;
+		}
+
+		static Diagram CreateDiagram(Viewport viewport, Drawer drawer, Data.Timer timer, Parameters parameters)
+		{
+			Diagram diagram = new Diagram();
+
+			diagram.Graphs = new List<Graph>();
+
+			diagram.GraphSettings = new GraphSettings();
+			diagram.GraphSettings.ExtendGraphs = parameters.ExtendGraphs;
+			diagram.GraphSettings.LineWidth = parameters.LineWidth;
+
+			diagram.Layouter = new Layouter(viewport);
+
+			switch (parameters.DiagramType)
+			{
+				case DiagramType.Continuous: diagram.TimeManager = new ContinuousTimeManager(timer); break;
+				case DiagramType.Shiftting: diagram.TimeManager = new ShiftingTimeManager(timer, parameters.DiagramTypeParameter); break;
+				case DiagramType.Wrapping: diagram.TimeManager = new WrappingTimeManager(timer, parameters.DiagramTypeParameter); break;
+				default: throw new InvalidOperationException();
+			}
+			diagram.TimeManager.Width = parameters.DiagramWidth;
+
+			if (parameters.RangeLow == parameters.RangeHigh) diagram.ValueManager = new FittingValueManager(diagram);
+			else diagram.ValueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
+
+			switch (parameters.SamplerType)
+			{
+				case SamplerType.PerSecond: diagram.DataManager = new PerSecondDataManager(diagram, parameters.DataLogging, parameters.SamplerFrequency); break;
+				case SamplerType.PerPixel: diagram.DataManager = new PerPixelDataManager(diagram, parameters.DataLogging, parameters.SamplerFrequency); break;
+				default: throw new InvalidOperationException();
+			}
+
+			diagram.AxisX = new AxisX(drawer, diagram);
+			diagram.AxisX.MarkerCount = parameters.MarkersX;
+			diagram.AxisX.Color = parameters.DiagramColor;
+
+			diagram.AxisY = new AxisY(drawer, diagram);
+			diagram.AxisY.MarkerCount = parameters.MarkersY;
+			diagram.AxisY.Color = parameters.DiagramColor;
+
+			return diagram;
 		}
 	}
 }
