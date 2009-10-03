@@ -44,7 +44,7 @@ namespace Visualizer.Drawing
 			this.diagram = diagram;
 			this.entryData = entryData;
 
-			streamManager = new StreamManager(diagram.TimeManager, entryData);
+			streamManager = new StreamManager(diagram, entryData);
 
 			IsDrawn = true;
 		}

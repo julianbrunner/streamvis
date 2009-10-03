@@ -26,16 +26,16 @@ namespace Visualizer.Environment
 	{
 		readonly Diagram diagram;
 		readonly GraphSettingsSettings graphSettings;
-		readonly AxisSettings axisX;
-		readonly AxisSettings axisY;
+		readonly AxisXSettings axisX;
+		readonly AxisYSettings axisY;
 
 		[Description("Contains settings concerning the Graphs.")]
 		[DisplayName("Graph Settings")]
 		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
 		[DisplayName("X-Axis")]
-		public AxisSettings AxisX { get { return axisX; } }
+		public AxisXSettings AxisX { get { return axisX; } }
 		[DisplayName("Y-Axis")]
-		public AxisSettings AxisY { get { return axisY; } }
+		public AxisYSettings AxisY { get { return axisY; } }
 
 		[DisplayName("Update")]
 		public bool IsUpdated
@@ -54,9 +54,9 @@ namespace Visualizer.Environment
 		{
 			this.diagram = diagram;
 
-			this.graphSettings = new GraphSettingsSettings(diagram.GraphSettings);
-			this.axisX = new AxisSettings(diagram.AxisX);
-			this.axisY = new AxisSettings(diagram.AxisY);
+			this.graphSettings = new GraphSettingsSettings(diagram);
+			this.axisX = new AxisXSettings(diagram);
+			this.axisY = new AxisYSettings(diagram);
 		}
 	}
 }

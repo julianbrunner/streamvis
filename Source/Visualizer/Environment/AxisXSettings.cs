@@ -17,32 +17,32 @@
 
 using System.ComponentModel;
 using System.Drawing;
-using Visualizer.Drawing.Axes;
+using Visualizer.Drawing;
 
 namespace Visualizer.Environment
 {
 	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpandableObjectConverter))]
-	class AxisSettings
+	class AxisXSettings
 	{
-		readonly Axis axis;
+		readonly Diagram diagram;
 
 		[DisplayName("Marker Count")]
 		public int MarkerCount
 		{
-			get { return axis.MarkerCount; }
-			set { axis.MarkerCount = value; }
+			get { return diagram.AxisX.MarkerCount; }
+			set { diagram.AxisX.MarkerCount = value; }
 		}
 		[DisplayName("Color")]
 		public Color Color
 		{
-			get { return axis.Color; }
-			set { axis.Color = value; }
+			get { return diagram.AxisX.Color; }
+			set { diagram.AxisX.Color = value; }
 		}
 
-		public AxisSettings(Axis axis)
+		public AxisXSettings(Diagram diagram)
 		{
-			this.axis = axis;
+			this.diagram = diagram;
 		}
 	}
 }

@@ -18,13 +18,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Visualizer.Data;
-using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Drawing.Data
 {
 	public class StreamManager
 	{
-		readonly TimeManager timeManager;
+		readonly Diagram diagram;
 		readonly EntryData entryData;
 		readonly EntryResampler entryResampler;
 		readonly EntryCache entryCache;
@@ -34,9 +33,9 @@ namespace Visualizer.Drawing.Data
 		public EntryCache EntryCache { get { return entryCache; } }
 		public IEnumerable<DataSegment> Segments { get; private set; }
 
-		public StreamManager(TimeManager timeManager, EntryData entryData)
+		public StreamManager(Diagram diagram, EntryData entryData)
 		{
-			this.timeManager = timeManager;
+			this.diagram = diagram;
 			this.entryData = entryData;
 
 			// TODO: Create and document policy about where to initialize objects
@@ -51,12 +50,12 @@ namespace Visualizer.Drawing.Data
 			// TODO: Test if leaving out the whole segment caching is faster
 			Segments =
 			(
-				from timeRange in timeManager.GraphRanges
+				from timeRange in diagram.TimeManager.GraphRanges
 				select new DataSegment(timeRange, entryCache[timeRange.Range])
 			)
 			.ToArray();
 
-			if (!entryCache.IsEmpty && timeManager.Time - entryCache.FirstEntry.Time > 10 * timeManager.Width) entryCache.Clear();
+			if (!entryCache.IsEmpty && diagram.TimeManager.Time - entryCache.FirstEntry.Time > 10 * diagram.TimeManager.Width) entryCache.Clear();
 		}
 	}
 }
