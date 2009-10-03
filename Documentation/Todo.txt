@@ -3,6 +3,7 @@ TODO: Vertical zoom
 TODO: Add ability to switch Value-/TimeManagers through GUI while drawing
 
 TODO: Document the following somewhere
+TODO: Default settings are specified in a settings dialog, current settings in settings pane in MainWindow
 TODO: Move obscure command-line options to a settings file
 TODO: Settings class/settings file should be the superset of all available settings. Subsets include command-line parameters
 

@@ -17,18 +17,9 @@
 
 using Visualizer.Drawing;
 
-namespace Visualizer
+namespace Visualizer.Environment
 {
-	class Settings
+	class DiagramSettings
 	{
-		readonly Diagram diagram;
-
-
-		public Diagram Diagram { get { return diagram; } }
-
-		public Settings(Diagram diagram)
-		{
-			this.diagram = diagram;
-		}
 	}
 }

@@ -26,12 +26,10 @@ using Visualizer.Data;
 using Visualizer.Drawing.Data;
 using Visualizer.Drawing.Timing;
 using Visualizer.Drawing.Values;
-using System.ComponentModel;
 
 namespace Visualizer.Drawing
 {
-	[TypeConverterAttribute(typeof(ExpandableObjectConverter))]
-	public class Diagram : Graphics.IComponent, IUpdateable, IDrawable
+	public class Diagram : IComponent, IUpdateable, IDrawable
 	{
 		readonly Drawer drawer;
 		readonly IEnumerable<Graph> graphs;

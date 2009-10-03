@@ -29,6 +29,7 @@ using Visualizer.Drawing;
 using Visualizer.Drawing.Data;
 using Visualizer.Drawing.Timing;
 using Visualizer.Drawing.Values;
+using Visualizer.Environment;
 
 namespace Visualizer
 {
@@ -40,7 +41,6 @@ namespace Visualizer
 		readonly Settings settings;
 		readonly Drawer drawer;
 		readonly Data.Timer timer;
-		readonly Parameters parameters;
 		readonly List<Graph> graphs;
 		readonly Layouter layouter;
 		readonly TimeManager timeManager;
@@ -64,11 +64,13 @@ namespace Visualizer
 			viewport.ClearColor = parameters.BackgroundColor;
 			viewport.VSync = parameters.VerticalSynchronization;
 
+			this.settings = new Settings();
+
+			properties.SelectedObject = settings;
+
 			this.drawer = new Drawer(parameters.LineSmoothing, parameters.AlphaBlending);
 
 			this.timer = new Data.Timer();
-
-			this.parameters = parameters;
 
 			Console.WriteLine("Initializing diagram...");
 			this.graphs = new List<Graph>();
@@ -97,9 +99,6 @@ namespace Visualizer
 			this.diagram = new Diagram(drawer, graphs, layouter, timeManager, valueManager, dataManager, parameters.MarkersX, parameters.MarkersY, parameters.DiagramColor);
 			this.diagram.ExtendGraphs = parameters.ExtendGraphs;
 			this.diagram.LineWidth = parameters.LineWidth;
-
-			settings = new Settings(diagram);
-			properties.SelectedObject = settings;
 
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
