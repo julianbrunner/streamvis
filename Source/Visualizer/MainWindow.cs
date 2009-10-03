@@ -42,7 +42,7 @@ namespace Visualizer
 		readonly Drawer drawer;
 		readonly Data.Timer timer;
 		readonly List<Graph> graphs;
-		readonly GraphParameters graphParameters;
+		readonly GraphSettings graphSettings;
 		readonly Layouter layouter;
 		readonly TimeManager timeManager;
 		readonly ValueManager valueManager;
@@ -76,9 +76,9 @@ namespace Visualizer
 			Console.WriteLine("Initializing diagram...");
 			this.graphs = new List<Graph>();
 
-			this.graphParameters = new GraphParameters();
-			this.graphParameters.ExtendGraphs = parameters.ExtendGraphs;
-			this.graphParameters.LineWidth = parameters.LineWidth;
+			this.graphSettings = new GraphSettings();
+			this.graphSettings.ExtendGraphs = parameters.ExtendGraphs;
+			this.graphSettings.LineWidth = parameters.LineWidth;
 
 			this.layouter = new Layouter(viewport);
 
@@ -153,6 +153,7 @@ namespace Visualizer
 		}
 		private void viewport_MouseMove(object sender, MouseEventArgs e)
 		{
+			// TODO: This should be extracted into a ZoomComponent
 			if (e.Button == MouseButtons.Right) timeManager.Width *= Math.Pow(1.1, e.Location.X - oldMousePosition.X);
 
 			oldMousePosition = e.Location;
@@ -192,7 +193,7 @@ namespace Visualizer
 		}
 		private void graphExtensionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			graphParameters.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
+			graphSettings.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
 		}
 		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -282,7 +283,7 @@ namespace Visualizer
 
 				foreach (Stream stream in port.Streams)
 				{
-					Graph graph = new Graph(drawer, graphParameters, layouter, timeManager, valueManager, stream.EntryData);
+					Graph graph = new Graph(drawer, graphSettings, layouter, timeManager, valueManager, stream.EntryData);
 					graph.Color = colorGenerator.NextColor();
 					graphs.Add(graph);
 

@@ -15,25 +15,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.ComponentModel;
-using System.Drawing;
-
-namespace Visualizer.Environment
+namespace Visualizer.Drawing
 {
-	// TODO: Add description for properties
-	[TypeConverter(typeof(ExpandableObjectConverter))]
-	class DiagramSettings
+	public class GraphSettings
 	{
-		[DisplayName("Update")]
-		public bool IsUpdated { get; set; }
-		[DisplayName("Draw")]
-		public bool IsDrawn { get; set; }
-
-		[DisplayName("X-Axis Markers")]
-		public int MarkersX { get; set; }
-		[DisplayName("Y-Axis Markers")]
-		public int MarkersY { get; set; }
-		[DisplayName("Color")]
-		public Color Color { get; set; }
+		public bool ExtendGraphs { get; set; }
+		public double LineWidth { get; set; }
 	}
 }

@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GraphParameters.cs" />
+    <Compile Include="GraphSettings.cs" />
     <Compile Include="Data\CacheFragment.cs" />
     <Compile Include="Data\StreamManager.cs" />
     <Compile Include="Data\DataSegment.cs" />

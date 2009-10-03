@@ -54,12 +54,12 @@ namespace Visualizer
 			this.statusStrip = new System.Windows.Forms.StatusStrip();
 			this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.coordinateStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			this.propertiesContainer = new System.Windows.Forms.SplitContainer();
 			this.streamsListContainer = new System.Windows.Forms.SplitContainer();
 			this.streamsList = new System.Windows.Forms.ListView();
 			this.nameColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.streamsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.changeColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.propertiesContainer = new System.Windows.Forms.SplitContainer();
 			this.viewport = new Graphics.Viewport();
 			this.properties = new System.Windows.Forms.PropertyGrid();
 			this.mainMenu = new System.Windows.Forms.MenuStrip();
@@ -91,13 +91,13 @@ namespace Visualizer
 			this.mainContainer.TopToolStripPanel.SuspendLayout();
 			this.mainContainer.SuspendLayout();
 			this.statusStrip.SuspendLayout();
+			this.propertiesContainer.Panel1.SuspendLayout();
+			this.propertiesContainer.Panel2.SuspendLayout();
+			this.propertiesContainer.SuspendLayout();
 			this.streamsListContainer.Panel1.SuspendLayout();
 			this.streamsListContainer.Panel2.SuspendLayout();
 			this.streamsListContainer.SuspendLayout();
 			this.streamsContextMenuStrip.SuspendLayout();
-			this.propertiesContainer.Panel1.SuspendLayout();
-			this.propertiesContainer.Panel2.SuspendLayout();
-			this.propertiesContainer.SuspendLayout();
 			this.mainMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -150,6 +150,24 @@ namespace Visualizer
 			this.coordinateStatusLabel.Size = new System.Drawing.Size(0, 17);
 			this.coordinateStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.coordinateStatusLabel.Visible = false;
+			// 
+			// propertiesContainer
+			// 
+			this.propertiesContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.propertiesContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+			this.propertiesContainer.Location = new System.Drawing.Point(0, 0);
+			this.propertiesContainer.Name = "propertiesContainer";
+			// 
+			// propertiesContainer.Panel1
+			// 
+			this.propertiesContainer.Panel1.Controls.Add(this.streamsListContainer);
+			// 
+			// propertiesContainer.Panel2
+			// 
+			this.propertiesContainer.Panel2.Controls.Add(this.properties);
+			this.propertiesContainer.Size = new System.Drawing.Size(1073, 608);
+			this.propertiesContainer.SplitterDistance = 816;
+			this.propertiesContainer.TabIndex = 1;
 			// 
 			// streamsListContainer
 			// 
@@ -205,24 +223,6 @@ namespace Visualizer
 			this.changeColorToolStripMenuItem.Text = "&Change Color";
 			this.changeColorToolStripMenuItem.Click += new System.EventHandler(this.changeColorToolStripMenuItem_Click);
 			// 
-			// propertiesContainer
-			// 
-			this.propertiesContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.propertiesContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-			this.propertiesContainer.Location = new System.Drawing.Point(0, 0);
-			this.propertiesContainer.Name = "propertiesContainer";
-			// 
-			// propertiesContainer.Panel1
-			// 
-			this.propertiesContainer.Panel1.Controls.Add(this.streamsListContainer);
-			// 
-			// propertiesContainer.Panel2
-			// 
-			this.propertiesContainer.Panel2.Controls.Add(this.properties);
-			this.propertiesContainer.Size = new System.Drawing.Size(1073, 608);
-			this.propertiesContainer.SplitterDistance = 816;
-			this.propertiesContainer.TabIndex = 1;
-			// 
 			// viewport
 			// 
 			this.viewport.BackColor = System.Drawing.Color.Black;
@@ -242,6 +242,7 @@ namespace Visualizer
 			this.properties.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.properties.Location = new System.Drawing.Point(0, 0);
 			this.properties.Name = "properties";
+			this.properties.PropertySort = System.Windows.Forms.PropertySort.NoSort;
 			this.properties.Size = new System.Drawing.Size(253, 608);
 			this.properties.TabIndex = 0;
 			this.properties.ToolbarVisible = false;
@@ -457,13 +458,13 @@ namespace Visualizer
 			this.mainContainer.PerformLayout();
 			this.statusStrip.ResumeLayout(false);
 			this.statusStrip.PerformLayout();
+			this.propertiesContainer.Panel1.ResumeLayout(false);
+			this.propertiesContainer.Panel2.ResumeLayout(false);
+			this.propertiesContainer.ResumeLayout(false);
 			this.streamsListContainer.Panel1.ResumeLayout(false);
 			this.streamsListContainer.Panel2.ResumeLayout(false);
 			this.streamsListContainer.ResumeLayout(false);
 			this.streamsContextMenuStrip.ResumeLayout(false);
-			this.propertiesContainer.Panel1.ResumeLayout(false);
-			this.propertiesContainer.Panel2.ResumeLayout(false);
-			this.propertiesContainer.ResumeLayout(false);
 			this.mainMenu.ResumeLayout(false);
 			this.mainMenu.PerformLayout();
 			this.ResumeLayout(false);

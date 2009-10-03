@@ -15,11 +15,17 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Visualizer.Drawing
+using System.ComponentModel;
+
+namespace Visualizer.Environment
 {
-	public class GraphParameters
+	// TODO: Add description for properties
+	[TypeConverter(typeof(ExpandableObjectConverter))]
+	class GraphSettingsSettings
 	{
+		[DisplayName("Extend Graphs")]
 		public bool ExtendGraphs { get; set; }
+		[DisplayName("Line Width")]
 		public double LineWidth { get; set; }
 	}
 }
