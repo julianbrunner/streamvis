@@ -28,7 +28,7 @@ namespace Visualizer.Drawing
 	public class Graph
 	{
 		readonly Drawer drawer;
-		readonly Diagram diagram;
+		readonly GraphParameters graphParameters;
 		readonly Layouter layouter;
 		readonly ValueManager valueManager;
 		readonly EntryData entryData;
@@ -39,10 +39,10 @@ namespace Visualizer.Drawing
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
 
-		public Graph(Drawer drawer, Diagram diagram, Layouter layouter, TimeManager timeManager, ValueManager valueManager, EntryData entryData)
+		public Graph(Drawer drawer, GraphParameters graphParameters, Layouter layouter, TimeManager timeManager, ValueManager valueManager, EntryData entryData)
 		{
 			this.drawer = drawer;
-			this.diagram = diagram;
+			this.graphParameters = graphParameters;
 			this.layouter = layouter;
 			this.valueManager = valueManager;
 			this.entryData = entryData;
@@ -73,7 +73,7 @@ namespace Visualizer.Drawing
 					Entry? startEntry = null;
 					Entry? endEntry = null;
 
-					if (diagram.ExtendGraphs)
+					if (graphParameters.ExtendGraphs)
 					{
 						if (firstEntry.Time - timeRange.Range.Start > 1.5 * streamManager.EntryResampler.SampleDistance) startEntry = new Entry(timeRange.Range.Start, firstEntry.Value);
 						if (timeRange.Range.End - lastEntry.Time > 1.5 * streamManager.EntryResampler.SampleDistance) endEntry = new Entry(timeRange.Range.End, lastEntry.Value);
@@ -112,7 +112,7 @@ namespace Visualizer.Drawing
 
 					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * layouter.Transformation;
 
-					drawer.DrawLineStrip(vertices, transformation, Color, (float)diagram.LineWidth);
+					drawer.DrawLineStrip(vertices, transformation, Color, (float)graphParameters.LineWidth);
 				}
 			}
 		}

@@ -42,6 +42,7 @@ namespace Visualizer
 		readonly Drawer drawer;
 		readonly Data.Timer timer;
 		readonly List<Graph> graphs;
+		readonly GraphParameters graphParameters;
 		readonly Layouter layouter;
 		readonly TimeManager timeManager;
 		readonly ValueManager valueManager;
@@ -75,6 +76,10 @@ namespace Visualizer
 			Console.WriteLine("Initializing diagram...");
 			this.graphs = new List<Graph>();
 
+			this.graphParameters = new GraphParameters();
+			this.graphParameters.ExtendGraphs = parameters.ExtendGraphs;
+			this.graphParameters.LineWidth = parameters.LineWidth;
+
 			this.layouter = new Layouter(viewport);
 
 			switch (parameters.DiagramType)
@@ -96,9 +101,10 @@ namespace Visualizer
 				default: throw new InvalidOperationException();
 			}
 
-			this.diagram = new Diagram(drawer, graphs, layouter, timeManager, valueManager, dataManager, parameters.MarkersX, parameters.MarkersY, parameters.DiagramColor);
-			this.diagram.ExtendGraphs = parameters.ExtendGraphs;
-			this.diagram.LineWidth = parameters.LineWidth;
+			this.diagram = new Diagram(drawer, graphs, layouter, timeManager, valueManager, dataManager);
+			this.diagram.MarkersX = parameters.MarkersX;
+			this.diagram.MarkersY = parameters.MarkersY;
+			this.diagram.Color = parameters.DiagramColor;
 
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
@@ -186,7 +192,7 @@ namespace Visualizer
 		}
 		private void graphExtensionToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			diagram.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
+			graphParameters.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
 		}
 		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -276,7 +282,7 @@ namespace Visualizer
 
 				foreach (Stream stream in port.Streams)
 				{
-					Graph graph = new Graph(drawer, diagram, layouter, timeManager, valueManager, stream.EntryData);
+					Graph graph = new Graph(drawer, graphParameters, layouter, timeManager, valueManager, stream.EntryData);
 					graph.Color = colorGenerator.NextColor();
 					graphs.Add(graph);
 
