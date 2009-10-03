@@ -29,10 +29,7 @@ namespace Visualizer.Drawing
 	public class Graph
 	{
 		readonly Drawer drawer;
-		readonly GraphSettings graphSettings;
-		readonly Layouter layouter;
-		readonly TimeManager timeManager;
-		readonly ValueManager valueManager;
+		readonly Diagram diagram;
 		readonly EntryData entryData;
 		readonly StreamManager streamManager;
 
@@ -41,16 +38,13 @@ namespace Visualizer.Drawing
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
 
-		public Graph(Drawer drawer, GraphSettings graphSettings, Layouter layouter, TimeManager timeManager, ValueManager valueManager, EntryData entryData)
+		public Graph(Drawer drawer, Diagram diagram, EntryData entryData)
 		{
 			this.drawer = drawer;
-			this.graphSettings = graphSettings;
-			this.layouter = layouter;
-			this.timeManager = timeManager;
-			this.valueManager = valueManager;
+			this.diagram = diagram;
 			this.entryData = entryData;
 
-			streamManager = new StreamManager(entryData, timeManager);
+			streamManager = new StreamManager(diagram.TimeManager, entryData);
 
 			IsDrawn = true;
 		}
@@ -61,8 +55,8 @@ namespace Visualizer.Drawing
 		}
 		public void Draw()
 		{
-			TimeRange timeRange = timeManager.Range;
-			ValueRange valueRange = valueManager.Range;
+			TimeRange timeRange = diagram.TimeManager.Range;
+			ValueRange valueRange = diagram.ValueManager.Range;
 
 			if (IsDrawn && !streamManager.EntryCache.IsEmpty && !timeRange.Range.IsEmpty() && !valueRange.Range.IsEmpty())
 			{
@@ -78,7 +72,7 @@ namespace Visualizer.Drawing
 					Entry? startEntry = null;
 					Entry? endEntry = null;
 
-					if (graphSettings.ExtendGraphs)
+					if (diagram.GraphSettings.ExtendGraphs)
 					{
 						if (firstEntry.Time - segmentTimeRange.Range.Start > 1.5 * streamManager.EntryResampler.SampleDistance) startEntry = new Entry(segmentTimeRange.Range.Start, firstEntry.Value);
 						if (segmentTimeRange.Range.End - lastEntry.Time > 1.5 * streamManager.EntryResampler.SampleDistance) endEntry = new Entry(segmentTimeRange.Range.End, lastEntry.Value);
@@ -115,9 +109,9 @@ namespace Visualizer.Drawing
 						vertices[position++] = (float)endEntry.Value.Value;
 					}
 
-					Matrix4 transformation = valueRange.Transformation * segmentTimeRange.Transformation * layouter.Transformation;
+					Matrix4 transformation = valueRange.Transformation * segmentTimeRange.Transformation * diagram.Layouter.Transformation;
 
-					drawer.DrawLineStrip(vertices, transformation, Color, (float)graphSettings.LineWidth);
+					drawer.DrawLineStrip(vertices, transformation, Color, (float)diagram.GraphSettings.LineWidth);
 				}
 			}
 		}

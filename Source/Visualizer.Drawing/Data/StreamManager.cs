@@ -24,8 +24,8 @@ namespace Visualizer.Drawing.Data
 {
 	public class StreamManager
 	{
-		readonly EntryData entryData;
 		readonly TimeManager timeManager;
+		readonly EntryData entryData;
 		readonly EntryResampler entryResampler;
 		readonly EntryCache entryCache;
 
@@ -34,10 +34,10 @@ namespace Visualizer.Drawing.Data
 		public EntryCache EntryCache { get { return entryCache; } }
 		public IEnumerable<DataSegment> Segments { get; private set; }
 
-		public StreamManager(EntryData entryData, TimeManager timeManager)
+		public StreamManager(TimeManager timeManager, EntryData entryData)
 		{
-			this.entryData = entryData;
 			this.timeManager = timeManager;
+			this.entryData = entryData;
 
 			// TODO: Create and document policy about where to initialize objects
 			entryResampler = new EntryResampler(entryData.Entries);

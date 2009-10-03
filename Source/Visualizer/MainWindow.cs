@@ -290,7 +290,7 @@ namespace Visualizer
 
 				foreach (Stream stream in port.Streams)
 				{
-					Graph graph = new Graph(drawer, graphSettings, layouter, timeManager, valueManager, stream.EntryData);
+					Graph graph = new Graph(drawer, diagram, stream.EntryData);
 					graph.Color = colorGenerator.NextColor();
 					graphs.Add(graph);
 
