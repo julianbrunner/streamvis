@@ -15,37 +15,33 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using Visualizer.Drawing.Timing;
-using Visualizer.Data;
 using Utility;
+using Visualizer.Data;
 
 namespace Visualizer.Drawing.Data
 {
 	public abstract class DataManager
 	{
-		readonly IEnumerable<Graph> graphs;
-		readonly TimeManager timeManager;
+		readonly Diagram diagram;
 		readonly bool dataLogging;
 
-		protected IEnumerable<Graph> Graphs { get { return graphs; } }
+		protected Diagram Diagram { get { return diagram; } }
 
-		protected DataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging)
+		protected DataManager(Diagram diagram, bool dataLogging)
 		{
-			this.graphs = graphs;
-			this.timeManager = timeManager;
+			this.diagram = diagram;
 			this.dataLogging = dataLogging;
 		}
 
 		public virtual void Update()
 		{
 			if (!dataLogging)
-				foreach (Graph graph in graphs)
+				foreach (Graph graph in diagram.Graphs)
 				{
 					SearchList<Entry, Time> entries = graph.EntryData.Entries;
 
-					if (entries.Count > 0 && timeManager.Time - entries[0].Time > 2 * timeManager.Width)
-						entries.Remove(0, entries.FindIndex(timeManager.Time - timeManager.Width));
+					if (entries.Count > 0 && diagram.TimeManager.Time - entries[0].Time > 2 * diagram.TimeManager.Width)
+						entries.Remove(0, entries.FindIndex(diagram.TimeManager.Time - diagram.TimeManager.Width));
 				}
 		}
 	}

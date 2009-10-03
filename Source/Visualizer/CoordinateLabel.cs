@@ -31,19 +31,15 @@ namespace Visualizer
 	{
 		readonly ToolStripStatusLabel label;
 		readonly Viewport viewport;
-		readonly Layouter layouter;
-		readonly TimeManager timeManager;
-		readonly ValueManager valueManager;
+		readonly Diagram diagram;
 
 		Point mousePosition;
 
-		public CoordinateLabel(ToolStripStatusLabel label, Viewport viewport, Layouter layouter, TimeManager timeManager, ValueManager valueManager)
+		public CoordinateLabel(ToolStripStatusLabel label, Viewport viewport, Diagram diagram)
 		{
 			this.label = label;
 			this.viewport = viewport;
-			this.layouter = layouter;
-			this.timeManager = timeManager;
-			this.valueManager = valueManager;
+			this.diagram = diagram;
 
 			this.viewport.MouseEnter += viewport_MouseEnter;
 			this.viewport.MouseLeave += viewport_MouseLeave;
@@ -52,14 +48,14 @@ namespace Visualizer
 
 		public void Draw()
 		{
-			label.Visible = layouter.Area.Contains(mousePosition);
+			label.Visible = diagram.Layouter.Area.Contains(mousePosition);
 
 			if (label.Visible)
 			{
-				Vector2 position = layouter.ReverseMap(new Vector2(mousePosition.X, mousePosition.Y));
+				Vector2 position = diagram.Layouter.ReverseMap(new Vector2(mousePosition.X, mousePosition.Y));
 
-				TimeRange timeRange = timeManager.Range;
-				ValueRange valueRange = valueManager.Range;
+				TimeRange timeRange = diagram.TimeManager.Range;
+				ValueRange valueRange = diagram.ValueManager.Range;
 
 				Time time = timeRange.ReverseMap(position.X);
 				double value = valueRange.ReverseMap(position.Y);

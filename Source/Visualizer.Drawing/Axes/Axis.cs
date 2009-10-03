@@ -25,10 +25,10 @@ namespace Visualizer.Drawing.Axes
 	public abstract class Axis
 	{
 		readonly Drawer drawer;
-		readonly Layouter layouter;
+		readonly Diagram diagram;
 
 		protected Drawer Drawer { get { return drawer; } }
-		protected Layouter Layouter { get { return layouter; } }
+		protected Diagram Diagram { get { return diagram; } }
 		protected abstract IEnumerable<double> Markers { get; }
 
 		public int MarkerCount { get; set; }
@@ -46,10 +46,10 @@ namespace Visualizer.Drawing.Axes
 			}
 		}
 
-		protected Axis(Drawer drawer, Layouter layouter)
+		protected Axis(Drawer drawer, Diagram diagram)
 		{
 			this.drawer = drawer;
-			this.layouter = layouter;
+			this.diagram = diagram;
 		}
 
 		public virtual void Draw() { }

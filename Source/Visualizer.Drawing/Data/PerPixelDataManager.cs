@@ -15,27 +15,21 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
 using Visualizer.Data;
-using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Drawing.Data
 {
+	// TODO: Create and document policy for when to fork a parameter and when to get it from the base class
 	public class PerPixelDataManager : DataManager
 	{
-		readonly Layouter layouter;
-		// TODO: Create and document policy for when to fork a parameter and when to get it from the base class
-		readonly TimeManager timeManager;
 		readonly double samplesPerPixel;
 
-		public PerPixelDataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging, Layouter layouter, double samplesPerPixel)
-			: base(graphs, timeManager, dataLogging)
+		public PerPixelDataManager(Diagram diagram, bool dataLogging, double samplesPerPixel)
+			: base(diagram, dataLogging)
 		{
 			// TODO: Do error checking (samplesPerPixel could be negative, etc.)
 			// TODO: Create and document policy for error checking
 
-			this.layouter = layouter;
-			this.timeManager = timeManager;
 			this.samplesPerPixel = samplesPerPixel;
 		}
 
@@ -43,12 +37,12 @@ namespace Visualizer.Drawing.Data
 		{
 			base.Update();
 
-			double pixelsPerSecond = layouter.Area.Width / timeManager.Width.Seconds;
+			double pixelsPerSecond = Diagram.Layouter.Area.Width / Diagram.TimeManager.Width.Seconds;
 			double samplesPerSecond = samplesPerPixel * pixelsPerSecond;
 
 			// TODO: Remove silent failure
 			if (samplesPerSecond > 0)
-				foreach (Graph graph in Graphs)
+				foreach (Graph graph in Diagram.Graphs)
 					graph.StreamManager.EntryResampler.SampleDistance = new Time(1.0) / samplesPerSecond;
 		}
 	}

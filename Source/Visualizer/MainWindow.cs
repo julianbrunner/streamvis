@@ -84,21 +84,21 @@ namespace Visualizer
 			}
 			diagram.TimeManager.Width = parameters.DiagramWidth;
 
-			if (parameters.RangeLow == parameters.RangeHigh) diagram.ValueManager = new FittingValueManager(diagram.Graphs);
+			if (parameters.RangeLow == parameters.RangeHigh) diagram.ValueManager = new FittingValueManager(diagram);
 			else diagram.ValueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
 
 			switch (parameters.SamplerType)
 			{
-				case SamplerType.PerSecond: diagram.DataManager = new PerSecondDataManager(diagram.Graphs, diagram.TimeManager, parameters.DataLogging, parameters.SamplerFrequency); break;
-				case SamplerType.PerPixel: diagram.DataManager = new PerPixelDataManager(diagram.Graphs, diagram.TimeManager, parameters.DataLogging, diagram.Layouter, parameters.SamplerFrequency); break;
+				case SamplerType.PerSecond: diagram.DataManager = new PerSecondDataManager(diagram, parameters.DataLogging, parameters.SamplerFrequency); break;
+				case SamplerType.PerPixel: diagram.DataManager = new PerPixelDataManager(diagram, parameters.DataLogging, parameters.SamplerFrequency); break;
 				default: throw new InvalidOperationException();
 			}
 
-			diagram.AxisX = new AxisX(drawer, diagram.Layouter, diagram.TimeManager);
+			diagram.AxisX = new AxisX(drawer, diagram);
 			diagram.AxisX.MarkerCount = parameters.MarkersX;
 			diagram.AxisX.Color = parameters.DiagramColor;
 
-			diagram.AxisY = new AxisY(drawer, diagram.Layouter, diagram.ValueManager);
+			diagram.AxisY = new AxisY(drawer, diagram);
 			diagram.AxisY.MarkerCount = parameters.MarkersY;
 			diagram.AxisY.Color = parameters.DiagramColor;
 
@@ -106,7 +106,7 @@ namespace Visualizer
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
 
 			Console.WriteLine("Initializing coordinate display");
-			this.coordinateLabel = new CoordinateLabel(coordinateStatusLabel, viewport, diagram.Layouter, diagram.TimeManager, diagram.ValueManager);
+			this.coordinateLabel = new CoordinateLabel(coordinateStatusLabel, viewport, diagram);
 
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);

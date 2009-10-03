@@ -15,9 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
 using Visualizer.Data;
-using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Drawing.Data
 {
@@ -25,8 +23,8 @@ namespace Visualizer.Drawing.Data
 	{
 		readonly double samplesPerSecond;
 
-		public PerSecondDataManager(IEnumerable<Graph> graphs, TimeManager timeManager, bool dataLogging, double samplesPerSecond)
-			: base(graphs, timeManager, dataLogging)
+		public PerSecondDataManager(Diagram diagram, bool dataLogging, double samplesPerSecond)
+			: base(diagram, dataLogging)
 		{
 			this.samplesPerSecond = samplesPerSecond;
 		}
@@ -35,7 +33,7 @@ namespace Visualizer.Drawing.Data
 		{
 			base.Update();
 
-			foreach (Graph graph in Graphs)
+			foreach (Graph graph in Diagram.Graphs)
 				graph.StreamManager.EntryResampler.SampleDistance = new Time(1.0) / samplesPerSecond;
 		}
 	}

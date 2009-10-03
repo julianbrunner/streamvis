@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
 using System.Linq;
 using Utility;
 using Visualizer.Data;
@@ -25,15 +24,15 @@ namespace Visualizer.Drawing.Values
 {
 	public class FittingValueManager : ValueManager
 	{
-		readonly IEnumerable<Graph> graphs;
+		readonly Diagram diagram;
 
 		ValueRange range;
 
 		public override ValueRange Range { get { return range; } }
 
-		public FittingValueManager(IEnumerable<Graph> graphs)
+		public FittingValueManager(Diagram diagram)
 		{
-			this.graphs = graphs;
+			this.diagram = diagram;
 		}
 
 		public override void Update()
@@ -43,7 +42,7 @@ namespace Visualizer.Drawing.Values
 			double minimum = double.NaN;
 			double maximum = double.NaN;
 
-			foreach (Graph graph in graphs.Where(graph => graph.IsDrawn))
+			foreach (Graph graph in diagram.Graphs.Where(graph => graph.IsDrawn))
 				foreach (DataSegment graphSegment in graph.StreamManager.Segments)
 					foreach (Entry entry in graphSegment.Entries)
 					{

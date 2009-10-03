@@ -28,13 +28,11 @@ namespace Visualizer.Drawing.Axes
 {
 	public class AxisX : Axis
 	{
-		readonly TimeManager timeManager;
-
 		protected override IEnumerable<double> Markers
 		{
 			get
 			{
-				TimeRange timeRange = timeManager.Range;
+				TimeRange timeRange = Diagram.TimeManager.Range;
 
 				if (timeRange.Range.IsEmpty()) yield break;
 
@@ -44,29 +42,25 @@ namespace Visualizer.Drawing.Axes
 			}
 		}
 
-		public AxisX(Drawer drawer, Layouter layouter, TimeManager timeManager)
-			: base(drawer, layouter)
-		{
-			this.timeManager = timeManager;
-		}
+		public AxisX(Drawer drawer, Diagram diagram) : base(drawer, diagram) { }
 
 		public override void Draw()
 		{
 			base.Draw();
 
-			TimeRange timeRange = timeManager.Range;
+			TimeRange timeRange = Diagram.TimeManager.Range;
 
 			Vector2 offset = new Vector2(0, 0);
 
-			Vector2 lineStart = Layouter.ForwardMap(Vector2.Zero) + offset;
-			Vector2 lineEnd = Layouter.ForwardMap(Vector2.UnitX) + offset;
+			Vector2 lineStart = Diagram.Layouter.ForwardMap(Vector2.Zero) + offset;
+			Vector2 lineEnd = Diagram.Layouter.ForwardMap(Vector2.UnitX) + offset;
 
 			Drawer.DrawLine(lineStart, lineEnd, Color, 1);
 
 			// TODO: Remove the selector once TimeRange and ValueRange are unified
 			foreach (Time time in Markers.Select(time => new Time(time)))
 			{
-				Vector2 markerStart = Layouter.ForwardMap((float)timeRange.ForwardMap(time) * Vector2.UnitX) + offset;
+				Vector2 markerStart = Diagram.Layouter.ForwardMap((float)timeRange.ForwardMap(time) * Vector2.UnitX) + offset;
 				Vector2 markerEnd = markerStart + new Vector2(0, 5);
 
 				Drawer.DrawLine(markerStart, markerEnd, Color, 1);
