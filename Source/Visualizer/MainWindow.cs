@@ -65,51 +65,48 @@ namespace Visualizer
 			this.timer = new Data.Timer();
 
 			Console.WriteLine("Initializing diagram...");
-			List<Graph>  graphs = new List<Graph>();
+			diagram = new Diagram();
 
-			GraphSettings graphSettings = new GraphSettings();
-			graphSettings.ExtendGraphs = parameters.ExtendGraphs;
-			graphSettings.LineWidth = parameters.LineWidth;
+			diagram.Graphs = new List<Graph>();
 
-			Layouter layouter = new Layouter(viewport);
+			diagram.GraphSettings = new GraphSettings();
+			diagram.GraphSettings.ExtendGraphs = parameters.ExtendGraphs;
+			diagram.GraphSettings.LineWidth = parameters.LineWidth;
 
-			TimeManager timeManager;
+			diagram.Layouter = new Layouter(viewport);
+
 			switch (parameters.DiagramType)
 			{
-				case DiagramType.Continuous: timeManager = new ContinuousTimeManager(timer); break;
-				case DiagramType.Shiftting: timeManager = new ShiftingTimeManager(timer, parameters.DiagramTypeParameter); break;
-				case DiagramType.Wrapping: timeManager = new WrappingTimeManager(timer, parameters.DiagramTypeParameter); break;
+				case DiagramType.Continuous: diagram.TimeManager = new ContinuousTimeManager(timer); break;
+				case DiagramType.Shiftting: diagram.TimeManager = new ShiftingTimeManager(timer, parameters.DiagramTypeParameter); break;
+				case DiagramType.Wrapping: diagram.TimeManager = new WrappingTimeManager(timer, parameters.DiagramTypeParameter); break;
 				default: throw new InvalidOperationException();
 			}
-			timeManager.Width = parameters.DiagramWidth;
+			diagram.TimeManager.Width = parameters.DiagramWidth;
 
-			ValueManager valueManager;
-			if (parameters.RangeLow == parameters.RangeHigh) valueManager = new FittingValueManager(graphs);
-			else valueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
+			if (parameters.RangeLow == parameters.RangeHigh) diagram.ValueManager = new FittingValueManager(diagram.Graphs);
+			else diagram.ValueManager = new FixedValueManager(parameters.RangeLow, parameters.RangeHigh);
 
-			DataManager dataManager;
 			switch (parameters.SamplerType)
 			{
-				case SamplerType.PerSecond: dataManager = new PerSecondDataManager(graphs, timeManager, parameters.DataLogging, parameters.SamplerFrequency); break;
-				case SamplerType.PerPixel: dataManager = new PerPixelDataManager(graphs, timeManager, parameters.DataLogging, layouter, parameters.SamplerFrequency); break;
+				case SamplerType.PerSecond: diagram.DataManager = new PerSecondDataManager(diagram.Graphs, diagram.TimeManager, parameters.DataLogging, parameters.SamplerFrequency); break;
+				case SamplerType.PerPixel: diagram.DataManager = new PerPixelDataManager(diagram.Graphs, diagram.TimeManager, parameters.DataLogging, diagram.Layouter, parameters.SamplerFrequency); break;
 				default: throw new InvalidOperationException();
 			}
 
-			Axis axisX = new AxisX(drawer, layouter, timeManager);
-			axisX.MarkerCount = parameters.MarkersX;
-			axisX.Color = parameters.DiagramColor;
+			diagram.AxisX = new AxisX(drawer, diagram.Layouter, diagram.TimeManager);
+			diagram.AxisX.MarkerCount = parameters.MarkersX;
+			diagram.AxisX.Color = parameters.DiagramColor;
 
-			Axis axisY = new AxisY(drawer, layouter, valueManager);
-			axisY.MarkerCount = parameters.MarkersY;
-			axisY.Color = parameters.DiagramColor;
-
-			this.diagram = new Diagram(graphs, graphSettings, layouter, timeManager, valueManager, dataManager, axisX, axisY);
+			diagram.AxisY = new AxisY(drawer, diagram.Layouter, diagram.ValueManager);
+			diagram.AxisY.MarkerCount = parameters.MarkersY;
+			diagram.AxisY.Color = parameters.DiagramColor;
 
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
 
 			Console.WriteLine("Initializing coordinate display");
-			this.coordinateLabel = new CoordinateLabel(coordinateStatusLabel, viewport, layouter, timeManager, valueManager);
+			this.coordinateLabel = new CoordinateLabel(coordinateStatusLabel, viewport, diagram.Layouter, diagram.TimeManager, diagram.ValueManager);
 
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);

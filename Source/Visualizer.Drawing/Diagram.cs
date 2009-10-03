@@ -26,40 +26,21 @@ namespace Visualizer.Drawing
 {
 	public class Diagram : IComponent, IUpdateable, IDrawable
 	{
-		readonly List<Graph> graphs;
-		readonly GraphSettings graphSettings;
-		readonly Layouter layouter;
-		readonly TimeManager timeManager;
-		readonly ValueManager valueManager;
-		readonly DataManager dataManager;
-		readonly Axis axisX;
-		readonly Axis axisY;
-
 		// TODO: Don't expose List<T>
-		public List<Graph> Graphs { get { return graphs; } }
-		public GraphSettings GraphSettings { get { return graphSettings; } }
-		public Layouter Layouter { get { return layouter; } }
-		public TimeManager TimeManager { get { return timeManager; } }
-		public ValueManager ValueManager { get { return valueManager; } }
-		public DataManager DataManager { get { return dataManager; } }
-		public Axis AxisX { get { return axisX; } }
-		public Axis AxisY { get { return axisY; } }
+		public List<Graph> Graphs { get; set; }
+		public GraphSettings GraphSettings { get; set; }
+		public Layouter Layouter { get; set; }
+		public TimeManager TimeManager { get; set; }
+		public ValueManager ValueManager { get; set; }
+		public DataManager DataManager { get; set; }
+		public Axis AxisX { get; set; }
+		public Axis AxisY { get; set; }
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 
-		// TODO: Don't expose List<T>
-		public Diagram(List<Graph> graphs, GraphSettings graphSettings, Layouter layouter, TimeManager timeManager, ValueManager valueManager, DataManager dataManager, Axis axisX, Axis axisY)
+		public Diagram()
 		{
-			this.graphs = graphs;
-			this.graphSettings = graphSettings;
-			this.layouter = layouter;
-			this.timeManager = timeManager;
-			this.valueManager = valueManager;
-			this.dataManager = dataManager;
-			this.axisX = axisX;
-			this.axisY = axisY;
-
 			IsUpdated = true;
 			IsDrawn = true;
 		}
@@ -69,21 +50,21 @@ namespace Visualizer.Drawing
 			if (IsUpdated)
 			{
 				// TODO: This looks random
-				timeManager.Update();
-				dataManager.Update();
-				foreach (Graph graph in graphs) graph.Update();
-				valueManager.Update();
-				layouter.Update(axisY.MaximumCaptionSize.Width, axisX.MaximumCaptionSize.Height);
+				TimeManager.Update();
+				DataManager.Update();
+				foreach (Graph graph in Graphs) graph.Update();
+				ValueManager.Update();
+				Layouter.Update(AxisY.MaximumCaptionSize.Width, AxisX.MaximumCaptionSize.Height);
 			}
 		}
 		public void Draw()
 		{
 			if (IsDrawn)
 			{
-				foreach (Graph graph in graphs) graph.Draw();
+				foreach (Graph graph in Graphs) graph.Draw();
 
-				axisX.Draw();
-				axisY.Draw();
+				AxisX.Draw();
+				AxisY.Draw();
 			}
 		}
 	}
