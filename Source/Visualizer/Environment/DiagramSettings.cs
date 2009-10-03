@@ -16,7 +16,6 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
-using System.Drawing;
 using Visualizer.Drawing;
 
 namespace Visualizer.Environment
@@ -26,6 +25,7 @@ namespace Visualizer.Environment
 	class DiagramSettings
 	{
 		readonly Diagram diagram;
+		readonly GraphSettingsSettings graphSettings;
 		readonly AxisSettings axisX;
 		readonly AxisSettings axisY;
 
@@ -42,6 +42,9 @@ namespace Visualizer.Environment
 			set { diagram.IsDrawn = value; }
 		}
 
+		[Description("Contains settings concerning the Graphs.")]
+		[DisplayName("Graph Settings")]
+		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
 		[DisplayName("X-Axis")]
 		public AxisSettings AxisX { get { return axisX; } }
 		[DisplayName("Y-Axis")]
@@ -51,6 +54,7 @@ namespace Visualizer.Environment
 		{
 			this.diagram = diagram;
 
+			this.graphSettings = new GraphSettingsSettings(diagram.GraphSettings);
 			this.axisX = new AxisSettings(diagram.AxisX);
 			this.axisY = new AxisSettings(diagram.AxisY);
 		}

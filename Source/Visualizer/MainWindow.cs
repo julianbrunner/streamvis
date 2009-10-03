@@ -107,7 +107,7 @@ namespace Visualizer
 			this.axisY.MarkerCount = parameters.MarkersY;
 			this.axisY.Color = parameters.DiagramColor;
 
-			this.diagram = new Diagram(graphs, layouter, timeManager, valueManager, dataManager, axisX, axisY);
+			this.diagram = new Diagram(graphs, graphSettings, layouter, timeManager, valueManager, dataManager, axisX, axisY);
 
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
@@ -138,7 +138,7 @@ namespace Visualizer
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
 
-			this.settings = new Settings(diagram, graphSettings);
+			this.settings = new Settings(diagram);
 
 			properties.SelectedObject = settings;
 		}

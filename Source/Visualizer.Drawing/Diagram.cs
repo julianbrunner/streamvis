@@ -27,6 +27,7 @@ namespace Visualizer.Drawing
 	public class Diagram : IComponent, IUpdateable, IDrawable
 	{
 		readonly IEnumerable<Graph> graphs;
+		readonly GraphSettings graphSettings;
 		readonly Layouter layouter;
 		readonly TimeManager timeManager;
 		readonly ValueManager valueManager;
@@ -36,12 +37,19 @@ namespace Visualizer.Drawing
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
+		public IEnumerable<Graph> Graphs { get { return graphs; } }
+		public GraphSettings GraphSettings { get { return graphSettings; } }
+		public Layouter Layouter { get { return layouter; } }
+		public TimeManager TimeManager { get { return timeManager; } }
+		public ValueManager ValueManager { get { return valueManager; } }
+		public DataManager DataManager { get { return dataManager; } }
 		public Axis AxisX { get { return axisX; } }
 		public Axis AxisY { get { return axisY; } }
 
-		public Diagram(IEnumerable<Graph> graphs, Layouter layouter, TimeManager timeManager, ValueManager valueManager, DataManager dataManager, Axis axisX, Axis axisY)
+		public Diagram(IEnumerable<Graph> graphs, GraphSettings graphSettings, Layouter layouter, TimeManager timeManager, ValueManager valueManager, DataManager dataManager, Axis axisX, Axis axisY)
 		{
 			this.graphs = graphs;
+			this.graphSettings = graphSettings;
 			this.layouter = layouter;
 			this.timeManager = timeManager;
 			this.valueManager = valueManager;

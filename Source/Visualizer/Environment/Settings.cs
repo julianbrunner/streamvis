@@ -23,19 +23,14 @@ namespace Visualizer.Environment
 	class Settings
 	{
 		readonly DiagramSettings diagram;
-		readonly GraphSettingsSettings graphSettings;
 
 		[Description("Contains settings concerning the Diagram.")]
 		[DisplayName("Diagram")]
 		public DiagramSettings Diagram { get { return diagram; } }
-		[Description("Contains settings concerning the Graphs.")]
-		[DisplayName("Graph Settings")]
-		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
 
-		public Settings(Diagram diagram, GraphSettings graphSettings)
+		public Settings(Diagram diagram)
 		{
 			this.diagram = new DiagramSettings(diagram);
-			this.graphSettings = new GraphSettingsSettings(graphSettings);
 		}
 	}
 }
