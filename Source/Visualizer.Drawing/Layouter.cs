@@ -59,7 +59,7 @@ namespace Visualizer.Drawing
 				-((source.Y - Area.Bottom) / Area.Height)
 			);
 		}
-		public virtual void Update(int timeLabelsHeight, int valueLabelsWidth)
+		public virtual void Update(int valueLabelsWidth, int timeLabelsHeight)
 		{
 			int borderLeft = baseBorderLeft + valueLabelsWidth;
 			int borderRight = baseBorderRight;

@@ -18,6 +18,7 @@
 using System.Drawing;
 using Graphics;
 using OpenTK.Math;
+using Utility.Extensions;
 using Visualizer.Data;
 using Visualizer.Drawing.Data;
 using Visualizer.Drawing.Timing;
@@ -30,6 +31,7 @@ namespace Visualizer.Drawing
 		readonly Drawer drawer;
 		readonly GraphSettings graphSettings;
 		readonly Layouter layouter;
+		readonly TimeManager timeManager;
 		readonly ValueManager valueManager;
 		readonly EntryData entryData;
 		readonly StreamManager streamManager;
@@ -44,9 +46,10 @@ namespace Visualizer.Drawing
 			this.drawer = drawer;
 			this.graphSettings = graphSettings;
 			this.layouter = layouter;
+			this.timeManager = timeManager;
 			this.valueManager = valueManager;
 			this.entryData = entryData;
-			
+
 			streamManager = new StreamManager(entryData, timeManager);
 
 			IsDrawn = true;
@@ -58,29 +61,31 @@ namespace Visualizer.Drawing
 		}
 		public void Draw()
 		{
-			if (IsDrawn && !streamManager.EntryCache.IsEmpty)
-			{
-				ValueRange valueRange = valueManager.Range;
+			TimeRange timeRange = timeManager.Range;
+			ValueRange valueRange = valueManager.Range;
 
+			if (IsDrawn && !streamManager.EntryCache.IsEmpty && !timeRange.Range.IsEmpty() && !valueRange.Range.IsEmpty())
+			{
 				Entry firstEntry = streamManager.EntryCache.FirstEntry;
 				Entry lastEntry = streamManager.EntryCache.LastEntry;
 
 				// TODO: Maybe screw the segment manager and do it the old way, would also be more symmetric with the timeManager
 				foreach (DataSegment segment in streamManager.Segments)
 				{
-					TimeRange timeRange = segment.TimeRange;
+					// TODO: Inline this?
+					TimeRange segmentTimeRange = segment.TimeRange;
 
 					Entry? startEntry = null;
 					Entry? endEntry = null;
 
 					if (graphSettings.ExtendGraphs)
 					{
-						if (firstEntry.Time - timeRange.Range.Start > 1.5 * streamManager.EntryResampler.SampleDistance) startEntry = new Entry(timeRange.Range.Start, firstEntry.Value);
-						if (timeRange.Range.End - lastEntry.Time > 1.5 * streamManager.EntryResampler.SampleDistance) endEntry = new Entry(timeRange.Range.End, lastEntry.Value);
+						if (firstEntry.Time - segmentTimeRange.Range.Start > 1.5 * streamManager.EntryResampler.SampleDistance) startEntry = new Entry(segmentTimeRange.Range.Start, firstEntry.Value);
+						if (segmentTimeRange.Range.End - lastEntry.Time > 1.5 * streamManager.EntryResampler.SampleDistance) endEntry = new Entry(segmentTimeRange.Range.End, lastEntry.Value);
 						if (segment.Entries.Length == 0)
 						{
-							if (startEntry == null) startEntry = new Entry(timeRange.Range.Start, endEntry.Value.Value);
-							if (endEntry == null) endEntry = new Entry(timeRange.Range.End, startEntry.Value.Value);
+							if (startEntry == null) startEntry = new Entry(segmentTimeRange.Range.Start, endEntry.Value.Value);
+							if (endEntry == null) endEntry = new Entry(segmentTimeRange.Range.End, startEntry.Value.Value);
 						}
 					}
 
@@ -110,7 +115,7 @@ namespace Visualizer.Drawing
 						vertices[position++] = (float)endEntry.Value.Value;
 					}
 
-					Matrix4 transformation = valueRange.Transformation * timeRange.Transformation * layouter.Transformation;
+					Matrix4 transformation = valueRange.Transformation * segmentTimeRange.Transformation * layouter.Transformation;
 
 					drawer.DrawLineStrip(vertices, transformation, Color, (float)graphSettings.LineWidth);
 				}

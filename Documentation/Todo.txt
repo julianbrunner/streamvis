@@ -1,3 +1,5 @@
+TODO: Can TimeRange and ValueRange be merged? Why not handle Times as doubles?
+
 TODO: Better playback controls
 TODO: Vertical zoom
 TODO: Add ability to switch Value-/TimeManagers through GUI while drawing

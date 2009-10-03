@@ -40,25 +40,6 @@ namespace Visualizer.Environment
 			set { diagram.IsDrawn = value; }
 		}
 
-		[DisplayName("X-Axis Markers")]
-		public int MarkersX
-		{
-			get { return diagram.MarkersX; }
-			set { diagram.MarkersX = value; }
-		}
-		[DisplayName("Y-Axis Markers")]
-		public int MarkersY
-		{
-			get { return diagram.MarkersY; }
-			set { diagram.MarkersY = value; }
-		}
-		[DisplayName("Color")]
-		public Color Color
-		{
-			get { return diagram.Color; }
-			set { diagram.Color = value; }
-		}
-
 		public DiagramSettings(Diagram diagram)
 		{
 			this.diagram = diagram;

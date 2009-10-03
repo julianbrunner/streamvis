@@ -26,6 +26,7 @@ using OpenTK.Math;
 using Utility;
 using Visualizer.Data;
 using Visualizer.Drawing;
+using Visualizer.Drawing.Axes;
 using Visualizer.Drawing.Data;
 using Visualizer.Drawing.Timing;
 using Visualizer.Drawing.Values;
@@ -46,6 +47,8 @@ namespace Visualizer
 		readonly TimeManager timeManager;
 		readonly ValueManager valueManager;
 		readonly DataManager dataManager;
+		readonly Axis axisX;
+		readonly Axis axisY;
 		readonly Diagram diagram;
 		readonly VisibleFrameCounter frameCounter;
 		readonly CoordinateLabel coordinateLabel;
@@ -97,10 +100,14 @@ namespace Visualizer
 				default: throw new InvalidOperationException();
 			}
 
-			this.diagram = new Diagram(drawer, graphs, layouter, timeManager, valueManager, dataManager);
-			this.diagram.MarkersX = parameters.MarkersX;
-			this.diagram.MarkersY = parameters.MarkersY;
-			this.diagram.Color = parameters.DiagramColor;
+			this.axisX = new AxisX(drawer, layouter, timeManager);
+			this.axisX.MarkerCount = parameters.MarkersX;
+			this.axisX.Color = parameters.DiagramColor;
+			this.axisY = new AxisY(drawer, layouter, valueManager);
+			this.axisY.MarkerCount = parameters.MarkersY;
+			this.axisY.Color = parameters.DiagramColor;
+
+			this.diagram = new Diagram(graphs, layouter, timeManager, valueManager, dataManager, axisX, axisY);
 
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);

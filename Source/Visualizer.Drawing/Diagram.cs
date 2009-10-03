@@ -16,13 +16,8 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 using Graphics;
-using OpenTK.Math;
-using Utility.Extensions;
-using Utility.Utilities;
-using Visualizer.Data;
+using Visualizer.Drawing.Axes;
 using Visualizer.Drawing.Data;
 using Visualizer.Drawing.Timing;
 using Visualizer.Drawing.Values;
@@ -31,27 +26,26 @@ namespace Visualizer.Drawing
 {
 	public class Diagram : IComponent, IUpdateable, IDrawable
 	{
-		readonly Drawer drawer;
 		readonly IEnumerable<Graph> graphs;
 		readonly Layouter layouter;
 		readonly TimeManager timeManager;
 		readonly ValueManager valueManager;
 		readonly DataManager dataManager;
+		readonly Axis axisX;
+		readonly Axis axisY;
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
-		public int MarkersX { get; set; }
-		public int MarkersY { get; set; }
-		public Color Color { get; set; }
 
-		public Diagram(Drawer drawer, IEnumerable<Graph> graphs, Layouter layouter, TimeManager timeManager, ValueManager valueManager, DataManager dataManager)
+		public Diagram(IEnumerable<Graph> graphs, Layouter layouter, TimeManager timeManager, ValueManager valueManager, DataManager dataManager, Axis axisX, Axis axisY)
 		{
-			this.drawer = drawer;
 			this.graphs = graphs;
 			this.layouter = layouter;
 			this.timeManager = timeManager;
 			this.valueManager = valueManager;
 			this.dataManager = dataManager;
+			this.axisX = axisX;
+			this.axisY = axisY;
 
 			IsUpdated = true;
 			IsDrawn = true;
@@ -66,78 +60,20 @@ namespace Visualizer.Drawing
 				dataManager.Update();
 				foreach (Graph graph in graphs) graph.Update();
 				valueManager.Update();
-
-				IEnumerable<Time> times = GetTimeMarkers(timeManager.Range, MarkersX);
-				int maxHeight = times.Any() ? times.Max(time => drawer.GetTextSize(time.Seconds).Height) : 0;
-
-				IEnumerable<double> values = GetValueMarkers(valueManager.Range, MarkersY);
-				int maxWidth = values.Any() ? values.Max(value => drawer.GetTextSize(value).Width) : 0;
-
-				layouter.Update(maxHeight, maxWidth);
+				layouter.Update(axisY.MaximumCaptionSize.Width, axisX.MaximumCaptionSize.Height);
+				axisX.Update();
+				axisY.Update();
 			}
 		}
 		public void Draw()
 		{
 			if (IsDrawn)
 			{
-				TimeRange timeRange = timeManager.Range;
-				ValueRange valueRange = valueManager.Range;
+				foreach (Graph graph in graphs) graph.Draw();
 
-				if (!timeRange.Range.IsEmpty() && !valueManager.Range.Range.IsEmpty())
-					foreach (Graph graph in graphs)
-						graph.Draw();
-
-				DrawAxisX(timeRange, valueRange);
-				DrawAxisY(timeRange, valueRange);
+				axisX.Draw();
+				axisY.Draw();
 			}
-		}
-
-		void DrawAxisX(TimeRange timeRange, ValueRange valueRange)
-		{
-			Vector2 offset = new Vector2(0, 0);
-
-			Vector2 start = layouter.ForwardMap(Vector2.Zero) + offset;
-			Vector2 end = layouter.ForwardMap(Vector2.UnitX) + offset;
-
-			drawer.DrawLine(start, end, Color, 1);
-
-			foreach (Time time in GetTimeMarkers(timeRange, MarkersX))
-			{
-				Vector2 markerStart = layouter.ForwardMap((float)timeRange.ForwardMap(time) * Vector2.UnitX) + offset;
-				Vector2 markerEnd = markerStart + new Vector2(0, 5);
-				drawer.DrawLine(markerStart, markerEnd, Color, 1);
-				drawer.DrawNumber(time.Seconds, markerEnd + new Vector2(0, 2), Color, TextAlignment.Center);
-			}
-		}
-		void DrawAxisY(TimeRange timeRange, ValueRange valueRange)
-		{
-			Vector2 offset = new Vector2(0, 0);
-
-			Vector2 start = layouter.ForwardMap(Vector2.Zero) + offset;
-			Vector2 end = layouter.ForwardMap(Vector2.UnitY) + offset;
-
-			drawer.DrawLine(start, end, Color, 1);
-
-			foreach (double value in GetValueMarkers(valueRange, MarkersY))
-			{
-				Vector2 markerStart = layouter.ForwardMap((float)valueRange.ForwardMap(value) * Vector2.UnitY) + offset;
-				Vector2 markerEnd = markerStart + new Vector2(-5, 0);
-				drawer.DrawLine(markerStart, markerEnd, Color, 1);
-				drawer.DrawNumber(value, markerEnd + new Vector2(-2, -6), Color, TextAlignment.Far);
-			}
-		}
-
-		static IEnumerable<Time> GetTimeMarkers(TimeRange timeRange, int count)
-		{
-			if (timeRange.Range.IsEmpty()) yield break;
-
-			foreach (double time in DoubleUtility.GetMarkers(timeRange.Range.Start.Seconds, timeRange.Range.End.Seconds, count)) yield return new Time(time);
-		}
-		static IEnumerable<double> GetValueMarkers(ValueRange valueRange, int count)
-		{
-			if (valueRange.Range.IsEmpty()) yield break;
-
-			foreach (double value in DoubleUtility.GetMarkers(valueRange.Range.Start, valueRange.Range.End, count)) yield return value;
 		}
 	}
 }

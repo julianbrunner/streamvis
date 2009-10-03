@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Axes\Axis.cs" />
+    <Compile Include="Axes\AxisX.cs" />
+    <Compile Include="Axes\AxisY.cs" />
     <Compile Include="GraphSettings.cs" />
     <Compile Include="Data\CacheFragment.cs" />
     <Compile Include="Data\StreamManager.cs" />
