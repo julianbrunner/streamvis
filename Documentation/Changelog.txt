@@ -1,6 +1,7 @@
 Version 0.10
 	- Added possibility to name individual streams
 	- Added possibility to scale the time axis (right mouse click + drag)
+	- Fixed a bug causing weird behaviour in the coordinate label
 
 Version 0.9
 	- Moved to OpenTK 0.9.8.3

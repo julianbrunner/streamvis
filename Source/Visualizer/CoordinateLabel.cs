@@ -33,6 +33,7 @@ namespace Visualizer
 		readonly Viewport viewport;
 		readonly Diagram diagram;
 
+		bool mouseIsideViewport = false;
 		Point mousePosition;
 
 		public CoordinateLabel(ToolStripStatusLabel label, Viewport viewport, Diagram diagram)
@@ -48,7 +49,7 @@ namespace Visualizer
 
 		public void Draw()
 		{
-			label.Visible = diagram.Layouter.Area.Contains(mousePosition);
+			label.Visible = mouseIsideViewport && diagram.Layouter.Area.Contains(mousePosition);
 
 			if (label.Visible)
 			{
@@ -66,11 +67,11 @@ namespace Visualizer
 
 		void viewport_MouseEnter(object sender, EventArgs e)
 		{
-			label.Visible = true;
+			mouseIsideViewport = true;
 		}
 		void viewport_MouseLeave(object sender, EventArgs e)
 		{
-			label.Visible = false;
+			mouseIsideViewport = false;
 		}
 		void viewport_MouseMove(object sender, MouseEventArgs e)
 		{
