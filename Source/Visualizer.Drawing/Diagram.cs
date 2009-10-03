@@ -35,6 +35,7 @@ namespace Visualizer.Drawing
 		readonly Axis axisX;
 		readonly Axis axisY;
 
+		// TODO: Don't expose List<T>
 		public List<Graph> Graphs { get { return graphs; } }
 		public GraphSettings GraphSettings { get { return graphSettings; } }
 		public Layouter Layouter { get { return layouter; } }
@@ -47,6 +48,7 @@ namespace Visualizer.Drawing
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 
+		// TODO: Don't expose List<T>
 		public Diagram(List<Graph> graphs, GraphSettings graphSettings, Layouter layouter, TimeManager timeManager, ValueManager valueManager, DataManager dataManager, Axis axisX, Axis axisY)
 		{
 			this.graphs = graphs;
