@@ -26,14 +26,20 @@ namespace Visualizer.Environment
 	{
 		readonly Diagram diagram;
 		readonly GraphSettingsSettings graphSettings;
+		readonly LayouterSettings layouter;
 		readonly AxisXSettings axisX;
 		readonly AxisYSettings axisY;
 
 		[Description("Contains settings concerning the Graphs.")]
 		[DisplayName("Graph Settings")]
 		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
+		[Description("Contains settings concerning the Layouter.")]
+		[DisplayName("Layouter Settings")]
+		public LayouterSettings Layouter { get { return layouter; } }
+		[Description("Contains settings concerning the X-Axis.")]
 		[DisplayName("X-Axis")]
 		public AxisXSettings AxisX { get { return axisX; } }
+		[Description("Contains settings concerning the Y-Axis.")]
 		[DisplayName("Y-Axis")]
 		public AxisYSettings AxisY { get { return axisY; } }
 
@@ -55,6 +61,7 @@ namespace Visualizer.Environment
 			this.diagram = diagram;
 
 			this.graphSettings = new GraphSettingsSettings(diagram);
+			this.layouter = new LayouterSettings(diagram);
 			this.axisX = new AxisXSettings(diagram);
 			this.axisY = new AxisYSettings(diagram);
 		}

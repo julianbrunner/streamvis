@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="CoordinateLabel.cs" />
     <Compile Include="Environment\AxisYSettings.cs" />
+    <Compile Include="Environment\LayouterSettings.cs" />
     <Compile Include="ValueManagerType.cs" />
     <Compile Include="Environment\AxisXSettings.cs" />
     <Compile Include="Environment\GraphSettingsSettings.cs" />
