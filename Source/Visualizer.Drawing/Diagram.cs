@@ -35,8 +35,6 @@ namespace Visualizer.Drawing
 		readonly Axis axisX;
 		readonly Axis axisY;
 
-		public bool IsUpdated { get; set; }
-		public bool IsDrawn { get; set; }
 		public IEnumerable<Graph> Graphs { get { return graphs; } }
 		public GraphSettings GraphSettings { get { return graphSettings; } }
 		public Layouter Layouter { get { return layouter; } }
@@ -45,6 +43,9 @@ namespace Visualizer.Drawing
 		public DataManager DataManager { get { return dataManager; } }
 		public Axis AxisX { get { return axisX; } }
 		public Axis AxisY { get { return axisY; } }
+
+		public bool IsUpdated { get; set; }
+		public bool IsDrawn { get; set; }
 
 		public Diagram(IEnumerable<Graph> graphs, GraphSettings graphSettings, Layouter layouter, TimeManager timeManager, ValueManager valueManager, DataManager dataManager, Axis axisX, Axis axisY)
 		{

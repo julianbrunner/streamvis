@@ -29,6 +29,14 @@ namespace Visualizer.Environment
 		readonly AxisSettings axisX;
 		readonly AxisSettings axisY;
 
+		[Description("Contains settings concerning the Graphs.")]
+		[DisplayName("Graph Settings")]
+		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
+		[DisplayName("X-Axis")]
+		public AxisSettings AxisX { get { return axisX; } }
+		[DisplayName("Y-Axis")]
+		public AxisSettings AxisY { get { return axisY; } }
+
 		[DisplayName("Update")]
 		public bool IsUpdated
 		{
@@ -41,14 +49,6 @@ namespace Visualizer.Environment
 			get { return diagram.IsDrawn; }
 			set { diagram.IsDrawn = value; }
 		}
-
-		[Description("Contains settings concerning the Graphs.")]
-		[DisplayName("Graph Settings")]
-		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
-		[DisplayName("X-Axis")]
-		public AxisSettings AxisX { get { return axisX; } }
-		[DisplayName("Y-Axis")]
-		public AxisSettings AxisY { get { return axisY; } }
 
 		public DiagramSettings(Diagram diagram)
 		{
