@@ -28,16 +28,16 @@ namespace Visualizer.Environment
 		readonly Diagram diagram;
 
 		[DisplayName("Time")]
-		public Time Time
+		public double Time
 		{
-			get { return diagram.TimeManager.Time; }
-			set { diagram.TimeManager.Time = value; }
+			get { return diagram.TimeManager.Time.Seconds; }
+			set { diagram.TimeManager.Time = new Time(value); }
 		}
 		[DisplayName("Width")]
-		public Time Width
+		public double Width
 		{
-			get { return diagram.TimeManager.Width; }
-			set { diagram.TimeManager.Width = value; }
+			get { return diagram.TimeManager.Width.Seconds; }
+			set { diagram.TimeManager.Width = new Time(value); }
 		}
 		[DisplayName("Frozen")]
 		public bool Frozen
