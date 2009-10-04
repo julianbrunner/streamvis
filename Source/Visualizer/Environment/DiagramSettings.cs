@@ -27,15 +27,19 @@ namespace Visualizer.Environment
 		readonly Diagram diagram;
 		readonly GraphSettingsSettings graphSettings;
 		readonly LayouterSettings layouter;
+		readonly TimeManagerSettings timeManager;
 		readonly AxisXSettings axisX;
 		readonly AxisYSettings axisY;
 
 		[Description("Contains settings concerning the Graphs.")]
-		[DisplayName("Graph Settings")]
+		[DisplayName("Graph Setitings")]
 		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
 		[Description("Contains settings concerning the Layouter.")]
-		[DisplayName("Layouter Settings")]
+		[DisplayName("Layouter")]
 		public LayouterSettings Layouter { get { return layouter; } }
+		[Description("Contains settings concerning the Time Manager.")]
+		[DisplayName("Time Manager")]
+		public TimeManagerSettings TimeManager { get { return timeManager; } }
 		[Description("Contains settings concerning the X-Axis.")]
 		[DisplayName("X-Axis")]
 		public AxisXSettings AxisX { get { return axisX; } }
@@ -62,6 +66,7 @@ namespace Visualizer.Environment
 
 			this.graphSettings = new GraphSettingsSettings(diagram);
 			this.layouter = new LayouterSettings(diagram);
+			this.timeManager = new TimeManagerSettings(diagram);
 			this.axisX = new AxisXSettings(diagram);
 			this.axisY = new AxisYSettings(diagram);
 		}

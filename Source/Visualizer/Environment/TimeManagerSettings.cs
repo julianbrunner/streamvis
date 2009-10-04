@@ -15,36 +15,40 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
+using System.ComponentModel;
 using Visualizer.Data;
+using Visualizer.Drawing;
 
-namespace Visualizer.Drawing.Timing
+namespace Visualizer.Environment
 {
-	public abstract class TimeManager
+	// TODO: Add description for properties
+	[TypeConverter(typeof(ExpandableObjectConverter))]
+	class TimeManagerSettings
 	{
-		readonly Timer timer;
+		readonly Diagram diagram;
 
-		// TODO: Create and document visibility policy
-		public Time Time { get; set; }
-		public Time Width { get; set; }
-		public bool Frozen { get; set; }
-		/// <summary>
-		/// Gets the overall Range, in which graphs are drawn.
-		/// </summary>
-		public abstract TimeRange Range { get; }
-		/// <summary>
-		/// Gets the specific sub Ranges, in which the graphs are drawn.
-		/// </summary>
-		public abstract IEnumerable<TimeRange> GraphRanges { get; }
-
-		protected TimeManager(Timer timer)
+		[DisplayName("Time")]
+		public Time Time
 		{
-			this.timer = timer;
+			get { return diagram.TimeManager.Time; }
+			set { diagram.TimeManager.Time = value; }
+		}
+		[DisplayName("Width")]
+		public Time Width
+		{
+			get { return diagram.TimeManager.Width; }
+			set { diagram.TimeManager.Width = value; }
+		}
+		[DisplayName("Frozen")]
+		public bool Frozen
+		{
+			get { return diagram.TimeManager.Frozen; }
+			set { diagram.TimeManager.Frozen = value; }
 		}
 
-		public virtual void Update()
+		public TimeManagerSettings(Diagram diagram)
 		{
-			if (!Frozen) Time = timer.Time;
+			this.diagram = diagram;
 		}
 	}
 }
