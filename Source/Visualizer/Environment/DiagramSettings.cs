@@ -15,8 +15,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using Visualizer.Drawing;
+using Visualizer.Drawing.Timing;
+using Visualizer.Data;
 
 namespace Visualizer.Environment
 {
@@ -24,28 +27,45 @@ namespace Visualizer.Environment
 	[TypeConverter(typeof(ExpandableObjectConverter))]
 	class DiagramSettings
 	{
+		readonly Timer timer;
 		readonly Diagram diagram;
-		readonly GraphSettingsSettings graphSettings;
-		readonly LayouterSettings layouter;
-		readonly TimeManagerSettings timeManager;
-		readonly AxisXSettings axisX;
-		readonly AxisYSettings axisY;
+		
+		GraphSettingsSettings graphSettings;
+		LayouterSettings layouter;
+		TimeManagerType timeManagerType;
+		TimeManagerSettings timeManager;
+		AxisXSettings axisX;
+		AxisYSettings axisY;
 
-		[Description("Contains settings concerning the Graphs.")]
+		#region Graph Settings
+		[Description("Contains setings concerning the Graphs.")]
 		[DisplayName("Graph Setitings")]
-		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
+		public GraphSettingsSettings GraphSettings { get{ return graphSettings; } }
+		#endregion
+		#region Layouter
 		[Description("Contains settings concerning the Layouter.")]
 		[DisplayName("Layouter")]
 		public LayouterSettings Layouter { get { return layouter; } }
+		#endregion
+		#region Time Manager
+		[DisplayName("Time Manager Type")]
+		public TimeManagerType TimeManagerType
+		{
+			get { return timeManagerType; }
+			set { timeManagerType = value; RefreshTimeManager(); }
+		}
 		[Description("Contains settings concerning the Time Manager.")]
 		[DisplayName("Time Manager")]
 		public TimeManagerSettings TimeManager { get { return timeManager; } }
+		#endregion
+		#region Axes
 		[Description("Contains settings concerning the X-Axis.")]
 		[DisplayName("X-Axis")]
 		public AxisXSettings AxisX { get { return axisX; } }
 		[Description("Contains settings concerning the Y-Axis.")]
 		[DisplayName("Y-Axis")]
 		public AxisYSettings AxisY { get { return axisY; } }
+		#endregion
 
 		[DisplayName("Update")]
 		public bool IsUpdated
@@ -60,15 +80,30 @@ namespace Visualizer.Environment
 			set { diagram.IsDrawn = value; }
 		}
 
-		public DiagramSettings(Diagram diagram)
+		public DiagramSettings(Timer timer, Diagram diagram)
 		{
+			this.timer = timer;
 			this.diagram = diagram;
 
-			this.graphSettings = new GraphSettingsSettings(diagram);
-			this.layouter = new LayouterSettings(diagram);
-			this.timeManager = new TimeManagerSettings(diagram);
-			this.axisX = new AxisXSettings(diagram);
-			this.axisY = new AxisYSettings(diagram);
+			graphSettings = new GraphSettingsSettings(diagram);
+			layouter = new LayouterSettings(diagram);
+			timeManager = new TimeManagerSettings(diagram);
+			axisX = new AxisXSettings(diagram);
+			axisY = new AxisYSettings(diagram);
+		}
+		
+		void RefreshTimeManager()
+		{
+			switch (timeManagerType)
+			{
+				case TimeManagerType.Continuous: diagram.TimeManager = new ContinuousTimeManager(timer); break;
+				case TimeManagerType.Shiftting: diagram.TimeManager = new ShiftingTimeManager(timer, 0.8); break;
+				case TimeManagerType.Wrapping: diagram.TimeManager = new WrappingTimeManager(timer, 0.2); break;
+				default: throw new InvalidOperationException();
+			}
+			diagram.TimeManager.Width = new Time(10.0);
+			
+			timeManager = new TimeManagerSettings(diagram);
 		}
 	}
 }

@@ -17,6 +17,7 @@
 
 using System.ComponentModel;
 using Visualizer.Drawing;
+using Visualizer.Data;
 
 namespace Visualizer.Environment
 {
@@ -28,9 +29,9 @@ namespace Visualizer.Environment
 		[DisplayName("Diagram")]
 		public DiagramSettings Diagram { get { return diagram; } }
 
-		public Settings(Diagram diagram)
+		public Settings(Timer timer, Diagram diagram)
 		{
-			this.diagram = new DiagramSettings(diagram);
+			this.diagram = new DiagramSettings(timer, diagram);
 		}
 	}
 }

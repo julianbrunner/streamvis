@@ -96,7 +96,7 @@ namespace Visualizer
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
 
-			this.settings = new Settings(diagram);
+			this.settings = new Settings(timer, diagram);
 
 			properties.SelectedObject = settings;
 		}
