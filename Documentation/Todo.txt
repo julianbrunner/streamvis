@@ -2,6 +2,7 @@ TODO: Better playback controls
 TODO: Vertical zoom
 TODO: Add ability to switch Value-/TimeManagers through GUI while drawing
 
+TODO: Test if default options still match help document, review code to make sure no conflicting default values exist
 TODO: Make settings pane collapsible
 TODO: Degrade obscure settings from command-line parameters to default settings
 TODO: Can TimeRange and ValueRange be merged? Why not handle Times as doubles?

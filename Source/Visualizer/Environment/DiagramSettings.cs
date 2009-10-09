@@ -54,8 +54,7 @@ namespace Visualizer.Environment
 			get { return timeManagerType; }
 			set
 			{
-				timeManagerType = value;
-				diagram.TimeManager = timeManagerType.Create(timer);
+				diagram.TimeManager = CreateTimeManager(timeManagerType = value, timer);
 				timeManager = new TimeManagerSettings(diagram);
 			}
 		}
@@ -95,6 +94,17 @@ namespace Visualizer.Environment
 			timeManager = new TimeManagerSettings(diagram);
 			axisX = new AxisXSettings(diagram);
 			axisY = new AxisYSettings(diagram);
+		}
+		
+		static TimeManager CreateTimeManager(TimeManagerType type, Timer timer)
+		{
+			switch (type)
+			{
+				case TimeManagerType.Continuous: return new ContinuousTimeManager(timer);
+				case TimeManagerType.Shiftting: return new ShiftingTimeManager(timer);
+				case TimeManagerType.Wrapping: return new WrappingTimeManager(timer);
+				default: throw new InvalidOperationException();
+			}
 		}
 	}
 }

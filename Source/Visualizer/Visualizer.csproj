@@ -84,7 +84,6 @@
     <Compile Include="TextDialog.Designer.cs">
       <DependentUpon>TextDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="TimeManagerTypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\CrossMark.png" />
