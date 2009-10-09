@@ -21,13 +21,12 @@ namespace Visualizer.Drawing.Values
 {
 	public class FixedValueManager : ValueManager
 	{
-		readonly ValueRange range;
+		public Range<double> FixedRange { get; set; }
+		public override ValueRange Range { get { return new ValueRange(FixedRange); } }
 
-		public override ValueRange Range { get { return range; } }
-
-		public FixedValueManager(Range<double> range)
+		public FixedValueManager()
 		{
-			this.range = new ValueRange(range);
+			FixedRange = new Range<double>(0, 1);
 		}
 	}
 }

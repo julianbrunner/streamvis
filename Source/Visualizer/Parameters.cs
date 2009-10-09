@@ -39,7 +39,7 @@ namespace Visualizer
 		public double? TimeManagerParameter { get; private set; }
 		public Time? DiagramWidth { get; private set; }
 		public ValueManagerType ValueManagerType { get; private set; }
-		public Range<double> ValueRange { get; private set; }
+		public Range<double>? ValueRange { get; private set; }
 		public SamplerType SamplerType { get; private set; }
 		public double? SamplerFrequency { get; private set; }
 		public double? LineWidth { get; private set; }

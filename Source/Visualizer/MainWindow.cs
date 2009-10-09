@@ -311,8 +311,13 @@ namespace Visualizer
 
 			switch (parameters.ValueManagerType)
 			{
-				case ValueManagerType.Fitting: diagram.ValueManager = new FittingValueManager(diagram); break;
-				case ValueManagerType.Fixed: diagram.ValueManager = new FixedValueManager(parameters.ValueRange); break;
+				case ValueManagerType.Fitting:
+					diagram.ValueManager = new FittingValueManager(diagram);
+					break;
+				case ValueManagerType.Fixed:
+					diagram.ValueManager = new FixedValueManager();
+					if (parameters.ValueRange != null) ((FixedValueManager)diagram.ValueManager).FixedRange = parameters.ValueRange.Value;
+					break;
 				default: throw new InvalidOperationException();
 			}
 
