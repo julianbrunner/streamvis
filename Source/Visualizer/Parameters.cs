@@ -50,24 +50,9 @@ namespace Visualizer
 
 		public Parameters(IEnumerable<string> parameters)
 		{
-			MinimalMode = false;
-			ExtendGraphs = true;
-			LineSmoothing = true;
-			AlphaBlending = true;
-			VerticalSynchronization = true;
-			ClearData = false;
 			TimeManagerType = TimeManagerType.Continuous;
-			TimeManagerParameter = 0;
-			DiagramWidth = new Time(10.0);
 			ValueManagerType = ValueManagerType.Fitting;
-			ValueRange = new Range<double>();
 			SamplerType = SamplerType.PerPixel;
-			SamplerFrequency = 1;
-			LineWidth = 1;
-			MarkerCountX = 5;
-			MarkerCountY = 5;
-			DiagramColor = Color.White;
-			BackgroundColor = Color.Black;
 
 			foreach (string parameter in parameters)
 			{
@@ -111,14 +96,16 @@ namespace Visualizer
 						case "s":
 							if (details.Length > 3) InvalidParameter(option);
 							TimeManagerType = TimeManagerType.Shiftting;
-							try { TimeManagerParameter = details.Length > 2 ? double.Parse(details[2]) : 0.8; }
-							catch (FormatException) { InvalidParameter(option); }
+							if (details.Length > 2)
+								try { TimeManagerParameter = double.Parse(details[2]); }
+								catch (FormatException) { InvalidParameter(option); }
 							break;
 						case "w":
 							if (details.Length > 3) InvalidParameter(option);
 							TimeManagerType = TimeManagerType.Wrapping;
-							try { TimeManagerParameter = details.Length > 2 ? double.Parse(details[2]) : 0.2; }
-							catch (FormatException) { InvalidParameter(option); }
+							if (details.Length > 2)
+								try { TimeManagerParameter = double.Parse(details[2]); }
+								catch (FormatException) { InvalidParameter(option); }
 							break;
 						default: throw new InvalidOperationException("Invalid time manager type: " + details[1]);
 					}
@@ -139,8 +126,9 @@ namespace Visualizer
 						case "s":
 							if (details.Length != 2 && details.Length != 4) InvalidParameter(option);
 							ValueManagerType = ValueManagerType.Fixed;
-							try { ValueRange = details.Length == 4 ? new Range<double>(double.Parse(details[2]), double.Parse(details[3])) : new Range<double>(0, 1); }
-							catch (FormatException) { InvalidParameter(option); }
+							if (details.Length == 4)
+								try { ValueRange = new Range<double>(double.Parse(details[2]), double.Parse(details[3])); }
+								catch (FormatException) { InvalidParameter(option); }
 							break;
 						default: throw new InvalidOperationException("Invalid value manager type: " + details[1]);
 					}
@@ -152,14 +140,16 @@ namespace Visualizer
 						case "s":
 							if (details.Length > 3) InvalidParameter(option);
 							SamplerType = SamplerType.PerSecond;
-							try { SamplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 10; }
-							catch (FormatException) { InvalidParameter(option); }
+							if (details.Length > 2)
+								try { SamplerFrequency = double.Parse(details[2]); }
+								catch (FormatException) { InvalidParameter(option); }
 							break;
 						case "p":
 							if (details.Length > 3) InvalidParameter(option);
 							SamplerType = SamplerType.PerPixel;
-							try { SamplerFrequency = details.Length > 2 ? double.Parse(details[2]) : 0.1; }
-							catch (FormatException) { InvalidParameter(option); }
+							if (details.Length > 2)
+								try { SamplerFrequency = double.Parse(details[2]); }
+								catch (FormatException) { InvalidParameter(option); }
 							break;
 						default: throw new InvalidOperationException("Invalid sampler type: " + details[1]);
 					}
