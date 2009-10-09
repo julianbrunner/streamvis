@@ -21,12 +21,12 @@ namespace Visualizer.Drawing.Data
 {
 	public class PerSecondDataManager : DataManager
 	{
-		readonly double samplesPerSecond;
+		public double SamplesPerSecond { get; set; }
 
-		public PerSecondDataManager(Diagram diagram, double samplesPerSecond)
+		public PerSecondDataManager(Diagram diagram)
 			: base(diagram)
 		{
-			this.samplesPerSecond = samplesPerSecond;
+			SamplesPerSecond = 10;
 		}
 
 		public override void Update()
@@ -34,7 +34,7 @@ namespace Visualizer.Drawing.Data
 			base.Update();
 
 			foreach (Graph graph in Diagram.Graphs)
-				graph.StreamManager.EntryResampler.SampleDistance = new Time(1.0) / samplesPerSecond;
+				graph.StreamManager.EntryResampler.SampleDistance = new Time(1.0) / SamplesPerSecond;
 		}
 	}
 }

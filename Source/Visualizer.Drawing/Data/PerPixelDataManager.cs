@@ -22,15 +22,14 @@ namespace Visualizer.Drawing.Data
 	// TODO: Create and document policy for when to fork a parameter and when to get it from the base class
 	public class PerPixelDataManager : DataManager
 	{
-		readonly double samplesPerPixel;
+		// TODO: Do error checking (samplesPerPixel could be negative, etc.)
+		// TODO: Create and document policy for error checking
+		public double SamplesPerPixel { get; set; }
 
-		public PerPixelDataManager(Diagram diagram, double samplesPerPixel)
+		public PerPixelDataManager(Diagram diagram)
 			: base(diagram)
 		{
-			// TODO: Do error checking (samplesPerPixel could be negative, etc.)
-			// TODO: Create and document policy for error checking
-
-			this.samplesPerPixel = samplesPerPixel;
+			SamplesPerPixel = 1;
 		}
 
 		public override void Update()
@@ -38,7 +37,7 @@ namespace Visualizer.Drawing.Data
 			base.Update();
 
 			double pixelsPerSecond = Diagram.Layouter.Area.Width / Diagram.TimeManager.Width.Seconds;
-			double samplesPerSecond = samplesPerPixel * pixelsPerSecond;
+			double samplesPerSecond = SamplesPerPixel * pixelsPerSecond;
 
 			// TODO: Remove silent failure
 			if (samplesPerSecond > 0)

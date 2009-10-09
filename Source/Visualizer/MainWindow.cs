@@ -300,10 +300,10 @@ namespace Visualizer
 				case TimeManagerType.Continuous:
 					break;
 				case TimeManagerType.Shiftting:
-					((ShiftingTimeManager)diagram.TimeManager).ShiftLength = parameters.TimeManagerParameter;
+					if (parameters.TimeManagerParameter != null) ((ShiftingTimeManager)diagram.TimeManager).ShiftLength = parameters.TimeManagerParameter.Value;
 					break;
 				case TimeManagerType.Wrapping:
-					((WrappingTimeManager)diagram.TimeManager).Gap = parameters.TimeManagerParameter;
+					if (parameters.TimeManagerParameter != null) ((WrappingTimeManager)diagram.TimeManager).Gap = parameters.TimeManagerParameter.Value;
 					break;
 				default: throw new InvalidOperationException();
 			}
@@ -318,8 +318,14 @@ namespace Visualizer
 
 			switch (parameters.SamplerType)
 			{
-				case SamplerType.PerSecond: diagram.DataManager = new PerSecondDataManager(diagram, parameters.SamplerFrequency); break;
-				case SamplerType.PerPixel: diagram.DataManager = new PerPixelDataManager(diagram, parameters.SamplerFrequency); break;
+				case SamplerType.PerSecond:
+					diagram.DataManager = new PerSecondDataManager(diagram);
+					if (parameters.SamplerFrequency != null) ((PerSecondDataManager)diagram.DataManager).SamplesPerSecond = parameters.SamplerFrequency.Value;
+					break;
+				case SamplerType.PerPixel:
+					diagram.DataManager = new PerPixelDataManager(diagram);
+					if (parameters.SamplerFrequency != null) ((PerPixelDataManager)diagram.DataManager).SamplesPerPixel = parameters.SamplerFrequency.Value;
+					break;
 				default: throw new InvalidOperationException();
 			}
 			if (parameters.ClearData != null) diagram.DataManager.ClearData = parameters.ClearData.Value;

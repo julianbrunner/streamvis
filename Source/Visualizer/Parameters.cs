@@ -36,12 +36,12 @@ namespace Visualizer
 		public bool? VerticalSynchronization { get; private set; }
 		public bool? ClearData { get; private set; }
 		public TimeManagerType TimeManagerType { get; private set; }
-		public double TimeManagerParameter { get; private set; }
+		public double? TimeManagerParameter { get; private set; }
 		public Time DiagramWidth { get; private set; }
 		public ValueManagerType ValueManagerType { get; private set; }
 		public Range<double> ValueRange { get; private set; }
 		public SamplerType SamplerType { get; private set; }
-		public double SamplerFrequency { get; private set; }
+		public double? SamplerFrequency { get; private set; }
 		public double? LineWidth { get; private set; }
 		public int MarkerCountX { get; private set; }
 		public int MarkerCountY { get; private set; }
