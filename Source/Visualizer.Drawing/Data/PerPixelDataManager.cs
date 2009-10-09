@@ -24,8 +24,8 @@ namespace Visualizer.Drawing.Data
 	{
 		readonly double samplesPerPixel;
 
-		public PerPixelDataManager(Diagram diagram, bool dataLogging, double samplesPerPixel)
-			: base(diagram, dataLogging)
+		public PerPixelDataManager(Diagram diagram, double samplesPerPixel)
+			: base(diagram)
 		{
 			// TODO: Do error checking (samplesPerPixel could be negative, etc.)
 			// TODO: Create and document policy for error checking

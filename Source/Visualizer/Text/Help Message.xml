@@ -65,8 +65,8 @@
 		<Text Column="Description">Enables or disables vertical synchronization. The default values is enabled.</Text>
 		<NewLine />
 		<NewLine />
-		<Text Column="Level1">+l|-l</Text>
-		<Text Column="Description">Enables or disables the logging of all received data. Disable if you plan to run the visualizer for a long time and you don't want to save the results. The default values is enabled.</Text>
+		<Text Column="Level1">+c|-c</Text>
+		<Text Column="Description">Enables or disables the regular clearing of old received data. Enable if you plan to run the visualizer for a long time and you don't want to save the results. The default values is disabled.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">t:(c|s[:&lt;c&gt;]|w[:&lt;c&gt;])</Text>

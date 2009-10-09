@@ -79,6 +79,7 @@ namespace Visualizer
 			NewSource(parameters.Ports);
 
 			Console.WriteLine("Applying parameters...");
+			// TODO: Move these to settings
 			freezeToolStripMenuItem.Checked = false;
 			graphExtensionToolStripMenuItem.Checked = diagram.GraphSettings.ExtendGraphs;
 			showStreamListToolStripMenuItem.Checked = true;
@@ -317,10 +318,11 @@ namespace Visualizer
 
 			switch (parameters.SamplerType)
 			{
-				case SamplerType.PerSecond: diagram.DataManager = new PerSecondDataManager(diagram, parameters.DataLogging, parameters.SamplerFrequency); break;
-				case SamplerType.PerPixel: diagram.DataManager = new PerPixelDataManager(diagram, parameters.DataLogging, parameters.SamplerFrequency); break;
+				case SamplerType.PerSecond: diagram.DataManager = new PerSecondDataManager(diagram, parameters.SamplerFrequency); break;
+				case SamplerType.PerPixel: diagram.DataManager = new PerPixelDataManager(diagram, parameters.SamplerFrequency); break;
 				default: throw new InvalidOperationException();
 			}
+			if (parameters.ClearData != null) diagram.DataManager.ClearData = parameters.ClearData.Value;
 
 			diagram.AxisX = new AxisX(drawer, diagram);
 			diagram.AxisX.MarkerCount = parameters.MarkerCountX;

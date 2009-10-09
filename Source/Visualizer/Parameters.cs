@@ -34,7 +34,7 @@ namespace Visualizer
 		public bool? LineSmoothing { get; private set; }
 		public bool? AlphaBlending { get; private set; }
 		public bool? VerticalSynchronization { get; private set; }
-		public bool DataLogging { get; private set; }
+		public bool? ClearData { get; private set; }
 		public TimeManagerType TimeManagerType { get; private set; }
 		public double TimeManagerParameter { get; private set; }
 		public Time DiagramWidth { get; private set; }
@@ -55,7 +55,7 @@ namespace Visualizer
 			LineSmoothing = true;
 			AlphaBlending = true;
 			VerticalSynchronization = true;
-			DataLogging = true;
+			ClearData = false;
 			TimeManagerType = TimeManagerType.Continuous;
 			TimeManagerParameter = 0;
 			DiagramWidth = new Time(10.0);
@@ -90,7 +90,7 @@ namespace Visualizer
 				case "a": LineSmoothing = value; break;
 				case "b": AlphaBlending = value; break;
 				case "v": VerticalSynchronization = value; break;
-				case "l": DataLogging = value; break;
+				case "c": ClearData = value; break;
 				default: InvalidParameter((value ? "+" : "-") + name); break;
 			}
 		}

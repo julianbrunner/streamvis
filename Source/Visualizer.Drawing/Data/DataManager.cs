@@ -23,19 +23,21 @@ namespace Visualizer.Drawing.Data
 	public abstract class DataManager
 	{
 		readonly Diagram diagram;
-		readonly bool dataLogging;
 
 		protected Diagram Diagram { get { return diagram; } }
+		
+		public bool ClearData { get; set; }
 
-		protected DataManager(Diagram diagram, bool dataLogging)
+		protected DataManager(Diagram diagram)
 		{
 			this.diagram = diagram;
-			this.dataLogging = dataLogging;
+			
+			ClearData = false;
 		}
 
 		public virtual void Update()
 		{
-			if (!dataLogging)
+			if (ClearData)
 				foreach (Graph graph in diagram.Graphs)
 				{
 					SearchList<Entry, Time> entries = graph.EntryData.Entries;

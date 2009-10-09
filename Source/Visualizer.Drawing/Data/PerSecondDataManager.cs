@@ -23,8 +23,8 @@ namespace Visualizer.Drawing.Data
 	{
 		readonly double samplesPerSecond;
 
-		public PerSecondDataManager(Diagram diagram, bool dataLogging, double samplesPerSecond)
-			: base(diagram, dataLogging)
+		public PerSecondDataManager(Diagram diagram, double samplesPerSecond)
+			: base(diagram)
 		{
 			this.samplesPerSecond = samplesPerSecond;
 		}
