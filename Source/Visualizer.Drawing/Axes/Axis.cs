@@ -50,6 +50,9 @@ namespace Visualizer.Drawing.Axes
 		{
 			this.drawer = drawer;
 			this.diagram = diagram;
+			
+			MarkerCount = 5;
+			Color = Color.White;
 		}
 
 		public virtual void Draw() { }

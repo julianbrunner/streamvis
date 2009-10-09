@@ -307,7 +307,7 @@ namespace Visualizer
 					break;
 				default: throw new InvalidOperationException();
 			}
-			diagram.TimeManager.Width = parameters.DiagramWidth;
+			if (parameters.DiagramWidth != null) diagram.TimeManager.Width = parameters.DiagramWidth.Value;
 
 			switch (parameters.ValueManagerType)
 			{
@@ -331,12 +331,12 @@ namespace Visualizer
 			if (parameters.ClearData != null) diagram.DataManager.ClearData = parameters.ClearData.Value;
 
 			diagram.AxisX = new AxisX(drawer, diagram);
-			diagram.AxisX.MarkerCount = parameters.MarkerCountX;
-			diagram.AxisX.Color = parameters.DiagramColor;
+			if (parameters.MarkerCountX != null) diagram.AxisX.MarkerCount = parameters.MarkerCountX.Value;
+			if (parameters.DiagramColor != null) diagram.AxisX.Color = parameters.DiagramColor.Value;
 
 			diagram.AxisY = new AxisY(drawer, diagram);
-			diagram.AxisY.MarkerCount = parameters.MarkerCountY;
-			diagram.AxisY.Color = parameters.DiagramColor;
+			if (parameters.MarkerCountY != null) diagram.AxisY.MarkerCount = parameters.MarkerCountY.Value;
+			if (parameters.DiagramColor != null) diagram.AxisY.Color = parameters.DiagramColor.Value;
 
 			return diagram;
 		}
