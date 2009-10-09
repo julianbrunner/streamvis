@@ -287,11 +287,18 @@ namespace Visualizer
 			diagram.Layouter = new Layouter(viewport);
 			diagram.Layouter.BaseMargin = new Padding(9, 8, 0, 9);
 
+			diagram.TimeManager = parameters.TimeManagerType.Create(timer);
+			
 			switch (parameters.TimeManagerType)
 			{
-				case TimeManagerType.Continuous: diagram.TimeManager = new ContinuousTimeManager(timer); break;
-				case TimeManagerType.Shiftting: diagram.TimeManager = new ShiftingTimeManager(timer, parameters.TimeManagerParameter); break;
-				case TimeManagerType.Wrapping: diagram.TimeManager = new WrappingTimeManager(timer, parameters.TimeManagerParameter); break;
+				case TimeManagerType.Continuous:
+					break;
+				case TimeManagerType.Shiftting:
+					((ShiftingTimeManager)diagram.TimeManager).ShiftLength = parameters.TimeManagerParameter;
+					break;
+				case TimeManagerType.Wrapping:
+					((WrappingTimeManager)diagram.TimeManager).Gap = parameters.TimeManagerParameter;
+					break;
 				default: throw new InvalidOperationException();
 			}
 			diagram.TimeManager.Width = parameters.DiagramWidth;

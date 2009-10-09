@@ -23,26 +23,23 @@ namespace Visualizer.Drawing.Timing
 {
 	public class ShiftingTimeManager : TimeManager
 	{
-		readonly double shiftLength;
-
 		TimeRange range;
 		TimeRange graphRange;
 
+		public double ShiftLength { get; set; }
 		public override TimeRange Range { get { return range; } }
 		public override IEnumerable<TimeRange> GraphRanges { get { yield return graphRange; } }
 
-		public ShiftingTimeManager(Timer timer) : this(timer, 0.8) { }
-		public ShiftingTimeManager(Timer timer, double shiftLength)
-			: base(timer)
+		public ShiftingTimeManager(Timer timer) : base(timer)
 		{
-			this.shiftLength = shiftLength;
+			ShiftLength = 0.8;
 		}
 
 		public override void Update()
 		{
 			base.Update();
 
-			Time interval = Width * shiftLength;
+			Time interval = Width * ShiftLength;
 
 			double intervals = Time / interval;
 			int wholeIntervals = (int)intervals;
@@ -51,7 +48,7 @@ namespace Visualizer.Drawing.Timing
 			Time startTime = interval * (wholeIntervals + 1) - Width;
 			double startPosition = 0;
 			Time endTime = Time;
-			double endPosition = (1 - shiftLength) + shiftLength * fractionalIntervals;
+			double endPosition = (1 - ShiftLength) + ShiftLength * fractionalIntervals;
 
 			range = new TimeRange(new Range<Time>(startTime, startTime + Width));
 			graphRange = new TimeRange(new Range<Time>(startTime, endTime), new Range<double>(startPosition, endPosition));

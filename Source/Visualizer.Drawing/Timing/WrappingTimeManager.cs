@@ -23,19 +23,17 @@ namespace Visualizer.Drawing.Timing
 {
 	public class WrappingTimeManager : TimeManager
 	{
-		readonly double gap;
-
 		TimeRange range;
 		IEnumerable<TimeRange> graphRanges;
 
+		public double Gap { get; set; }
 		public override TimeRange Range { get { return range; } }
 		public override IEnumerable<TimeRange> GraphRanges { get { return graphRanges; } }
 
-		public WrappingTimeManager(Timer timer) : this(timer, 0.2) { }
-		public WrappingTimeManager(Timer timer, double gap)
+		public WrappingTimeManager(Timer timer)
 			: base(timer)
 		{
-			this.gap = gap;
+			Gap = 0.2;
 		}
 
 		public override void Update()
@@ -46,10 +44,10 @@ namespace Visualizer.Drawing.Timing
 			int wholeIntervals = (int)intervals;
 			double fractionalIntervals = intervals - wholeIntervals;
 
-			Time startTime = Time - (1 - gap) * Width;
-			double startPosition = (fractionalIntervals + gap) % 1;
+			Time startTime = Time - (1 - Gap) * Width;
+			double startPosition = (fractionalIntervals + Gap) % 1;
 			Time endTime = Time;
-			double endPosition = startPosition + (1 - gap);
+			double endPosition = startPosition + (1 - Gap);
 
 			range = new TimeRange(new Range<Time>((wholeIntervals + 0) * Width, (wholeIntervals + 1) * Width));
 
