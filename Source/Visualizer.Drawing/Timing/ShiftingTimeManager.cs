@@ -31,6 +31,7 @@ namespace Visualizer.Drawing.Timing
 		public override TimeRange Range { get { return range; } }
 		public override IEnumerable<TimeRange> GraphRanges { get { yield return graphRange; } }
 
+		public ShiftingTimeManager(Timer timer) : this(timer, 0.8) { }
 		public ShiftingTimeManager(Timer timer, double shiftLength)
 			: base(timer)
 		{

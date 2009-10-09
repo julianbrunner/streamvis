@@ -40,6 +40,11 @@ namespace Visualizer.Drawing.Timing
 		protected TimeManager(Timer timer)
 		{
 			this.timer = timer;
+			
+			// TODO: Create and document policy on property initialization (initialize all properties for other components, too)
+			Time = Time.Zero;
+			Width = new Time(10.0);
+			Frozen = false;
 		}
 
 		public virtual void Update()

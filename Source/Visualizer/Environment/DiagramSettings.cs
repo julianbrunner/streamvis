@@ -98,19 +98,14 @@ namespace Visualizer.Environment
 		}
 		
 		public static TimeManager CreateTimeManager(Timer timer, TimeManagerType type)
-		{
-			TimeManager timeManager;
-			
+		{			
 			switch (type)
 			{
-				case TimeManagerType.Continuous: timeManager = new ContinuousTimeManager(timer); break;
-				case TimeManagerType.Shiftting: timeManager = new ShiftingTimeManager(timer, 0.8); break;
-				case TimeManagerType.Wrapping: timeManager = new WrappingTimeManager(timer, 0.2); break;
+				case TimeManagerType.Continuous: return new ContinuousTimeManager(timer);
+				case TimeManagerType.Shiftting: return new ShiftingTimeManager(timer);
+				case TimeManagerType.Wrapping: return new WrappingTimeManager(timer);
 				default: throw new InvalidOperationException();
 			}
-			timeManager.Width = new Time(10.0);
-			
-			return timeManager;
 		}
 	}
 }
