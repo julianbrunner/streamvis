@@ -57,10 +57,11 @@ namespace Visualizer
 
 			Text = title;
 
-			viewport.ClearColor = parameters.BackgroundColor;
-			viewport.VSync = parameters.VerticalSynchronization;
+			if (parameters.BackgroundColor != null) viewport.ClearColor = parameters.BackgroundColor.Value;
 
-			this.drawer = new Drawer(parameters.LineSmoothing, parameters.AlphaBlending);
+			this.drawer = new Drawer();
+			if (parameters.LineSmoothing != null) drawer.LineSmoothing = parameters.LineSmoothing.Value;
+			if (parameters.AlphaBlending != null) drawer.AlphaBlending = parameters.AlphaBlending.Value;
 
 			this.timer = new Data.Timer();
 
@@ -76,20 +77,27 @@ namespace Visualizer
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);
 
+			// TODO: Move the "Checked" property default values to MainWindow.Designer.cs
+			// TODO: The classes (line GraphSettings) should specify the default values, not the designer defaults for menu items
 			Console.WriteLine("Applying parameters...");
 			freezeToolStripMenuItem.Checked = false;
-			freezeToolStripMenuItem_Click(this, EventArgs.Empty);
-			graphExtensionToolStripMenuItem.Checked = parameters.ExtendGraphs;
-			graphExtensionToolStripMenuItem_Click(this, EventArgs.Empty);
+			graphExtensionToolStripMenuItem.Checked = true;
 			showStreamListToolStripMenuItem.Checked = true;
-			showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
-			minimalModeToolStripMenuItem.Checked = parameters.MinimalMode;
-			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
+			minimalModeToolStripMenuItem.Checked = false;
 			showDiagramToolStripMenuItem.Checked = true;
-			showDiagramToolStripMenuItem_Click(this, EventArgs.Empty);
 			showFrameCounterToolStripMenuItem.Checked = true;
+			verticalSynchronizationToolStripMenuItem.Checked = true;
+			
+			if (parameters.ExtendGraphs != null) graphExtensionToolStripMenuItem.Checked = parameters.ExtendGraphs.Value;
+			if (parameters.MinimalMode != null) minimalModeToolStripMenuItem.Checked = parameters.MinimalMode.Value;
+			if (parameters.VerticalSynchronization != null) verticalSynchronizationToolStripMenuItem.Checked = parameters.VerticalSynchronization.Value;
+			
+			freezeToolStripMenuItem_Click(this, EventArgs.Empty);
+			graphExtensionToolStripMenuItem_Click(this, EventArgs.Empty);
+			showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
+			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
+			showDiagramToolStripMenuItem_Click(this, EventArgs.Empty);
 			showFrameCounterToolStripMenuItem_Click(this, EventArgs.Empty);
-			verticalSynchronizationToolStripMenuItem.Checked = parameters.VerticalSynchronization;
 			verticalSynchronizationToolStripMenuItem_Click(this, EventArgs.Empty);
 
 			viewport.AddComponent(diagram);
@@ -281,8 +289,8 @@ namespace Visualizer
 			diagram.Graphs = new List<Graph>();
 
 			diagram.GraphSettings = new GraphSettings();
-			diagram.GraphSettings.ExtendGraphs = parameters.ExtendGraphs;
-			diagram.GraphSettings.LineWidth = parameters.LineWidth;
+			if (parameters.ExtendGraphs != null) diagram.GraphSettings.ExtendGraphs = parameters.ExtendGraphs.Value;
+			if (parameters.LineWidth != null) diagram.GraphSettings.LineWidth = parameters.LineWidth.Value;
 
 			diagram.Layouter = new Layouter(viewport);
 			diagram.Layouter.BaseMargin = new Padding(9, 8, 0, 9);

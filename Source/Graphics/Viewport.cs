@@ -37,10 +37,10 @@ namespace Graphics
 			set { GL.ClearColor(clearColor = value); }
 		}
 
-		public Viewport()
-			: base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false))
+		public Viewport() : base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false))
 		{
 			ClearColor = Color.Black;
+			VSync = true;
 
 			Application.Idle += Application_Idle;
 		}

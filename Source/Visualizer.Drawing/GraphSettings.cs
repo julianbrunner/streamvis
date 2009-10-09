@@ -21,5 +21,11 @@ namespace Visualizer.Drawing
 	{
 		public bool ExtendGraphs { get; set; }
 		public double LineWidth { get; set; }
+		
+		public GraphSettings()
+		{
+			ExtendGraphs = true;
+			LineWidth = 1;
+		}
 	}
 }

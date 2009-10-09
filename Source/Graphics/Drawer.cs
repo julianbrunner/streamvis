@@ -31,25 +31,34 @@ namespace Graphics
 		static readonly Size characterSize = new Size(7, 12);
 		static readonly string characters = "+-.0123456789E";
 
+		bool lineSmoothing;
+		bool alphaBlending;
+		
 		bool disposed = false;
 		int[] textTextures = new int[1];
 		int characterLists;
-
-		public Drawer(bool lineSmoothing, bool alphaBlending)
+		
+		public bool LineSmoothing
 		{
+			get { return lineSmoothing; }
+			set { SetCapability(EnableCap.LineSmooth, lineSmoothing = value); }
+		}
+		public bool AlphaBlending
+		{
+			get { return alphaBlending; }
+			set { SetCapability(EnableCap.Blend, alphaBlending = value); }
+		}
+
+		public Drawer()
+		{
+			LineSmoothing = true;
+			AlphaBlending = true;
+			
 			GL.EnableClientState(EnableCap.VertexArray);
 
 			GL.Enable(EnableCap.Texture2D);
-			if (lineSmoothing)
-			{
-				GL.Enable(EnableCap.LineSmooth);
-				GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
-			}
-			if (alphaBlending)
-			{
-				GL.Enable(EnableCap.Blend);
-				GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
-			}
+			GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
+			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 
 			InitializeTextTexture();
 			InitializeCharacterDisplayLists();
@@ -177,7 +186,12 @@ namespace Graphics
 				GL.EndList();
 			}
 		}
-
+		void SetCapability(EnableCap capability, bool value)
+		{
+			if (value) GL.Enable(capability);
+			else GL.Disable(capability);
+		}
+		
 		static void DrawCharacter(int character)
 		{
 			Rectangle textureBounds = new Rectangle(new Point(character * characterSize.Width, 0), characterSize);
