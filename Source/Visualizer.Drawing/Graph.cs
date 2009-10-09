@@ -76,7 +76,7 @@ namespace Visualizer.Drawing
 					{
 						if (firstEntry.Time - segmentTimeRange.Range.Start > 1.5 * streamManager.EntryResampler.SampleDistance) startEntry = new Entry(segmentTimeRange.Range.Start, firstEntry.Value);
 						if (segmentTimeRange.Range.End - lastEntry.Time > 1.5 * streamManager.EntryResampler.SampleDistance) endEntry = new Entry(segmentTimeRange.Range.End, lastEntry.Value);
-						if (segment.Entries.Length == 0)
+						if (segment.Entries.Length == 0 && (startEntry != null || endEntry != null))
 						{
 							if (startEntry == null) startEntry = new Entry(segmentTimeRange.Range.Start, endEntry.Value.Value);
 							if (endEntry == null) endEntry = new Entry(segmentTimeRange.Range.End, startEntry.Value.Value);
@@ -85,13 +85,13 @@ namespace Visualizer.Drawing
 
 					int vertexCount = segment.Entries.Length;
 
-					if (startEntry.HasValue) vertexCount++;
-					if (endEntry.HasValue) vertexCount++;
+					if (startEntry != null) vertexCount++;
+					if (endEntry != null) vertexCount++;
 
 					float[] vertices = new float[vertexCount * 2];
 					int position = 0;
 
-					if (startEntry.HasValue)
+					if (startEntry != null)
 					{
 						vertices[position++] = (float)startEntry.Value.Time.Seconds;
 						vertices[position++] = (float)startEntry.Value.Value;
@@ -103,7 +103,7 @@ namespace Visualizer.Drawing
 						vertices[position++] = (float)entry.Value;
 					}
 
-					if (endEntry.HasValue)
+					if (endEntry != null)
 					{
 						vertices[position++] = (float)endEntry.Value.Time.Seconds;
 						vertices[position++] = (float)endEntry.Value.Value;

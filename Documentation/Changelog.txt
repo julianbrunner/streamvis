@@ -4,6 +4,7 @@ Version 0.10
 	- Fixed a bug causing weird behaviour in the coordinate label
 	- Improved command-line options
 	- Corrected a few mistakes in the command-line help message
+	- Fixed a bug causing an exception to be thrown when very short empty segments appear
 
 Version 0.9
 	- Moved to OpenTK 0.9.8.3
