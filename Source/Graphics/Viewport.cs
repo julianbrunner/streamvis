@@ -39,8 +39,8 @@ namespace Graphics
 
 		public Viewport() : base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false))
 		{
-			ClearColor = Color.Black;
 			VSync = true;
+			ClearColor = Color.Black;
 
 			Application.Idle += Application_Idle;
 		}

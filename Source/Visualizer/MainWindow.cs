@@ -57,6 +57,7 @@ namespace Visualizer
 
 			Text = title;
 
+			if (parameters.VerticalSynchronization != null) viewport.VSync = parameters.VerticalSynchronization.Value;
 			if (parameters.BackgroundColor != null) viewport.ClearColor = parameters.BackgroundColor.Value;
 
 			this.drawer = new Drawer();
@@ -77,20 +78,16 @@ namespace Visualizer
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);
 
-			// TODO: Move the "Checked" property default values to MainWindow.Designer.cs
-			// TODO: The classes (line GraphSettings) should specify the default values, not the designer defaults for menu items
 			Console.WriteLine("Applying parameters...");
 			freezeToolStripMenuItem.Checked = false;
-			graphExtensionToolStripMenuItem.Checked = true;
+			graphExtensionToolStripMenuItem.Checked = diagram.GraphSettings.ExtendGraphs;
 			showStreamListToolStripMenuItem.Checked = true;
 			minimalModeToolStripMenuItem.Checked = false;
 			showDiagramToolStripMenuItem.Checked = true;
 			showFrameCounterToolStripMenuItem.Checked = true;
-			verticalSynchronizationToolStripMenuItem.Checked = true;
+			verticalSynchronizationToolStripMenuItem.Checked = viewport.VSync;
 			
-			if (parameters.ExtendGraphs != null) graphExtensionToolStripMenuItem.Checked = parameters.ExtendGraphs.Value;
 			if (parameters.MinimalMode != null) minimalModeToolStripMenuItem.Checked = parameters.MinimalMode.Value;
-			if (parameters.VerticalSynchronization != null) verticalSynchronizationToolStripMenuItem.Checked = parameters.VerticalSynchronization.Value;
 			
 			freezeToolStripMenuItem_Click(this, EventArgs.Empty);
 			graphExtensionToolStripMenuItem_Click(this, EventArgs.Empty);
