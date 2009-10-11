@@ -54,8 +54,15 @@ namespace Visualizer.Environment
 			get { return timeManagerType; }
 			set
 			{
-				diagram.TimeManager = CreateTimeManager(timeManagerType = value, timer);
-				timeManager = new TimeManagerSettings(diagram);
+				switch (value)
+				{
+					case TimeManagerType.Continuous: diagram.TimeManager = new ContinuousTimeManager(timer); break;
+					case TimeManagerType.Shiftting: diagram.TimeManager = new ShiftingTimeManager(timer); break;
+					case TimeManagerType.Wrapping: diagram.TimeManager = new WrappingTimeManager(timer); break;
+					default: throw new InvalidOperationException();
+				}
+				
+				Initialize();
 			}
 		}
 		[Description("Contains settings concerning the Time Manager.")]
@@ -89,22 +96,33 @@ namespace Visualizer.Environment
 			this.timer = timer;
 			this.diagram = diagram;
 
+			Initialize();
+		}
+		
+		void Initialize()
+		{
 			graphSettings = new GraphSettingsSettings(diagram);
 			layouter = new LayouterSettings(diagram);
-			timeManager = new TimeManagerSettings(diagram);
+			
+			switch (timeManagerType = GetType(diagram.TimeManager))
+			{
+				case TimeManagerType.Continuous: timeManager = new ContinuousTimeManagerSettings(diagram); break;
+				case TimeManagerType.Shiftting: timeManager = new ShiftingTimeManagerSettings(diagram); break;
+				case TimeManagerType.Wrapping: timeManager = new WrappingTimeManagerSettings(diagram); break;
+				default: throw new InvalidOperationException();
+			}
+			
 			axisX = new AxisXSettings(diagram);
 			axisY = new AxisYSettings(diagram);
 		}
 		
-		static TimeManager CreateTimeManager(TimeManagerType type, Timer timer)
+		static TimeManagerType GetType(TimeManager timeManager)
 		{
-			switch (type)
-			{
-				case TimeManagerType.Continuous: return new ContinuousTimeManager(timer);
-				case TimeManagerType.Shiftting: return new ShiftingTimeManager(timer);
-				case TimeManagerType.Wrapping: return new WrappingTimeManager(timer);
-				default: throw new InvalidOperationException();
-			}
+			if (timeManager is ContinuousTimeManager) return TimeManagerType.Continuous;
+			if (timeManager is ShiftingTimeManager) return TimeManagerType.Shiftting;
+			if (timeManager is WrappingTimeManager) return TimeManagerType.Wrapping;
+			
+			throw new ArgumentException();
 		}
 	}
 }

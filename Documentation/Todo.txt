@@ -1,3 +1,7 @@
+TODO: Move Diagram-related settings classes into an appropriate subfolder
+TODO: Correct namespaces of classes in Visualizer.Environment
+TODO: Apparently, mono doesn't care if PropertyGrid sorting is disabled - confirm and create bug report
+
 TODO: Better playback controls
 TODO: Vertical zoom
 TODO: Add ability to switch Value-/TimeManagers through GUI while drawing
@@ -13,7 +17,7 @@ TODO: Add AboutBox
 TODO: Fix massive memory consumption on save (XML)
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
 TODO: Fix feedback loop between resampler and graph area resizing upon label size changes
-TODO: Check for every command-line parameter if it would make sense to add a way to change it thorugh the GUI
+TODO: Check for every command-line parameter if it would make sense to add a way to change it through the GUI
 
 TODO: Look through comment TODOs
 

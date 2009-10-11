@@ -60,7 +60,6 @@
   <ItemGroup>
     <Compile Include="CoordinateLabel.cs" />
     <Compile Include="Environment\AxisYSettings.cs" />
-    <Compile Include="Environment\TimeManagerSettings.cs" />
     <Compile Include="Environment\LayouterSettings.cs" />
     <Compile Include="ValueManagerType.cs" />
     <Compile Include="Environment\AxisXSettings.cs" />
@@ -84,6 +83,10 @@
     <Compile Include="TextDialog.Designer.cs">
       <DependentUpon>TextDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Environment\Timing\ContinuousTimeManagerSettings.cs" />
+    <Compile Include="Environment\Timing\ShiftingTimeManagerSettings.cs" />
+    <Compile Include="Environment\Timing\TimeManagerSettings.cs" />
+    <Compile Include="Environment\Timing\WrappingTimeManagerSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\CrossMark.png" />
@@ -135,4 +138,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Environment\Timing\" />
+  </ItemGroup>
 </Project>

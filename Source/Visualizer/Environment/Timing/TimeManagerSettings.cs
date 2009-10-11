@@ -23,9 +23,11 @@ namespace Visualizer.Environment
 {
 	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpandableObjectConverter))]
-	class TimeManagerSettings
+	abstract class TimeManagerSettings
 	{
 		readonly Diagram diagram;
+		
+		protected Diagram Diagram { get { return diagram; } }
 
 		[DisplayName("Time")]
 		public double Time
@@ -46,7 +48,7 @@ namespace Visualizer.Environment
 			set { diagram.TimeManager.Frozen = value; }
 		}
 
-		public TimeManagerSettings(Diagram diagram)
+		protected TimeManagerSettings(Diagram diagram)
 		{
 			this.diagram = diagram;
 		}

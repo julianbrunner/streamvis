@@ -304,7 +304,7 @@ namespace Visualizer
 					break;
 				case TimeManagerType.Wrapping:
 					diagram.TimeManager = new WrappingTimeManager(timer);
-					if (parameters.TimeManagerParameter != null) ((WrappingTimeManager)diagram.TimeManager).Gap = parameters.TimeManagerParameter.Value;
+					if (parameters.TimeManagerParameter != null) ((WrappingTimeManager)diagram.TimeManager).GapLength = parameters.TimeManagerParameter.Value;
 					break;
 				default: throw new InvalidOperationException();
 			}
