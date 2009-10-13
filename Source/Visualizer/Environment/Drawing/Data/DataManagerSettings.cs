@@ -28,6 +28,13 @@ namespace Visualizer.Environment.Drawing.Data
 
 		protected Diagram Diagram { get { return diagram; } }
 
+		[DisplayName("Clear Data")]
+		public bool ClearData
+		{
+			get { return Diagram.DataManager.ClearData; }
+			set { Diagram.DataManager.ClearData = value; }
+		}
+
 		protected DataManagerSettings(Diagram diagram)
 		{
 			this.diagram = diagram;
