@@ -102,7 +102,7 @@ namespace Visualizer
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
 
-			this.settings = new Settings(properties, viewport, timer, diagram);
+			this.settings = new Settings(properties, viewport, drawer, timer, diagram);
 
 			properties.SelectedObject = settings;
 		}

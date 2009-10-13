@@ -16,28 +16,32 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
-using System.Drawing;
 using Graphics;
 
 namespace Visualizer.Environment
 {
 	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpandableObjectConverter))]
-	class ViewportSettings
+	class DrawerSettings
 	{
-		readonly Viewport viewport;
+		readonly Drawer drawer;
 
-		[DisplayName("Clear Color")]
-		public Color ClearColor
+		[DisplayName("Line Smoothing")]
+		public bool LineSmoothing
 		{
-			get { return viewport.ClearColor; }
-			set { viewport.ClearColor = value; }
+			get { return drawer.LineSmoothing; }
+			set { drawer.LineSmoothing = value; }
 		}
-		// TODO: Add VSync
-
-		public ViewportSettings(Viewport viewport)
+		[DisplayName("Alpha Blending")]
+		public bool AlphaBlending
 		{
-			this.viewport = viewport;
+			get { return drawer.AlphaBlending; }
+			set { drawer.AlphaBlending = value; }
+		}
+
+		public DrawerSettings(Drawer drawer)
+		{
+			this.drawer = drawer;
 		}
 	}
 }

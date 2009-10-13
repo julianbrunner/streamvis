@@ -16,17 +16,17 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
+using Graphics;
 using Visualizer.Data;
 using Visualizer.Drawing;
-using Graphics;
 
 namespace Visualizer.Environment
 {
 	class Settings
 	{
-		readonly System.Windows.Forms.PropertyGrid propertyGrid;
 		readonly DiagramSettings diagram;
 		readonly ViewportSettings viewport;
+		readonly DrawerSettings drawer;
 
 		[Description("Contains settings concerning the Diagram.")]
 		[DisplayName("Diagram")]
@@ -34,11 +34,15 @@ namespace Visualizer.Environment
 		[Description("Contains settings concerning the Viewport.")]
 		[DisplayName("Viewport")]
 		public ViewportSettings Viewport { get { return viewport; } }
+		[Description("Contains settings concerning the Drawer.")]
+		[DisplayName("Drawer")]
+		public DrawerSettings Drawer { get { return drawer; } }
 
-		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, Viewport viewport, Timer timer, Diagram diagram)
+		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, Viewport viewport, Drawer drawer, Timer timer, Diagram diagram)
 		{
 			this.diagram = new DiagramSettings(propertyGrid, timer, diagram);
 			this.viewport = new ViewportSettings(viewport);
+			this.drawer = new DrawerSettings(drawer);
 		}
 	}
 }
