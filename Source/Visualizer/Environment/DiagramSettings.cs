@@ -17,9 +17,9 @@
 
 using System;
 using System.ComponentModel;
+using Visualizer.Data;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Timing;
-using Visualizer.Data;
 using Visualizer.Environment.Drawing;
 using Visualizer.Environment.Drawing.Timing;
 
@@ -29,9 +29,10 @@ namespace Visualizer.Environment
 	[TypeConverter(typeof(ExpandableObjectConverter))]
 	class DiagramSettings
 	{
+		readonly System.Windows.Forms.PropertyGrid propertyGrid;
 		readonly Timer timer;
 		readonly Diagram diagram;
-		
+
 		GraphSettingsSettings graphSettings;
 		LayouterSettings layouter;
 		TimeManagerType timeManagerType;
@@ -42,7 +43,7 @@ namespace Visualizer.Environment
 		#region Graph Settings
 		[Description("Contains setings concerning the Graphs.")]
 		[DisplayName("Graph Setitings")]
-		public GraphSettingsSettings GraphSettings { get{ return graphSettings; } }
+		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
 		#endregion
 		#region Layouter
 		[Description("Contains settings concerning the Layouter.")]
@@ -63,7 +64,7 @@ namespace Visualizer.Environment
 					case TimeManagerType.Wrapping: diagram.TimeManager = new WrappingTimeManager(timer); break;
 					default: throw new InvalidOperationException();
 				}
-				
+
 				Initialize();
 			}
 		}
@@ -93,19 +94,20 @@ namespace Visualizer.Environment
 			set { diagram.IsDrawn = value; }
 		}
 
-		public DiagramSettings(Timer timer, Diagram diagram)
+		public DiagramSettings(System.Windows.Forms.PropertyGrid propertyGrid, Timer timer, Diagram diagram)
 		{
+			this.propertyGrid = propertyGrid;
 			this.timer = timer;
 			this.diagram = diagram;
 
 			Initialize();
 		}
-		
+
 		void Initialize()
 		{
 			graphSettings = new GraphSettingsSettings(diagram);
 			layouter = new LayouterSettings(diagram);
-			
+
 			switch (timeManagerType = GetType(diagram.TimeManager))
 			{
 				case TimeManagerType.Continuous: timeManager = new ContinuousTimeManagerSettings(diagram); break;
@@ -113,17 +115,19 @@ namespace Visualizer.Environment
 				case TimeManagerType.Wrapping: timeManager = new WrappingTimeManagerSettings(diagram); break;
 				default: throw new InvalidOperationException();
 			}
-			
+
 			axisX = new AxisXSettings(diagram);
 			axisY = new AxisYSettings(diagram);
+
+			propertyGrid.Refresh();
 		}
-		
+
 		static TimeManagerType GetType(TimeManager timeManager)
 		{
 			if (timeManager is ContinuousTimeManager) return TimeManagerType.Continuous;
 			if (timeManager is ShiftingTimeManager) return TimeManagerType.Shiftting;
 			if (timeManager is WrappingTimeManager) return TimeManagerType.Wrapping;
-			
+
 			throw new ArgumentException();
 		}
 	}

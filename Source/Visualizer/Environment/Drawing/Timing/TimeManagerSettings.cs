@@ -26,7 +26,7 @@ namespace Visualizer.Environment.Drawing.Timing
 	abstract class TimeManagerSettings
 	{
 		readonly Diagram diagram;
-		
+
 		protected Diagram Diagram { get { return diagram; } }
 
 		[DisplayName("Time")]

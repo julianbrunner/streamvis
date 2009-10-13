@@ -16,7 +16,6 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
-using Visualizer.Data;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Timing;
 
@@ -27,14 +26,14 @@ namespace Visualizer.Environment.Drawing.Timing
 	class WrappingTimeManagerSettings : TimeManagerSettings
 	{
 		WrappingTimeManager WrappingTimeManager { get { return (WrappingTimeManager)Diagram.TimeManager; } }
-		
-		[DisplayName("GapLength Length")]
+
+		[DisplayName("Gap Length")]
 		public double GapLength
 		{
 			get { return WrappingTimeManager.GapLength; }
 			set { WrappingTimeManager.GapLength = value; }
 		}
-		
+
 		public WrappingTimeManagerSettings(Diagram diagram) : base(diagram) { }
 	}
 }

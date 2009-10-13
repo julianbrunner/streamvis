@@ -16,22 +16,23 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
-using Visualizer.Drawing;
 using Visualizer.Data;
+using Visualizer.Drawing;
 
 namespace Visualizer.Environment
 {
 	class Settings
 	{
+		readonly System.Windows.Forms.PropertyGrid propertyGrid;
 		readonly DiagramSettings diagram;
 
 		[Description("Contains settings concerning the Diagram.")]
 		[DisplayName("Diagram")]
 		public DiagramSettings Diagram { get { return diagram; } }
 
-		public Settings(Timer timer, Diagram diagram)
+		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, Timer timer, Diagram diagram)
 		{
-			this.diagram = new DiagramSettings(timer, diagram);
+			this.diagram = new DiagramSettings(propertyGrid, timer, diagram);
 		}
 	}
 }

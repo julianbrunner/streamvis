@@ -16,18 +16,16 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
-using Visualizer.Data;
 using Visualizer.Drawing;
-using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Environment.Drawing.Timing
-{	
+{
 	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpandableObjectConverter))]
 	class ContinuousTimeManagerSettings : TimeManagerSettings
 	{
 		//ContinuousTimeManager ContinuousTimeManager { get { return (ContinuousTimeManager)Diagram.TimeManager; } }
-		
+
 		public ContinuousTimeManagerSettings(Diagram diagram) : base(diagram) { }
 	}
 }

@@ -16,7 +16,6 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
-using Visualizer.Data;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Timing;
 
@@ -27,14 +26,14 @@ namespace Visualizer.Environment.Drawing.Timing
 	class ShiftingTimeManagerSettings : TimeManagerSettings
 	{
 		ShiftingTimeManager ShiftingTimeManager { get { return (ShiftingTimeManager)Diagram.TimeManager; } }
-		
-		[DisplayName("SHift Length")]
+
+		[DisplayName("Shift Length")]
 		public double ShiftLength
 		{
 			get { return ShiftingTimeManager.ShiftLength; }
 			set { ShiftingTimeManager.ShiftLength = value; }
 		}
-		
+
 		public ShiftingTimeManagerSettings(Diagram diagram) : base(diagram) { }
 	}
 }
