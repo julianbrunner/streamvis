@@ -27,13 +27,18 @@ namespace Visualizer.Environment
 	{
 		readonly Viewport viewport;
 
+		[DisplayName("Vertical Synchronization")]
+		public bool VerticalSynchronization
+		{
+			get { return viewport.VSync; }
+			set { viewport.VSync = value; }
+		}
 		[DisplayName("Clear Color")]
 		public Color ClearColor
 		{
 			get { return viewport.ClearColor; }
 			set { viewport.ClearColor = value; }
 		}
-		// TODO: Add VSync
 
 		public ViewportSettings(Viewport viewport)
 		{
