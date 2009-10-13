@@ -17,5 +17,5 @@
 
 namespace Visualizer
 {
-	enum SamplerType { PerSecond, PerPixel }
+	enum DataManagerType { PerSecond, PerPixel }
 }

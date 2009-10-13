@@ -102,15 +102,15 @@
 		<NewLine />
 		<NewLine />		
 		<Text Column="Level1">s:(s[:&lt;c&gt;]|p[:&lt;c&gt;])</Text>
-		<Text Column="Description">Lets you specify the sampler type and settings used for drawing graphs. The default value is "p:1".</Text>
+		<Text Column="Description">Lets you specify the data manager type and settings used for drawing graphs. The default value is "p:1".</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level2">s[:&lt;c&gt;]</Text>
-		<Text Column="Description">Per-Second sampler. The data will be resampled to &lt;c&gt; entries per second. The default value for &lt;c&gt; is "10".</Text>
+		<Text Column="Description">Per-Second data manager. The data will be resampled to &lt;c&gt; entries per second. The default value for &lt;c&gt; is "10".</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level2">p[:&lt;c&gt;]</Text>
-		<Text Column="Description">Per-Pixel sampler. The data will be resampled to &lt;c&gt; entries per pixel. The default value for &lt;c&gt; is "0.1".</Text>
+		<Text Column="Description">Per-Pixel data manager. The data will be resampled to &lt;c&gt; entries per pixel. The default value for &lt;c&gt; is "0.1".</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">l:&lt;width&gt;</Text>

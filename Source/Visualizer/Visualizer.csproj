@@ -96,7 +96,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ValueManagerType.cs" />
-    <Compile Include="SamplerType.cs" />
+    <Compile Include="DataManagerType.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

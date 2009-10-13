@@ -40,8 +40,8 @@ namespace Visualizer
 		public Time? DiagramWidth { get; private set; }
 		public ValueManagerType ValueManagerType { get; private set; }
 		public Range<double>? ValueRange { get; private set; }
-		public SamplerType SamplerType { get; private set; }
-		public double? SamplerFrequency { get; private set; }
+		public DataManagerType DataManagerType { get; private set; }
+		public double? DataManagerParameter { get; private set; }
 		public double? LineWidth { get; private set; }
 		public int? MarkerCountX { get; private set; }
 		public int? MarkerCountY { get; private set; }
@@ -52,7 +52,7 @@ namespace Visualizer
 		{
 			TimeManagerType = TimeManagerType.Continuous;
 			ValueManagerType = ValueManagerType.Fitting;
-			SamplerType = SamplerType.PerPixel;
+			DataManagerType = DataManagerType.PerPixel;
 
 			foreach (string parameter in parameters)
 			{
@@ -139,19 +139,19 @@ namespace Visualizer
 					{
 						case "s":
 							if (details.Length > 3) InvalidParameter(option);
-							SamplerType = SamplerType.PerSecond;
+							DataManagerType = DataManagerType.PerSecond;
 							if (details.Length > 2)
-								try { SamplerFrequency = double.Parse(details[2]); }
+								try { DataManagerParameter = double.Parse(details[2]); }
 								catch (FormatException) { InvalidParameter(option); }
 							break;
 						case "p":
 							if (details.Length > 3) InvalidParameter(option);
-							SamplerType = SamplerType.PerPixel;
+							DataManagerType = DataManagerType.PerPixel;
 							if (details.Length > 2)
-								try { SamplerFrequency = double.Parse(details[2]); }
+								try { DataManagerParameter = double.Parse(details[2]); }
 								catch (FormatException) { InvalidParameter(option); }
 							break;
-						default: throw new InvalidOperationException("Invalid sampler type: " + details[1]);
+						default: throw new InvalidOperationException("Invalid data manager type: " + details[1]);
 					}
 					break;
 				case "l":

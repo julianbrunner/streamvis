@@ -322,15 +322,15 @@ namespace Visualizer
 				default: throw new InvalidOperationException();
 			}
 
-			switch (parameters.SamplerType)
+			switch (parameters.DataManagerType)
 			{
-				case SamplerType.PerSecond:
+				case DataManagerType.PerSecond:
 					diagram.DataManager = new PerSecondDataManager(diagram);
-					if (parameters.SamplerFrequency != null) ((PerSecondDataManager)diagram.DataManager).SamplesPerSecond = parameters.SamplerFrequency.Value;
+					if (parameters.DataManagerParameter != null) ((PerSecondDataManager)diagram.DataManager).SamplesPerSecond = parameters.DataManagerParameter.Value;
 					break;
-				case SamplerType.PerPixel:
+				case DataManagerType.PerPixel:
 					diagram.DataManager = new PerPixelDataManager(diagram);
-					if (parameters.SamplerFrequency != null) ((PerPixelDataManager)diagram.DataManager).SamplesPerPixel = parameters.SamplerFrequency.Value;
+					if (parameters.DataManagerParameter != null) ((PerPixelDataManager)diagram.DataManager).SamplesPerPixel = parameters.DataManagerParameter.Value;
 					break;
 				default: throw new InvalidOperationException();
 			}
