@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -59,13 +59,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoordinateLabel.cs" />
-    <Compile Include="Environment\AxisYSettings.cs" />
-    <Compile Include="Environment\LayouterSettings.cs" />
+    <Compile Include="Environment\DiagramSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Environment\Drawing\AxisXSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Environment\Drawing\AxisYSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Environment\Drawing\GraphSettingsSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Environment\Drawing\LayouterSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Environment\Drawing\Timing\ContinuousTimeManagerSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Environment\Drawing\Timing\ShiftingTimeManagerSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Environment\Drawing\Timing\TimeManagerSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Environment\Drawing\Timing\WrappingTimeManagerSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Environment\Settings.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ValueManagerType.cs" />
-    <Compile Include="Environment\AxisXSettings.cs" />
-    <Compile Include="Environment\GraphSettingsSettings.cs" />
-    <Compile Include="Environment\DiagramSettings.cs" />
-    <Compile Include="Environment\Settings.cs" />
     <Compile Include="SamplerType.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -83,10 +107,6 @@
     <Compile Include="TextDialog.Designer.cs">
       <DependentUpon>TextDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Environment\Timing\ContinuousTimeManagerSettings.cs" />
-    <Compile Include="Environment\Timing\ShiftingTimeManagerSettings.cs" />
-    <Compile Include="Environment\Timing\TimeManagerSettings.cs" />
-    <Compile Include="Environment\Timing\WrappingTimeManagerSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\CrossMark.png" />
@@ -138,7 +158,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="Environment\Timing\" />
-  </ItemGroup>
 </Project>

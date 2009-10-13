@@ -1,5 +1,3 @@
-TODO: Move Diagram-related settings classes into an appropriate subfolder
-TODO: Correct namespaces of classes in Visualizer.Environment
 TODO: Apparently, mono doesn't care if PropertyGrid sorting is disabled - confirm and create bug report
 
 TODO: Better playback controls

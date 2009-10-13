@@ -20,6 +20,8 @@ using System.ComponentModel;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Timing;
 using Visualizer.Data;
+using Visualizer.Environment.Drawing;
+using Visualizer.Environment.Drawing.Timing;
 
 namespace Visualizer.Environment
 {

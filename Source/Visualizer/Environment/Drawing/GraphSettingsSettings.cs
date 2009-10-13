@@ -18,7 +18,7 @@
 using System.ComponentModel;
 using Visualizer.Drawing;
 
-namespace Visualizer.Environment
+namespace Visualizer.Environment.Drawing
 {
 	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpandableObjectConverter))]

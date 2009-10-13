@@ -20,7 +20,7 @@ using Visualizer.Data;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Timing;
 
-namespace Visualizer.Environment
+namespace Visualizer.Environment.Drawing.Timing
 {	
 	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpandableObjectConverter))]
