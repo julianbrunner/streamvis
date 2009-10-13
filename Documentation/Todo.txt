@@ -3,7 +3,6 @@ TODO: Create bug report for compiler exception in ColorGenerator.GetMinimumDista
 
 TODO: Better playback controls
 TODO: Vertical zoom
-TODO: Add ability to switch Value-/TimeManagers through GUI while drawing
 
 TODO: Test if default options still match help document, review code to make sure no conflicting default values exist
 TODO: Make settings pane collapsible
