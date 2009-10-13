@@ -68,6 +68,9 @@
     <Compile Include="Environment\Drawing\AxisYSettings.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Environment\Drawing\Data\PerPixelDataManagerSettings.cs" />
+    <Compile Include="Environment\Drawing\Data\PerSecondDataManagerSettings.cs" />
+    <Compile Include="Environment\Drawing\Data\DataManagerSettings.cs" />
     <Compile Include="Environment\Drawing\GraphSettingsSettings.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -152,9 +155,6 @@
       <Project>{88377E30-410B-40ED-8D90-BE90D7831933}</Project>
       <Name>Yarp</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Environment\Drawing\Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
