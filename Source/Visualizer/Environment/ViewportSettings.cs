@@ -16,29 +16,27 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
-using Visualizer.Data;
-using Visualizer.Drawing;
+using System.Drawing;
 using Graphics;
 
 namespace Visualizer.Environment
 {
-	class Settings
+	// TODO: Add description for properties
+	[TypeConverter(typeof(ExpandableObjectConverter))]
+	class ViewportSettings
 	{
-		readonly System.Windows.Forms.PropertyGrid propertyGrid;
-		readonly DiagramSettings diagram;
-		readonly ViewportSettings viewport;
+		readonly Viewport viewport;
 
-		[Description("Contains settings concerning the Diagram.")]
-		[DisplayName("Diagram")]
-		public DiagramSettings Diagram { get { return diagram; } }
-		[Description("Contains settings concerning the Viewport.")]
-		[DisplayName("Viewport")]
-		public ViewportSettings Viewport { get { return viewport; } }
-
-		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, Viewport viewport, Timer timer, Diagram diagram)
+		[DisplayName("Clear Color")]
+		public Color ClearColor
 		{
-			this.diagram = new DiagramSettings(propertyGrid, timer, diagram);
-			this.viewport = new ViewportSettings(viewport);
+			get { return viewport.ClearColor; }
+			set { viewport.ClearColor = value; }
+		}
+
+		public ViewportSettings(Viewport viewport)
+		{
+			this.viewport = viewport;
 		}
 	}
 }

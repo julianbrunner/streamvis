@@ -87,9 +87,9 @@ namespace Visualizer
 			showDiagramToolStripMenuItem.Checked = true;
 			showFrameCounterToolStripMenuItem.Checked = true;
 			verticalSynchronizationToolStripMenuItem.Checked = viewport.VSync;
-			
+
 			if (parameters.MinimalMode != null) minimalModeToolStripMenuItem.Checked = parameters.MinimalMode.Value;
-			
+
 			freezeToolStripMenuItem_Click(this, EventArgs.Empty);
 			graphExtensionToolStripMenuItem_Click(this, EventArgs.Empty);
 			showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
@@ -102,7 +102,7 @@ namespace Visualizer
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
 
-			this.settings = new Settings(properties, timer, diagram);
+			this.settings = new Settings(properties, viewport, timer, diagram);
 
 			properties.SelectedObject = settings;
 		}

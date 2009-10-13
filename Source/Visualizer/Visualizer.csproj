@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoordinateLabel.cs" />
+    <Compile Include="Environment\ViewportSettings.cs" />
     <Compile Include="Environment\DiagramSettings.cs">
       <SubType>Code</SubType>
     </Compile>
