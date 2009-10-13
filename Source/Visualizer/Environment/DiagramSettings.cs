@@ -19,11 +19,13 @@ using System;
 using System.ComponentModel;
 using Visualizer.Data;
 using Visualizer.Drawing;
+using Visualizer.Drawing.Data;
 using Visualizer.Drawing.Timing;
+using Visualizer.Drawing.Values;
 using Visualizer.Environment.Drawing;
+using Visualizer.Environment.Drawing.Data;
 using Visualizer.Environment.Drawing.Timing;
 using Visualizer.Environment.Drawing.Values;
-using Visualizer.Drawing.Values;
 
 namespace Visualizer.Environment
 {
@@ -41,6 +43,8 @@ namespace Visualizer.Environment
 		TimeManagerSettings timeManager;
 		ValueManagerType valueManagerType;
 		ValueManagerSettings valueManager;
+		DataManagerType dataManagerType;
+		DataManagerSettings dataManager;
 		AxisXSettings axisX;
 		AxisYSettings axisY;
 
@@ -97,6 +101,27 @@ namespace Visualizer.Environment
 		[DisplayName("Value Manager")]
 		public ValueManagerSettings ValueManager { get { return valueManager; } }
 		#endregion
+		#region Data Manager
+		[DisplayName("Data Manager Type")]
+		public DataManagerType DataManagerType
+		{
+			get { return dataManagerType; }
+			set
+			{
+				switch (value)
+				{
+					case DataManagerType.PerSecond: diagram.DataManager = new PerSecondDataManager(diagram); break;
+					case DataManagerType.PerPixel: diagram.DataManager = new PerPixelDataManager(diagram); break;
+					default: throw new InvalidOperationException();
+				}
+
+				Initialize();
+			}
+		}
+		[Description("Contains settings concerning the Data Manager.")]
+		[DisplayName("Data Manager")]
+		public DataManagerSettings DataManager { get { return dataManager; } }
+		#endregion
 		#region Axes
 		[Description("Contains settings concerning the X-Axis.")]
 		[DisplayName("X-Axis")]
@@ -148,6 +173,13 @@ namespace Visualizer.Environment
 				default: throw new InvalidOperationException();
 			}
 
+			switch (dataManagerType = GetDataManagerType(diagram.DataManager))
+			{
+				case DataManagerType.PerSecond: dataManager = new PerSecondDataManagerSettings(diagram); break;
+				case DataManagerType.PerPixel: dataManager = new PerPixelDataManagerSettings(diagram); break;
+				default: throw new InvalidOperationException();
+			}
+
 			axisX = new AxisXSettings(diagram);
 			axisY = new AxisYSettings(diagram);
 
@@ -166,6 +198,13 @@ namespace Visualizer.Environment
 		{
 			if (valueManager is FixedValueManager) return ValueManagerType.Fixed;
 			if (valueManager is FittingValueManager) return ValueManagerType.Fitting;
+
+			throw new ArgumentException();
+		}
+		static DataManagerType GetDataManagerType(DataManager dataManager)
+		{
+			if (dataManager is PerSecondDataManager) return DataManagerType.PerSecond;
+			if (dataManager is PerPixelDataManager) return DataManagerType.PerPixel;
 
 			throw new ArgumentException();
 		}
