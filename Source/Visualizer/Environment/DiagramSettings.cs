@@ -22,6 +22,8 @@ using Visualizer.Drawing;
 using Visualizer.Drawing.Timing;
 using Visualizer.Environment.Drawing;
 using Visualizer.Environment.Drawing.Timing;
+using Visualizer.Environment.Drawing.Values;
+using Visualizer.Drawing.Values;
 
 namespace Visualizer.Environment
 {
@@ -37,6 +39,8 @@ namespace Visualizer.Environment
 		LayouterSettings layouter;
 		TimeManagerType timeManagerType;
 		TimeManagerSettings timeManager;
+		ValueManagerType valueManagerType;
+		ValueManagerSettings valueManager;
 		AxisXSettings axisX;
 		AxisYSettings axisY;
 
@@ -71,6 +75,27 @@ namespace Visualizer.Environment
 		[Description("Contains settings concerning the Time Manager.")]
 		[DisplayName("Time Manager")]
 		public TimeManagerSettings TimeManager { get { return timeManager; } }
+		#endregion
+		#region Value Manager
+		[DisplayName("Value Manager Type")]
+		public ValueManagerType ValueManagerType
+		{
+			get { return valueManagerType; }
+			set
+			{
+				switch (value)
+				{
+					case ValueManagerType.Fixed: diagram.ValueManager = new FixedValueManager(); break;
+					case ValueManagerType.Fitting: diagram.ValueManager = new FittingValueManager(diagram); break;
+					default: throw new InvalidOperationException();
+				}
+
+				Initialize();
+			}
+		}
+		[Description("Contains settings concerning the Value Manager.")]
+		[DisplayName("Value Manager")]
+		public ValueManagerSettings ValueManager { get { return valueManager; } }
 		#endregion
 		#region Axes
 		[Description("Contains settings concerning the X-Axis.")]
@@ -108,11 +133,18 @@ namespace Visualizer.Environment
 			graphSettings = new GraphSettingsSettings(diagram);
 			layouter = new LayouterSettings(diagram);
 
-			switch (timeManagerType = GetType(diagram.TimeManager))
+			switch (timeManagerType = GetTimeManagerType(diagram.TimeManager))
 			{
 				case TimeManagerType.Continuous: timeManager = new ContinuousTimeManagerSettings(diagram); break;
 				case TimeManagerType.Shiftting: timeManager = new ShiftingTimeManagerSettings(diagram); break;
 				case TimeManagerType.Wrapping: timeManager = new WrappingTimeManagerSettings(diagram); break;
+				default: throw new InvalidOperationException();
+			}
+
+			switch (valueManagerType = GetValueManagerType(diagram.ValueManager))
+			{
+				case ValueManagerType.Fixed: valueManager = new FixedValueManagerSettings(diagram); break;
+				case ValueManagerType.Fitting: valueManager = new FittingValueManagerSettings(diagram); break;
 				default: throw new InvalidOperationException();
 			}
 
@@ -122,11 +154,18 @@ namespace Visualizer.Environment
 			propertyGrid.Refresh();
 		}
 
-		static TimeManagerType GetType(TimeManager timeManager)
+		static TimeManagerType GetTimeManagerType(TimeManager timeManager)
 		{
 			if (timeManager is ContinuousTimeManager) return TimeManagerType.Continuous;
 			if (timeManager is ShiftingTimeManager) return TimeManagerType.Shiftting;
 			if (timeManager is WrappingTimeManager) return TimeManagerType.Wrapping;
+
+			throw new ArgumentException();
+		}
+		static ValueManagerType GetValueManagerType(ValueManager valueManager)
+		{
+			if (valueManager is FixedValueManager) return ValueManagerType.Fixed;
+			if (valueManager is FittingValueManager) return ValueManagerType.Fitting;
 
 			throw new ArgumentException();
 		}

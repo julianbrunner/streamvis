@@ -86,6 +86,9 @@
     <Compile Include="Environment\Drawing\Timing\WrappingTimeManagerSettings.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Environment\Drawing\Values\FittingValueManagerSettings.cs" />
+    <Compile Include="Environment\Drawing\Values\FixedValueManagerSettings.cs" />
+    <Compile Include="Environment\Drawing\Values\ValueManagerSettings.cs" />
     <Compile Include="Environment\Settings.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -149,6 +152,9 @@
       <Project>{88377E30-410B-40ED-8D90-BE90D7831933}</Project>
       <Name>Yarp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Environment\Drawing\Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
