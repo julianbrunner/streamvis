@@ -5,7 +5,8 @@ Version 0.10
 	- Improved command-line options
 	- Corrected a few mistakes in the command-line help message
 	- Fixed a bug causing an exception to be thrown when very short empty segments appear
-	- Lots of settings can now be changed on-the-fly using the property box
+	- Lots of settings can now be changed on-the-fly using the settings pane
+	- Settings pane is now collapsible
 
 Version 0.9
 	- Moved to OpenTK 0.9.8.3

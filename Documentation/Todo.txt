@@ -5,9 +5,7 @@ TODO: Proper controls for playback position and zooming
 
 TODO: Add possibility to rename streams through the UI
 TODO: Test if default options still match help document, review code to make sure no conflicting default values exist
-TODO: Make settings pane collapsible
 TODO: Degrade obscure settings from command-line parameters to default settings
-TODO: Can TimeRange and ValueRange be merged? Why not handle Times as doubles?
 
 TODO: Move documentation to Wiki
 
@@ -19,6 +17,7 @@ TODO: Check for every command-line parameter if it would make sense to add a way
 
 TODO: Look through comment TODOs
 
+TODO: Can TimeRange and ValueRange be merged? Why not handle Times as doubles?
 TODO: Proper component model, IsUpdated and IsDrawn should determine if the Update and Draw methods are called at all, parent is responsible
 TODO: TimeManager.Range is not always the range from TimeManager.Time - Width to TimeManager.Time, look for places where this is assumed
 TODO: Hide OpenTK members sufficiently so that a reference to Graphics doesn't result in a dependency reference to OpenTK
