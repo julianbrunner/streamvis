@@ -63,7 +63,7 @@ namespace Visualizer
 		public bool MinimalMode
 		{
 			get { return !mainContainer.TopToolStripPanelVisible && !mainContainer.BottomToolStripPanelVisible && !StreamListVisible && !PropertiesVisible; }
-			set { mainContainer.TopToolStripPanelVisible = mainContainer.BottomToolStripPanelVisible = StreamListVisible = PropertiesVisible = value; }
+			set { mainContainer.TopToolStripPanelVisible = mainContainer.BottomToolStripPanelVisible = StreamListVisible = PropertiesVisible = !value; }
 		}
 
 		public MainWindow(Parameters parameters)
@@ -76,10 +76,12 @@ namespace Visualizer
 			if (parameters.VerticalSynchronization != null) viewport.VSync = parameters.VerticalSynchronization.Value;
 			if (parameters.BackgroundColor != null) viewport.ClearColor = parameters.BackgroundColor.Value;
 
+			Console.WriteLine("Initializing drawer...");
 			this.drawer = new Drawer();
 			if (parameters.LineSmoothing != null) drawer.LineSmoothing = parameters.LineSmoothing.Value;
 			if (parameters.AlphaBlending != null) drawer.AlphaBlending = parameters.AlphaBlending.Value;
 
+			Console.WriteLine("Initializing timer...");
 			this.timer = new Data.Timer();
 
 			Console.WriteLine("Initializing diagram...");
@@ -90,32 +92,23 @@ namespace Visualizer
 			this.frameCounter.Color = Color.Yellow;
 			this.frameCounter.Alignment = TextAlignment.Far;
 
-			Console.WriteLine("Initializing coordinate display");
+			Console.WriteLine("Initializing coordinate label");
 			this.coordinateLabel = new CoordinateLabel(coordinateStatusLabel, viewport, diagram);
 
 			Console.WriteLine("Initializing data source...");
 			NewSource(parameters.Ports);
 
 			Console.WriteLine("Applying parameters...");
-			// TODO: Move these to settings
-			//freezeToolStripMenuItem.Checked = false;
-			//graphExtensionToolStripMenuItem.Checked = diagram.GraphSettings.ExtendGraphs;
-			//showStreamListToolStripMenuItem.Checked = true;
-			//minimalModeToolStripMenuItem.Checked = false;
-			//verticalSynchronizationToolStripMenuItem.Checked = viewport.VSync;
-
 			if (parameters.MinimalMode != null) MinimalMode = parameters.MinimalMode.Value;
 
-			//showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
-			//minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
+			Console.WriteLine("Initializing settings...");
+			this.settings = new Settings(properties, this, viewport, drawer, timer, diagram, frameCounter);
+			properties.SelectedObject = settings;
 
+			Console.WriteLine("Adding components...");
 			viewport.AddComponent(diagram);
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
-
-			this.settings = new Settings(properties, viewport, drawer, timer, diagram, frameCounter);
-
-			properties.SelectedObject = settings;
 		}
 
 		private void streamsList_ItemChecked(object sender, ItemCheckedEventArgs e)
@@ -173,17 +166,6 @@ namespace Visualizer
 			if (streamsList.SelectedItems.Count > 0 && colorDialog.ShowDialog() == DialogResult.OK)
 				SetColor(streamsList.SelectedItems[0], colorDialog.Color);
 		}
-		//private void showStreamListToolStripMenuItem_Click(object sender, EventArgs e)
-		//{
-		//    streamsListContainer.Panel1Collapsed = !showStreamListToolStripMenuItem.Checked;
-		//}
-		//private void minimalModeToolStripMenuItem_Click(object sender, EventArgs e)
-		//{
-		//    showStreamListToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
-		//    showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
-		//    mainContainer.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
-		//    mainContainer.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
-		//}
 
 		void NewSource(IEnumerable<string> ports)
 		{

@@ -24,6 +24,7 @@ namespace Visualizer.Environment
 {
 	class Settings
 	{
+		readonly MainWindow mainWindow;
 		readonly ViewportSettings viewport;
 		readonly DrawerSettings drawer;
 		readonly DiagramSettings diagram;
@@ -37,9 +38,28 @@ namespace Visualizer.Environment
 		public DiagramSettings Diagram { get { return diagram; } }
 		[DisplayName("Frame Counter")]
 		public FrameCounterSettings FrameCounter { get { return frameCounter; } }
-
-		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, Viewport viewport, Drawer drawer, Timer timer, Diagram diagram, VisibleFrameCounter frameCounter)
+		[DisplayName("Minimal Mode")]
+		public bool MinimalMode
 		{
+			get { return mainWindow.MinimalMode; }
+			set { mainWindow.MinimalMode = value; }
+		}
+		[DisplayName("Show Stream List")]
+		public bool StreamListVisible
+		{
+			get { return mainWindow.StreamListVisible; }
+			set { mainWindow.StreamListVisible = value; }
+		}
+		[DisplayName("Show Properties")]
+		public bool PropertiesVisible
+		{
+			get { return mainWindow.PropertiesVisible; }
+			set { mainWindow.PropertiesVisible = value; }
+		}
+
+		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, MainWindow mainWindow, Viewport viewport, Drawer drawer, Timer timer, Diagram diagram, VisibleFrameCounter frameCounter)
+		{
+			this.mainWindow = mainWindow;
 			this.viewport = new ViewportSettings(viewport);
 			this.drawer = new DrawerSettings(drawer);
 			this.diagram = new DiagramSettings(propertyGrid, timer, diagram);
