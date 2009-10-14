@@ -86,7 +86,9 @@ namespace Visualizer
 			this.diagram = CreateDiagram(viewport, drawer, timer, parameters);
 
 			Console.WriteLine("Initializing frame counter");
-			this.frameCounter = new VisibleFrameCounter(drawer, Color.Yellow, TextAlignment.Far);
+			this.frameCounter = new VisibleFrameCounter(drawer);
+			this.frameCounter.Color = Color.Yellow;
+			this.frameCounter.Alignment = TextAlignment.Far;
 
 			Console.WriteLine("Initializing coordinate display");
 			this.coordinateLabel = new CoordinateLabel(coordinateStatusLabel, viewport, diagram);

@@ -23,25 +23,25 @@ namespace Graphics
 	public class VisibleFrameCounter : FrameCounter, IDrawable
 	{
 		readonly Drawer drawer;
-		readonly Color color;
-		readonly TextAlignment alignment;
 
 		public bool IsDrawn { get; set; }
+		public Color Color { get; set; }
+		public TextAlignment Alignment { get; set; }
 		public Vector2 Position { get; set; }
 
-		public VisibleFrameCounter(Drawer drawer, Color color, TextAlignment alignment)
+		public VisibleFrameCounter(Drawer drawer)
 		{
 			this.drawer = drawer;
-			this.color = color;
-			this.alignment = alignment;
 
-			Position = Vector2.Zero;
 			IsDrawn = true;
+			Color = Color.White;
+			Alignment = TextAlignment.Near;
+			Position = Vector2.Zero;
 		}
 
 		public void Draw()
 		{
-			if (IsDrawn) drawer.DrawNumber(FramesPerSecond, Position, color, alignment);
+			if (IsDrawn) drawer.DrawNumber(FramesPerSecond, Position, Color, Alignment);
 		}
 	}
 }

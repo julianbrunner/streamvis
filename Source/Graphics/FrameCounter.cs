@@ -21,15 +21,14 @@ using System.Diagnostics;
 namespace Graphics
 {
 	public class FrameCounter : IComponent, IUpdateable
-	{
-		const int frameWindow = 20;
-		
+	{		
 		readonly Stopwatch stopwatch;
 		
 		TimeSpan lastOverflow = TimeSpan.Zero;
 		int frames = 0;
 		
 		public bool IsUpdated { get; set; }
+		public int CycleLength { get; set; }
 		public double FramesPerSecond { get; private set; }
 		
 		public FrameCounter()
@@ -39,16 +38,17 @@ namespace Graphics
 			stopwatch.Start();
 			
 			IsUpdated = true;
+			CycleLength = 20;
 		}
 		
 		public void Update()
 		{
 			if (IsUpdated)
 			{
-				if (++frames == frameWindow)
+				if (++frames == CycleLength)
 				{
 					TimeSpan time =  stopwatch.Elapsed;
-					FramesPerSecond = frameWindow / (time - lastOverflow).TotalSeconds;
+					FramesPerSecond = CycleLength / (time - lastOverflow).TotalSeconds;
 					lastOverflow = time;
 					frames = 0;
 				}
