@@ -21,7 +21,6 @@ namespace Visualizer.Data
 {
 	public class Stream
 	{
-		readonly string name;
 		readonly Path path;
 		readonly EntryData entryData;
 
@@ -34,25 +33,26 @@ namespace Visualizer.Data
 				return new XElement
 				(
 					XElementName,
-					new XElement("Name", name),
+					new XElement("Name", Name),
 					path.XElement,
 					entryData.XElement
 				);
 			}
 		}
-		public string Name { get { return name; } }
+		// TODO: Policy for mutable properties?
+		public string Name { get; set; }
 		public Path Path { get { return path; } }
 		public EntryData EntryData { get { return entryData; } }
 
 		public Stream(XElement stream)
 		{
-			this.name = (string)stream.Element("Name");
+			this.Name = (string)stream.Element("Name");
 			this.path = new Path(stream.Element(Path.XElementName));
 			this.entryData = new EntryData(stream.Element(EntryData.XElementName));
 		}
 		public Stream(string name, Path path)
 		{
-			this.name = name;
+			this.Name = name;
 			this.path = path;
 			this.entryData = new EntryData();
 		}

@@ -59,6 +59,7 @@ namespace Visualizer
 			this.streamsList = new System.Windows.Forms.ListView();
 			this.nameColumnHeader = new System.Windows.Forms.ColumnHeader();
 			this.streamsContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.changeNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.changeColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewport = new Graphics.Viewport();
 			this.properties = new System.Windows.Forms.PropertyGrid();
@@ -190,7 +191,6 @@ namespace Visualizer
 			this.streamsList.TabIndex = 1;
 			this.streamsList.UseCompatibleStateImageBehavior = false;
 			this.streamsList.View = System.Windows.Forms.View.Details;
-			this.streamsList.ItemActivate += new System.EventHandler(this.changeColorToolStripMenuItem_Click);
 			this.streamsList.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.streamsList_ItemChecked);
 			// 
 			// nameColumnHeader
@@ -201,15 +201,23 @@ namespace Visualizer
 			// streamsContextMenuStrip
 			// 
 			this.streamsContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeNameToolStripMenuItem,
             this.changeColorToolStripMenuItem});
 			this.streamsContextMenuStrip.Name = "streamsContextMenuStrip";
-			this.streamsContextMenuStrip.Size = new System.Drawing.Size(148, 26);
+			this.streamsContextMenuStrip.Size = new System.Drawing.Size(151, 48);
+			// 
+			// changeNameToolStripMenuItem
+			// 
+			this.changeNameToolStripMenuItem.Name = "changeNameToolStripMenuItem";
+			this.changeNameToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+			this.changeNameToolStripMenuItem.Text = "Change &Name";
+			this.changeNameToolStripMenuItem.Click += new System.EventHandler(this.changeNameToolStripMenuItem_Click);
 			// 
 			// changeColorToolStripMenuItem
 			// 
 			this.changeColorToolStripMenuItem.Name = "changeColorToolStripMenuItem";
-			this.changeColorToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-			this.changeColorToolStripMenuItem.Text = "&Change Color";
+			this.changeColorToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+			this.changeColorToolStripMenuItem.Text = "Change &Color";
 			this.changeColorToolStripMenuItem.Click += new System.EventHandler(this.changeColorToolStripMenuItem_Click);
 			// 
 			// viewport
@@ -393,6 +401,7 @@ namespace Visualizer
 		private System.Windows.Forms.ToolStripStatusLabel coordinateStatusLabel;
 		private System.Windows.Forms.SplitContainer propertiesContainer;
 		private System.Windows.Forms.PropertyGrid properties;
+		private System.Windows.Forms.ToolStripMenuItem changeNameToolStripMenuItem;
 		
 	}
 }

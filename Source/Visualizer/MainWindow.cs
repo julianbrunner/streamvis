@@ -112,8 +112,8 @@ namespace Visualizer
 
 		private void streamsList_ItemChecked(object sender, ItemCheckedEventArgs e)
 		{
-			Graph graph = (Graph)e.Item.Tag;
-			graph.IsDrawn = e.Item.Checked;
+			StreamListItem streamListItem = (StreamListItem)e.Item.Tag;
+			streamListItem.Graph.IsDrawn = e.Item.Checked;
 		}
 		private void viewport_Layout(object sender, LayoutEventArgs e)
 		{
@@ -152,6 +152,13 @@ namespace Visualizer
 		{
 			timer.Reset();
 			source.ClearData();
+		}
+		private void changeNameToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			TextDialog textDialog = new TextDialog("Stream Name", "Please enter the new name for the stream", string.Empty);
+
+			if (streamsList.SelectedItems.Count > 0 && textDialog.ShowDialog() == DialogResult.OK)
+				SetName(streamsList.SelectedItems[0], textDialog.Result);
 		}
 		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -227,7 +234,7 @@ namespace Visualizer
 					item.Text = stream.Name + " (" + stream.Path + ")";
 					item.Group = group;
 					item.Checked = true;
-					item.Tag = graph;
+					item.Tag = new StreamListItem(stream, graph);
 
 					SetColor(item, graph.Color);
 
@@ -235,11 +242,18 @@ namespace Visualizer
 				}
 			}
 		}
+		void SetName(ListViewItem item, string name)
+		{
+			StreamListItem streamListItem = (StreamListItem)item.Tag;
+
+			streamListItem.Stream.Name = name;
+			item.Text = streamListItem.Stream.Name + " (" + streamListItem.Stream.Path + ")";
+		}
 		void SetColor(ListViewItem item, Color color)
 		{
-			Graph graph = (Graph)item.Tag;
+			StreamListItem streamListItem = (StreamListItem)item.Tag;
 
-			graph.Color = color;
+			streamListItem.Graph.Color = color;
 			item.BackColor = color;
 			item.ForeColor = item.BackColor.R * 0.299 + item.BackColor.G * 0.587 + item.BackColor.B * 0.114 >= 0x80 ? Color.Black : Color.White;
 		}

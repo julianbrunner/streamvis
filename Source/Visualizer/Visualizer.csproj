@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoordinateLabel.cs" />
+    <Compile Include="StreamListItem.cs" />
     <Compile Include="Environment\ExpansionConverter.cs" />
     <Compile Include="Environment\FrameCounterSettings.cs" />
     <Compile Include="Environment\DrawerSettings.cs" />

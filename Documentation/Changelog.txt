@@ -1,3 +1,8 @@
+Version 0.11
+	- Settings pane is now collapsible
+	- Removed old user interface elements
+	- Added possibility to change the name of a stream through the user interface
+
 Version 0.10
 	- Added possibility to name individual streams
 	- Added possibility to scale the time axis (right mouse click + drag)
@@ -6,7 +11,6 @@ Version 0.10
 	- Corrected a few mistakes in the command-line help message
 	- Fixed a bug causing an exception to be thrown when very short empty segments appear
 	- Lots of settings can now be changed on-the-fly using the settings pane
-	- Settings pane is now collapsible
 
 Version 0.9
 	- Moved to OpenTK 0.9.8.3
