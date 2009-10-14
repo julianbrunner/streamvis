@@ -50,6 +50,22 @@ namespace Visualizer
 		Source source;
 		string filePath;
 
+		public bool StreamListVisible
+		{
+			get { return !streamsListContainer.Panel1Collapsed; }
+			set { streamsListContainer.Panel1Collapsed = !value; }
+		}
+		public bool PropertiesVisible
+		{
+			get { return !propertiesContainer.Panel2Collapsed; }
+			set { propertiesContainer.Panel2Collapsed = !value; }
+		}
+		public bool MinimalMode
+		{
+			get { return !mainContainer.TopToolStripPanelVisible && !mainContainer.BottomToolStripPanelVisible && !StreamListVisible && !PropertiesVisible; }
+			set { mainContainer.TopToolStripPanelVisible = mainContainer.BottomToolStripPanelVisible = StreamListVisible = PropertiesVisible = value; }
+		}
+
 		public MainWindow(Parameters parameters)
 		{
 			Console.WriteLine("Initializing graphics and user interface...");
