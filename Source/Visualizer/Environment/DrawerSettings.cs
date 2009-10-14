@@ -21,7 +21,7 @@ using Graphics;
 namespace Visualizer.Environment
 {
 	// TODO: Add description for properties
-	[TypeConverter(typeof(ExpandableObjectConverter))]
+	[TypeConverter(typeof(ExpansionConverter))]
 	class DrawerSettings
 	{
 		readonly Drawer drawer;

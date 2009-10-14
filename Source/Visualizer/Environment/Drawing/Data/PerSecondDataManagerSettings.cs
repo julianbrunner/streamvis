@@ -22,7 +22,7 @@ using Visualizer.Drawing.Data;
 namespace Visualizer.Environment.Drawing.Data
 {
 	// TODO: Add description for properties
-	[TypeConverter(typeof(ExpandableObjectConverter))]
+	[TypeConverter(typeof(ExpansionConverter))]
 	class PerSecondDataManagerSettings : DataManagerSettings
 	{
 		PerSecondDataManager PerSecondDataManager { get { return (PerSecondDataManager)Diagram.DataManager; } }

@@ -15,17 +15,19 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
-using Visualizer.Drawing;
+using System.Globalization;
 
-namespace Visualizer.Environment.Drawing.Timing
+namespace Visualizer.Environment
 {
-	// TODO: Add description for properties
-	[TypeConverter(typeof(ExpansionConverter))]
-	class ContinuousTimeManagerSettings : TimeManagerSettings
+	class ExpansionConverter : ExpandableObjectConverter
 	{
-		//ContinuousTimeManager ContinuousTimeManager { get { return (ContinuousTimeManager)Diagram.TimeManager; } }
+		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+		{
+			if (destinationType == typeof(string)) return string.Empty;
 
-		public ContinuousTimeManagerSettings(Diagram diagram) : base(diagram) { }
+			return base.ConvertTo(context, culture, value, destinationType);
+		}
 	}
 }

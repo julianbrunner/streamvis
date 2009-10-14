@@ -22,7 +22,7 @@ using Visualizer.Drawing.Timing;
 namespace Visualizer.Environment.Drawing.Timing
 {
 	// TODO: Add description for properties
-	[TypeConverter(typeof(ExpandableObjectConverter))]
+	[TypeConverter(typeof(ExpansionConverter))]
 	class WrappingTimeManagerSettings : TimeManagerSettings
 	{
 		WrappingTimeManager WrappingTimeManager { get { return (WrappingTimeManager)Diagram.TimeManager; } }

@@ -21,7 +21,7 @@ using Visualizer.Drawing;
 namespace Visualizer.Environment.Drawing
 {
 	// TODO: Add description for properties
-	[TypeConverter(typeof(ExpandableObjectConverter))]
+	[TypeConverter(typeof(ExpansionConverter))]
 	class GraphSettingsSettings
 	{
 		readonly Diagram diagram;

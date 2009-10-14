@@ -21,7 +21,7 @@ using Visualizer.Drawing;
 namespace Visualizer.Environment.Drawing.Data
 {
 	// TODO: Add description for properties
-	[TypeConverter(typeof(ExpandableObjectConverter))]
+	[TypeConverter(typeof(ExpansionConverter))]
 	abstract class DataManagerSettings
 	{
 		readonly Diagram diagram;

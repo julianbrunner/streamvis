@@ -30,7 +30,7 @@ using Visualizer.Environment.Drawing.Values;
 namespace Visualizer.Environment
 {
 	// TODO: Add description for properties
-	[TypeConverter(typeof(ExpandableObjectConverter))]
+	[TypeConverter(typeof(ExpansionConverter))]
 	class DiagramSettings
 	{
 		readonly System.Windows.Forms.PropertyGrid propertyGrid;

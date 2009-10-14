@@ -6,6 +6,7 @@ TODO: Remove bogus "Contains settings concerning ..." descriptions
 TODO: Better playback controls
 TODO: Vertical zoom
 
+TODO: Add possibility to rename streams through the UI
 TODO: Test if default options still match help document, review code to make sure no conflicting default values exist
 TODO: Make settings pane collapsible
 TODO: Degrade obscure settings from command-line parameters to default settings

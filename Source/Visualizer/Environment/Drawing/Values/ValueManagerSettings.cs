@@ -21,7 +21,7 @@ using Visualizer.Drawing;
 namespace Visualizer.Environment.Drawing.Values
 {
 	// TODO: Add description for properties
-	[TypeConverter(typeof(ExpandableObjectConverter))]
+	[TypeConverter(typeof(ExpansionConverter))]
 	abstract class ValueManagerSettings
 	{
 		readonly Diagram diagram;
