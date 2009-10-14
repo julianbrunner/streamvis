@@ -96,23 +96,20 @@ namespace Visualizer
 
 			Console.WriteLine("Applying parameters...");
 			// TODO: Move these to settings
-			freezeToolStripMenuItem.Checked = false;
-			graphExtensionToolStripMenuItem.Checked = diagram.GraphSettings.ExtendGraphs;
-			showStreamListToolStripMenuItem.Checked = true;
-			minimalModeToolStripMenuItem.Checked = false;
-			showDiagramToolStripMenuItem.Checked = true;
-			showFrameCounterToolStripMenuItem.Checked = true;
-			verticalSynchronizationToolStripMenuItem.Checked = viewport.VSync;
+			//freezeToolStripMenuItem.Checked = false;
+			//graphExtensionToolStripMenuItem.Checked = diagram.GraphSettings.ExtendGraphs;
+			//showStreamListToolStripMenuItem.Checked = true;
+			//minimalModeToolStripMenuItem.Checked = false;
+			//showDiagramToolStripMenuItem.Checked = true;
+			//showFrameCounterToolStripMenuItem.Checked = true;
+			//verticalSynchronizationToolStripMenuItem.Checked = viewport.VSync;
 
-			if (parameters.MinimalMode != null) minimalModeToolStripMenuItem.Checked = parameters.MinimalMode.Value;
+			if (parameters.MinimalMode != null) MinimalMode = parameters.MinimalMode.Value;
 
-			freezeToolStripMenuItem_Click(this, EventArgs.Empty);
-			graphExtensionToolStripMenuItem_Click(this, EventArgs.Empty);
-			showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
-			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
-			showDiagramToolStripMenuItem_Click(this, EventArgs.Empty);
-			showFrameCounterToolStripMenuItem_Click(this, EventArgs.Empty);
-			verticalSynchronizationToolStripMenuItem_Click(this, EventArgs.Empty);
+			//showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
+			//minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
+			//showDiagramToolStripMenuItem_Click(this, EventArgs.Empty);
+			//showFrameCounterToolStripMenuItem_Click(this, EventArgs.Empty);
 
 			viewport.AddComponent(diagram);
 			viewport.AddComponent(frameCounter);
@@ -135,8 +132,7 @@ namespace Visualizer
 		}
 		private void viewport_DoubleClick(object sender, EventArgs e)
 		{
-			minimalModeToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
-			minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
+			MinimalMode = !MinimalMode;
 		}
 		private void viewport_MouseMove(object sender, MouseEventArgs e)
 		{
@@ -174,42 +170,30 @@ namespace Visualizer
 			timer.Reset();
 			source.ClearData();
 		}
-		private void freezeToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			diagram.TimeManager.Frozen = freezeToolStripMenuItem.Checked;
-		}
-		private void graphExtensionToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			diagram.GraphSettings.ExtendGraphs = graphExtensionToolStripMenuItem.Checked;
-		}
 		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (streamsList.SelectedItems.Count > 0 && colorDialog.ShowDialog() == DialogResult.OK)
 				SetColor(streamsList.SelectedItems[0], colorDialog.Color);
 		}
-		private void showStreamListToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			streamsListContainer.Panel1Collapsed = !showStreamListToolStripMenuItem.Checked;
-		}
-		private void minimalModeToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			showStreamListToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
-			showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
-			mainContainer.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
-			mainContainer.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
-		}
-		private void showDiagramToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			diagram.IsUpdated = diagram.IsDrawn = showDiagramToolStripMenuItem.Checked;
-		}
-		private void showFrameCounterToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			frameCounter.IsUpdated = frameCounter.IsDrawn = showFrameCounterToolStripMenuItem.Checked;
-		}
-		private void verticalSynchronizationToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			viewport.VSync = verticalSynchronizationToolStripMenuItem.Checked;
-		}
+		//private void showStreamListToolStripMenuItem_Click(object sender, EventArgs e)
+		//{
+		//    streamsListContainer.Panel1Collapsed = !showStreamListToolStripMenuItem.Checked;
+		//}
+		//private void minimalModeToolStripMenuItem_Click(object sender, EventArgs e)
+		//{
+		//    showStreamListToolStripMenuItem.Checked = !minimalModeToolStripMenuItem.Checked;
+		//    showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
+		//    mainContainer.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
+		//    mainContainer.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
+		//}
+		//private void showDiagramToolStripMenuItem_Click(object sender, EventArgs e)
+		//{
+		//    diagram.IsUpdated = diagram.IsDrawn = showDiagramToolStripMenuItem.Checked;
+		//}
+		//private void showFrameCounterToolStripMenuItem_Click(object sender, EventArgs e)
+		//{
+		//    frameCounter.IsUpdated = frameCounter.IsDrawn = showFrameCounterToolStripMenuItem.Checked;
+		//}
 
 		void NewSource(IEnumerable<string> ports)
 		{
