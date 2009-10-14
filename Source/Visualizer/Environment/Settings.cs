@@ -24,25 +24,26 @@ namespace Visualizer.Environment
 {
 	class Settings
 	{
-		readonly DiagramSettings diagram;
 		readonly ViewportSettings viewport;
 		readonly DrawerSettings drawer;
+		readonly DiagramSettings diagram;
+		readonly FrameCounterSettings frameCounter;
 
-		[Description("Contains settings concerning the Diagram.")]
-		[DisplayName("Diagram")]
-		public DiagramSettings Diagram { get { return diagram; } }
-		[Description("Contains settings concerning the Viewport.")]
 		[DisplayName("Viewport")]
 		public ViewportSettings Viewport { get { return viewport; } }
-		[Description("Contains settings concerning the Drawer.")]
 		[DisplayName("Drawer")]
 		public DrawerSettings Drawer { get { return drawer; } }
+		[DisplayName("Diagram")]
+		public DiagramSettings Diagram { get { return diagram; } }
+		[DisplayName("Frame Counter")]
+		public FrameCounterSettings FrameCounter { get { return frameCounter; } }
 
-		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, Viewport viewport, Drawer drawer, Timer timer, Diagram diagram)
+		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, Viewport viewport, Drawer drawer, Timer timer, Diagram diagram, VisibleFrameCounter frameCounter)
 		{
-			this.diagram = new DiagramSettings(propertyGrid, timer, diagram);
 			this.viewport = new ViewportSettings(viewport);
 			this.drawer = new DrawerSettings(drawer);
+			this.diagram = new DiagramSettings(propertyGrid, timer, diagram);
+			this.frameCounter = new FrameCounterSettings(frameCounter);
 		}
 	}
 }

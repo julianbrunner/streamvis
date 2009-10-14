@@ -102,22 +102,18 @@ namespace Visualizer
 			//graphExtensionToolStripMenuItem.Checked = diagram.GraphSettings.ExtendGraphs;
 			//showStreamListToolStripMenuItem.Checked = true;
 			//minimalModeToolStripMenuItem.Checked = false;
-			//showDiagramToolStripMenuItem.Checked = true;
-			//showFrameCounterToolStripMenuItem.Checked = true;
 			//verticalSynchronizationToolStripMenuItem.Checked = viewport.VSync;
 
 			if (parameters.MinimalMode != null) MinimalMode = parameters.MinimalMode.Value;
 
 			//showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
 			//minimalModeToolStripMenuItem_Click(this, EventArgs.Empty);
-			//showDiagramToolStripMenuItem_Click(this, EventArgs.Empty);
-			//showFrameCounterToolStripMenuItem_Click(this, EventArgs.Empty);
 
 			viewport.AddComponent(diagram);
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
 
-			this.settings = new Settings(properties, viewport, drawer, timer, diagram);
+			this.settings = new Settings(properties, viewport, drawer, timer, diagram, frameCounter);
 
 			properties.SelectedObject = settings;
 		}
@@ -187,14 +183,6 @@ namespace Visualizer
 		//    showStreamListToolStripMenuItem_Click(this, EventArgs.Empty);
 		//    mainContainer.TopToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
 		//    mainContainer.BottomToolStripPanelVisible = !minimalModeToolStripMenuItem.Checked;
-		//}
-		//private void showDiagramToolStripMenuItem_Click(object sender, EventArgs e)
-		//{
-		//    diagram.IsUpdated = diagram.IsDrawn = showDiagramToolStripMenuItem.Checked;
-		//}
-		//private void showFrameCounterToolStripMenuItem_Click(object sender, EventArgs e)
-		//{
-		//    frameCounter.IsUpdated = frameCounter.IsDrawn = showFrameCounterToolStripMenuItem.Checked;
 		//}
 
 		void NewSource(IEnumerable<string> ports)
