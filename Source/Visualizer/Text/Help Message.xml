@@ -46,27 +46,27 @@
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+m|-m</Text>
-		<Text Column="Description">Enables or disables minimal mode. In minimal mode, everything except for the graph area is hidden from the user interface to maximize the available drawing-space. The default values is disabled.</Text>
+		<Text Column="Description">Enables or disables minimal mode. In minimal mode, everything except for the graph area is hidden from the user interface to maximize the available drawing-space. The default value is disabled.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+e|-e</Text>
-		<Text Column="Description">Enables or disables the graph extension feature. When graph extension is enabled, all graphs that have at least one sampled data entry are extended across the whole width of the coordinate system using known adjacent values. The default values is enabled.</Text>
+		<Text Column="Description">Enables or disables the graph extension feature. When graph extension is enabled, all graphs that have at least one sampled data entry are extended across the whole width of the coordinate system using known adjacent values. The default value is enabled.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+a|-a</Text>
-		<Text Column="Description">Enables or disables antialiasing of graph lines. The default values is enabled.</Text>
+		<Text Column="Description">Enables or disables antialiasing of graph lines. The default value is enabled.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+b|-b</Text>
-		<Text Column="Description">Enables or disables alpha-blending. The default values is enabled.</Text>
+		<Text Column="Description">Enables or disables alpha-blending. The default value is enabled.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+v|-v</Text>
-		<Text Column="Description">Enables or disables vertical synchronization. The default values is enabled.</Text>
+		<Text Column="Description">Enables or disables vertical synchronization. The default value is enabled.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+c|-c</Text>
-		<Text Column="Description">Enables or disables the regular clearing of old received data. Enable if you plan to run the visualizer for a long time and you don't want to save the results. The default values is disabled.</Text>
+		<Text Column="Description">Enables or disables the regular clearing of old received data. Enable if you plan to run the visualizer for a long time and you don't want to save the results. The default value is disabled.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">t:(c|s[:&lt;c&gt;]|w[:&lt;c&gt;])</Text>
