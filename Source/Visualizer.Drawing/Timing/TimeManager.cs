@@ -25,9 +25,9 @@ namespace Visualizer.Drawing.Timing
 		readonly Timer timer;
 
 		// TODO: Create and document visibility policy
+		public bool IsUpdated { get; set; }
 		public Time Time { get; set; }
 		public Time Width { get; set; }
-		public bool Frozen { get; set; }
 		/// <summary>
 		/// Gets the overall Range, in which graphs are drawn.
 		/// </summary>
@@ -44,12 +44,12 @@ namespace Visualizer.Drawing.Timing
 			// TODO: Create and document policy on property initialization (initialize all properties for other components, too)
 			Time = Time.Zero;
 			Width = new Time(10.0);
-			Frozen = false;
+			IsUpdated = true;
 		}
 
 		public virtual void Update()
 		{
-			if (!Frozen) Time = timer.Time;
+			if (IsUpdated) Time = timer.Time;
 		}
 	}
 }

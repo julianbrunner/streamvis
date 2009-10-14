@@ -28,6 +28,12 @@ namespace Visualizer.Environment.Drawing.Timing
 
 		protected Diagram Diagram { get { return diagram; } }
 
+		[DisplayName("Update")]
+		public bool IsUpdated
+		{
+			get { return diagram.TimeManager.IsUpdated; }
+			set { diagram.TimeManager.IsUpdated = value; }
+		}
 		[DisplayName("Time")]
 		public double Time
 		{
@@ -39,12 +45,6 @@ namespace Visualizer.Environment.Drawing.Timing
 		{
 			get { return diagram.TimeManager.Width.Seconds; }
 			set { diagram.TimeManager.Width = new Time(value); }
-		}
-		[DisplayName("Frozen")]
-		public bool Frozen
-		{
-			get { return diagram.TimeManager.Frozen; }
-			set { diagram.TimeManager.Frozen = value; }
 		}
 
 		protected TimeManagerSettings(Diagram diagram)
