@@ -21,7 +21,6 @@ using Visualizer.Drawing.Data;
 
 namespace Visualizer.Environment.Drawing.Data
 {
-	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpansionConverter))]
 	class PerPixelDataManagerSettings : DataManagerSettings
 	{

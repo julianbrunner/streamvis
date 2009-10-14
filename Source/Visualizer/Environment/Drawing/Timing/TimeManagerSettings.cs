@@ -21,7 +21,6 @@ using Visualizer.Drawing;
 
 namespace Visualizer.Environment.Drawing.Timing
 {
-	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpansionConverter))]
 	abstract class TimeManagerSettings
 	{

@@ -22,7 +22,6 @@ using Visualizer.Drawing.Values;
 
 namespace Visualizer.Environment.Drawing.Values
 {
-	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpansionConverter))]
 	class FixedValueManagerSettings : ValueManagerSettings
 	{

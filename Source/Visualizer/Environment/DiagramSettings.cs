@@ -29,7 +29,6 @@ using Visualizer.Environment.Drawing.Values;
 
 namespace Visualizer.Environment
 {
-	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpansionConverter))]
 	class DiagramSettings
 	{
@@ -49,12 +48,10 @@ namespace Visualizer.Environment
 		AxisYSettings axisY;
 
 		#region Graph Settings
-		[Description("Contains setings concerning the Graphs.")]
 		[DisplayName("Graph Setitings")]
 		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
 		#endregion
 		#region Layouter
-		[Description("Contains settings concerning the Layouter.")]
 		[DisplayName("Layouter")]
 		public LayouterSettings Layouter { get { return layouter; } }
 		#endregion
@@ -76,7 +73,6 @@ namespace Visualizer.Environment
 				Initialize();
 			}
 		}
-		[Description("Contains settings concerning the Time Manager.")]
 		[DisplayName("Time Manager")]
 		public TimeManagerSettings TimeManager { get { return timeManager; } }
 		#endregion
@@ -97,7 +93,6 @@ namespace Visualizer.Environment
 				Initialize();
 			}
 		}
-		[Description("Contains settings concerning the Value Manager.")]
 		[DisplayName("Value Manager")]
 		public ValueManagerSettings ValueManager { get { return valueManager; } }
 		#endregion
@@ -118,15 +113,12 @@ namespace Visualizer.Environment
 				Initialize();
 			}
 		}
-		[Description("Contains settings concerning the Data Manager.")]
 		[DisplayName("Data Manager")]
 		public DataManagerSettings DataManager { get { return dataManager; } }
 		#endregion
 		#region Axes
-		[Description("Contains settings concerning the X-Axis.")]
 		[DisplayName("X-Axis")]
 		public AxisXSettings AxisX { get { return axisX; } }
-		[Description("Contains settings concerning the Y-Axis.")]
 		[DisplayName("Y-Axis")]
 		public AxisYSettings AxisY { get { return axisY; } }
 		#endregion

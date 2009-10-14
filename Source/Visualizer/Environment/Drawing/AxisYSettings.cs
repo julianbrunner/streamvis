@@ -21,7 +21,6 @@ using Visualizer.Drawing;
 
 namespace Visualizer.Environment.Drawing
 {
-	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpansionConverter))]
 	class AxisYSettings
 	{

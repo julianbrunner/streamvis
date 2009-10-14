@@ -20,7 +20,6 @@ using Graphics;
 
 namespace Visualizer.Environment
 {
-	// TODO: Add description for properties
 	[TypeConverter(typeof(ExpansionConverter))]
 	class DrawerSettings
 	{

@@ -1,8 +1,6 @@
 TODO: Apparently, mono doesn't care if PropertyGrid sorting is disabled - confirm and create bug report
 TODO: Create bug report for compiler exception in ColorGenerator.GetMinimumDistance
 
-TODO: Remove bogus "Contains settings concerning ..." descriptions
-
 TODO: Better playback controls
 TODO: Vertical zoom
 
