@@ -1,12 +1,6 @@
-TODO: Apparently, mono doesn't care if PropertyGrid sorting is disabled - confirm and create bug report
-TODO: Create bug report for compiler exception in ColorGenerator.GetMinimumDistance
-
 TODO: Proper controls for playback position and zooming
 TODO: Introduce menu items for the most often used settings
-
 TODO: Degrade obscure settings from command-line parameters to default settings
-
-TODO: Move documentation to Wiki
 
 TODO: Add AboutBox
 TODO: Fix massive memory consumption on save (XML)
@@ -29,9 +23,12 @@ TODO: Comparators will treat NaN and NaN as equal while <, <=, ==, >=, > will re
 TODO: Check if IDisposable pattern is implementend correctly everywhere
 
 TODO: Add installation instructions for Linux, Windows and Mac OS X
+TODO: Move documentation to Wiki
 
 TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file copying on dependency resolution
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
 TODO: Extension methods don't work without reference to System.Core?!
 TODO: Check when mono will support thread priorities
 TODO: Reintegrate ColorGenerator.GetMinimumDistance into query once the mono compiler doesn't crash because of it anymore
+TODO: Apparently, mono doesn't care if PropertyGrid sorting is disabled - confirm and create bug report
+TODO: Create bug report for compiler exception in ColorGenerator.GetMinimumDistance
