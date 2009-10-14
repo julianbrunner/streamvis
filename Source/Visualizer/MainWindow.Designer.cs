@@ -224,7 +224,6 @@ namespace Visualizer
 			this.viewport.VSync = true;
 			this.viewport.DoubleClick += new System.EventHandler(this.viewport_DoubleClick);
 			this.viewport.Layout += new System.Windows.Forms.LayoutEventHandler(this.viewport_Layout);
-			this.viewport.MouseMove += new System.Windows.Forms.MouseEventHandler(this.viewport_MouseMove);
 			// 
 			// properties
 			// 

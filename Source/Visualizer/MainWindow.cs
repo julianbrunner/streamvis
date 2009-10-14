@@ -46,7 +46,6 @@ namespace Visualizer
 		readonly CoordinateLabel coordinateLabel;
 		readonly Settings settings;
 
-		Point oldMousePosition;
 		Source source;
 		string filePath;
 
@@ -124,13 +123,6 @@ namespace Visualizer
 		private void viewport_DoubleClick(object sender, EventArgs e)
 		{
 			MinimalMode = !MinimalMode;
-		}
-		private void viewport_MouseMove(object sender, MouseEventArgs e)
-		{
-			// TODO: This should be extracted into a ZoomComponent
-			if (e.Button == MouseButtons.Right) diagram.TimeManager.Width *= Math.Pow(1.1, e.Location.X - oldMousePosition.X);
-
-			oldMousePosition = e.Location;
 		}
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
