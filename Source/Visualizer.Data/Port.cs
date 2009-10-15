@@ -16,7 +16,9 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 
 namespace Visualizer.Data
@@ -44,6 +46,40 @@ namespace Visualizer.Data
 			this.streams = streams.ToArray();
 		}
 
+		public void Save(TextWriter writer)
+		{
+			if (streams.Any())
+			{
+				IEnumerable<IEnumerable<Entry>> entries =
+				(
+					from stream in streams
+					select stream.EntryData.Entries
+				)
+				.ToArray();
+
+				IEnumerable<IEnumerator<Entry>> enumerators =
+				(
+					from stream in entries
+					select stream.GetEnumerator()
+				)
+				.ToArray();
+
+				foreach (Entry leadEntry in entries.First())
+					if (enumerators.All(enumerator => enumerator.MoveNext()))
+					{
+						StringBuilder stringBuilder = new StringBuilder();
+						stringBuilder.Append(leadEntry.Time.Seconds);
+						stringBuilder.Append(" ");
+						foreach (Entry entry in from enumerator in enumerators select enumerator.Current)
+						{
+							stringBuilder.Append(entry.Value);
+							stringBuilder.Append(" ");
+						}
+						stringBuilder.Remove(stringBuilder.Length - 1, 1);
+						writer.WriteLine(stringBuilder.ToString());
+					}
+			}
+		}
 		public void ClearData()
 		{
 			foreach (Stream stream in streams) stream.EntryData.Clear();

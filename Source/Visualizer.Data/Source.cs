@@ -16,10 +16,9 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using System.IO;
-using System.Text;
 
 namespace Visualizer.Data
 {
@@ -32,55 +31,25 @@ namespace Visualizer.Data
 		public XElement XElement { get { return new XElement(XElementName, from port in ports select port.XElement); } }
 		public IEnumerable<Port> Ports { get { return ports; } }
 
+		public Source() : this(Enumerable.Empty<Port>()) { }
 		public Source(XElement source)
 		{
 			this.ports = (from port in source.Elements(Port.XElementName) select new Port(port)).ToArray();
 		}
-		public Source() : this(Enumerable.Empty<Port>()) { }
 		protected Source(IEnumerable<Port> ports)
 		{
 			this.ports = ports.ToArray();
 		}
 
-		public void ClearData()
-		{
-			foreach (Port port in ports) port.ClearData();
-		}
-		public void ExportGNUPlot(string path)
+		public void Save(string path)
 		{
 			foreach (Port port in ports)
 				using (StreamWriter streamWriter = new StreamWriter(System.IO.Path.ChangeExtension(path, EscapeFilename(port.Name) + ".stream")))
-					if (port.Streams.Any())
-					{
-						IEnumerable<IEnumerable<Entry>> entries =
-						(
-							from stream in port.Streams
-							select stream.EntryData.Entries
-						)
-						.ToArray();
-
-						IEnumerable<IEnumerator<Entry>> enumerators =
-						(
-							from stream in entries
-							select stream.GetEnumerator()
-						)
-						.ToArray();
-
-						foreach (Entry leadEntry in entries.First())
-							if (enumerators.All(enumerator => enumerator.MoveNext()))
-							{
-								StringBuilder stringBuilder = new StringBuilder();
-								stringBuilder.Append(leadEntry.Time.Seconds);
-								stringBuilder.Append(" ");
-								foreach (Entry entry in from enumerator in enumerators select enumerator.Current)
-								{
-									stringBuilder.Append(entry.Value);
-									stringBuilder.Append(" ");
-								}
-								stringBuilder.Remove(stringBuilder.Length - 1, 1);
-								streamWriter.WriteLine(stringBuilder.ToString());
-							}
-					}
+					port.Save(streamWriter);
+		}
+		public void ClearData()
+		{
+			foreach (Port port in ports) port.ClearData();
 		}
 
 		static string EscapeFilename(string filename)
