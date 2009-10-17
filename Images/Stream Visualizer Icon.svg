@@ -17,9 +17,9 @@
    version="1.0"
    sodipodi:docname="Stream Visualizer Icon.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/julian/Projects/Visualizer/Images/Stream Visualizer Icon.png"
-   inkscape:export-xdpi="1.40625"
-   inkscape:export-ydpi="1.40625">
+   inkscape:export-filename="/home/julian/Projects/Visualizer/Images/Stream Visualizer Icon 256×256.png"
+   inkscape:export-xdpi="12"
+   inkscape:export-ydpi="12">
   <defs
      id="defs4">
     <linearGradient
@@ -188,7 +188,7 @@
      inkscape:cx="766.61177"
      inkscape:cy="1037.9807"
      inkscape:document-units="px"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer2"
      showgrid="false"
      showguides="true"
      inkscape:window-width="1280"
