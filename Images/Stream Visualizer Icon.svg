@@ -136,6 +136,42 @@
        y1="1536"
        x2="512"
        y2="512" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3203"
+       id="linearGradient3415"
+       gradientUnits="userSpaceOnUse"
+       x1="512"
+       y1="512"
+       x2="1536"
+       y2="1536" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3203"
+       id="linearGradient3427"
+       gradientUnits="userSpaceOnUse"
+       x1="512"
+       y1="512"
+       x2="1536"
+       y2="1536" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3203"
+       id="linearGradient3429"
+       gradientUnits="userSpaceOnUse"
+       x1="512"
+       y1="512"
+       x2="1536"
+       y2="1536" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3203"
+       id="linearGradient3432"
+       gradientUnits="userSpaceOnUse"
+       x1="512"
+       y1="512"
+       x2="1536"
+       y2="1536" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -147,11 +183,11 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.24748737"
-     inkscape:cx="684.7852"
-     inkscape:cy="1017.4855"
+     inkscape:zoom="0.24"
+     inkscape:cx="604.44656"
+     inkscape:cy="1115.4549"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer1"
      showgrid="true"
      showguides="true"
      inkscape:window-width="1280"
@@ -182,68 +218,11 @@
      inkscape:label="Text"
      inkscape:groupmode="layer"
      id="layer1"
-     sodipodi:insensitive="true"
      style="display:inline">
-    <g
-       id="g3185"
-       style="fill:url(#linearGradient3209);fill-opacity:1">
-      <rect
-         y="64"
-         x="64"
-         height="128"
-         width="1920"
-         id="rect3163"
-         style="fill:url(#linearGradient3209);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <rect
-         y="320"
-         x="64"
-         height="128"
-         width="1920"
-         id="rect3169"
-         style="fill:url(#linearGradient3209);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <rect
-         y="576"
-         x="64.000061"
-         height="128"
-         width="1920"
-         id="rect3173"
-         style="fill:url(#linearGradient3209);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <rect
-         y="832"
-         x="64"
-         height="128"
-         width="1920"
-         id="rect3175"
-         style="fill:url(#linearGradient3209);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <rect
-         y="1088"
-         x="64.000008"
-         height="128"
-         width="1920"
-         id="rect3177"
-         style="fill:url(#linearGradient3209);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <rect
-         y="1344"
-         x="64"
-         height="128"
-         width="1920"
-         id="rect3179"
-         style="fill:url(#linearGradient3209);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <rect
-         y="1600"
-         x="64"
-         height="128"
-         width="1920"
-         id="rect3181"
-         style="fill:url(#linearGradient3209);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <rect
-         y="1856"
-         x="64"
-         height="128"
-         width="1920"
-         id="rect3183"
-         style="fill:url(#linearGradient3209);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-    </g>
+    <path
+       style="fill:url(#linearGradient3432);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 64 64 L 64 192 L 448 192 L 448 64 L 64 64 z M 576 64 L 576 192 L 960 192 L 960 64 L 576 64 z M 1088 64 L 1088 192 L 1472 192 L 1472 64 L 1088 64 z M 1600 64 L 1600 192 L 1984 192 L 1984 64 L 1600 64 z M 64 320 L 64 448 L 448 448 L 448 320 L 64 320 z M 576 320 L 576 448 L 960 448 L 960 320 L 576 320 z M 1088 320 L 1088 448 L 1472 448 L 1472 320 L 1088 320 z M 1600 320 L 1600 448 L 1984 448 L 1984 320 L 1600 320 z M 64 576 L 64 704 L 448 704 L 448 576 L 64 576 z M 576 576 L 576 704 L 960 704 L 960 576 L 576 576 z M 1088 576 L 1088 704 L 1472 704 L 1472 576 L 1088 576 z M 1600 576 L 1600 704 L 1984 704 L 1984 576 L 1600 576 z M 64 832 L 64 960 L 448 960 L 448 832 L 64 832 z M 576 832 L 576 960 L 960 960 L 960 832 L 576 832 z M 1088 832 L 1088 960 L 1472 960 L 1472 832 L 1088 832 z M 1600 832 L 1600 960 L 1984 960 L 1984 832 L 1600 832 z M 64 1088 L 64 1216 L 448 1216 L 448 1088 L 64 1088 z M 576 1088 L 576 1216 L 960 1216 L 960 1088 L 576 1088 z M 1088 1088 L 1088 1216 L 1472 1216 L 1472 1088 L 1088 1088 z M 1600 1088 L 1600 1216 L 1984 1216 L 1984 1088 L 1600 1088 z M 64 1344 L 64 1472 L 448 1472 L 448 1344 L 64 1344 z M 576 1344 L 576 1472 L 960 1472 L 960 1344 L 576 1344 z M 1088 1344 L 1088 1472 L 1472 1472 L 1472 1344 L 1088 1344 z M 1600 1344 L 1600 1472 L 1984 1472 L 1984 1344 L 1600 1344 z M 64 1600 L 64 1728 L 448 1728 L 448 1600 L 64 1600 z M 576 1600 L 576 1728 L 960 1728 L 960 1600 L 576 1600 z M 1088 1600 L 1088 1728 L 1472 1728 L 1472 1600 L 1088 1600 z M 1600 1600 L 1600 1728 L 1984 1728 L 1984 1600 L 1600 1600 z M 64 1856 L 64 1984 L 448 1984 L 448 1856 L 64 1856 z M 576 1856 L 576 1984 L 960 1984 L 960 1856 L 576 1856 z M 1088 1856 L 1088 1984 L 1472 1984 L 1472 1856 L 1088 1856 z M 1600 1856 L 1600 1984 L 1984 1984 L 1984 1856 L 1600 1856 z "
+       id="rect3163" />
   </g>
   <g
      inkscape:groupmode="layer"
