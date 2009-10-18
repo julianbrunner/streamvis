@@ -2,6 +2,8 @@ Version 0.11
 	- Settings pane is now collapsible
 	- Removed old user interface elements
 	- Added possibility to change the name of a stream through the user interface
+	- Added icon
+	- Added about box
 
 Version 0.10
 	- Added possibility to name individual streams

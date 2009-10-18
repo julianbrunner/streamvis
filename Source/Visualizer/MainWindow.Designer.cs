@@ -76,6 +76,8 @@ namespace Visualizer
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainContainer.BottomToolStripPanel.SuspendLayout();
 			this.mainContainer.ContentPanel.SuspendLayout();
 			this.mainContainer.TopToolStripPanel.SuspendLayout();
@@ -247,7 +249,8 @@ namespace Visualizer
 			// 
 			this.mainMenu.Dock = System.Windows.Forms.DockStyle.None;
 			this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.captureToolStripMenuItem});
+            this.captureToolStripMenuItem,
+            this.helpToolStripMenuItem});
 			this.mainMenu.Location = new System.Drawing.Point(0, 0);
 			this.mainMenu.Name = "mainMenu";
 			this.mainMenu.Size = new System.Drawing.Size(1073, 24);
@@ -343,6 +346,21 @@ namespace Visualizer
 			this.saveCaptureFileDialog.DefaultExt = "capture";
 			this.saveCaptureFileDialog.Filter = "Capture Files|*.capture|All Files|*.*";
 			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.helpToolStripMenuItem.Text = "&Help";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.aboutToolStripMenuItem.Text = "&About...";
+			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -403,6 +421,8 @@ namespace Visualizer
 		private System.Windows.Forms.SplitContainer propertiesContainer;
 		private System.Windows.Forms.PropertyGrid properties;
 		private System.Windows.Forms.ToolStripMenuItem changeNameToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		
 	}
 }

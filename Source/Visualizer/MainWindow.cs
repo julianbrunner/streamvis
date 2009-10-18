@@ -153,12 +153,15 @@ namespace Visualizer
 			timer.Reset();
 			source.ClearData();
 		}
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (AboutBox aboutBox = new AboutBox()) aboutBox.ShowDialog();
+		}
 		private void changeNameToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			TextDialog textDialog = new TextDialog("Stream Name", "Please enter the new name for the stream", string.Empty);
-
-			if (streamsList.SelectedItems.Count > 0 && textDialog.ShowDialog() == DialogResult.OK)
-				SetName(streamsList.SelectedItems[0], textDialog.Result);
+			using (TextDialog textDialog = new TextDialog("Stream Name", "Please enter the new name for the stream", string.Empty))
+				if (streamsList.SelectedItems.Count > 0 && textDialog.ShowDialog() == DialogResult.OK)
+					SetName(streamsList.SelectedItems[0], textDialog.Result);
 		}
 		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
