@@ -17,9 +17,9 @@
    version="1.0"
    sodipodi:docname="Stream Visualizer Icon.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/julian/Projects/Visualizer/Images/Stream Visualizer Icon 256×256.png"
-   inkscape:export-xdpi="12"
-   inkscape:export-ydpi="12">
+   inkscape:export-filename="/home/julian/Projects/Visualizer/Images/Stream Visualizer Icon 55×55.png"
+   inkscape:export-xdpi="2.5799999"
+   inkscape:export-ydpi="2.5799999">
   <defs
      id="defs4">
     <linearGradient
@@ -170,9 +170,9 @@
        id="linearGradient3540"
        gradientUnits="userSpaceOnUse"
        x1="1024"
-       y1="128"
+       y1="192"
        x2="1024"
-       y2="1408" />
+       y2="1664" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -185,10 +185,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.24"
-     inkscape:cx="766.61177"
-     inkscape:cy="1037.9807"
+     inkscape:cx="162.4451"
+     inkscape:cy="1024"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="layer3"
      showgrid="false"
      showguides="true"
      inkscape:window-width="1280"
@@ -234,7 +234,7 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="Button (Shading)"
-     style="display:inline"
+     style="display:inline;opacity:0.5"
      sodipodi:insensitive="true">
     <rect
        style="fill:url(#linearGradient3523);fill-opacity:1;stroke:none;stroke-width:16;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1"
@@ -244,17 +244,6 @@
        x="64"
        y="63.999939"
        rx="256" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer3"
-     inkscape:label="Button (Highlight)"
-     sodipodi:insensitive="true">
-    <path
-       style="fill:url(#linearGradient3540);fill-opacity:1;stroke:none;stroke-width:16;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:20;stroke-opacity:1"
-       d="M 366.93332,128 L 1681.0667,128 C 1813.4357,128 1920,234.56426 1920,366.93332 L 1920,1024 C 1920,1156.369 1472,1216 1024,1216 C 576,1216 128,1156.369 128,1024 L 128,366.93332 C 128,234.56426 234.56426,128 366.93332,128 z"
-       id="rect3525"
-       sodipodi:nodetypes="cccczccc" />
   </g>
   <g
      inkscape:label="Text"
@@ -285,5 +274,18 @@
        style="fill:url(#linearGradient3489);fill-opacity:1;stroke:none;stroke-width:128;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1"
        d="M 256,403.55 L 256,558.1 L 1241.65,1672.325 L 1311.525,1751.3 L 1330.3751,1647.55 L 1399.6,1266.875 L 1488.0501,1502.775 L 1534.45,1626.5 L 1583.5499,1503.825 L 1792,982.70003 L 1792,706.9 L 1537.525,1343.05 L 1430.35,1057.225 L 1365.2,883.55 L 1332.025,1066.0499 L 1248.5,1525.5 L 256,403.55 z"
        id="path3330" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Button (Highlight)"
+     style="opacity:1">
+    <path
+       style="fill:url(#linearGradient3540);fill-opacity:1;stroke:none;stroke-width:16;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:20;stroke-opacity:1"
+       d="M 366.93332,128 L 1681.0667,128 C 1813.4357,128 1920,234.56426 1920,366.93332 L 1920,1024 C 1920,1156.369 1472,1344 1024,1344 C 576,1344 128,1156.369 128,1024 L 128,366.93332 C 128,234.56426 234.56426,128 366.93332,128 z"
+       id="rect3525"
+       sodipodi:nodetypes="cccczccc"
+       inkscape:export-xdpi="2.5799999"
+       inkscape:export-ydpi="2.5799999" />
   </g>
 </svg>
