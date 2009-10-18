@@ -17,7 +17,7 @@
    version="1.0"
    sodipodi:docname="Stream Visualizer Icon.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/julian/Projects/Visualizer/Images/Stream Visualizer Icon 55×55.png"
+   inkscape:export-filename="C:\Users\Julian Brunner\Documents\Visual Studio 2008\Projects\Visualizer\Images\Stream Visualizer Icon 55×55.png"
    inkscape:export-xdpi="2.5799999"
    inkscape:export-ydpi="2.5799999">
   <defs
@@ -185,16 +185,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.24"
-     inkscape:cx="739.5239"
+     inkscape:cx="89.5239"
      inkscape:cy="1045.1"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer4"
      showgrid="false"
      showguides="true"
-     inkscape:window-width="1280"
-     inkscape:window-height="755"
-     inkscape:window-x="0"
-     inkscape:window-y="0">
+     inkscape:window-width="1680"
+     inkscape:window-height="1028"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8">
     <inkscape:grid
        type="xygrid"
        id="grid3157"
@@ -219,16 +219,17 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Button (Base)"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <rect
-       style="fill:#654eff;fill-opacity:1;stroke:none;stroke-width:16;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1;display:inline"
+       style="fill:#1921b7;fill-opacity:1;stroke:none;stroke-width:16;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:20;stroke-dasharray:none;stroke-opacity:1;display:inline"
        id="rect3492"
        width="1920"
        height="1920"
        x="64"
        y="64"
-       rx="256" />
+       rx="256"
+       inkscape:export-xdpi="2.5799999"
+       inkscape:export-ydpi="2.5799999" />
   </g>
   <g
      inkscape:groupmode="layer"
