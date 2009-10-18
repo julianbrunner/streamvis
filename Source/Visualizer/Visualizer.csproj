@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>Visualizer.Program</StartupObject>
-    <ApplicationIcon>Images\Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Images\Application Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -121,8 +121,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\Application Icon.xcf" />
     <None Include="Images\CrossMark.png" />
-    <None Include="Images\Icon.xcf" />
+    <None Include="Images\MainWindow Icon.xcf" />
     <None Include="Images\New.png" />
     <None Include="Images\Open.png" />
     <None Include="Images\Save.png" />
@@ -165,7 +166,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\Icon.ico" />
+    <None Include="Images\Application Icon.ico" />
+    <None Include="Images\MainWindow Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
