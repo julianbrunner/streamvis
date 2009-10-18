@@ -23,7 +23,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Stream Visualizer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Stream Visualizer is an application that can be used to visualize, capture and replay data streams.\r\n\r\nOfficial Website: http://streamvis.googlecode.com/")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Julian Brunner")]
 [assembly: AssemblyProduct("Stream Visualizer")]
