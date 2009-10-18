@@ -349,6 +349,7 @@ namespace Visualizer
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1073, 654);
 			this.Controls.Add(this.mainContainer);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.mainMenu;
 			this.Name = "MainWindow";
 			this.Text = "<Title>";
