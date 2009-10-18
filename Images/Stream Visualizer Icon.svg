@@ -185,8 +185,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.24"
-     inkscape:cx="162.4451"
-     inkscape:cy="1024"
+     inkscape:cx="739.5239"
+     inkscape:cy="1045.1"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -279,7 +279,8 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Button (Highlight)"
-     style="opacity:1">
+     style="opacity:1"
+     sodipodi:insensitive="true">
     <path
        style="fill:url(#linearGradient3540);fill-opacity:1;stroke:none;stroke-width:16;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:20;stroke-opacity:1"
        d="M 366.93332,128 L 1681.0667,128 C 1813.4357,128 1920,234.56426 1920,366.93332 L 1920,1024 C 1920,1156.369 1472,1344 1024,1344 C 576,1344 128,1156.369 128,1024 L 128,366.93332 C 128,234.56426 234.56426,128 366.93332,128 z"
