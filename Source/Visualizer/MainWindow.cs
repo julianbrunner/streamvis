@@ -146,7 +146,7 @@ namespace Visualizer
 		}
 		private void exportToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (exportCaptureFileDialog.ShowDialog() == DialogResult.OK) source.Save(exportCaptureFileDialog.FileName);
+			if (exportCaptureFileDialog.ShowDialog() == DialogResult.OK) source.Export(exportCaptureFileDialog.FileName);
 		}
 		private void clearDataToolStripMenuItem_Click(object sender, EventArgs e)
 		{

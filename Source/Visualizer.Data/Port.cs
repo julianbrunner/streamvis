@@ -46,7 +46,7 @@ namespace Visualizer.Data
 			this.streams = streams.ToArray();
 		}
 
-		public void Save(TextWriter writer)
+		public void Export(TextWriter writer)
 		{
 			if (streams.Any())
 			{
@@ -68,14 +68,18 @@ namespace Visualizer.Data
 					if (enumerators.All(enumerator => enumerator.MoveNext()))
 					{
 						StringBuilder stringBuilder = new StringBuilder();
+
 						stringBuilder.Append(leadEntry.Time.Seconds);
 						stringBuilder.Append(" ");
+
 						foreach (Entry entry in from enumerator in enumerators select enumerator.Current)
 						{
 							stringBuilder.Append(entry.Value);
 							stringBuilder.Append(" ");
 						}
+
 						stringBuilder.Remove(stringBuilder.Length - 1, 1);
+
 						writer.WriteLine(stringBuilder.ToString());
 					}
 			}

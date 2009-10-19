@@ -41,11 +41,11 @@ namespace Visualizer.Data
 			this.ports = ports.ToArray();
 		}
 
-		public void Save(string path)
+		public void Export(string path)
 		{
 			foreach (Port port in ports)
 				using (StreamWriter streamWriter = new StreamWriter(System.IO.Path.ChangeExtension(path, EscapeFilename(port.Name) + ".stream")))
-					port.Save(streamWriter);
+					port.Export(streamWriter);
 		}
 		public void ClearData()
 		{
