@@ -49,22 +49,21 @@ namespace Visualizer
 
 		public void Update()
 		{
-			//label.Visible = mouseInsideViewport && diagram.Layouter.Area.Contains(mousePosition);
-			label.Visible = true;
+			label.Visible = mouseInsideViewport && diagram.Layouter.Area.Contains(mousePosition);
 		}
 		public void Draw()
 		{
-			//if (label.Visible)
+			if (label.Visible)
 			{
-				//Vector2 position = diagram.Layouter.ReverseMap(new Vector2(mousePosition.X, mousePosition.Y));
+				Vector2 position = diagram.Layouter.ReverseMap(new Vector2(mousePosition.X, mousePosition.Y));
 
-				//TimeRange timeRange = diagram.TimeManager.Range;
-				//ValueRange valueRange = diagram.ValueManager.Range;
+				TimeRange timeRange = diagram.TimeManager.Range;
+				ValueRange valueRange = diagram.ValueManager.Range;
 
-				//Time time = timeRange.ReverseMap(position.X);
-				//double value = valueRange.ReverseMap(position.Y);
+				Time time = timeRange.ReverseMap(position.X);
+				double value = valueRange.ReverseMap(position.Y);
 
-				label.Text = string.Format("Time: {0}, Value: {1}, I: {2}, C: {3}", 0, 0, mouseInsideViewport, diagram.Layouter.Area.Contains(mousePosition));
+				label.Text = string.Format("Time: {0}, Value: {1}", time, value);
 			}
 		}
 
