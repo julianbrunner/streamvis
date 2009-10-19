@@ -27,13 +27,13 @@ using Visualizer.Drawing.Values;
 
 namespace Visualizer
 {
-	class CoordinateLabel : IComponent, IDrawable
+	class CoordinateLabel : IComponent, IUpdateable, IDrawable
 	{
 		readonly ToolStripStatusLabel label;
 		readonly Viewport viewport;
 		readonly Diagram diagram;
 
-		bool mouseIsideViewport = false;
+		bool mouseInsideViewport = false;
 		Point mousePosition;
 
 		public CoordinateLabel(ToolStripStatusLabel label, Viewport viewport, Diagram diagram)
@@ -47,10 +47,12 @@ namespace Visualizer
 			this.viewport.MouseMove += viewport_MouseMove;
 		}
 
+		public void Update()
+		{
+			label.Visible = mouseInsideViewport && diagram.Layouter.Area.Contains(mousePosition);
+		}
 		public void Draw()
 		{
-			label.Visible = mouseIsideViewport && diagram.Layouter.Area.Contains(mousePosition);
-
 			if (label.Visible)
 			{
 				Vector2 position = diagram.Layouter.ReverseMap(new Vector2(mousePosition.X, mousePosition.Y));
@@ -67,11 +69,11 @@ namespace Visualizer
 
 		void viewport_MouseEnter(object sender, EventArgs e)
 		{
-			mouseIsideViewport = true;
+			mouseInsideViewport = true;
 		}
 		void viewport_MouseLeave(object sender, EventArgs e)
 		{
-			mouseIsideViewport = false;
+			mouseInsideViewport = false;
 		}
 		void viewport_MouseMove(object sender, MouseEventArgs e)
 		{
