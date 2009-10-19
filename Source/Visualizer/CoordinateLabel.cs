@@ -63,7 +63,7 @@ namespace Visualizer
 				Time time = timeRange.ReverseMap(position.X);
 				double value = valueRange.ReverseMap(position.Y);
 
-				label.Text = string.Format("Time: {0}, Value: {1}", time, value);
+				label.Text = string.Format("Time: {0}, Value: {1}, I: {2}, C: {3}", time, value, mouseInsideViewport, diagram.Layouter.Area.Contains(mousePosition));
 			}
 		}
 
