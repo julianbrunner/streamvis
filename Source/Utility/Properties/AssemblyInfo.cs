@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Utility")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Julian Brunner")]
+[assembly: AssemblyCompany("Technische Universität München - Institut für Informatik")]
 [assembly: AssemblyProduct("Utility")]
 [assembly: AssemblyCopyright("Copyright © Julian Brunner 2009")]
 [assembly: AssemblyTrademark("")]

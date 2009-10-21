@@ -25,7 +25,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Stream Visualizer")]
 [assembly: AssemblyDescription("Stream Visualizer is an application that can be used to visualize, capture and replay data streams.\r\n\r\nOfficial Website: http://streamvis.googlecode.com/")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Julian Brunner")]
+[assembly: AssemblyCompany("Technische Universität München - Institut für Informatik")]
 [assembly: AssemblyProduct("Stream Visualizer")]
 [assembly: AssemblyCopyright("Copyright © Julian Brunner 2009")]
 [assembly: AssemblyTrademark("")]
