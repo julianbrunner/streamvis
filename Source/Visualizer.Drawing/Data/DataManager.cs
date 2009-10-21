@@ -25,13 +25,13 @@ namespace Visualizer.Drawing.Data
 		readonly Diagram diagram;
 
 		protected Diagram Diagram { get { return diagram; } }
-		
+
 		public bool ClearData { get; set; }
 
 		protected DataManager(Diagram diagram)
 		{
 			this.diagram = diagram;
-			
+
 			ClearData = false;
 		}
 
@@ -45,6 +45,13 @@ namespace Visualizer.Drawing.Data
 					if (entries.Count > 0 && diagram.TimeManager.Time - entries[0].Time > 2 * diagram.TimeManager.Width)
 						entries.Remove(0, entries.FindIndex(diagram.TimeManager.Time - diagram.TimeManager.Width));
 				}
+		}
+
+		protected static void SetSampleDistance(EntryResampler resampler, Time sampleDistance)
+		{
+			double factor = sampleDistance / resampler.SampleDistance;
+
+			if (factor < 0.8 || factor > 1.25) resampler.SampleDistance = sampleDistance;
 		}
 	}
 }

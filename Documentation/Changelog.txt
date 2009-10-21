@@ -5,6 +5,7 @@ Version 0.11
 	- Added icon
 	- Added about box
 	- Now also works with integer values
+	- Dampened feedback loop between label widths and resampler
 
 Version 0.10
 	- Added possibility to name individual streams

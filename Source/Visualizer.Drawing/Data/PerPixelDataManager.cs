@@ -42,7 +42,7 @@ namespace Visualizer.Drawing.Data
 			// TODO: Remove silent failure
 			if (samplesPerSecond > 0)
 				foreach (Graph graph in Diagram.Graphs)
-					graph.StreamManager.EntryResampler.SampleDistance = new Time(1.0) / samplesPerSecond;
+					SetSampleDistance(graph.StreamManager.EntryResampler, new Time(1.0) / samplesPerSecond);
 		}
 	}
 }
