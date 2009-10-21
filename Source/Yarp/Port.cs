@@ -76,6 +76,7 @@ namespace Yarp
 		static Packet ParseValue(IntPtr value)
 		{
 			if (Value_IsList(value) > 0) return ParseBottle(Value_AsList(value));
+			if (Value_IsInt(value) > 0) return new Value(Value_AsInt(value));
 			if (Value_IsDouble(value) > 0) return new Value(Value_AsDouble(value));
 
 			return Packet.Empty;
@@ -119,9 +120,13 @@ namespace Yarp
 		[DllImport("Yarp.Wrapper")]
 		static extern byte Value_IsList(IntPtr value);
 		[DllImport("Yarp.Wrapper")]
+		static extern byte Value_IsInt(IntPtr value);
+		[DllImport("Yarp.Wrapper")]
 		static extern byte Value_IsDouble(IntPtr value);
 		[DllImport("Yarp.Wrapper")]
 		static extern IntPtr Value_AsList(IntPtr value);
+		[DllImport("Yarp.Wrapper")]
+		static extern int Value_AsInt(IntPtr value);
 		[DllImport("Yarp.Wrapper")]
 		static extern double Value_AsDouble(IntPtr value);
 	}
