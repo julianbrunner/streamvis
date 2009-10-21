@@ -45,8 +45,10 @@ extern "C"
 	void	Bottle_AddDouble(Bottle* bottle, double value);
 	
 	bool	Value_IsList(Value* value);
+	bool	Value_IsInt(Value* value);
 	bool	Value_IsDouble(Value* value);
 	Bottle*	Value_AsList(Value* value);
+	int		Value_AsInt(Value* value);
 	double	Value_AsDouble(Value* value);
 }
 

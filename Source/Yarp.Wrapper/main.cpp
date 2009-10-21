@@ -38,6 +38,8 @@ Bottle*	Bottle_AddList(Bottle* bottle)					{ return &bottle->addList();	}
 void	Bottle_AddDouble(Bottle* bottle, double value)	{ bottle->addDouble(value);		}
 	
 bool	Value_IsList(Value* value)		{ return value->isList();	}
+bool	Value_IsInt(Value* value)		{ return value->isInt();	}
 bool	Value_IsDouble(Value* value)	{ return value->isDouble();	}
 Bottle*	Value_AsList(Value* value)		{ return value->asList();	}
+int		Value_AsInt(Value* value)		{ return value->asInt();	}
 double	Value_AsDouble(Value* value)	{ return value->asDouble();	}
