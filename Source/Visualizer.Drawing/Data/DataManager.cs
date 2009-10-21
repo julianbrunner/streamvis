@@ -49,9 +49,13 @@ namespace Visualizer.Drawing.Data
 
 		protected static void SetSampleDistance(EntryResampler resampler, Time sampleDistance)
 		{
-			double factor = sampleDistance / resampler.SampleDistance;
+			if (resampler.SampleDistance == Time.Zero) resampler.SampleDistance = sampleDistance;
+			else
+			{
+				double factor = sampleDistance / resampler.SampleDistance;
 
-			if (factor < 0.8 || factor > 1.25) resampler.SampleDistance = sampleDistance;
+				if (factor < 0.8 || factor > 1.25) resampler.SampleDistance = sampleDistance;
+			}
 		}
 	}
 }
