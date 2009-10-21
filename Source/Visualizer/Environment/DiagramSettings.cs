@@ -37,7 +37,6 @@ namespace Visualizer.Environment
 		readonly Diagram diagram;
 
 		GraphSettingsSettings graphSettings;
-		LayouterSettings layouter;
 		TimeManagerType timeManagerType;
 		TimeManagerSettings timeManager;
 		ValueManagerType valueManagerType;
@@ -46,14 +45,11 @@ namespace Visualizer.Environment
 		DataManagerSettings dataManager;
 		AxisXSettings axisX;
 		AxisYSettings axisY;
+		LayouterSettings layouter;
 
 		#region Graph Settings
 		[DisplayName("Graph Setitings")]
 		public GraphSettingsSettings GraphSettings { get { return graphSettings; } }
-		#endregion
-		#region Layouter
-		[DisplayName("Layouter")]
-		public LayouterSettings Layouter { get { return layouter; } }
 		#endregion
 		#region Time Manager
 		[DisplayName("Time Manager Type")]
@@ -122,6 +118,10 @@ namespace Visualizer.Environment
 		[DisplayName("Y-Axis")]
 		public AxisYSettings AxisY { get { return axisY; } }
 		#endregion
+		#region Layouter
+		[DisplayName("Layouter")]
+		public LayouterSettings Layouter { get { return layouter; } }
+		#endregion
 
 		[DisplayName("Update")]
 		public bool IsUpdated
@@ -148,7 +148,6 @@ namespace Visualizer.Environment
 		void Initialize()
 		{
 			graphSettings = new GraphSettingsSettings(diagram);
-			layouter = new LayouterSettings(diagram);
 
 			switch (timeManagerType = GetTimeManagerType(diagram.TimeManager))
 			{
@@ -174,6 +173,8 @@ namespace Visualizer.Environment
 
 			axisX = new AxisXSettings(diagram);
 			axisY = new AxisYSettings(diagram);
+
+			layouter = new LayouterSettings(diagram);
 
 			propertyGrid.Refresh();
 		}
