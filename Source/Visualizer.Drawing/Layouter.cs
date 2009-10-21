@@ -20,20 +20,25 @@ using System.Drawing;
 using System.Windows.Forms;
 using Graphics;
 using OpenTK.Math;
+using Visualizer.Drawing.Axes;
 
 namespace Visualizer.Drawing
 {
 	public class Layouter
 	{
 		readonly Viewport viewport;
+		readonly Axis axisX;
+		readonly Axis axisY;
 
 		public Padding BaseMargin { get; set; }
 		public Rectangle Area { get; private set; }
 		public Matrix4 Transformation { get; private set; }
 
-		public Layouter(Viewport viewport)
+		public Layouter(Viewport viewport, Axis axisX, Axis axisY)
 		{
 			this.viewport = viewport;
+			this.axisX = axisX;
+			this.axisY = axisY;
 		}
 
 		public Vector2 ForwardMap(Vector2 source)
@@ -56,12 +61,12 @@ namespace Visualizer.Drawing
 				-((source.Y - Area.Bottom) / Area.Height)
 			);
 		}
-		public virtual void Update(int valueLabelsWidth, int timeLabelsHeight)
+		public virtual void Update()
 		{
-			int borderLeft = BaseMargin.Left + valueLabelsWidth;
+			int borderLeft = BaseMargin.Left + axisY.MaximumCaptionSize.Width;
 			int borderRight = BaseMargin.Right;
 			int borderTop = BaseMargin.Top;
-			int borderBottom = BaseMargin.Bottom + timeLabelsHeight;
+			int borderBottom = BaseMargin.Bottom + axisX.MaximumCaptionSize.Height;
 
 			Rectangle clientArea = viewport.ClientRectangle;
 

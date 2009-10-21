@@ -271,9 +271,6 @@ namespace Visualizer
 			if (parameters.ExtendGraphs != null) diagram.GraphSettings.ExtendGraphs = parameters.ExtendGraphs.Value;
 			if (parameters.LineWidth != null) diagram.GraphSettings.LineWidth = parameters.LineWidth.Value;
 
-			diagram.Layouter = new Layouter(viewport);
-			diagram.Layouter.BaseMargin = new Padding(9, 8, 0, 9);
-
 			switch (parameters.TimeManagerType)
 			{
 				case TimeManagerType.Continuous:
@@ -324,6 +321,9 @@ namespace Visualizer
 			diagram.AxisY = new AxisY(drawer, diagram);
 			if (parameters.MarkerCountY != null) diagram.AxisY.MarkerCount = parameters.MarkerCountY.Value;
 			if (parameters.DiagramColor != null) diagram.AxisY.Color = parameters.DiagramColor.Value;
+
+			diagram.Layouter = new Layouter(viewport, diagram.AxisX, diagram.AxisY);
+			diagram.Layouter.BaseMargin = new Padding(9, 8, 0, 9);
 
 			return diagram;
 		}

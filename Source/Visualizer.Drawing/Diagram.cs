@@ -29,12 +29,12 @@ namespace Visualizer.Drawing
 		// TODO: Don't expose List<T>
 		public List<Graph> Graphs { get; set; }
 		public GraphSettings GraphSettings { get; set; }
-		public Layouter Layouter { get; set; }
 		public TimeManager TimeManager { get; set; }
 		public ValueManager ValueManager { get; set; }
 		public DataManager DataManager { get; set; }
 		public Axis AxisX { get; set; }
 		public Axis AxisY { get; set; }
+		public Layouter Layouter { get; set; }
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
@@ -54,7 +54,7 @@ namespace Visualizer.Drawing
 				DataManager.Update();
 				foreach (Graph graph in Graphs) graph.Update();
 				ValueManager.Update();
-				Layouter.Update(AxisY.MaximumCaptionSize.Width, AxisX.MaximumCaptionSize.Height);
+				Layouter.Update();
 			}
 		}
 		public void Draw()
