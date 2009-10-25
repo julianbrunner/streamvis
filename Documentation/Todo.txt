@@ -29,7 +29,7 @@ TODO: Remove reference to Yarp in Visualizer once monodevelop does proper file c
 TODO: Remove symbolic link to libYarp.Wrapper in Yarp once monodevelop does proper file copying on dependeny resolution
 TODO: Extension methods don't work without reference to System.Core?!
 TODO: Check when mono will support thread priorities
-TODO: Apparently, mono doesn't updated the status label properly, confirm and create bug report
+TODO: Apparently, mono doesn't update the status label properly, confirm and create bug report
 TODO: Reintegrate ColorGenerator.GetMinimumDistance into query once the mono compiler doesn't crash because of it anymore
 TODO: Apparently, mono doesn't care if PropertyGrid sorting is disabled, confirm and create bug report
 TODO: Create bug report for compiler exception in ColorGenerator.GetMinimumDistance
