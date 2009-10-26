@@ -47,7 +47,6 @@ namespace Visualizer.Drawing.Data
 		{
 			entryData.UpdateEntries();
 
-			// TODO: Test if leaving out the whole segment caching is faster
 			Segments =
 			(
 				from timeRange in diagram.TimeManager.GraphRanges
