@@ -17,7 +17,6 @@
 
 using System.Drawing;
 using Graphics;
-using OpenTK.Math;
 using Utility.Extensions;
 using Visualizer.Data;
 using Visualizer.Drawing.Data;
@@ -90,28 +89,6 @@ namespace Visualizer.Drawing
 
 					float[] vertices = new float[vertexCount * 2];
 					int position = 0;
-
-					//if (startEntry != null)
-					//{
-					//    vertices[position++] = (float)startEntry.Value.Time.Seconds;
-					//    vertices[position++] = (float)startEntry.Value.Value;
-					//}
-
-					//foreach (Entry entry in segment.Entries)
-					//{
-					//    vertices[position++] = (float)entry.Time.Seconds;
-					//    vertices[position++] = (float)entry.Value;
-					//}
-
-					//if (endEntry != null)
-					//{
-					//    vertices[position++] = (float)endEntry.Value.Time.Seconds;
-					//    vertices[position++] = (float)endEntry.Value.Value;
-					//}
-
-					//Matrix4 transformation = valueRange.Transformation * segmentTimeRange.Transformation * diagram.Layouter.Transformation;
-
-					//drawer.DrawLineStrip(vertices, transformation, Color, (float)diagram.GraphSettings.LineWidth);
 
 					if (startEntry != null)
 					{
