@@ -3,8 +3,8 @@ TODO: Introduce menu items for the most often used settings
 TODO: Degrade obscure settings from command-line parameters to default settings
 
 TODO: Better parameter error checking (values of 0 shouldn't be allowed for interval counts, etc.)
+TODO: Do something about XML save memory consumption? (Do we really have to fix it or is that not a scenario anyways?)
 TODO: Try scaling on CPU to preserve double precision
-TODO: Do something about XML save memory consumption
 
 TODO: Look through comment TODOs
 

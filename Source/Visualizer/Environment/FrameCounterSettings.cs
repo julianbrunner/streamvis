@@ -26,13 +26,13 @@ namespace Visualizer.Environment
 	{
 		readonly VisibleFrameCounter frameCounter;
 
-		[DisplayName("Is Updated")]
+		[DisplayName("Update")]
 		public bool IsUpdated
 		{
 			get { return frameCounter.IsUpdated; }
 			set { frameCounter.IsUpdated = value; }
 		}
-		[DisplayName("Is Drawn")]
+		[DisplayName("Draw")]
 		public bool IsDrawn
 		{
 			get { return frameCounter.IsDrawn; }
