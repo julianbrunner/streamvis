@@ -101,7 +101,7 @@
 		<Text Column="Description">Fixed (static) value manager. You can manually specify the range of values along the Y-Axis. The default value for &lt;low&gt;:&lt;high&gt; is "0:1".</Text>
 		<NewLine />
 		<NewLine />		
-		<Text Column="Level1">s:(s[:&lt;c&gt;]|p[:&lt;c&gt;])</Text>
+		<Text Column="Level1">d:(s[:&lt;c&gt;]|p[:&lt;c&gt;])</Text>
 		<Text Column="Description">Lets you specify the data manager type and settings used for drawing graphs. The default value is "p:1".</Text>
 		<NewLine />
 		<NewLine />

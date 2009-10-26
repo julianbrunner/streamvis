@@ -133,7 +133,7 @@ namespace Visualizer
 						default: throw new InvalidOperationException("Invalid value manager type: " + details[1]);
 					}
 					break;
-				case "s":
+				case "d":
 					if (details.Length < 2) InvalidParameter(option);
 					switch (details[1])
 					{
