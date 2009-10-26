@@ -91,27 +91,47 @@ namespace Visualizer.Drawing
 					float[] vertices = new float[vertexCount * 2];
 					int position = 0;
 
+					//if (startEntry != null)
+					//{
+					//    vertices[position++] = (float)startEntry.Value.Time.Seconds;
+					//    vertices[position++] = (float)startEntry.Value.Value;
+					//}
+
+					//foreach (Entry entry in segment.Entries)
+					//{
+					//    vertices[position++] = (float)entry.Time.Seconds;
+					//    vertices[position++] = (float)entry.Value;
+					//}
+
+					//if (endEntry != null)
+					//{
+					//    vertices[position++] = (float)endEntry.Value.Time.Seconds;
+					//    vertices[position++] = (float)endEntry.Value.Value;
+					//}
+
+					//Matrix4 transformation = valueRange.Transformation * segmentTimeRange.Transformation * diagram.Layouter.Transformation;
+
+					//drawer.DrawLineStrip(vertices, transformation, Color, (float)diagram.GraphSettings.LineWidth);
+
 					if (startEntry != null)
 					{
-						vertices[position++] = (float)startEntry.Value.Time.Seconds;
-						vertices[position++] = (float)startEntry.Value.Value;
+						vertices[position++] = (float)segmentTimeRange.Mapping.ForwardMap(startEntry.Value.Time.Seconds);
+						vertices[position++] = (float)valueRange.Mapping.ForwardMap(startEntry.Value.Value);
 					}
 
 					foreach (Entry entry in segment.Entries)
 					{
-						vertices[position++] = (float)entry.Time.Seconds;
-						vertices[position++] = (float)entry.Value;
+						vertices[position++] = (float)segmentTimeRange.Mapping.ForwardMap(entry.Time.Seconds);
+						vertices[position++] = (float)valueRange.Mapping.ForwardMap(entry.Value);
 					}
 
 					if (endEntry != null)
 					{
-						vertices[position++] = (float)endEntry.Value.Time.Seconds;
-						vertices[position++] = (float)endEntry.Value.Value;
+						vertices[position++] = (float)segmentTimeRange.Mapping.ForwardMap(endEntry.Value.Time.Seconds);
+						vertices[position++] = (float)valueRange.Mapping.ForwardMap(endEntry.Value.Value);
 					}
 
-					Matrix4 transformation = valueRange.Transformation * segmentTimeRange.Transformation * diagram.Layouter.Transformation;
-
-					drawer.DrawLineStrip(vertices, transformation, Color, (float)diagram.GraphSettings.LineWidth);
+					drawer.DrawLineStrip(vertices, diagram.Layouter.Transformation, Color, (float)diagram.GraphSettings.LineWidth);
 				}
 			}
 		}
