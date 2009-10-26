@@ -42,6 +42,7 @@ namespace Visualizer.Data
 		public void Clear()
 		{
 			entries.Clear();
+			lock (buffer) buffer.Clear();
 		}
 		public void Add(Entry entry)
 		{

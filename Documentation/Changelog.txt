@@ -6,6 +6,7 @@ Version 0.11
 	- Added about box
 	- Now also works with integer values
 	- Dampened feedback loop between label widths and resampler
+	- Fixed a bug causing some of the caches not to be cleared when the "clear data" command is executed
 
 Version 0.10
 	- Added possibility to name individual streams

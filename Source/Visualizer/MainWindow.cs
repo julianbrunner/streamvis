@@ -152,6 +152,7 @@ namespace Visualizer
 		{
 			timer.Reset();
 			source.ClearData();
+			foreach (Graph graph in diagram.Graphs) graph.StreamManager.EntryCache.Clear();
 		}
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
