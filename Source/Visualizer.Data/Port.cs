@@ -42,7 +42,6 @@ namespace Visualizer.Data
 		protected Port(string name, IEnumerable<Stream> streams)
 		{
 			this.name = name;
-			// TODO: Create and document policy about who is responsible for calling .ToArray on an expensive or time-critical enumeration
 			this.streams = streams.ToArray();
 		}
 

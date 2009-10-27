@@ -24,7 +24,6 @@ namespace Visualizer.Drawing.Timing
 	{
 		readonly Timer timer;
 
-		// TODO: Create and document visibility policy
 		public bool IsUpdated { get; set; }
 		public Time Time { get; set; }
 		public Time Width { get; set; }
@@ -41,7 +40,6 @@ namespace Visualizer.Drawing.Timing
 		{
 			this.timer = timer;
 			
-			// TODO: Create and document policy on property initialization (initialize all properties for other components, too)
 			Time = Time.Zero;
 			Width = new Time(10.0);
 			IsUpdated = true;

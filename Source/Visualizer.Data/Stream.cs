@@ -39,7 +39,6 @@ namespace Visualizer.Data
 				);
 			}
 		}
-		// TODO: Policy for mutable properties?
 		public string Name { get; set; }
 		public Path Path { get { return path; } }
 		public EntryData EntryData { get { return entryData; } }

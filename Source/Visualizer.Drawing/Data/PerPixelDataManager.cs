@@ -19,11 +19,9 @@ using Visualizer.Data;
 
 namespace Visualizer.Drawing.Data
 {
-	// TODO: Create and document policy for when to fork a parameter and when to get it from the base class
 	public class PerPixelDataManager : DataManager
 	{
 		// TODO: Do error checking (samplesPerPixel could be negative, etc.)
-		// TODO: Create and document policy for error checking
 		public double SamplesPerPixel { get; set; }
 
 		public PerPixelDataManager(Diagram diagram)

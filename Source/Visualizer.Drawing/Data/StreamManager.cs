@@ -28,7 +28,6 @@ namespace Visualizer.Drawing.Data
 		readonly EntryResampler entryResampler;
 		readonly EntryCache entryCache;
 
-		// TODO: Create and document policy about when to do deep properties
 		public EntryResampler EntryResampler { get { return entryResampler; } }
 		public EntryCache EntryCache { get { return entryCache; } }
 		public IEnumerable<DataSegment> Segments { get; private set; }
@@ -38,7 +37,6 @@ namespace Visualizer.Drawing.Data
 			this.diagram = diagram;
 			this.entryData = entryData;
 
-			// TODO: Create and document policy about where to initialize objects
 			entryResampler = new EntryResampler(entryData.Entries);
 			entryCache = new EntryCache(entryResampler);
 		}
