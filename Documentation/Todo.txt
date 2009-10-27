@@ -16,7 +16,6 @@ TODO: Review if design and relationship of Visualizer.Data and Visualizer.Captur
 TODO: Remove unused usings and references
 TODO: Make classes internal which don't have to be public
 TODO: Look for places to use LINQ queries
-TODO: Create development policy document
 TODO: Comparators will treat NaN and NaN as equal while <, <=, ==, >=, > will return false on every comparison. See if this is used in a wrong way in any place
 TODO: Check if IDisposable pattern is implementend correctly everywhere
 
