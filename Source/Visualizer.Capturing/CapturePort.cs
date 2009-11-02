@@ -63,8 +63,7 @@ namespace Visualizer.Capturing
 
 				Console.WriteLine("Trying to join reader thread of \"" + Name + "\"...");
 
-				// TODO: If constructor throws an exception, reader could be null. Either do a null test or avoid throwing in constructors (policy!)
-				if (!reader.Join(1000))
+				if (reader != null && !reader.Join(1000))
 				{
 					Console.WriteLine("Sending a packet to \"" + Name + "\" in order to join reader thread...");
 					using (Yarp.Port helperPort = new Yarp.Port(network.FindName(Name + "/activator")))
@@ -77,9 +76,12 @@ namespace Visualizer.Capturing
 					reader.Join();
 				}
 
-				network.Disconnect(Name, port.Name);
+				if (port != null)
+				{
+					network.Disconnect(Name, port.Name);
 
-				port.Dispose();
+					port.Dispose();
+				}
 			}
 		}
 

@@ -21,7 +21,6 @@ using System.Collections.Generic;
 
 namespace Utility
 {
-	// TODO: Add an IsEmpty property and use it where appropriate
 	public class SearchList<TValue, TKey> : IEnumerable<TValue>
 	{
 		readonly Func<TValue, TKey> keySelector;
@@ -76,6 +75,7 @@ namespace Utility
 		}
 		public TValue[] this[Range<TKey> range] { get { return this[range.Start, range.End]; } }
 
+		public bool IsEmpty { get { return items.Count == 0; } }
 		public int Count { get { return items.Count; } }
 
 		public SearchList(Func<TValue, TKey> keySelector, IComparer<TKey> comparer)

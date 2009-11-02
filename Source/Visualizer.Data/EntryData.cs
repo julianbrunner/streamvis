@@ -29,7 +29,6 @@ namespace Visualizer.Data
 
 		public static string XElementName { get { return "EntryData"; } }
 
-		// TODO: Add interface so SearchList doesn't get exposed
 		public SearchList<Entry, Time> Entries { get { return entries; } }
 		public XElement XElement { get { return new XElement(XElementName, from entry in entries select entry.XElement); } }
 

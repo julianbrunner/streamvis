@@ -71,7 +71,7 @@ namespace Visualizer.Drawing.Data
 		{
 			get
 			{
-				if (entries.Count == 0) throw new InvalidOperationException();
+				if (entries.IsEmpty) throw new InvalidOperationException();
 
 				return entries[0];
 			}
@@ -80,7 +80,7 @@ namespace Visualizer.Drawing.Data
 		{
 			get
 			{
-				if (entries.Count == 0) throw new InvalidOperationException();
+				if (entries.IsEmpty) throw new InvalidOperationException();
 
 				return entries[entries.Count - 1];
 			}

@@ -50,7 +50,7 @@ namespace Visualizer.Drawing.Data
 			get
 			{
 				if (sampleDistance == Time.Zero) return CacheFragment.Empty;
-				if (entries.Count == 0) return CacheFragment.Empty;
+				if (entries.IsEmpty) return CacheFragment.Empty;
 
 				Time startTime = range.Start;
 				Time endTime = range.End;

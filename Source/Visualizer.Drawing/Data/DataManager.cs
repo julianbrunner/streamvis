@@ -43,7 +43,7 @@ namespace Visualizer.Drawing.Data
 				{
 					SearchList<Entry, Time> entries = graph.EntryData.Entries;
 
-					if (entries.Count > 0 && diagram.TimeManager.Time - entries[0].Time > 2 * diagram.TimeManager.Width)
+					if (!entries.IsEmpty && diagram.TimeManager.Time - entries[0].Time > 2 * diagram.TimeManager.Width)
 						entries.Remove(0, entries.FindIndex(diagram.TimeManager.Time - diagram.TimeManager.Width));
 				}
 		}

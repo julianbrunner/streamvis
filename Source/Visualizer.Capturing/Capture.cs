@@ -41,15 +41,15 @@ namespace Visualizer.Capturing
 
 		public static Source Create(IEnumerable<string> portStrings, Timer timer)
 		{
-			// TODO: Can this be done in a nicer way?
-
-			Network network = new Network();
+			Network network = null;
 			List<Data.Port> ports = new List<Data.Port>();
 
 			bool finished = false;
 
 			try
 			{
+				network = new Network();
+
 				foreach (string portString in portStrings) ports.Add(CapturePort.Create(portString, network, timer));
 
 				finished = true;
@@ -59,7 +59,8 @@ namespace Visualizer.Capturing
 				if (!finished)
 				{
 					foreach (IDisposable port in ports.OfType<IDisposable>()) port.Dispose();
-					network.Dispose();
+
+					if (network != null) network.Dispose();
 				}
 			}
 

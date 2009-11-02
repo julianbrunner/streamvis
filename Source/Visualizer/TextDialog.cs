@@ -19,7 +19,6 @@ using System.Windows.Forms;
 
 namespace Visualizer
 {
-	// TODO: Remove this once port string is entered via PropertyGrid
 	partial class TextDialog : Form
 	{
 		public string Result { get { return textBox.Text; } }
