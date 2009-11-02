@@ -25,6 +25,17 @@ namespace Yarp
 		readonly IntPtr network;
 		
 		bool disposed = false;
+
+		public static bool YarpAvailable
+		{
+			get
+			{
+				try { using (Network network = new Network()) ; }
+				catch (DllNotFoundException) { return false; }
+
+				return true;
+			}
+		}
 		
 		public Network()
 		{
@@ -41,7 +52,7 @@ namespace Yarp
 			{
 				disposed = true;
 				
-				Network_Dispose(network);
+				if (network != IntPtr.Zero) Network_Dispose(network);
 			}
 		}
 		public void Connect(string source, string destination)

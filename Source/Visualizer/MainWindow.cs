@@ -117,7 +117,6 @@ namespace Visualizer
 		}
 		private void viewport_Layout(object sender, LayoutEventArgs e)
 		{
-			// TODO: Find a cleaner way to avoid a crash if layout is called before frameCounter is initialized
 			if (frameCounter != null) frameCounter.Position = new Vector2(viewport.Right, viewport.Top);
 		}
 		private void viewport_DoubleClick(object sender, EventArgs e)
@@ -177,16 +176,17 @@ namespace Visualizer
 			SetFilePath(null);
 			timer.Reset();
 			source = new Source();
+
 			if (ports.Any())
-				try { source = Capturing.Capture.Create(ports, timer); }
-				catch (InvalidOperationException e) { MessageBox.Show(e.Message, "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-			// TODO: Check beforehand if Yarp is available
-			//catch (Exception e)
-			//{
-			//    if (e.InnerException != null && e.InnerException.InnerException != null && e.InnerException.InnerException is DllNotFoundException)
-			//        MessageBox.Show(e.InnerException.InnerException.Message, "Library not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			//    else throw;
-			//}
+			{
+				if (Yarp.Network.YarpAvailable)
+				{
+					try { source = Capturing.Capture.Create(ports, timer); }
+					catch (InvalidOperationException e) { MessageBox.Show(e.Message, "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+				}
+				else MessageBox.Show("YARP could not be found.", "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
 			RebuildList();
 		}
 		void LoadSource(string filePath)
