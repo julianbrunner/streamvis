@@ -26,8 +26,7 @@ namespace Visualizer.Drawing
 {
 	public class Diagram : IComponent, IUpdateable, IDrawable
 	{
-		// TODO: Don't expose List<T>
-		public List<Graph> Graphs { get; set; }
+		public IEnumerable<Graph> Graphs { get; set; }
 		public GraphSettings GraphSettings { get; set; }
 		public TimeManager TimeManager { get; set; }
 		public ValueManager ValueManager { get; set; }
@@ -49,7 +48,6 @@ namespace Visualizer.Drawing
 		{
 			if (IsUpdated)
 			{
-				// TODO: This looks random
 				TimeManager.Update();
 				DataManager.Update();
 				foreach (Graph graph in Graphs) graph.Update();

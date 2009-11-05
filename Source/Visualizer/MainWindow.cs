@@ -217,8 +217,8 @@ namespace Visualizer
 		void RebuildList()
 		{
 			ColorGenerator colorGenerator = new ColorGenerator();
+			List<Graph> graphs = new List<Graph>();
 
-			diagram.Graphs.Clear();
 			streamsList.Groups.Clear();
 			streamsList.Items.Clear();
 
@@ -231,7 +231,8 @@ namespace Visualizer
 				{
 					Graph graph = new Graph(drawer, diagram, stream.EntryData);
 					graph.Color = colorGenerator.NextColor();
-					diagram.Graphs.Add(graph);
+					
+					graphs.Add(graph);
 
 					ListViewItem item = new ListViewItem();
 					item.Name = port.Name + "Stream" + stream.Path;
@@ -245,6 +246,8 @@ namespace Visualizer
 					streamsList.Items.Add(item);
 				}
 			}
+
+			diagram.Graphs = graphs;
 		}
 		void SetName(ListViewItem item, string name)
 		{
