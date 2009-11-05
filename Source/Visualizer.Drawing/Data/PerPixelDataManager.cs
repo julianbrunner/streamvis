@@ -21,7 +21,6 @@ namespace Visualizer.Drawing.Data
 {
 	public class PerPixelDataManager : DataManager
 	{
-		// TODO: Do error checking (samplesPerPixel could be negative, etc.)
 		public double SamplesPerPixel { get; set; }
 
 		public PerPixelDataManager(Diagram diagram)
@@ -34,13 +33,14 @@ namespace Visualizer.Drawing.Data
 		{
 			base.Update();
 
-			double pixelsPerSecond = Diagram.Layouter.Area.Width / Diagram.TimeManager.Width.Seconds;
-			double samplesPerSecond = SamplesPerPixel * pixelsPerSecond;
+			if (Diagram.Layouter.Area.Width > 0)
+			{
+				double pixelsPerSecond = Diagram.Layouter.Area.Width / Diagram.TimeManager.Width.Seconds;
+				double samplesPerSecond = SamplesPerPixel * pixelsPerSecond;
 
-			// TODO: Remove silent failure
-			if (samplesPerSecond > 0)
 				foreach (Graph graph in Diagram.Graphs)
 					SetSampleDistance(graph.StreamManager.EntryResampler, new Time(1.0) / samplesPerSecond);
+			}
 		}
 	}
 }
