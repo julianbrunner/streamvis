@@ -34,7 +34,6 @@ using Visualizer.Environment;
 
 namespace Visualizer
 {
-	// TODO: Do some cleanup here, extract stuff into extra components
 	partial class MainWindow : Form
 	{
 		const string title = "Yarp Visualizer";
