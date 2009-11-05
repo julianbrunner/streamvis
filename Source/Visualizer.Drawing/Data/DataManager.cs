@@ -37,7 +37,6 @@ namespace Visualizer.Drawing.Data
 
 		public virtual void Update()
 		{
-			// TODO: Implement this in a more abstract way, we can't just remove entries here without other components knowing
 			if (ClearData)
 				foreach (Graph graph in diagram.Graphs)
 				{
