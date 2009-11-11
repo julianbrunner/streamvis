@@ -23,10 +23,10 @@ namespace Visualizer.Drawing.Timing
 {
 	public class ContinuousTimeManager : TimeManager
 	{
-		LinearMapping timeMapping;
+		LinearMapping mapping;
 
-		public override LinearMapping TimeMapping { get { return timeMapping; } }
-		public override IEnumerable<LinearMapping> GraphTimeMappings { get { yield return timeMapping; } }
+		public override LinearMapping Mapping { get { return mapping; } }
+		public override IEnumerable<LinearMapping> GraphMappings { get { yield return mapping; } }
 
 		public ContinuousTimeManager(Timer timer) : base(timer) { }
 
@@ -34,7 +34,7 @@ namespace Visualizer.Drawing.Timing
 		{
 			base.Update();
 
-			timeMapping = new LinearMapping(new Range<double>(Time.Seconds - Width.Seconds, Time.Seconds));
+			mapping = new LinearMapping(new Range<double>(Time.Seconds - Width.Seconds, Time.Seconds));
 		}
 	}
 }

@@ -32,7 +32,7 @@ namespace Visualizer.Drawing.Axes
 		{
 			get
 			{
-				LinearMapping timeMapping = Diagram.TimeManager.TimeMapping;
+				LinearMapping timeMapping = Diagram.TimeManager.Mapping;
 
 				if (timeMapping.Input.IsEmpty()) yield break;
 
@@ -48,7 +48,7 @@ namespace Visualizer.Drawing.Axes
 		{
 			base.Draw();
 
-			LinearMapping timeMapping = Diagram.TimeManager.TimeMapping;
+			LinearMapping timeMapping = Diagram.TimeManager.Mapping;
 
 			Vector2 offset = new Vector2(0, 0);
 

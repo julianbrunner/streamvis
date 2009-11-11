@@ -31,11 +31,11 @@ namespace Visualizer.Drawing.Timing
 		/// <summary>
 		/// Gets the overall Range, in which graphs are drawn.
 		/// </summary>
-		public abstract LinearMapping TimeMapping { get; }
+		public abstract LinearMapping Mapping { get; }
 		/// <summary>
 		/// Gets the specific sub Ranges, in which the graphs are drawn.
 		/// </summary>
-		public abstract IEnumerable<LinearMapping> GraphTimeMappings { get; }
+		public abstract IEnumerable<LinearMapping> GraphMappings { get; }
 
 		protected TimeManager(Timer timer)
 		{

@@ -56,7 +56,7 @@ namespace Visualizer
 			{
 				Vector2 position = diagram.Layouter.ReverseMap(new Vector2(mousePosition.X, mousePosition.Y));
 
-				LinearMapping timeMapping = diagram.TimeManager.TimeMapping;
+				LinearMapping timeMapping = diagram.TimeManager.Mapping;
 				LinearMapping valueMapping = diagram.ValueManager.Mapping;
 
 				Time time = new Time(timeMapping.ReverseMap(position.X));

@@ -53,7 +53,7 @@ namespace Visualizer.Drawing
 		}
 		public void Draw()
 		{
-			LinearMapping timeMapping = diagram.TimeManager.TimeMapping;
+			LinearMapping timeMapping = diagram.TimeManager.Mapping;
 			LinearMapping valueMapping = diagram.ValueManager.Mapping;
 
 			if (IsDrawn && !streamManager.EntryCache.IsEmpty && !timeMapping.Input.IsEmpty() && !valueMapping.Input.IsEmpty())
