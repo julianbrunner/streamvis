@@ -63,5 +63,12 @@ namespace Utility.Extensions
 			double remainder = DoubleUtility.Modulo(value - offset, interval);
 			return remainder == 0 ? value : value - remainder + 1 * interval;
 		}
+		public static double Clamp(this double value, double minimum, double maximum)
+		{
+			value = Math.Max(value, minimum);
+			value = Math.Min(value, maximum);
+
+			return value;
+		}
 	}
 }

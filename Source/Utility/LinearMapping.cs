@@ -15,6 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using Utility.Extensions;
+
 namespace Utility
 {
 	public class LinearMapping
@@ -42,11 +44,11 @@ namespace Utility
 
 		public double ForwardMap(double value)
 		{
-			return offset + value * factor;
+			return output.Clamp(offset + value * factor);
 		}
 		public double ReverseMap(double value)
 		{
-			return (value - offset) / factor;
+			return input.Clamp((value - offset) / factor);
 		}
 	}
 }

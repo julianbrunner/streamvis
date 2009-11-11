@@ -25,5 +25,9 @@ namespace Utility.Extensions
 		{
 			return range.End.CompareTo(range.Start) <= 0;
 		}
+		public static double Clamp(this Range<double> range, double value)
+		{
+			return value.Clamp(range.Start, range.End);
+		}
 	}
 }
