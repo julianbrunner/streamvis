@@ -15,11 +15,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using Utility;
+
 namespace Visualizer.Drawing.Values
 {
 	public abstract class ValueManager
 	{
-		public abstract ValueRange Range { get; }
+		public abstract LinearMapping Mapping { get; }
 
 		public virtual void Update() { }
 	}

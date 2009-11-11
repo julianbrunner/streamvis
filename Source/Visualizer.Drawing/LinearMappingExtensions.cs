@@ -15,40 +15,16 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
+using OpenTK.Math;
 using Utility;
-using Visualizer.Data;
 
-namespace Visualizer.Drawing.Timing
+namespace Visualizer.Drawing
 {
-	public abstract class TimeManager
+	public static class LinearMappingExtensions
 	{
-		readonly Timer timer;
-
-		public bool IsUpdated { get; set; }
-		public Time Time { get; set; }
-		public Time Width { get; set; }
-		/// <summary>
-		/// Gets the overall Range, in which graphs are drawn.
-		/// </summary>
-		public abstract LinearMapping TimeMapping { get; }
-		/// <summary>
-		/// Gets the specific sub Ranges, in which the graphs are drawn.
-		/// </summary>
-		public abstract IEnumerable<LinearMapping> GraphTimeMappings { get; }
-
-		protected TimeManager(Timer timer)
+		public static Matrix4 ToMatrix(this LinearMapping linearMapping)
 		{
-			this.timer = timer;
-
-			Time = Time.Zero;
-			Width = new Time(10.0);
-			IsUpdated = true;
-		}
-
-		public virtual void Update()
-		{
-			if (IsUpdated) Time = timer.Time;
+			return Matrix4.Scale(1, (float)linearMapping.Factor, 1) * Matrix4.CreateTranslation(0, (float)linearMapping.Offset, 0);
 		}
 	}
 }

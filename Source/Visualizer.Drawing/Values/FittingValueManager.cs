@@ -26,9 +26,9 @@ namespace Visualizer.Drawing.Values
 	{
 		readonly Diagram diagram;
 
-		ValueRange range;
+		LinearMapping mapping;
 
-		public override ValueRange Range { get { return range; } }
+		public override LinearMapping Mapping { get { return mapping; } }
 
 		public FittingValueManager(Diagram diagram)
 		{
@@ -50,7 +50,7 @@ namespace Visualizer.Drawing.Values
 						if (double.IsNaN(maximum) || entry.Value > maximum) maximum = entry.Value;
 					}
 
-			range = new ValueRange(new Range<double>(minimum, maximum));
+			mapping = new LinearMapping(new Range<double>(minimum, maximum));
 		}
 	}
 }

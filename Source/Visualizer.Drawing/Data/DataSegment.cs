@@ -15,22 +15,22 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using Utility;
 using Visualizer.Data;
-using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Drawing.Data
 {
 	public class DataSegment
 	{
-		readonly TimeRange timeRange;
+		readonly LinearMapping timeMapping;
 		readonly Entry[] entries;
 
-		public TimeRange TimeRange { get { return timeRange; } }
+		public LinearMapping TimeMapping { get { return timeMapping; } }
 		public Entry[] Entries { get { return entries; } }
 
-		public DataSegment(TimeRange timeRange, Entry[] entries)
+		public DataSegment(LinearMapping timeMapping, Entry[] entries)
 		{
-			this.timeRange = timeRange;
+			this.timeMapping = timeMapping;
 			this.entries = entries;
 		}
 	}

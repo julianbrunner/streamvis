@@ -23,12 +23,12 @@ namespace Visualizer.Drawing.Timing
 {
 	public class WrappingTimeManager : TimeManager
 	{
-		TimeRange range;
-		IEnumerable<TimeRange> graphRanges;
+		LinearMapping timeMapping;
+		IEnumerable<LinearMapping> graphTimeMappings;
 
 		public double GapLength { get; set; }
-		public override TimeRange Range { get { return range; } }
-		public override IEnumerable<TimeRange> GraphRanges { get { return graphRanges; } }
+		public override LinearMapping TimeMapping { get { return timeMapping; } }
+		public override IEnumerable<LinearMapping> GraphTimeMappings { get { return graphTimeMappings; } }
 
 		public WrappingTimeManager(Timer timer)
 			: base(timer)
@@ -49,18 +49,18 @@ namespace Visualizer.Drawing.Timing
 			Time endTime = Time;
 			double endPosition = startPosition + (1 - GapLength);
 
-			range = new TimeRange(new Range<Time>((wholeIntervals + 0) * Width, (wholeIntervals + 1) * Width));
+			timeMapping = new LinearMapping(new Range<double>((wholeIntervals + 0) * Width.Seconds, (wholeIntervals + 1) * Width.Seconds));
 
 			if (startTime >= wholeIntervals * Width)
-				graphRanges = new TimeRange[]
+				graphTimeMappings = new LinearMapping[]
 				{
-					new TimeRange(new Range<Time>(startTime, endTime), new Range<double>(startPosition,endPosition))
+					new LinearMapping(new Range<double>(startTime.Seconds, endTime.Seconds), new Range<double>(startPosition,endPosition))
 				};
 			else
-				graphRanges = new TimeRange[]
+				graphTimeMappings = new LinearMapping[]
 				{
-					new TimeRange(new Range<Time>(startTime, wholeIntervals * Width), new Range<double>(startPosition, 1)),
-					new TimeRange(new Range<Time>(wholeIntervals * Width, endTime), new Range<double>(0, endPosition - 1))
+					new LinearMapping(new Range<double>(startTime.Seconds, wholeIntervals * Width.Seconds), new Range<double>(startPosition, 1)),
+					new LinearMapping(new Range<double>(wholeIntervals * Width.Seconds, endTime.Seconds), new Range<double>(0, endPosition - 1))
 				};
 		}
 	}

@@ -20,10 +20,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using Graphics;
 using OpenTK.Math;
+using Utility;
 using Visualizer.Data;
 using Visualizer.Drawing;
-using Visualizer.Drawing.Timing;
-using Visualizer.Drawing.Values;
 
 namespace Visualizer
 {
@@ -57,11 +56,11 @@ namespace Visualizer
 			{
 				Vector2 position = diagram.Layouter.ReverseMap(new Vector2(mousePosition.X, mousePosition.Y));
 
-				TimeRange timeRange = diagram.TimeManager.Range;
-				ValueRange valueRange = diagram.ValueManager.Range;
+				LinearMapping timeMapping = diagram.TimeManager.TimeMapping;
+				LinearMapping valueMapping = diagram.ValueManager.Mapping;
 
-				Time time = timeRange.ReverseMap(position.X);
-				double value = valueRange.ReverseMap(position.Y);
+				Time time = new Time(timeMapping.ReverseMap(position.X));
+				double value = valueMapping.ReverseMap(position.Y);
 
 				label.Text = string.Format("Time: {0}, Value: {1}", time, value);
 			}

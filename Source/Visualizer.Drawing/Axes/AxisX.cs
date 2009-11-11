@@ -19,10 +19,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Graphics;
 using OpenTK.Math;
+using Utility;
 using Utility.Extensions;
 using Utility.Utilities;
 using Visualizer.Data;
-using Visualizer.Drawing.Timing;
 
 namespace Visualizer.Drawing.Axes
 {
@@ -32,11 +32,11 @@ namespace Visualizer.Drawing.Axes
 		{
 			get
 			{
-				TimeRange timeRange = Diagram.TimeManager.Range;
+				LinearMapping timeMapping = Diagram.TimeManager.TimeMapping;
 
-				if (timeRange.Range.IsEmpty()) yield break;
+				if (timeMapping.Input.IsEmpty()) yield break;
 
-				IEnumerable<double> markers = DoubleUtility.GetMarkers(timeRange.Range.Start.Seconds, timeRange.Range.End.Seconds, MarkerCount);
+				IEnumerable<double> markers = DoubleUtility.GetMarkers(timeMapping.Input.Start, timeMapping.Input.End, MarkerCount);
 
 				foreach (double time in markers) yield return time;
 			}
@@ -48,7 +48,7 @@ namespace Visualizer.Drawing.Axes
 		{
 			base.Draw();
 
-			TimeRange timeRange = Diagram.TimeManager.Range;
+			LinearMapping timeMapping = Diagram.TimeManager.TimeMapping;
 
 			Vector2 offset = new Vector2(0, 0);
 
@@ -60,7 +60,7 @@ namespace Visualizer.Drawing.Axes
 			// TODO: Remove the selector once TimeRange and ValueRange are unified
 			foreach (Time time in Markers.Select(time => new Time(time)))
 			{
-				Vector2 markerStart = Diagram.Layouter.ForwardMap((float)timeRange.ForwardMap(time) * Vector2.UnitX) + offset;
+				Vector2 markerStart = Diagram.Layouter.ForwardMap((float)timeMapping.ForwardMap(time.Seconds) * Vector2.UnitX) + offset;
 				Vector2 markerEnd = markerStart + new Vector2(0, 5);
 
 				Drawer.DrawLine(markerStart, markerEnd, Color, 1);

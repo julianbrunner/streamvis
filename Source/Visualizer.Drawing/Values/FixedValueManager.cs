@@ -22,7 +22,7 @@ namespace Visualizer.Drawing.Values
 	public class FixedValueManager : ValueManager
 	{
 		public Range<double> FixedRange { get; set; }
-		public override ValueRange Range { get { return new ValueRange(FixedRange); } }
+		public override LinearMapping Mapping { get { return new LinearMapping(FixedRange); } }
 
 		public FixedValueManager()
 		{

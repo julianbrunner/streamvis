@@ -17,11 +17,10 @@
 
 using System.Drawing;
 using Graphics;
+using Utility;
 using Utility.Extensions;
 using Visualizer.Data;
 using Visualizer.Drawing.Data;
-using Visualizer.Drawing.Timing;
-using Visualizer.Drawing.Values;
 
 namespace Visualizer.Drawing
 {
@@ -54,29 +53,29 @@ namespace Visualizer.Drawing
 		}
 		public void Draw()
 		{
-			TimeRange timeRange = diagram.TimeManager.Range;
-			ValueRange valueRange = diagram.ValueManager.Range;
+			LinearMapping timeMapping = diagram.TimeManager.TimeMapping;
+			LinearMapping valueMapping = diagram.ValueManager.Mapping;
 
-			if (IsDrawn && !streamManager.EntryCache.IsEmpty && !timeRange.Range.IsEmpty() && !valueRange.Range.IsEmpty())
+			if (IsDrawn && !streamManager.EntryCache.IsEmpty && !timeMapping.Input.IsEmpty() && !valueMapping.Input.IsEmpty())
 			{
 				Entry firstEntry = streamManager.EntryCache.FirstEntry;
 				Entry lastEntry = streamManager.EntryCache.LastEntry;
 
 				foreach (DataSegment segment in streamManager.Segments)
 				{
-					TimeRange segmentTimeRange = segment.TimeRange;
+					LinearMapping segmentTimeMapping = segment.TimeMapping;
 
 					Entry? startEntry = null;
 					Entry? endEntry = null;
 
 					if (diagram.GraphSettings.ExtendGraphs)
 					{
-						if (firstEntry.Time - segmentTimeRange.Range.Start > 1.5 * streamManager.EntryResampler.SampleDistance) startEntry = new Entry(segmentTimeRange.Range.Start, firstEntry.Value);
-						if (segmentTimeRange.Range.End - lastEntry.Time > 1.5 * streamManager.EntryResampler.SampleDistance) endEntry = new Entry(segmentTimeRange.Range.End, lastEntry.Value);
+						if (firstEntry.Time.Seconds - segmentTimeMapping.Input.Start > 1.5 * streamManager.EntryResampler.SampleDistance.Seconds) startEntry = new Entry(new Time(segmentTimeMapping.Input.Start), firstEntry.Value);
+						if (segmentTimeMapping.Input.End - lastEntry.Time.Seconds > 1.5 * streamManager.EntryResampler.SampleDistance.Seconds) endEntry = new Entry(new Time(segmentTimeMapping.Input.End), lastEntry.Value);
 						if (segment.Entries.Length == 0 && (startEntry != null || endEntry != null))
 						{
-							if (startEntry == null) startEntry = new Entry(segmentTimeRange.Range.Start, endEntry.Value.Value);
-							if (endEntry == null) endEntry = new Entry(segmentTimeRange.Range.End, startEntry.Value.Value);
+							if (startEntry == null) startEntry = new Entry(new Time(segmentTimeMapping.Input.Start), endEntry.Value.Value);
+							if (endEntry == null) endEntry = new Entry(new Time(segmentTimeMapping.Input.End), startEntry.Value.Value);
 						}
 					}
 
@@ -90,20 +89,20 @@ namespace Visualizer.Drawing
 
 					if (startEntry != null)
 					{
-						vertices[position++] = (float)segmentTimeRange.Mapping.ForwardMap(startEntry.Value.Time.Seconds);
-						vertices[position++] = (float)valueRange.Mapping.ForwardMap(startEntry.Value.Value);
+						vertices[position++] = (float)segmentTimeMapping.ForwardMap(startEntry.Value.Time.Seconds);
+						vertices[position++] = (float)valueMapping.ForwardMap(startEntry.Value.Value);
 					}
 
 					foreach (Entry entry in segment.Entries)
 					{
-						vertices[position++] = (float)segmentTimeRange.Mapping.ForwardMap(entry.Time.Seconds);
-						vertices[position++] = (float)valueRange.Mapping.ForwardMap(entry.Value);
+						vertices[position++] = (float)segmentTimeMapping.ForwardMap(entry.Time.Seconds);
+						vertices[position++] = (float)valueMapping.ForwardMap(entry.Value);
 					}
 
 					if (endEntry != null)
 					{
-						vertices[position++] = (float)segmentTimeRange.Mapping.ForwardMap(endEntry.Value.Time.Seconds);
-						vertices[position++] = (float)valueRange.Mapping.ForwardMap(endEntry.Value.Value);
+						vertices[position++] = (float)segmentTimeMapping.ForwardMap(endEntry.Value.Time.Seconds);
+						vertices[position++] = (float)valueMapping.ForwardMap(endEntry.Value.Value);
 					}
 
 					drawer.DrawLineStrip(vertices, diagram.Layouter.Transformation, Color, (float)diagram.GraphSettings.LineWidth);

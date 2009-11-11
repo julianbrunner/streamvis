@@ -23,14 +23,15 @@ namespace Visualizer.Drawing.Timing
 {
 	public class ShiftingTimeManager : TimeManager
 	{
-		TimeRange range;
-		TimeRange graphRange;
+		LinearMapping timeMapping;
+		LinearMapping graphTimeMappings;
 
 		public double ShiftLength { get; set; }
-		public override TimeRange Range { get { return range; } }
-		public override IEnumerable<TimeRange> GraphRanges { get { yield return graphRange; } }
+		public override LinearMapping TimeMapping { get { return timeMapping; } }
+		public override IEnumerable<LinearMapping> GraphTimeMappings { get { yield return graphTimeMappings; } }
 
-		public ShiftingTimeManager(Timer timer) : base(timer)
+		public ShiftingTimeManager(Timer timer)
+			: base(timer)
 		{
 			ShiftLength = 0.8;
 		}
@@ -50,8 +51,8 @@ namespace Visualizer.Drawing.Timing
 			Time endTime = Time;
 			double endPosition = (1 - ShiftLength) + ShiftLength * fractionalIntervals;
 
-			range = new TimeRange(new Range<Time>(startTime, startTime + Width));
-			graphRange = new TimeRange(new Range<Time>(startTime, endTime), new Range<double>(startPosition, endPosition));
+			timeMapping = new LinearMapping(new Range<double>(startTime.Seconds, startTime.Seconds + Width.Seconds));
+			graphTimeMappings = new LinearMapping(new Range<double>(startTime.Seconds, endTime.Seconds), new Range<double>(startPosition, endPosition));
 		}
 	}
 }

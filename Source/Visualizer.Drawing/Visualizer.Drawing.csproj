@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -34,6 +34,7 @@
     <Compile Include="Axes\Axis.cs" />
     <Compile Include="Axes\AxisX.cs" />
     <Compile Include="Axes\AxisY.cs" />
+    <Compile Include="LinearMappingExtensions.cs" />
     <Compile Include="GraphSettings.cs" />
     <Compile Include="Data\CacheFragment.cs" />
     <Compile Include="Data\StreamManager.cs" />
@@ -50,12 +51,10 @@
     <Compile Include="Timing\ContinuousTimeManager.cs" />
     <Compile Include="Timing\ShiftingTimeManager.cs" />
     <Compile Include="Timing\TimeManager.cs" />
-    <Compile Include="Timing\TimeRange.cs" />
     <Compile Include="Timing\WrappingTimeManager.cs" />
     <Compile Include="Values\FittingValueManager.cs" />
     <Compile Include="Values\FixedValueManager.cs" />
     <Compile Include="Values\ValueManager.cs" />
-    <Compile Include="Values\ValueRange.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK, Version=0.9.8.3, Culture=neutral, PublicKeyToken=null">
