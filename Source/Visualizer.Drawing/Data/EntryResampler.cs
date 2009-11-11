@@ -66,7 +66,7 @@ namespace Visualizer.Drawing.Data
 
 				List<Entry> samples = new List<Entry>();
 
-				for (double time = startTime; time < endTime; time += sampleDistance)
+				for (double time = startTime; time + sampleDistance <= endTime; time += sampleDistance)
 					samples.Add(Aggregate(entries, time, time + sampleDistance));
 
 				return new CacheFragment(new Range<double>(startTime, endTime), samples);
