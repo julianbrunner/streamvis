@@ -21,7 +21,6 @@ using System.Windows.Forms;
 using Graphics;
 using OpenTK.Math;
 using Utility;
-using Visualizer.Data;
 using Visualizer.Drawing;
 
 namespace Visualizer
@@ -59,7 +58,7 @@ namespace Visualizer
 				LinearMapping timeMapping = diagram.TimeManager.Mapping;
 				LinearMapping valueMapping = diagram.ValueManager.Mapping;
 
-				Time time = new Time(timeMapping.ReverseMap(position.X));
+				double time = timeMapping.ReverseMap(position.X);
 				double value = valueMapping.ReverseMap(position.Y);
 
 				label.Text = string.Format("Time: {0}, Value: {1}", time, value);

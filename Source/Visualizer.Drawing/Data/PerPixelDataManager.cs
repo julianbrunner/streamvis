@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using Visualizer.Data;
 
 namespace Visualizer.Drawing.Data
 {
@@ -35,11 +34,11 @@ namespace Visualizer.Drawing.Data
 
 			if (Diagram.Layouter.Area.Width > 0)
 			{
-				double pixelsPerSecond = Diagram.Layouter.Area.Width / Diagram.TimeManager.Width.Seconds;
+				double pixelsPerSecond = Diagram.Layouter.Area.Width / Diagram.TimeManager.Width;
 				double samplesPerSecond = SamplesPerPixel * pixelsPerSecond;
 
 				foreach (Graph graph in Diagram.Graphs)
-					SetSampleDistance(graph.StreamManager.EntryResampler, new Time(1.0) / samplesPerSecond);
+					SetSampleDistance(graph.StreamManager.EntryResampler, 1.0 / samplesPerSecond);
 			}
 		}
 	}

@@ -40,16 +40,16 @@ namespace Visualizer.Drawing.Data
 			if (ClearData)
 				foreach (Graph graph in diagram.Graphs)
 				{
-					SearchList<Entry, Time> entries = graph.EntryData.Entries;
+					SearchList<Entry, double> entries = graph.EntryData.Entries;
 
 					if (!entries.IsEmpty && diagram.TimeManager.Time - entries[0].Time > 2 * diagram.TimeManager.Width)
 						entries.Remove(0, entries.FindIndex(diagram.TimeManager.Time - diagram.TimeManager.Width));
 				}
 		}
 
-		protected static void SetSampleDistance(EntryResampler resampler, Time sampleDistance)
+		protected static void SetSampleDistance(EntryResampler resampler, double sampleDistance)
 		{
-			if (resampler.SampleDistance == Time.Zero) resampler.SampleDistance = sampleDistance;
+			if (resampler.SampleDistance == 0) resampler.SampleDistance = sampleDistance;
 			else
 			{
 				double factor = sampleDistance / resampler.SampleDistance;

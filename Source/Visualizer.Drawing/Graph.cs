@@ -70,12 +70,12 @@ namespace Visualizer.Drawing
 
 					if (diagram.GraphSettings.ExtendGraphs)
 					{
-						if (firstEntry.Time.Seconds - segmentTimeMapping.Input.Start > 1.5 * streamManager.EntryResampler.SampleDistance.Seconds) startEntry = new Entry(new Time(segmentTimeMapping.Input.Start), firstEntry.Value);
-						if (segmentTimeMapping.Input.End - lastEntry.Time.Seconds > 1.5 * streamManager.EntryResampler.SampleDistance.Seconds) endEntry = new Entry(new Time(segmentTimeMapping.Input.End), lastEntry.Value);
+						if (firstEntry.Time - segmentTimeMapping.Input.Start > 1.5 * streamManager.EntryResampler.SampleDistance) startEntry = new Entry(segmentTimeMapping.Input.Start, firstEntry.Value);
+						if (segmentTimeMapping.Input.End - lastEntry.Time > 1.5 * streamManager.EntryResampler.SampleDistance) endEntry = new Entry(segmentTimeMapping.Input.End, lastEntry.Value);
 						if (segment.Entries.Length == 0 && (startEntry != null || endEntry != null))
 						{
-							if (startEntry == null) startEntry = new Entry(new Time(segmentTimeMapping.Input.Start), endEntry.Value.Value);
-							if (endEntry == null) endEntry = new Entry(new Time(segmentTimeMapping.Input.End), startEntry.Value.Value);
+							if (startEntry == null) startEntry = new Entry(segmentTimeMapping.Input.Start, endEntry.Value.Value);
+							if (endEntry == null) endEntry = new Entry(segmentTimeMapping.Input.End, startEntry.Value.Value);
 						}
 					}
 
@@ -89,19 +89,19 @@ namespace Visualizer.Drawing
 
 					if (startEntry != null)
 					{
-						vertices[position++] = (float)segmentTimeMapping.ForwardMap(startEntry.Value.Time.Seconds);
+						vertices[position++] = (float)segmentTimeMapping.ForwardMap(startEntry.Value.Time);
 						vertices[position++] = (float)valueMapping.ForwardMap(startEntry.Value.Value);
 					}
 
 					foreach (Entry entry in segment.Entries)
 					{
-						vertices[position++] = (float)segmentTimeMapping.ForwardMap(entry.Time.Seconds);
+						vertices[position++] = (float)segmentTimeMapping.ForwardMap(entry.Time);
 						vertices[position++] = (float)valueMapping.ForwardMap(entry.Value);
 					}
 
 					if (endEntry != null)
 					{
-						vertices[position++] = (float)segmentTimeMapping.ForwardMap(endEntry.Value.Time.Seconds);
+						vertices[position++] = (float)segmentTimeMapping.ForwardMap(endEntry.Value.Time);
 						vertices[position++] = (float)valueMapping.ForwardMap(endEntry.Value.Value);
 					}
 

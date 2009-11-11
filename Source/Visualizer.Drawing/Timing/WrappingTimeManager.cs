@@ -44,23 +44,23 @@ namespace Visualizer.Drawing.Timing
 			int wholeIntervals = (int)intervals;
 			double fractionalIntervals = intervals - wholeIntervals;
 
-			Time startTime = Time - (1 - GapLength) * Width;
+			double startTime = Time - (1 - GapLength) * Width;
 			double startPosition = (fractionalIntervals + GapLength) % 1;
-			Time endTime = Time;
+			double endTime = Time;
 			double endPosition = startPosition + (1 - GapLength);
 
-			mapping = new LinearMapping(new Range<double>((wholeIntervals + 0) * Width.Seconds, (wholeIntervals + 1) * Width.Seconds));
+			mapping = new LinearMapping(new Range<double>((wholeIntervals + 0) * Width, (wholeIntervals + 1) * Width));
 
 			if (startTime >= wholeIntervals * Width)
 				graphMappings = new LinearMapping[]
 				{
-					new LinearMapping(new Range<double>(startTime.Seconds, endTime.Seconds), new Range<double>(startPosition,endPosition))
+					new LinearMapping(new Range<double>(startTime, endTime), new Range<double>(startPosition,endPosition))
 				};
 			else
 				graphMappings = new LinearMapping[]
 				{
-					new LinearMapping(new Range<double>(startTime.Seconds, wholeIntervals * Width.Seconds), new Range<double>(startPosition, 1)),
-					new LinearMapping(new Range<double>(wholeIntervals * Width.Seconds, endTime.Seconds), new Range<double>(0, endPosition - 1))
+					new LinearMapping(new Range<double>(startTime, wholeIntervals * Width), new Range<double>(startPosition, 1)),
+					new LinearMapping(new Range<double>(wholeIntervals * Width, endTime), new Range<double>(0, endPosition - 1))
 				};
 		}
 	}

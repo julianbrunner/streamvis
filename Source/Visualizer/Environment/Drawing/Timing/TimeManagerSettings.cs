@@ -16,7 +16,6 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
-using Visualizer.Data;
 using Visualizer.Drawing;
 
 namespace Visualizer.Environment.Drawing.Timing
@@ -37,14 +36,14 @@ namespace Visualizer.Environment.Drawing.Timing
 		[DisplayName("Time")]
 		public double Time
 		{
-			get { return diagram.TimeManager.Time.Seconds; }
-			set { diagram.TimeManager.Time = new Time(value); }
+			get { return diagram.TimeManager.Time; }
+			set { diagram.TimeManager.Time = value; }
 		}
 		[DisplayName("Width")]
 		public double Width
 		{
-			get { return diagram.TimeManager.Width.Seconds; }
-			set { diagram.TimeManager.Width = new Time(value); }
+			get { return diagram.TimeManager.Width; }
+			set { diagram.TimeManager.Width = value; }
 		}
 
 		protected TimeManagerSettings(Diagram diagram)

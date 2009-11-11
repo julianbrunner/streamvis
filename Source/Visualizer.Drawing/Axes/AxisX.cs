@@ -16,13 +16,11 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Linq;
 using Graphics;
 using OpenTK.Math;
 using Utility;
 using Utility.Extensions;
 using Utility.Utilities;
-using Visualizer.Data;
 
 namespace Visualizer.Drawing.Axes
 {
@@ -57,14 +55,13 @@ namespace Visualizer.Drawing.Axes
 
 			Drawer.DrawLine(lineStart, lineEnd, Color, 1);
 
-			// TODO: Remove the selector once TimeRange and ValueRange are unified
-			foreach (Time time in Markers.Select(time => new Time(time)))
+			foreach (double time in Markers)
 			{
-				Vector2 markerStart = Diagram.Layouter.ForwardMap((float)timeMapping.ForwardMap(time.Seconds) * Vector2.UnitX) + offset;
+				Vector2 markerStart = Diagram.Layouter.ForwardMap((float)timeMapping.ForwardMap(time) * Vector2.UnitX) + offset;
 				Vector2 markerEnd = markerStart + new Vector2(0, 5);
 
 				Drawer.DrawLine(markerStart, markerEnd, Color, 1);
-				Drawer.DrawNumber(time.Seconds, markerEnd + new Vector2(0, 2), Color, TextAlignment.Center);
+				Drawer.DrawNumber(time, markerEnd + new Vector2(0, 2), Color, TextAlignment.Center);
 			}
 		}
 	}

@@ -18,24 +18,25 @@
 using System;
 using System.Collections.Generic;
 using Utility;
+using Utility.Extensions;
 using Visualizer.Data;
 
 namespace Visualizer.Drawing.Data
 {
 	public class EntryResampler
 	{
-		readonly SearchList<Entry, Time> entries;
+		readonly SearchList<Entry, double> entries;
 
-		Time sampleDistance;
+		double sampleDistance;
 
 		public event EventHandler SampleDistanceChanged;
 
-		public Time SampleDistance
+		public double SampleDistance
 		{
 			get { return sampleDistance; }
 			set
 			{
-				if (value <= Time.Zero) throw new ArgumentOutOfRangeException("value");
+				if (value <= 0) throw new ArgumentOutOfRangeException("value");
 
 				if (sampleDistance != value)
 				{
@@ -45,34 +46,34 @@ namespace Visualizer.Drawing.Data
 			}
 		}
 
-		public CacheFragment this[Range<Time> range]
+		public CacheFragment this[Range<double> range]
 		{
 			get
 			{
-				if (sampleDistance == Time.Zero) return CacheFragment.Empty;
+				if (sampleDistance == 0) return CacheFragment.Empty;
 				if (entries.IsEmpty) return CacheFragment.Empty;
 
-				Time startTime = range.Start;
-				Time endTime = range.End;
+				double startTime = range.Start;
+				double endTime = range.End;
 
-				startTime = Time.Max(startTime, entries[0].Time);
-				endTime = Time.Min(endTime, entries[entries.Count - 1].Time);
+				startTime = Math.Max(startTime, entries[0].Time);
+				endTime = Math.Min(endTime, entries[entries.Count - 1].Time);
 
-				startTime = startTime.Ceiling(sampleDistance, Time.Zero);
-				endTime = endTime.Floor(sampleDistance, Time.Zero);
+				startTime = startTime.Ceiling(sampleDistance);
+				endTime = endTime.Floor(sampleDistance);
 
 				if (startTime >= endTime) return CacheFragment.Empty;
 
 				List<Entry> samples = new List<Entry>();
 
-				for (Time time = startTime; time < endTime; time += sampleDistance)
+				for (double time = startTime; time < endTime; time += sampleDistance)
 					samples.Add(Aggregate(entries, time, time + sampleDistance));
 
-				return new CacheFragment(new Range<Time>(startTime, endTime), samples);
+				return new CacheFragment(new Range<double>(startTime, endTime), samples);
 			}
 		}
 
-		public EntryResampler(SearchList<Entry, Time> source)
+		public EntryResampler(SearchList<Entry, double> source)
 		{
 			this.entries = source;
 		}
@@ -82,7 +83,7 @@ namespace Visualizer.Drawing.Data
 			if (SampleDistanceChanged != null) SampleDistanceChanged(this, EventArgs.Empty);
 		}
 
-		static Entry Aggregate(SearchList<Entry, Time> source, Time startTime, Time endTime)
+		static Entry Aggregate(SearchList<Entry, double> source, double startTime, double endTime)
 		{
 			int startIndex = source.FindIndex(startTime);
 			int endIndex = source.FindIndex(endTime);
@@ -104,11 +105,11 @@ namespace Visualizer.Drawing.Data
 			foreach (Entry entry in source[startIndex, endIndex]) area += GetArea(last, last = entry);
 			area += GetArea(last, end);
 
-			return new Entry(0.5 * (start.Time + end.Time), area / (end.Time - start.Time).Seconds);
+			return new Entry(0.5 * (start.Time + end.Time), area / (end.Time - start.Time));
 		}
 		static double GetArea(Entry start, Entry end)
 		{
-			return 0.5 * (start.Value + end.Value) * (end.Time - start.Time).Seconds;
+			return 0.5 * (start.Value + end.Value) * (end.Time - start.Time);
 		}
 	}
 }

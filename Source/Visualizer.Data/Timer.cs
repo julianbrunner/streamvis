@@ -23,7 +23,7 @@ namespace Visualizer.Data
 	{
 		readonly Stopwatch stopwatch = new Stopwatch();
 
-		public Time Time { get { lock (stopwatch) return new Time(stopwatch.Elapsed.Ticks); } }
+		public double Time { get { lock (stopwatch) return stopwatch.Elapsed.Seconds; } }
 
 		public Timer()
 		{

@@ -34,7 +34,7 @@ namespace Visualizer.Drawing.Timing
 		{
 			base.Update();
 
-			mapping = new LinearMapping(new Range<double>(Time.Seconds - Width.Seconds, Time.Seconds));
+			mapping = new LinearMapping(new Range<double>(Time - Width, Time));
 		}
 	}
 }

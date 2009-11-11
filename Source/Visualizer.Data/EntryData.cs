@@ -24,12 +24,12 @@ namespace Visualizer.Data
 {
 	public class EntryData
 	{
-		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time);
+		readonly SearchList<Entry, double> entries = new SearchList<Entry, double>(entry => entry.Time);
 		readonly List<Entry> buffer = new List<Entry>();
 
 		public static string XElementName { get { return "EntryData"; } }
 
-		public SearchList<Entry, Time> Entries { get { return entries; } }
+		public SearchList<Entry, double> Entries { get { return entries; } }
 		public XElement XElement { get { return new XElement(XElementName, from entry in entries select entry.XElement); } }
 
 		public EntryData() { }

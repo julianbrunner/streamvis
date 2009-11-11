@@ -15,7 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using Visualizer.Data;
 
 namespace Visualizer.Drawing.Data
 {
@@ -34,7 +33,7 @@ namespace Visualizer.Drawing.Data
 			base.Update();
 
 			foreach (Graph graph in Diagram.Graphs)
-				SetSampleDistance(graph.StreamManager.EntryResampler, new Time(1.0) / SamplesPerSecond);
+				SetSampleDistance(graph.StreamManager.EntryResampler, 1.0 / SamplesPerSecond);
 		}
 	}
 }

@@ -68,7 +68,7 @@ namespace Visualizer.Data
 					{
 						StringBuilder stringBuilder = new StringBuilder();
 
-						stringBuilder.Append(leadEntry.Time.Seconds);
+						stringBuilder.Append(leadEntry.Time);
 						stringBuilder.Append(" ");
 
 						foreach (Entry entry in from enumerator in enumerators select enumerator.Current)

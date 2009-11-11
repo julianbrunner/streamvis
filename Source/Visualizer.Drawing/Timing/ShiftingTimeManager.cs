@@ -40,19 +40,19 @@ namespace Visualizer.Drawing.Timing
 		{
 			base.Update();
 
-			Time interval = Width * ShiftLength;
+			double interval = Width * ShiftLength;
 
 			double intervals = Time / interval;
 			int wholeIntervals = (int)intervals;
 			double fractionalIntervals = intervals - wholeIntervals;
 
-			Time startTime = interval * (wholeIntervals + 1) - Width;
+			double startTime = interval * (wholeIntervals + 1) - Width;
 			double startPosition = 0;
-			Time endTime = Time;
+			double endTime = Time;
 			double endPosition = (1 - ShiftLength) + ShiftLength * fractionalIntervals;
 
-			mapping = new LinearMapping(new Range<double>(startTime.Seconds, startTime.Seconds + Width.Seconds));
-			graphMappings = new LinearMapping(new Range<double>(startTime.Seconds, endTime.Seconds), new Range<double>(startPosition, endPosition));
+			mapping = new LinearMapping(new Range<double>(startTime, startTime + Width));
+			graphMappings = new LinearMapping(new Range<double>(startTime, endTime), new Range<double>(startPosition, endPosition));
 		}
 	}
 }

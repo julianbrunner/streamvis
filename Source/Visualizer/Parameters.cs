@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using Utility;
-using Visualizer.Data;
 
 namespace Visualizer
 {
@@ -37,7 +36,7 @@ namespace Visualizer
 		public bool? ClearData { get; private set; }
 		public TimeManagerType TimeManagerType { get; private set; }
 		public double? TimeManagerParameter { get; private set; }
-		public Time? DiagramWidth { get; private set; }
+		public double? DiagramWidth { get; private set; }
 		public ValueManagerType ValueManagerType { get; private set; }
 		public Range<double>? ValueRange { get; private set; }
 		public DataManagerType DataManagerType { get; private set; }
@@ -112,7 +111,7 @@ namespace Visualizer
 					break;
 				case "w":
 					if (details.Length != 2) InvalidParameter(option);
-					try { DiagramWidth = new Time(double.Parse(details[1])); }
+					try { DiagramWidth = double.Parse(details[1]); }
 					catch (FormatException) { InvalidParameter(option); }
 					break;
 				case "v":

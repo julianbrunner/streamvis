@@ -27,21 +27,21 @@ namespace Visualizer.Drawing.Data
 	public class EntryCache
 	{
 		readonly EntryResampler entryResampler;
-		readonly SearchList<Range<Time>, Time> ranges = new SearchList<Range<Time>, Time>(range => range.Start);
-		readonly SearchList<Entry, Time> entries = new SearchList<Entry, Time>(entry => entry.Time);
+		readonly SearchList<Range<double>, double> ranges = new SearchList<Range<double>, double>(range => range.Start);
+		readonly SearchList<Entry, double> entries = new SearchList<Entry, double>(entry => entry.Time);
 
-		public Entry[] this[Range<Time> range]
+		public Entry[] this[Range<double> range]
 		{
 			get
 			{
-				foreach (Range<Time> missingRange in Exclude(range.Single(), ranges))
+				foreach (Range<double> missingRange in Exclude(range.Single(), ranges))
 				{
 					CacheFragment fragment = entryResampler[missingRange];
 
 					if (!fragment.IsEmpty)
 					{
-						Time start = fragment.Range.Start;
-						Time end = fragment.Range.End;
+						double start = fragment.Range.Start;
+						double end = fragment.Range.End;
 
 						int indexAfter = ranges.FindIndex(start);
 						int indexBefore = indexAfter - 1;
@@ -57,7 +57,7 @@ namespace Visualizer.Drawing.Data
 							ranges.Remove(indexBefore);
 						}
 
-						ranges.Insert(new Range<Time>(start, end));
+						ranges.Insert(new Range<double>(start, end));
 						entries.Insert(fragment.Entries);
 					}
 				}
@@ -104,25 +104,25 @@ namespace Visualizer.Drawing.Data
 			Clear();
 		}
 
-		static IEnumerable<Range<Time>> Exclude(IEnumerable<Range<Time>> ranges, IEnumerable<Range<Time>> exclusions)
+		static IEnumerable<Range<double>> Exclude(IEnumerable<Range<double>> ranges, IEnumerable<Range<double>> exclusions)
 		{
-			List<Range<Time>> rangeList = new List<Range<Time>>(ranges);
+			List<Range<double>> rangeList = new List<Range<double>>(ranges);
 
-			foreach (Range<Time> exclusion in exclusions)
+			foreach (Range<double> exclusion in exclusions)
 			{
-				Range<Time>[] oldRanges = rangeList.ToArray();
+				Range<double>[] oldRanges = rangeList.ToArray();
 
 				rangeList.Clear();
 
-				foreach (Range<Time> range in oldRanges)
+				foreach (Range<double> range in oldRanges)
 				{
-					Range<Time> intersection = Intersect(range, exclusion);
+					Range<double> intersection = Intersect(range, exclusion);
 
 					if (intersection.IsEmpty()) rangeList.Add(range);
 					else
 					{
-						Range<Time> range1 = new Range<Time>(range.Start, exclusion.Start);
-						Range<Time> range2 = new Range<Time>(exclusion.End, range.End);
+						Range<double> range1 = new Range<double>(range.Start, exclusion.Start);
+						Range<double> range2 = new Range<double>(exclusion.End, range.End);
 
 						if (!range1.IsEmpty()) rangeList.Add(range1);
 						if (!range2.IsEmpty()) rangeList.Add(range2);
@@ -132,9 +132,9 @@ namespace Visualizer.Drawing.Data
 
 			return rangeList;
 		}
-		static Range<Time> Intersect(Range<Time> a, Range<Time> b)
+		static Range<double> Intersect(Range<double> a, Range<double> b)
 		{
-			return new Range<Time>(Time.Max(a.Start, b.Start), Time.Min(a.End, b.End));
+			return new Range<double>(Math.Max(a.Start, b.Start), Math.Min(a.End, b.End));
 		}
 	}
 }

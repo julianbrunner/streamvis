@@ -26,8 +26,8 @@ namespace Visualizer.Drawing.Timing
 		readonly Timer timer;
 
 		public bool IsUpdated { get; set; }
-		public Time Time { get; set; }
-		public Time Width { get; set; }
+		public double Time { get; set; }
+		public double Width { get; set; }
 		/// <summary>
 		/// Gets the overall Range, in which graphs are drawn.
 		/// </summary>
@@ -41,8 +41,8 @@ namespace Visualizer.Drawing.Timing
 		{
 			this.timer = timer;
 
-			Time = Time.Zero;
-			Width = new Time(10.0);
+			Time = 0;
+			Width = 10;
 			IsUpdated = true;
 		}
 

@@ -90,7 +90,7 @@ namespace Visualizer.Capturing
 			while (running)
 			{
 				Packet packet = port.Read();
-				Time time = timer.Time;
+				double time = timer.Time;
 
 				if (running)
 					foreach (Stream stream in Streams)

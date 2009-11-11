@@ -21,12 +21,12 @@ namespace Visualizer.Data
 {
 	public struct Entry
 	{
-		readonly Time time;
+		readonly double time;
 		readonly double value;
 
 		public static string XElementName { get { return "Entry"; } }
 
-		public Time Time { get { return time; } }
+		public double Time { get { return time; } }
 		public double Value { get { return value; } }
 		public XElement XElement
 		{
@@ -35,20 +35,20 @@ namespace Visualizer.Data
 				return new XElement
 				(
 					XElementName,
-					new XElement("Time", Time.Ticks),
+					new XElement("Time", Time),
 					new XElement("Value", Value)
 				);
 			}
 		}
 
-		public Entry(Time time, double value)
+		public Entry(double time, double value)
 		{
 			this.time = time;
 			this.value = value;
 		}
 		public Entry(XElement entry)
 		{
-			this.time = new Time((long)entry.Element("Time"));
+			this.time = (double)entry.Element("Time");
 			this.value = (double)entry.Element("Value");
 		}
 	}
