@@ -38,6 +38,7 @@ namespace Utility
 			this.offset = (input.End * output.Start - input.Start * output.End) / divisor;
 			this.factor = (output.End - output.Start) / divisor;
 		}
+		public LinearMapping(Range<double> input) : this(input, new Range<double>(0, 1)) { }
 
 		public double ForwardMap(double value)
 		{
