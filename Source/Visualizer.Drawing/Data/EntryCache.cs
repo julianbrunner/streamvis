@@ -46,11 +46,13 @@ namespace Visualizer.Drawing.Data
 						int indexAfter = ranges.FindIndex(start);
 						int indexBefore = indexAfter - 1;
 
+						// The fragment can be merged with a range that comes after the fragment
 						if (indexAfter >= 0 && indexAfter < ranges.Count && ranges[indexAfter].Start == end)
 						{
 							end = ranges[indexAfter].End;
 							ranges.Remove(indexAfter);
 						}
+						// The fragment can be merged with a range that comes before the fragment
 						if (indexBefore >= 0 && indexBefore < ranges.Count && ranges[indexBefore].End == start)
 						{
 							start = ranges[indexBefore].Start;
