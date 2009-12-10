@@ -25,10 +25,7 @@ namespace Utility.Utilities
 	{
 		public static IEnumerable<double> GetMarkers(double start, double end, int count)
 		{
-			double difference = end - start;
-			int magnitude = (int)Math.Floor(Math.Log10(difference));
-			double rawIntervalLength = difference * Math.Pow(10, -magnitude) / count;
-			double intervalLength = rawIntervalLength.FractionRound(1, 2, 2.5, 5) * Math.Pow(10, magnitude);
+			double intervalLength = ((end - start) / count).FractionRound(1, 2, 2.5, 5);
 
 			start = start.Ceiling(intervalLength);
 			end = end.Floor(intervalLength);
