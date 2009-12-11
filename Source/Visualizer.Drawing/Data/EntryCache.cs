@@ -38,6 +38,7 @@ namespace Visualizer.Drawing.Data
 				{
 					CacheFragment fragment = entryResampler[missingRange];
 
+					// TODO: Ranges that are smaller than one interval will never get swallowed
 					if (!fragment.IsEmpty)
 					{
 						double start = fragment.Range.Start;

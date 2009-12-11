@@ -51,8 +51,7 @@ namespace Utility.Extensions
 		}
 		public static double Floor(this double value, double interval, double offset)
 		{
-			double remainder = DoubleUtility.Modulo(value - offset, interval);
-			return remainder == 0 ? value : value - remainder + 0 * interval;
+			return Math.Floor(value / interval) * interval;
 		}
 		public static double Ceiling(this double value, double interval)
 		{
@@ -60,8 +59,7 @@ namespace Utility.Extensions
 		}
 		public static double Ceiling(this double value, double interval, double offset)
 		{
-			double remainder = DoubleUtility.Modulo(value - offset, interval);
-			return remainder == 0 ? value : value - remainder + 1 * interval;
+			return Math.Ceiling(value / interval) * interval;
 		}
 		public static double Clamp(this double value, double minimum, double maximum)
 		{

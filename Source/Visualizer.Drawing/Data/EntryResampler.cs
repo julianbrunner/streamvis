@@ -27,6 +27,7 @@ namespace Visualizer.Drawing.Data
 	{
 		readonly SearchList<Entry, double> entries;
 
+		// TODO: This should never be 0, remove all zero-checks
 		double sampleDistance;
 
 		public event EventHandler SampleDistanceChanged;
