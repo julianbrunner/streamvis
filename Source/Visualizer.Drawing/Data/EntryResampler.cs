@@ -27,8 +27,7 @@ namespace Visualizer.Drawing.Data
 	{
 		readonly SearchList<Entry, double> entries;
 
-		// TODO: This should never be 0, remove all zero-checks
-		double sampleDistance;
+		double sampleDistance = 1;
 
 		public event EventHandler SampleDistanceChanged;
 
@@ -51,7 +50,6 @@ namespace Visualizer.Drawing.Data
 		{
 			get
 			{
-				if (sampleDistance == 0) return CacheFragment.Empty;
 				if (entries.IsEmpty) return CacheFragment.Empty;
 
 				double startTime = range.Start;
