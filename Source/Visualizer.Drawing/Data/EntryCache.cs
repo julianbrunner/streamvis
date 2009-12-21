@@ -36,9 +36,15 @@ namespace Visualizer.Drawing.Data
 			{
 				foreach (Range<double> missingRange in Exclude(range.Single(), ranges))
 				{
-					CacheFragment fragment = entryResampler[missingRange];
+					CacheFragment fragment = entryResampler
+					[
+						new Range<double>
+						(
+							missingRange.Start - 0.5 * entryResampler.SampleDistance,
+							missingRange.End + 0.5 * entryResampler.SampleDistance
+						)
+					];
 
-					// TODO: Ranges that are smaller than one interval will never get swallowed
 					if (!fragment.IsEmpty)
 					{
 						double start = fragment.Range.Start;
