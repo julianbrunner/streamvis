@@ -19,6 +19,8 @@ namespace Graphics
 {
 	public interface IUpdateable : IComponent
 	{
+		bool IsUpdated { get; }
+
 		void Update();
 	}
 }

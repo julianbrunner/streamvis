@@ -37,7 +37,8 @@ namespace Graphics
 			set { GL.ClearColor(clearColor = value); }
 		}
 
-		public Viewport() : base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false))
+		public Viewport()
+			: base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false))
 		{
 			VSync = true;
 			ClearColor = Color.Black;
@@ -69,8 +70,12 @@ namespace Graphics
 			{
 				GL.Clear(ClearBufferMask.ColorBufferBit);
 
-				foreach (IUpdateable updateable in components.OfType<IUpdateable>()) updateable.Update();
-				foreach (IDrawable drawable in components.OfType<IDrawable>()) drawable.Draw();
+				foreach (IUpdateable updateable in components.OfType<IUpdateable>())
+					if (updateable.IsUpdated)
+						updateable.Update();
+				foreach (IDrawable drawable in components.OfType<IDrawable>())
+					if (drawable.IsDrawn)
+						drawable.Draw();
 
 				SwapBuffers();
 			}

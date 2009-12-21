@@ -41,7 +41,7 @@ namespace Graphics
 
 		public void Draw()
 		{
-			if (IsDrawn) drawer.DrawNumber(FramesPerSecond, Position, Color, Alignment);
+			drawer.DrawNumber(FramesPerSecond, Position, Color, Alignment);
 		}
 	}
 }

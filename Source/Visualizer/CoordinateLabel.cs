@@ -34,6 +34,9 @@ namespace Visualizer
 		bool mouseInsideViewport = false;
 		Point mousePosition;
 
+		public bool IsUpdated { get { return true; } }
+		public bool IsDrawn { get { return true; } }
+
 		public CoordinateLabel(ToolStripStatusLabel label, Viewport viewport, Diagram diagram)
 		{
 			this.label = label;

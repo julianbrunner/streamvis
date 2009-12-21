@@ -46,24 +46,18 @@ namespace Visualizer.Drawing
 
 		public void Update()
 		{
-			if (IsUpdated)
-			{
-				TimeManager.Update();
-				DataManager.Update();
-				foreach (Graph graph in Graphs) graph.Update();
-				ValueManager.Update();
-				Layouter.Update();
-			}
+			TimeManager.Update();
+			DataManager.Update();
+			foreach (Graph graph in Graphs) graph.Update();
+			ValueManager.Update();
+			Layouter.Update();
 		}
 		public void Draw()
 		{
-			if (IsDrawn)
-			{
-				foreach (Graph graph in Graphs) graph.Draw();
+			foreach (Graph graph in Graphs) graph.Draw();
 
-				AxisX.Draw();
-				AxisY.Draw();
-			}
+			AxisX.Draw();
+			AxisY.Draw();
 		}
 	}
 }
