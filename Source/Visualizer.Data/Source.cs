@@ -36,7 +36,7 @@ namespace Visualizer.Data
 		{
 			this.ports = (from port in source.Elements(Port.XElementName) select new Port(port)).ToArray();
 		}
-		protected Source(IEnumerable<Port> ports)
+		public Source(IEnumerable<Port> ports)
 		{
 			this.ports = ports.ToArray();
 		}
