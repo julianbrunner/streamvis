@@ -24,8 +24,6 @@ namespace Graphics
 {
 	public class Dragger : IComponent, IUpdateable, IDrawable
 	{
-		readonly Drawer drawer;
-
 		bool dragging;
 		Point mousePosition;
 
@@ -35,10 +33,8 @@ namespace Graphics
 		public bool IsDrawn { get; set; }
 		public MouseButtons Button { get; set; }
 
-		public Dragger(Drawer drawer, Viewport viewport)
+		public Dragger(Viewport viewport)
 		{
-			this.drawer = drawer;
-
 			IsUpdated = true;
 			IsDrawn = true;
 			Button = MouseButtons.Left;
