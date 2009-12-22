@@ -112,7 +112,7 @@ namespace Visualizer
 			if (parameters.MinimalMode != null) MinimalMode = parameters.MinimalMode.Value;
 
 			Console.WriteLine("Initializing settings...");
-			this.settings = new Settings(properties, this, viewport, drawer, timer, diagram, zoomSelector, frameCounter);
+			this.settings = new Settings(properties, this, viewport, drawer, timer, diagram, zoomSelector, panDragger, frameCounter);
 			properties.SelectedObject = settings;
 
 			Console.WriteLine("Adding components...");
