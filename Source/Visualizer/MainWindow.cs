@@ -88,6 +88,8 @@ namespace Visualizer
 
 			Console.WriteLine("Initializing zoom selector...");
 			this.zoomSelector = new RectangleSelector(drawer, MouseButtons.Left, viewport);
+			this.zoomSelector.Color = Color.White;
+			this.zoomSelector.Select += zoomSelector_Select;
 
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer);
@@ -104,7 +106,7 @@ namespace Visualizer
 			if (parameters.MinimalMode != null) MinimalMode = parameters.MinimalMode.Value;
 
 			Console.WriteLine("Initializing settings...");
-			this.settings = new Settings(properties, this, viewport, drawer, timer, diagram, frameCounter);
+			this.settings = new Settings(properties, this, viewport, drawer, timer, diagram, zoomSelector, frameCounter);
 			properties.SelectedObject = settings;
 
 			Console.WriteLine("Adding components...");
@@ -171,6 +173,10 @@ namespace Visualizer
 		{
 			if (streamsList.SelectedItems.Count > 0 && colorDialog.ShowDialog() == DialogResult.OK)
 				SetColor(streamsList.SelectedItems[0], colorDialog.Color);
+		}
+		private void zoomSelector_Select(object sender, EventArgs<Rectangle> e)
+		{
+
 		}
 
 		void NewSource(IEnumerable<string> ports)

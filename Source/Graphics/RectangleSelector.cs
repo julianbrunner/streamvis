@@ -28,8 +28,9 @@ namespace Graphics
 		readonly Drawer drawer;
 		readonly MouseButtons button;
 
+		bool selecting;
+		Point startPosition;
 		Point mousePosition;
-		Point? startPosition;
 
 		public event EventHandler<EventArgs<Rectangle>> Select;
 
@@ -46,20 +47,20 @@ namespace Graphics
 			IsDrawn = true;
 			Color = Color.White;
 
-			viewport.MouseMove += viewport_MouseMove;
 			viewport.MouseDown += viewport_MouseDown;
 			viewport.MouseUp += viewport_MouseUp;
+			viewport.MouseMove += viewport_MouseMove;
 		}
 
 		public void Update() { }
 		public void Draw()
 		{
-			if (startPosition != null)
+			if (selecting)
 			{
-				drawer.DrawLine(new Vector2(startPosition.Value.X, startPosition.Value.Y), new Vector2(mousePosition.X, startPosition.Value.Y), Color, 1);
-				drawer.DrawLine(new Vector2(mousePosition.X, startPosition.Value.Y), new Vector2(mousePosition.X, mousePosition.Y), Color, 1);
-				drawer.DrawLine(new Vector2(mousePosition.X, mousePosition.Y), new Vector2(startPosition.Value.X, mousePosition.Y), Color, 1);
-				drawer.DrawLine(new Vector2(startPosition.Value.X, mousePosition.Y), new Vector2(startPosition.Value.X, startPosition.Value.Y), Color, 1);
+				drawer.DrawLine(new Vector2(startPosition.X, startPosition.Y), new Vector2(mousePosition.X, startPosition.Y), Color, 1);
+				drawer.DrawLine(new Vector2(mousePosition.X, startPosition.Y), new Vector2(mousePosition.X, mousePosition.Y), Color, 1);
+				drawer.DrawLine(new Vector2(mousePosition.X, mousePosition.Y), new Vector2(startPosition.X, mousePosition.Y), Color, 1);
+				drawer.DrawLine(new Vector2(startPosition.X, mousePosition.Y), new Vector2(startPosition.X, startPosition.Y), Color, 1);
 			}
 		}
 
@@ -68,21 +69,25 @@ namespace Graphics
 			if (Select != null) Select(this, new EventArgs<Rectangle>(selection));
 		}
 
-		void viewport_MouseMove(object sender, MouseEventArgs e)
-		{
-			mousePosition = e.Location;
-		}
 		void viewport_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (e.Button == button) startPosition = e.Location;
+			if (e.Button == button)
+			{
+				selecting = true;
+				startPosition = e.Location;
+			}
 		}
 		void viewport_MouseUp(object sender, MouseEventArgs e)
 		{
 			if (e.Button == button)
 			{
-				OnSelect(new Rectangle(startPosition.Value.X, startPosition.Value.Y, mousePosition.X - startPosition.Value.X, mousePosition.Y - startPosition.Value.Y));
-				startPosition = null;
+				selecting = false;
+				OnSelect(new Rectangle(startPosition.X, startPosition.Y, mousePosition.X - startPosition.X, mousePosition.Y - startPosition.Y));
 			}
+		}
+		void viewport_MouseMove(object sender, MouseEventArgs e)
+		{
+			mousePosition = e.Location;
 		}
 	}
 }

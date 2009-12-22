@@ -28,6 +28,7 @@ namespace Visualizer.Environment
 		readonly ViewportSettings viewport;
 		readonly DrawerSettings drawer;
 		readonly DiagramSettings diagram;
+		readonly RectangleSlectorSettings zoomSelector;
 		readonly FrameCounterSettings frameCounter;
 
 		[DisplayName("Viewport")]
@@ -38,6 +39,8 @@ namespace Visualizer.Environment
 		public DiagramSettings Diagram { get { return diagram; } }
 		[DisplayName("Frame Counter")]
 		public FrameCounterSettings FrameCounter { get { return frameCounter; } }
+		[DisplayName("Zoom Selector")]
+		public RectangleSlectorSettings ZoomSelector { get { return zoomSelector; } }
 		[DisplayName("Minimal Mode")]
 		public bool MinimalMode
 		{
@@ -57,12 +60,13 @@ namespace Visualizer.Environment
 			set { mainWindow.PropertiesVisible = value; }
 		}
 
-		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, MainWindow mainWindow, Viewport viewport, Drawer drawer, Timer timer, Diagram diagram, VisibleFrameCounter frameCounter)
+		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, MainWindow mainWindow, Viewport viewport, Drawer drawer, Timer timer, Diagram diagram, RectangleSelector zoomSelector, VisibleFrameCounter frameCounter)
 		{
 			this.mainWindow = mainWindow;
 			this.viewport = new ViewportSettings(viewport);
 			this.drawer = new DrawerSettings(drawer);
 			this.diagram = new DiagramSettings(propertyGrid, timer, diagram);
+			this.zoomSelector = new RectangleSlectorSettings(zoomSelector);
 			this.frameCounter = new FrameCounterSettings(frameCounter);
 		}
 	}
