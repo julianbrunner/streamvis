@@ -175,7 +175,23 @@ namespace Visualizer
 		}
 		private void zoomSelector_Select(object sender, EventArgs<Rectangle> e)
 		{
+			if (diagram.Layouter.Area.Contains(e.Parameter))
+			{
+				Vector2 leftTop = diagram.Layouter.ReverseMap(new Vector2(e.Parameter.Left, e.Parameter.Top));
+				Vector2 rightBottom = diagram.Layouter.ReverseMap(new Vector2(e.Parameter.Right, e.Parameter.Bottom));
 
+				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.ReverseMap(leftTop.X), diagram.TimeManager.Mapping.ReverseMap(rightBottom.X));
+				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.ReverseMap(rightBottom.Y), diagram.ValueManager.Mapping.ReverseMap(leftTop.Y));
+
+				diagram.TimeManager.Width = timeRange.End - timeRange.Start;
+
+				FixedValueManager valueManager = new FixedValueManager();
+				valueManager.FixedRange = valueRange;
+
+				diagram.ValueManager = valueManager;
+
+				settings.Diagram.Initialize();
+			}
 		}
 
 		void NewSource(IEnumerable<string> ports)

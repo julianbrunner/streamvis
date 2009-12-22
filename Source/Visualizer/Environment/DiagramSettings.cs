@@ -145,7 +145,7 @@ namespace Visualizer.Environment
 			Initialize();
 		}
 
-		void Initialize()
+		public void Initialize()
 		{
 			graphSettings = new GraphSettingsSettings(diagram);
 
