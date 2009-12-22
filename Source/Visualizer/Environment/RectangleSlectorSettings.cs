@@ -17,6 +17,7 @@
 
 using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 using Graphics;
 
 namespace Visualizer.Environment
@@ -37,6 +38,12 @@ namespace Visualizer.Environment
 		{
 			get { return rectangleSelector.IsDrawn; }
 			set { rectangleSelector.IsDrawn = value; }
+		}
+		[DisplayName("Button")]
+		public MouseButtons Button
+		{
+			get { return rectangleSelector.Button; }
+			set { rectangleSelector.Button = value; }
 		}
 		[DisplayName("Color")]
 		public Color Color

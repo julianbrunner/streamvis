@@ -87,7 +87,7 @@ namespace Visualizer
 			this.diagram = CreateDiagram(viewport, drawer, timer, parameters);
 
 			Console.WriteLine("Initializing zoom selector...");
-			this.zoomSelector = new RectangleSelector(drawer, MouseButtons.Left, viewport);
+			this.zoomSelector = new RectangleSelector(drawer, viewport);
 			this.zoomSelector.Select += zoomSelector_Select;
 
 			Console.WriteLine("Initializing frame counter");

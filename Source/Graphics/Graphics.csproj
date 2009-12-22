@@ -43,6 +43,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dragger.cs" />
     <Compile Include="RectangleSelector.cs" />
     <Compile Include="Drawer.cs" />
     <Compile Include="FrameCounter.cs" />
