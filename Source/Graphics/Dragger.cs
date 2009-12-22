@@ -28,6 +28,8 @@ namespace Graphics
 		Point mousePosition;
 
 		public event EventHandler<EventArgs<Point>> Drag;
+		public event EventHandler BeginDrag;
+		public event EventHandler EndDrag;
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
@@ -51,14 +53,30 @@ namespace Graphics
 		{
 			if (Drag != null) Drag(this, new EventArgs<Point>(offset));
 		}
+		protected virtual void OnBeginDrag()
+		{
+			if (BeginDrag != null) BeginDrag(this, EventArgs.Empty);
+		}
+		protected virtual void OnEndDrag()
+		{
+			if (EndDrag != null) EndDrag(this, EventArgs.Empty);
+		}
 
 		void viewport_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (e.Button == Button) dragging = true;
+			if (e.Button == Button)
+			{
+				dragging = true;
+				OnBeginDrag();
+			}
 		}
 		void viewport_MouseUp(object sender, MouseEventArgs e)
 		{
-			if (e.Button == Button) dragging = false;
+			if (e.Button == Button)
+			{
+				dragging = false;
+				OnEndDrag();
+			}
 		}
 		void viewport_MouseMove(object sender, MouseEventArgs e)
 		{

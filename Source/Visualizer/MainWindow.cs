@@ -89,12 +89,13 @@ namespace Visualizer
 
 			Console.WriteLine("Initializing zoom selector...");
 			this.zoomSelector = new RectangleSelector(drawer, viewport);
-			this.zoomSelector.Select += zoomSelector_Select;
+			this.zoomSelector.EndSelect += zoomSelector_Select;
 
 			Console.WriteLine("Initializing pan dragger...");
 			this.panDragger = new Dragger(viewport);
 			this.panDragger.Button = MouseButtons.Right;
 			this.panDragger.Drag += panDragger_Drag;
+			this.panDragger.EndDrag += panDragger_EndDrag;
 
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer);
@@ -206,15 +207,19 @@ namespace Visualizer
 		}
 		private void panDragger_Drag(object sender, EventArgs<Point> e)
 		{
+			double width = (double)e.Parameter.X / (double)diagram.Layouter.Area.Width / diagram.TimeManager.Mapping.Factor;
+			double height = -(double)e.Parameter.Y / (double)diagram.Layouter.Area.Height / diagram.ValueManager.Mapping.Factor;
+
 			diagram.TimeManager.IsUpdated = false;
-			diagram.TimeManager.Time += e.Parameter.X * diagram.TimeManager.Width / 100;
+			diagram.TimeManager.Time -= width;
 
+			Range<double> valueRange = diagram.ValueManager.Range;
 			if (!(diagram.ValueManager is FixedValueManager)) diagram.ValueManager = new FixedValueManager();
-			Range<double> valueRange = ((FixedValueManager)diagram.ValueManager).FixedRange;
-			double offset = e.Parameter.Y * (valueRange.End - valueRange.Start) / 100;
-			((FixedValueManager)diagram.ValueManager).FixedRange = new Range<double>(valueRange.Start + offset, valueRange.End + offset);
-
-			//settings.Diagram.Initialize();
+			((FixedValueManager)diagram.ValueManager).FixedRange = new Range<double>(valueRange.Start - height, valueRange.End - height);
+		}
+		private void panDragger_EndDrag(object sender, EventArgs e)
+		{
+			settings.Diagram.Initialize();
 		}
 
 		void NewSource(IEnumerable<string> ports)

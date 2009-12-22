@@ -31,7 +31,8 @@ namespace Graphics
 		Point startPosition;
 		Point mousePosition;
 
-		public event EventHandler<EventArgs<Rectangle>> Select;
+		public event EventHandler<EventArgs<Point>> BeginSelect;
+		public event EventHandler<EventArgs<Rectangle>> EndSelect;
 
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
@@ -66,9 +67,13 @@ namespace Graphics
 			}
 		}
 
-		protected virtual void OnSelect(Rectangle selection)
+		protected virtual void OnBeginSelect(Point startPosition)
 		{
-			if (Select != null) Select(this, new EventArgs<Rectangle>(selection));
+			if (BeginSelect != null) BeginSelect(this, new EventArgs<Point>(startPosition));
+		}
+		protected virtual void OnEndSelect(Rectangle selection)
+		{
+			if (EndSelect != null) EndSelect(this, new EventArgs<Rectangle>(selection));
 		}
 
 		void viewport_MouseDown(object sender, MouseEventArgs e)
@@ -78,6 +83,8 @@ namespace Graphics
 				selecting = true;
 
 				startPosition = e.Location;
+
+				OnBeginSelect(startPosition);
 			}
 		}
 		void viewport_MouseUp(object sender, MouseEventArgs e)
@@ -87,7 +94,8 @@ namespace Graphics
 				selecting = false;
 
 				Rectangle selection = new Rectangle(startPosition.X, startPosition.Y, mousePosition.X - startPosition.X, mousePosition.Y - startPosition.Y);
-				if (selection.Width > 0 && selection.Height > 0) OnSelect(selection);
+				
+				if (selection.Width > 0 && selection.Height > 0) OnEndSelect(selection);
 			}
 		}
 		void viewport_MouseMove(object sender, MouseEventArgs e)

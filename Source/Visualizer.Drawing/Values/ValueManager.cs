@@ -21,6 +21,7 @@ namespace Visualizer.Drawing.Values
 {
 	public abstract class ValueManager
 	{
+		public abstract Range<double> Range { get; }
 		public abstract LinearMapping Mapping { get; }
 
 		public virtual void Update() { }

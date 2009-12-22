@@ -9,7 +9,7 @@ Table of Contents
 
 1. About
 --------------------------------------------------------------------------------
-Stream Visualizer (sometimes called "streamvis" or "Visualizer" is an application that can be used to visualize, capture and replay data streams.
+Stream Visualizer (sometimes called "streamvis" or "Visualizer") is an application that can be used to visualize, capture and replay data streams.
 
 2. Legal
 --------------------------------------------------------------------------------
