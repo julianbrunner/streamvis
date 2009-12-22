@@ -72,12 +72,14 @@ namespace Visualizer
 			this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.clearDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainContainer.BottomToolStripPanel.SuspendLayout();
 			this.mainContainer.ContentPanel.SuspendLayout();
 			this.mainContainer.TopToolStripPanel.SuspendLayout();
@@ -250,6 +252,7 @@ namespace Visualizer
 			this.mainMenu.Dock = System.Windows.Forms.DockStyle.None;
 			this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.captureToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
 			this.mainMenu.Location = new System.Drawing.Point(0, 0);
 			this.mainMenu.Name = "mainMenu";
@@ -325,6 +328,37 @@ namespace Visualizer
 			this.clearDataToolStripMenuItem.Text = "&Clear Data";
 			this.clearDataToolStripMenuItem.Click += new System.EventHandler(this.clearDataToolStripMenuItem_Click);
 			// 
+			// viewToolStripMenuItem
+			// 
+			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetToolStripMenuItem});
+			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.viewToolStripMenuItem.Text = "&View";
+			// 
+			// resetToolStripMenuItem
+			// 
+			this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+			this.resetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+			this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.resetToolStripMenuItem.Text = "&Reset";
+			this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+			// 
+			// helpToolStripMenuItem
+			// 
+			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+			this.helpToolStripMenuItem.Text = "&Help";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+			this.aboutToolStripMenuItem.Text = "&About...";
+			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+			// 
 			// exportCaptureFileDialog
 			// 
 			this.exportCaptureFileDialog.DefaultExt = "stream";
@@ -345,21 +379,6 @@ namespace Visualizer
 			// 
 			this.saveCaptureFileDialog.DefaultExt = "capture";
 			this.saveCaptureFileDialog.Filter = "Capture Files|*.capture|All Files|*.*";
-			// 
-			// helpToolStripMenuItem
-			// 
-			this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-			this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-			this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-			this.helpToolStripMenuItem.Text = "&Help";
-			// 
-			// aboutToolStripMenuItem
-			// 
-			this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-			this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.aboutToolStripMenuItem.Text = "&About...";
-			this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
 			// 
 			// MainWindow
 			// 
@@ -423,6 +442,8 @@ namespace Visualizer
 		private System.Windows.Forms.ToolStripMenuItem changeNameToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
 		
 	}
 }

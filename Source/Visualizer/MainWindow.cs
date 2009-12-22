@@ -173,6 +173,13 @@ namespace Visualizer
 			if (streamsList.SelectedItems.Count > 0 && colorDialog.ShowDialog() == DialogResult.OK)
 				SetColor(streamsList.SelectedItems[0], colorDialog.Color);
 		}
+		private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			diagram.TimeManager = new ContinuousTimeManager(timer);
+			diagram.ValueManager = new FittingValueManager(diagram);
+
+			settings.Diagram.Initialize();
+		}
 		private void zoomSelector_Select(object sender, EventArgs<Rectangle> e)
 		{
 			if (diagram.Layouter.Area.Contains(e.Parameter))
