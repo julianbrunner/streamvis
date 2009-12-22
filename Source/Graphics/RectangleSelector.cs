@@ -76,6 +76,7 @@ namespace Graphics
 			if (e.Button == button)
 			{
 				selecting = true;
+
 				startPosition = e.Location;
 			}
 		}
@@ -84,7 +85,9 @@ namespace Graphics
 			if (e.Button == button)
 			{
 				selecting = false;
-				OnSelect(new Rectangle(startPosition.X, startPosition.Y, mousePosition.X - startPosition.X, mousePosition.Y - startPosition.Y));
+
+				Rectangle selection = new Rectangle(startPosition.X, startPosition.Y, mousePosition.X - startPosition.X, mousePosition.Y - startPosition.Y);
+				if (selection.Width > 0 && selection.Height > 0) OnSelect(selection);
 			}
 		}
 		void viewport_MouseMove(object sender, MouseEventArgs e)
