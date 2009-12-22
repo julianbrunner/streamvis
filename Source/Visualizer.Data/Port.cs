@@ -49,6 +49,12 @@ namespace Visualizer.Data
 		{
 			if (streams.Any())
 			{
+				// Add comment line describing the file layout
+				writer.Write("# Time");
+				foreach (Stream stream in streams) writer.Write("    " + stream.Name);
+				writer.WriteLine();
+				writer.WriteLine();
+
 				IEnumerable<IEnumerable<Entry>> entries =
 				(
 					from stream in streams
