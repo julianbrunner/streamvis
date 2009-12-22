@@ -44,6 +44,12 @@ namespace Visualizer.Environment
 			get { return rectangleSelector.Color; }
 			set { rectangleSelector.Color = value; }
 		}
+		[DisplayName("Width")]
+		public float Width
+		{
+			get { return rectangleSelector.Width; }
+			set { rectangleSelector.Width = value; }
+		}
 
 		public RectangleSlectorSettings(RectangleSelector rectangleSelector)
 		{

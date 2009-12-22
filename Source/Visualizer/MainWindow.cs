@@ -88,7 +88,6 @@ namespace Visualizer
 
 			Console.WriteLine("Initializing zoom selector...");
 			this.zoomSelector = new RectangleSelector(drawer, MouseButtons.Left, viewport);
-			this.zoomSelector.Color = Color.White;
 			this.zoomSelector.Select += zoomSelector_Select;
 
 			Console.WriteLine("Initializing frame counter");

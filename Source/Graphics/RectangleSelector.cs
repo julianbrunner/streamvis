@@ -37,6 +37,7 @@ namespace Graphics
 		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 		public Color Color { get; set; }
+		public float Width { get; set; }
 
 		public RectangleSelector(Drawer drawer, MouseButtons button, Viewport viewport)
 		{
@@ -46,6 +47,7 @@ namespace Graphics
 			IsUpdated = true;
 			IsDrawn = true;
 			Color = Color.White;
+			Width = 1;
 
 			viewport.MouseDown += viewport_MouseDown;
 			viewport.MouseUp += viewport_MouseUp;
@@ -57,10 +59,10 @@ namespace Graphics
 		{
 			if (selecting)
 			{
-				drawer.DrawLine(new Vector2(startPosition.X, startPosition.Y), new Vector2(mousePosition.X, startPosition.Y), Color, 1);
-				drawer.DrawLine(new Vector2(mousePosition.X, startPosition.Y), new Vector2(mousePosition.X, mousePosition.Y), Color, 1);
-				drawer.DrawLine(new Vector2(mousePosition.X, mousePosition.Y), new Vector2(startPosition.X, mousePosition.Y), Color, 1);
-				drawer.DrawLine(new Vector2(startPosition.X, mousePosition.Y), new Vector2(startPosition.X, startPosition.Y), Color, 1);
+				drawer.DrawLine(new Vector2(startPosition.X, startPosition.Y), new Vector2(mousePosition.X, startPosition.Y), Color, Width);
+				drawer.DrawLine(new Vector2(mousePosition.X, startPosition.Y), new Vector2(mousePosition.X, mousePosition.Y), Color, Width);
+				drawer.DrawLine(new Vector2(mousePosition.X, mousePosition.Y), new Vector2(startPosition.X, mousePosition.Y), Color, Width);
+				drawer.DrawLine(new Vector2(startPosition.X, mousePosition.Y), new Vector2(startPosition.X, startPosition.Y), Color, Width);
 			}
 		}
 
