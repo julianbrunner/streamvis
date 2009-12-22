@@ -28,7 +28,7 @@ namespace Visualizer.Environment
 		readonly ViewportSettings viewport;
 		readonly DrawerSettings drawer;
 		readonly DiagramSettings diagram;
-		readonly RectangleSlectorSettings zoomSelector;
+		readonly RectangleSelectorSettings zoomSelector;
 		readonly FrameCounterSettings frameCounter;
 
 		[DisplayName("Viewport")]
@@ -40,7 +40,7 @@ namespace Visualizer.Environment
 		[DisplayName("Frame Counter")]
 		public FrameCounterSettings FrameCounter { get { return frameCounter; } }
 		[DisplayName("Zoom Selector")]
-		public RectangleSlectorSettings ZoomSelector { get { return zoomSelector; } }
+		public RectangleSelectorSettings ZoomSelector { get { return zoomSelector; } }
 		[DisplayName("Minimal Mode")]
 		public bool MinimalMode
 		{
@@ -66,7 +66,7 @@ namespace Visualizer.Environment
 			this.viewport = new ViewportSettings(viewport);
 			this.drawer = new DrawerSettings(drawer);
 			this.diagram = new DiagramSettings(propertyGrid, timer, diagram);
-			this.zoomSelector = new RectangleSlectorSettings(zoomSelector);
+			this.zoomSelector = new RectangleSelectorSettings(zoomSelector);
 			this.frameCounter = new FrameCounterSettings(frameCounter);
 		}
 	}

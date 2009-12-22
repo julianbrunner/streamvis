@@ -66,7 +66,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="CoordinateLabel.cs" />
-    <Compile Include="Environment\RectangleSlectorSettings.cs" />
+    <Compile Include="Environment\RectangleSelectorSettings.cs" />
     <Compile Include="StreamListItem.cs" />
     <Compile Include="Environment\ExpansionConverter.cs" />
     <Compile Include="Environment\FrameCounterSettings.cs" />

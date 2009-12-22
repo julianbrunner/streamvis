@@ -23,7 +23,7 @@ using Graphics;
 namespace Visualizer.Environment
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	class RectangleSlectorSettings
+	class RectangleSelectorSettings
 	{
 		readonly RectangleSelector rectangleSelector;
 
@@ -58,7 +58,7 @@ namespace Visualizer.Environment
 			set { rectangleSelector.Width = value; }
 		}
 
-		public RectangleSlectorSettings(RectangleSelector rectangleSelector)
+		public RectangleSelectorSettings(RectangleSelector rectangleSelector)
 		{
 			this.rectangleSelector = rectangleSelector;
 		}
