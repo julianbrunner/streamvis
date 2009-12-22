@@ -41,6 +41,7 @@ namespace Visualizer
 		readonly Drawer drawer;
 		readonly Data.Timer timer;
 		readonly Diagram diagram;
+		readonly RectangleSelector zoomSelector;
 		readonly VisibleFrameCounter frameCounter;
 		readonly CoordinateLabel coordinateLabel;
 		readonly Settings settings;
@@ -85,6 +86,9 @@ namespace Visualizer
 			Console.WriteLine("Initializing diagram...");
 			this.diagram = CreateDiagram(viewport, drawer, timer, parameters);
 
+			Console.WriteLine("Initializing zoom selector...");
+			this.zoomSelector = new RectangleSelector(drawer, MouseButtons.Left, viewport);
+
 			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer);
 			this.frameCounter.Color = Color.Yellow;
@@ -105,6 +109,7 @@ namespace Visualizer
 
 			Console.WriteLine("Adding components...");
 			viewport.AddComponent(diagram);
+			viewport.AddComponent(zoomSelector);
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
 		}
@@ -230,7 +235,7 @@ namespace Visualizer
 				{
 					Graph graph = new Graph(drawer, diagram, stream.EntryData);
 					graph.Color = colorGenerator.NextColor();
-					
+
 					graphs.Add(graph);
 
 					ListViewItem item = new ListViewItem();
