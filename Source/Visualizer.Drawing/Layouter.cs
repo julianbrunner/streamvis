@@ -29,8 +29,19 @@ namespace Visualizer.Drawing
 		readonly Viewport viewport;
 		readonly Axis axisX;
 		readonly Axis axisY;
+		
+		Padding baseMargin = Padding.Empty;
 
-		public Padding BaseMargin { get; set; }
+		public Padding BaseMargin
+		{
+			get { return baseMargin; }
+			set
+			{
+				if (value.Left < 0 || value.Right < 0 || value.Top < 0 || value.Bottom < 0) throw new ArgumentOutOfRangeException("value");
+				
+				baseMargin = value;
+			}
+		}
 		public Rectangle Area { get; private set; }
 		public Matrix4 Transformation { get; private set; }
 
@@ -39,6 +50,8 @@ namespace Visualizer.Drawing
 			this.viewport = viewport;
 			this.axisX = axisX;
 			this.axisY = axisY;
+			
+			baseMargin = new Padding(9, 8, 0, 9);
 		}
 
 		public Vector2 ForwardMap(Vector2 source)

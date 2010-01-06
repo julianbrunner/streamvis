@@ -380,7 +380,6 @@ namespace Visualizer
 			if (parameters.DiagramColor != null) diagram.AxisY.Color = parameters.DiagramColor.Value;
 
 			diagram.Layouter = new Layouter(viewport, diagram.AxisX, diagram.AxisY);
-			diagram.Layouter.BaseMargin = new Padding(9, 8, 0, 9);
 
 			return diagram;
 		}
