@@ -15,11 +15,24 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+
 namespace Visualizer.Drawing.Data
 {
 	public class PerPixelDataManager : DataManager
 	{
-		public double SamplesPerPixel { get; set; }
+		double samplesPerPixel = 0;
+		
+		public double SamplesPerPixel
+		{
+			get { return samplesPerPixel; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException("value");
+				
+				samplesPerPixel = value;
+			}
+		}
 
 		public PerPixelDataManager(Diagram diagram)
 			: base(diagram)

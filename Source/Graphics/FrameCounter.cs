@@ -26,9 +26,19 @@ namespace Graphics
 
 		TimeSpan lastOverflow = TimeSpan.Zero;
 		int frames = 0;
+		int cycleLength = 0;
 
 		public bool IsUpdated { get; set; }
-		public int CycleLength { get; set; }
+		public int CycleLength
+		{
+			get { return cycleLength; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException("value");
+				
+				cycleLength = value;
+			}
+		}
 		public double FramesPerSecond { get; private set; }
 
 		public FrameCounter()

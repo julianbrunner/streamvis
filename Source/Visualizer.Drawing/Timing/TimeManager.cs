@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using Utility;
 using Visualizer.Data;
@@ -24,10 +25,31 @@ namespace Visualizer.Drawing.Timing
 	public abstract class TimeManager
 	{
 		readonly Timer timer;
+		
+		double time = 0;
+		double width = 0;
 
 		public bool IsUpdated { get; set; }
-		public double Time { get; set; }
-		public double Width { get; set; }
+		public double Time
+		{
+			get { return time; }
+			set
+			{
+				if (value < 0) throw new ArgumentOutOfRangeException("value");
+				
+				time = value;
+			}
+		}
+		public double Width
+		{
+			get { return width; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException("value");
+				
+				width = value;
+			}
+		}
 		/// <summary>
 		/// Gets the overall Range, in which graphs are drawn.
 		/// </summary>

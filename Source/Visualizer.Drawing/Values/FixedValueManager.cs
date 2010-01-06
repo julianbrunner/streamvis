@@ -15,13 +15,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using Utility;
 
 namespace Visualizer.Drawing.Values
 {
 	public class FixedValueManager : ValueManager
 	{
-		public Range<double> FixedRange { get; set; }
+		Range<double> fixedRange;
+		
+		public Range<double> FixedRange
+		{
+			get { return fixedRange; }
+			set
+			{
+				if (value.End - value.Start <= 0) throw new ArgumentOutOfRangeException("value");
+				
+				fixedRange = value;
+			}
+		}
 		public override Range<double> Range { get { return FixedRange; } }
 		public override LinearMapping Mapping { get { return new LinearMapping(FixedRange); } }
 

@@ -26,6 +26,7 @@ namespace Visualizer.Environment.Drawing
 	{
 		readonly Diagram diagram;
 
+		// TODO: Do we have to check for bad user input?
 		[DisplayName("Base Margin")]
 		public Padding BaseMargin
 		{

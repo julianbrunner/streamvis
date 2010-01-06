@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using Utility;
 using Visualizer.Data;
@@ -25,8 +26,18 @@ namespace Visualizer.Drawing.Timing
 	{
 		LinearMapping mapping;
 		IEnumerable<LinearMapping> graphMappings;
-
-		public double GapLength { get; set; }
+		double gapLength = 0;
+		
+		public double GapLength
+		{
+			get { return gapLength; }
+			set
+			{
+				if (value < 0 || value >= 1) throw new ArgumentOutOfRangeException("value");
+				
+				gapLength = value;
+			}
+		}
 		public override LinearMapping Mapping { get { return mapping; } }
 		public override IEnumerable<LinearMapping> GraphMappings { get { return graphMappings; } }
 

@@ -27,6 +27,7 @@ namespace Graphics
 	{
 		readonly Drawer drawer;
 
+		float width = 0;
 		bool selecting;
 		Point startPosition;
 		Point mousePosition;
@@ -38,7 +39,16 @@ namespace Graphics
 		public bool IsDrawn { get; set; }
 		public MouseButtons Button { get; set; }
 		public Color Color { get; set; }
-		public float Width { get; set; }
+		public float Width
+		{
+			get { return width; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException("value");
+				
+				width = value;
+			}
+		}
 
 		public RectangleSelector(Drawer drawer, Viewport viewport)
 		{

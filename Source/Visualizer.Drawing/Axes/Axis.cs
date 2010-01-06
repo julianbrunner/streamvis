@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -26,12 +27,23 @@ namespace Visualizer.Drawing.Axes
 	{
 		readonly Drawer drawer;
 		readonly Diagram diagram;
+		
+		int markerCount = 0;
 
 		protected Drawer Drawer { get { return drawer; } }
 		protected Diagram Diagram { get { return diagram; } }
 		protected abstract IEnumerable<double> Markers { get; }
 
-		public int MarkerCount { get; set; }
+		public int MarkerCount
+		{
+			get { return markerCount; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException("value");
+				
+				markerCount = value;
+			}
+		}
 		public Color Color { get; set; }
 		public Size MaximumCaptionSize
 		{

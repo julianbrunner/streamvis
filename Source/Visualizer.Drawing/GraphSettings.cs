@@ -15,12 +15,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+
 namespace Visualizer.Drawing
 {
 	public class GraphSettings
 	{
+		double lineWidth = 0;
+		
 		public bool ExtendGraphs { get; set; }
-		public double LineWidth { get; set; }
+		public double LineWidth
+		{
+			get { return lineWidth; }
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException("value");
+				
+				lineWidth = value;
+			}
+		}
 		
 		public GraphSettings()
 		{
