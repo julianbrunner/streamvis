@@ -21,8 +21,8 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using OpenTK.Graphics;
-using OpenTK.Math;
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
 
 namespace Graphics
 {
@@ -33,11 +33,11 @@ namespace Graphics
 
 		bool lineSmoothing;
 		bool alphaBlending;
-		
+
 		bool disposed = false;
 		int[] textTextures = new int[1];
 		int characterLists;
-		
+
 		public bool LineSmoothing
 		{
 			get { return lineSmoothing; }
@@ -53,7 +53,7 @@ namespace Graphics
 		{
 			LineSmoothing = true;
 			AlphaBlending = true;
-			
+
 			GL.EnableClientState(EnableCap.VertexArray);
 
 			GL.Enable(EnableCap.Texture2D);
@@ -159,12 +159,12 @@ namespace Graphics
 			using (Bitmap bitmap = new Bitmap(stream))
 			{
 				BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-				GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmap.Width, bitmap.Height, 0, OpenTK.Graphics.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
+				GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, bitmap.Width, bitmap.Height, 0, OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, bitmapData.Scan0);
 				bitmap.UnlockBits(bitmapData);
 
 				GL.MatrixMode(MatrixMode.Texture);
 				GL.LoadIdentity();
-				Glu.Ortho2D(-bitmap.Width, bitmap.Width, -bitmap.Height, bitmap.Height);
+				GL.Ortho(-bitmap.Width, bitmap.Width, -bitmap.Height, bitmap.Height, -1, 1);
 			}
 
 			GL.BindTexture(TextureTarget.Texture2D, 0);
@@ -191,7 +191,7 @@ namespace Graphics
 			if (value) GL.Enable(capability);
 			else GL.Disable(capability);
 		}
-		
+
 		static void DrawCharacter(int character)
 		{
 			Rectangle textureBounds = new Rectangle(new Point(character * characterSize.Width, 0), characterSize);

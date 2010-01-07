@@ -22,7 +22,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Graphics;
-using OpenTK.Math;
+using OpenTK;
 using Utility;
 using Visualizer.Data;
 using Visualizer.Drawing;

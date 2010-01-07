@@ -19,7 +19,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Graphics;
-using OpenTK.Math;
+using OpenTK;
 using Visualizer.Drawing.Axes;
 
 namespace Visualizer.Drawing
@@ -29,7 +29,7 @@ namespace Visualizer.Drawing
 		readonly Viewport viewport;
 		readonly Axis axisX;
 		readonly Axis axisY;
-		
+
 		Padding baseMargin = Padding.Empty;
 
 		public Padding BaseMargin
@@ -38,7 +38,7 @@ namespace Visualizer.Drawing
 			set
 			{
 				if (value.Left < 0 || value.Right < 0 || value.Top < 0 || value.Bottom < 0) throw new ArgumentOutOfRangeException("value");
-				
+
 				baseMargin = value;
 			}
 		}
@@ -50,7 +50,7 @@ namespace Visualizer.Drawing
 			this.viewport = viewport;
 			this.axisX = axisX;
 			this.axisY = axisY;
-			
+
 			baseMargin = new Padding(9, 8, 0, 9);
 		}
 

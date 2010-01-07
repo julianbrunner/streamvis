@@ -18,7 +18,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using OpenTK.Math;
+using OpenTK;
 using Utility;
 
 namespace Graphics
@@ -45,7 +45,7 @@ namespace Graphics
 			set
 			{
 				if (value <= 0) throw new ArgumentOutOfRangeException("value");
-				
+
 				width = value;
 			}
 		}
@@ -104,7 +104,7 @@ namespace Graphics
 				selecting = false;
 
 				Rectangle selection = new Rectangle(startPosition.X, startPosition.Y, mousePosition.X - startPosition.X, mousePosition.Y - startPosition.Y);
-				
+
 				if (selection.Width > 0 && selection.Height > 0) OnEndSelect(selection);
 			}
 		}

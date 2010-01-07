@@ -17,7 +17,7 @@
 
 using System.Collections.Generic;
 using Graphics;
-using OpenTK.Math;
+using OpenTK;
 using Utility;
 using Utility.Extensions;
 using Utility.Utilities;

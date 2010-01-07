@@ -22,6 +22,7 @@ using System.Linq;
 using System.Windows.Forms;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 
 namespace Graphics
 {
@@ -57,7 +58,7 @@ namespace Graphics
 
 			GL.MatrixMode(MatrixMode.Projection);
 			GL.LoadIdentity();
-			Glu.Ortho2D(ClientRectangle.Left, ClientRectangle.Right, ClientRectangle.Bottom, ClientRectangle.Top);
+			GL.Ortho(ClientRectangle.Left, ClientRectangle.Right, ClientRectangle.Bottom, ClientRectangle.Top, -1, 1);
 
 			base.OnLayout(e);
 		}

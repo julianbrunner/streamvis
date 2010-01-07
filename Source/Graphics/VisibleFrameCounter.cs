@@ -16,7 +16,7 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Drawing;
-using OpenTK.Math;
+using OpenTK;
 
 namespace Graphics
 {
