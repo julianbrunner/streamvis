@@ -227,7 +227,6 @@ namespace Visualizer
 			// viewport
 			// 
 			this.viewport.BackColor = System.Drawing.Color.Black;
-			this.viewport.ClearColor = System.Drawing.Color.Black;
 			this.viewport.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.viewport.Location = new System.Drawing.Point(0, 0);
 			this.viewport.Name = "viewport";
@@ -340,7 +339,7 @@ namespace Visualizer
 			// 
 			this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
 			this.resetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-			this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.resetToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
 			this.resetToolStripMenuItem.Text = "&Reset";
 			this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
 			// 
@@ -390,6 +389,7 @@ namespace Visualizer
 			this.MainMenuStrip = this.mainMenu;
 			this.Name = "MainWindow";
 			this.Text = "<Title>";
+			this.Load += new System.EventHandler(this.MainWindow_Load);
 			this.mainContainer.BottomToolStripPanel.ResumeLayout(false);
 			this.mainContainer.BottomToolStripPanel.PerformLayout();
 			this.mainContainer.ContentPanel.ResumeLayout(false);

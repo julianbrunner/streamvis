@@ -38,6 +38,7 @@ namespace Visualizer
 	{
 		const string title = "Yarp Visualizer";
 
+		readonly Parameters parameters;
 		readonly Drawer drawer;
 		readonly Data.Timer timer;
 		readonly Diagram diagram;
@@ -73,13 +74,10 @@ namespace Visualizer
 
 			Text = title;
 
-			if (parameters.VerticalSynchronization != null) viewport.VSync = parameters.VerticalSynchronization.Value;
-			if (parameters.BackgroundColor != null) viewport.ClearColor = parameters.BackgroundColor.Value;
+			this.parameters = parameters;
 
 			Console.WriteLine("Initializing drawer...");
-			this.drawer = new Drawer();
-			if (parameters.LineSmoothing != null) drawer.LineSmoothing = parameters.LineSmoothing.Value;
-			if (parameters.AlphaBlending != null) drawer.AlphaBlending = parameters.AlphaBlending.Value;
+			this.drawer = new Drawer(viewport);
 
 			Console.WriteLine("Initializing timer...");
 			this.timer = new Data.Timer();
@@ -122,6 +120,16 @@ namespace Visualizer
 			viewport.AddComponent(coordinateLabel);
 		}
 
+		private void MainWindow_Load(object sender, EventArgs e)
+		{
+			viewport.Initialize();
+
+			if (parameters.VerticalSynchronization != null) viewport.VSync = parameters.VerticalSynchronization.Value;
+			if (parameters.BackgroundColor != null) viewport.ClearColor = parameters.BackgroundColor.Value;
+
+			if (parameters.LineSmoothing != null) drawer.LineSmoothing = parameters.LineSmoothing.Value;
+			if (parameters.AlphaBlending != null) drawer.AlphaBlending = parameters.AlphaBlending.Value;
+		}
 		private void streamsList_ItemChecked(object sender, ItemCheckedEventArgs e)
 		{
 			StreamListItem streamListItem = (StreamListItem)e.Item.Tag;

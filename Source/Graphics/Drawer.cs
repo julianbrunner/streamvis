@@ -49,19 +49,9 @@ namespace Graphics
 			set { SetCapability(EnableCap.Blend, alphaBlending = value); }
 		}
 
-		public Drawer()
+		public Drawer(Viewport viewport)
 		{
-			LineSmoothing = true;
-			AlphaBlending = true;
-
-			GL.EnableClientState(EnableCap.VertexArray);
-
-			GL.Enable(EnableCap.Texture2D);
-			GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
-			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
-
-			InitializeTextTexture();
-			InitializeCharacterDisplayLists();
+			viewport.Load += viewport_Load;
 		}
 		~Drawer()
 		{
@@ -146,6 +136,20 @@ namespace Graphics
 			}
 		}
 
+		void viewport_Load(object sender, EventArgs e)
+		{
+			LineSmoothing = true;
+			AlphaBlending = true;
+
+			GL.EnableClientState(EnableCap.VertexArray);
+
+			GL.Enable(EnableCap.Texture2D);
+			GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
+			GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+
+			InitializeTextTexture();
+			InitializeCharacterDisplayLists();
+		}
 		void InitializeTextTexture()
 		{
 			GL.GenTextures(textTextures.Length, textTextures);

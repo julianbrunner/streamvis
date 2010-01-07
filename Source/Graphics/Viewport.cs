@@ -38,31 +38,28 @@ namespace Graphics
 			set { GL.ClearColor(clearColor = value); }
 		}
 
-		public Viewport()
-			: base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false))
+		public Viewport() : base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false)) { }
+
+		public void Initialize()
 		{
-			VSync = true;
 			ClearColor = Color.Black;
 
+			Layout += Viewport_Layout;
 			Application.Idle += Application_Idle;
 		}
-
 		public void AddComponent(IComponent component)
 		{
 			components.Add(component);
 		}
 
-		protected override void OnLayout(LayoutEventArgs e)
+		void Viewport_Layout(object sender, LayoutEventArgs e)
 		{
 			GL.Viewport(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width, ClientRectangle.Height);
 
 			GL.MatrixMode(MatrixMode.Projection);
 			GL.LoadIdentity();
 			GL.Ortho(ClientRectangle.Left, ClientRectangle.Right, ClientRectangle.Bottom, ClientRectangle.Top, -1, 1);
-
-			base.OnLayout(e);
 		}
-
 		void Application_Idle(object sender, EventArgs e)
 		{
 			Application.DoEvents();
@@ -74,6 +71,7 @@ namespace Graphics
 				foreach (IUpdateable updateable in components.OfType<IUpdateable>())
 					if (updateable.IsUpdated)
 						updateable.Update();
+
 				foreach (IDrawable drawable in components.OfType<IDrawable>())
 					if (drawable.IsDrawn)
 						drawable.Draw();
