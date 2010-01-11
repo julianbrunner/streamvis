@@ -28,7 +28,7 @@ namespace Utility.Utilities
 			int top = Math.Max(rectangle1.Top, rectangle2.Top);
 			int right = Math.Min(rectangle1.Right, rectangle2.Right);
 			int bottom = Math.Min(rectangle1.Bottom, rectangle2.Bottom);
-			
+
 			return new Rectangle(left, top, right - left, bottom - top);
 		}
 	}

@@ -25,7 +25,7 @@ namespace Visualizer.Drawing.Timing
 	public abstract class TimeManager
 	{
 		readonly Timer timer;
-		
+
 		double time = 0;
 		double width = 0;
 
@@ -41,7 +41,7 @@ namespace Visualizer.Drawing.Timing
 			set
 			{
 				if (value <= 0) throw new ArgumentOutOfRangeException("value");
-				
+
 				width = value;
 			}
 		}

@@ -92,7 +92,7 @@ namespace Visualizer
 			this.zoomSelector.Button = MouseButtons.Left;
 			this.zoomSelector.Color = Color.White;
 			this.zoomSelector.EndSelect += zoomSelector_Select;
-			
+
 			this.unZoomSelector = new RectangleSelector(drawer, viewport);
 			this.unZoomSelector.Button = MouseButtons.Middle;
 			this.unZoomSelector.Color = Color.Blue;
@@ -206,7 +206,7 @@ namespace Visualizer
 			settings.Diagram.Initialize();
 		}
 		private void zoomSelector_Select(object sender, EventArgs<Rectangle> e)
-		{			
+		{
 			Rectangle intersection = RectangleUtility.Intersect(diagram.Layouter.Area, e.Parameter);
 
 			if (intersection.Width > 0 && intersection.Height > 0)
@@ -216,13 +216,13 @@ namespace Visualizer
 
 				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.ReverseMap(leftTop.X), diagram.TimeManager.Mapping.ReverseMap(rightBottom.X));
 				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.ReverseMap(rightBottom.Y), diagram.ValueManager.Mapping.ReverseMap(leftTop.Y));
-				
+
 				LinearMapping timeMapping = new LinearMapping(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange);
 				LinearMapping valueMapping = new LinearMapping(diagram.ValueManager.Range, valueRange);
-				
+
 				timeRange = timeMapping.ForwardMap(timeMapping.Input);
 				valueRange = valueMapping.ForwardMap(valueMapping.Input);
-				
+
 				diagram.TimeManager.Time = timeRange.End;
 				diagram.TimeManager.Width = timeRange.End - timeRange.Start;
 				diagram.TimeManager.IsUpdated = false;
@@ -234,7 +234,7 @@ namespace Visualizer
 			}
 		}
 		private void unZoomSelector_Select(object sender, EventArgs<Rectangle> e)
-		{			
+		{
 			Rectangle intersection = RectangleUtility.Intersect(diagram.Layouter.Area, e.Parameter);
 
 			if (intersection.Width > 0 && intersection.Height > 0)
@@ -244,7 +244,7 @@ namespace Visualizer
 
 				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.ReverseMap(leftTop.X), diagram.TimeManager.Mapping.ReverseMap(rightBottom.X));
 				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.ReverseMap(rightBottom.Y), diagram.ValueManager.Mapping.ReverseMap(leftTop.Y));
-				
+
 				LinearMapping timeMapping = new LinearMapping(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange);
 				LinearMapping valueMapping = new LinearMapping(diagram.ValueManager.Range, valueRange);
 

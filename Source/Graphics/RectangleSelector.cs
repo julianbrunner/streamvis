@@ -62,7 +62,7 @@ namespace Graphics
 			viewport.MouseUp += viewport_MouseUp;
 			viewport.MouseMove += viewport_MouseMove;
 		}
-		
+
 		public void Draw()
 		{
 			if (selecting)
@@ -99,7 +99,7 @@ namespace Graphics
 			if (e.Button == Button)
 			{
 				selecting = false;
-				
+
 				int x1 = Math.Min(startPosition.X, mousePosition.X);
 				int y1 = Math.Min(startPosition.Y, mousePosition.Y);
 				int x2 = Math.Max(startPosition.X, mousePosition.X);
