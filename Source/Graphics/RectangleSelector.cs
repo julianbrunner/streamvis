@@ -92,7 +92,7 @@ namespace Graphics
 			{
 				selecting = true;
 
-				startPosition = e.Location;
+				startPosition = mousePosition = e.Location;
 
 				OnBeginSelect(startPosition);
 			}
@@ -102,8 +102,13 @@ namespace Graphics
 			if (e.Button == Button)
 			{
 				selecting = false;
+				
+				int x1 = Math.Min(startPosition.X, mousePosition.X);
+				int y1 = Math.Min(startPosition.Y, mousePosition.Y);
+				int x2 = Math.Max(startPosition.X, mousePosition.X);
+				int y2 = Math.Max(startPosition.Y, mousePosition.Y);
 
-				Rectangle selection = new Rectangle(startPosition.X, startPosition.Y, mousePosition.X - startPosition.X, mousePosition.Y - startPosition.Y);
+				Rectangle selection = new Rectangle(x1, y1, x2 - x1, y2 - y1);
 
 				if (selection.Width > 0 && selection.Height > 0) OnEndSelect(selection);
 			}
