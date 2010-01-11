@@ -142,7 +142,8 @@ namespace Visualizer
 		}
 		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
 		{
-
+			zoomSelector.Abort();
+			unZoomSelector.Abort();
 		}
 		private void streamsList_ItemChecked(object sender, ItemCheckedEventArgs e)
 		{
