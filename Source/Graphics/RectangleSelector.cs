@@ -20,6 +20,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using OpenTK;
 using Utility;
+using Utility.Extensions;
 
 namespace Graphics
 {
@@ -73,6 +74,10 @@ namespace Graphics
 				drawer.DrawLine(new Vector2(startPosition.X, mousePosition.Y), new Vector2(startPosition.X, startPosition.Y), Color, Width);
 			}
 		}
+		public void Abort()
+		{
+			selecting = false;
+		}
 
 		protected virtual void OnBeginSelect(Point startPosition)
 		{
@@ -85,7 +90,7 @@ namespace Graphics
 
 		void viewport_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (e.Button == Button)
+			if (e.Button == Button && !selecting)
 			{
 				selecting = true;
 
@@ -96,18 +101,13 @@ namespace Graphics
 		}
 		void viewport_MouseUp(object sender, MouseEventArgs e)
 		{
-			if (e.Button == Button)
+			if (e.Button == Button && selecting)
 			{
 				selecting = false;
 
-				int x1 = Math.Min(startPosition.X, mousePosition.X);
-				int y1 = Math.Min(startPosition.Y, mousePosition.Y);
-				int x2 = Math.Max(startPosition.X, mousePosition.X);
-				int y2 = Math.Max(startPosition.Y, mousePosition.Y);
+				Rectangle selection = new Rectangle(startPosition, new Size(mousePosition.X - startPosition.X, mousePosition.Y - startPosition.Y));
 
-				Rectangle selection = new Rectangle(x1, y1, x2 - x1, y2 - y1);
-
-				if (selection.Width > 0 && selection.Height > 0) OnEndSelect(selection);
+				OnEndSelect(selection.Absolute());
 			}
 		}
 		void viewport_MouseMove(object sender, MouseEventArgs e)

@@ -140,6 +140,10 @@ namespace Visualizer
 			if (parameters.LineSmoothing != null) drawer.LineSmoothing = parameters.LineSmoothing.Value;
 			if (parameters.AlphaBlending != null) drawer.AlphaBlending = parameters.AlphaBlending.Value;
 		}
+		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+		{
+
+		}
 		private void streamsList_ItemChecked(object sender, ItemCheckedEventArgs e)
 		{
 			StreamListItem streamListItem = (StreamListItem)e.Item.Tag;
@@ -209,7 +213,7 @@ namespace Visualizer
 		{
 			Rectangle intersection = RectangleUtility.Intersect(diagram.Layouter.Area, e.Parameter);
 
-			if (intersection.Width > 0 && intersection.Height > 0)
+			if (intersection.Width > 5 && intersection.Height > 5)
 			{
 				Vector2 leftTop = diagram.Layouter.ReverseMap(new Vector2(intersection.Left, intersection.Top));
 				Vector2 rightBottom = diagram.Layouter.ReverseMap(new Vector2(intersection.Right, intersection.Bottom));
@@ -237,7 +241,7 @@ namespace Visualizer
 		{
 			Rectangle intersection = RectangleUtility.Intersect(diagram.Layouter.Area, e.Parameter);
 
-			if (intersection.Width > 0 && intersection.Height > 0)
+			if (intersection.Width > 5 && intersection.Height > 5)
 			{
 				Vector2 leftTop = diagram.Layouter.ReverseMap(new Vector2(intersection.Left, intersection.Top));
 				Vector2 rightBottom = diagram.Layouter.ReverseMap(new Vector2(intersection.Right, intersection.Bottom));

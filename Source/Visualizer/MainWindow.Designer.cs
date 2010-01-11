@@ -386,10 +386,12 @@ namespace Visualizer
 			this.ClientSize = new System.Drawing.Size(1073, 654);
 			this.Controls.Add(this.mainContainer);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.KeyPreview = true;
 			this.MainMenuStrip = this.mainMenu;
 			this.Name = "MainWindow";
 			this.Text = "<Title>";
 			this.Load += new System.EventHandler(this.MainWindow_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyDown);
 			this.mainContainer.BottomToolStripPanel.ResumeLayout(false);
 			this.mainContainer.BottomToolStripPanel.PerformLayout();
 			this.mainContainer.ContentPanel.ResumeLayout(false);
