@@ -58,6 +58,8 @@ namespace Visualizer.Environment
 			get { return timeManagerType; }
 			set
 			{
+				TimeManager timeManager = diagram.TimeManager;
+				
 				switch (value)
 				{
 					case TimeManagerType.Continuous: diagram.TimeManager = new ContinuousTimeManager(timer); break;
@@ -65,6 +67,10 @@ namespace Visualizer.Environment
 					case TimeManagerType.Wrapping: diagram.TimeManager = new WrappingTimeManager(timer); break;
 					default: throw new InvalidOperationException();
 				}
+				
+				diagram.TimeManager.IsUpdated = timeManager.IsUpdated;
+				diagram.TimeManager.Time = timeManager.Time;
+				diagram.TimeManager.Width = timeManager.Width;
 
 				Initialize();
 			}
@@ -79,6 +85,8 @@ namespace Visualizer.Environment
 			get { return valueManagerType; }
 			set
 			{
+				//ValueManager valueManager = diagram.ValueManager;
+				
 				switch (value)
 				{
 					case ValueManagerType.Fixed: diagram.ValueManager = new FixedValueManager(); break;
@@ -99,12 +107,16 @@ namespace Visualizer.Environment
 			get { return dataManagerType; }
 			set
 			{
+				DataManager dataManager = diagram.DataManager;
+				
 				switch (value)
 				{
 					case DataManagerType.PerSecond: diagram.DataManager = new PerSecondDataManager(diagram); break;
 					case DataManagerType.PerPixel: diagram.DataManager = new PerPixelDataManager(diagram); break;
 					default: throw new InvalidOperationException();
 				}
+				
+				diagram.DataManager.ClearData = dataManager.ClearData;
 
 				Initialize();
 			}
