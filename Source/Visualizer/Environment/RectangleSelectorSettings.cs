@@ -27,12 +27,6 @@ namespace Visualizer.Environment
 	{
 		readonly RectangleSelector rectangleSelector;
 
-		[DisplayName("Update")]
-		public bool IsUpdated
-		{
-			get { return rectangleSelector.IsUpdated; }
-			set { rectangleSelector.IsUpdated = value; }
-		}
 		[DisplayName("Draw")]
 		public bool IsDrawn
 		{

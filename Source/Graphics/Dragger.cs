@@ -22,7 +22,7 @@ using Utility;
 
 namespace Graphics
 {
-	public class Dragger : IComponent, IUpdateable, IDrawable
+	public class Dragger : IComponent
 	{
 		bool dragging;
 		Point mousePosition;
@@ -31,23 +31,16 @@ namespace Graphics
 		public event EventHandler BeginDrag;
 		public event EventHandler EndDrag;
 
-		public bool IsUpdated { get; set; }
-		public bool IsDrawn { get; set; }
 		public MouseButtons Button { get; set; }
 
 		public Dragger(Viewport viewport)
 		{
-			IsUpdated = true;
-			IsDrawn = true;
 			Button = MouseButtons.Left;
 
 			viewport.MouseDown += viewport_MouseDown;
 			viewport.MouseUp += viewport_MouseUp;
 			viewport.MouseMove += viewport_MouseMove;
 		}
-
-		public void Update() { }
-		public void Draw() { }
 
 		protected virtual void OnDrag(Point offset)
 		{

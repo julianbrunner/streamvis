@@ -26,18 +26,6 @@ namespace Visualizer.Environment
 	{
 		readonly Dragger dragger;
 
-		[DisplayName("Update")]
-		public bool IsUpdated
-		{
-			get { return dragger.IsUpdated; }
-			set { dragger.IsUpdated = value; }
-		}
-		[DisplayName("Draw")]
-		public bool IsDrawn
-		{
-			get { return dragger.IsDrawn; }
-			set { dragger.IsDrawn = value; }
-		}
 		[DisplayName("Button")]
 		public MouseButtons Button
 		{

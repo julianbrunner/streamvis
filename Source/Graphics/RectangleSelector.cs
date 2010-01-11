@@ -23,7 +23,7 @@ using Utility;
 
 namespace Graphics
 {
-	public class RectangleSelector : IComponent, IUpdateable, IDrawable
+	public class RectangleSelector : IComponent, IDrawable
 	{
 		readonly Drawer drawer;
 
@@ -35,7 +35,6 @@ namespace Graphics
 		public event EventHandler<EventArgs<Point>> BeginSelect;
 		public event EventHandler<EventArgs<Rectangle>> EndSelect;
 
-		public bool IsUpdated { get; set; }
 		public bool IsDrawn { get; set; }
 		public MouseButtons Button { get; set; }
 		public Color Color { get; set; }
@@ -54,7 +53,6 @@ namespace Graphics
 		{
 			this.drawer = drawer;
 
-			IsUpdated = true;
 			IsDrawn = true;
 			Button = MouseButtons.Left;
 			Color = Color.White;
@@ -64,8 +62,7 @@ namespace Graphics
 			viewport.MouseUp += viewport_MouseUp;
 			viewport.MouseMove += viewport_MouseMove;
 		}
-
-		public void Update() { }
+		
 		public void Draw()
 		{
 			if (selecting)
