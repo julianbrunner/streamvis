@@ -24,6 +24,7 @@ using System.Xml.Linq;
 using Graphics;
 using OpenTK;
 using Utility;
+using Utility.Utilities;
 using Visualizer.Data;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Axes;
@@ -196,11 +197,13 @@ namespace Visualizer
 			settings.Diagram.Initialize();
 		}
 		private void zoomSelector_Select(object sender, EventArgs<Rectangle> e)
-		{
-			if (diagram.Layouter.Area.Contains(e.Parameter))
+		{			
+			Rectangle intersection = RectangleUtility.Intersect(diagram.Layouter.Area, e.Parameter);
+
+			if (intersection.Width > 0 && intersection.Height > 0)
 			{
-				Vector2 leftTop = diagram.Layouter.ReverseMap(new Vector2(e.Parameter.Left, e.Parameter.Top));
-				Vector2 rightBottom = diagram.Layouter.ReverseMap(new Vector2(e.Parameter.Right, e.Parameter.Bottom));
+				Vector2 leftTop = diagram.Layouter.ReverseMap(new Vector2(intersection.Left, intersection.Top));
+				Vector2 rightBottom = diagram.Layouter.ReverseMap(new Vector2(intersection.Right, intersection.Bottom));
 
 				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.ReverseMap(leftTop.X), diagram.TimeManager.Mapping.ReverseMap(rightBottom.X));
 				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.ReverseMap(rightBottom.Y), diagram.ValueManager.Mapping.ReverseMap(leftTop.Y));

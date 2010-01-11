@@ -33,12 +33,7 @@ namespace Visualizer.Drawing.Timing
 		public double Time
 		{
 			get { return time; }
-			set
-			{
-				if (value < 0) throw new ArgumentOutOfRangeException("value");
-				
-				time = value;
-			}
+			set { time = value; }
 		}
 		public double Width
 		{
