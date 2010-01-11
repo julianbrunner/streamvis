@@ -247,14 +247,10 @@ namespace Visualizer
 				
 				LinearMapping timeMapping = new LinearMapping(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange);
 				LinearMapping valueMapping = new LinearMapping(diagram.ValueManager.Range, valueRange);
-				
-				Console.WriteLine(timeMapping.Input);
-				
+
 				timeRange = timeMapping.ReverseMap(timeMapping.Input);
 				valueRange = valueMapping.ReverseMap(valueMapping.Input);
-				
-				Console.WriteLine(timeRange);
-				
+
 				diagram.TimeManager.Time = timeRange.End;
 				diagram.TimeManager.Width = timeRange.End - timeRange.Start;
 				diagram.TimeManager.IsUpdated = false;
