@@ -204,8 +204,10 @@ namespace Visualizer
 
 				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.ReverseMap(leftTop.X), diagram.TimeManager.Mapping.ReverseMap(rightBottom.X));
 				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.ReverseMap(rightBottom.Y), diagram.ValueManager.Mapping.ReverseMap(leftTop.Y));
-
+				
+				diagram.TimeManager.Time = timeRange.End;
 				diagram.TimeManager.Width = timeRange.End - timeRange.Start;
+				diagram.TimeManager.IsUpdated = false;
 
 				if (!(diagram.ValueManager is FixedValueManager)) diagram.ValueManager = new FixedValueManager();
 				((FixedValueManager)diagram.ValueManager).FixedRange = valueRange;
