@@ -44,11 +44,19 @@ namespace Utility
 
 		public double ForwardMap(double value)
 		{
-			return output.Clamp(offset + value * factor);
+			return offset + value * factor;
+		}
+		public Range<double> ForwardMap(Range<double> range)
+		{
+			return new Range<double>(ForwardMap(range.Start), ForwardMap(range.End));
 		}
 		public double ReverseMap(double value)
 		{
-			return input.Clamp((value - offset) / factor);
+			return (value - offset) / factor;
+		}
+		public Range<double> ReverseMap(Range<double> range)
+		{
+			return new Range<double>(ReverseMap(range.Start), ReverseMap(range.End));
 		}
 	}
 }

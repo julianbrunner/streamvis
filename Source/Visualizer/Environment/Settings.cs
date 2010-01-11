@@ -29,6 +29,7 @@ namespace Visualizer.Environment
 		readonly DrawerSettings drawer;
 		readonly DiagramSettings diagram;
 		readonly RectangleSelectorSettings zoomSelector;
+		readonly RectangleSelectorSettings unZoomSelector;
 		readonly DraggerSettings panDragger;
 		readonly FrameCounterSettings frameCounter;
 
@@ -42,6 +43,8 @@ namespace Visualizer.Environment
 		public FrameCounterSettings FrameCounter { get { return frameCounter; } }
 		[DisplayName("Zoom Selector")]
 		public RectangleSelectorSettings ZoomSelector { get { return zoomSelector; } }
+		[DisplayName("Un-Zoom Selector")]
+		public RectangleSelectorSettings UnZoomSelector { get { return unZoomSelector; } }
 		[DisplayName("Pan Dragger")]
 		public DraggerSettings PanDragger { get { return panDragger; } }
 		[DisplayName("Minimal Mode")]
@@ -63,13 +66,14 @@ namespace Visualizer.Environment
 			set { mainWindow.PropertiesVisible = value; }
 		}
 
-		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, MainWindow mainWindow, Viewport viewport, Drawer drawer, Timer timer, Diagram diagram, RectangleSelector zoomSelector, Dragger panDragger, VisibleFrameCounter frameCounter)
+		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, MainWindow mainWindow, Viewport viewport, Drawer drawer, Timer timer, Diagram diagram, RectangleSelector zoomSelector, RectangleSelector unZoomSelector, Dragger panDragger, VisibleFrameCounter frameCounter)
 		{
 			this.mainWindow = mainWindow;
 			this.viewport = new ViewportSettings(viewport);
 			this.drawer = new DrawerSettings(drawer);
 			this.diagram = new DiagramSettings(propertyGrid, timer, diagram);
 			this.zoomSelector = new RectangleSelectorSettings(zoomSelector);
+			this.unZoomSelector = new RectangleSelectorSettings(unZoomSelector);
 			this.panDragger = new DraggerSettings(panDragger);
 			this.frameCounter = new FrameCounterSettings(frameCounter);
 		}

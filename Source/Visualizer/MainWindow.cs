@@ -44,6 +44,7 @@ namespace Visualizer
 		readonly Data.Timer timer;
 		readonly Diagram diagram;
 		readonly RectangleSelector zoomSelector;
+		readonly RectangleSelector unZoomSelector;
 		readonly Dragger panDragger;
 		readonly VisibleFrameCounter frameCounter;
 		readonly CoordinateLabel coordinateLabel;
@@ -86,9 +87,16 @@ namespace Visualizer
 			Console.WriteLine("Initializing diagram...");
 			this.diagram = CreateDiagram(viewport, drawer, timer, parameters);
 
-			Console.WriteLine("Initializing zoom selector...");
+			Console.WriteLine("Initializing zoom selectors...");
 			this.zoomSelector = new RectangleSelector(drawer, viewport);
+			this.zoomSelector.Button = MouseButtons.Left;
+			this.zoomSelector.Color = Color.White;
 			this.zoomSelector.EndSelect += zoomSelector_Select;
+			
+			this.unZoomSelector = new RectangleSelector(drawer, viewport);
+			this.unZoomSelector.Button = MouseButtons.Middle;
+			this.unZoomSelector.Color = Color.Blue;
+			this.unZoomSelector.EndSelect += unZoomSelector_Select;
 
 			Console.WriteLine("Initializing pan dragger...");
 			this.panDragger = new Dragger(viewport);
@@ -111,12 +119,13 @@ namespace Visualizer
 			if (parameters.MinimalMode != null) MinimalMode = parameters.MinimalMode.Value;
 
 			Console.WriteLine("Initializing settings...");
-			this.settings = new Settings(properties, this, viewport, drawer, timer, diagram, zoomSelector, panDragger, frameCounter);
+			this.settings = new Settings(properties, this, viewport, drawer, timer, diagram, zoomSelector, unZoomSelector, panDragger, frameCounter);
 			properties.SelectedObject = settings;
 
 			Console.WriteLine("Adding components...");
 			viewport.AddComponent(diagram);
 			viewport.AddComponent(zoomSelector);
+			viewport.AddComponent(unZoomSelector);
 			viewport.AddComponent(frameCounter);
 			viewport.AddComponent(coordinateLabel);
 		}
@@ -207,6 +216,44 @@ namespace Visualizer
 
 				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.ReverseMap(leftTop.X), diagram.TimeManager.Mapping.ReverseMap(rightBottom.X));
 				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.ReverseMap(rightBottom.Y), diagram.ValueManager.Mapping.ReverseMap(leftTop.Y));
+				
+				LinearMapping timeMapping = new LinearMapping(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange);
+				LinearMapping valueMapping = new LinearMapping(diagram.ValueManager.Range, valueRange);
+				
+				timeRange = timeMapping.ForwardMap(timeMapping.Input);
+				valueRange = valueMapping.ForwardMap(valueMapping.Input);
+				
+				diagram.TimeManager.Time = timeRange.End;
+				diagram.TimeManager.Width = timeRange.End - timeRange.Start;
+				diagram.TimeManager.IsUpdated = false;
+
+				if (!(diagram.ValueManager is FixedValueManager)) diagram.ValueManager = new FixedValueManager();
+				((FixedValueManager)diagram.ValueManager).FixedRange = valueRange;
+
+				settings.Diagram.Initialize();
+			}
+		}
+		private void unZoomSelector_Select(object sender, EventArgs<Rectangle> e)
+		{			
+			Rectangle intersection = RectangleUtility.Intersect(diagram.Layouter.Area, e.Parameter);
+
+			if (intersection.Width > 0 && intersection.Height > 0)
+			{
+				Vector2 leftTop = diagram.Layouter.ReverseMap(new Vector2(intersection.Left, intersection.Top));
+				Vector2 rightBottom = diagram.Layouter.ReverseMap(new Vector2(intersection.Right, intersection.Bottom));
+
+				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.ReverseMap(leftTop.X), diagram.TimeManager.Mapping.ReverseMap(rightBottom.X));
+				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.ReverseMap(rightBottom.Y), diagram.ValueManager.Mapping.ReverseMap(leftTop.Y));
+				
+				LinearMapping timeMapping = new LinearMapping(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange);
+				LinearMapping valueMapping = new LinearMapping(diagram.ValueManager.Range, valueRange);
+				
+				Console.WriteLine(timeMapping.Input);
+				
+				timeRange = timeMapping.ReverseMap(timeMapping.Input);
+				valueRange = valueMapping.ReverseMap(valueMapping.Input);
+				
+				Console.WriteLine(timeRange);
 				
 				diagram.TimeManager.Time = timeRange.End;
 				diagram.TimeManager.Width = timeRange.End - timeRange.Start;
