@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -32,7 +33,6 @@ using Visualizer.Drawing.Data;
 using Visualizer.Drawing.Timing;
 using Visualizer.Drawing.Values;
 using Visualizer.Environment;
-using System.ComponentModel;
 
 namespace Visualizer
 {
@@ -196,9 +196,9 @@ namespace Visualizer
 
 			settings.Diagram.Initialize();
 		}
-		private void freezeToolStripMenuItem_Click(object sender, EventArgs e)
+		private void toggleFreezeToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			diagram.TimeManager.IsUpdated = freezeToolStripMenuItem.Checked;
+			diagram.TimeManager.IsUpdated = !diagram.TimeManager.IsUpdated;
 		}
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{

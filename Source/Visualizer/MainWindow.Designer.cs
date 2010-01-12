@@ -75,13 +75,13 @@ namespace Visualizer
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.diagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.freezeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
+			this.toggleFreezeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainContainer.BottomToolStripPanel.SuspendLayout();
 			this.mainContainer.ContentPanel.SuspendLayout();
 			this.mainContainer.TopToolStripPanel.SuspendLayout();
@@ -210,7 +210,7 @@ namespace Visualizer
             this.changeNameToolStripMenuItem,
             this.changeColorToolStripMenuItem});
 			this.streamsContextMenuStrip.Name = "streamsContextMenuStrip";
-			this.streamsContextMenuStrip.Size = new System.Drawing.Size(153, 70);
+			this.streamsContextMenuStrip.Size = new System.Drawing.Size(151, 48);
 			this.streamsContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.streamsContextMenuStrip_Opening);
 			// 
 			// changeNameToolStripMenuItem
@@ -350,19 +350,10 @@ namespace Visualizer
 			// diagramToolStripMenuItem
 			// 
 			this.diagramToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.freezeToolStripMenuItem});
+            this.toggleFreezeToolStripMenuItem});
 			this.diagramToolStripMenuItem.Name = "diagramToolStripMenuItem";
 			this.diagramToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
 			this.diagramToolStripMenuItem.Text = "Diagram";
-			// 
-			// freezeToolStripMenuItem
-			// 
-			this.freezeToolStripMenuItem.CheckOnClick = true;
-			this.freezeToolStripMenuItem.Name = "freezeToolStripMenuItem";
-			this.freezeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-			this.freezeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.freezeToolStripMenuItem.Text = "&Freeze";
-			this.freezeToolStripMenuItem.Click += new System.EventHandler(this.freezeToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -399,6 +390,14 @@ namespace Visualizer
 			// 
 			this.saveCaptureFileDialog.DefaultExt = "capture";
 			this.saveCaptureFileDialog.Filter = "Capture Files|*.capture|All Files|*.*";
+			// 
+			// toggleFreezeToolStripMenuItem
+			// 
+			this.toggleFreezeToolStripMenuItem.Name = "toggleFreezeToolStripMenuItem";
+			this.toggleFreezeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+			this.toggleFreezeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+			this.toggleFreezeToolStripMenuItem.Text = "Toggle &Freeze";
+			this.toggleFreezeToolStripMenuItem.Click += new System.EventHandler(this.toggleFreezeToolStripMenuItem_Click);
 			// 
 			// MainWindow
 			// 
@@ -468,7 +467,7 @@ namespace Visualizer
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem diagramToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem freezeToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toggleFreezeToolStripMenuItem;
 		
 	}
 }
