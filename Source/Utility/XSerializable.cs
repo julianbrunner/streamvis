@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.ComponentModel;
 using System.Xml.Linq;
 
 namespace Utility
@@ -23,7 +24,9 @@ namespace Utility
 	{
 		readonly string xElementName;
 
+		[Browsable(false)]
 		public string XElementName { get { return xElementName; } }
+		[Browsable(false)]
 		public abstract XElement XElement { get; set; }
 
 		public XSerializable(string xElementName)
