@@ -18,13 +18,42 @@
 using System.ComponentModel;
 using System.Drawing;
 using Graphics;
+using Utility;
+using System.Xml.Linq;
+using System;
+using Utility.Utilities;
+using Utility.Extensions;
 
 namespace Visualizer.Environment
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	class FrameCounterSettings
+	class FrameCounterSettings : XSerializable
 	{
 		readonly VisibleFrameCounter frameCounter;
+
+		public XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					new XElement("IsUpdated", IsUpdated),
+					new XElement("IsDrawn", IsDrawn),
+					new XElement("CycleLength", CycleLength),
+					new XElement("Color", Color.ToHtmlString())
+				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				IsUpdated = (bool)value.Element("IsUpdated");
+				IsDrawn = (bool)value.Element("IsDrawn");
+				CycleLength = (int)value.Element("CycleLength");
+				Color = ColorUtility.FromHtmlString((string)value.Element("Color"));
+			}
+		}
 
 		[DisplayName("Update")]
 		public bool IsUpdated
@@ -51,7 +80,8 @@ namespace Visualizer.Environment
 			set { frameCounter.Color = value; }
 		}
 
-		public FrameCounterSettings(VisibleFrameCounter frameCounter)
+		public FrameCounterSettings(string xElementName, VisibleFrameCounter frameCounter)
+			: base(xElementName)
 		{
 			this.frameCounter = frameCounter;
 		}

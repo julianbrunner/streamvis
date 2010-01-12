@@ -20,17 +20,16 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Xml.Linq;
 using Graphics;
+using Utility;
 using Utility.Extensions;
 using Utility.Utilities;
 
 namespace Visualizer.Environment
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	class ViewportSettings
+	class ViewportSettings : XSerializable
 	{
 		readonly Viewport viewport;
-
-		public static string XElementName { get { return "ViewportSettings"; } }
 
 		public XElement XElement
 		{
@@ -65,7 +64,8 @@ namespace Visualizer.Environment
 			set { viewport.BackColor = value; }
 		}
 
-		public ViewportSettings(Viewport viewport)
+		public ViewportSettings(string xElementName, Viewport viewport)
+			: base(xElementName)
 		{
 			this.viewport = viewport;
 		}

@@ -19,15 +19,14 @@ using System;
 using System.ComponentModel;
 using System.Xml.Linq;
 using Graphics;
+using Utility;
 
 namespace Visualizer.Environment
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	class DrawerSettings
+	class DrawerSettings : XSerializable
 	{
 		readonly Drawer drawer;
-
-		public static string XElementName { get { return "DrawerSettings"; } }
 
 		public XElement XElement
 		{
@@ -62,7 +61,8 @@ namespace Visualizer.Environment
 			set { drawer.AlphaBlending = value; }
 		}
 
-		public DrawerSettings(Drawer drawer)
+		public DrawerSettings(string xElementName, Drawer drawer)
+			: base(xElementName)
 		{
 			this.drawer = drawer;
 		}

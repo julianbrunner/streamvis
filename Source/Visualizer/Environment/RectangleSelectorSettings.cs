@@ -15,17 +15,46 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Graphics;
+using Utility;
+using Utility.Extensions;
+using Utility.Utilities;
 
 namespace Visualizer.Environment
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	class RectangleSelectorSettings
+	class RectangleSelectorSettings : XSerializable
 	{
 		readonly RectangleSelector rectangleSelector;
+
+		public XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					new XElement("IsDrawn", IsDrawn),
+					new XElement("Button", Button),
+					new XElement("Color", Color.ToHtmlString()),
+					new XElement("Width", Width)
+				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				IsDrawn = (bool)value.Element("IsDrawn");
+				Button = (MouseButtons)Enum.Parse(typeof(MouseButtons), (string)value.Element("Button"));
+				Color = ColorUtility.FromHtmlString((string)value.Element("Color"));
+				Width = (float)value.Element("Width");
+			}
+		}
 
 		[DisplayName("Draw")]
 		public bool IsDrawn
@@ -52,7 +81,8 @@ namespace Visualizer.Environment
 			set { rectangleSelector.Width = value; }
 		}
 
-		public RectangleSelectorSettings(RectangleSelector rectangleSelector)
+		public RectangleSelectorSettings(string xElementName, RectangleSelector rectangleSelector)
+			: base(xElementName)
 		{
 			this.rectangleSelector = rectangleSelector;
 		}

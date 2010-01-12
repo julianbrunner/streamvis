@@ -15,16 +15,37 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Graphics;
+using Utility;
 
 namespace Visualizer.Environment
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	class DraggerSettings
+	class DraggerSettings : XSerializable
 	{
 		readonly Dragger dragger;
+
+		public XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					new XElement("Button", Button)
+				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				Button = (MouseButtons)Enum.Parse(typeof(MouseButtons), (string)value.Element("Button"));
+			}
+		}
 
 		[DisplayName("Button")]
 		public MouseButtons Button
@@ -33,7 +54,8 @@ namespace Visualizer.Environment
 			set { dragger.Button = value; }
 		}
 
-		public DraggerSettings(Dragger dragger)
+		public DraggerSettings(string xElementName, Dragger dragger)
+			: base(xElementName)
 		{
 			this.dragger = dragger;
 		}

@@ -19,12 +19,13 @@ using System;
 using System.ComponentModel;
 using System.Xml.Linq;
 using Graphics;
+using Utility;
 using Visualizer.Data;
 using Visualizer.Drawing;
 
 namespace Visualizer.Environment
 {
-	class Settings
+	class Settings : XSerializable
 	{
 		readonly MainWindow mainWindow;
 		readonly ViewportSettings viewport;
@@ -35,8 +36,6 @@ namespace Visualizer.Environment
 		readonly DraggerSettings panDragger;
 		readonly FrameCounterSettings frameCounter;
 
-		public static string XElementName { get { return "Settings"; } }
-
 		public XElement XElement
 		{
 			get
@@ -46,6 +45,10 @@ namespace Visualizer.Environment
 					XElementName,
 					viewport.XElement,
 					drawer.XElement,
+					zoomSelector.XElement,
+					unZoomSelector.XElement,
+					panDragger.XElement,
+					frameCounter.XElement,
 					new XElement("MinimalMode", MinimalMode),
 					new XElement("StreamListVisible", StreamListVisible),
 					new XElement("PropertiesVisible", PropertiesVisible)
@@ -55,8 +58,12 @@ namespace Visualizer.Environment
 			{
 				if (value.Name != XElementName) throw new ArgumentException("value");
 
-				viewport.XElement = value.Element(ViewportSettings.XElementName);
-				drawer.XElement = value.Element(DrawerSettings.XElementName);
+				viewport.XElement = value.Element(viewport.XElementName);
+				drawer.XElement = value.Element(drawer.XElementName);
+				zoomSelector.XElement = value.Element(zoomSelector.XElementName);
+				unZoomSelector.XElement = value.Element(unZoomSelector.XElementName);
+				panDragger.XElement = value.Element(panDragger.XElementName);
+				frameCounter.XElement = value.Element(frameCounter.XElementName);
 				MinimalMode = (bool)value.Element("VerticalSynchronization");
 				StreamListVisible = (bool)value.Element("StreamListVisible");
 				PropertiesVisible = (bool)value.Element("PropertiesVisible");
@@ -69,14 +76,14 @@ namespace Visualizer.Environment
 		public DrawerSettings Drawer { get { return drawer; } }
 		[DisplayName("Diagram")]
 		public DiagramSettings Diagram { get { return diagram; } }
-		[DisplayName("Frame Counter")]
-		public FrameCounterSettings FrameCounter { get { return frameCounter; } }
 		[DisplayName("Zoom Selector")]
 		public RectangleSelectorSettings ZoomSelector { get { return zoomSelector; } }
 		[DisplayName("Un-Zoom Selector")]
 		public RectangleSelectorSettings UnZoomSelector { get { return unZoomSelector; } }
 		[DisplayName("Pan Dragger")]
 		public DraggerSettings PanDragger { get { return panDragger; } }
+		[DisplayName("Frame Counter")]
+		public FrameCounterSettings FrameCounter { get { return frameCounter; } }
 		[DisplayName("Minimal Mode")]
 		public bool MinimalMode
 		{
@@ -97,15 +104,16 @@ namespace Visualizer.Environment
 		}
 
 		public Settings(System.Windows.Forms.PropertyGrid propertyGrid, MainWindow mainWindow, Viewport viewport, Drawer drawer, Timer timer, Diagram diagram, RectangleSelector zoomSelector, RectangleSelector unZoomSelector, Dragger panDragger, VisibleFrameCounter frameCounter)
+			: base("Settings")
 		{
 			this.mainWindow = mainWindow;
-			this.viewport = new ViewportSettings(viewport);
-			this.drawer = new DrawerSettings(drawer);
-			this.diagram = new DiagramSettings(propertyGrid, timer, diagram);
-			this.zoomSelector = new RectangleSelectorSettings(zoomSelector);
-			this.unZoomSelector = new RectangleSelectorSettings(unZoomSelector);
-			this.panDragger = new DraggerSettings(panDragger);
-			this.frameCounter = new FrameCounterSettings(frameCounter);
+			this.viewport = new ViewportSettings("ViewportSettings", viewport);
+			this.drawer = new DrawerSettings("DrawerSettings", drawer);
+			this.diagram = new DiagramSettings("DiagramSettings", propertyGrid, timer, diagram);
+			this.zoomSelector = new RectangleSelectorSettings("ZoomSelectorSettings", zoomSelector);
+			this.unZoomSelector = new RectangleSelectorSettings("UnZoomSelectorSettings", unZoomSelector);
+			this.panDragger = new DraggerSettings("PanDraggerSettings", panDragger);
+			this.frameCounter = new FrameCounterSettings("FrameCounterSettings", frameCounter);
 		}
 	}
 }

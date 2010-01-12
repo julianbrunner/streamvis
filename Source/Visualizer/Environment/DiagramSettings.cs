@@ -26,11 +26,12 @@ using Visualizer.Environment.Drawing;
 using Visualizer.Environment.Drawing.Data;
 using Visualizer.Environment.Drawing.Timing;
 using Visualizer.Environment.Drawing.Values;
+using Utility;
 
 namespace Visualizer.Environment
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	class DiagramSettings
+	class DiagramSettings : XSerializable
 	{
 		readonly System.Windows.Forms.PropertyGrid propertyGrid;
 		readonly Timer timer;
@@ -148,7 +149,8 @@ namespace Visualizer.Environment
 			set { diagram.IsDrawn = value; }
 		}
 
-		public DiagramSettings(System.Windows.Forms.PropertyGrid propertyGrid, Timer timer, Diagram diagram)
+		public DiagramSettings(string xElementName, System.Windows.Forms.PropertyGrid propertyGrid, Timer timer, Diagram diagram)
+			: base(xElementName)
 		{
 			this.propertyGrid = propertyGrid;
 			this.timer = timer;

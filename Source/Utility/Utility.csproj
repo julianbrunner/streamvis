@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="ColorGenerator.cs" />
     <Compile Include="ColorPlus.cs" />
+    <Compile Include="XSerializable.cs" />
     <Compile Include="EventsArgs.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Extensions\RectangleExtensions.cs" />
