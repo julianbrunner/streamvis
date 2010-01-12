@@ -45,6 +45,7 @@ namespace Visualizer.Environment
 					XElementName,
 					viewport.XElement,
 					drawer.XElement,
+					diagram.XElement,
 					zoomSelector.XElement,
 					unZoomSelector.XElement,
 					panDragger.XElement,
@@ -60,6 +61,7 @@ namespace Visualizer.Environment
 
 				viewport.XElement = value.Element(viewport.XElementName);
 				drawer.XElement = value.Element(drawer.XElementName);
+				diagram.XElement = value.Element(diagram.XElementName);
 				zoomSelector.XElement = value.Element(zoomSelector.XElementName);
 				unZoomSelector.XElement = value.Element(unZoomSelector.XElementName);
 				panDragger.XElement = value.Element(panDragger.XElementName);

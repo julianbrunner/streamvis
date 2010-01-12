@@ -17,6 +17,8 @@
 
 using System;
 using System.ComponentModel;
+using System.Xml.Linq;
+using Utility;
 using Visualizer.Data;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Data;
@@ -26,7 +28,6 @@ using Visualizer.Environment.Drawing;
 using Visualizer.Environment.Drawing.Data;
 using Visualizer.Environment.Drawing.Timing;
 using Visualizer.Environment.Drawing.Values;
-using Utility;
 
 namespace Visualizer.Environment
 {
@@ -47,6 +48,28 @@ namespace Visualizer.Environment
 		AxisXSettings axisX;
 		AxisYSettings axisY;
 		LayouterSettings layouter;
+
+		public XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					graphSettings.XElement,
+					new XElement("IsUpdated", IsUpdated),
+					new XElement("IsDrawn", IsDrawn)
+				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				graphSettings.XElement = value.Element(graphSettings.XElementName);
+				IsUpdated = (bool)value.Element("IsUpdated");
+				IsDrawn = (bool)value.Element("IsDrawn");
+			}
+		}
 
 		#region Graph Settings
 		[DisplayName("Graph Setitings")]
@@ -161,7 +184,7 @@ namespace Visualizer.Environment
 
 		public void Initialize()
 		{
-			graphSettings = new GraphSettingsSettings(diagram);
+			graphSettings = new GraphSettingsSettings("GraphSettingsSettings", diagram);
 
 			switch (timeManagerType = GetTimeManagerType(diagram.TimeManager))
 			{

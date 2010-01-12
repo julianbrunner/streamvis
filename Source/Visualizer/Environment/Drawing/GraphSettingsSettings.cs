@@ -15,15 +15,38 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
+using System.Xml.Linq;
+using Utility;
 using Visualizer.Drawing;
 
 namespace Visualizer.Environment.Drawing
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	class GraphSettingsSettings
+	class GraphSettingsSettings : XSerializable
 	{
 		readonly Diagram diagram;
+
+		public XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					new XElement("ExtendGraphs", ExtendGraphs),
+					new XElement("LineWidth", LineWidth)
+				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				ExtendGraphs = (bool)value.Element("ExtendGraphs");
+				LineWidth = (double)value.Element("LineWidth");
+			}
+		}
 
 		[DisplayName("Extend Graphs")]
 		public bool ExtendGraphs
@@ -38,7 +61,8 @@ namespace Visualizer.Environment.Drawing
 			set { diagram.GraphSettings.LineWidth = value; }
 		}
 
-		public GraphSettingsSettings(Diagram diagram)
+		public GraphSettingsSettings(string xElementName, Diagram diagram)
+			: base(xElementName)
 		{
 			this.diagram = diagram;
 		}
