@@ -30,22 +30,29 @@ namespace Graphics
 	{
 		readonly List<IComponent> components = new List<IComponent>();
 
-		Color clearColor;
+		bool initialized = false;
 
-		public Color ClearColor
+		public override Color BackColor
 		{
-			get { return clearColor; }
-			set { GL.ClearColor(clearColor = value); }
+			get { return base.BackColor; }
+			set
+			{
+				base.BackColor = value;
+
+				if (initialized) GL.ClearColor(base.BackColor);
+			}
 		}
 
 		public Viewport() : base(new GraphicsMode(DisplayDevice.Default.BitsPerPixel, 0, 0, 0, 0, 2, false)) { }
 
 		public void Initialize()
 		{
-			ClearColor = Color.Black;
+			GL.ClearColor(base.BackColor);
 
 			Layout += Viewport_Layout;
 			Application.Idle += Application_Idle;
+
+			initialized = true;
 		}
 		public void AddComponent(IComponent component)
 		{

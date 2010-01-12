@@ -15,33 +15,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.ComponentModel;
 using System.Drawing;
-using Graphics;
 
-namespace Visualizer.Environment
+namespace Utility.Extensions
 {
-	[TypeConverter(typeof(ExpansionConverter))]
-	class ViewportSettings
+	public static class ColorExtesions
 	{
-		readonly Viewport viewport;
-
-		[DisplayName("Vertical Synchronization")]
-		public bool VerticalSynchronization
+		public static Color Invert(this Color color)
 		{
-			get { return viewport.VSync; }
-			set { viewport.VSync = value; }
-		}
-		[DisplayName("Background Color")]
-		public Color BackgroundColor
-		{
-			get { return viewport.BackColor; }
-			set { viewport.BackColor = value; }
-		}
-
-		public ViewportSettings(Viewport viewport)
-		{
-			this.viewport = viewport;
+			return Color.FromArgb(0xFF - color.R, 0xFF - color.G, 0xFF - color.B);
 		}
 	}
 }

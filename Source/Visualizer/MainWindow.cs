@@ -25,6 +25,7 @@ using System.Xml.Linq;
 using Graphics;
 using OpenTK;
 using Utility;
+using Utility.Extensions;
 using Utility.Utilities;
 using Visualizer.Data;
 using Visualizer.Drawing;
@@ -136,7 +137,7 @@ namespace Visualizer
 			viewport.Initialize();
 
 			if (parameters.VerticalSynchronization != null) viewport.VSync = parameters.VerticalSynchronization.Value;
-			if (parameters.BackgroundColor != null) viewport.ClearColor = parameters.BackgroundColor.Value;
+			if (parameters.BackgroundColor != null) viewport.BackColor = parameters.BackgroundColor.Value;
 
 			if (parameters.LineSmoothing != null) drawer.LineSmoothing = parameters.LineSmoothing.Value;
 			if (parameters.AlphaBlending != null) drawer.AlphaBlending = parameters.AlphaBlending.Value;
@@ -188,6 +189,28 @@ namespace Visualizer
 			timer.Reset();
 			source.ClearData();
 			foreach (Graph graph in diagram.Graphs) graph.StreamManager.EntryCache.Clear();
+		}
+		private void streamsListToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			streamsList.Visible = !streamsList.Visible;
+		}
+		private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			properties.Visible = !properties.Visible;
+		}
+		private void diagramToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			diagram.IsDrawn = !diagram.IsDrawn;
+		}
+		private void frameCounterToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			frameCounter.IsDrawn = !frameCounter.IsDrawn;
+		}
+		private void invertColorsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			viewport.BackColor = viewport.BackColor.Invert();
+			diagram.AxisX.Color = diagram.AxisX.Color.Invert();
+			diagram.AxisY.Color = diagram.AxisY.Color.Invert();
 		}
 		private void resetToolStripMenuItem_Click(object sender, EventArgs e)
 		{

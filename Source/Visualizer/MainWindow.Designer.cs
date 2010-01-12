@@ -73,15 +73,22 @@ namespace Visualizer
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.clearDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.streamsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.propertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+			this.diagramToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.frameCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.invertColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.diagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toggleFreezeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.colorDialog = new System.Windows.Forms.ColorDialog();
 			this.openCaptureFileDialog = new System.Windows.Forms.OpenFileDialog();
 			this.saveCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
-			this.toggleFreezeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.mainContainer.BottomToolStripPanel.SuspendLayout();
 			this.mainContainer.ContentPanel.SuspendLayout();
 			this.mainContainer.TopToolStripPanel.SuspendLayout();
@@ -334,26 +341,86 @@ namespace Visualizer
 			// viewToolStripMenuItem
 			// 
 			this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resetToolStripMenuItem});
+            this.streamsListToolStripMenuItem,
+            this.propertiesToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.diagramToolStripMenuItem1,
+            this.frameCounterToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.invertColorsToolStripMenuItem});
 			this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
 			this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
 			this.viewToolStripMenuItem.Text = "&View";
+			// 
+			// streamsListToolStripMenuItem
+			// 
+			this.streamsListToolStripMenuItem.Name = "streamsListToolStripMenuItem";
+			this.streamsListToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.streamsListToolStripMenuItem.Text = "&Streams List";
+			this.streamsListToolStripMenuItem.Click += new System.EventHandler(this.streamsListToolStripMenuItem_Click);
+			// 
+			// propertiesToolStripMenuItem
+			// 
+			this.propertiesToolStripMenuItem.Name = "propertiesToolStripMenuItem";
+			this.propertiesToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.propertiesToolStripMenuItem.Text = "&Properties";
+			this.propertiesToolStripMenuItem.Click += new System.EventHandler(this.propertiesToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator2
+			// 
+			this.toolStripSeparator2.Name = "toolStripSeparator2";
+			this.toolStripSeparator2.Size = new System.Drawing.Size(150, 6);
+			// 
+			// diagramToolStripMenuItem1
+			// 
+			this.diagramToolStripMenuItem1.Name = "diagramToolStripMenuItem1";
+			this.diagramToolStripMenuItem1.Size = new System.Drawing.Size(153, 22);
+			this.diagramToolStripMenuItem1.Text = "&Diagram";
+			this.diagramToolStripMenuItem1.Click += new System.EventHandler(this.diagramToolStripMenuItem1_Click);
+			// 
+			// frameCounterToolStripMenuItem
+			// 
+			this.frameCounterToolStripMenuItem.Name = "frameCounterToolStripMenuItem";
+			this.frameCounterToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.frameCounterToolStripMenuItem.Text = "&Frame Counter";
+			this.frameCounterToolStripMenuItem.Click += new System.EventHandler(this.frameCounterToolStripMenuItem_Click);
+			// 
+			// toolStripSeparator3
+			// 
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(150, 6);
+			// 
+			// invertColorsToolStripMenuItem
+			// 
+			this.invertColorsToolStripMenuItem.Name = "invertColorsToolStripMenuItem";
+			this.invertColorsToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+			this.invertColorsToolStripMenuItem.Text = "&Invert Colors";
+			this.invertColorsToolStripMenuItem.Click += new System.EventHandler(this.invertColorsToolStripMenuItem_Click);
+			// 
+			// diagramToolStripMenuItem
+			// 
+			this.diagramToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetToolStripMenuItem,
+            this.toggleFreezeToolStripMenuItem});
+			this.diagramToolStripMenuItem.Name = "diagramToolStripMenuItem";
+			this.diagramToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+			this.diagramToolStripMenuItem.Text = "&Diagram";
 			// 
 			// resetToolStripMenuItem
 			// 
 			this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
 			this.resetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-			this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.resetToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
 			this.resetToolStripMenuItem.Text = "&Reset";
 			this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
 			// 
-			// diagramToolStripMenuItem
+			// toggleFreezeToolStripMenuItem
 			// 
-			this.diagramToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toggleFreezeToolStripMenuItem});
-			this.diagramToolStripMenuItem.Name = "diagramToolStripMenuItem";
-			this.diagramToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-			this.diagramToolStripMenuItem.Text = "Diagram";
+			this.toggleFreezeToolStripMenuItem.Name = "toggleFreezeToolStripMenuItem";
+			this.toggleFreezeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+			this.toggleFreezeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+			this.toggleFreezeToolStripMenuItem.Text = "Toggle &Freeze";
+			this.toggleFreezeToolStripMenuItem.Click += new System.EventHandler(this.toggleFreezeToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -390,14 +457,6 @@ namespace Visualizer
 			// 
 			this.saveCaptureFileDialog.DefaultExt = "capture";
 			this.saveCaptureFileDialog.Filter = "Capture Files|*.capture|All Files|*.*";
-			// 
-			// toggleFreezeToolStripMenuItem
-			// 
-			this.toggleFreezeToolStripMenuItem.Name = "toggleFreezeToolStripMenuItem";
-			this.toggleFreezeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-			this.toggleFreezeToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-			this.toggleFreezeToolStripMenuItem.Text = "Toggle &Freeze";
-			this.toggleFreezeToolStripMenuItem.Click += new System.EventHandler(this.toggleFreezeToolStripMenuItem_Click);
 			// 
 			// MainWindow
 			// 
@@ -465,9 +524,16 @@ namespace Visualizer
 		private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem diagramToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toggleFreezeToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem streamsListToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem propertiesToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStripMenuItem diagramToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem frameCounterToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripMenuItem invertColorsToolStripMenuItem;
 		
 	}
 }
