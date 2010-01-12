@@ -30,10 +30,8 @@ namespace Yarp
 		{
 			get
 			{
-				try { using (Network network = new Network()) ; }
+				try { using (Network network = new Network()) return true; }
 				catch (DllNotFoundException) { return false; }
-
-				return true;
 			}
 		}
 		
