@@ -25,6 +25,6 @@ namespace Visualizer.Environment.Drawing.Values
 	{
 		//FittingValueManager FittingValueManager { get { return (FittingValueManager)Diagram.ValueManager; } }
 
-		public FittingValueManagerSettings(Diagram diagram) : base(diagram) { }
+		public FittingValueManagerSettings(string xElementName, Diagram diagram) : base(xElementName, diagram) { }
 	}
 }

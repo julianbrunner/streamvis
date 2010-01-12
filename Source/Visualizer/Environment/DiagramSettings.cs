@@ -59,6 +59,8 @@ namespace Visualizer.Environment
 					graphSettings.XElement,
 					new XElement("TimeManagerType", TimeManagerType),
 					timeManager.XElement,
+					new XElement("ValueManagerType", ValueManagerType),
+					valueManager.XElement,
 					axisX.XElement,
 					axisY.XElement,
 					layouter.XElement,
@@ -73,6 +75,8 @@ namespace Visualizer.Environment
 				graphSettings.XElement = value.Element(graphSettings.XElementName);
 				TimeManagerType = (TimeManagerType)Enum.Parse(typeof(TimeManagerType), (string)value.Element("TimeManagerType"));
 				timeManager.XElement = value.Element(timeManager.XElementName);
+				ValueManagerType = (ValueManagerType)Enum.Parse(typeof(ValueManagerType), (string)value.Element("ValueManagerType"));
+				valueManager.XElement = value.Element(valueManager.XElementName);
 				axisX.XElement = value.Element(axisX.XElementName);
 				axisY.XElement = value.Element(axisY.XElementName);
 				layouter.XElement = value.Element(layouter.XElementName);
@@ -206,8 +210,8 @@ namespace Visualizer.Environment
 
 			switch (valueManagerType = GetValueManagerType(diagram.ValueManager))
 			{
-				case ValueManagerType.Fixed: valueManager = new FixedValueManagerSettings(diagram); break;
-				case ValueManagerType.Fitting: valueManager = new FittingValueManagerSettings(diagram); break;
+				case ValueManagerType.Fixed: valueManager = new FixedValueManagerSettings("FixedValueManagerSettings", diagram); break;
+				case ValueManagerType.Fitting: valueManager = new FittingValueManagerSettings("FittingValueManagerSettings", diagram); break;
 				default: throw new InvalidOperationException();
 			}
 
