@@ -32,6 +32,7 @@ using Visualizer.Drawing.Data;
 using Visualizer.Drawing.Timing;
 using Visualizer.Drawing.Values;
 using Visualizer.Environment;
+using System.ComponentModel;
 
 namespace Visualizer
 {
@@ -188,27 +189,35 @@ namespace Visualizer
 			source.ClearData();
 			foreach (Graph graph in diagram.Graphs) graph.StreamManager.EntryCache.Clear();
 		}
-		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			using (AboutBox aboutBox = new AboutBox()) aboutBox.ShowDialog();
-		}
-		private void changeNameToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			using (TextDialog textDialog = new TextDialog("Stream Name", "Please enter the new name for the stream", string.Empty))
-				if (streamsList.SelectedItems.Count > 0 && textDialog.ShowDialog() == DialogResult.OK)
-					SetName(streamsList.SelectedItems[0], textDialog.Result);
-		}
-		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (streamsList.SelectedItems.Count > 0 && colorDialog.ShowDialog() == DialogResult.OK)
-				SetColor(streamsList.SelectedItems[0], colorDialog.Color);
-		}
 		private void resetToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			diagram.TimeManager = new ContinuousTimeManager(timer);
 			diagram.ValueManager = new FittingValueManager(diagram);
 
 			settings.Diagram.Initialize();
+		}
+		private void freezeToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			diagram.TimeManager.IsUpdated = freezeToolStripMenuItem.Checked;
+		}
+		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (AboutBox aboutBox = new AboutBox()) aboutBox.ShowDialog();
+		}
+		private void streamsContextMenuStrip_Opening(object sender, CancelEventArgs e)
+		{
+			if (streamsList.SelectedItems.Count != 1) e.Cancel = true;
+		}
+		private void changeNameToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			using (TextDialog textDialog = new TextDialog("Stream Name", "Please enter the new name for the stream", string.Empty))
+				if (streamsList.SelectedItems.Count == 1 && textDialog.ShowDialog() == DialogResult.OK)
+					SetName(streamsList.SelectedItems[0], textDialog.Result);
+		}
+		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (streamsList.SelectedItems.Count == 1 && colorDialog.ShowDialog() == DialogResult.OK)
+				SetColor(streamsList.SelectedItems[0], colorDialog.Color);
 		}
 		private void zoomSelector_Select(object sender, EventArgs<Rectangle> e)
 		{

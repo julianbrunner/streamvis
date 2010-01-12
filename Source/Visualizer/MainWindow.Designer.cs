@@ -74,6 +74,8 @@ namespace Visualizer
 			this.clearDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.diagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.freezeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exportCaptureFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -208,7 +210,8 @@ namespace Visualizer
             this.changeNameToolStripMenuItem,
             this.changeColorToolStripMenuItem});
 			this.streamsContextMenuStrip.Name = "streamsContextMenuStrip";
-			this.streamsContextMenuStrip.Size = new System.Drawing.Size(151, 48);
+			this.streamsContextMenuStrip.Size = new System.Drawing.Size(153, 70);
+			this.streamsContextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.streamsContextMenuStrip_Opening);
 			// 
 			// changeNameToolStripMenuItem
 			// 
@@ -252,6 +255,7 @@ namespace Visualizer
 			this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.captureToolStripMenuItem,
             this.viewToolStripMenuItem,
+            this.diagramToolStripMenuItem,
             this.helpToolStripMenuItem});
 			this.mainMenu.Location = new System.Drawing.Point(0, 0);
 			this.mainMenu.Name = "mainMenu";
@@ -339,9 +343,26 @@ namespace Visualizer
 			// 
 			this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
 			this.resetToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-			this.resetToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+			this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.resetToolStripMenuItem.Text = "&Reset";
 			this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+			// 
+			// diagramToolStripMenuItem
+			// 
+			this.diagramToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.freezeToolStripMenuItem});
+			this.diagramToolStripMenuItem.Name = "diagramToolStripMenuItem";
+			this.diagramToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+			this.diagramToolStripMenuItem.Text = "Diagram";
+			// 
+			// freezeToolStripMenuItem
+			// 
+			this.freezeToolStripMenuItem.CheckOnClick = true;
+			this.freezeToolStripMenuItem.Name = "freezeToolStripMenuItem";
+			this.freezeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+			this.freezeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.freezeToolStripMenuItem.Text = "&Freeze";
+			this.freezeToolStripMenuItem.Click += new System.EventHandler(this.freezeToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -446,6 +467,8 @@ namespace Visualizer
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem diagramToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem freezeToolStripMenuItem;
 		
 	}
 }
