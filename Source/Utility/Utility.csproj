@@ -51,6 +51,7 @@
     <Compile Include="Range.cs" />
     <Compile Include="SearchList.cs" />
     <Compile Include="Utilities\ConsoleUtility.cs" />
+    <Compile Include="Utilities\ColorUtility.cs" />
     <Compile Include="Utilities\DoubleUtility.cs" />
     <Compile Include="Utilities\EnumerableUtility.cs" />
     <Compile Include="Utilities\RectangleUtility.cs" />

@@ -18,8 +18,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using Utility;
+using Utility.Utilities;
 
 namespace Visualizer
 {
@@ -170,13 +170,13 @@ namespace Visualizer
 					break;
 				case "pc":
 					if (details.Length != 2) InvalidParameter(option);
-					try { DiagramColor = HtmlStringToColor(details[1]); }
+					try { DiagramColor = ColorUtility.FromHtmlString(details[1]); }
 					catch (FormatException) { InvalidParameter(option); }
 					catch (ArgumentOutOfRangeException) { InvalidParameter(option); }
 					break;
 				case "bc":
 					if (details.Length != 2) InvalidParameter(option);
-					try { BackgroundColor = HtmlStringToColor(details[1]); }
+					try { BackgroundColor = ColorUtility.FromHtmlString(details[1]); }
 					catch (FormatException) { InvalidParameter(option); }
 					catch (ArgumentOutOfRangeException) { InvalidParameter(option); }
 					break;
@@ -184,19 +184,6 @@ namespace Visualizer
 			}
 		}
 
-		static Color HtmlStringToColor(string htmlString)
-		{
-			if (htmlString.Length != 6) throw new ArgumentOutOfRangeException("htmlString");
-
-			try
-			{
-				byte red = byte.Parse(htmlString.Substring(0, 2), NumberStyles.HexNumber);
-				byte green = byte.Parse(htmlString.Substring(2, 2), NumberStyles.HexNumber);
-				byte blue = byte.Parse(htmlString.Substring(4, 2), NumberStyles.HexNumber);
-				return Color.FromArgb(red, green, blue);
-			}
-			catch (FormatException) { throw new ArgumentOutOfRangeException("htmlString"); }
-		}
 		static void InvalidParameter(string parameter)
 		{
 			throw new InvalidOperationException("Invalid parameter: \"" + parameter + "\"");

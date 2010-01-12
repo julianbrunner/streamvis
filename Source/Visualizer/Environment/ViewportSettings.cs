@@ -17,7 +17,9 @@
 
 using System.ComponentModel;
 using System.Drawing;
+using System.Xml.Linq;
 using Graphics;
+using Utility.Extensions;
 
 namespace Visualizer.Environment
 {
@@ -25,6 +27,21 @@ namespace Visualizer.Environment
 	class ViewportSettings
 	{
 		readonly Viewport viewport;
+
+		public static string XElementName { get { return "ViewportSettings"; } }
+
+		public XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					new XElement("VerticalSynchronization", VerticalSynchronization),
+					new XElement("BackgroundColor", BackgroundColor.ToHtmlString())
+				);
+			}
+		}
 
 		[DisplayName("Vertical Synchronization")]
 		public bool VerticalSynchronization

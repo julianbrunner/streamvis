@@ -15,19 +15,26 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Drawing;
+using System.Globalization;
 
-namespace Utility.Extensions
+namespace Utility.Utilities
 {
-	public static class ColorExtesions
+	public static class ColorUtility
 	{
-		public static Color Invert(this Color color)
+		public static Color FromHtmlString(string htmlString)
 		{
-			return Color.FromArgb(0xFF - color.R, 0xFF - color.G, 0xFF - color.B);
-		}
-		public static string ToHtmlString(this Color color)
-		{
-			return color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+			if (htmlString.Length != 6) throw new ArgumentOutOfRangeException("htmlString");
+
+			try
+			{
+				byte red = byte.Parse(htmlString.Substring(0, 2), NumberStyles.HexNumber);
+				byte green = byte.Parse(htmlString.Substring(2, 2), NumberStyles.HexNumber);
+				byte blue = byte.Parse(htmlString.Substring(4, 2), NumberStyles.HexNumber);
+				return Color.FromArgb(red, green, blue);
+			}
+			catch (FormatException) { throw new ArgumentOutOfRangeException("htmlString"); }
 		}
 	}
 }

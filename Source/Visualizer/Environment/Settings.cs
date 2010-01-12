@@ -19,6 +19,7 @@ using System.ComponentModel;
 using Graphics;
 using Visualizer.Data;
 using Visualizer.Drawing;
+using System.Xml.Linq;
 
 namespace Visualizer.Environment
 {
@@ -32,6 +33,23 @@ namespace Visualizer.Environment
 		readonly RectangleSelectorSettings unZoomSelector;
 		readonly DraggerSettings panDragger;
 		readonly FrameCounterSettings frameCounter;
+
+		public static string XElementName { get { return "Settings"; } }
+
+		public XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					Viewport.XElement,
+					new XElement("MinimalMode", MinimalMode),
+					new XElement("StreamListVisible", StreamListVisible),
+					new XElement("PropertiesVisible", PropertiesVisible)
+				);
+			}
+		}
 
 		[DisplayName("Viewport")]
 		public ViewportSettings Viewport { get { return viewport; } }

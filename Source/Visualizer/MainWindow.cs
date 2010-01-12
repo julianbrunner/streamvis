@@ -223,6 +223,10 @@ namespace Visualizer
 		{
 			diagram.TimeManager.IsUpdated = !diagram.TimeManager.IsUpdated;
 		}
+		private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			settings.XElement.Save("Settings.xml");
+		}
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			using (AboutBox aboutBox = new AboutBox()) aboutBox.ShowDialog();
