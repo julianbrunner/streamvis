@@ -47,12 +47,12 @@ namespace Graphics
 
 		public void Initialize()
 		{
-			GL.ClearColor(base.BackColor);
+			initialized = true;
+
+			BackColor = BackColor;
 
 			Layout += Viewport_Layout;
 			Application.Idle += Application_Idle;
-
-			initialized = true;
 		}
 		public void AddComponent(IComponent component)
 		{

@@ -31,6 +31,7 @@ namespace Graphics
 		static readonly Size characterSize = new Size(7, 12);
 		static readonly string characters = "+-.0123456789E";
 
+		bool initialized = false;
 		bool lineSmoothing;
 		bool alphaBlending;
 
@@ -41,17 +42,30 @@ namespace Graphics
 		public bool LineSmoothing
 		{
 			get { return lineSmoothing; }
-			set { SetCapability(EnableCap.LineSmooth, lineSmoothing = value); }
+			set
+			{
+				lineSmoothing = value;
+
+				if (initialized) SetCapability(EnableCap.LineSmooth, lineSmoothing);
+			}
 		}
 		public bool AlphaBlending
 		{
 			get { return alphaBlending; }
-			set { SetCapability(EnableCap.Blend, alphaBlending = value); }
+			set
+			{
+				alphaBlending = value;
+
+				if (initialized) SetCapability(EnableCap.Blend, alphaBlending);
+			}
 		}
 
 		public Drawer(Viewport viewport)
 		{
 			viewport.Load += viewport_Load;
+
+			LineSmoothing = true;
+			AlphaBlending = true;
 		}
 		~Drawer()
 		{
@@ -138,8 +152,10 @@ namespace Graphics
 
 		void viewport_Load(object sender, EventArgs e)
 		{
-			LineSmoothing = true;
-			AlphaBlending = true;
+			initialized = true;
+
+			LineSmoothing = LineSmoothing;
+			AlphaBlending = AlphaBlending;
 
 			GL.EnableClientState(EnableCap.VertexArray);
 
