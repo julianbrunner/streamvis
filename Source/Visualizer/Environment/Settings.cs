@@ -66,7 +66,7 @@ namespace Visualizer.Environment
 				unZoomSelector.XElement = value.Element(unZoomSelector.XElementName);
 				panDragger.XElement = value.Element(panDragger.XElementName);
 				frameCounter.XElement = value.Element(frameCounter.XElementName);
-				MinimalMode = (bool)value.Element("VerticalSynchronization");
+				MinimalMode = (bool)value.Element("MinimalMode");
 				StreamListVisible = (bool)value.Element("StreamListVisible");
 				PropertiesVisible = (bool)value.Element("PropertiesVisible");
 			}
