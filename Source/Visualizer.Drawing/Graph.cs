@@ -89,20 +89,20 @@ namespace Visualizer.Drawing
 
 					if (startEntry != null)
 					{
-						vertices[position++] = (float)segmentTimeMapping.Output.Clamp(segmentTimeMapping.ForwardMap(startEntry.Value.Time));
-						vertices[position++] = (float)valueMapping.Output.Clamp(valueMapping.ForwardMap(startEntry.Value.Value));
+						vertices[position++] = (float)segmentTimeMapping.ForwardMap(startEntry.Value.Time);
+						vertices[position++] = (float)valueMapping.ForwardMap(startEntry.Value.Value);
 					}
 
 					foreach (Entry entry in segment.Entries)
 					{
-						vertices[position++] = (float)segmentTimeMapping.Output.Clamp(segmentTimeMapping.ForwardMap(entry.Time));
-						vertices[position++] = (float)valueMapping.Output.Clamp(valueMapping.ForwardMap(entry.Value));
+						vertices[position++] = (float)segmentTimeMapping.ForwardMap(entry.Time);
+						vertices[position++] = (float)valueMapping.ForwardMap(entry.Value);
 					}
 
 					if (endEntry != null)
 					{
-						vertices[position++] = (float)segmentTimeMapping.Output.Clamp(segmentTimeMapping.ForwardMap(endEntry.Value.Time));
-						vertices[position++] = (float)valueMapping.Output.Clamp(valueMapping.ForwardMap(endEntry.Value.Value));
+						vertices[position++] = (float)segmentTimeMapping.ForwardMap(endEntry.Value.Time);
+						vertices[position++] = (float)valueMapping.ForwardMap(endEntry.Value.Value);
 					}
 
 					drawer.DrawLineStrip(vertices, diagram.Layouter.Transformation, Color, (float)diagram.GraphSettings.LineWidth);
