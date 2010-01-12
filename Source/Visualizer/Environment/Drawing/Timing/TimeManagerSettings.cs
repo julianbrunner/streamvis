@@ -15,17 +15,42 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
+using System.Xml.Linq;
+using Utility;
 using Visualizer.Drawing;
 
 namespace Visualizer.Environment.Drawing.Timing
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	abstract class TimeManagerSettings
+	abstract class TimeManagerSettings : XSerializable
 	{
 		readonly Diagram diagram;
 
 		protected Diagram Diagram { get { return diagram; } }
+
+		public override XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					new XElement("IsUpdated", IsUpdated),
+					new XElement("Time", Time),
+					new XElement("Width", Width)
+				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				IsUpdated = (bool)value.Element("IsUpdated");
+				Time = (double)value.Element("Time");
+				Width = (double)value.Element("Width");
+			}
+		}
 
 		[DisplayName("Update")]
 		public bool IsUpdated
@@ -46,7 +71,8 @@ namespace Visualizer.Environment.Drawing.Timing
 			set { diagram.TimeManager.Width = value; }
 		}
 
-		protected TimeManagerSettings(Diagram diagram)
+		protected TimeManagerSettings(string xElementName, Diagram diagram)
+			: base(xElementName)
 		{
 			this.diagram = diagram;
 		}

@@ -57,6 +57,8 @@ namespace Visualizer.Environment
 				(
 					XElementName,
 					graphSettings.XElement,
+					new XElement("TimeManagerType", TimeManagerType),
+					timeManager.XElement,
 					axisX.XElement,
 					axisY.XElement,
 					layouter.XElement,
@@ -69,6 +71,8 @@ namespace Visualizer.Environment
 				if (value.Name != XElementName) throw new ArgumentException("value");
 
 				graphSettings.XElement = value.Element(graphSettings.XElementName);
+				TimeManagerType = (TimeManagerType)Enum.Parse(typeof(TimeManagerType), (string)value.Element("TimeManagerType"));
+				timeManager.XElement = value.Element(timeManager.XElementName);
 				axisX.XElement = value.Element(axisX.XElementName);
 				axisY.XElement = value.Element(axisY.XElementName);
 				layouter.XElement = value.Element(layouter.XElementName);
@@ -194,9 +198,9 @@ namespace Visualizer.Environment
 
 			switch (timeManagerType = GetTimeManagerType(diagram.TimeManager))
 			{
-				case TimeManagerType.Continuous: timeManager = new ContinuousTimeManagerSettings(diagram); break;
-				case TimeManagerType.Shiftting: timeManager = new ShiftingTimeManagerSettings(diagram); break;
-				case TimeManagerType.Wrapping: timeManager = new WrappingTimeManagerSettings(diagram); break;
+				case TimeManagerType.Continuous: timeManager = new ContinuousTimeManagerSettings("ContinuousTimeManagerSettings", diagram); break;
+				case TimeManagerType.Shiftting: timeManager = new ShiftingTimeManagerSettings("ShiftingTimeManagerSettings", diagram); break;
+				case TimeManagerType.Wrapping: timeManager = new WrappingTimeManagerSettings("WrappingTimeManagerSettings", diagram); break;
 				default: throw new InvalidOperationException();
 			}
 

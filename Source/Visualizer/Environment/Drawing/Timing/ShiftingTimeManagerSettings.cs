@@ -15,7 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
+using System.Xml.Linq;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Timing;
 
@@ -26,6 +28,24 @@ namespace Visualizer.Environment.Drawing.Timing
 	{
 		ShiftingTimeManager ShiftingTimeManager { get { return (ShiftingTimeManager)Diagram.TimeManager; } }
 
+		public override XElement XElement
+		{
+			get
+			{
+				XElement xElement = base.XElement;
+
+				xElement.Add(new XElement("ShiftLength", ShiftLength));
+
+				return xElement;
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				ShiftLength = (double)value.Element("ShiftLength");
+			}
+		}
+
 		[DisplayName("Shift Length")]
 		public double ShiftLength
 		{
@@ -33,6 +53,6 @@ namespace Visualizer.Environment.Drawing.Timing
 			set { ShiftingTimeManager.ShiftLength = value; }
 		}
 
-		public ShiftingTimeManagerSettings(Diagram diagram) : base(diagram) { }
+		public ShiftingTimeManagerSettings(string xElementName, Diagram diagram) : base(xElementName, diagram) { }
 	}
 }

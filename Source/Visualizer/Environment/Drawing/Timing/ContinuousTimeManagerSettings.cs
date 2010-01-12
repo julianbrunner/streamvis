@@ -25,6 +25,6 @@ namespace Visualizer.Environment.Drawing.Timing
 	{
 		//ContinuousTimeManager ContinuousTimeManager { get { return (ContinuousTimeManager)Diagram.TimeManager; } }
 
-		public ContinuousTimeManagerSettings(Diagram diagram) : base(diagram) { }
+		public ContinuousTimeManagerSettings(string xElementName, Diagram diagram) : base(xElementName, diagram) { }
 	}
 }
