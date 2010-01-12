@@ -36,7 +36,7 @@ namespace Visualizer.Data
 
 		public Port(XElement port)
 		{
-			this.name = (string)port.Element("name");
+			this.name = (string)port.Element("Name");
 			this.streams = (from stream in port.Elements(Stream.XElementName) select new Stream(stream)).ToArray();
 		}
 		public Port(string name, IEnumerable<Stream> streams)
