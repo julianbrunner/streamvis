@@ -122,7 +122,7 @@ namespace Visualizer
 
 			Console.WriteLine("Initializing settings...");
 			this.settings = new Settings(properties, this, viewport, drawer, timer, diagram, zoomSelector, unZoomSelector, panDragger, frameCounter);
-			this.settings.XElement = XElement.Load("Settings.xml");
+			if (System.IO.File.Exists("Settings.xml")) this.settings.XElement = XElement.Load("Settings.xml");
 			properties.SelectedObject = settings;
 
 			Console.WriteLine("Adding components...");
