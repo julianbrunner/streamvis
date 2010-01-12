@@ -15,16 +15,41 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Xml.Linq;
+using Utility;
+using Utility.Extensions;
+using Utility.Utilities;
 using Visualizer.Drawing;
 
 namespace Visualizer.Environment.Drawing
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	class AxisXSettings
+	class AxisXSettings : XSerializable
 	{
 		readonly Diagram diagram;
+
+		public XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					new XElement("MarkerCount", MarkerCount),
+					new XElement("Color", Color.ToHtmlString())
+				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				MarkerCount = (int)value.Element("MarkerCount");
+				Color = ColorUtility.FromHtmlString((string)value.Element("Color"));
+			}
+		}
 
 		[DisplayName("Marker Count")]
 		public int MarkerCount
@@ -39,7 +64,8 @@ namespace Visualizer.Environment.Drawing
 			set { diagram.AxisX.Color = value; }
 		}
 
-		public AxisXSettings(Diagram diagram)
+		public AxisXSettings(string xElementName, Diagram diagram)
+			: base(xElementName)
 		{
 			this.diagram = diagram;
 		}

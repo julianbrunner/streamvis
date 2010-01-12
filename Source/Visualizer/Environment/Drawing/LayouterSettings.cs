@@ -15,18 +15,51 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using Utility;
 using Visualizer.Drawing;
 
 namespace Visualizer.Environment.Drawing
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	class LayouterSettings
+	class LayouterSettings : XSerializable
 	{
 		readonly Diagram diagram;
 
-		// TODO: Do we have to check for bad user input?
+		public XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					new XElement
+					(
+						"BaseMargin",
+						new XElement("Left", BaseMargin.Left),
+						new XElement("Right", BaseMargin.Right),
+						new XElement("Top", BaseMargin.Top),
+						new XElement("Bottom", BaseMargin.Bottom)
+					)
+				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				BaseMargin = new Padding
+				(
+					(int)value.Element("BaseMargin").Element("Left"),
+					(int)value.Element("BaseMargin").Element("Top"),
+					(int)value.Element("BaseMargin").Element("Right"),
+					(int)value.Element("BaseMargin").Element("Bottom")
+				);
+			}
+		}
+
 		[DisplayName("Base Margin")]
 		public Padding BaseMargin
 		{
@@ -34,7 +67,8 @@ namespace Visualizer.Environment.Drawing
 			set { diagram.Layouter.BaseMargin = value; }
 		}
 
-		public LayouterSettings(Diagram diagram)
+		public LayouterSettings(string xElementName, Diagram diagram)
+			: base(xElementName)
 		{
 			this.diagram = diagram;
 		}

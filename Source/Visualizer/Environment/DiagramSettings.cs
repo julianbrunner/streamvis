@@ -57,6 +57,9 @@ namespace Visualizer.Environment
 				(
 					XElementName,
 					graphSettings.XElement,
+					axisX.XElement,
+					axisY.XElement,
+					layouter.XElement,
 					new XElement("IsUpdated", IsUpdated),
 					new XElement("IsDrawn", IsDrawn)
 				);
@@ -66,6 +69,9 @@ namespace Visualizer.Environment
 				if (value.Name != XElementName) throw new ArgumentException("value");
 
 				graphSettings.XElement = value.Element(graphSettings.XElementName);
+				axisX.XElement = value.Element(axisX.XElementName);
+				axisY.XElement = value.Element(axisY.XElementName);
+				layouter.XElement = value.Element(layouter.XElementName);
 				IsUpdated = (bool)value.Element("IsUpdated");
 				IsDrawn = (bool)value.Element("IsDrawn");
 			}
@@ -208,10 +214,10 @@ namespace Visualizer.Environment
 				default: throw new InvalidOperationException();
 			}
 
-			axisX = new AxisXSettings(diagram);
-			axisY = new AxisYSettings(diagram);
+			axisX = new AxisXSettings("AxisXSettings", diagram);
+			axisY = new AxisYSettings("AxisYSettings", diagram);
 
-			layouter = new LayouterSettings(diagram);
+			layouter = new LayouterSettings("LayouterSettings", diagram);
 
 			propertyGrid.Refresh();
 		}
