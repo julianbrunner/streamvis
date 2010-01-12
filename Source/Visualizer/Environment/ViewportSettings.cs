@@ -15,11 +15,13 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Xml.Linq;
 using Graphics;
 using Utility.Extensions;
+using Utility.Utilities;
 
 namespace Visualizer.Environment
 {
@@ -40,6 +42,13 @@ namespace Visualizer.Environment
 					new XElement("VerticalSynchronization", VerticalSynchronization),
 					new XElement("BackgroundColor", BackgroundColor.ToHtmlString())
 				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				VerticalSynchronization = (bool)value.Element("VerticalSynchronization");
+				BackgroundColor = ColorUtility.FromHtmlString((string)value.Element("BackgroundColor"));
 			}
 		}
 

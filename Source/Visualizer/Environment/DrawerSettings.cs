@@ -15,7 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
+using System.Xml.Linq;
 using Graphics;
 
 namespace Visualizer.Environment
@@ -24,6 +26,28 @@ namespace Visualizer.Environment
 	class DrawerSettings
 	{
 		readonly Drawer drawer;
+
+		public static string XElementName { get { return "DrawerSettings"; } }
+
+		public XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					new XElement("LineSmoothing", LineSmoothing),
+					new XElement("AlphaBlending", AlphaBlending)
+				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				LineSmoothing = (bool)value.Element("LineSmoothing");
+				AlphaBlending = (bool)value.Element("AlphaBlending");
+			}
+		}
 
 		[DisplayName("Line Smoothing")]
 		public bool LineSmoothing

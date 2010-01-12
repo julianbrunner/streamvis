@@ -15,11 +15,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
+using System.Xml.Linq;
 using Graphics;
 using Visualizer.Data;
 using Visualizer.Drawing;
-using System.Xml.Linq;
 
 namespace Visualizer.Environment
 {
@@ -43,11 +44,22 @@ namespace Visualizer.Environment
 				return new XElement
 				(
 					XElementName,
-					Viewport.XElement,
+					viewport.XElement,
+					drawer.XElement,
 					new XElement("MinimalMode", MinimalMode),
 					new XElement("StreamListVisible", StreamListVisible),
 					new XElement("PropertiesVisible", PropertiesVisible)
 				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				viewport.XElement = value.Element(ViewportSettings.XElementName);
+				drawer.XElement = value.Element(DrawerSettings.XElementName);
+				MinimalMode = (bool)value.Element("VerticalSynchronization");
+				StreamListVisible = (bool)value.Element("StreamListVisible");
+				PropertiesVisible = (bool)value.Element("PropertiesVisible");
 			}
 		}
 
