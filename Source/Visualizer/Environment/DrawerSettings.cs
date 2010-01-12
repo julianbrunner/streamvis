@@ -28,7 +28,7 @@ namespace Visualizer.Environment
 	{
 		readonly Drawer drawer;
 
-		public XElement XElement
+		public override XElement XElement
 		{
 			get
 			{

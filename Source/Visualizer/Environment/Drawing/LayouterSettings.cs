@@ -29,7 +29,7 @@ namespace Visualizer.Environment.Drawing
 	{
 		readonly Diagram diagram;
 
-		public XElement XElement
+		public override XElement XElement
 		{
 			get
 			{

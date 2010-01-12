@@ -32,7 +32,7 @@ namespace Visualizer.Environment
 	{
 		readonly RectangleSelector rectangleSelector;
 
-		public XElement XElement
+		public override XElement XElement
 		{
 			get
 			{

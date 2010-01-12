@@ -29,7 +29,7 @@ namespace Visualizer.Environment
 	{
 		readonly Dragger dragger;
 
-		public XElement XElement
+		public override XElement XElement
 		{
 			get
 			{

@@ -36,7 +36,7 @@ namespace Visualizer.Environment
 		readonly DraggerSettings panDragger;
 		readonly FrameCounterSettings frameCounter;
 
-		public XElement XElement
+		public override XElement XElement
 		{
 			get
 			{

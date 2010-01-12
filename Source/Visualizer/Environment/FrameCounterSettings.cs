@@ -15,14 +15,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Xml.Linq;
 using Graphics;
 using Utility;
-using System.Xml.Linq;
-using System;
-using Utility.Utilities;
 using Utility.Extensions;
+using Utility.Utilities;
 
 namespace Visualizer.Environment
 {
@@ -31,7 +31,7 @@ namespace Visualizer.Environment
 	{
 		readonly VisibleFrameCounter frameCounter;
 
-		public XElement XElement
+		public override XElement XElement
 		{
 			get
 			{

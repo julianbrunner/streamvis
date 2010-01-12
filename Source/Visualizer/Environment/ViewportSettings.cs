@@ -31,7 +31,7 @@ namespace Visualizer.Environment
 	{
 		readonly Viewport viewport;
 
-		public XElement XElement
+		public override XElement XElement
 		{
 			get
 			{

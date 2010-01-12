@@ -49,7 +49,7 @@ namespace Visualizer.Environment
 		AxisYSettings axisY;
 		LayouterSettings layouter;
 
-		public XElement XElement
+		public override XElement XElement
 		{
 			get
 			{
