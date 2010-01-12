@@ -15,17 +15,38 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
+using System.Xml.Linq;
+using Utility;
 using Visualizer.Drawing;
 
 namespace Visualizer.Environment.Drawing.Data
 {
 	[TypeConverter(typeof(ExpansionConverter))]
-	abstract class DataManagerSettings
+	abstract class DataManagerSettings : XSerializable
 	{
 		readonly Diagram diagram;
 
 		protected Diagram Diagram { get { return diagram; } }
+
+		public override XElement XElement
+		{
+			get
+			{
+				return new XElement
+				(
+					XElementName,
+					new XElement("ClearData", ClearData)
+				);
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				ClearData = (bool)value.Element("ClearData");
+			}
+		}
 
 		[DisplayName("Clear Data")]
 		public bool ClearData
@@ -34,7 +55,8 @@ namespace Visualizer.Environment.Drawing.Data
 			set { Diagram.DataManager.ClearData = value; }
 		}
 
-		protected DataManagerSettings(Diagram diagram)
+		protected DataManagerSettings(string xElementName, Diagram diagram)
+			: base(xElementName)
 		{
 			this.diagram = diagram;
 		}

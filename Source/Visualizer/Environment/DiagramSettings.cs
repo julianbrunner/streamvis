@@ -61,6 +61,8 @@ namespace Visualizer.Environment
 					timeManager.XElement,
 					new XElement("ValueManagerType", ValueManagerType),
 					valueManager.XElement,
+					new XElement("DataManagerType", DataManagerType),
+					dataManager.XElement,
 					axisX.XElement,
 					axisY.XElement,
 					layouter.XElement,
@@ -77,6 +79,8 @@ namespace Visualizer.Environment
 				timeManager.XElement = value.Element(timeManager.XElementName);
 				ValueManagerType = (ValueManagerType)Enum.Parse(typeof(ValueManagerType), (string)value.Element("ValueManagerType"));
 				valueManager.XElement = value.Element(valueManager.XElementName);
+				DataManagerType = (DataManagerType)Enum.Parse(typeof(DataManagerType), (string)value.Element("DataManagerType"));
+				dataManager.XElement = value.Element(dataManager.XElementName);
 				axisX.XElement = value.Element(axisX.XElementName);
 				axisY.XElement = value.Element(axisY.XElementName);
 				layouter.XElement = value.Element(layouter.XElementName);
@@ -217,8 +221,8 @@ namespace Visualizer.Environment
 
 			switch (dataManagerType = GetDataManagerType(diagram.DataManager))
 			{
-				case DataManagerType.PerSecond: dataManager = new PerSecondDataManagerSettings(diagram); break;
-				case DataManagerType.PerPixel: dataManager = new PerPixelDataManagerSettings(diagram); break;
+				case DataManagerType.PerSecond: dataManager = new PerSecondDataManagerSettings("PerSecondDataManagerSettings", diagram); break;
+				case DataManagerType.PerPixel: dataManager = new PerPixelDataManagerSettings("PerPixelDataManagerSettings", diagram); break;
 				default: throw new InvalidOperationException();
 			}
 

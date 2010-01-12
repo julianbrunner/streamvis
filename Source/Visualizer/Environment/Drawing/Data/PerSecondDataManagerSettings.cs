@@ -15,7 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
+using System.Xml.Linq;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Data;
 
@@ -26,6 +28,24 @@ namespace Visualizer.Environment.Drawing.Data
 	{
 		PerSecondDataManager PerSecondDataManager { get { return (PerSecondDataManager)Diagram.DataManager; } }
 
+		public override XElement XElement
+		{
+			get
+			{
+				XElement xElement = base.XElement;
+
+				xElement.Add(new XElement("SamplesPerSecond", SamplesPerSecond));
+
+				return xElement;
+			}
+			set
+			{
+				if (value.Name != XElementName) throw new ArgumentException("value");
+
+				SamplesPerSecond = (double)value.Element("SamplesPerSecond");
+			}
+		}
+
 		[DisplayName("Samples / sec")]
 		public double SamplesPerSecond
 		{
@@ -33,6 +53,6 @@ namespace Visualizer.Environment.Drawing.Data
 			set { PerSecondDataManager.SamplesPerSecond = value; }
 		}
 
-		public PerSecondDataManagerSettings(Diagram diagram) : base(diagram) { }
+		public PerSecondDataManagerSettings(string xElementName, Diagram diagram) : base(xElementName, diagram) { }
 	}
 }
