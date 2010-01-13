@@ -207,7 +207,6 @@ namespace Visualizer
 			this.streamsList.UseCompatibleStateImageBehavior = false;
 			this.streamsList.View = System.Windows.Forms.View.Details;
 			this.streamsList.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.streamsList_ItemChecked);
-			this.streamsList.ItemActivate += new System.EventHandler(this.changeNameToolStripMenuItem_Click);
 			// 
 			// nameColumnHeader
 			// 
