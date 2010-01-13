@@ -208,8 +208,13 @@ namespace Visualizer
 		private void invertColorsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			viewport.BackColor = viewport.BackColor.Invert();
+
 			diagram.AxisX.Color = diagram.AxisX.Color.Invert();
 			diagram.AxisY.Color = diagram.AxisY.Color.Invert();
+			
+			zoomSelector.Color = zoomSelector.Color.Invert();
+			unZoomSelector.Color = unZoomSelector.Color.Invert();
+			frameCounter.Color = frameCounter.Color.Invert();
 		}
 		private void resetToolStripMenuItem_Click(object sender, EventArgs e)
 		{
