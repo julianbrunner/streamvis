@@ -65,6 +65,7 @@ namespace Visualizer.Environment.Drawing.Timing
 			set { diagram.TimeManager.Time = value; }
 		}
 		[DisplayName("Width")]
+		[Description("Lets you specify the width of the drawing-area in total seconds.")]
 		public double Width
 		{
 			get { return diagram.TimeManager.Width; }

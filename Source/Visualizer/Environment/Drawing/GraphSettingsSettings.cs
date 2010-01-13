@@ -49,6 +49,7 @@ namespace Visualizer.Environment.Drawing
 		}
 
 		[DisplayName("Extend Graphs")]
+		[Description("Enables or disables the graph extension feature. When graph extension is enabled, all graphs that have at least one sampled data entry are extended across the whole width of the coordinate system using known adjacent values.")]
 		public bool ExtendGraphs
 		{
 			get { return diagram.GraphSettings.ExtendGraphs; }

@@ -49,6 +49,7 @@ namespace Visualizer.Environment.Drawing.Data
 		}
 
 		[DisplayName("Clear Data")]
+		[Description("Enables or disables the regular clearing of old received data. Enable if you plan to run the visualizer for a long time and you don't want to save the results.")]
 		public bool ClearData
 		{
 			get { return Diagram.DataManager.ClearData; }
