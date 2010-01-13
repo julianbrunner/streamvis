@@ -50,9 +50,9 @@ namespace Visualizer.Environment
 					unZoomSelector.XElement,
 					panDragger.XElement,
 					frameCounter.XElement,
-					new XElement("MinimalMode", MinimalMode),
-					new XElement("StreamListVisible", StreamListVisible),
-					new XElement("PropertiesVisible", PropertiesVisible)
+					new XElement("MinimalMode", MinimalMode.ToString().ToLowerInvariant()),
+					new XElement("StreamListVisible", StreamListVisible.ToString().ToLowerInvariant()),
+					new XElement("PropertiesVisible", PropertiesVisible.ToString().ToLowerInvariant())
 				);
 			}
 			set

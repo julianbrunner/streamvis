@@ -37,7 +37,7 @@ namespace Visualizer.Environment.Drawing.Data
 				return new XElement
 				(
 					XElementName,
-					new XElement("ClearData", ClearData)
+					new XElement("ClearData", ClearData.ToString().ToLowerInvariant())
 				);
 			}
 			set

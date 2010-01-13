@@ -66,8 +66,8 @@ namespace Visualizer.Environment
 					axisX.XElement,
 					axisY.XElement,
 					layouter.XElement,
-					new XElement("IsUpdated", IsUpdated),
-					new XElement("IsDrawn", IsDrawn)
+					new XElement("IsUpdated", IsUpdated.ToString().ToLowerInvariant()),
+					new XElement("IsDrawn", IsDrawn.ToString().ToLowerInvariant())
 				);
 			}
 			set

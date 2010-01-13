@@ -35,7 +35,7 @@ namespace Visualizer.Environment.Drawing
 				return new XElement
 				(
 					XElementName,
-					new XElement("ExtendGraphs", ExtendGraphs),
+					new XElement("ExtendGraphs", ExtendGraphs.ToString().ToLowerInvariant()),
 					new XElement("LineWidth", LineWidth)
 				);
 			}
