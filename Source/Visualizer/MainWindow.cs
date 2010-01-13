@@ -195,11 +195,11 @@ namespace Visualizer
 		}
 		private void streamsListToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			streamsList.Visible = !streamsList.Visible;
+			streamsListContainer.Panel1Collapsed = !streamsListContainer.Panel1Collapsed;
 		}
 		private void propertiesToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			properties.Visible = !properties.Visible;
+			propertiesContainer.Panel2Collapsed = !propertiesContainer.Panel2Collapsed;
 		}
 		private void diagramToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
