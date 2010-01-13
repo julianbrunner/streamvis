@@ -55,6 +55,8 @@ namespace Visualizer
 		Source source;
 		string filePath;
 
+		static string SettingsPath { get { return System.IO.Path.Combine(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "streamvis"), "Settings.xml"); } }
+		
 		public bool StreamListVisible
 		{
 			get { return !streamsListContainer.Panel1Collapsed; }
@@ -122,7 +124,7 @@ namespace Visualizer
 
 			Console.WriteLine("Initializing settings...");
 			this.settings = new Settings(properties, this, viewport, drawer, timer, diagram, zoomSelector, unZoomSelector, panDragger, frameCounter);
-			if (System.IO.File.Exists("Settings.xml")) this.settings.XElement = XElement.Load("Settings.xml");
+			if (System.IO.File.Exists(SettingsPath)) this.settings.XElement = XElement.Load(SettingsPath);
 			properties.SelectedObject = settings;
 
 			Console.WriteLine("Adding components...");
@@ -226,7 +228,9 @@ namespace Visualizer
 		}
 		private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
-			settings.XElement.Save("Settings.xml");
+			if (!System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(SettingsPath))) System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(SettingsPath));
+			
+			settings.XElement.Save(SettingsPath);
 		}
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
