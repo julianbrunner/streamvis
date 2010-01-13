@@ -56,7 +56,7 @@ namespace Visualizer
 		string filePath;
 
 		static string SettingsPath { get { return System.IO.Path.Combine(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "streamvis"), "Settings.xml"); } }
-		
+
 		public bool StreamListVisible
 		{
 			get { return !streamsListContainer.Panel1Collapsed; }
@@ -211,7 +211,7 @@ namespace Visualizer
 
 			diagram.AxisX.Color = diagram.AxisX.Color.Invert();
 			diagram.AxisY.Color = diagram.AxisY.Color.Invert();
-			
+
 			zoomSelector.Color = zoomSelector.Color.Invert();
 			unZoomSelector.Color = unZoomSelector.Color.Invert();
 			frameCounter.Color = frameCounter.Color.Invert();
@@ -230,12 +230,16 @@ namespace Visualizer
 		private void saveToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
 			if (!System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(SettingsPath))) System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(SettingsPath));
-			
+
 			settings.XElement.Save(SettingsPath);
 		}
 		private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			using (AboutBox aboutBox = new AboutBox()) aboutBox.ShowDialog();
+		}
+		private void streamsList_AfterLabelEdit(object sender, LabelEditEventArgs e)
+		{
+			SetName(streamsList.Items[e.Item], e.Label);
 		}
 		private void streamsContextMenuStrip_Opening(object sender, CancelEventArgs e)
 		{
@@ -243,14 +247,26 @@ namespace Visualizer
 		}
 		private void changeNameToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			using (TextDialog textDialog = new TextDialog("Stream Name", "Please enter the new name for the stream", string.Empty))
-				if (streamsList.SelectedItems.Count == 1 && textDialog.ShowDialog() == DialogResult.OK)
-					SetName(streamsList.SelectedItems[0], textDialog.Result);
+			if (streamsList.SelectedItems.Count == 1)
+			{
+				StreamListItem streamListItem = (StreamListItem)streamsList.SelectedItems[0].Tag;
+
+				using (TextDialog textDialog = new TextDialog("Stream Name", "Please enter the new name for the stream", streamListItem.Stream.Name))
+					if (textDialog.ShowDialog() == DialogResult.OK)
+						SetName(streamsList.SelectedItems[0], textDialog.Result);
+			}
 		}
 		private void changeColorToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (streamsList.SelectedItems.Count == 1 && colorDialog.ShowDialog() == DialogResult.OK)
-				SetColor(streamsList.SelectedItems[0], colorDialog.Color);
+			if (streamsList.SelectedItems.Count == 1)
+			{
+				StreamListItem streamListItem = (StreamListItem)streamsList.SelectedItems[0].Tag;
+
+				colorDialog.Color = streamListItem.Graph.Color;
+
+				if (colorDialog.ShowDialog() == DialogResult.OK)
+					SetColor(streamsList.SelectedItems[0], colorDialog.Color);
+			}
 		}
 		private void zoomSelector_Select(object sender, EventArgs<Rectangle> e)
 		{
@@ -392,7 +408,8 @@ namespace Visualizer
 
 					ListViewItem item = new ListViewItem();
 					item.Name = port.Name + "Stream" + stream.Path;
-					item.Text = stream.Name + " (" + stream.Path + ")";
+					item.Text = stream.Name;
+					item.SubItems.Add(new ListViewItem.ListViewSubItem(item, stream.Path.ToString()));
 					item.Group = group;
 					item.Checked = true;
 					item.Tag = new StreamListItem(stream, graph);
@@ -410,7 +427,7 @@ namespace Visualizer
 			StreamListItem streamListItem = (StreamListItem)item.Tag;
 
 			streamListItem.Stream.Name = name;
-			item.Text = streamListItem.Stream.Name + " (" + streamListItem.Stream.Path + ")";
+			item.Text = streamListItem.Stream.Name;
 		}
 		void SetColor(ListViewItem item, Color color)
 		{
