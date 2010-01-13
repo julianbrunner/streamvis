@@ -39,7 +39,7 @@ namespace Visualizer
 {
 	partial class MainWindow : Form
 	{
-		const string title = "Yarp Visualizer";
+		const string title = "Stream Visualizer";
 
 		readonly Parameters parameters;
 		readonly Drawer drawer;
