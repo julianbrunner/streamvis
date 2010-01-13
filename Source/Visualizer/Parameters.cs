@@ -30,17 +30,12 @@ namespace Visualizer
 		public IEnumerable<string> Ports { get { return ports; } }
 		public bool? MinimalMode { get; private set; }
 		public bool? ExtendGraphs { get; private set; }
-		public bool? LineSmoothing { get; private set; }
-		public bool? AlphaBlending { get; private set; }
-		public bool? VerticalSynchronization { get; private set; }
 		public bool? ClearData { get; private set; }
 		public TimeManagerType TimeManagerType { get; private set; }
 		public double? TimeManagerParameter { get; private set; }
 		public double? DiagramWidth { get; private set; }
 		public ValueManagerType ValueManagerType { get; private set; }
 		public Range<double>? ValueRange { get; private set; }
-		public DataManagerType DataManagerType { get; private set; }
-		public double? DataManagerParameter { get; private set; }
 		public double? LineWidth { get; private set; }
 		public int? MarkerCountX { get; private set; }
 		public int? MarkerCountY { get; private set; }
@@ -51,7 +46,6 @@ namespace Visualizer
 		{
 			TimeManagerType = TimeManagerType.Continuous;
 			ValueManagerType = ValueManagerType.Fitting;
-			DataManagerType = DataManagerType.PerPixel;
 
 			foreach (string parameter in parameters)
 			{
@@ -71,9 +65,6 @@ namespace Visualizer
 			{
 				case "m": MinimalMode = value; break;
 				case "e": ExtendGraphs = value; break;
-				case "a": LineSmoothing = value; break;
-				case "b": AlphaBlending = value; break;
-				case "v": VerticalSynchronization = value; break;
 				case "c": ClearData = value; break;
 				default: InvalidParameter((value ? "+" : "-") + name); break;
 			}
@@ -130,27 +121,6 @@ namespace Visualizer
 								catch (FormatException) { InvalidParameter(option); }
 							break;
 						default: throw new InvalidOperationException("Invalid value manager type: " + details[1]);
-					}
-					break;
-				case "d":
-					if (details.Length < 2) InvalidParameter(option);
-					switch (details[1])
-					{
-						case "s":
-							if (details.Length > 3) InvalidParameter(option);
-							DataManagerType = DataManagerType.PerSecond;
-							if (details.Length > 2)
-								try { DataManagerParameter = double.Parse(details[2]); }
-								catch (FormatException) { InvalidParameter(option); }
-							break;
-						case "p":
-							if (details.Length > 3) InvalidParameter(option);
-							DataManagerType = DataManagerType.PerPixel;
-							if (details.Length > 2)
-								try { DataManagerParameter = double.Parse(details[2]); }
-								catch (FormatException) { InvalidParameter(option); }
-							break;
-						default: throw new InvalidOperationException("Invalid data manager type: " + details[1]);
 					}
 					break;
 				case "l":

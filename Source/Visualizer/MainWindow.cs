@@ -139,11 +139,7 @@ namespace Visualizer
 		{
 			viewport.Initialize();
 
-			if (parameters.VerticalSynchronization != null) viewport.VSync = parameters.VerticalSynchronization.Value;
 			if (parameters.BackgroundColor != null) viewport.BackColor = parameters.BackgroundColor.Value;
-
-			if (parameters.LineSmoothing != null) drawer.LineSmoothing = parameters.LineSmoothing.Value;
-			if (parameters.AlphaBlending != null) drawer.AlphaBlending = parameters.AlphaBlending.Value;
 		}
 		private void MainWindow_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -459,18 +455,7 @@ namespace Visualizer
 				default: throw new InvalidOperationException();
 			}
 
-			switch (parameters.DataManagerType)
-			{
-				case DataManagerType.PerSecond:
-					diagram.DataManager = new PerSecondDataManager(diagram);
-					if (parameters.DataManagerParameter != null) ((PerSecondDataManager)diagram.DataManager).SamplesPerSecond = parameters.DataManagerParameter.Value;
-					break;
-				case DataManagerType.PerPixel:
-					diagram.DataManager = new PerPixelDataManager(diagram);
-					if (parameters.DataManagerParameter != null) ((PerPixelDataManager)diagram.DataManager).SamplesPerPixel = parameters.DataManagerParameter.Value;
-					break;
-				default: throw new InvalidOperationException();
-			}
+			diagram.DataManager = new PerPixelDataManager(diagram);
 			if (parameters.ClearData != null) diagram.DataManager.ClearData = parameters.ClearData.Value;
 
 			diagram.AxisX = new AxisX(drawer, diagram);

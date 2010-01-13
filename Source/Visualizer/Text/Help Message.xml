@@ -53,18 +53,6 @@
 		<Text Column="Description">Enables or disables the graph extension feature. When graph extension is enabled, all graphs that have at least one sampled data entry are extended across the whole width of the coordinate system using known adjacent values. The default value is enabled.</Text>
 		<NewLine />
 		<NewLine />
-		<Text Column="Level1">+a|-a</Text>
-		<Text Column="Description">Enables or disables antialiasing of graph lines. The default value is enabled.</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level1">+b|-b</Text>
-		<Text Column="Description">Enables or disables alpha-blending. The default value is enabled.</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level1">+v|-v</Text>
-		<Text Column="Description">Enables or disables vertical synchronization. The default value is enabled.</Text>
-		<NewLine />
-		<NewLine />
 		<Text Column="Level1">+c|-c</Text>
 		<Text Column="Description">Enables or disables the regular clearing of old received data. Enable if you plan to run the visualizer for a long time and you don't want to save the results. The default value is disabled.</Text>
 		<NewLine />
@@ -99,18 +87,6 @@
 		<NewLine />
 		<Text Column="Level2">s[:&lt;low&gt;:&lt;high&gt;]</Text>
 		<Text Column="Description">Fixed (static) value manager. You can manually specify the range of values along the Y-Axis. The default value for &lt;low&gt;:&lt;high&gt; is "0:1".</Text>
-		<NewLine />
-		<NewLine />		
-		<Text Column="Level1">d:(s[:&lt;c&gt;]|p[:&lt;c&gt;])</Text>
-		<Text Column="Description">Lets you specify the data manager type and settings used for drawing graphs. The default value is "p:1".</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level2">s[:&lt;c&gt;]</Text>
-		<Text Column="Description">Per-Second data manager. The data will be resampled to &lt;c&gt; entries per second. The default value for &lt;c&gt; is "10".</Text>
-		<NewLine />
-		<NewLine />
-		<Text Column="Level2">p[:&lt;c&gt;]</Text>
-		<Text Column="Description">Per-Pixel data manager. The data will be resampled to &lt;c&gt; entries per pixel. The default value for &lt;c&gt; is "0.1".</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">l:&lt;width&gt;</Text>
