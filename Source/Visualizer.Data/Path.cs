@@ -24,6 +24,7 @@ using Utility.Extensions;
 
 namespace Visualizer.Data
 {
+	// TODO: Paths are YARP specific and should be move to Visualizer.Capturing.Yarp
 	public class Path : IEnumerable<int>
 	{
 		readonly IEnumerable<int> nodes;

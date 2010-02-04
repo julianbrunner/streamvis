@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -154,9 +154,9 @@
       <Project>{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}</Project>
       <Name>Utility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Visualizer.Capturing\Visualizer.Capturing.csproj">
-      <Project>{1A1D9F99-88B7-41A8-A084-8762DC16963C}</Project>
-      <Name>Visualizer.Capturing</Name>
+    <ProjectReference Include="..\Visualizer.Data.Yarp\Visualizer.Data.Yarp.csproj">
+      <Project>{887A09FE-B8F4-4674-B1E0-91218DF6103A}</Project>
+      <Name>Visualizer.Data.Yarp</Name>
     </ProjectReference>
     <ProjectReference Include="..\Visualizer.Data\Visualizer.Data.csproj">
       <Project>{188C1B70-DD61-4EEA-B733-8379A3866CF2}</Project>

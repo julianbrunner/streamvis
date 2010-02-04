@@ -28,6 +28,7 @@ using Utility;
 using Utility.Extensions;
 using Utility.Utilities;
 using Visualizer.Data;
+using Visualizer.Data.Yarp;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Axes;
 using Visualizer.Drawing.Data;
@@ -356,7 +357,7 @@ namespace Visualizer
 			{
 				if (Yarp.Network.YarpAvailable)
 				{
-					try { source = Capturing.Capture.Create(ports, timer); }
+					try { source = YarpSource.Create(ports, timer); }
 					catch (InvalidOperationException e) { MessageBox.Show(e.Message, "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 				}
 				else MessageBox.Show("YARP could not be found.", "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
