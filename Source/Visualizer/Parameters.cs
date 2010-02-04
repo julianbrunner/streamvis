@@ -25,9 +25,11 @@ namespace Visualizer
 {
 	class Parameters
 	{
-		readonly List<string> ports = new List<string>();
+		readonly List<string> yarpPorts = new List<string>();
+		readonly List<string> textPorts = new List<string>();
 
-		public IEnumerable<string> Ports { get { return ports; } }
+		public IEnumerable<string> YarpPorts { get { return yarpPorts; } }
+		public IEnumerable<string> TextPorts { get { return textPorts; } }
 		public bool? MinimalMode { get; private set; }
 		public bool? ExtendGraphs { get; private set; }
 		public bool? ClearData { get; private set; }
@@ -51,7 +53,8 @@ namespace Visualizer
 			{
 				switch (parameter[0])
 				{
-					case '/': ports.Add(parameter); break;
+					case '!': yarpPorts.Add(parameter.Substring(1)); break;
+					case '@': textPorts.Add(parameter.Substring(1)); break;
 					case '+': ParseBooleanOption(parameter.Substring(1), true); break;
 					case '-': ParseBooleanOption(parameter.Substring(1), false); break;
 					default: ParseOption(parameter); break;

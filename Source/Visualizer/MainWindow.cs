@@ -118,7 +118,7 @@ namespace Visualizer
 			this.coordinateLabel = new CoordinateLabel(coordinateStatusLabel, viewport, diagram);
 
 			Console.WriteLine("Initializing data source...");
-			NewSource(parameters.Ports);
+			NewSource(parameters.YarpPorts);
 
 			Console.WriteLine("Applying parameters...");
 			if (parameters.MinimalMode != null) MinimalMode = parameters.MinimalMode.Value;

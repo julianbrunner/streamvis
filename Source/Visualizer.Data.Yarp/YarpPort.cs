@@ -26,22 +26,19 @@ namespace Visualizer.Data.Yarp
 	class YarpPort : Data.Port, IDisposable
 	{
 		readonly Network network;
-		readonly Timer timer;
 		readonly global::Yarp.Port port;
+		readonly Timer timer;
 		readonly System.Threading.Thread reader;
 
 		bool disposed = false;
 		bool running = true;
 
-		YarpPort(string name, IEnumerable<Stream> streams, Network network, Timer timer)
+		YarpPort(string name, IEnumerable<Stream> streams, Network network, global::Yarp.Port port, Timer timer)
 			: base(name, streams)
 		{
 			this.network = network;
+			this.port = port;
 			this.timer = timer;
-
-			port = new global::Yarp.Port(network.FindName(name + "/visualization"));
-
-			network.Connect(name, port.Name);
 
 			reader = new System.Threading.Thread(ReadLoop);
 			reader.Priority = System.Threading.ThreadPriority.AboveNormal;
@@ -62,9 +59,10 @@ namespace Visualizer.Data.Yarp
 
 				Console.WriteLine("Trying to join reader thread of \"" + Name + "\"...");
 
-				if (reader != null && !reader.Join(1000))
+				if (!reader.Join(1000))
 				{
 					Console.WriteLine("Sending a packet to \"" + Name + "\" in order to join reader thread...");
+
 					using (global::Yarp.Port helperPort = new global::Yarp.Port(network.FindName(Name + "/activator")))
 					{
 						network.Connect(helperPort.Name, port.Name);
@@ -75,12 +73,9 @@ namespace Visualizer.Data.Yarp
 					reader.Join();
 				}
 
-				if (port != null)
-				{
-					network.Disconnect(Name, port.Name);
+				network.Disconnect(Name, port.Name);
 
-					port.Dispose();
-				}
+				port.Dispose();
 			}
 		}
 
@@ -91,9 +86,10 @@ namespace Visualizer.Data.Yarp
 				Packet packet = port.Read();
 				double time = timer.Time;
 
-				if (running)
-					foreach (Stream stream in Streams)
-						stream.EntryData.Add(new Entry(time, packet.Get(stream.Path)));
+				if (!running) break;
+
+				foreach (Stream stream in Streams)
+					stream.EntryData.Add(new Entry(time, packet.Get(stream.Path)));
 			}
 		}
 
@@ -112,7 +108,14 @@ namespace Visualizer.Data.Yarp
 					using (global::Yarp.Port testPort = new global::Yarp.Port(network.FindName(name + "/tester")))
 					{
 						network.Connect(name, testPort.Name);
-						streams = (from path in GetPaths(Enumerable.Empty<int>(), testPort.Read()) select new Stream(path)).ToArray();
+
+						streams =
+						(
+							from path in GetPaths(Enumerable.Empty<int>(), testPort.Read())
+							select new Stream(path)
+						)
+						.ToArray();
+
 						network.Disconnect(name, testPort.Name);
 					}
 					break;
@@ -120,7 +123,11 @@ namespace Visualizer.Data.Yarp
 				default: throw new InvalidOperationException("Invalid port: \"" + portString + "\".");
 			}
 
-			return new YarpPort(name, streams, network, timer);
+			global::Yarp.Port port = new global::Yarp.Port(network.FindName(name + "/visualization"));
+
+			network.Connect(name, port.Name);
+
+			return new YarpPort(name, streams, network, port, timer);
 		}
 
 		static IEnumerable<Path> GetPaths(IEnumerable<int> path, Packet packet)
