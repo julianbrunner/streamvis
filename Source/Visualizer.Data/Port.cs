@@ -45,49 +45,50 @@ namespace Visualizer.Data
 			this.streams = streams.ToArray();
 		}
 
-		public void Export(TextWriter writer)
+		public void Export(string path)
 		{
 			if (streams.Any())
-			{
-				// Add comment line describing the file layout
-				writer.Write("# Time");
-				foreach (Stream stream in streams) writer.Write("    " + stream.Name);
-				writer.WriteLine();
-				writer.WriteLine();
+				using (StreamWriter streamWriter = new StreamWriter(path))
+				{
+					// Add comment line describing the file layout
+					streamWriter.Write("# Time");
+					foreach (Stream stream in streams) streamWriter.Write("    " + stream.Name);
+					streamWriter.WriteLine();
+					streamWriter.WriteLine();
 
-				IEnumerable<IEnumerable<Entry>> entries =
-				(
-					from stream in streams
-					select stream.EntryData.Entries
-				)
-				.ToArray();
+					IEnumerable<IEnumerable<Entry>> entries =
+					(
+						from stream in streams
+						select stream.EntryData.Entries
+					)
+					.ToArray();
 
-				IEnumerable<IEnumerator<Entry>> enumerators =
-				(
-					from stream in entries
-					select stream.GetEnumerator()
-				)
-				.ToArray();
+					IEnumerable<IEnumerator<Entry>> enumerators =
+					(
+						from stream in entries
+						select stream.GetEnumerator()
+					)
+					.ToArray();
 
-				foreach (Entry leadEntry in entries.First())
-					if (enumerators.All(enumerator => enumerator.MoveNext()))
-					{
-						StringBuilder stringBuilder = new StringBuilder();
-
-						stringBuilder.Append(leadEntry.Time);
-						stringBuilder.Append(" ");
-
-						foreach (Entry entry in from enumerator in enumerators select enumerator.Current)
+					foreach (Entry leadEntry in entries.First())
+						if (enumerators.All(enumerator => enumerator.MoveNext()))
 						{
-							stringBuilder.Append(entry.Value);
+							StringBuilder stringBuilder = new StringBuilder();
+
+							stringBuilder.Append(leadEntry.Time);
 							stringBuilder.Append(" ");
+
+							foreach (Entry entry in from enumerator in enumerators select enumerator.Current)
+							{
+								stringBuilder.Append(entry.Value);
+								stringBuilder.Append(" ");
+							}
+
+							stringBuilder.Remove(stringBuilder.Length - 1, 1);
+
+							streamWriter.WriteLine(stringBuilder.ToString());
 						}
-
-						stringBuilder.Remove(stringBuilder.Length - 1, 1);
-
-						writer.WriteLine(stringBuilder.ToString());
-					}
-			}
+				}
 		}
 		public void ClearData()
 		{

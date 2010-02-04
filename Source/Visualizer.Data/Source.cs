@@ -43,9 +43,7 @@ namespace Visualizer.Data
 
 		public void Export(string path)
 		{
-			foreach (Port port in ports)
-				using (StreamWriter streamWriter = new StreamWriter(System.IO.Path.ChangeExtension(path, EscapeFilename(port.Name) + ".stream")))
-					port.Export(streamWriter);
+			foreach (Port port in ports) port.Export(System.IO.Path.ChangeExtension(path, EscapeFilename(port.Name) + ".stream"));
 		}
 		public void ClearData()
 		{
