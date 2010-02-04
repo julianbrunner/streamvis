@@ -48,7 +48,7 @@ namespace Visualizer.Data
 		public void Export(string path)
 		{
 			if (streams.Any())
-				using (StreamWriter streamWriter = new StreamWriter(path))
+				using (StreamWriter streamWriter = new StreamWriter(System.IO.Path.ChangeExtension(path, EscapeFilename(Name) + ".stream")))
 				{
 					// Add comment line describing the file layout
 					streamWriter.Write("# Time");
@@ -93,6 +93,14 @@ namespace Visualizer.Data
 		public void ClearData()
 		{
 			foreach (Stream stream in streams) stream.EntryData.Clear();
+		}
+
+		static string EscapeFilename(string filename)
+		{
+			foreach (char invalidCharacter in System.IO.Path.GetInvalidFileNameChars())
+				filename = filename.Replace(invalidCharacter.ToString(), string.Empty);
+
+			return filename;
 		}
 	}
 }

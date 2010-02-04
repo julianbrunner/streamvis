@@ -16,7 +16,6 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -43,19 +42,11 @@ namespace Visualizer.Data
 
 		public void Export(string path)
 		{
-			foreach (Port port in ports) port.Export(System.IO.Path.ChangeExtension(path, EscapeFilename(port.Name) + ".stream"));
+			foreach (Port port in ports) port.Export(path);
 		}
 		public void ClearData()
 		{
 			foreach (Port port in ports) port.ClearData();
-		}
-
-		static string EscapeFilename(string filename)
-		{
-			foreach (char invalidCharacter in System.IO.Path.GetInvalidFileNameChars())
-				filename = filename.Replace(invalidCharacter.ToString(), string.Empty);
-
-			return filename;
 		}
 	}
 }
