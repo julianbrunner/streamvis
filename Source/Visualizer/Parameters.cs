@@ -53,8 +53,14 @@ namespace Visualizer
 			{
 				switch (parameter[0])
 				{
-					case '!': yarpPorts.Add(parameter.Substring(1)); break;
-					case '@': textPorts.Add(parameter.Substring(1)); break;
+					case ':':
+						switch (string.Empty + parameter[1] + parameter[2])
+						{
+							case "y:": yarpPorts.Add(parameter.Substring(3)); break;
+							case "t:": textPorts.Add(parameter.Substring(3)); break;
+							default: InvalidParameter(parameter); break;
+						}
+						break;
 					case '+': ParseBooleanOption(parameter.Substring(1), true); break;
 					case '-': ParseBooleanOption(parameter.Substring(1), false); break;
 					default: ParseOption(parameter); break;

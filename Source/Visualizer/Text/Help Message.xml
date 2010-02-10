@@ -25,11 +25,11 @@
 		<Text Column="Root">Parameters:</Text>
 		<NewLine />
 		<NewLine />
-		<Text Column="Level1">!&lt;port&gt;</Text>
+		<Text Column="Level1">:y:&lt;port&gt;</Text>
 		<Text Column="Description">Specifies that all streams of &lt;port&gt; should be included in the stream selection list. A test packet will be retrieved from the specified port to build a list of possible streams before the visualization begins.</Text>
 		<NewLine />
 		<NewLine />
-		<Text Column="Level1">!&lt;port&gt;:&lt;streams&gt;</Text>
+		<Text Column="Level1">:y:&lt;port&gt;:&lt;streams&gt;</Text>
 		<Text Column="Description">Specifies that the &lt;streams&gt; of &lt;port&gt; should be included in the stream selection list.</Text>
 		<NewLine />
 		<NewLine />
