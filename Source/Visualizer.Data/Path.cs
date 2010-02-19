@@ -24,7 +24,6 @@ using Utility.Extensions;
 
 namespace Visualizer.Data
 {
-	// TODO: Paths are YARP specific and should be move to Visualizer.Capturing.Yarp
 	public class Path : IEnumerable<int>
 	{
 		readonly IEnumerable<int> nodes;
@@ -35,21 +34,14 @@ namespace Visualizer.Data
 		public IEnumerable<int> Head { get { return nodes.Take(nodes.Count() - 1); } }
 		public int Tail { get { return nodes.Last(); } }
 
-		public Path(XElement path)
-		{
-			this.nodes = (from node in ((string)path).Split('.') select int.Parse(node)).ToArray();
-		}
-		public Path(string path)
-		{
-			try { this.nodes = (from node in path.Split('.') select int.Parse(node)).ToArray(); }
-			catch (FormatException) { throw new ArgumentOutOfRangeException("path"); }
-		}
 		public Path(IEnumerable<int> nodes)
 		{
 			if (!nodes.Any()) throw new ArgumentOutOfRangeException("nodes");
 
 			this.nodes = nodes.ToArray();
 		}
+		public Path(string path) : this(Parse(path)) { }
+		public Path(XElement path) : this((string)path) { }
 
 		public override string ToString()
 		{
@@ -70,6 +62,20 @@ namespace Visualizer.Data
 				throw new InvalidOperationException("Heads of range delimiter paths do not match (" + start + ", " + end + ").");
 
 			for (int i = start.Tail; i <= end.Tail; i++) yield return new Path(start.Head.Concat(i));
+		}
+
+		static IEnumerable<int> Parse(string path)
+		{
+			try
+			{
+				return
+				(
+					from node in path.Split('.')
+					select int.Parse(node)
+				)
+				.ToArray();
+			}
+			catch (FormatException) { throw new ArgumentOutOfRangeException("path"); }
 		}
 	}
 }
