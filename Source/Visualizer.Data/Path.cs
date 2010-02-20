@@ -75,7 +75,7 @@ namespace Visualizer.Data
 				)
 				.ToArray();
 			}
-			catch (FormatException) { throw new ArgumentOutOfRangeException("path"); }
+			catch (FormatException) { throw new ArgumentException("path"); }
 		}
 	}
 }
