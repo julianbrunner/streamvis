@@ -14,6 +14,14 @@
 			<Value>6</Value>
 		</Column>
 		<Column>
+			<Name>Level3</Name>
+			<Value>10</Value>
+		</Column>
+		<Column>
+			<Name>Level4</Name>
+			<Value>14</Value>
+		</Column>
+		<Column>
 			<Name>Description</Name>
 			<Value>25</Value>
 		</Column>
@@ -22,27 +30,47 @@
 		<Text Column="Root">Stream Visualizer is an application that can be used to visualize, capture and replay data streams.</Text>
 		<NewLine />
 		<NewLine />
+		<Text Column="Root">Examples:</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level1">streamvis :y:/my/port</Text>
+		<NewLine />
+		<Text Column="Level1">foo |streamvis :t:-</Text>
+		<NewLine />
+		<Text Column="Level1">streamvis :t:mypipe:2.3-2.7,4.1,5</Text>
+		<NewLine />
+		<Text Column="Level1">streamvis :y:/my/port:2.1=Foo,2.2=Bar :t:mypipe :t:-</Text>
+		<NewLine />
+		<NewLine />
 		<Text Column="Root">Parameters:</Text>
 		<NewLine />
 		<NewLine />
-		<Text Column="Level1">:y:&lt;port&gt;</Text>
-		<Text Column="Description">Specifies that all streams of &lt;port&gt; should be included in the stream selection list. A test packet will be retrieved from the specified port to build a list of possible streams before the visualization begins.</Text>
+		<Text Column="Level1">:&lt;interface&gt;:&lt;port&gt;</Text>
+		<Text Column="Description">Specifies that the streams specified in &lt;port&gt; received on &lt;interface&gt; should be included in the stream selection list.</Text>
 		<NewLine />
 		<NewLine />
-		<Text Column="Level1">:y:&lt;port&gt;:&lt;streams&gt;</Text>
-		<Text Column="Description">Specifies that the &lt;streams&gt; of &lt;port&gt; should be included in the stream selection list.</Text>
+		<Text Column="Level2">&lt;interface&gt;</Text>
+		<Text Column="Description">Can be either "y" (YARP) or "t" (Text).</Text>
 		<NewLine />
 		<NewLine />
-		<Text Column="Level2">&lt;streams&gt;</Text>
-		<Text Column="Description">&lt;range&gt;,&lt;range&gt;,...</Text>
+		<Text Column="Level2">&lt;port&gt;</Text>
+		<Text Column="Description">&lt;name&gt;|&lt;name&gt;:&lt;range&gt;,&lt;range&gt;,...</Text>
 		<NewLine />
 		<NewLine />
-		<Text Column="Level2">&lt;range&gt;</Text>
+		<Text Column="Level3">&lt;name&gt;</Text>
+		<Text Column="Description">The name of the port to receive streams on. If no ranges are given, a test packet is retrieved from the specified port to build a list of possible streams before the visualization begins. When receiving from YARP ports, &lt;name&gt; is the name of the YARP port. When receiving from text ports, &lt;name&gt; is the path to the file or pipe from which to read the streams. Additionally, &lt;name&gt; can be "-" to receive from standard input when receiving from text ports.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level3">&lt;range&gt;</Text>
 		<Text Column="Description">&lt;path&gt;[=&lt;name&gt;]|&lt;path&gt;-&lt;path&gt;</Text>
 		<NewLine />
 		<NewLine />
-		<Text Column="Level2">&lt;path&gt;</Text>
+		<Text Column="Level4">&lt;path&gt;</Text>
 		<Text Column="Description">A path to the stream, subpaths are seperated by dots. For example "1.2.3" specifies that the stream should be generated from the third value in the second list in the first list of the port.</Text>
+		<NewLine />
+		<NewLine />
+		<Text Column="Level4">&lt;name&gt;</Text>
+		<Text Column="Description">The name of the stream. This is displayed in the stream selection list.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+m|-m</Text>

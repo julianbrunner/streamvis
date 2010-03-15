@@ -16,8 +16,9 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using Data;
+using Data.Yarp;
 using Utility.Utilities;
-using Yarp;
 
 namespace Receiver
 {
@@ -25,8 +26,8 @@ namespace Receiver
 	{
 		static void Main(string[] args)
 		{
-			using (Network network = new Network())
-			using (Port port = new Port("/test"))
+			using (YarpNetwork network = new YarpNetwork())
+			using (YarpPort port = new YarpPort("/test", network))
 			{
 				network.Connect("/write", port.Name);
 
@@ -35,7 +36,7 @@ namespace Receiver
 					Packet packet = port.Read();
 					for (int i = 0; i < 38; i++)
 					{
-						double d = packet.Get(i.Single());
+						double d = packet.GetValue(new Path(EnumerableUtility.Single(i)));
 						if (d == 0) Console.WriteLine("Awesome");
 					}
 				}

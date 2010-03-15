@@ -32,8 +32,8 @@ namespace Visualizer
 		{
 			if (disposing && (components != null))
 			{
-				DisposeSource();
 				drawer.Dispose();
+				session.Dispose();
 
 				components.Dispose();
 			}

@@ -16,7 +16,7 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using Graphics;
+using Graphics.Components;
 using Visualizer.Drawing.Axes;
 using Visualizer.Drawing.Data;
 using Visualizer.Drawing.Timing;

@@ -19,6 +19,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Graphics;
+using Graphics.Components;
 using OpenTK;
 using Utility;
 using Visualizer.Drawing;

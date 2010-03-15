@@ -18,6 +18,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Graphics.Components;
 using Utility;
 
 namespace Graphics

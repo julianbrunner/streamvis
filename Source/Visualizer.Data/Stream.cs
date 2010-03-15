@@ -16,6 +16,7 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Xml.Linq;
+using Data;
 
 namespace Visualizer.Data
 {
@@ -26,6 +27,9 @@ namespace Visualizer.Data
 
 		public static string XElementName { get { return "Stream"; } }
 
+		public Path Path { get { return path; } }
+		public string Name { get; set; }
+		public EntryData EntryData { get { return entryData; } }
 		public XElement XElement
 		{
 			get
@@ -33,28 +37,25 @@ namespace Visualizer.Data
 				return new XElement
 				(
 					XElementName,
-					new XElement("Name", Name),
 					path.XElement,
+					new XElement("Name", Name),
 					entryData.XElement
 				);
 			}
 		}
-		public string Name { get; set; }
-		public Path Path { get { return path; } }
-		public EntryData EntryData { get { return entryData; } }
 
-		public Stream(XElement stream)
+		public Stream(Path path, string name)
 		{
-			this.Name = (string)stream.Element("Name");
-			this.path = new Path(stream.Element(Path.XElementName));
-			this.entryData = new EntryData(stream.Element(EntryData.XElementName));
-		}
-		public Stream(string name, Path path)
-		{
-			this.Name = name;
 			this.path = path;
+			this.Name = name;
 			this.entryData = new EntryData();
 		}
-		public Stream(Path path) : this("Stream " + path, path) { }
+		public Stream(Path path) : this(path, "Stream " + path) { }
+		public Stream(XElement stream)
+		{
+			this.path = new Path(stream.Element(Path.XElementName));
+			this.Name = (string)stream.Element("Name");
+			this.entryData = new EntryData(stream.Element(EntryData.XElementName));
+		}
 	}
 }

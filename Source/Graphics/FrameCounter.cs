@@ -17,6 +17,7 @@
 
 using System;
 using System.Diagnostics;
+using Graphics.Components;
 
 namespace Graphics
 {
@@ -35,7 +36,7 @@ namespace Graphics
 			set
 			{
 				if (value <= 0) throw new ArgumentOutOfRangeException("value");
-				
+
 				cycleLength = value;
 			}
 		}

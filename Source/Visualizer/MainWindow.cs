@@ -28,7 +28,6 @@ using Utility;
 using Utility.Extensions;
 using Utility.Utilities;
 using Visualizer.Data;
-using Visualizer.Data.Yarp;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Axes;
 using Visualizer.Drawing.Data;
@@ -53,7 +52,7 @@ namespace Visualizer
 		readonly CoordinateLabel coordinateLabel;
 		readonly Settings settings;
 
-		Source source;
+		Session session;
 		string filePath;
 
 		static string SettingsPath { get { return System.IO.Path.Combine(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData), "streamvis"), "Settings.xml"); } }
@@ -83,16 +82,12 @@ namespace Visualizer
 
 			this.parameters = parameters;
 
-			Console.WriteLine("Initializing drawer...");
 			this.drawer = new Drawer(viewport);
 
-			Console.WriteLine("Initializing timer...");
 			this.timer = new Data.Timer();
 
-			Console.WriteLine("Initializing diagram...");
 			this.diagram = CreateDiagram(viewport, drawer, timer, parameters);
 
-			Console.WriteLine("Initializing zoom selectors...");
 			this.zoomSelector = new RectangleSelector(drawer, viewport);
 			this.zoomSelector.Button = MouseButtons.Left;
 			this.zoomSelector.Color = Color.White;
@@ -103,32 +98,25 @@ namespace Visualizer
 			this.unZoomSelector.Color = Color.Blue;
 			this.unZoomSelector.EndSelect += unZoomSelector_Select;
 
-			Console.WriteLine("Initializing pan dragger...");
 			this.panDragger = new Dragger(viewport);
 			this.panDragger.Button = MouseButtons.Right;
 			this.panDragger.Drag += panDragger_Drag;
 			this.panDragger.EndDrag += panDragger_EndDrag;
 
-			Console.WriteLine("Initializing frame counter");
 			this.frameCounter = new VisibleFrameCounter(drawer);
 			this.frameCounter.Color = Color.Yellow;
 			this.frameCounter.Alignment = TextAlignment.Far;
 
-			Console.WriteLine("Initializing coordinate label");
 			this.coordinateLabel = new CoordinateLabel(coordinateStatusLabel, viewport, diagram);
 
-			Console.WriteLine("Initializing data source...");
-			NewSource(parameters.YarpPorts);
+			NewSession(parameters.PortStrings);
 
-			Console.WriteLine("Applying parameters...");
 			if (parameters.MinimalMode != null) MinimalMode = parameters.MinimalMode.Value;
 
-			Console.WriteLine("Initializing settings...");
 			this.settings = new Settings(properties, this, viewport, drawer, timer, diagram, zoomSelector, unZoomSelector, panDragger, frameCounter);
 			if (System.IO.File.Exists(SettingsPath)) this.settings.XElement = XElement.Load(SettingsPath);
 			properties.SelectedObject = settings;
 
-			Console.WriteLine("Adding components...");
 			viewport.AddComponent(diagram);
 			viewport.AddComponent(zoomSelector);
 			viewport.AddComponent(unZoomSelector);
@@ -167,30 +155,30 @@ namespace Visualizer
 		{
 			using (TextDialog textDialog = new TextDialog("Port selection", "Specify the ports for this capture:", string.Empty))
 				if (textDialog.ShowDialog() == DialogResult.OK)
-					NewSource(textDialog.Result == string.Empty ? Enumerable.Empty<string>() : textDialog.Result.Split(' '));
+					NewSession(textDialog.Result == string.Empty ? Enumerable.Empty<string>() : textDialog.Result.Split(' '));
 		}
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (openCaptureFileDialog.ShowDialog() == DialogResult.OK)
-				LoadSource(openCaptureFileDialog.FileName);
+				LoadSession(openCaptureFileDialog.FileName);
 		}
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if (filePath == null) saveAsToolStripMenuItem_Click(sender, e);
-			else SaveSource(filePath);
+			else SaveSession(filePath);
 		}
 		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (saveCaptureFileDialog.ShowDialog() == DialogResult.OK) SaveSource(saveCaptureFileDialog.FileName);
+			if (saveCaptureFileDialog.ShowDialog() == DialogResult.OK) SaveSession(saveCaptureFileDialog.FileName);
 		}
 		private void exportToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (exportCaptureFileDialog.ShowDialog() == DialogResult.OK) source.Export(exportCaptureFileDialog.FileName);
+			if (exportCaptureFileDialog.ShowDialog() == DialogResult.OK) session.Capture.Export(exportCaptureFileDialog.FileName);
 		}
 		private void clearDataToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			timer.Reset();
-			source.ClearData();
+			session.Capture.ClearData();
 			foreach (Graph graph in diagram.Graphs) graph.StreamManager.EntryCache.Clear();
 		}
 		private void streamsListToolStripMenuItem_Click(object sender, EventArgs e)
@@ -345,44 +333,33 @@ namespace Visualizer
 			settings.Diagram.Initialize();
 		}
 
-		void NewSource(IEnumerable<string> ports)
+		void NewSession(IEnumerable<string> portStrings)
 		{
-			DisposeSource();
+			if (session != null) session.Dispose();
 
 			SetFilePath(null);
 			timer.Reset();
-			source = new Source();
-
-			if (ports.Any())
-			{
-				if (Yarp.Network.YarpAvailable)
-				{
-					try { source = YarpSource.Create(ports, timer); }
-					catch (InvalidOperationException e) { MessageBox.Show(e.Message, "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-				}
-				else MessageBox.Show("YARP could not be found.", "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+			session = new Session(timer, Enumerable.Empty<string>());
+			
+			try { session = new Session(timer, portStrings); }
+			catch (InvalidOperationException e) { MessageBox.Show(e.Message, "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
 			RebuildList();
 		}
-		void LoadSource(string filePath)
+		void LoadSession(string filePath)
 		{
-			DisposeSource();
-
+			session.Dispose();
+			
 			SetFilePath(filePath);
 			timer.Reset();
-			source = new Source(XElement.Load(this.filePath));
+			session = new Session(new Capture(XElement.Load(this.filePath)));
+			
 			RebuildList();
 		}
-		void SaveSource(string filePath)
+		void SaveSession(string filePath)
 		{
 			SetFilePath(filePath);
-			source.XElement.Save(this.filePath);
-		}
-		void DisposeSource()
-		{
-			IDisposable disposable = source as IDisposable;
-			if (disposable != null) disposable.Dispose();
+			session.Capture.XElement.Save(this.filePath);
 		}
 		void SetFilePath(string filePath)
 		{
@@ -398,12 +375,12 @@ namespace Visualizer
 			streamsList.Groups.Clear();
 			streamsList.Items.Clear();
 
-			foreach (Port port in source.Ports)
+			foreach (PortData portData in session.Capture.PortsData)
 			{
-				ListViewGroup group = new ListViewGroup(port.Name);
+				ListViewGroup group = new ListViewGroup(portData.Name);
 				streamsList.Groups.Add(group);
 
-				foreach (Stream stream in port.Streams)
+				foreach (Stream stream in portData.Streams)
 				{
 					Graph graph = new Graph(drawer, diagram, stream.EntryData);
 					graph.Color = colorGenerator.NextColor();
@@ -411,7 +388,7 @@ namespace Visualizer
 					graphs.Add(graph);
 
 					ListViewItem item = new ListViewItem();
-					item.Name = port.Name + "Stream" + stream.Path;
+					item.Name = portData.Name + "Stream" + stream.Path;
 					item.Text = stream.Name;
 					item.SubItems.Add(new ListViewItem.ListViewSubItem(item, stream.Path.ToString()));
 					item.Group = group;

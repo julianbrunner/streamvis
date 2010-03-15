@@ -36,13 +36,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data.Yarp\Data.Yarp.csproj">
+      <Project>{1B61AF80-3A0D-4947-9E9D-9FE0EFA26E92}</Project>
+      <Name>Data.Yarp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{6C360F0B-D9D0-4F41-B702-D791E06E564B}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}</Project>
       <Name>Utility</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Yarp\Yarp.csproj">
-      <Project>{88377E30-410B-40ED-8D90-BE90D7831933}</Project>
-      <Name>Yarp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

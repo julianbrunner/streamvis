@@ -34,7 +34,11 @@ namespace Utility.Utilities
 					yield return item;
 			}
 		}
-		public static IEnumerable<T> Single<T>(this T item)
+		public static IEnumerable<T> Consume<T>(Func<T> getItem)
+		{
+			while (true) yield return getItem();
+		}
+		public static IEnumerable<T> Single<T>(T item)
 		{
 			yield return item;
 		}

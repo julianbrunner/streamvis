@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -70,6 +70,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="CoordinateLabel.cs" />
+    <Compile Include="Session.cs" />
     <Compile Include="Environment\DraggerSettings.cs" />
     <Compile Include="Environment\RectangleSelectorSettings.cs" />
     <Compile Include="StreamListItem.cs" />
@@ -146,6 +147,18 @@
     <EmbeddedResource Include="Text\Help Message.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data.Text\Data.Text.csproj">
+      <Project>{B106CAA9-737F-4940-964E-DC32F4AED0C9}</Project>
+      <Name>Data.Text</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data.Yarp\Data.Yarp.csproj">
+      <Project>{1B61AF80-3A0D-4947-9E9D-9FE0EFA26E92}</Project>
+      <Name>Data.Yarp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{6C360F0B-D9D0-4F41-B702-D791E06E564B}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Graphics\Graphics.csproj">
       <Project>{9CFCF6A1-6763-4108-851F-E2A8869968B2}</Project>
       <Name>Graphics</Name>
@@ -154,10 +167,6 @@
       <Project>{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}</Project>
       <Name>Utility</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Visualizer.Data.Yarp\Visualizer.Data.Yarp.csproj">
-      <Project>{887A09FE-B8F4-4674-B1E0-91218DF6103A}</Project>
-      <Name>Visualizer.Data.Yarp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Visualizer.Data\Visualizer.Data.csproj">
       <Project>{188C1B70-DD61-4EEA-B733-8379A3866CF2}</Project>
       <Name>Visualizer.Data</Name>
@@ -165,10 +174,6 @@
     <ProjectReference Include="..\Visualizer.Drawing\Visualizer.Drawing.csproj">
       <Project>{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}</Project>
       <Name>Visualizer.Drawing</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Yarp\Yarp.csproj">
-      <Project>{88377E30-410B-40ED-8D90-BE90D7831933}</Project>
-      <Name>Yarp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -19,8 +19,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using Data;
+using Data.Yarp;
 using Utility.Extensions;
-using Yarp;
 
 namespace Sender
 {
@@ -43,8 +44,8 @@ namespace Sender
 			//double variance = 1;
 			//int counter = 0;
 
-			using (Network network = new Network())
-			using (Port port = new Port("/write"))
+			using (YarpNetwork network = new YarpNetwork())
+			using (YarpPort port = new YarpPort("/write", network))
 				while (!Console.KeyAvailable)
 				{
 					if (stopwatch.Elapsed.TotalSeconds > 1)

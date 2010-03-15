@@ -51,9 +51,9 @@
     <Compile Include="RectangleSelector.cs" />
     <Compile Include="Drawer.cs" />
     <Compile Include="FrameCounter.cs" />
-    <Compile Include="IComponent.cs" />
-    <Compile Include="IDrawable.cs" />
-    <Compile Include="IUpdateable.cs" />
+    <Compile Include="Components\IComponent.cs" />
+    <Compile Include="Components\IDrawable.cs" />
+    <Compile Include="Components\IUpdateable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextAlignment.cs" />
     <Compile Include="Viewport.cs">

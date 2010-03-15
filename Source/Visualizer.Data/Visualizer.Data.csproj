@@ -41,16 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Receiver.cs" />
     <Compile Include="EntryData.cs" />
     <Compile Include="Entry.cs" />
-    <Compile Include="Path.cs" />
-    <Compile Include="Port.cs" />
+    <Compile Include="PortData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source.cs" />
+    <Compile Include="Capture.cs" />
     <Compile Include="Stream.cs" />
     <Compile Include="Timer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{6C360F0B-D9D0-4F41-B702-D791E06E564B}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}</Project>
       <Name>Utility</Name>

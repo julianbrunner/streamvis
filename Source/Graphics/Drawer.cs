@@ -69,12 +69,18 @@ namespace Graphics
 		}
 		~Drawer()
 		{
-			Dispose(false);
+			Dispose();
 		}
 
-		public void Dispose()
+		public virtual void Dispose()
 		{
-			Dispose(true);
+			if (!disposed)
+			{
+				GL.DeleteTextures(textTextures.Length, textTextures);
+				GL.DeleteLists(characterLists, characters.Length);
+				
+				disposed = true;
+			}
 		}
 		public Size GetTextSize(double number)
 		{
@@ -139,17 +145,6 @@ namespace Graphics
 			GL.LoadIdentity();
 		}
 
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				disposed = true;
-
-				GL.DeleteTextures(textTextures.Length, textTextures);
-				GL.DeleteLists(characterLists, characters.Length);
-			}
-		}
-
 		void viewport_Load(object sender, EventArgs e)
 		{
 			initialized = true;
@@ -157,7 +152,7 @@ namespace Graphics
 			LineSmoothing = LineSmoothing;
 			AlphaBlending = AlphaBlending;
 
-			GL.EnableClientState(EnableCap.VertexArray);
+			GL.EnableClientState(ArrayCap.VertexArray);
 
 			GL.Enable(EnableCap.Texture2D);
 			GL.Hint(HintTarget.LineSmoothHint, HintMode.Nicest);
