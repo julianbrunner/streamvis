@@ -56,7 +56,7 @@ namespace Visualizer.Drawing
 			LinearMapping timeMapping = diagram.TimeManager.Mapping;
 			LinearMapping valueMapping = diagram.ValueManager.Mapping;
 
-			if (IsDrawn && !streamManager.EntryCache.IsEmpty && !timeMapping.Input.IsEmpty() && !valueMapping.Input.IsEmpty())
+			if (IsDrawn && !streamManager.EntryCache.IsEmpty && !timeMapping.Source.IsEmpty() && !valueMapping.Source.IsEmpty())
 			{
 				Entry firstEntry = streamManager.EntryCache.FirstEntry;
 				Entry lastEntry = streamManager.EntryCache.LastEntry;
@@ -70,12 +70,12 @@ namespace Visualizer.Drawing
 
 					if (diagram.GraphSettings.ExtendGraphs)
 					{
-						if (firstEntry.Time - segmentTimeMapping.Input.Start > 1.5 * streamManager.EntryResampler.SampleDistance) startEntry = new Entry(segmentTimeMapping.Input.Start, firstEntry.Value);
-						if (segmentTimeMapping.Input.End - lastEntry.Time > 1.5 * streamManager.EntryResampler.SampleDistance) endEntry = new Entry(segmentTimeMapping.Input.End, lastEntry.Value);
+						if (firstEntry.Time - segmentTimeMapping.Source.Start > 1.5 * streamManager.EntryResampler.SampleDistance) startEntry = new Entry(segmentTimeMapping.Source.Start, firstEntry.Value);
+						if (segmentTimeMapping.Source.End - lastEntry.Time > 1.5 * streamManager.EntryResampler.SampleDistance) endEntry = new Entry(segmentTimeMapping.Source.End, lastEntry.Value);
 						if (segment.Entries.Length == 0 && (startEntry != null || endEntry != null))
 						{
-							if (startEntry == null) startEntry = new Entry(segmentTimeMapping.Input.Start, endEntry.Value.Value);
-							if (endEntry == null) endEntry = new Entry(segmentTimeMapping.Input.End, startEntry.Value.Value);
+							if (startEntry == null) startEntry = new Entry(segmentTimeMapping.Source.Start, endEntry.Value.Value);
+							if (endEntry == null) endEntry = new Entry(segmentTimeMapping.Source.End, startEntry.Value.Value);
 						}
 					}
 

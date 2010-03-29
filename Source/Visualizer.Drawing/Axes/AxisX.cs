@@ -32,9 +32,9 @@ namespace Visualizer.Drawing.Axes
 			{
 				LinearMapping timeMapping = Diagram.TimeManager.Mapping;
 
-				if (timeMapping.Input.IsEmpty()) yield break;
+				if (timeMapping.Source.IsEmpty()) yield break;
 
-				IEnumerable<double> markers = DoubleUtility.GetMarkers(timeMapping.Input.Start, timeMapping.Input.End, MarkerCount);
+				IEnumerable<double> markers = DoubleUtility.GetMarkers(timeMapping.Source.Start, timeMapping.Source.End, MarkerCount);
 
 				foreach (double time in markers) yield return time;
 			}

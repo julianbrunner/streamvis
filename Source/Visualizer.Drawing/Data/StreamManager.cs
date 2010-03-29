@@ -48,7 +48,7 @@ namespace Visualizer.Drawing.Data
 			Segments =
 			(
 				from timeRange in diagram.TimeManager.GraphMappings
-				select new DataSegment(timeRange, entryCache[timeRange.Input])
+				select new DataSegment(timeRange, entryCache[timeRange.Source])
 			)
 			.ToArray();
 

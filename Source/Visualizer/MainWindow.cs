@@ -275,8 +275,8 @@ namespace Visualizer
 				LinearMapping timeMapping = new LinearMapping(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange);
 				LinearMapping valueMapping = new LinearMapping(diagram.ValueManager.Range, valueRange);
 
-				timeRange = timeMapping.ForwardMap(timeMapping.Input);
-				valueRange = valueMapping.ForwardMap(valueMapping.Input);
+				timeRange = timeMapping.ForwardMap(timeMapping.Source);
+				valueRange = valueMapping.ForwardMap(valueMapping.Source);
 
 				diagram.TimeManager.Time = timeRange.End;
 				diagram.TimeManager.Width = timeRange.End - timeRange.Start;
@@ -303,8 +303,8 @@ namespace Visualizer
 				LinearMapping timeMapping = new LinearMapping(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange);
 				LinearMapping valueMapping = new LinearMapping(diagram.ValueManager.Range, valueRange);
 
-				timeRange = timeMapping.ReverseMap(timeMapping.Input);
-				valueRange = valueMapping.ReverseMap(valueMapping.Input);
+				timeRange = timeMapping.ReverseMap(timeMapping.Source);
+				valueRange = valueMapping.ReverseMap(valueMapping.Source);
 
 				diagram.TimeManager.Time = timeRange.End;
 				diagram.TimeManager.Width = timeRange.End - timeRange.Start;

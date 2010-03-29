@@ -20,26 +20,26 @@ namespace Utility
 {
 	public class LinearMapping
 	{
-		readonly Range<double> input;
-		readonly Range<double> output;
+		readonly Range<double> source;
+		readonly Range<double> destination;
 		readonly double offset;
 		readonly double factor;
 
-		public Range<double> Input { get { return input; } }
-		public Range<double> Output { get { return output; } }
+		public Range<double> Source { get { return source; } }
+		public Range<double> Destination { get { return destination; } }
 		public double Offset { get { return offset; } }
 		public double Factor { get { return factor; } }
 
-		public LinearMapping(Range<double> input, Range<double> output)
+		public LinearMapping(Range<double> source, Range<double> destination)
 		{
-			this.input = input;
-			this.output = output;
+			this.source = source;
+			this.destination = destination;
 
-			double divisor = input.End - input.Start;
-			this.offset = (input.End * output.Start - input.Start * output.End) / divisor;
-			this.factor = (output.End - output.Start) / divisor;
+			double divisor = source.End - source.Start;
+			this.offset = (source.End * destination.Start - source.Start * destination.End) / divisor;
+			this.factor = (destination.End - destination.Start) / divisor;
 		}
-		public LinearMapping(Range<double> input) : this(input, new Range<double>(0, 1)) { }
+		public LinearMapping(Range<double> source) : this(source, new Range<double>(0, 1)) { }
 
 		public double ForwardMap(double value)
 		{

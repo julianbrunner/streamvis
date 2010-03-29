@@ -32,9 +32,9 @@ namespace Visualizer.Drawing.Axes
 			{
 				LinearMapping valueMapping = Diagram.ValueManager.Mapping;
 
-				if (valueMapping.Input.IsEmpty()) yield break;
+				if (valueMapping.Source.IsEmpty()) yield break;
 
-				IEnumerable<double> markers = DoubleUtility.GetMarkers(valueMapping.Input.Start, valueMapping.Input.End, MarkerCount);
+				IEnumerable<double> markers = DoubleUtility.GetMarkers(valueMapping.Source.Start, valueMapping.Source.End, MarkerCount);
 
 				foreach (double value in markers) yield return value;
 			}
