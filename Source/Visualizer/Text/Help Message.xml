@@ -74,7 +74,7 @@
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+t|-t</Text>
-		<Text Column="Description">Enables or disables timestamp mode. In timestamp mode, timestamps will be retrieved from the first stream instaed of the local machine's system time.</Text>
+		<Text Column="Description">Enables or disables timestamp mode. In timestamp mode, timestamps will be retrieved from the first stream of each port instaed of the local machine's system time.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+m|-m</Text>
