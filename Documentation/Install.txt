@@ -3,7 +3,7 @@ Linux
 
    1. (Optional) Install YARP (http://eris.liralab.it/yarpdoc/install.html)
    2. Install MonoDevelop 2.0 (or newer) (http://monodevelop.com/Download)
-   3. Do a checkout of the trunk of the SVN repository on Google Code (http://code.google.com/p/streamvis/source/checkout) or download and extract one of the SVN snapshots provided in the downloads section on Google Code (http://code.google.com/p/streamvis/downloads/list)
+   3. Do a checkout of the path 'tags/Version 1.1' of the SVN repository on Google Code (http://code.google.com/p/streamvis/source/checkout) or download and extract one of the SVN snapshots provided in the downloads section on Google Code (http://code.google.com/p/streamvis/downloads/list)
    4. Open Source/Visualizer.sln in MonoDevelop and build either the project Visualizer or the entire solution 
 
 The Stream Visualizer binary will be created at Source/Visualizer/bin/<configuration>/streamvis. It needs Source/Visualizer/bin/<configuration>/libYarp.Wrapper.so to run.
@@ -12,7 +12,7 @@ Windows
 ----------
 
    1. (Optional) Install YARP (http://eris.liralab.it/yarpdoc/install.html)
-   2. Do a checkout of the trunk of the SVN repository on Google Code (http://code.google.com/p/streamvis/source/checkout) or download and extract one of the SVN snapshots provided in the downloads section on Google Code (http://code.google.com/p/streamvis/downloads/list)
+   2. Do a checkout of the path 'tags/Version 1.1' of the SVN repository on Google Code (http://code.google.com/p/streamvis/source/checkout) or download and extract one of the SVN snapshots provided in the downloads section on Google Code (http://code.google.com/p/streamvis/downloads/list)
    3. Open Source/Visualizer.sln in the C# IDE of your choice
    4. Remove the reference to Yarp.Wrapper from the project Yarp
    5. Build either the project Visualizer or the entire solution
