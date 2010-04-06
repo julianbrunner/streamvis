@@ -46,34 +46,14 @@ namespace Visualizer.Data
 
 			string[] details = portString.Split(':');
 
-			switch (details.Length)
-			{
-				case 1:
-					this.portName = details[0];
-					this.portStreams =
-					(
-						from path in GetPaths(Enumerable.Empty<int>(), EnumerableUtility.Consume<Packet>(source.Read).First(packet => packet != null))
-						select new Stream(path)
-					)
-					.ToArray();
-					break;
-				case 2:
-					this.portName = details[0];
-					this.portStreams =
-					(
-						from range in details[1].Split(',')
-						from stream in ParseRange(range)
-						select stream
-					)
-					.ToArray();
-					break;
-				default: throw new ArgumentException("portString");
-			}
+			this.portName = details[0];
+			this.portStreams = GetStreams(source, details);
 
 			this.reader = new Thread(ReadLoop);
 			this.reader.Priority = ThreadPriority.AboveNormal;
 			this.reader.Start();
 		}
+
 		~Receiver()
 		{
 			Dispose();
@@ -113,6 +93,28 @@ namespace Visualizer.Data
 			}
 		}
 
+		static IEnumerable<Stream> GetStreams(Port port, string[] portString)
+		{
+			switch (portString.Length)
+			{
+				case 1:
+					return
+					(
+						from path in GetPaths(Enumerable.Empty<int>(), EnumerableUtility.Consume<Packet>(port.Read).First(packet => packet != null))
+						select new Stream(path)
+					)
+					.ToArray();
+				case 2:
+					return
+					(
+						from range in portString[1].Split(',')
+						from stream in ParseRange(range)
+						select stream
+					)
+					.ToArray();
+				default: throw new ArgumentException("portString");
+			}
+		}
 		static IEnumerable<Stream> ParseRange(string range)
 		{
 			string[] details = range.Split('-');
