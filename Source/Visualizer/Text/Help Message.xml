@@ -73,6 +73,10 @@
 		<Text Column="Description">The name of the stream. This is displayed in the stream selection list.</Text>
 		<NewLine />
 		<NewLine />
+		<Text Column="Level1">+t|-t</Text>
+		<Text Column="Description">Enables or disables timestamp mode. In timestamp mode, timestamps will be retrieved from the first stream instaed of the local machine's system time.</Text>
+		<NewLine />
+		<NewLine />
 		<Text Column="Level1">+m|-m</Text>
 		<Text Column="Description">Enables or disables minimal mode. In minimal mode, everything except for the graph area is hidden from the user interface to maximize the available drawing-space. The default value is disabled.</Text>
 		<NewLine />

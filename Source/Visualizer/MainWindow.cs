@@ -84,7 +84,7 @@ namespace Visualizer
 
 			this.drawer = new Drawer(viewport);
 
-			this.timer = new Data.Timer();
+			this.timer = new StopwatchTimer();
 
 			this.diagram = CreateDiagram(viewport, drawer, timer, parameters);
 
