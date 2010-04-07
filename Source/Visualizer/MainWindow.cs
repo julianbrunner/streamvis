@@ -342,7 +342,7 @@ namespace Visualizer
 			session = new Session(timer, Enumerable.Empty<string>());
 			
 			try { session = new Session(timer, portStrings); }
-			catch (InvalidOperationException e) { MessageBox.Show(e.Message, "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+			catch (Exception e) { MessageBox.Show(e.Message, "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
 			RebuildList();
 		}

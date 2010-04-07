@@ -16,12 +16,9 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Threading;
 using System.IO;
 using System.Linq;
 using Utility;
-using Utility.Utilities;
 
 namespace Data.Text
 {
@@ -29,7 +26,7 @@ namespace Data.Text
 	{
 		readonly TextReader textReader;
 		readonly Breaker<string> lines;
-		
+
 		bool disposed = false;
 
 		public TextReaderPort()
@@ -52,16 +49,16 @@ namespace Data.Text
 		{
 			if (!disposed)
 			{
-				textReader.Dispose();
-				lines.Dispose();
-				
+				if (textReader != null) textReader.Dispose();
+				if (textReader != null) lines.Dispose();
+
 				disposed = true;
 			}
 		}
 		public override List Read()
 		{
 			string line = lines.Read();
-			
+
 			if (line == null) return null;
 
 			if (line.Contains('#')) line = line.Substring(0, line.IndexOf('#'));

@@ -47,8 +47,8 @@ namespace Data.Text
 		{
 			if (!disposed)
 			{
-				textWriter.Dispose();
-				
+				if (textWriter != null) textWriter.Dispose();
+
 				disposed = true;
 			}
 		}

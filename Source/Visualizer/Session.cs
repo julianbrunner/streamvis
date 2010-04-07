@@ -88,7 +88,9 @@ namespace Visualizer
 		{
 			if (!disposed)
 			{
-				foreach (Receiver receiver in receivers) receiver.Dispose();
+				if (receivers != null)
+					foreach (Receiver receiver in receivers)
+						receiver.Dispose();
 
 				if (network != null) network.Dispose();
 
