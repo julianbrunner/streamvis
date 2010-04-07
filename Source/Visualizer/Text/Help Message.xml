@@ -70,7 +70,7 @@
 		<NewLine />
 		<NewLine />
 		<Text Column="Level4">&lt;name&gt;</Text>
-		<Text Column="Description">The name of the stream. This is displayed in the stream selection list.</Text>
+		<Text Column="Description">The name of the stream. This is displayed in the stream selection list. If &lt;name&gt; is "TIME", this stream will be used to timestamp incoming packets on this port instead of the local system's clock. If &lt;name&gt; is "TIMER", the timestamps received on this stream will not only be used to classify the packets received on this port, but also to specify the global timestamps for the entire capture.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level1">+m|-m</Text>
