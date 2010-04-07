@@ -31,11 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenTK, Version=0.9.9.5, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+    <Reference Include="OpenTK, Version=1.0.0.103, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\OpenTK\OpenTK.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK.GLControl, Version=0.9.9.5, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+    <Reference Include="OpenTK.GLControl, Version=1.0.0.103, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\OpenTK\OpenTK.GLControl.dll</HintPath>
     </Reference>
