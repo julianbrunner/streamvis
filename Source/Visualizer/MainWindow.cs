@@ -84,7 +84,7 @@ namespace Visualizer
 
 			this.drawer = new Drawer(viewport);
 
-			this.timer = new StopwatchTimer();
+			this.timer = new Data.Timer();
 
 			this.diagram = CreateDiagram(viewport, drawer, timer, parameters);
 
@@ -340,7 +340,7 @@ namespace Visualizer
 			SetFilePath(null);
 			timer.Reset();
 			session = new Session(timer, Enumerable.Empty<string>());
-			
+
 			try { session = new Session(timer, portStrings); }
 			catch (Exception e) { MessageBox.Show(e.Message, "Capture creation error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
@@ -349,11 +349,11 @@ namespace Visualizer
 		void LoadSession(string filePath)
 		{
 			session.Dispose();
-			
+
 			SetFilePath(filePath);
 			timer.Reset();
 			session = new Session(new Capture(XElement.Load(this.filePath)));
-			
+
 			RebuildList();
 		}
 		void SaveSession(string filePath)

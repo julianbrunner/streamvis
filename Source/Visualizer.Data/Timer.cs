@@ -15,12 +15,47 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Diagnostics;
+
 namespace Visualizer.Data
 {
-	public abstract class Timer
+	public class Timer
 	{
-		public abstract double Time { get; }
+		readonly Stopwatch stopwatch = new Stopwatch();
 
-		public abstract void Reset();
+		double time;
+
+		public bool IsUpdated { get; set; }
+		public double Time
+		{
+			get
+			{
+				if (IsUpdated)
+					lock (stopwatch)
+						time = stopwatch.Elapsed.TotalSeconds;
+
+				return time;
+			}
+			set
+			{
+				time = value;
+			}
+		}
+
+		public Timer()
+		{
+			Reset();
+		}
+
+		public void Reset()
+		{
+			time = 0;
+
+			lock (stopwatch)
+			{
+				stopwatch.Reset();
+				stopwatch.Start();
+			}
+		}
 	}
 }

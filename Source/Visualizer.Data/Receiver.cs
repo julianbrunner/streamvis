@@ -60,6 +60,8 @@ namespace Visualizer.Data
 			this.timeStream = timeStreams.SingleOrDefault();
 			this.portStreams = streams.Except(timeStreams).ToArray();
 
+			if (HasTimer) timer.IsUpdated = false;
+
 			this.reader = new Thread(Read);
 			this.reader.Priority = ThreadPriority.AboveNormal;
 			this.reader.Start();
@@ -83,6 +85,8 @@ namespace Visualizer.Data
 
 				if (source is IDisposable) ((IDisposable)source).Dispose();
 
+				if (HasTimer) timer.IsUpdated = true;
+
 				disposed = true;
 			}
 		}
@@ -98,7 +102,12 @@ namespace Visualizer.Data
 
 				if (packet != null)
 				{
-					if (timeStream != null) time = packet.GetValue(timeStream.Path);
+					if (timeStream != null)
+					{
+						time = packet.GetValue(timeStream.Path);
+
+						if (HasTimer) timer.Time = time;
+					}
 
 					foreach (Stream stream in portStreams)
 						try { stream.EntryData.Add(new Entry(time, packet.GetValue(stream.Path))); }

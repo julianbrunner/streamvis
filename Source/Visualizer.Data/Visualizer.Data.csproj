@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StopwatchTimer.cs" />
     <Compile Include="Receiver.cs" />
     <Compile Include="EntryData.cs" />
     <Compile Include="Entry.cs" />
