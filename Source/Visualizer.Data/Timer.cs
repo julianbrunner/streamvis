@@ -44,6 +44,8 @@ namespace Visualizer.Data
 
 		public Timer()
 		{
+			IsUpdated = true;
+			
 			Reset();
 		}
 

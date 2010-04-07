@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -59,7 +60,8 @@ namespace Visualizer.Data
 				buffer.Clear();
 			}
 
-			entries.Append(bufferedEntries);
+			try { entries.Append(bufferedEntries); }
+			catch (ArgumentException) { Console.WriteLine("Entries could not be appended because the timestamps are not ordered correctly."); }
 		}
 	}
 }

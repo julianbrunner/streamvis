@@ -95,7 +95,7 @@ namespace Utility
 		}
 		public void Append(TValue item)
 		{
-			if (items.Count > 0 && comparer.Compare(keySelector(item), keySelector(items[items.Count - 1])) < 0) throw new ArgumentException("item");
+			if (items.Count > 0 && comparer.Compare(keySelector(item), keySelector(items[items.Count - 1])) < 0) throw new ArgumentException("Item cannot be appended without violating list ordering.");
 
 			items.Add(item);
 		}
