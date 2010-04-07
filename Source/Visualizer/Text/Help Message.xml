@@ -50,7 +50,7 @@
 		<NewLine />
 		<NewLine />
 		<Text Column="Level2">&lt;interface&gt;</Text>
-		<Text Column="Description">Can be either "y" (YARP) or "t" (Text).</Text>
+		<Text Column="Description">Can be either "t" (Text) or "y" (YARP).</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level2">&lt;port&gt;</Text>
@@ -58,7 +58,7 @@
 		<NewLine />
 		<NewLine />
 		<Text Column="Level3">&lt;name&gt;</Text>
-		<Text Column="Description">The name of the port to receive streams on. If no ranges are given, a test packet is retrieved from the specified port to build a list of possible streams before the visualization begins. When receiving from YARP ports, &lt;name&gt; is the name of the YARP port. When receiving from text ports, &lt;name&gt; is the path to the file or pipe from which to read the streams. Additionally, &lt;name&gt; can be "-" to receive from standard input when receiving from text ports.</Text>
+		<Text Column="Description">The name of the port to receive streams on. If no ranges are given, a test packet is retrieved from the specified port to build a list of possible streams before the visualization begins. When receiving from text ports, &lt;name&gt; is the path to the file or pipe from which to read the streams. Additionally, &lt;name&gt; can be "-" to receive from standard input when receiving from text ports. When receiving from YARP ports, &lt;name&gt; is the name of the YARP port.</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level3">&lt;range&gt;</Text>

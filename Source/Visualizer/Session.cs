@@ -37,17 +37,17 @@ namespace Visualizer
 
 		public Session(Timer timer, IEnumerable<string> portStrings)
 		{
-			List<string> yarpPortStrings = new List<string>();
 			List<string> textPortStrings = new List<string>();
-			
+			List<string> yarpPortStrings = new List<string>();
+
 			foreach (string portString in portStrings)
 			{
 				if (portString.Length < 2) throw new InvalidOperationException("\"" + portString + "\" is not a valid port string");
-				
+
 				switch (portString.Substring(0, 2))
 				{
-					case "y:": yarpPortStrings.Add(portString.Substring(2)); break;
 					case "t:": textPortStrings.Add(portString.Substring(2)); break;
+					case "y:": yarpPortStrings.Add(portString.Substring(2)); break;
 					default: throw new InvalidOperationException("\"" + portString + "\" is not a valid port string");
 				}
 			}
@@ -55,16 +55,16 @@ namespace Visualizer
 			if (yarpPortStrings.Any()) this.network = new YarpNetwork();
 
 			List<Receiver> receivers = new List<Receiver>();
-			foreach (string portString in yarpPortStrings)
-			{
-				string name = portString.Split(':').First();
-				Port port = new ConnectedYarpPort(name, network);
-				receivers.Add(new Receiver(port, timer, portString));
-			}
 			foreach (string portString in textPortStrings)
 			{
 				string name = portString.Split(':').First();
 				Port port = name == "-" ? new TextReaderPort() : new TextReaderPort(name);
+				receivers.Add(new Receiver(port, timer, portString));
+			}
+			foreach (string portString in yarpPortStrings)
+			{
+				string name = portString.Split(':').First();
+				Port port = new ConnectedYarpPort(name, network);
 				receivers.Add(new Receiver(port, timer, portString));
 			}
 			this.receivers = receivers;
@@ -91,7 +91,7 @@ namespace Visualizer
 				foreach (Receiver receiver in receivers) receiver.Dispose();
 
 				if (network != null) network.Dispose();
-				
+
 				disposed = true;
 			}
 		}

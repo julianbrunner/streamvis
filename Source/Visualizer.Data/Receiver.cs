@@ -49,7 +49,7 @@ namespace Visualizer.Data
 			this.portName = details[0];
 			this.portStreams = GetStreams(source, details);
 
-			this.reader = new Thread(ReadLoop);
+			this.reader = new Thread(Read);
 			this.reader.Priority = ThreadPriority.AboveNormal;
 			this.reader.Start();
 		}
@@ -77,7 +77,7 @@ namespace Visualizer.Data
 			}
 		}
 
-		void ReadLoop()
+		void Read()
 		{
 			while (running)
 			{
