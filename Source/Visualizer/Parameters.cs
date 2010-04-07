@@ -28,7 +28,6 @@ namespace Visualizer
 		readonly List<string> portStrings = new List<string>();
 
 		public IEnumerable<string> PortStrings { get { return portStrings; } }
-		public bool? TimestampMode { get; private set; }
 		public bool? MinimalMode { get; private set; }
 		public bool? ExtendGraphs { get; private set; }
 		public bool? ClearData { get; private set; }
@@ -64,7 +63,6 @@ namespace Visualizer
 		{
 			switch (name)
 			{
-				case "t": TimestampMode = value; break;
 				case "m": MinimalMode = value; break;
 				case "e": ExtendGraphs = value; break;
 				case "c": ClearData = value; break;
