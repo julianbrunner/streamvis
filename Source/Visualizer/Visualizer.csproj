@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>Visualizer.Program</StartupObject>
-    <ApplicationIcon>Images\Application Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Application Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -177,16 +177,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\AboutBox Image.png" />
-    <None Include="Images\Application Icon.ico" />
-    <None Include="Images\Application Icon.xcf" />
-    <None Include="Images\CrossMark.png" />
-    <None Include="Images\CrossMark.xcf" />
-    <None Include="Images\MainWindow Icon.ico" />
-    <None Include="Images\MainWindow Icon.xcf" />
-    <None Include="Images\New.png" />
-    <None Include="Images\Open.png" />
-    <None Include="Images\Save.png" />
+    <Content Include="Application Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
