@@ -30,6 +30,7 @@ namespace Visualizer.Data
 		readonly Port source;
 		readonly Timer timer;
 		readonly string portName;
+		readonly Stream timeStream;
 		readonly IEnumerable<Stream> portStreams;
 		readonly Thread reader;
 
@@ -38,6 +39,7 @@ namespace Visualizer.Data
 
 		public string PortName { get { return portName; } }
 		public IEnumerable<Stream> PortStreams { get { return portStreams; } }
+		public bool HasTimer { get { return timeStream != null && timeStream.Name == "TIMER"; } }
 
 		public Receiver(Port source, Timer timer, string portString)
 		{
@@ -47,13 +49,21 @@ namespace Visualizer.Data
 			string[] details = portString.Split(':');
 
 			this.portName = details[0];
-			this.portStreams = GetStreams(source, details);
+
+			IEnumerable<Stream> streams = GetStreams(source, details);
+			IEnumerable<Stream> timeStreams = from stream in streams
+											  where stream.Name == "TIME" || stream.Name == "TIMER"
+											  select stream;
+
+			if (timeStreams.Count() > 1) throw new ArgumentException("More than one timestamp stream was found.");
+
+			this.timeStream = timeStreams.SingleOrDefault();
+			this.portStreams = streams.Except(timeStreams).ToArray();
 
 			this.reader = new Thread(Read);
 			this.reader.Priority = ThreadPriority.AboveNormal;
 			this.reader.Start();
 		}
-
 		~Receiver()
 		{
 			Dispose();
@@ -72,7 +82,7 @@ namespace Visualizer.Data
 				}
 
 				if (source is IDisposable) ((IDisposable)source).Dispose();
-				
+
 				disposed = true;
 			}
 		}
@@ -87,9 +97,13 @@ namespace Visualizer.Data
 				if (!running) break;
 
 				if (packet != null)
+				{
+					if (timeStream != null) time = packet.GetValue(timeStream.Path);
+
 					foreach (Stream stream in portStreams)
 						try { stream.EntryData.Add(new Entry(time, packet.GetValue(stream.Path))); }
 						catch (ArgumentException) { Console.WriteLine("Packet \"{0}\" does not have a value at path \"{1}\".", packet, stream.Path); }
+				}
 			}
 		}
 

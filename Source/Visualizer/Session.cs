@@ -69,6 +69,8 @@ namespace Visualizer
 			}
 			this.receivers = receivers;
 
+			if (receivers.Count(receiver => receiver.HasTimer) > 1) throw new ArgumentException("More than one timer stream was found.");
+
 			this.capture = new Capture
 			(
 				from receiver in receivers
