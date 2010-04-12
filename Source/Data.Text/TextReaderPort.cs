@@ -97,8 +97,12 @@ namespace Data.Text
 			}
 
 			double value;
-			if (!double.TryParse(item, out value)) throw new ArgumentException(string.Format("String \"{0}\" could not be parsed.", item));
-			return new Value(value);
+			if (double.TryParse(item, out value)) return new Value(value);
+			else 
+			{
+				Console.WriteLine("String \"{0}\" could not be parsed.", item);
+				return null;
+			}
 		}
 	}
 }
