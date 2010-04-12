@@ -104,7 +104,9 @@ namespace Visualizer.Data
 				{
 					if (timeStream != null)
 					{
-						time = packet.GetValue(timeStream.Path);
+						try { time = packet.GetValue(timeStream.Path); }
+						catch (ArgumentException e) { Console.WriteLine(e.Message); }
+						catch (InvalidOperationException e) { Console.WriteLine(e.Message); }
 
 						if (HasTimer) timer.Time = time;
 					}
