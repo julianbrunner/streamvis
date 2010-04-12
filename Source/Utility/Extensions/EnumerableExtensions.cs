@@ -59,7 +59,7 @@ namespace Utility.Extensions
 		{
 			if (source == null) throw new ArgumentNullException("source");
 
-			foreach (T item in source) yield return item == null ? null : item.ToString();
+			foreach (T item in source) yield return item == null ? "<null>" : item.ToString();
 		}
 		public static string AggregateString<T>(this IEnumerable<T> source)
 		{
