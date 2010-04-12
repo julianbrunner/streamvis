@@ -32,9 +32,11 @@ namespace Data
 			{
 				List list = current as List;
 				
-				if (list == null || index < 0 || index >= list.Length) throw new ArgumentException("path");
+				if (list == null || index < 0 || index >= list.Length) throw new ArgumentException(string.Format("Packet \"{0}\" does not have a value at path \"{1}\".", this, path));
 				
 				current = list[index];
+				
+				if (current == null) throw new InvalidOperationException(string.Format("Value at path \"{0}\" in packet \"{1}\" is not valid.", path, this));
 			}
 			
 			return (Value)current;

@@ -111,7 +111,8 @@ namespace Visualizer.Data
 
 					foreach (Stream stream in portStreams)
 						try { stream.EntryData.Add(new Entry(time, packet.GetValue(stream.Path))); }
-						catch (ArgumentException) { Console.WriteLine("Packet \"{0}\" does not have a value at path \"{1}\".", packet, stream.Path); }
+						catch (ArgumentException e) { Console.WriteLine(e.Message); }
+						catch (InvalidOperationException e) { Console.WriteLine(e.Message); }
 				}
 			}
 		}
