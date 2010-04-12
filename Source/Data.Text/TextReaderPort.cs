@@ -88,13 +88,17 @@ namespace Data.Text
 			{
 				item = item.Substring(1, item.Length - 2);
 
-				return new List(from part in item.Split(' ') select StringToPacket(part));
+				return new List
+				(
+					from part in item.Split(' ', '\t')
+					where part != string.Empty
+					select StringToPacket(part)
+				);
 			}
 
 			double value;
-			if (double.TryParse(item, out value)) return new Value(value);
-
-			throw new ArgumentException("item");
+			if (!double.TryParse(item, out value)) throw new ArgumentException(string.Format("String \"{0}\" could not be parsed.", item));
+			return new Value(value);
 		}
 	}
 }
