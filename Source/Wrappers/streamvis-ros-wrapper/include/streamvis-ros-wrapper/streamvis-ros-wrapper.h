@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>./ project created on 4/18/2010 at 4:28 PM
 
-#ifndef __ROS_WRAPPER_H__
-#define __ROS_WRAPPER_H__
+#ifndef __STREAMVIS_ROS_WRAPPER_H__
+#define __STREAMVIS_ROS_WRAPPER_H__
 
 // Add function prototypes here
 

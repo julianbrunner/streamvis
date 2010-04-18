@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "Ros.Wrapper.h"
+#include "streamvis-ros-wrapper/streamvis-ros-wrapper.h"
 
 #include <ros/ros.h>
 
