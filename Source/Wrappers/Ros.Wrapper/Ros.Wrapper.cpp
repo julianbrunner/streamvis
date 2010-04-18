@@ -19,11 +19,14 @@
 
 #include <ros/ros.h>
 
+using namespace std;
+
 void Callback(const unsigned char* data)
 {
 }
 
 void Ros_Init()
 {
-	ros::init(0, NULL, "ros.wrapper");
+	int argc = 0;
+	ros::init(argc, NULL, string("ros.wrapper"));
 }
