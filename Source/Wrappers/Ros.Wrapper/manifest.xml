@@ -1,0 +1,15 @@
+<package>
+  <description brief="Ros.Wrapper">
+
+     Ros.Wrapper
+
+  </description>
+  <author>Julian Brunner</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/Ros.Wrapper</url>
+  <depend package="roscpp"/>
+
+</package>
+
+
