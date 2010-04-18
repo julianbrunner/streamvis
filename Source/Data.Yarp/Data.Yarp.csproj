@@ -47,10 +47,6 @@
       <Project>{6C360F0B-D9D0-4F41-B702-D791E06E564B}</Project>
       <Name>Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Yarp.Wrapper\Yarp.Wrapper.cproj">
-      <Project>{E8BC2BB2-9CAC-40B2-92E4-0D32F31878D5}</Project>
-      <Name>Yarp.Wrapper</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Core">
