@@ -1,4 +1,5 @@
-binary = Yarp.Wrapper.so
+binary = streamvis-wrappers-yarp
+binarySuffix = .so
 includeDirectories = 
 libraryDirectories = 
 libraries = YARP_OS
@@ -17,12 +18,12 @@ $(binary): $(objectFiles)
 -include $(dependencyFiles)
 
 clean:
-	rm $(objectFiles) $(dependencyFiles) $(binary)
+	rm $(objectFiles) $(dependencyFiles) $(binary)$(binarySuffix)
 
 .PHONY: clean
 
 %.o: %.cpp
 	$(CXX) -c $(CPPFLAGS) $(CXXFLAGS) $*.cpp -o $*.o
 	$(CXX) -MM $(CPPFLAGS) $(CXXFLAGS) $*.cpp > $*.d
-%.so: %
-	cp $* $*.so
+%: %.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $*.cpp $(LDFLAGS) -o $*$(binarySuffix)
