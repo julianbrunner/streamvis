@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "Yarp.Wrapper.h"
+#include "streamvis-wrappers-yarp.h"
 
 Network*	Network_New()													{ return new Network;							}
 void		Network_Dispose(Network* network)								{ delete network;;								}
