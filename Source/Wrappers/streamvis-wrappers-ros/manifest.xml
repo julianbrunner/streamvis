@@ -1,0 +1,16 @@
+<package>
+  <description brief="streamvis-wrappers-ros">
+
+     streamvis-wrappers-ros
+
+  </description>
+  <author>Julian Brunner</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/streamvis-wrappers-ros</url>
+  <depend package="roscpp"/>
+  <depend package="topic_tools"/>
+
+</package>
+
+
