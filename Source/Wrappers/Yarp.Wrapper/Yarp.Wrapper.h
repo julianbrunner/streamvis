@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __MAIN_H__
-#define __MAIN_H__
+#ifndef __YARP_WRAPPER_H__
+#define __YARP_WRAPPER_H__
 
 #include <yarp/os/all.h>
 

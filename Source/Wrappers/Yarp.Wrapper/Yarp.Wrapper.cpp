@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "main.h"
+#include "Yarp.Wrapper.h"
 
 Network*	Network_New()													{ return new Network;							}
 void		Network_Dispose(Network* network)								{ delete network;;								}
