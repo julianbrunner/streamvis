@@ -1,2 +1,3 @@
 #!/bin/sh
-mkbundle2 -z -o $1 *.exe *.dll
+
+mkbundle2 -z -o $2/$1 $2/*.exe $2/*.dll

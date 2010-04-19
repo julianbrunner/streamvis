@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source $HOME/.bashrc
+
+echo $ROS_ROOT
+
+cd $1/Wrappers/streamvis-wrappers-yarp
+make
+cp bin/libstreamvis-wrappers-yarp.so $2
+
+cd $1/Wrappers/streamvis-wrappers-ros
+make
+cp bin/libstreamvis-wrappers-ros.so $2

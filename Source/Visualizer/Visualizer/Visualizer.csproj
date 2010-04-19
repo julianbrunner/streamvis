@@ -25,7 +25,8 @@
     <WarningLevel>4</WarningLevel>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="../../../Tools/MakeBundle streamvis" workingdir="${TargetDir}" />
+        <Command type="AfterBuild" command="../../../Tools/MakeBundle streamvis ${TargetDir}" workingdir="" />
+        <Command type="AfterBuild" command="../../../Tools/InstallWrappers ../.. ${TargetDir}" workingdir="" />
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
@@ -38,7 +39,8 @@
     <WarningLevel>4</WarningLevel>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="../../../Tools/MakeBundle streamvis" workingdir="${TargetDir}" />
+        <Command type="AfterBuild" command="../../../Tools/MakeBundle streamvis ${TargetDir}" workingdir="" />
+        <Command type="AfterBuild" command="../../../Tools/InstallWrappers ../.. ${TargetDir}" />
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
