@@ -103,43 +103,43 @@ namespace Data.Yarp
 			for (int i = 0; i < length; i++) yield return Bottle_GetValue(bottle, i);
 		}
 
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern IntPtr BufferedPort_Bottle_New();
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern void BufferedPort_Bottle_Dispose(IntPtr port);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern void BufferedPort_Bottle_Open(IntPtr port, string name);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern void BufferedPort_Bottle_Close(IntPtr port);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern IntPtr BufferedPort_Bottle_Prepare(IntPtr port);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern IntPtr BufferedPort_Bottle_Read(IntPtr port);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern void BufferedPort_Bottle_Write(IntPtr port);
 
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern void Bottle_Clear(IntPtr bottle);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern int Bottle_Size(IntPtr bottle);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern IntPtr Bottle_GetValue(IntPtr bottle, int index);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern IntPtr Bottle_AddList(IntPtr bottle);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern void Bottle_AddDouble(IntPtr bottle, double value);
 
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern byte Value_IsList(IntPtr value);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern byte Value_IsInt(IntPtr value);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern byte Value_IsDouble(IntPtr value);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern IntPtr Value_AsList(IntPtr value);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern int Value_AsInt(IntPtr value);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern double Value_AsDouble(IntPtr value);
 	}
 }

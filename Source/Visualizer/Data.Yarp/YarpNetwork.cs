@@ -74,15 +74,15 @@ namespace Data.Yarp
 			return prefix + "/" + i;
 		}
 
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern IntPtr Network_New();
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern void Network_Dispose(IntPtr network);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern void Network_Connect(string source, string destination);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern void Network_Disconnect(string source, string destination);
-		[DllImport("Yarp.Wrapper")]
+		[DllImport("streamvis-wrappers-yarp")]
 		static extern byte Network_Exists(string name);
 	}
 }
