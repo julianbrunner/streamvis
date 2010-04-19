@@ -37,9 +37,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="libYarp.Wrapper.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Notes\Notes.txt" />
   </ItemGroup>
   <ItemGroup>
