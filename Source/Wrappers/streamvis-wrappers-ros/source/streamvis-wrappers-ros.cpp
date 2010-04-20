@@ -18,14 +18,37 @@
 #include "streamvis-wrappers-ros.h"
 
 #include <ros/ros.h>
+#include <std_msgs/Empty.h>
 
 void Callback(const unsigned char* data)
 {
 }
 
-void Ros_Init()
+ros::NodeHandle* Initialize()
 {
 	int argc = 0;
-	int argv = NULL;
+	char** argv = NULL;
 	ros::init(argc, argv, "streamvis-wrappers-ros");
+
+	return new ros::NodeHandle;
+}
+void Dispose(ros::NodeHandle* nodeHandle)
+{
+	delete nodeHandle;
+}
+ros::Publisher* Advertise(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength)
+{
+	return new ros::Publisher(nodeHandle->advertise<std_msgs::Empty>(topicName, queueLength));
+}
+void DisposePublisher(ros::Publisher* publisher)
+{
+	delete publisher;
+}
+bool ros_ok()
+{
+	return ros::ok();
+}
+void ros_spinOnce()
+{
+	ros::spinOnce();
 }
