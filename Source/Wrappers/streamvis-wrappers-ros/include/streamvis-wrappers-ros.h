@@ -1,4 +1,4 @@
-/// Copyright © Julian Brunner 2009 - 2010
+// Copyright © Julian Brunner 2009 - 2010
 
 // This file is part of Stream Visualizer (streamvis).
 // 
@@ -13,7 +13,7 @@
 // GNU General Public License for more details.
 // 
 // You should have received a copy of the GNU General Public License
-// along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>./ project created on 4/18/2010 at 4:28 PM
+// along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifndef __STREAMVIS_WRAPPERS_ROS_H__
 #define __STREAMVIS_WRAPPERS_ROS_H__

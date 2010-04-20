@@ -19,8 +19,6 @@
 
 #include <ros/ros.h>
 
-using namespace std;
-
 void Callback(const unsigned char* data)
 {
 }
@@ -28,5 +26,6 @@ void Callback(const unsigned char* data)
 void Ros_Init()
 {
 	int argc = 0;
-	ros::init(argc, NULL, string("ros.wrapper"));
+	int argv = NULL;
+	ros::init(argc, argv, "streamvis-wrappers-ros");
 }
