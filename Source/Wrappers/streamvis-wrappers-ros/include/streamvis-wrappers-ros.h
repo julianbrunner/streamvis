@@ -18,6 +18,19 @@
 #ifndef __STREAMVIS_WRAPPERS_ROS_H__
 #define __STREAMVIS_WRAPPERS_ROS_H__
 
-// Add function prototypes here
+#include <ros/ros.h>
+#include <topic_tools/shape_shifter.h>
+
+extern "C"
+{
+	ros::NodeHandle* Initialize();
+	void Dispose(ros::NodeHandle* nodeHandle);
+	ros::Publisher* Advertise(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength);
+	void DisposePublisher(ros::Publisher* publisher);
+	ros::Subscriber* Subscribe(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr));
+	void DisposeSubscriber(ros::Subscriber* subscriber);
+	bool ros_ok();
+	void ros_spinOnce();
+}
 
 #endif
