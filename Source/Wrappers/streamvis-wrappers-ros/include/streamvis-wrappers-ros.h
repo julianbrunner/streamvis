@@ -24,10 +24,10 @@
 extern "C"
 {
 	ros::NodeHandle* Initialize();
-	void Dispose(ros::NodeHandle* nodeHandle);
-	ros::Publisher* Advertise(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength);
+	void Dispose(ros::NodeHandle* node);
+	ros::Publisher* Advertise(ros::NodeHandle* node, const char* topicName, unsigned int queueLength);
 	void DisposePublisher(ros::Publisher* publisher);
-	ros::Subscriber* Subscribe(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr));
+	ros::Subscriber* Subscribe(ros::NodeHandle* node, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr));
 	void DisposeSubscriber(ros::Subscriber* subscriber);
 	bool ros_ok();
 	void ros_spinOnce();

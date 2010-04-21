@@ -28,21 +28,21 @@ ros::NodeHandle* Initialize()
 
 	return new ros::NodeHandle;
 }
-void Dispose(ros::NodeHandle* nodeHandle)
+void Dispose(ros::NodeHandle* node)
 {
-	delete nodeHandle;
+	delete node;
 }
-ros::Publisher* Advertise(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength)
+ros::Publisher* Advertise(ros::NodeHandle* node, const char* topicName, unsigned int queueLength)
 {
-	return new ros::Publisher(nodeHandle->advertise<topic_tools::ShapeShifter>(topicName, queueLength));
+	return new ros::Publisher(node->advertise<topic_tools::ShapeShifter>(topicName, queueLength));
 }
 void DisposePublisher(ros::Publisher* publisher)
 {
 	delete publisher;
 }
-ros::Subscriber* Subscribe(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr))
+ros::Subscriber* Subscribe(ros::NodeHandle* node, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr))
 {
-	return new ros::Subscriber(nodeHandle->subscribe<topic_tools::ShapeShifter>(topicName, queueLength, callback));
+	return new ros::Subscriber(node->subscribe<topic_tools::ShapeShifter>(topicName, queueLength, callback));
 }
 void DisposeSubscriber(ros::Subscriber* subscriber)
 {
