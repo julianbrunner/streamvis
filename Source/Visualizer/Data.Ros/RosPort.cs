@@ -67,12 +67,14 @@ namespace Data.Ros
 		
 		void MessageReceived(IntPtr message)
 		{
-			Console.WriteLine(message);
+			Console.WriteLine(ShapeShifterGetInfo(message));
 		}	
 
 		[DllImport("streamvis-wrappers-ros")]
 		static extern IntPtr Subscribe(IntPtr node, string topicName, uint queueLength, Action<IntPtr> callback);
 		[DllImport("streamvis-wrappers-ros")]
 		static extern void DisposeSubscriber(IntPtr subscriber);
+		[DllImport("streamvis-wrappers-ros")]
+		static extern string ShapeShifterGetInfo(IntPtr message);
 	}
 }
