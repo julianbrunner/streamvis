@@ -18,9 +18,9 @@
 #include "streamvis-wrappers-ros.h"
 
 #include <ros/ros.h>
-#include <std_msgs/Empty.h>
+#include <topic_tools/shape_shifter.h>
 
-void Callback(const unsigned char* data)
+void Callback(const topic_tools::ShapeShifter::ConstPtr message)
 {
 }
 
@@ -38,11 +38,19 @@ void Dispose(ros::NodeHandle* nodeHandle)
 }
 ros::Publisher* Advertise(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength)
 {
-	return new ros::Publisher(nodeHandle->advertise<std_msgs::Empty>(topicName, queueLength));
+	return new ros::Publisher(nodeHandle->advertise<topic_tools::ShapeShifter>(topicName, queueLength));
 }
 void DisposePublisher(ros::Publisher* publisher)
 {
 	delete publisher;
+}
+ros::Subscriber* Subscribe(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength)
+{
+	return new ros::Subscriber(nodeHandle->subscribe<topic_tools::ShapeShifter>(topicName, queueLength, Callback));
+}
+void DisposeSubscriber(ros::Subscriber* subscriber)
+{
+	delete subscriber;
 }
 bool ros_ok()
 {
