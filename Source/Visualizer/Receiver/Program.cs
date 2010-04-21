@@ -17,6 +17,7 @@
 
 using System;
 using Data;
+using Data.Ros;
 using Data.Yarp;
 using Utility.Utilities;
 
@@ -26,19 +27,27 @@ namespace Receiver
 	{
 		static void Main(string[] args)
 		{
-			using (YarpNetwork network = new YarpNetwork())
-			using (YarpPort port = new YarpPort("/test", network))
+//			using (YarpNetwork network = new YarpNetwork())
+//			using (YarpPort port = new YarpPort("/test", network))
+//			{
+//				network.Connect("/write", port.Name);
+//
+//				while (!Console.KeyAvailable)
+//				{
+//					Packet packet = port.Read();
+//					for (int i = 0; i < 38; i++)
+//					{
+//						double d = packet.GetValue(new Path(EnumerableUtility.Single(i)));
+//						if (d == 0) Console.WriteLine("Awesome");
+//					}
+//				}
+//			}
+			using (RosNode node = new RosNode())
+			using (RosPort port = new RosPort("/wii/wiimote", node))
 			{
-				network.Connect("/write", port.Name);
-
 				while (!Console.KeyAvailable)
 				{
-					Packet packet = port.Read();
-					for (int i = 0; i < 38; i++)
-					{
-						double d = packet.GetValue(new Path(EnumerableUtility.Single(i)));
-						if (d == 0) Console.WriteLine("Awesome");
-					}
+					port.Read();
 				}
 			}
 		}

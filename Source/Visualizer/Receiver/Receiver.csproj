@@ -48,6 +48,10 @@
       <Project>{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}</Project>
       <Name>Utility</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Data.Ros\Data.Ros.csproj">
+      <Project>{EE409601-043C-4009-9438-CA86BB7596FB}</Project>
+      <Name>Data.Ros</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
