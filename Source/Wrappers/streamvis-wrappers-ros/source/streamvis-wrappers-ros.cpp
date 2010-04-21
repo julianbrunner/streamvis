@@ -20,7 +20,7 @@
 #include <ros/ros.h>
 #include <topic_tools/shape_shifter.h>
 
-ros::NodeHandle* Initialize()
+ros::NodeHandle* InitializeNode()
 {
 	int argc = 0;
 	char** argv = NULL;
@@ -28,7 +28,7 @@ ros::NodeHandle* Initialize()
 
 	return new ros::NodeHandle;
 }
-void Dispose(ros::NodeHandle* node)
+void DisposeNode(ros::NodeHandle* node)
 {
 	delete node;
 }
