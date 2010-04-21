@@ -29,8 +29,8 @@ extern "C"
 	void DisposePublisher(ros::Publisher* publisher);
 	ros::Subscriber* Subscribe(ros::NodeHandle* node, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr));
 	void DisposeSubscriber(ros::Subscriber* subscriber);
-	bool ros_ok();
-	void ros_spinOnce();
+	bool RosOk();
+	void RosSpinOnce();
 }
 
 #endif

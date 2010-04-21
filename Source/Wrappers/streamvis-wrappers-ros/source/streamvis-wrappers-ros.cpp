@@ -24,7 +24,7 @@ ros::NodeHandle* InitializeNode()
 {
 	int argc = 0;
 	char** argv = NULL;
-	ros::init(argc, argv, "streamvis-wrappers-ros");
+	ros::init(argc, argv, "streamvis_wrappers_ros");
 
 	return new ros::NodeHandle;
 }
@@ -48,11 +48,11 @@ void DisposeSubscriber(ros::Subscriber* subscriber)
 {
 	delete subscriber;
 }
-bool ros_ok()
+bool RosOk()
 {
 	return ros::ok();
 }
-void ros_spinOnce()
+void RosSpinOnce()
 {
 	ros::spinOnce();
 }
