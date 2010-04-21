@@ -32,6 +32,8 @@ namespace Data.Yarp
 		public YarpPort(string name, YarpNetwork network)
 			: base(name)
 		{
+			if (network == null) throw new ArgumentNullException("network");
+			
 			this.network = network;
 			this.port = BufferedPort_Bottle_New();
 
