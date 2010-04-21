@@ -20,6 +20,8 @@
 #include <ros/ros.h>
 #include <topic_tools/shape_shifter.h>
 
+																	#include <stdio.h>
+
 ros::NodeHandle* InitializeNode()
 {
 	int argc = 0;
@@ -31,6 +33,14 @@ ros::NodeHandle* InitializeNode()
 void DisposeNode(ros::NodeHandle* node)
 {
 	delete node;
+}
+bool RosOk()
+{
+	return ros::ok();
+}
+void RosSpinOnce()
+{
+	ros::spinOnce();
 }
 ros::Publisher* Advertise(ros::NodeHandle* node, const char* topicName, unsigned int queueLength)
 {
@@ -48,11 +58,11 @@ void DisposeSubscriber(ros::Subscriber* subscriber)
 {
 	delete subscriber;
 }
-bool RosOk()
+const char* ShapeShifterGetInfo(topic_tools::ShapeShifter::ConstPtr message)
 {
-	return ros::ok();
-}
-void RosSpinOnce()
-{
-	ros::spinOnce();
+	std::string info = message->datatype + "|" + message->md5 + "|" + message->msg_def;
+
+	char* datatype = new char[info.size() + 1];
+	strcpy(datatype, info.c_str());
+	return datatype;
 }
