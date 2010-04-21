@@ -20,10 +20,6 @@
 #include <ros/ros.h>
 #include <topic_tools/shape_shifter.h>
 
-void Callback(const topic_tools::ShapeShifter::ConstPtr message)
-{
-}
-
 ros::NodeHandle* Initialize()
 {
 	int argc = 0;
@@ -44,9 +40,9 @@ void DisposePublisher(ros::Publisher* publisher)
 {
 	delete publisher;
 }
-ros::Subscriber* Subscribe(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength)
+ros::Subscriber* Subscribe(ros::NodeHandle* nodeHandle, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr))
 {
-	return new ros::Subscriber(nodeHandle->subscribe<topic_tools::ShapeShifter>(topicName, queueLength, Callback));
+	return new ros::Subscriber(nodeHandle->subscribe<topic_tools::ShapeShifter>(topicName, queueLength, callback));
 }
 void DisposeSubscriber(ros::Subscriber* subscriber)
 {
