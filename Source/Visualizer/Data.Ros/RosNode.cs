@@ -27,6 +27,7 @@ namespace Data.Ros
 		bool disposed = false;
 		
 		public IntPtr Node { get { return node; } }
+		public bool IsRunning { get { return RosOk(); } }
 		
 		public RosNode()
 		{
@@ -46,10 +47,18 @@ namespace Data.Ros
 				disposed = true;
 			}
 		}
+		public void SpinOnce()
+		{
+			RosSpinOnce();
+		}
 		
 		[DllImport("streamvis-wrappers-ros")]
 		static extern IntPtr InitializeNode();
 		[DllImport("streamvis-wrappers-ros")]
 		static extern void DisposeNode(IntPtr node);
+		[DllImport("streamvis-wrappers-ros")]
+		static extern bool RosOk();
+		[DllImport("streamvis-wrappers-ros")]
+		static extern void RosSpinOnce();
 	}
 }

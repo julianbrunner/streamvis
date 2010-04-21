@@ -50,7 +50,11 @@ namespace Data.Ros
 		}
 		public override List Read()
 		{
-			throw new System.NotImplementedException();
+			if (!node.IsRunning) return null;
+			
+			node.SpinOnce();
+			
+			return null;
 		}
 		public override void Write(List list)
 		{
@@ -63,6 +67,7 @@ namespace Data.Ros
 		
 		void MessageReceived(IntPtr message)
 		{
+			Console.WriteLine(message);
 		}	
 
 		[DllImport("streamvis-wrappers-ros")]
