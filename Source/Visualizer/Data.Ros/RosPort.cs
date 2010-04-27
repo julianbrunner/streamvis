@@ -67,7 +67,7 @@ namespace Data.Ros
 		
 		void MessageReceived(IntPtr message)
 		{
-			Console.WriteLine(ShapeShifterGetInfo(message));
+			Console.WriteLine(ShapeShifterGetDefinition(message));
 		}	
 
 		[DllImport("streamvis-wrappers-ros")]
@@ -75,6 +75,6 @@ namespace Data.Ros
 		[DllImport("streamvis-wrappers-ros")]
 		static extern void DisposeSubscriber(IntPtr subscriber);
 		[DllImport("streamvis-wrappers-ros")]
-		static extern string ShapeShifterGetInfo(IntPtr message);
+		static extern string ShapeShifterGetDefinition(IntPtr message);
 	}
 }

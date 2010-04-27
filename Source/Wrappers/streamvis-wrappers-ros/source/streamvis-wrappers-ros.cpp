@@ -58,9 +58,9 @@ void DisposeSubscriber(ros::Subscriber* subscriber)
 {
 	delete subscriber;
 }
-const char* ShapeShifterGetInfo(topic_tools::ShapeShifter::ConstPtr message)
+const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr message)
 {
-	std::string info = message->datatype + "|" + message->md5 + "|" + message->msg_def;
+	std::string info = message->msg_def;
 
 	char* datatype = new char[info.size() + 1];
 	strcpy(datatype, info.c_str());
