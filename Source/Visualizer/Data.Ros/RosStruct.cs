@@ -23,50 +23,54 @@ namespace Data.Ros
 {
 	class RosStruct
 	{
+		readonly string type;
 		readonly string name;
 		readonly IEnumerable<RosStruct> members;
 		
-		RosStruct(string name, IEnumerable<string> lines)
+		RosStruct(string type, string name, IEnumerable<RosStruct> members)
 		{
+			this.type = type;
 			this.name = name;
-			this.members = ParseMembers(lines).ToArray();
+			this.members = members;
 		}
-		RosStruct(string name)
-		{
-			this.name = name;
-		}
-		public RosStruct(string name, string definition) : this(name, definition.Split('\n')) { }
 		
 		public override string ToString()
 		{
-			if (members == null) return "<" + name + "/>" + "\n";
-			else
+			if (members.Any()) 
 			{
 				string result = string.Empty;
 				
-				result += "<" + name + ">" + "\n";
-				
-				foreach (RosStruct member in members)
-					result += member.ToString();
-				
-				result += "</" + name + ">" + "\n";
+				result += string.Format("<{0} type=\"{1}\" members=\"{2}\">\n", name, type, members.Count());
+				foreach (RosStruct member in members) result += member.ToString();
+				result += string.Format("</{0}>\n", name);
 				
 				return result;
 			}
+			else return string.Format("<{0} type=\"{1}\" />\n", name, type);	
+		}
+		
+		public static RosStruct Parse(string declaration, string definition)
+		{	
+			return Parse(declaration, definition.Split('\n'));
 		}
 
-		
+		static RosStruct Parse(string declaration, IEnumerable<string> lines)
+		{
+			string[] declarationDetails = declaration.Split(' ');
+			
+			return new RosStruct(declarationDetails[0], declarationDetails[1], ParseMembers(lines).ToArray());
+		}
 		static IEnumerable<RosStruct> ParseMembers(IEnumerable<string> lines)
 		{
 			while (lines.Any())
 			{
-				string memberName = lines.First();
+				string memberDeclaration = lines.First();
 				lines = lines.Skip(1);
 
 				IEnumerable<string> memberLines = lines.TakeWhile(line => line.Length >= 2 && line.Substring(0, 2) == "  ").Select(line => line.Substring(2));
 				lines = lines.Skip(memberLines.Count());
 				
-				yield return memberLines.Any() ? new RosStruct(memberName, memberLines) : new RosStruct(memberName);
+				yield return Parse(memberDeclaration, memberLines);
 			}
 		}
 	}

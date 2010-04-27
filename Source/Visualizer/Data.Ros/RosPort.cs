@@ -75,6 +75,8 @@ namespace Data.Ros
 		[DllImport("streamvis-wrappers-ros")]
 		static extern void DisposeSubscriber(IntPtr subscriber);
 		[DllImport("streamvis-wrappers-ros")]
+		static extern string ShapeShifterGetDataType(IntPtr message);
+		[DllImport("streamvis-wrappers-ros")]
 		static extern string ShapeShifterGetDefinition(IntPtr message);
 	}
 }

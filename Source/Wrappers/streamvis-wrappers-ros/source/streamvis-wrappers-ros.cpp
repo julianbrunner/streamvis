@@ -58,11 +58,19 @@ void DisposeSubscriber(ros::Subscriber* subscriber)
 {
 	delete subscriber;
 }
+const char* ShapeShifterGetDataType(topic_tools::ShapeShifter::ConstPtr message)
+{
+	std::string info = message->datatype;
+
+	char* result = new char[info.size() + 1];
+	strcpy(result, info.c_str());
+	return result;	
+}
 const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr message)
 {
 	std::string info = message->msg_def;
 
-	char* datatype = new char[info.size() + 1];
-	strcpy(datatype, info.c_str());
-	return datatype;
+	char* result = new char[info.size() + 1];
+	strcpy(result, info.c_str());
+	return result;
 }
