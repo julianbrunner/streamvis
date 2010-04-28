@@ -17,16 +17,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Data.Ros.Types
 {
 	class RosInt32 : RosBasicType<Int32>
 	{
-		public RosInt32() : base("Int32") { }
+		public RosInt32() : base("int32") { }
 		
 		public override Int32 Convert(IEnumerable<byte> source)
 		{
-			return 0;
+			return BitConverter.ToInt32(source.ToArray(), 0);
 		}
 	}
 }

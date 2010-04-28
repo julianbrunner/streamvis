@@ -19,7 +19,15 @@ using System;
 
 namespace Data.Ros.Types
 {
-	class RosArray
+	class RosArray : RosType
 	{
+		readonly RosType type;
+		
+		public RosArray(RosType type) : base("Array")
+		{
+			if (type == null) throw new ArgumentNullException("type");
+			
+			this.type = type;
+		}
 	}
 }

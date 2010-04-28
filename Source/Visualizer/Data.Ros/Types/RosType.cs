@@ -16,12 +16,23 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 
 namespace Data.Ros.Types
 {
 	abstract class RosType
 	{
 		readonly string name;
+		
+		public string Name { get { return name; } }
+		
+		public static IEnumerable<RosType> BasicTypes
+		{
+			get
+			{
+				yield return new RosInt32();
+			}
+		}
 		
 		protected RosType(string name)
 		{

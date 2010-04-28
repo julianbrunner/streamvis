@@ -47,17 +47,21 @@ namespace Data.Ros.Types
 			lines = lines.Skip(1);
 			
 			string typeName = declarationDetails[0];
+			bool isArray = typeName.EndsWith("[]");
+			typeName = typeName.Substring(0, typeName.Length - 2);
 			string fieldName = declarationDetails[1];
 			
 			IEnumerable<string> members = lines.TakeWhile(line => line.Length >= 2 && line.Substring(0, 2) == "  ").Select(line => line.Substring(2));
 			lines = lines.Skip(members.Count());
 			
-			RosType type;
-			switch (typeName)
-			{
-				case "Int32": type = new RosInt32(); break;
-				default: type = new RosStruct(typeName, members); break;
-			}
+			RosType type =
+				members.Any() || !RosType.BasicTypes.Any(basicType => basicType.Name == typeName)
+				?
+				new RosStruct(typeName, members)
+				:
+				RosType.BasicTypes.Single(basicType => basicType.Name == typeName);
+			
+			if (isArray) type = new RosArray(type);
 			
 			return new RosField(type, fieldName);
 		}
