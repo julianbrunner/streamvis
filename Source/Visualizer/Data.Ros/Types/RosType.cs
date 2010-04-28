@@ -21,13 +21,13 @@ using System.Collections.Generic;
 
 namespace Data.Ros
 {
-	class RosStruct
+	class RosType
 	{
 		readonly string type;
 		readonly string name;
-		readonly IEnumerable<RosStruct> members;
+		readonly IEnumerable<RosType> members;
 		
-		RosStruct(string type, string name, IEnumerable<RosStruct> members)
+		RosType(string type, string name, IEnumerable<RosType> members)
 		{
 			this.type = type;
 			this.name = name;
@@ -41,7 +41,7 @@ namespace Data.Ros
 				string result = string.Empty;
 				
 				result += string.Format("<{0} type=\"{1}\" members=\"{2}\">\n", name, type, members.Count());
-				foreach (RosStruct member in members) result += member.ToString();
+				foreach (RosType member in members) result += member.ToString();
 				result += string.Format("</{0}>\n", name);
 				
 				return result;
@@ -49,18 +49,18 @@ namespace Data.Ros
 			else return string.Format("<{0} type=\"{1}\" />\n", name, type);	
 		}
 		
-		public static RosStruct Parse(string declaration, string definition)
+		public static RosType Parse(string declaration, string definition)
 		{	
 			return Parse(declaration, definition.Split('\n'));
 		}
 
-		static RosStruct Parse(string declaration, IEnumerable<string> lines)
+		static RosType Parse(string declaration, IEnumerable<string> lines)
 		{
 			string[] declarationDetails = declaration.Split(' ');
 			
-			return new RosStruct(declarationDetails[0], declarationDetails[1], ParseMembers(lines).ToArray());
+			return new RosType(declarationDetails[0], declarationDetails[1], ParseMembers(lines).ToArray());
 		}
-		static IEnumerable<RosStruct> ParseMembers(IEnumerable<string> lines)
+		static IEnumerable<RosType> ParseMembers(IEnumerable<string> lines)
 		{
 			while (lines.Any())
 			{

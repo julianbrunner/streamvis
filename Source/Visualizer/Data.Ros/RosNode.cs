@@ -80,7 +80,7 @@ dynamic_reconfigure/Config dflt
     float64 value";
 			text = text.Replace("\r\n", "\n");
 			
-			RosStruct a = RosStruct.Parse("TestType Test", text);
+			RosType a = RosType.Parse("TestType Test", text);
 			Console.WriteLine(a);
 		}
 		~RosNode()
