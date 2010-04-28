@@ -16,16 +16,21 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Data.Ros
+namespace Data.Ros.Types
 {
-	
-	
-	public class RosStruct
+	class RosStruct : RosType
 	{
+		readonly List<RosField> members;
 		
-		public RosStruct()
+		public RosStruct(string name, IEnumerable<string> members) : base(name)
 		{
+			if (members == null) throw new ArgumentNullException("members");
+			
+			this.members = new List<RosField>();
+			while (members.Any()) this.members.Add(RosField.Parse(ref members));
 		}
 	}
 }

@@ -36,9 +36,10 @@
     <Compile Include="RosNode.cs" />
     <Compile Include="Types\RosBasicType.cs" />
     <Compile Include="Types\RosInt32.cs" />
-    <Compile Include="Types\RosType.cs" />
+    <Compile Include="Types\RosField.cs" />
     <Compile Include="Types\RosStruct.cs" />
     <Compile Include="Types\RosArray.cs" />
+    <Compile Include="Types\RosType.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

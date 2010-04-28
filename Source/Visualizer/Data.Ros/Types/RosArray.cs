@@ -17,15 +17,9 @@
 
 using System;
 
-namespace Data.Ros
+namespace Data.Ros.Types
 {
-	
-	
-	public class RosArray
+	class RosArray
 	{
-		
-		public RosArray()
-		{
-		}
 	}
 }

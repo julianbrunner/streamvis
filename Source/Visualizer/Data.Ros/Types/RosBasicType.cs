@@ -18,10 +18,12 @@
 using System;
 using System.Collections.Generic;
 
-namespace Data.Ros
+namespace Data.Ros.Types
 {
-	abstract class RosBasicType<TValue>
+	abstract class RosBasicType<TValue> : RosType
 	{
+		protected RosBasicType(string name) : base(name) { }
+		
 		public abstract TValue Convert(IEnumerable<byte> source);
 	}
 }
