@@ -29,5 +29,10 @@ namespace Data.Ros.Types
 			
 			this.type = type;
 		}
+		
+		public override string ToString()
+		{
+			return base.ToString() + "\n" + "{" + "\n" + type + "\n" + "}";
+		}
 	}
 }

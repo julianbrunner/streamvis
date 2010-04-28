@@ -48,7 +48,7 @@ namespace Data.Ros.Types
 			
 			string typeName = declarationDetails[0];
 			bool isArray = typeName.EndsWith("[]");
-			typeName = typeName.Substring(0, typeName.Length - 2);
+			if (isArray) typeName = typeName.Substring(0, typeName.Length - 2);
 			string fieldName = declarationDetails[1];
 			
 			IEnumerable<string> members = lines.TakeWhile(line => line.Length >= 2 && line.Substring(0, 2) == "  ").Select(line => line.Substring(2));
@@ -66,19 +66,9 @@ namespace Data.Ros.Types
 			return new RosField(type, fieldName);
 		}
 		
-//		public override string ToString()
-//		{
-//			if (members.Any()) 
-//			{
-//				string result = string.Empty;
-//				
-//				result += string.Format("<{0} type=\"{1}\" members=\"{2}\">\n", name, type, members.Count());
-//				foreach (RosField member in members) result += member.ToString();
-//				result += string.Format("</{0}>\n", name);
-//				
-//				return result;
-//			}
-//			else return string.Format("<{0} type=\"{1}\" />\n", name, type);	
-//		}
+		public override string ToString()
+		{
+			return name + " : " + type;
+		}
 	}
 }

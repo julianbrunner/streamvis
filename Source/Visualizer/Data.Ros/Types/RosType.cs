@@ -53,5 +53,10 @@ namespace Data.Ros.Types
 			
 			this.name = name;
 		}
+		
+		public override string ToString()
+		{
+			return name;
+		}
 	}
 }

@@ -32,5 +32,19 @@ namespace Data.Ros.Types
 			this.members = new List<RosField>();
 			while (members.Any()) this.members.Add(RosField.Parse(ref members));
 		}
+		
+		public override string ToString()
+		{
+			string result = base.ToString() + "\n" + "{" + "\n";
+			
+			foreach (RosField member in members)
+			{
+				result += member.ToString() + "\n";
+			}
+			
+			result += "}";
+			
+			return result;
+		}
 	}
 }
