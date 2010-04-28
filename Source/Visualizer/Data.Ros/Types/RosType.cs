@@ -30,7 +30,20 @@ namespace Data.Ros.Types
 		{
 			get
 			{
+				yield return new RosString();
+				yield return new RosBool();
+				yield return new RosByte();
+				yield return new RosChar();
+				yield return new RosFloat32(); 
+				yield return new RosFloat64();
+				yield return new RosInt8();
+				yield return new RosInt16();
 				yield return new RosInt32();
+				yield return new RosInt64();
+				yield return new RosUInt8();
+				yield return new RosUInt16();
+				yield return new RosUInt32();
+				yield return new RosUInt64();
 			}
 		}
 		

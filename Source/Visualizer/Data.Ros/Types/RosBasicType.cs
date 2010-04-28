@@ -23,7 +23,5 @@ namespace Data.Ros.Types
 	abstract class RosBasicType<TValue> : RosType
 	{
 		protected RosBasicType(string name) : base(name) { }
-		
-		public abstract TValue Convert(IEnumerable<byte> source);
 	}
 }
