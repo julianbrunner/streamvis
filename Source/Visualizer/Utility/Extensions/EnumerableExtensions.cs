@@ -43,6 +43,12 @@ namespace Utility.Extensions
 
 			return source.Concat(EnumerableUtility.Single(item));
 		}
+		public static IEnumerable<T> Except<T>(this IEnumerable<T> source, T item)
+		{
+			if (source == null) throw new ArgumentNullException("source");
+
+			return source.Except(EnumerableUtility.Single(item));
+		}
 		public static IEnumerable<Range<T>> GetRanges<T>(this IEnumerable<T> source)
 		{
 			if (source == null) throw new ArgumentNullException("source");

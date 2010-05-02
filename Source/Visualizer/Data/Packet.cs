@@ -26,6 +26,7 @@ namespace Data
 	{
 		public IEnumerable<Path> ValidPaths { get { return GetValidPaths(Enumerable.Empty<int>(), this); } }
 
+		// TODO: Review
 		public double GetValue(Path path)
 		{
 			if (path == null) throw new ArgumentNullException("path");

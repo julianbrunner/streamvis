@@ -16,6 +16,8 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Linq;
+using Utility.Utilities;
 
 namespace Data
 {
@@ -33,6 +35,10 @@ namespace Data
 		}
 
 		public abstract Packet Read();
+		public Packet FirstValid()
+		{
+			return EnumerableUtility.Consume<Packet>(Read).First(packet => packet != null && !(packet is InvalidPacket));
+		}
 		public abstract void Write(Packet packet);
 		public abstract void AbortWait();
 	}

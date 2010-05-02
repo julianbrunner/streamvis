@@ -31,6 +31,7 @@ namespace Visualizer.Data
 		readonly Timer timer;
 		readonly string portName;
 		readonly Stream timeStream;
+		readonly bool hasTimer;
 		readonly IEnumerable<Stream> portStreams;
 		readonly Thread reader;
 
@@ -39,7 +40,7 @@ namespace Visualizer.Data
 
 		public string PortName { get { return portName; } }
 		public IEnumerable<Stream> PortStreams { get { return portStreams; } }
-		public bool HasTimer { get { return timeStream != null && timeStream.Name == "TIMER"; } }
+		public bool HasTimer { get { return hasTimer; } }
 
 		public Receiver(Port source, Timer timer, string portString)
 		{
@@ -55,11 +56,13 @@ namespace Visualizer.Data
 											  where stream.Name == "TIME" || stream.Name == "TIMER"
 											  select stream;
 
-			if (timeStreams.Count() > 1) throw new ArgumentException("More than one timestamp stream was found.");
+			if (timeStreams.Count() > 1) throw new ArgumentException(string.Format("More than one timestamp stream was found in port '{0}'.", portName));
 
 			this.timeStream = timeStreams.SingleOrDefault();
-			this.portStreams = streams.Except(timeStreams).ToArray();
+			this.hasTimer = timeStream != null && timeStream.Name == "TIMER";
+			this.portStreams = streams.Except(timeStream).ToArray();
 
+			// TODO: Try and make this stateless
 			if (HasTimer) timer.IsUpdated = false;
 
 			this.reader = new Thread(Read);
@@ -126,7 +129,7 @@ namespace Visualizer.Data
 				case 1:
 					return
 					(
-						from path in EnumerableUtility.Consume<Packet>(port.Read).First(packet => packet != null).ValidPaths
+						from path in port.FirstValid().ValidPaths
 						select new Stream(path)
 					)
 					.ToArray();
