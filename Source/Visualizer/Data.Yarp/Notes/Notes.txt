@@ -1,5 +1,0 @@
-﻿Data		<->		YARP
----------------------------------------
-Packet		<->		Value
-List		<->		Bottle
-Value		<->		Double
