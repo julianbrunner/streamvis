@@ -29,8 +29,7 @@ namespace Data.Ros
 
 		public RosPort(string topicName, RosNode node) : base(topicName)
 		{
-			if (node == null)
-				throw new ArgumentNullException("node");
+			if (node == null) throw new ArgumentNullException("node");
 			
 			this.node = node;
 			this.subscriber = Subscribe(node.Node, topicName, 0x100, MessageReceived);
@@ -49,22 +48,21 @@ namespace Data.Ros
 				disposed = true;
 			}
 		}
-		public override List Read()
+		public override Packet Read()
 		{
-			if (!node.IsRunning)
-				return null;
+			if (!node.IsRunning) return null;
 			
 			node.SpinOnce();
 			
 			return null;
 		}
-		public override void Write(List list)
+		public override void Write(Packet packet)
 		{
-			throw new System.NotImplementedException();
+			throw new NotSupportedException();
 		}
 		public override void AbortWait()
 		{
-			throw new System.NotImplementedException();
+			throw new NotSupportedException();
 		}
 
 		void MessageReceived(IntPtr message)

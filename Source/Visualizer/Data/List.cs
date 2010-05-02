@@ -45,7 +45,6 @@ namespace Data
 		{
 			return packets.ToStrings().Separate(" ").AggregateString();
 		}
-
 		public IEnumerator<Packet> GetEnumerator()
 		{
 			return ((IEnumerable<Packet>)packets).GetEnumerator();

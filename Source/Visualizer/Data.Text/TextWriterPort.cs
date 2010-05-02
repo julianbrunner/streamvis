@@ -21,22 +21,23 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using Utility.Extensions;
+using System.Text.RegularExpressions;
 
 namespace Data.Text
 {
 	public class TextWriterPort : TextPort, IDisposable
 	{
-		TextWriter textWriter;
+		readonly TextWriter textWriter;
+
 		bool disposed = false;
 
 		public TextWriterPort()
 		{
-			textWriter = Console.Out;
+			this.textWriter = Console.Out;
 		}
-		public TextWriterPort(string path)
-			: base(path)
+		public TextWriterPort(string path) : base(path)
 		{
-			textWriter = new StreamWriter(Path, true);
+			this.textWriter = new StreamWriter(Path, true);
 		}
 		~TextWriterPort()
 		{
@@ -52,45 +53,35 @@ namespace Data.Text
 				disposed = true;
 			}
 		}
-		public override List Read()
+		public override Packet Read()
 		{
 			throw new NotSupportedException();
 		}
-		public override void Write(List list)
+		public override void Write(Packet packet)
 		{
-			IEnumerable<string> tuple =
-			(
-				 from subPacket in list
-				 select PacketToString(subPacket)
-			);
-
-			textWriter.WriteLine(tuple.Separate(" ").AggregateString());
+			if (packet is Value) throw new ArgumentException("Cannot directly write a value to a text port.");
+			if (packet is List) textWriter.WriteLine(Regex.Match(PacketToText(packet), @"^\((.*)\)$").Groups[1].Value);
 		}
 		public override void AbortWait()
 		{
 			throw new NotSupportedException();
 		}
 
-		static string PacketToString(Packet packet)
+		static string PacketToText(Packet packet)
 		{
+			if (packet is Value) return ((double)(Value)packet).ToString(CultureInfo.InvariantCulture);
 			if (packet is List)
 			{
-				IEnumerable<string> tuple =
+				IEnumerable<string> list =
 				(
 					from subPacket in (List)packet
-					select PacketToString(subPacket)
+					select PacketToText(subPacket)
 				);
 
-				return "(" + tuple.Separate(" ").AggregateString() + ")";
-			}
-			if (packet is Value)
-			{
-				double value = (Value)packet;
-
-				return value.ToString(CultureInfo.InvariantCulture);
+				return "(" + list.Separate(" ").AggregateString() + ")";
 			}
 
-			throw new ArgumentException("packet");
+			return string.Empty;
 		}
 	}
 }

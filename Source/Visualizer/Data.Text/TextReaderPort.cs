@@ -18,6 +18,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Utility;
 
 namespace Data.Text
@@ -34,8 +35,7 @@ namespace Data.Text
 			this.textReader = Console.In;
 			this.lines = new Breaker<string>(textReader.ReadLine);
 		}
-		public TextReaderPort(string path)
-			: base(path)
+		public TextReaderPort(string path) : base(path)
 		{
 			this.textReader = new StreamReader(Path);
 			this.lines = new Breaker<string>(textReader.ReadLine);
@@ -50,30 +50,23 @@ namespace Data.Text
 			if (!disposed)
 			{
 				if (textReader != null) textReader.Dispose();
-				if (textReader != null) lines.Dispose();
+				if (lines != null) lines.Dispose();
 
 				disposed = true;
 			}
 		}
-		public override List Read()
+		public override Packet Read()
 		{
 			string line = lines.Read();
 
-			if (line == null) return null;
-
+			if (line == null) return new InvalidPacket();
 			if (line.Contains('#')) line = line.Substring(0, line.IndexOf('#'));
 			line = line.Trim();
+			if (line == string.Empty) return new InvalidPacket();
 
-			if (line == string.Empty) return null;
-
-			return new List
-			(
-				 from part in line.Split(' ', '\t')
-				 where part != string.Empty
-				 select StringToPacket(part)
-			);
+			return TextToPacket("(" + line + ")");
 		}
-		public override void Write(List list)
+		public override void Write(Packet packet)
 		{
 			throw new NotSupportedException();
 		}
@@ -82,28 +75,28 @@ namespace Data.Text
 			lines.Break();
 		}
 
-		static Packet StringToPacket(string item)
+		static Packet TextToPacket(string text)
 		{
-			if (item[0] == '(' && item[item.Length - 1] == ')')
+			// Is it a list?
+			if (Regex.IsMatch(text, @"^\(.*\)$"))
 			{
-				item = item.Substring(1, item.Length - 2);
+				// Extract the content
+				text = Regex.Match(text, @"^\((.*)\)$").Groups[1].Value;
 
 				return new List
 				(
-					from part in item.Split(' ', '\t')
+					from part in text.Split(' ', '\t')
 					where part != string.Empty
-					select StringToPacket(part)
+					select TextToPacket(part)
 				);
 			}
-			else
+
+			// Then it must be a value
+			try { return new Value(double.Parse(text)); }
+			catch (FormatException)
 			{
-				double value;
-				if (double.TryParse(item, out value)) return new Value(value);
-				else
-				{
-					Console.WriteLine("String \"{0}\" could not be parsed.", item);
-					return new InvalidPacket();
-				}
+				Console.WriteLine("Text \"{0}\" could not be parsed.", text);
+				return new InvalidPacket();
 			}
 		}
 	}

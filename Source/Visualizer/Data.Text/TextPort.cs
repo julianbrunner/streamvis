@@ -23,13 +23,11 @@ namespace Data.Text
 
 		protected string Path { get { return path; } }
 
-		public TextPort()
-			: base("Standard I/O")
+		public TextPort() : base("Standard I/O")
 		{
 			this.path = null;
 		}
-		public TextPort(string path)
-			: base(System.IO.Path.GetFileName(path))
+		public TextPort(string path) : base(System.IO.Path.GetFileName(path))
 		{
 			this.path = path;
 		}

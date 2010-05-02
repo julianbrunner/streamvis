@@ -15,6 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+
 namespace Data
 {
 	public abstract class Port
@@ -25,11 +27,13 @@ namespace Data
 
 		protected Port(string name)
 		{
+			if (name == null) throw new ArgumentNullException("name");
+
 			this.name = name;
 		}
 
-		public abstract List Read();
-		public abstract void Write(List list);
+		public abstract Packet Read();
+		public abstract void Write(Packet packet);
 		public abstract void AbortWait();
 	}
 }

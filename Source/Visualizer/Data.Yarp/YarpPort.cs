@@ -54,7 +54,7 @@ namespace Data.Yarp
 				disposed = true;
 			}
 		}
-		public override List Read()
+		public override Packet Read()
 		{
 			return new List
 			(
@@ -62,14 +62,18 @@ namespace Data.Yarp
 				select ValueToPacket(value)
 			);
 		}
-		public override void Write(List list)
+		public override void Write(Packet packet)
 		{
-			IntPtr bottle = BufferedPort_Bottle_Prepare(port);
-			Bottle_Clear(bottle);
+			if (packet is Value) throw new ArgumentException("Cannot directly write a value to a YARP port.");
+			if (packet is List)
+			{
+				IntPtr bottle = BufferedPort_Bottle_Prepare(port);
+				Bottle_Clear(bottle);
 
-			foreach (Packet packet in list) PacketToValue(bottle, packet);
-
-			BufferedPort_Bottle_Write(port);
+				foreach (Packet subPacket in (List)packet) PacketToValue(bottle, subPacket);
+	
+				BufferedPort_Bottle_Write(port);
+			}
 		}
 		public override void AbortWait()
 		{
