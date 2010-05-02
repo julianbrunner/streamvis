@@ -95,13 +95,15 @@ namespace Data.Text
 					select StringToPacket(part)
 				);
 			}
-
-			double value;
-			if (double.TryParse(item, out value)) return new Value(value);
-			else 
+			else
 			{
-				Console.WriteLine("String \"{0}\" could not be parsed.", item);
-				return null;
+				double value;
+				if (double.TryParse(item, out value)) return new Value(value);
+				else
+				{
+					Console.WriteLine("String \"{0}\" could not be parsed.", item);
+					return new InvalidPacket();
+				}
 			}
 		}
 	}

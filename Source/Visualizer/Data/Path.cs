@@ -37,7 +37,6 @@ namespace Data
 		public Path(IEnumerable<int> nodes)
 		{
 			if (nodes == null) throw new ArgumentNullException("nodes");
-			if (!nodes.Any()) throw new ArgumentOutOfRangeException("nodes");
 
 			this.nodes = nodes.ToArray();
 		}

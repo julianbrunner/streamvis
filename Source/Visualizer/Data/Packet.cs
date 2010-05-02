@@ -16,12 +16,16 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Utility.Extensions;
 
 namespace Data
 {
 	public abstract class Packet
 	{
+		public IEnumerable<Path> ValidPaths { get { return GetValidPaths(Enumerable.Empty<int>(), this); } }
+
 		public double GetValue(Path path)
 		{
 			if (path == null) throw new ArgumentNullException("path");
@@ -32,14 +36,29 @@ namespace Data
 			{
 				List list = current as List;
 				
-				if (list == null || index < 0 || index >= list.Length) throw new ArgumentException(string.Format("Packet \"{0}\" does not have a value at path \"{1}\".", this, path));
+				if (list == null || index < 0 || index >= list.Length)
+					throw new ArgumentException(string.Format("Packet \"{0}\" does not have a value at path \"{1}\".", this, path));
 				
 				current = list[index];
 				
-				if (current == null) throw new InvalidOperationException(string.Format("Value at path \"{0}\" in packet \"{1}\" is not valid.", path, this));
+				if (current == null)
+					throw new InvalidOperationException(string.Format("Value at path \"{0}\" in packet \"{1}\" is not valid.", path, this));
 			}
 			
 			return (Value)current;
+		}
+
+		static IEnumerable<Path> GetValidPaths(IEnumerable<int> root, Packet packet)
+		{
+			if (packet is Value) yield return new Path(root);
+			if (packet is List)
+			{
+				int i = 0;
+
+				foreach (Packet subPacket in (List)packet)
+					foreach (Path subPath in GetValidPaths(root.Concat(i++), subPacket))
+						yield return subPath;
+			}
 		}
 	}
 }

@@ -126,7 +126,7 @@ namespace Visualizer.Data
 				case 1:
 					return
 					(
-						from path in GetPaths(Enumerable.Empty<int>(), EnumerableUtility.Consume<Packet>(port.Read).First(packet => packet != null))
+						from path in EnumerableUtility.Consume<Packet>(port.Read).First(packet => packet != null).ValidPaths
 						select new Stream(path)
 					)
 					.ToArray();
@@ -163,18 +163,6 @@ namespace Visualizer.Data
 				case 2: return new Stream(new Path(details[0]), details[1]);
 				default: throw new ArgumentException("streamString");
 			}
-		}
-		static IEnumerable<Path> GetPaths(IEnumerable<int> path, Packet packet)
-		{
-			if (packet is List)
-			{
-				int i = 0;
-
-				foreach (Packet subPacket in (List)packet)
-					foreach (Path subPath in GetPaths(path.Concat(i++), subPacket))
-						yield return subPath;
-			}
-			if (packet is Value) yield return new Path(path);
 		}
 	}
 }
