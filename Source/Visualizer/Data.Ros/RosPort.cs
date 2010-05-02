@@ -24,12 +24,13 @@ namespace Data.Ros
 	{
 		readonly RosNode node;
 		readonly IntPtr subscriber;
-		
+
 		bool disposed = false;
-		
+
 		public RosPort(string topicName, RosNode node) : base(topicName)
 		{
-			if (node == null) throw new ArgumentNullException("node");
+			if (node == null)
+				throw new ArgumentNullException("node");
 			
 			this.node = node;
 			this.subscriber = Subscribe(node.Node, topicName, 0x100, MessageReceived);
@@ -38,7 +39,7 @@ namespace Data.Ros
 		{
 			Dispose();
 		}
-		
+
 		public void Dispose()
 		{
 			if (!disposed)
@@ -50,7 +51,8 @@ namespace Data.Ros
 		}
 		public override List Read()
 		{
-			if (!node.IsRunning) return null;
+			if (!node.IsRunning)
+				return null;
 			
 			node.SpinOnce();
 			
@@ -64,11 +66,11 @@ namespace Data.Ros
 		{
 			throw new System.NotImplementedException();
 		}
-		
+
 		void MessageReceived(IntPtr message)
 		{
 			Console.WriteLine(ShapeShifterGetDefinition(message));
-		}	
+		}
 
 		[DllImport("streamvis-wrappers-ros")]
 		static extern IntPtr Subscribe(IntPtr node, string topicName, uint queueLength, Action<IntPtr> callback);
