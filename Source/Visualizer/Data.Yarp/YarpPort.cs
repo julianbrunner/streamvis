@@ -91,7 +91,7 @@ namespace Data.Yarp
 			if (Value_IsInt(value) > 0) return new Value(Value_AsInt(value));
 			if (Value_IsDouble(value) > 0) return new Value(Value_AsDouble(value));
 
-			throw new ArgumentException("value");
+			return new InvalidPacket();
 		}
 		static void PacketToValue(IntPtr bottle, Packet packet)
 		{
@@ -99,8 +99,15 @@ namespace Data.Yarp
 			{
 				IntPtr subBottle = Bottle_AddList(bottle);
 				foreach (Packet subPacket in (List)packet) PacketToValue(subBottle, subPacket);
+				return;
 			}
-			if (packet is Value) Bottle_AddDouble(bottle, (Value)packet);
+			if (packet is Value)
+			{
+				Bottle_AddDouble(bottle, (Value)packet);
+				return;
+			}
+
+			Bottle_AddDouble(bottle, double.NaN);
 		}
 		static IEnumerable<IntPtr> GetValues(IntPtr bottle)
 		{
