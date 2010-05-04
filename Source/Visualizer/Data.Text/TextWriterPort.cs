@@ -81,7 +81,7 @@ namespace Data.Text
 				return "(" + list.Separate(" ").AggregateString() + ")";
 			}
 
-			return "<Invalid>";
+			return "<invalid>";
 		}
 	}
 }

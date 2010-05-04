@@ -26,7 +26,6 @@ namespace Data
 	{
 		public IEnumerable<Path> ValidPaths { get { return GetValidPaths(Enumerable.Empty<int>(), this); } }
 
-		// TODO: Review
 		public double GetValue(Path path)
 		{
 			if (path == null) throw new ArgumentNullException("path");
@@ -37,16 +36,18 @@ namespace Data
 			{
 				List list = current as List;
 				
-				if (list == null || index < 0 || index >= list.Length)
-					throw new ArgumentException(string.Format("Packet \"{0}\" does not have a value at path \"{1}\".", this, path));
+				if (list == null || index < 0 || index >= list.Length || list[index] is InvalidPacket)
+					throw new InvalidOperationException(string.Format("Packet \"{0}\" does not have a valid value at path \"{1}\".", this, path));
 				
 				current = list[index];
-				
-				if (current == null)
-					throw new InvalidOperationException(string.Format("Value at path \"{0}\" in packet \"{1}\" is not valid.", path, this));
 			}
-			
-			return (Value)current;
+
+			Value value = current as Value;
+
+			if (value == null)
+				throw new InvalidOperationException(string.Format("Packet \"{0}\" does not have a valid value at path \"{1}\".", this, path));
+
+			return value;
 		}
 
 		static IEnumerable<Path> GetValidPaths(IEnumerable<int> root, Packet packet)
@@ -54,10 +55,10 @@ namespace Data
 			if (packet is Value) yield return new Path(root);
 			if (packet is List)
 			{
-				int i = 0;
+				int index = 0;
 
 				foreach (Packet subPacket in (List)packet)
-					foreach (Path subPath in GetValidPaths(root.Concat(i++), subPacket))
+					foreach (Path subPath in GetValidPaths(root.Concat(index++), subPacket))
 						yield return subPath;
 			}
 		}

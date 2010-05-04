@@ -56,7 +56,7 @@ namespace Visualizer.Data
 											  where stream.Name == "TIME" || stream.Name == "TIMER"
 											  select stream;
 
-			if (timeStreams.Count() > 1) throw new ArgumentException(string.Format("More than one timestamp stream was found in port '{0}'.", portName));
+			if (timeStreams.Count() > 1) throw new ArgumentException(string.Format("More than one timestamp stream was found in '{0}'.", portName));
 
 			this.timeStream = timeStreams.SingleOrDefault();
 			this.hasTimer = timeStream != null && timeStream.Name == "TIMER";
@@ -103,12 +103,12 @@ namespace Visualizer.Data
 
 				if (!running) break;
 
-				if (packet != null)
+				if (packet is InvalidPacket) Console.WriteLine("Received invalid packet on {0}.", portName);
+				else
 				{
 					if (timeStream != null)
 					{
 						try { time = packet.GetValue(timeStream.Path); }
-						catch (ArgumentException e) { Console.WriteLine(e.Message); }
 						catch (InvalidOperationException e) { Console.WriteLine(e.Message); }
 
 						if (HasTimer) timer.Time = time;
@@ -116,7 +116,6 @@ namespace Visualizer.Data
 
 					foreach (Stream stream in portStreams)
 						try { stream.EntryData.Add(new Entry(time, packet.GetValue(stream.Path))); }
-						catch (ArgumentException e) { Console.WriteLine(e.Message); }
 						catch (InvalidOperationException e) { Console.WriteLine(e.Message); }
 				}
 			}
