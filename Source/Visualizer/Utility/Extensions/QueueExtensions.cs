@@ -11,7 +11,7 @@
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -19,38 +19,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Data.Ros.Types
+namespace Utility.Extensions
 {
-	class RosStruct : RosType
+	public static class QueueExtensions
 	{
-		readonly List<RosField> members;
-		
-		public RosStruct(string name, IEnumerable<string> members) : base(name)
+		public static IEnumerable<T> Dequeue<T>(this Queue<T> source, Func<T, bool> predicate)
 		{
-			if (members == null) throw new ArgumentNullException("members");
+			if (source == null) throw new ArgumentNullException("source");
+			if (predicate == null) throw new ArgumentNullException("predicate");
 
-			Queue<string> lines = new Queue<string>(members);
-			
-			this.members = new List<RosField>();
-			while (members.Any()) this.members.Add(RosField.Parse(lines));
-		}
-		
-		public override string ToString()
-		{
-			string result = base.ToString() + "\n" + "{" + "\n";
-			
-			foreach (RosField member in members)
+			List<T> result = new List<T>();
+
+			while (source.Any())
 			{
-				result += member.ToString() + "\n";
+				if (!predicate(source.Peek())) break;
+
+				result.Add(source.Dequeue());
 			}
-			
-			result += "}";
-			
+
 			return result;
-		}
-		public override Packet ToPacket(IEnumerable<byte> data)
-		{
-			return new InvalidPacket();
 		}
 	}
 }

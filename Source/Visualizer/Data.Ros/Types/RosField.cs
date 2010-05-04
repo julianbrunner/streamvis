@@ -18,6 +18,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Utility.Extensions;
 
 namespace Data.Ros.Types
 {
@@ -44,32 +45,23 @@ namespace Data.Ros.Types
 			return type.ToPacket(data);
 		}
 
-		// TODO: Implement a Stream<T> class which supports FIFO, or use Queue<T>.
 		public static RosField Parse(string field)
 		{
-			IEnumerable<string> lines = field.Split('\n');
-			
-			return Parse(ref lines);
+			return Parse(new Queue<string>(field.Split('\n')));
 		}
-		public static RosField Parse(ref IEnumerable<string> lines)
+		public static RosField Parse(Queue<string> lines)
 		{
-			string[] declarationDetails = lines.First().Split(' ');
-			lines = lines.Skip(1);
+			string[] declarationDetails = lines.Dequeue().Split(' ');
+			IEnumerable<string> members = lines.Dequeue(line => line.Length >= 2 && line.Substring(0, 2) == "  ").Select(line => line.Substring(2));
 			
 			string typeName = declarationDetails[0];
 			bool isArray = typeName.EndsWith("[]");
 			if (isArray) typeName = typeName.Substring(0, typeName.Length - 2);
 			string fieldName = declarationDetails[1];
-			
-			IEnumerable<string> members = lines.TakeWhile(line => line.Length >= 2 && line.Substring(0, 2) == "  ").Select(line => line.Substring(2));
-			lines = lines.Skip(members.Count());
-			
-			RosType type =
-				members.Any() || !RosType.BasicTypes.Any(basicType => basicType.Name == typeName)
-				?
-				new RosStruct(typeName, members)
-				:
-				RosType.BasicTypes.Single(basicType => basicType.Name == typeName);
+
+			RosType type;
+			if (members.Any() || !RosType.BasicTypes.Any(basicType => basicType.Name == typeName)) type = new RosStruct(typeName, members);
+			else type = RosType.BasicTypes.Single(basicType => basicType.Name == typeName);
 			
 			if (isArray) type = new RosArray(type);
 			
