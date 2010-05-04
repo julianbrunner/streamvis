@@ -34,7 +34,17 @@ namespace Data.Ros.Types
 			this.type = type;
 			this.name = name;
 		}
-		
+
+		public override string ToString()
+		{
+			return name + " : " + type;
+		}
+		public Packet Parse(IEnumerable<byte> data)
+		{
+			return type.ToPacket(data);
+		}
+
+		// TODO: Implement a Stream<T> class which supports FIFO, or use Queue<T>.
 		public static RosField Parse(string field)
 		{
 			IEnumerable<string> lines = field.Split('\n');
@@ -64,11 +74,6 @@ namespace Data.Ros.Types
 			if (isArray) type = new RosArray(type);
 			
 			return new RosField(type, fieldName);
-		}
-		
-		public override string ToString()
-		{
-			return name + " : " + type;
 		}
 	}
 }

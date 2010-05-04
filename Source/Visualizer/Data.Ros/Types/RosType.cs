@@ -46,17 +46,18 @@ namespace Data.Ros.Types
 				yield return new RosUInt64();
 			}
 		}
-		
+
 		protected RosType(string name)
 		{
 			if (name == null) throw new ArgumentNullException("name");
 			
 			this.name = name;
 		}
-		
+
 		public override string ToString()
 		{
 			return name;
 		}
+		public abstract Packet ToPacket(IEnumerable<byte> data);
 	}
 }

@@ -16,6 +16,7 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 
 namespace Data.Ros.Types
 {
@@ -32,7 +33,11 @@ namespace Data.Ros.Types
 		
 		public override string ToString()
 		{
-			return base.ToString() + "\n" + "{" + "\n" + type + "\n" + "}";
+			return base.ToString() + "\n" + "[" + "\n" + type + "\n" + "]";
+		}
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
 		}
 	}
 }

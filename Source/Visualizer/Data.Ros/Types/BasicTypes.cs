@@ -21,60 +21,130 @@ using System.Linq;
 
 namespace Data.Ros.Types
 {
-	class RosString : RosBasicType<String>
+	class RosString : RosType
 	{
 		public RosString() : base("string") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosBool : RosBasicType<Boolean>
+	class RosBool : RosType
 	{
 		public RosBool() : base("bool") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosByte : RosBasicType<Byte>
+	class RosByte : RosType
 	{
 		public RosByte() : base("byte") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosChar : RosBasicType<Char>
+	class RosChar : RosType
 	{
 		public RosChar() : base("char") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosFloat32 : RosBasicType<Single>
+	class RosFloat32 : RosType
 	{
 		public RosFloat32() : base("float32") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosFloat64 : RosBasicType<Double>
+	class RosFloat64 : RosType
 	{
 		public RosFloat64() : base("float64") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosInt8 : RosBasicType<SByte>
+	class RosInt8 : RosType
 	{
 		public RosInt8() : base("int8") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosInt16 : RosBasicType<Int16>
+	class RosInt16 : RosType
 	{
 		public RosInt16() : base("int16") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosInt32 : RosBasicType<Int32>
+	class RosInt32 : RosType
 	{
 		public RosInt32() : base("int32") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosInt64 : RosBasicType<Int64>
+	class RosInt64 : RosType
 	{
 		public RosInt64() : base("int64") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosUInt8 : RosBasicType<Byte>
+	class RosUInt8 : RosType
 	{
 		public RosUInt8() : base("uint8") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosUInt16 : RosBasicType<UInt16>
+	class RosUInt16 : RosType
 	{
 		public RosUInt16() : base("uint16") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosUInt32 : RosBasicType<UInt32>
+	class RosUInt32 : RosType
 	{
 		public RosUInt32() : base("uint32") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
-	class RosUInt64 : RosBasicType<UInt64>
+	class RosUInt64 : RosType
 	{
 		public RosUInt64() : base("uint64") { }
+
+		public override Packet ToPacket(IEnumerable<byte> data)
+		{
+			return new InvalidPacket();
+		}
 	}
 }
