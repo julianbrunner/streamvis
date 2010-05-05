@@ -39,10 +39,7 @@ namespace Data.Ros.Types
 		{
 			string result = base.ToString() + "\n" + "{" + "\n";
 			
-			foreach (RosField member in members)
-			{
-				result += member.ToString() + "\n";
-			}
+			foreach (RosField member in members) result += member.ToString() + "\n";
 			
 			result += "}";
 			
@@ -50,7 +47,11 @@ namespace Data.Ros.Types
 		}
 		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			List<Packet> items = new List<Packet>();
+
+			foreach (RosField member in members) items.Add(member.ToPacket(data));
+
+			return new List(items);
 		}
 	}
 }

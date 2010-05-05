@@ -17,6 +17,8 @@
 
 using System;
 using System.Collections.Generic;
+using Utility.Extensions;
+using System.Linq;
 
 namespace Data.Ros.Types
 {
@@ -37,7 +39,12 @@ namespace Data.Ros.Types
 		}
 		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			int count = BitConverter.ToInt32(data.Dequeue(4).ToArray(), 0);
+
+			List<Packet> items = new List<Packet>();
+			for (int i = 0; i < count; i++) items.Add(type.ToPacket(data));
+
+			return new List(items);
 		}
 	}
 }
