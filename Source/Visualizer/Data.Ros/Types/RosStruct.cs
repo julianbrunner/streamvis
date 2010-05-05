@@ -48,7 +48,7 @@ namespace Data.Ros.Types
 			
 			return result;
 		}
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
 			return new InvalidPacket();
 		}

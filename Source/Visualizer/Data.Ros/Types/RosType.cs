@@ -58,6 +58,6 @@ namespace Data.Ros.Types
 		{
 			return name;
 		}
-		public abstract Packet ToPacket(IEnumerable<byte> data);
+		public abstract Packet ToPacket(Queue<byte> data);
 	}
 }

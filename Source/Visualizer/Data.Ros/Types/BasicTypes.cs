@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Utility.Extensions;
 
 namespace Data.Ros.Types
 {
@@ -25,8 +26,11 @@ namespace Data.Ros.Types
 	{
 		public RosString() : base("string") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
+			data.Dequeue(character => character != 0);
+			data.Dequeue();
+
 			return new InvalidPacket();
 		}
 	}
@@ -34,8 +38,10 @@ namespace Data.Ros.Types
 	{
 		public RosBool() : base("bool") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
+			data.Dequeue();
+
 			return new InvalidPacket();
 		}
 	}
@@ -43,17 +49,21 @@ namespace Data.Ros.Types
 	{
 		public RosByte() : base("byte") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			byte value = data.Dequeue();
+
+			return new Value(value);
 		}
 	}
 	class RosChar : RosType
 	{
 		public RosChar() : base("char") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
+			data.Dequeue();
+
 			return new InvalidPacket();
 		}
 	}
@@ -61,90 +71,110 @@ namespace Data.Ros.Types
 	{
 		public RosFloat32() : base("float32") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			byte[] value = data.Dequeue(4).ToArray();
+
+			return new Value(BitConverter.ToSingle(value, 0));
 		}
 	}
 	class RosFloat64 : RosType
 	{
 		public RosFloat64() : base("float64") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			byte[] value = data.Dequeue(8).ToArray();
+
+			return new Value(BitConverter.ToDouble(value, 0));
 		}
 	}
 	class RosInt8 : RosType
 	{
 		public RosInt8() : base("int8") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			sbyte value = (sbyte)data.Dequeue();
+
+			return new Value(value);
 		}
 	}
 	class RosInt16 : RosType
 	{
 		public RosInt16() : base("int16") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			byte[] value = data.Dequeue(2).ToArray();
+
+			return new Value(BitConverter.ToInt16(value, 0));
 		}
 	}
 	class RosInt32 : RosType
 	{
 		public RosInt32() : base("int32") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			byte[] value = data.Dequeue(4).ToArray();
+
+			return new Value(BitConverter.ToInt32(value, 0));
 		}
 	}
 	class RosInt64 : RosType
 	{
 		public RosInt64() : base("int64") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			byte[] value = data.Dequeue(8).ToArray();
+
+			return new Value(BitConverter.ToInt64(value, 0));
 		}
 	}
 	class RosUInt8 : RosType
 	{
 		public RosUInt8() : base("uint8") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			byte value = data.Dequeue();
+
+			return new Value(value);
 		}
 	}
 	class RosUInt16 : RosType
 	{
 		public RosUInt16() : base("uint16") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			byte[] value = data.Dequeue(2).ToArray();
+
+			return new Value(BitConverter.ToUInt16(value, 0));
 		}
 	}
 	class RosUInt32 : RosType
 	{
 		public RosUInt32() : base("uint32") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			byte[] value = data.Dequeue(4).ToArray();
+
+			return new Value(BitConverter.ToUInt32(value, 0));
 		}
 	}
 	class RosUInt64 : RosType
 	{
 		public RosUInt64() : base("uint64") { }
 
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
-			return new InvalidPacket();
+			byte[] value = data.Dequeue(8).ToArray();
+
+			return new Value(BitConverter.ToUInt64(value, 0));
 		}
 	}
 }

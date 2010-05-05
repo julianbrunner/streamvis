@@ -40,7 +40,7 @@ namespace Data.Ros.Types
 		{
 			return name + " : " + type;
 		}
-		public Packet Parse(IEnumerable<byte> data)
+		public Packet Parse(Queue<byte> data)
 		{
 			return type.ToPacket(data);
 		}

@@ -35,7 +35,7 @@ namespace Data.Ros.Types
 		{
 			return base.ToString() + "\n" + "[" + "\n" + type + "\n" + "]";
 		}
-		public override Packet ToPacket(IEnumerable<byte> data)
+		public override Packet ToPacket(Queue<byte> data)
 		{
 			return new InvalidPacket();
 		}
