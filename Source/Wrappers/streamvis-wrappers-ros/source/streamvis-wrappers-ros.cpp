@@ -20,8 +20,6 @@
 #include <ros/ros.h>
 #include <topic_tools/shape_shifter.h>
 
-																	#include <stdio.h>
-
 ros::NodeHandle* InitializeNode()
 {
 	int argc = 0;
@@ -73,4 +71,8 @@ const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr messag
 	char* result = new char[info.size() + 1];
 	strcpy(result, info.c_str());
 	return result;
+}
+const unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message)
+{
+	return message->deserialize();
 }
