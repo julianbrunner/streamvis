@@ -17,6 +17,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using Data.Ros.Types;
 
 namespace Data.Ros
 {
@@ -26,6 +27,7 @@ namespace Data.Ros
 		readonly IntPtr subscriber;
 
 		bool disposed = false;
+		IntPtr currentMessage;
 
 		public RosPort(string topicName, RosNode node) : base(topicName)
 		{
@@ -50,10 +52,12 @@ namespace Data.Ros
 		}
 		public override Packet Read()
 		{
-			if (!node.IsRunning) return null;
+			if (!node.IsRunning) return new InvalidPacket();
 			
 			node.SpinOnce();
-			
+
+			RosField messageDefinition = RosField.Parse("Message " + ShapeShifterGetDataType(currentMessage) + "\n" + ShapeShifterGetDefinition(currentMessage));
+
 			return null;
 		}
 		public override void Write(Packet packet)
@@ -67,7 +71,7 @@ namespace Data.Ros
 
 		void MessageReceived(IntPtr message)
 		{
-			Console.WriteLine(ShapeShifterGetDefinition(message));
+			currentMessage = message;
 		}
 
 		[DllImport("streamvis-wrappers-ros")]
