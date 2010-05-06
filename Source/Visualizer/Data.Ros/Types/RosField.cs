@@ -42,7 +42,11 @@ namespace Data.Ros.Types
 		}
 		public Packet ToPacket(IEnumerable<byte> data)
 		{
-			return type.ToPacket(new Queue<byte>(data));
+			return ToPacket(new Queue<byte>(data));
+		}
+		public Packet ToPacket(Queue<byte> data)
+		{
+			return type.ToPacket(data);
 		}
 
 		public static RosField Parse(string field)
