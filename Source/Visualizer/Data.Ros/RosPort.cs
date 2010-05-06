@@ -28,7 +28,7 @@ namespace Data.Ros
 		readonly IntPtr subscriber;
 
 		bool disposed = false;
-		IntPtr currentMessage;
+		Packet currentPacket;
 
 		public RosPort(string topicName, RosNode node) : base(topicName)
 		{
@@ -54,14 +54,14 @@ namespace Data.Ros
 		public override Packet Read()
 		{
 			if (!node.IsRunning) return new InvalidPacket();
-			
-			node.SpinOnce();
 
-			RosField messageDefinition = RosField.Parse("Message " + ShapeShifterGetDataType(currentMessage) + "\n" + ShapeShifterGetDefinition(currentMessage));
-			byte[] data = new byte[ShapeShifterGetDataLength(currentMessage)];
-			Marshal.Copy(ShapeShifterGetData(currentMessage), data, 0, data.Length);
+			while (currentPacket == null) node.SpinOnce();
 
-			return messageDefinition.ToPacket(new Queue<byte>(data));
+			Packet packet = currentPacket;
+
+			currentPacket = null;
+
+			return packet;
 		}
 		public override void Write(Packet packet)
 		{
@@ -74,7 +74,13 @@ namespace Data.Ros
 
 		void MessageReceived(IntPtr message)
 		{
-			currentMessage = message;
+			string dataType = ShapeShifterGetDataType(message);
+			string definition = ShapeShifterGetDefinition(message);
+			RosField messageDefinition = RosField.Parse(string.Format("Message {0}\n{1}", dataType, definition));
+			byte[] data = new byte[ShapeShifterGetDataLength(message)];
+			Marshal.Copy(ShapeShifterGetData(message), data, 0, data.Length);
+
+			currentPacket = messageDefinition.ToPacket(new Queue<byte>(data));
 		}
 
 		[DllImport("streamvis-wrappers-ros")]
