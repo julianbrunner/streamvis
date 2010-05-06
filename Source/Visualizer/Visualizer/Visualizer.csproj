@@ -14,6 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>Visualizer.Program</StartupObject>
     <ApplicationIcon>Images\Application Icon.ico</ApplicationIcon>
+    <ReleaseVersion>1.2</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -177,11 +178,15 @@
       <Project>{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}</Project>
       <Name>Visualizer.Drawing</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Data.Ros\Data.Ros.csproj">
+      <Project>{EE409601-043C-4009-9438-CA86BB7596FB}</Project>
+      <Name>Data.Ros</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\Application Icon.ico" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

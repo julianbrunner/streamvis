@@ -21,6 +21,7 @@ using System.Linq;
 using Data;
 using Data.Text;
 using Data.Yarp;
+using Data.Ros;
 using Visualizer.Data;
 
 namespace Visualizer
@@ -29,7 +30,8 @@ namespace Visualizer
 	{
 		readonly Capture capture;
 		readonly IEnumerable<Receiver> receivers;
-		readonly YarpNetwork network;
+		readonly YarpNetwork yarpNetwork;
+		readonly RosNode rosNode;
 
 		public Capture Capture { get { return capture; } }
 
@@ -39,6 +41,7 @@ namespace Visualizer
 		{
 			List<string> textPortStrings = new List<string>();
 			List<string> yarpPortStrings = new List<string>();
+			List<string> rosPortStrings = new List<string>();
 
 			foreach (string portString in portStrings)
 			{
@@ -48,11 +51,13 @@ namespace Visualizer
 				{
 					case "t:": textPortStrings.Add(portString.Substring(2)); break;
 					case "y:": yarpPortStrings.Add(portString.Substring(2)); break;
+					case "r:": rosPortStrings.Add(portString.Substring(2)); break;
 					default: throw new InvalidOperationException("\"" + portString + "\" is not a valid port string");
 				}
 			}
 
-			if (yarpPortStrings.Any()) this.network = new YarpNetwork();
+			if (yarpPortStrings.Any()) this.yarpNetwork = new YarpNetwork();
+			if (rosPortStrings.Any()) this.rosNode = new RosNode();
 
 			List<Receiver> receivers = new List<Receiver>();
 			foreach (string portString in textPortStrings)
@@ -64,7 +69,13 @@ namespace Visualizer
 			foreach (string portString in yarpPortStrings)
 			{
 				string name = portString.Split(':').First();
-				Port port = new ConnectedYarpPort(name, network);
+				Port port = new ConnectedYarpPort(name, yarpNetwork);
+				receivers.Add(new Receiver(port, timer, portString));
+			}
+			foreach (string portString in rosPortStrings)
+			{
+				string name = portString.Split(':').First();
+				Port port = new RosPort(name, rosNode);
 				receivers.Add(new Receiver(port, timer, portString));
 			}
 			this.receivers = receivers;
@@ -94,7 +105,7 @@ namespace Visualizer
 					foreach (Receiver receiver in receivers)
 						receiver.Dispose();
 
-				if (network != null) network.Dispose();
+				if (yarpNetwork != null) yarpNetwork.Dispose();
 
 				disposed = true;
 			}
