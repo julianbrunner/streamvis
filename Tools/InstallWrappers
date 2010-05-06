@@ -1,8 +1,7 @@
 #!/bin/bash
 
+PS1=HACK
 source $HOME/.bashrc
-
-echo $ROS_ROOT
 
 cd $1/Wrappers/streamvis-wrappers-yarp
 make
