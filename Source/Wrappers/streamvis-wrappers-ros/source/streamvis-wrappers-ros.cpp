@@ -72,7 +72,12 @@ const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr messag
 	strcpy(result, info.c_str());
 	return result;
 }
-const unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message)
+unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message)
 {
-	return message->deserialize();
+	return message->msgBuf;
 }
+int ShapeShifterGetDataLength(topic_tools::ShapeShifter::ConstPtr message)
+{
+	return message->msgBufUsed;
+}
+

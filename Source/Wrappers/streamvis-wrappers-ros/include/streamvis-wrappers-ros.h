@@ -34,7 +34,8 @@ extern "C"
 	void RosSpinOnce();
 	const char* ShapeShifterGetDataType(topic_tools::ShapeShifter::ConstPtr message);
 	const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr message);
-	const unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message);
+	unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message);
+	int ShapeShifterGetDataLength(topic_tools::ShapeShifter::ConstPtr messsage);
 }
 
 #endif
