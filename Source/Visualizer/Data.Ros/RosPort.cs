@@ -16,6 +16,7 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Data.Ros.Types;
 
@@ -57,8 +58,10 @@ namespace Data.Ros
 			node.SpinOnce();
 
 			RosField messageDefinition = RosField.Parse("Message " + ShapeShifterGetDataType(currentMessage) + "\n" + ShapeShifterGetDefinition(currentMessage));
+			byte[] data = new byte[ShapeShifterGetDataLength(currentMessage)];
+			Marshal.Copy(ShapeShifterGetData(currentMessage), data, 0, data.Length);
 
-			return null;
+			return messageDefinition.ToPacket(new Queue<byte>(data));
 		}
 		public override void Write(Packet packet)
 		{
@@ -82,5 +85,9 @@ namespace Data.Ros
 		static extern string ShapeShifterGetDataType(IntPtr message);
 		[DllImport("streamvis-wrappers-ros")]
 		static extern string ShapeShifterGetDefinition(IntPtr message);
+		[DllImport("streamvis-wrappers-ros")]
+		static extern IntPtr ShapeShifterGetData(IntPtr message);
+		[DllImport("streamvis-wrappers-ros")]
+		static extern int ShapeShifterGetDataLength(IntPtr message);
 	}
 }
