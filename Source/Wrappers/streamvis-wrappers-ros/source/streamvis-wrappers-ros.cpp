@@ -76,7 +76,7 @@ unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message)
 {
 	return message->msgBuf;
 }
-int ShapeShifterGetDataLength(topic_tools::ShapeShifter::ConstPtr message)
+unsigned int ShapeShifterGetDataLength(topic_tools::ShapeShifter::ConstPtr message)
 {
 	return message->msgBufUsed;
 }

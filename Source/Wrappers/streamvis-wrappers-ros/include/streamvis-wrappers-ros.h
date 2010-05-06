@@ -35,7 +35,7 @@ extern "C"
 	const char* ShapeShifterGetDataType(topic_tools::ShapeShifter::ConstPtr message);
 	const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr message);
 	unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message);
-	int ShapeShifterGetDataLength(topic_tools::ShapeShifter::ConstPtr messsage);
+	unsigned int ShapeShifterGetDataLength(topic_tools::ShapeShifter::ConstPtr messsage);
 }
 
 #endif
