@@ -40,9 +40,9 @@ namespace Data.Ros.Types
 		{
 			return name + " : " + type;
 		}
-		public Packet ToPacket(Queue<byte> data)
+		public Packet ToPacket(IEnumerable<byte> data)
 		{
-			return type.ToPacket(data);
+			return type.ToPacket(new Queue<byte>(data));
 		}
 
 		public static RosField Parse(string field)
@@ -53,7 +53,7 @@ namespace Data.Ros.Types
 		{
 			string[] declarationDetails = lines.Dequeue().Split(' ');
 			IEnumerable<string> members = lines.Dequeue(line => line.Length >= 2 && line.Substring(0, 2) == "  ").Select(line => line.Substring(2));
-			
+
 			string typeName = declarationDetails[0];
 			bool isArray = typeName.EndsWith("[]");
 			if (isArray) typeName = typeName.Substring(0, typeName.Length - 2);

@@ -32,7 +32,7 @@ namespace Data.Ros.Types
 			Queue<string> lines = new Queue<string>(members);
 			
 			this.members = new List<RosField>();
-			while (members.Any()) this.members.Add(RosField.Parse(lines));
+			while (lines.Any()) this.members.Add(RosField.Parse(lines));
 		}
 		
 		public override string ToString()

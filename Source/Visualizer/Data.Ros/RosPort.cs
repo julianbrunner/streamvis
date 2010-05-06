@@ -18,7 +18,10 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Linq;
 using Data.Ros.Types;
+using System.Text.RegularExpressions;
+using Utility.Extensions;
 
 namespace Data.Ros
 {
@@ -75,12 +78,17 @@ namespace Data.Ros
 		void MessageReceived(IntPtr message)
 		{
 			string dataType = ShapeShifterGetDataType(message);
+
 			string definition = ShapeShifterGetDefinition(message);
+			definition = Regex.Replace(definition, @"^(.*?)$", @"  $0", RegexOptions.Multiline);
+			definition = Regex.Replace(definition, @"[ \n]*$", string.Empty);
+
 			RosField messageDefinition = RosField.Parse(string.Format("Message {0}\n{1}", dataType, definition));
+
 			byte[] data = new byte[ShapeShifterGetDataLength(message)];
 			Marshal.Copy(ShapeShifterGetData(message), data, 0, data.Length);
 
-			currentPacket = messageDefinition.ToPacket(new Queue<byte>(data));
+			currentPacket = messageDefinition.ToPacket(data);
 		}
 
 		[DllImport("streamvis-wrappers-ros")]
