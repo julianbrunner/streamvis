@@ -136,32 +136,35 @@ namespace Visualizer.Data
 					return
 					(
 						from range in portString[1].Split(',')
-						from stream in ParseRange(range)
+						from stream in ParseRange(port, range)
 						select stream
 					)
 					.ToArray();
 				default: throw new ArgumentException("portString");
 			}
 		}
-		static IEnumerable<Stream> ParseRange(string range)
+		static IEnumerable<Stream> ParseRange(Port port, string range)
 		{
 			string[] details = range.Split('-');
 
 			switch (details.Length)
 			{
-				case 1: return EnumerableUtility.Single(ParseStream(details[0]));
+				case 1: return EnumerableUtility.Single(ParseStream(port, details[0]));
 				case 2: return from path in Path.Range(new Path(details[0]), new Path(details[1]))
 							   select new Stream(path);
 				default: throw new ArgumentException("range");
 			}
 		}
-		static Stream ParseStream(string streamString)
+		static Stream ParseStream(Port port, string streamString)
 		{
 			string[] details = streamString.Split('=');
 
 			switch (details.Length)
 			{
-				case 1: return new Stream(new Path(details[0]));
+				case 1:
+					Path path = new Path(details[0]);
+					string name = port.GetName(path);
+					return name == null ? new Stream(path) : new Stream(path, name);
 				case 2: return new Stream(new Path(details[0]), details[1]);
 				default: throw new ArgumentException("streamString");
 			}
