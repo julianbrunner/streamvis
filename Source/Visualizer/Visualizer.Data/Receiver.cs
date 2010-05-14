@@ -128,7 +128,7 @@ namespace Visualizer.Data
 				case 1:
 					return
 					(
-						from path in port.FirstValid().ValidPaths
+						from path in port.ValidPaths
 						select new Stream(path)
 					)
 					.ToArray();
