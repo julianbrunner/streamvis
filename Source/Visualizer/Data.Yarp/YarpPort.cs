@@ -62,7 +62,11 @@ namespace Data.Yarp
 				select ValueToPacket(value)
 			);
 		}
-		public override void Write(Packet packet)
+		public override void AbortWait()
+		{
+			using (YarpPort activator = new ConnectedYarpPort(Name, network)) activator.Write(new List());
+		}
+		public void Write(Packet packet)
 		{
 			if (packet is Value) throw new ArgumentException("Cannot directly write a value to a YARP port.");
 			if (packet is List)
@@ -71,13 +75,9 @@ namespace Data.Yarp
 				Bottle_Clear(bottle);
 
 				foreach (Packet subPacket in (List)packet) PacketToValue(bottle, subPacket);
-	
+
 				BufferedPort_Bottle_Write(port);
 			}
-		}
-		public override void AbortWait()
-		{
-			using (YarpPort activator = new ConnectedYarpPort(Name, network)) activator.Write(new List());
 		}
 
 		static Packet ValueToPacket(IntPtr value)

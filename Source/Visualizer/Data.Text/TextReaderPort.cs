@@ -66,10 +66,6 @@ namespace Data.Text
 
 			return TextToPacket("(" + line + ")");
 		}
-		public override void Write(Packet packet)
-		{
-			throw new NotSupportedException();
-		}
 		public override void AbortWait()
 		{
 			lines.Break();

@@ -33,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="TextPort.cs" />
-    <Compile Include="TextWriterPort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextReaderPort.cs" />
   </ItemGroup>

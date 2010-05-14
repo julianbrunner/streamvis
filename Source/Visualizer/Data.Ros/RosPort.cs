@@ -66,10 +66,6 @@ namespace Data.Ros
 
 			return packet;
 		}
-		public override void Write(Packet packet)
-		{
-			throw new NotSupportedException();
-		}
 		public override void AbortWait()
 		{
 			throw new NotSupportedException();
