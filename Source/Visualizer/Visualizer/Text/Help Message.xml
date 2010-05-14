@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Document>
 	<Columns>
 		<Column>
@@ -33,7 +33,7 @@
 		<Text Column="Root">Examples:</Text>
 		<NewLine />
 		<NewLine />
-		<Text Column="Level1">streamvis :y:/my/port</Text>
+		<Text Column="Level1">streamvis :r:/my/port</Text>
 		<NewLine />
 		<Text Column="Level1">foo |streamvis :t:-</Text>
 		<NewLine />
@@ -50,7 +50,7 @@
 		<NewLine />
 		<NewLine />
 		<Text Column="Level2">&lt;interface&gt;</Text>
-		<Text Column="Description">Can be either "t" (Text) or "y" (YARP).</Text>
+		<Text Column="Description">Can be either "t" (Text), "y" (YARP) or "r" (ROS).</Text>
 		<NewLine />
 		<NewLine />
 		<Text Column="Level2">&lt;port&gt;</Text>
