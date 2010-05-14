@@ -18,6 +18,7 @@
 using System;
 using System.Linq;
 using Utility.Utilities;
+using System.Collections.Generic;
 
 namespace Data
 {
@@ -26,6 +27,7 @@ namespace Data
 		readonly string name;
 
 		public string Name { get { return name; } }
+		public IEnumerable<Path> ValidPaths { get; private set; }
 
 		protected Port(string name)
 		{
@@ -35,11 +37,12 @@ namespace Data
 		}
 
 		public abstract Packet Read();
-		public Packet FirstValid()
-		{
-			return EnumerableUtility.Consume<Packet>(Read).First(packet => packet != null && !(packet is InvalidPacket));
-		}
-		public abstract void Write(Packet packet);
 		public abstract void AbortWait();
+
+		protected void Initialize()
+		{
+			Packet firstValid = EnumerableUtility.Consume<Packet>(Read).First(packet => packet != null && !(packet is InvalidPacket));
+			ValidPaths = firstValid.ValidPaths;
+		}
 	}
 }
