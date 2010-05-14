@@ -32,6 +32,8 @@ namespace Data.Yarp
 
 			network.Connect(target, Name);
 			network.Connect(Name, target);
+
+			Initialize();
 		}
 		~ConnectedYarpPort()
 		{

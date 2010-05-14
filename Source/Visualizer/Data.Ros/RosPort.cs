@@ -39,6 +39,8 @@ namespace Data.Ros
 			
 			this.node = node;
 			this.subscriber = Subscribe(node.Node, topicName, 0x100, MessageReceived);
+
+			Initialize();
 		}
 		~RosPort()
 		{
@@ -69,6 +71,10 @@ namespace Data.Ros
 		public override void AbortWait()
 		{
 			throw new NotSupportedException();
+		}
+		public override string GetName(Path path)
+		{
+			throw new NotImplementedException();
 		}
 
 		void MessageReceived(IntPtr message)

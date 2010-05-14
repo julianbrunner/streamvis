@@ -26,8 +26,10 @@ namespace Data
 	{
 		readonly string name;
 
+		protected Packet Sample { get; private set; }
+
 		public string Name { get { return name; } }
-		public IEnumerable<Path> ValidPaths { get; private set; }
+		public IEnumerable<Path> ValidPaths { get { return Sample.ValidPaths; } }
 
 		protected Port(string name)
 		{
@@ -38,11 +40,11 @@ namespace Data
 
 		public abstract Packet Read();
 		public abstract void AbortWait();
+		public abstract string GetName(Path path);
 
 		protected void Initialize()
 		{
-			Packet firstValid = EnumerableUtility.Consume<Packet>(Read).First(packet => packet != null && !(packet is InvalidPacket));
-			ValidPaths = firstValid.ValidPaths;
+			Sample = EnumerableUtility.Consume<Packet>(Read).First(packet => packet != null && !(packet is InvalidPacket));
 		}
 	}
 }

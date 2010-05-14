@@ -22,14 +22,14 @@ using System.Runtime.InteropServices;
 
 namespace Data.Yarp
 {
-	public class YarpPort : Port, IDisposable
+	public abstract class YarpPort : Port, IDisposable
 	{
 		readonly YarpNetwork network;
 		readonly IntPtr port;
 
 		bool disposed = false;
 
-		public YarpPort(string name, YarpNetwork network)
+		protected YarpPort(string name, YarpNetwork network)
 			: base(name)
 		{
 			if (network == null) throw new ArgumentNullException("network");
@@ -78,6 +78,10 @@ namespace Data.Yarp
 
 				BufferedPort_Bottle_Write(port);
 			}
+		}
+		public override string GetName(Path path)
+		{
+			return null;
 		}
 
 		static Packet ValueToPacket(IntPtr value)

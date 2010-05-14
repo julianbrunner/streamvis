@@ -34,11 +34,15 @@ namespace Data.Text
 		{
 			this.textReader = Console.In;
 			this.lines = new Breaker<string>(textReader.ReadLine);
+
+			Initialize();
 		}
 		public TextReaderPort(string path) : base(path)
 		{
 			this.textReader = new StreamReader(Path);
 			this.lines = new Breaker<string>(textReader.ReadLine);
+
+			Initialize();
 		}
 		~TextReaderPort()
 		{
@@ -69,6 +73,10 @@ namespace Data.Text
 		public override void AbortWait()
 		{
 			lines.Break();
+		}
+		public override string GetName(Path path)
+		{
+			return null;
 		}
 
 		static Packet TextToPacket(string text)
