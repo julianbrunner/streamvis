@@ -31,6 +31,7 @@ namespace Data.Ros
 		readonly IntPtr subscriber;
 
 		bool disposed = false;
+		RosField sampleDefinition;
 		Packet currentPacket;
 
 		public RosPort(string topicName, RosNode node) : base(topicName)
@@ -60,13 +61,10 @@ namespace Data.Ros
 		{
 			if (!node.IsRunning) return new InvalidPacket();
 
+			currentPacket = null;
 			while (currentPacket == null) node.SpinOnce();
 
-			Packet packet = currentPacket;
-
-			currentPacket = null;
-
-			return packet;
+			return currentPacket;
 		}
 		public override void AbortWait()
 		{
@@ -79,18 +77,21 @@ namespace Data.Ros
 
 		void MessageReceived(IntPtr message)
 		{
-			string dataType = ShapeShifterGetDataType(message);
+			if (sampleDefinition == null)
+			{
+				string dataType = ShapeShifterGetDataType(message);
 
-			string definition = ShapeShifterGetDefinition(message);
-			definition = Regex.Replace(definition, @"^(.*?)$", @"  $0", RegexOptions.Multiline);
-			definition = Regex.Replace(definition, @"[ \n]*$", string.Empty);
+				string definition = ShapeShifterGetDefinition(message);
+				definition = Regex.Replace(definition, @"^(.*?)$", @"  $0", RegexOptions.Multiline);
+				definition = Regex.Replace(definition, @"[ \n]*$", string.Empty);
 
-			RosField messageDefinition = RosField.Parse(string.Format("Message {0}\n{1}", dataType, definition));
+				sampleDefinition = RosField.Parse(string.Format("Message {0}\n{1}", dataType, definition));
+			}
 
 			byte[] data = new byte[ShapeShifterGetDataLength(message)];
 			Marshal.Copy(ShapeShifterGetData(message), data, 0, data.Length);
 
-			currentPacket = messageDefinition.ToPacket(data);
+			currentPacket = sampleDefinition.ToPacket(data);
 		}
 
 		[DllImport("streamvis-wrappers-ros")]
