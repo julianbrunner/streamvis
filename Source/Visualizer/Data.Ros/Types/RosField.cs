@@ -48,6 +48,11 @@ namespace Data.Ros.Types
 		{
 			return type.ToPacket(data);
 		}
+		public string GetName(Path path)
+		{
+			if (path.Any()) return name + type.GetName(path);
+			else return name;
+		}
 
 		public static RosField Parse(string field)
 		{

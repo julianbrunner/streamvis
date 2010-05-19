@@ -59,5 +59,6 @@ namespace Data.Ros.Types
 			return name;
 		}
 		public abstract Packet ToPacket(Queue<byte> data);
+		public abstract string GetName(Path path);
 	}
 }

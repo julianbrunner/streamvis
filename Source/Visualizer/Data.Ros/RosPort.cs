@@ -72,7 +72,7 @@ namespace Data.Ros
 		}
 		public override string GetName(Path path)
 		{
-			throw new NotImplementedException();
+			return sampleDefinition.GetName(path);
 		}
 
 		void MessageReceived(IntPtr message)

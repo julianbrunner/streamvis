@@ -129,7 +129,8 @@ namespace Visualizer.Data
 					return
 					(
 						from path in port.ValidPaths
-						select new Stream(path)
+						let name = port.GetName(path)
+						select name == null ? new Stream(path) : new Stream(path, name)
 					)
 					.ToArray();
 				case 2:

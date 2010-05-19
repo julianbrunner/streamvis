@@ -33,6 +33,12 @@ namespace Data.Ros.Types
 
 			return new InvalidPacket();
 		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
+		}
 	}
 	class RosBool : RosType
 	{
@@ -43,6 +49,12 @@ namespace Data.Ros.Types
 			data.Dequeue();
 
 			return new InvalidPacket();
+		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
 		}
 	}
 	class RosByte : RosType
@@ -55,6 +67,12 @@ namespace Data.Ros.Types
 
 			return new Value(value);
 		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
+		}
 	}
 	class RosChar : RosType
 	{
@@ -65,6 +83,12 @@ namespace Data.Ros.Types
 			data.Dequeue();
 
 			return new InvalidPacket();
+		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
 		}
 	}
 	class RosFloat32 : RosType
@@ -77,6 +101,12 @@ namespace Data.Ros.Types
 
 			return new Value(BitConverter.ToSingle(value, 0));
 		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
+		}
 	}
 	class RosFloat64 : RosType
 	{
@@ -87,6 +117,12 @@ namespace Data.Ros.Types
 			byte[] value = data.Dequeue(8).ToArray();
 
 			return new Value(BitConverter.ToDouble(value, 0));
+		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
 		}
 	}
 	class RosInt8 : RosType
@@ -99,6 +135,12 @@ namespace Data.Ros.Types
 
 			return new Value(value);
 		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
+		}
 	}
 	class RosInt16 : RosType
 	{
@@ -109,6 +151,12 @@ namespace Data.Ros.Types
 			byte[] value = data.Dequeue(2).ToArray();
 
 			return new Value(BitConverter.ToInt16(value, 0));
+		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
 		}
 	}
 	class RosInt32 : RosType
@@ -121,6 +169,12 @@ namespace Data.Ros.Types
 
 			return new Value(BitConverter.ToInt32(value, 0));
 		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
+		}
 	}
 	class RosInt64 : RosType
 	{
@@ -131,6 +185,12 @@ namespace Data.Ros.Types
 			byte[] value = data.Dequeue(8).ToArray();
 
 			return new Value(BitConverter.ToInt64(value, 0));
+		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
 		}
 	}
 	class RosUInt8 : RosType
@@ -143,6 +203,12 @@ namespace Data.Ros.Types
 
 			return new Value(value);
 		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
+		}
 	}
 	class RosUInt16 : RosType
 	{
@@ -153,6 +219,12 @@ namespace Data.Ros.Types
 			byte[] value = data.Dequeue(2).ToArray();
 
 			return new Value(BitConverter.ToUInt16(value, 0));
+		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
 		}
 	}
 	class RosUInt32 : RosType
@@ -165,6 +237,12 @@ namespace Data.Ros.Types
 
 			return new Value(BitConverter.ToUInt32(value, 0));
 		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
+		}
 	}
 	class RosUInt64 : RosType
 	{
@@ -175,6 +253,12 @@ namespace Data.Ros.Types
 			byte[] value = data.Dequeue(8).ToArray();
 
 			return new Value(BitConverter.ToUInt64(value, 0));
+		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
 		}
 	}
 }

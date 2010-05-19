@@ -46,5 +46,11 @@ namespace Data.Ros.Types
 
 			return new List(items);
 		}
+		public override string GetName(Path path)
+		{
+			if (!path.Any()) throw new ArgumentException("Parameter 'path' cannot be empty.");
+
+			return "[" + path.First() + "]" + type.GetName(new Path(path.Skip(1)));
+		}
 	}
 }
