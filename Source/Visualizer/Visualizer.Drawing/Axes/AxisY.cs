@@ -44,8 +44,6 @@ namespace Visualizer.Drawing.Axes
 
 		public override void Draw()
 		{
-			base.Draw();
-
 			LinearMapping valueMapping = Diagram.ValueManager.Mapping;
 
 			Vector2 offset = new Vector2(0, 0);

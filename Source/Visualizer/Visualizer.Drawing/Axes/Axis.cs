@@ -67,6 +67,6 @@ namespace Visualizer.Drawing.Axes
 			Color = Color.White;
 		}
 
-		public virtual void Draw() { }
+		public abstract void Draw();
 	}
 }
