@@ -1,7 +1,11 @@
-all: visualizer
+binaries: bundle
+	mkdir -p Binaries
+	cp Visualizer/bin/Release/streamvis Binaries
 
-.PHONY: visualizer
+bundle: visualizer
+	mkbundle2 -z -o Visualizer/bin/Release/streamvis Visualizer/bin/Release/*.exe Visualizer/bin/Release/*.dll
 
 visualizer:
-	xbuild /target:Rebuild /property:Configuration=Release
-	mkbundle2 -z -o Visualizer/bin/Release/streamvis Visualizer/bin/Release/*.exe Visualizer/bin/Release/*.dll
+	xbuild /property:Configuration=Release
+
+.PHONY: visualizer
