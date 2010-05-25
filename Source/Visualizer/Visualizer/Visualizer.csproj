@@ -24,12 +24,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CustomCommands>
-      <CustomCommands>
-        <Command type="AfterBuild" command="../../../Tools/MakeBundle streamvis ${TargetDir}" workingdir="" />
-        <Command type="AfterBuild" command="../../../Tools/InstallWrappers ../.. ${TargetDir}" workingdir="" />
-      </CustomCommands>
-    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -38,12 +32,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CustomCommands>
-      <CustomCommands>
-        <Command type="AfterBuild" command="../../../Tools/MakeBundle streamvis ${TargetDir}" workingdir="" />
-        <Command type="AfterBuild" command="../../../Tools/InstallWrappers ../.. ${TargetDir}" />
-      </CustomCommands>
-    </CustomCommands>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
