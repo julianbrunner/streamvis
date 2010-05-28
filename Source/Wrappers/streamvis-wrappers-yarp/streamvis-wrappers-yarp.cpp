@@ -18,7 +18,7 @@
 #include "streamvis-wrappers-yarp.h"
 
 Network*	Network_New()													{ return new Network;							}
-void		Network_Dispose(Network* network)								{ delete network;;								}
+void		Network_Dispose(Network* network)								{ delete network;								}
 void		Network_Connect(const char* source, const char* destination)	{ Network::connect(source, destination);		}
 void		Network_Disconnect(const char* source, const char* destination)	{ Network::disconnect(source, destination);		}
 bool		Network_Exists(const char* name)								{ return Network::queryName(name).isValid();	}
