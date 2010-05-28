@@ -22,14 +22,14 @@ using System.Runtime.InteropServices;
 
 namespace Data.Yarp
 {
-	public abstract class YarpPort : Port, IDisposable
+	public class YarpPort : Port, IDisposable
 	{
 		readonly YarpNetwork network;
 		readonly IntPtr port;
 
 		bool disposed = false;
 
-		protected YarpPort(string name, YarpNetwork network)
+		public YarpPort(string name, YarpNetwork network)
 			: base(name)
 		{
 			if (network == null) throw new ArgumentNullException("network");
