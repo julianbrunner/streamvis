@@ -1,6 +1,6 @@
 binaries: yarp ros
 	mkdir -p Binaries
-	-cp streamvis-wrappers-yarp/Binaries/libstreamvis-wrappers-yarp.so Binaries
+	-cp streamvis-wrappers-yarp/bin/libstreamvis-wrappers-yarp.so Binaries
 	-cp streamvis-wrappers-ros/bin/libstreamvis-wrappers-ros.so Binaries
 
 yarp:

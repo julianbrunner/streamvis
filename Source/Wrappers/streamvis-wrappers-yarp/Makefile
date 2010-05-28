@@ -1,6 +1,6 @@
 binaries: wrapper
-	mkdir -p Binaries
-	cp build/libstreamvis-wrappers-yarp.so Binaries
+	mkdir -p bin
+	cp build/libstreamvis-wrappers-yarp.so bin
 
 wrapper:
 	mkdir -p build
