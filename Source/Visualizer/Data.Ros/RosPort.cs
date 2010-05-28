@@ -59,10 +59,10 @@ namespace Data.Ros
 		}
 		public override Packet Read()
 		{
-			if (!node.IsRunning) return new InvalidPacket();
-
 			currentPacket = null;
-			while (currentPacket == null) node.SpinOnce();
+			while (currentPacket == null && node.IsRunning) node.SpinOnce();
+
+			if (currentPacket == null) return new InvalidPacket();
 
 			return currentPacket;
 		}
