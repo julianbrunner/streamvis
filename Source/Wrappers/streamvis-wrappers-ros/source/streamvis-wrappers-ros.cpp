@@ -18,6 +18,7 @@
 #include "streamvis-wrappers-ros.h"
 
 #include <ros/ros.h>
+#include <ros/serialization.h>
 #include <topic_tools/shape_shifter.h>
 
 ros::NodeHandle* InitializeNode()
@@ -40,14 +41,6 @@ void RosSpinOnce()
 {
 	ros::spinOnce();
 }
-ros::Publisher* Advertise(ros::NodeHandle* node, const char* topicName, unsigned int queueLength)
-{
-	return new ros::Publisher(node->advertise<topic_tools::ShapeShifter>(topicName, queueLength));
-}
-void DisposePublisher(ros::Publisher* publisher)
-{
-	delete publisher;
-}
 ros::Subscriber* Subscribe(ros::NodeHandle* node, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr))
 {
 	return new ros::Subscriber(node->subscribe<topic_tools::ShapeShifter>(topicName, queueLength, callback));
@@ -58,7 +51,7 @@ void DisposeSubscriber(ros::Subscriber* subscriber)
 }
 const char* ShapeShifterGetDataType(topic_tools::ShapeShifter::ConstPtr message)
 {
-	std::string info = message->datatype;
+	std::string info = message->getDataType();
 
 	char* result = new char[info.size() + 1];
 	strcpy(result, info.c_str());
@@ -66,7 +59,7 @@ const char* ShapeShifterGetDataType(topic_tools::ShapeShifter::ConstPtr message)
 }
 const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr message)
 {
-	std::string info = message->msg_def;
+	std::string info = message->getMessageDefinition();
 
 	char* result = new char[info.size() + 1];
 	strcpy(result, info.c_str());
@@ -74,10 +67,15 @@ const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr messag
 }
 unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message)
 {
-	return message->msgBuf;
+	unsigned char* data = new unsigned char[message->size()];
+
+	ros::serialization::OStream stream(data, message->size());
+	message->write(stream);
+
+	return data;
 }
 unsigned int ShapeShifterGetDataLength(topic_tools::ShapeShifter::ConstPtr message)
 {
-	return message->msgBufUsed;
+	return message->size();
 }
 
