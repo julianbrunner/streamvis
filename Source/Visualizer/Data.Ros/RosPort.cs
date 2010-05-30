@@ -19,10 +19,10 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Linq;
-using Data.Ros.Types;
 using System.Text.RegularExpressions;
-using Utility.Extensions;
 using System.Threading;
+using Data.Ros.Types;
+using Utility.Extensions;
 
 namespace Data.Ros
 {
@@ -69,7 +69,7 @@ namespace Data.Ros
 		}
 		public override void AbortWait()
 		{
-			throw new NotSupportedException();
+			packetAvailable.Set();
 		}
 		public override string GetName(Path path)
 		{
