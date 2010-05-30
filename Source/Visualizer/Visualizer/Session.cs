@@ -31,7 +31,7 @@ namespace Visualizer
 		readonly Capture capture;
 		readonly IEnumerable<Receiver> receivers;
 		readonly YarpNetwork yarpNetwork;
-		readonly RosNode rosNode;
+		readonly RosNetwork rosNetwork;
 
 		public Capture Capture { get { return capture; } }
 
@@ -57,7 +57,7 @@ namespace Visualizer
 			}
 
 			if (yarpPortStrings.Any()) this.yarpNetwork = new YarpNetwork();
-			if (rosPortStrings.Any()) this.rosNode = new RosNode();
+			if (rosPortStrings.Any()) this.rosNetwork = new RosNetwork();
 
 			List<Receiver> receivers = new List<Receiver>();
 			foreach (string portString in textPortStrings)
@@ -75,7 +75,7 @@ namespace Visualizer
 			foreach (string portString in rosPortStrings)
 			{
 				string name = portString.Split(':').First();
-				Port port = new RosPort(name, rosNode);
+				Port port = new RosPort(name, rosNetwork);
 				receivers.Add(new Receiver(port, timer, portString));
 			}
 			this.receivers = receivers;
@@ -106,6 +106,7 @@ namespace Visualizer
 						receiver.Dispose();
 
 				if (yarpNetwork != null) yarpNetwork.Dispose();
+				if (rosNetwork != null) rosNetwork.Dispose();
 
 				disposed = true;
 			}

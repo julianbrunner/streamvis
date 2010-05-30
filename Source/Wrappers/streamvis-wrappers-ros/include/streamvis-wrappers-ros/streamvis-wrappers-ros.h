@@ -21,19 +21,25 @@
 #include <ros/ros.h>
 #include <topic_tools/shape_shifter.h>
 
+using namespace ros;
+using namespace topic_tools;
+
 extern "C"
 {
-	ros::NodeHandle* InitializeNode();
-	void DisposeNode(ros::NodeHandle* node);
-	bool RosOk();
-	void RosSpinOnce();
-	ros::Subscriber* Subscribe(ros::NodeHandle* node, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr));
-	void DisposeSubscriber(ros::Subscriber* subscriber);
+	void InitializeRos();
+	void ShutdownRos();
 	void RosSpin();
-	const char* ShapeShifterGetDataType(topic_tools::ShapeShifter::ConstPtr message);
-	const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr message);
-	unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message);
-	unsigned int ShapeShifterGetDataLength(topic_tools::ShapeShifter::ConstPtr messsage);
+
+	NodeHandle* CreateNode();
+	void DisposeNode(NodeHandle* node);
+
+	Subscriber* CreateSubscriber(NodeHandle* node, const char* topicName, unsigned int queueLength, void (*callback)(const ShapeShifter::ConstPtr));
+	void DisposeSubscriber(Subscriber* subscriber);
+
+	const char* ShapeShifterGetDataType(const ShapeShifter::ConstPtr message);
+	const char* ShapeShifterGetDefinition(const ShapeShifter::ConstPtr message);
+	unsigned char* ShapeShifterGetData(const ShapeShifter::ConstPtr message);
+	unsigned int ShapeShifterGetDataLength(const ShapeShifter::ConstPtr messsage);
 }
 
 #endif

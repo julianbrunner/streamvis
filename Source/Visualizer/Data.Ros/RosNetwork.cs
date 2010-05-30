@@ -17,12 +17,12 @@
 
 using System;
 using System.Runtime.InteropServices;
-using Data.Ros.Types;
 using System.Threading;
+using Data.Ros.Types;
 
 namespace Data.Ros
 {
-	public class RosNode : IDisposable
+	public class RosNetwork : IDisposable
 	{
 		readonly IntPtr node;
 		readonly Thread spinner;
@@ -30,15 +30,16 @@ namespace Data.Ros
 		bool disposed = false;
 		
 		public IntPtr Node { get { return node; } }
-		public bool IsRunning { get { return RosOk(); } }
 		
-		public RosNode()
+		public RosNetwork()
 		{
-			this.node = InitializeNode();
+			InitializeRos();
+			
+			this.node = CreateNode();
 			this.spinner = new Thread(RosSpin);
 			this.spinner.Start();
 		}
-		~RosNode()
+		~RosNetwork()
 		{
 			Dispose();
 		}
@@ -47,21 +48,25 @@ namespace Data.Ros
 		{
 			if (!disposed)
 			{
-				// TODO: Request ROS shutdown and join spinner
-				
 				DisposeNode(node);
+				ShutdownRos();
+				
+				spinner.Join();
 				
 				disposed = true;
 			}
 		}
 		
 		[DllImport("streamvis-wrappers-ros")]
-		static extern IntPtr InitializeNode();
+		static extern void InitializeRos();
 		[DllImport("streamvis-wrappers-ros")]
-		static extern void DisposeNode(IntPtr node);
-		[DllImport("streamvis-wrappers-ros")]
-		static extern bool RosOk();
+		static extern void ShutdownRos();
 		[DllImport("streamvis-wrappers-ros")]
 		static extern void RosSpin();
+
+		[DllImport("streamvis-wrappers-ros")]
+		static extern IntPtr CreateNode();
+		[DllImport("streamvis-wrappers-ros")]
+		static extern void DisposeNode(IntPtr node);
 	}
 }

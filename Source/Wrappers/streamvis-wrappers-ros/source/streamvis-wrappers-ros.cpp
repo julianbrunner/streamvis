@@ -17,64 +17,76 @@
 
 #include "streamvis-wrappers-ros/streamvis-wrappers-ros.h"
 
+#include <string>
+
 #include <ros/ros.h>
 #include <ros/serialization.h>
 #include <topic_tools/shape_shifter.h>
 
-ros::NodeHandle* InitializeNode()
+using namespace std;
+using namespace ros;
+using namespace ros::serialization;
+using namespace topic_tools;
+
+void InitializeRos()
 {
 	int argc = 0;
 	char** argv = NULL;
-	ros::init(argc, argv, "streamvis_wrappers_ros");
-
-	return new ros::NodeHandle;
+	init(argc, argv, "streamvis_wrappers_ros");
 }
-void DisposeNode(ros::NodeHandle* node)
+void ShutdownRos()
 {
-	delete node;
-}
-bool RosOk()
-{
-	return ros::ok();
+	shutdown();
 }
 void RosSpin()
 {
-	ros::spin();
+	spin();
 }
-ros::Subscriber* Subscribe(ros::NodeHandle* node, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr))
+
+NodeHandle* CreateNode()
 {
-	return new ros::Subscriber(node->subscribe<topic_tools::ShapeShifter>(topicName, queueLength, callback));
+	return new NodeHandle();
 }
-void DisposeSubscriber(ros::Subscriber* subscriber)
+void DisposeNode(NodeHandle* node)
+{
+	delete node;
+}
+
+Subscriber* CreateSubscriber(NodeHandle* node, const char* topicName, unsigned int queueLength, void (*callback)(ShapeShifter::ConstPtr))
+{
+	return new Subscriber(node->subscribe<ShapeShifter>(topicName, queueLength, callback));
+}
+void DisposeSubscriber(Subscriber* subscriber)
 {
 	delete subscriber;
 }
-const char* ShapeShifterGetDataType(topic_tools::ShapeShifter::ConstPtr message)
+
+const char* ShapeShifterGetDataType(const ShapeShifter::ConstPtr message)
 {
-	std::string info = message->getDataType();
+	string info = message->getDataType();
 
 	char* result = new char[info.size() + 1];
 	strcpy(result, info.c_str());
 	return result;	
 }
-const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr message)
+const char* ShapeShifterGetDefinition(const ShapeShifter::ConstPtr message)
 {
-	std::string info = message->getMessageDefinition();
+	string info = message->getMessageDefinition();
 
 	char* result = new char[info.size() + 1];
 	strcpy(result, info.c_str());
 	return result;
 }
-unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message)
+unsigned char* ShapeShifterGetData(const ShapeShifter::ConstPtr message)
 {
 	unsigned char* data = new unsigned char[message->size()];
 
-	ros::serialization::OStream stream(data, message->size());
+	OStream stream(data, message->size());
 	message->write(stream);
 
 	return data;
 }
-unsigned int ShapeShifterGetDataLength(topic_tools::ShapeShifter::ConstPtr message)
+unsigned int ShapeShifterGetDataLength(const ShapeShifter::ConstPtr message)
 {
 	return message->size();
 }

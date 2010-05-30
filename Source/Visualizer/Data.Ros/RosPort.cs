@@ -35,12 +35,12 @@ namespace Data.Ros
 		RosField sampleDefinition;
 		Packet currentPacket;
 
-		public RosPort(string topicName, RosNode node) : base(topicName)
+		public RosPort(string topicName, RosNetwork network) : base(topicName)
 		{
-			if (node == null) throw new ArgumentNullException("node");
+			if (network == null) throw new ArgumentNullException("network");
 			
 			this.packetAvailable = new AutoResetEvent(false);
-			this.subscriber = Subscribe(node.Node, topicName, 0x100, MessageReceived);
+			this.subscriber = CreateSubscriber(network.Node, topicName, 0x100, MessageReceived);
 
 			Initialize();
 		}
@@ -53,6 +53,7 @@ namespace Data.Ros
 		{
 			if (!disposed)
 			{
+				packetAvailable.Close();
 				DisposeSubscriber(subscriber);
 				
 				disposed = true;
@@ -61,6 +62,8 @@ namespace Data.Ros
 		public override Packet Read()
 		{
 			packetAvailable.WaitOne();
+			
+			if (currentPacket == null) return new InvalidPacket();
 
 			return currentPacket;
 		}
@@ -94,9 +97,10 @@ namespace Data.Ros
 		}
 
 		[DllImport("streamvis-wrappers-ros")]
-		static extern IntPtr Subscribe(IntPtr node, string topicName, uint queueLength, Action<IntPtr> callback);
+		static extern IntPtr CreateSubscriber(IntPtr node, string topicName, uint queueLength, Action<IntPtr> callback);
 		[DllImport("streamvis-wrappers-ros")]
 		static extern void DisposeSubscriber(IntPtr subscriber);
+
 		[DllImport("streamvis-wrappers-ros")]
 		static extern string ShapeShifterGetDataType(IntPtr message);
 		[DllImport("streamvis-wrappers-ros")]
