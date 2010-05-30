@@ -37,9 +37,9 @@ bool RosOk()
 {
 	return ros::ok();
 }
-void RosSpinOnce()
+void RosSpin()
 {
-	ros::spinOnce();
+	ros::spin();
 }
 ros::Subscriber* Subscribe(ros::NodeHandle* node, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr))
 {

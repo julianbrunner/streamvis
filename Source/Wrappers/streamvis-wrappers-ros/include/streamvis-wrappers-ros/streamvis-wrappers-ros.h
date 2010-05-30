@@ -29,7 +29,7 @@ extern "C"
 	void RosSpinOnce();
 	ros::Subscriber* Subscribe(ros::NodeHandle* node, const char* topicName, unsigned int queueLength, void (*callback)(topic_tools::ShapeShifter::ConstPtr));
 	void DisposeSubscriber(ros::Subscriber* subscriber);
-	void RosSpinOnce();
+	void RosSpin();
 	const char* ShapeShifterGetDataType(topic_tools::ShapeShifter::ConstPtr message);
 	const char* ShapeShifterGetDefinition(topic_tools::ShapeShifter::ConstPtr message);
 	unsigned char* ShapeShifterGetData(topic_tools::ShapeShifter::ConstPtr message);

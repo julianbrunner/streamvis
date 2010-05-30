@@ -22,12 +22,13 @@ using System.Linq;
 using Data.Ros.Types;
 using System.Text.RegularExpressions;
 using Utility.Extensions;
+using System.Threading;
 
 namespace Data.Ros
 {
 	public class RosPort : Port, IDisposable
 	{
-		readonly RosNode node;
+		readonly AutoResetEvent packetAvailable;
 		readonly IntPtr subscriber;
 
 		bool disposed = false;
@@ -38,7 +39,7 @@ namespace Data.Ros
 		{
 			if (node == null) throw new ArgumentNullException("node");
 			
-			this.node = node;
+			this.packetAvailable = new AutoResetEvent(false);
 			this.subscriber = Subscribe(node.Node, topicName, 0x100, MessageReceived);
 
 			Initialize();
@@ -59,10 +60,7 @@ namespace Data.Ros
 		}
 		public override Packet Read()
 		{
-			currentPacket = null;
-			while (currentPacket == null && node.IsRunning) node.SpinOnce();
-
-			if (currentPacket == null) return new InvalidPacket();
+			packetAvailable.WaitOne();
 
 			return currentPacket;
 		}
@@ -92,6 +90,7 @@ namespace Data.Ros
 			Marshal.Copy(ShapeShifterGetData(message), data, 0, data.Length);
 
 			currentPacket = sampleDefinition.ToPacket(data);
+			packetAvailable.Set();
 		}
 
 		[DllImport("streamvis-wrappers-ros")]

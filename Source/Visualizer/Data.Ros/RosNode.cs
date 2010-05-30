@@ -18,12 +18,14 @@
 using System;
 using System.Runtime.InteropServices;
 using Data.Ros.Types;
+using System.Threading;
 
 namespace Data.Ros
 {
 	public class RosNode : IDisposable
 	{
 		readonly IntPtr node;
+		readonly Thread spinner;
 		
 		bool disposed = false;
 		
@@ -33,6 +35,8 @@ namespace Data.Ros
 		public RosNode()
 		{
 			this.node = InitializeNode();
+			this.spinner = new Thread(RosSpin);
+			this.spinner.Start();
 		}
 		~RosNode()
 		{
@@ -43,14 +47,12 @@ namespace Data.Ros
 		{
 			if (!disposed)
 			{
+				// TODO: Request ROS shutdown and join spinner
+				
 				DisposeNode(node);
 				
 				disposed = true;
 			}
-		}
-		public void SpinOnce()
-		{
-			RosSpinOnce();
 		}
 		
 		[DllImport("streamvis-wrappers-ros")]
@@ -60,6 +62,6 @@ namespace Data.Ros
 		[DllImport("streamvis-wrappers-ros")]
 		static extern bool RosOk();
 		[DllImport("streamvis-wrappers-ros")]
-		static extern void RosSpinOnce();
+		static extern void RosSpin();
 	}
 }
