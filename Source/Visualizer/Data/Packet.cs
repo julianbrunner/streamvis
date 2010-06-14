@@ -26,26 +26,26 @@ namespace Data
 	{
 		public IEnumerable<Path> ValidPaths { get { return GetValidPaths(Enumerable.Empty<int>(), this); } }
 
+		public Packet GetPacket(Path path)
+		{
+			if (path == null) throw new ArgumentNullException("path");
+
+			if (path.IsEmpty) return this;
+
+			List list = GetPacket(path.Head) as List;
+			int index = path.Tail;
+
+			if (list == null || index < 0 || index >= list.Length) return new InvalidPacket();
+
+			return list[index];
+		}
 		public double GetValue(Path path)
 		{
 			if (path == null) throw new ArgumentNullException("path");
-			
-			Packet current = this;
-			
-			foreach (int index in path)
-			{
-				List list = current as List;
-				
-				if (list == null || index < 0 || index >= list.Length || list[index] is InvalidPacket)
-					throw new InvalidOperationException(string.Format("Packet \"{0}\" does not have a valid value at path \"{1}\".", this, path));
-				
-				current = list[index];
-			}
 
-			Value value = current as Value;
+			Value value = GetPacket(path) as Value;
 
-			if (value == null)
-				throw new InvalidOperationException(string.Format("Packet \"{0}\" does not have a valid value at path \"{1}\".", this, path));
+			if (value == null) throw new InvalidOperationException(string.Format("Packet \"{0}\" does not have a valid value at path \"{1}\".", this, path));
 
 			return value;
 		}

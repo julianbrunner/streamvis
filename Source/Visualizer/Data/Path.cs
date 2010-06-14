@@ -29,11 +29,17 @@ namespace Data
 		readonly IEnumerable<int> nodes;
 
 		public static string XElementName { get { return "Path"; } }
+		public static Path Empty { get { return new Path(); } }
 
-		public IEnumerable<int> Head { get { return nodes.Take(nodes.Count() - 1); } }
+		public Path Head { get { return new Path(nodes.SkipLast(1)); } }
 		public int Tail { get { return nodes.Last(); } }
-		public XElement XElement { get { return new XElement(XElementName, ToString()); } }
+		public bool IsEmpty { get { return !nodes.Any(); } }
+		public XElement XElement { get { return new XElement(XElementName, this); } }
 
+		public Path()
+		{
+			this.nodes = Enumerable.Empty<int>();
+		}
 		public Path(IEnumerable<int> nodes)
 		{
 			if (nodes == null) throw new ArgumentNullException("nodes");
@@ -61,10 +67,11 @@ namespace Data
 		{
 			if (start == null) throw new ArgumentNullException("start");
 			if (end == null) throw new ArgumentNullException("end");
-			if (!Enumerable.SequenceEqual(start.Head, end.Head))
-				throw new ArgumentException("Heads of range delimiter paths do not match (" + start + ", " + end + ").");
+			if (!Enumerable.SequenceEqual(start.Head, end.Head)) throw new ArgumentException("Heads of range delimiter paths do not match (" + start + ", " + end + ").");
 
-			for (int i = start.Tail; i <= end.Tail; i++) yield return new Path(start.Head.Concat(i));
+			Path head = start.Head;
+
+			for (int i = start.Tail; i <= end.Tail; i++) yield return new Path(head.Concat(i));
 		}
 
 		static IEnumerable<int> Parse(string pathString)
@@ -80,7 +87,7 @@ namespace Data
 				)
 				.ToArray();
 			}
-			catch (FormatException) { throw new ArgumentException("path"); }
+			catch (FormatException) { throw new ArgumentException(string.Format("Parameter 'pathString' ({0}) is not a valid path string.")); }
 		}
 	}
 }
