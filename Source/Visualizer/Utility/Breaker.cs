@@ -25,7 +25,7 @@ using System.Threading;
 
 namespace Utility
 {
-	public class Breaker<T> : IDisposable where T : class
+	public class Breaker<T> : IDisposable
 	{
 		readonly Func<T> readItem;
 		readonly Thread reader;
@@ -39,7 +39,7 @@ namespace Utility
 		T Current
 		{
 			get
-			{				
+			{
 				itemAvailable.WaitOne();
 			
 				T item = current;
@@ -54,8 +54,6 @@ namespace Utility
 				itemNeeded.WaitOne();
 
 				current = value;
-				
-				if (current == null) done = true;
 
 				itemNeeded.Reset();
 				itemAvailable.Set();
@@ -90,11 +88,13 @@ namespace Utility
 		}
 		public T Read()
 		{
-			return done ? null : Current;
+			return done ? default(T) : Current;
 		}
 		public void Break()
 		{
-			Current = null;
+			done = true;
+
+			Current = default(T);
 		}
 
 		void ReadLoop()
