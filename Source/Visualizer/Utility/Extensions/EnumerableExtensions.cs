@@ -73,5 +73,33 @@ namespace Utility.Extensions
 
 			return source.Aggregate(string.Empty, (seed, current) => seed + current);
 		}
+		public static IEnumerable<T> SkipLast(this IEnumerable<T> source, int count)
+		{
+			if (source == null) throw new ArgumentNullException("source");
+
+			Queue<T> queue = new Queue<T>();
+
+			foreach (T item in source)
+			{
+				queue.Enqueue(item);
+
+				if (queue.Count > count) yield return queue.Dequeue();
+			}
+		}
+		public static IEnumerable<T> TakeLast(this IEnumerable<T> source, int count)
+		{
+			if (source == null) throw new ArgumentNullException("source");
+
+			Queue<T> queue = new Queue<T>();
+
+			foreach (T item in source)
+			{
+				queue.Enqueue(item);
+
+				if (queue.Count > count) queue.Dequeue();
+			}
+
+			return queue;
+		}
 	}
 }
