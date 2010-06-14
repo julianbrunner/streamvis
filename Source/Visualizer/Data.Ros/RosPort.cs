@@ -69,6 +69,8 @@ namespace Data.Ros
 		}
 		public override void AbortWait()
 		{
+			currentPacket = null;
+
 			packetAvailable.Set();
 		}
 		public override string GetName(Path path)

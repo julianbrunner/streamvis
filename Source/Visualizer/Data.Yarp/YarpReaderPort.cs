@@ -17,38 +17,11 @@
 
 namespace Data.Yarp
 {
-	public class ConnectedYarpPort : YarpPort
+	public class YarpReaderPort : ConnectedYarpPort
 	{
-		readonly string target;
-		readonly YarpNetwork network;
-
-		bool disposed = false;
-
-		public ConnectedYarpPort(string target, YarpNetwork network)
-			: base(network.FindName(target + "/client"), network)
+		public YarpReaderPort(string target, YarpNetwork network) : base(target, network)
 		{
-			this.target = target;
-			this.network = network;
-
-			network.Connect(target, Name);
-			network.Connect(Name, target);
-		}
-		~ConnectedYarpPort()
-		{
-			Dispose();
-		}
-
-		public override void Dispose()
-		{
-			if (!disposed)
-			{
-				disposed = true;
-
-				network.Disconnect(target, Name);
-				network.Disconnect(Name, target);
-			}
-
-			base.Dispose();
+			Initialize();
 		}
 	}
 }

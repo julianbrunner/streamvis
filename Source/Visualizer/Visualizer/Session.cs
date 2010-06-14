@@ -69,7 +69,7 @@ namespace Visualizer
 			foreach (string portString in yarpPortStrings)
 			{
 				string name = portString.Split(':').First();
-				Port port = new ConnectedYarpPort(name, yarpNetwork);
+				Port port = new YarpReaderPort(name, yarpNetwork);
 				receivers.Add(new Receiver(port, timer, portString));
 			}
 			foreach (string portString in rosPortStrings)

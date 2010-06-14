@@ -77,9 +77,12 @@ namespace Utility
 			{
 				done = true;
 				
-				if (!reader.Join(TimeSpan.FromSeconds(1.0))) reader.Abort();
-				
-				reader.Join();
+				if (!reader.Join(TimeSpan.FromSeconds(1.0)))
+				{
+					reader.Abort();
+					reader.Join();
+				}
+
 				itemNeeded.Close();
 				itemAvailable.Close();
 				
