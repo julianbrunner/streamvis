@@ -24,6 +24,6 @@ yarp:
 	-$(MAKE) -C streamvis-wrappers-yarp
 
 ros:
-	-ROS_PACKAGE_PATH=$$ROS_PACKAGE_PATH:$$PWD/streamvis-wrappers-ros $(MAKE) -C streamvis-wrappers-ros
+	-ROS_PACKAGE_PATH=$$ROS_PACKAGE_PATH:$$PWD/streamvis-wrappers-ros rosmake streamvis-wrappers-ros
 
 .PHONY: yarp ros
