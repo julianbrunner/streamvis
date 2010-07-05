@@ -23,6 +23,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using Data.Ros.Types;
 using Utility.Extensions;
+using System.Diagnostics;
 
 namespace Data.Ros
 {
@@ -83,9 +84,23 @@ namespace Data.Ros
 			if (sampleDefinition == null)
 			{
 				string dataType = ShapeShifterGetDataType(message);
+				string definition = null;
 
-				string definition = ShapeShifterGetDefinition(message);
+				using (Process rosmsg = new Process())
+				{
+					rosmsg.StartInfo.FileName = "rosmsg";
+					rosmsg.StartInfo.Arguments = string.Format("show {0}", dataType);
+					rosmsg.StartInfo.UseShellExecute = false;
+					rosmsg.StartInfo.RedirectStandardOutput = true;
+
+					rosmsg.Start();
+					definition = rosmsg.StandardOutput.ReadToEnd();
+					rosmsg.WaitForExit();
+				}
+
+				// Add indentation to each line
 				definition = Regex.Replace(definition, @"^(.*?)$", @"  $0", RegexOptions.Multiline);
+				// Remove whitespaces at the end of a line
 				definition = Regex.Replace(definition, @"[ \n]*$", string.Empty);
 
 				sampleDefinition = RosField.Parse(string.Format("Message {0}\n{1}", dataType, definition));
@@ -105,8 +120,6 @@ namespace Data.Ros
 
 		[DllImport("streamvis-wrappers-ros")]
 		static extern string ShapeShifterGetDataType(IntPtr message);
-		[DllImport("streamvis-wrappers-ros")]
-		static extern string ShapeShifterGetDefinition(IntPtr message);
 		[DllImport("streamvis-wrappers-ros")]
 		static extern IntPtr ShapeShifterGetData(IntPtr message);
 		[DllImport("streamvis-wrappers-ros")]

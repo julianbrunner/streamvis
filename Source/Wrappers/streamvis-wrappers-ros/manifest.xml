@@ -10,8 +10,6 @@
   <url>http://ros.org/wiki/streamvis-wrappers-ros</url>
   <depend package="roscpp"/>
   <depend package="topic_tools"/>
-  <depend package="std_msgs"/>
-
 </package>
 
 
