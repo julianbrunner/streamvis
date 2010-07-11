@@ -14,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <StartupObject>Visualizer.Program</StartupObject>
     <ApplicationIcon>Images\Application Icon.ico</ApplicationIcon>
-    <ReleaseVersion>1.2</ReleaseVersion>
+    <ReleaseVersion>1.3</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
