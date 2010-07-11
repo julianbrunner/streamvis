@@ -72,7 +72,7 @@ namespace Graphics
 		{
 			Application.DoEvents();
 
-			while (IsIdle)
+			while (!IsDisposed && IsIdle)
 			{
 				GL.Clear(ClearBufferMask.ColorBufferBit);
 
