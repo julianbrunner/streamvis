@@ -17,7 +17,7 @@
 
 binaries: wrappers visualizer
 	mkdir -p Binaries
-	cp -r Wrappers/Binaries/* Binaries
+	-cp -r Wrappers/Binaries/* Binaries
 	cp -r Visualizer/Binaries/* Binaries
 
 wrappers:
