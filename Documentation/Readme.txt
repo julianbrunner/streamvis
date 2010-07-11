@@ -19,8 +19,10 @@ Unless stated otherwise, Stream Visualizer (streamvis) and the files that it con
 	
 The Open Toolkit Library (OpenTK) is licensed under the terms of the The Open Toolkit Library license. See "Legal/OpenTK License.txt" for details.
 
-Yet Another Robot Platform (YARP) is licensed under the terms of the GNU GPL v2. See "Legal/GNU GPL v2.txt" for details.
+Yet Another Robot Platform (YARP) is licensed under the terms of the GNU LGPL v2.1. See "Legal/GNU LGPL v2.1.txt" for details.
+
+Robot Operating System (ROS) is licensed under the terms of the BSD license. See "Legal/ROS" for details.
 
 3. Contact information
 --------------------------------------------------------------------------------
-Julian Brunner	JulianBrunner@gmx.net
+Julian Brunner	JulianBrunner@googlemail.com
