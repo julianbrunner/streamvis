@@ -1,11 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{7B60F588-1AA5-4123-8CCA-1907A036564E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer", "Visualizer\Visualizer.csproj", "{0251F686-E89D-4529-82AD-4C8D467C0765}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Visualizer.Data", "Visualizer.Data\Visualizer.Data.csproj", "{188C1B70-DD61-4EEA-B733-8379A3866CF2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{7B60F588-1AA5-4123-8CCA-1907A036564E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphics", "Graphics\Graphics.csproj", "{9CFCF6A1-6763-4108-851F-E2A8869968B2}"
 EndProject
@@ -35,10 +35,10 @@ Global
 		{188C1B70-DD61-4EEA-B733-8379A3866CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{188C1B70-DD61-4EEA-B733-8379A3866CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{188C1B70-DD61-4EEA-B733-8379A3866CF2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B61AF80-3A0D-4947-9E9D-9FE0EFA26E92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B61AF80-3A0D-4947-9E9D-9FE0EFA26E92}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B61AF80-3A0D-4947-9E9D-9FE0EFA26E92}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B61AF80-3A0D-4947-9E9D-9FE0EFA26E92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,22 +47,25 @@ Global
 		{6C360F0B-D9D0-4F41-B702-D791E06E564B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C360F0B-D9D0-4F41-B702-D791E06E564B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C360F0B-D9D0-4F41-B702-D791E06E564B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9CFCF6A1-6763-4108-851F-E2A8869968B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B61AF80-3A0D-4947-9E9D-9FE0EFA26E92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B61AF80-3A0D-4947-9E9D-9FE0EFA26E92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B61AF80-3A0D-4947-9E9D-9FE0EFA26E92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B61AF80-3A0D-4947-9E9D-9FE0EFA26E92}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B106CAA9-737F-4940-964E-DC32F4AED0C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B106CAA9-737F-4940-964E-DC32F4AED0C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B106CAA9-737F-4940-964E-DC32F4AED0C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B106CAA9-737F-4940-964E-DC32F4AED0C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EE409601-043C-4009-9438-CA86BB7596FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EE409601-043C-4009-9438-CA86BB7596FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE409601-043C-4009-9438-CA86BB7596FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE409601-043C-4009-9438-CA86BB7596FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3B5B3E8-F163-4A1E-AB31-A312E5FC3EA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9CFCF6A1-6763-4108-851F-E2A8869968B2} = {7B60F588-1AA5-4123-8CCA-1907A036564E}
@@ -76,8 +79,5 @@ Global
 		description = Stream Visualizer is an application that can be used to visualize, capture and replay data streams.
 		version = 1.3
 		StartupItem = Visualizer\Visualizer.csproj
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal
