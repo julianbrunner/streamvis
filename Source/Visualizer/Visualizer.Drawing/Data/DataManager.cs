@@ -15,8 +15,8 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using Utility;
 using Visualizer.Data;
+using Krach.Collections;
 
 namespace Visualizer.Drawing.Data
 {

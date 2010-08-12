@@ -18,7 +18,6 @@
 using System;
 using System.ComponentModel;
 using System.Xml.Linq;
-using Utility;
 using Visualizer.Data;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Data;

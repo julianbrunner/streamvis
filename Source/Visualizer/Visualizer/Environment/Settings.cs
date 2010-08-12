@@ -19,7 +19,7 @@ using System;
 using System.ComponentModel;
 using System.Xml.Linq;
 using Graphics;
-using Utility;
+
 using Visualizer.Data;
 using Visualizer.Drawing;
 

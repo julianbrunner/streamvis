@@ -19,10 +19,8 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Xml.Linq;
-using Utility;
-using Utility.Extensions;
-using Utility.Utilities;
 using Visualizer.Drawing;
+using Krach.Graphics;
 
 namespace Visualizer.Environment.Drawing
 {
@@ -39,7 +37,7 @@ namespace Visualizer.Environment.Drawing
 				(
 					XElementName,
 					new XElement("MarkerCount", MarkerCount),
-					new XElement("Color", Color.ToHtmlString())
+					new XElement("Color", ColorUtility.ToHtmlString(Color))
 				);
 			}
 			set
@@ -58,7 +56,7 @@ namespace Visualizer.Environment.Drawing
 			set { diagram.AxisY.MarkerCount = value; }
 		}
 		[DisplayName("Color")]
-		public Color Color
+		public System.Drawing.Color Color
 		{
 			get { return diagram.AxisY.Color; }
 			set { diagram.AxisY.Color = value; }

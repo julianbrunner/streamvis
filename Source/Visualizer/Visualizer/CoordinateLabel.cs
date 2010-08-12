@@ -21,8 +21,9 @@ using System.Windows.Forms;
 using Graphics;
 using Graphics.Components;
 using OpenTK;
-using Utility;
+
 using Visualizer.Drawing;
+using Krach.Maps.Scalar;
 
 namespace Visualizer
 {
@@ -59,11 +60,11 @@ namespace Visualizer
 			{
 				Vector2 position = diagram.Layouter.ReverseMap(new Vector2(mousePosition.X, mousePosition.Y));
 
-				LinearMapping timeMapping = diagram.TimeManager.Mapping;
-				LinearMapping valueMapping = diagram.ValueManager.Mapping;
+				SymmetricRangeMap timeMapping = diagram.TimeManager.Mapping;
+				SymmetricRangeMap valueMapping = diagram.ValueManager.Mapping;
 
-				double time = timeMapping.ReverseMap(position.X);
-				double value = valueMapping.ReverseMap(position.Y);
+				double time = timeMapping.Reverse.Map(position.X);
+				double value = valueMapping.Reverse.Map(position.Y);
 
 				label.Text = string.Format("Time: {0}, Value: {1}", time, value);
 			}

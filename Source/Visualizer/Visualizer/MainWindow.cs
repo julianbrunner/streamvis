@@ -24,9 +24,6 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Graphics;
 using OpenTK;
-using Utility;
-using Utility.Extensions;
-using Utility.Utilities;
 using Visualizer.Data;
 using Visualizer.Drawing;
 using Visualizer.Drawing.Axes;
@@ -34,6 +31,12 @@ using Visualizer.Drawing.Data;
 using Visualizer.Drawing.Timing;
 using Visualizer.Drawing.Values;
 using Visualizer.Environment;
+using Krach;
+using Krach.Basics;
+using Krach.Extensions;
+using Krach.Maps.Scalar;
+using Krach.Maps;
+using Krach.Graphics;
 
 namespace Visualizer
 {
@@ -90,12 +93,12 @@ namespace Visualizer
 
 			this.zoomSelector = new RectangleSelector(drawer, viewport);
 			this.zoomSelector.Button = MouseButtons.Left;
-			this.zoomSelector.Color = Color.White;
+			this.zoomSelector.Color = System.Drawing.Color.White;
 			this.zoomSelector.EndSelect += zoomSelector_Select;
 
 			this.unZoomSelector = new RectangleSelector(drawer, viewport);
 			this.unZoomSelector.Button = MouseButtons.Middle;
-			this.unZoomSelector.Color = Color.Blue;
+			this.unZoomSelector.Color = System.Drawing.Color.Blue;
 			this.unZoomSelector.EndSelect += unZoomSelector_Select;
 
 			this.panDragger = new Dragger(viewport);
@@ -104,7 +107,7 @@ namespace Visualizer
 			this.panDragger.EndDrag += panDragger_EndDrag;
 
 			this.frameCounter = new VisibleFrameCounter(drawer);
-			this.frameCounter.Color = Color.Yellow;
+			this.frameCounter.Color = System.Drawing.Color.Yellow;
 			this.frameCounter.Alignment = TextAlignment.Far;
 
 			this.coordinateLabel = new CoordinateLabel(coordinateStatusLabel, viewport, diagram);
@@ -262,21 +265,21 @@ namespace Visualizer
 		}
 		private void zoomSelector_Select(object sender, EventArgs<Rectangle> e)
 		{
-			Rectangle intersection = RectangleUtility.Intersect(diagram.Layouter.Area, e.Parameter);
+			Rectangle intersection = Rectangle.Intersect(diagram.Layouter.Area, e.Parameter);
 
 			if (intersection.Width > 5 && intersection.Height > 5)
 			{
 				Vector2 leftTop = diagram.Layouter.ReverseMap(new Vector2(intersection.Left, intersection.Top));
 				Vector2 rightBottom = diagram.Layouter.ReverseMap(new Vector2(intersection.Right, intersection.Bottom));
 
-				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.ReverseMap(leftTop.X), diagram.TimeManager.Mapping.ReverseMap(rightBottom.X));
-				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.ReverseMap(rightBottom.Y), diagram.ValueManager.Mapping.ReverseMap(leftTop.Y));
+				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.Reverse.Map(leftTop.X), diagram.TimeManager.Mapping.Reverse.Map(rightBottom.X));
+				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.Reverse.Map(rightBottom.Y), diagram.ValueManager.Mapping.Reverse.Map(leftTop.Y));
 
-				LinearMapping timeMapping = new LinearMapping(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange);
-				LinearMapping valueMapping = new LinearMapping(diagram.ValueManager.Range, valueRange);
+				SymmetricRangeMap timeMapping = new SymmetricRangeMap(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange, Mappers.Linear);
+				SymmetricRangeMap valueMapping = new SymmetricRangeMap(diagram.ValueManager.Range, valueRange, Mappers.Linear);
 
-				timeRange = timeMapping.ForwardMap(timeMapping.Source);
-				valueRange = valueMapping.ForwardMap(valueMapping.Source);
+				timeRange = timeMapping.Forward.Map(timeMapping.Source);
+				valueRange = valueMapping.Forward.Map(valueMapping.Source);
 
 				diagram.TimeManager.Time = timeRange.End;
 				diagram.TimeManager.Width = timeRange.End - timeRange.Start;
@@ -290,21 +293,21 @@ namespace Visualizer
 		}
 		private void unZoomSelector_Select(object sender, EventArgs<Rectangle> e)
 		{
-			Rectangle intersection = RectangleUtility.Intersect(diagram.Layouter.Area, e.Parameter);
+			Rectangle intersection = Rectangle.Intersect(diagram.Layouter.Area, e.Parameter);
 
 			if (intersection.Width > 5 && intersection.Height > 5)
 			{
 				Vector2 leftTop = diagram.Layouter.ReverseMap(new Vector2(intersection.Left, intersection.Top));
 				Vector2 rightBottom = diagram.Layouter.ReverseMap(new Vector2(intersection.Right, intersection.Bottom));
 
-				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.ReverseMap(leftTop.X), diagram.TimeManager.Mapping.ReverseMap(rightBottom.X));
-				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.ReverseMap(rightBottom.Y), diagram.ValueManager.Mapping.ReverseMap(leftTop.Y));
+				Range<double> timeRange = new Range<double>(diagram.TimeManager.Mapping.Reverse.Map(leftTop.X), diagram.TimeManager.Mapping.Reverse.Map(rightBottom.X));
+				Range<double> valueRange = new Range<double>(diagram.ValueManager.Mapping.Reverse.Map(rightBottom.Y), diagram.ValueManager.Mapping.Reverse.Map(leftTop.Y));
 
-				LinearMapping timeMapping = new LinearMapping(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange);
-				LinearMapping valueMapping = new LinearMapping(diagram.ValueManager.Range, valueRange);
+				SymmetricRangeMap timeMapping = new SymmetricRangeMap(new Range<double>(diagram.TimeManager.Time - diagram.TimeManager.Width, diagram.TimeManager.Time), timeRange, Mappers.Linear);
+				SymmetricRangeMap valueMapping = new SymmetricRangeMap(diagram.ValueManager.Range, valueRange, Mappers.Linear);
 
-				timeRange = timeMapping.ReverseMap(timeMapping.Source);
-				valueRange = valueMapping.ReverseMap(valueMapping.Source);
+				timeRange = timeMapping.Reverse.Map(timeMapping.Source);
+				valueRange = valueMapping.Reverse.Map(valueMapping.Source);
 
 				diagram.TimeManager.Time = timeRange.End;
 				diagram.TimeManager.Width = timeRange.End - timeRange.Start;
@@ -318,8 +321,8 @@ namespace Visualizer
 		}
 		private void panDragger_Drag(object sender, EventArgs<Point> e)
 		{
-			double width = (double)e.Parameter.X / (double)diagram.Layouter.Area.Width / diagram.TimeManager.Mapping.Factor;
-			double height = -(double)e.Parameter.Y / (double)diagram.Layouter.Area.Height / diagram.ValueManager.Mapping.Factor;
+			double width = (double)e.Parameter.X / (double)diagram.Layouter.Area.Width / (diagram.TimeManager.Mapping.Destination.Length() / diagram.TimeManager.Mapping.Source.Length());
+			double height = -(double)e.Parameter.Y / (double)diagram.Layouter.Area.Height / (diagram.ValueManager.Mapping.Destination.Length() / diagram.ValueManager.Mapping.Source.Length());
 
 			diagram.TimeManager.IsUpdated = false;
 			diagram.TimeManager.Time -= width;
@@ -383,7 +386,8 @@ namespace Visualizer
 				foreach (Stream stream in portData.Streams)
 				{
 					Graph graph = new Graph(drawer, diagram, stream.EntryData);
-					graph.Color = colorGenerator.NextColor();
+					Krach.Graphics.Color color = colorGenerator.NextColor();
+					graph.Color = System.Drawing.Color.FromArgb((int)(color.Alpha * 0xFF), (int)(color.Red * 0xFF), (int)(color.Green * 0xFF), (int)(color.Blue * 0xFF));
 
 					graphs.Add(graph);
 
@@ -410,13 +414,13 @@ namespace Visualizer
 			streamListItem.Stream.Name = name;
 			item.Text = streamListItem.Stream.Name;
 		}
-		void SetColor(ListViewItem item, Color color)
+		void SetColor(ListViewItem item, System.Drawing.Color color)
 		{
 			StreamListItem streamListItem = (StreamListItem)item.Tag;
 
 			streamListItem.Graph.Color = color;
 			item.BackColor = color;
-			item.ForeColor = item.BackColor.R * 0.299 + item.BackColor.G * 0.587 + item.BackColor.B * 0.114 >= 0x80 ? Color.Black : Color.White;
+			item.ForeColor = item.BackColor.R * 0.299 + item.BackColor.G * 0.587 + item.BackColor.B * 0.114 >= 0x80 ? System.Drawing.Color.Black : System.Drawing.Color.White;
 		}
 
 		static Diagram CreateDiagram(Viewport viewport, Drawer drawer, Data.Timer timer, Parameters parameters)

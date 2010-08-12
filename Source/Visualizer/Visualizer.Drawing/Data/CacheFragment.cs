@@ -17,9 +17,8 @@
 
 using System;
 using System.Collections.Generic;
-using Utility;
-using Utility.Extensions;
 using Visualizer.Data;
+using Krach.Basics;
 
 namespace Visualizer.Drawing.Data
 {
@@ -32,12 +31,12 @@ namespace Visualizer.Drawing.Data
 
 		public Range<double> Range { get { return range; } }
 		public IEnumerable<Entry> Entries { get { return entries; } }
-		public bool IsEmpty { get { return range.IsEmpty(); } }
+		public bool IsEmpty { get { return range.IsEmpty; } }
 
 		public CacheFragment() { }
 		public CacheFragment(Range<double> range, IEnumerable<Entry> entries)
 		{
-			if (range.IsEmpty()) throw new ArgumentException("range");
+			if (range.IsEmpty) throw new ArgumentException("range");
 			if (entries == null) throw new ArgumentNullException("entries");
 
 			this.range = range;

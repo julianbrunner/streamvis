@@ -18,9 +18,8 @@
 using System.Collections.Generic;
 using Graphics;
 using OpenTK;
-using Utility;
-using Utility.Extensions;
-using Utility.Utilities;
+using Krach.Extensions;
+using Krach.Maps.Scalar;
 
 namespace Visualizer.Drawing.Axes
 {
@@ -30,11 +29,11 @@ namespace Visualizer.Drawing.Axes
 		{
 			get
 			{
-				LinearMapping valueMapping = Diagram.ValueManager.Mapping;
+				SymmetricRangeMap valueMapping = Diagram.ValueManager.Mapping;
 
-				if (valueMapping.Source.IsEmpty()) yield break;
+				if (valueMapping.Source.IsEmpty) yield break;
 
-				IEnumerable<double> markers = DoubleUtility.GetMarkers(valueMapping.Source.Start, valueMapping.Source.End, MarkerCount);
+				IEnumerable<double> markers = Scalars.GetMarkers(valueMapping.Source.Start, valueMapping.Source.End, MarkerCount);
 
 				foreach (double value in markers) yield return value;
 			}
@@ -44,7 +43,7 @@ namespace Visualizer.Drawing.Axes
 
 		public override void Draw()
 		{
-			LinearMapping valueMapping = Diagram.ValueManager.Mapping;
+			SymmetricRangeMap valueMapping = Diagram.ValueManager.Mapping;
 
 			Vector2 offset = new Vector2(0, 0);
 
@@ -55,7 +54,7 @@ namespace Visualizer.Drawing.Axes
 
 			foreach (double value in Markers)
 			{
-				Vector2 markerStart = Diagram.Layouter.ForwardMap((float)valueMapping.ForwardMap(value) * Vector2.UnitY) + offset;
+				Vector2 markerStart = Diagram.Layouter.ForwardMap((float)valueMapping.Forward.Map(value) * Vector2.UnitY) + offset;
 				Vector2 markerEnd = markerStart + new Vector2(-5, 0);
 
 				Drawer.DrawLine(markerStart, markerEnd, Color, 1);

@@ -16,9 +16,9 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using Utility.Extensions;
+using System.Linq;
+using Krach.Extensions;
 
 namespace Data.Ros.Types
 {
@@ -26,12 +26,12 @@ namespace Data.Ros.Types
 	{
 		readonly RosType type;
 		readonly string name;
-		
+
 		RosField(RosType type, string name)
 		{
 			if (type == null) throw new ArgumentNullException("type");
 			if (name == null) throw new ArgumentNullException("name");
-			
+
 			this.type = type;
 			this.name = name;
 		}
@@ -71,9 +71,9 @@ namespace Data.Ros.Types
 			RosType type;
 			if (members.Any() || !RosType.BasicTypes.Any(basicType => basicType.Name == typeName)) type = new RosStruct(typeName, members);
 			else type = RosType.BasicTypes.Single(basicType => basicType.Name == typeName);
-			
+
 			if (isArray) type = new RosArray(type);
-			
+
 			return new RosField(type, fieldName);
 		}
 	}

@@ -19,7 +19,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Utility;
+using Krach.Threading;
 
 namespace Data.Text
 {
@@ -37,7 +37,8 @@ namespace Data.Text
 
 			Initialize();
 		}
-		public TextReaderPort(string path) : base(path)
+		public TextReaderPort(string path)
+			: base(path)
 		{
 			this.textReader = new StreamReader(Path);
 			this.lines = new Breaker<string>(textReader.ReadLine);

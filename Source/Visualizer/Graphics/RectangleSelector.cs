@@ -19,9 +19,8 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Graphics.Components;
+using Krach;
 using OpenTK;
-using Utility;
-using Utility.Extensions;
 
 namespace Graphics
 {
@@ -108,12 +107,22 @@ namespace Graphics
 
 				Rectangle selection = new Rectangle(startPosition, new Size(mousePosition.X - startPosition.X, mousePosition.Y - startPosition.Y));
 
-				OnEndSelect(selection.Absolute());
+				OnEndSelect(Absolute(selection));
 			}
 		}
 		void viewport_MouseMove(object sender, MouseEventArgs e)
 		{
 			mousePosition = e.Location;
+		}
+
+		static Rectangle Absolute(Rectangle rectangle)
+		{
+			int x1 = Math.Min(rectangle.Left, rectangle.Right);
+			int y1 = Math.Min(rectangle.Top, rectangle.Bottom);
+			int x2 = Math.Max(rectangle.Left, rectangle.Right);
+			int y2 = Math.Max(rectangle.Top, rectangle.Bottom);
+
+			return new Rectangle(x1, y1, x2 - x1, y2 - y1);
 		}
 	}
 }

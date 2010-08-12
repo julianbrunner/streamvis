@@ -18,8 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Utility;
-using Utility.Utilities;
+using Krach.Basics;
 
 namespace Visualizer
 {

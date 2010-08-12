@@ -17,10 +17,10 @@
 
 using System;
 using System.Collections.Generic;
-using Utility;
-using Utility.Extensions;
-using Utility.Utilities;
 using Visualizer.Data;
+using Krach.Collections;
+using Krach.Basics;
+using Krach.Extensions;
 
 namespace Visualizer.Drawing.Data
 {
@@ -34,7 +34,7 @@ namespace Visualizer.Drawing.Data
 		{
 			get
 			{
-				foreach (Range<double> missingRange in Exclude(EnumerableUtility.Single(range), ranges))
+				foreach (Range<double> missingRange in Exclude(Enumerables.Single(range), ranges))
 				{
 					CacheFragment fragment = entryResampler
 					[
@@ -71,7 +71,7 @@ namespace Visualizer.Drawing.Data
 					}
 				}
 
-				return entries[range];
+				return entries[range.Start, range.End];
 			}
 		}
 
@@ -127,14 +127,14 @@ namespace Visualizer.Drawing.Data
 				{
 					Range<double> intersection = Intersect(range, exclusion);
 
-					if (intersection.IsEmpty()) rangeList.Add(range);
+					if (intersection.IsEmpty) rangeList.Add(range);
 					else
 					{
 						Range<double> range1 = new Range<double>(range.Start, exclusion.Start);
 						Range<double> range2 = new Range<double>(exclusion.End, range.End);
 
-						if (!range1.IsEmpty()) rangeList.Add(range1);
-						if (!range2.IsEmpty()) rangeList.Add(range2);
+						if (!range1.IsEmpty) rangeList.Add(range1);
+						if (!range2.IsEmpty) rangeList.Add(range2);
 					}
 				}
 			}

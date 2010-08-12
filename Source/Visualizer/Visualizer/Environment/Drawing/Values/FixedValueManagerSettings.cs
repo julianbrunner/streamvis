@@ -18,9 +18,10 @@
 using System;
 using System.ComponentModel;
 using System.Xml.Linq;
-using Utility;
+
 using Visualizer.Drawing;
 using Visualizer.Drawing.Values;
+using Krach.Basics;
 
 namespace Visualizer.Environment.Drawing.Values
 {

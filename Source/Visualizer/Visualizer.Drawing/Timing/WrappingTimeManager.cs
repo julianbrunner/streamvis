@@ -17,29 +17,31 @@
 
 using System;
 using System.Collections.Generic;
-using Utility;
 using Visualizer.Data;
+using Krach.Maps.Scalar;
+using Krach.Basics;
+using Krach.Maps;
 
 namespace Visualizer.Drawing.Timing
 {
 	public class WrappingTimeManager : TimeManager
 	{
-		LinearMapping mapping;
-		IEnumerable<LinearMapping> graphMappings;
+		SymmetricRangeMap mapping;
+		IEnumerable<SymmetricRangeMap> graphMappings;
 		double gapLength = 0;
-		
+
 		public double GapLength
 		{
 			get { return gapLength; }
 			set
 			{
 				if (value < 0 || value >= 1) throw new ArgumentOutOfRangeException("value");
-				
+
 				gapLength = value;
 			}
 		}
-		public override LinearMapping Mapping { get { return mapping; } }
-		public override IEnumerable<LinearMapping> GraphMappings { get { return graphMappings; } }
+		public override SymmetricRangeMap Mapping { get { return mapping; } }
+		public override IEnumerable<SymmetricRangeMap> GraphMappings { get { return graphMappings; } }
 
 		public WrappingTimeManager(Timer timer)
 			: base(timer)
@@ -60,18 +62,18 @@ namespace Visualizer.Drawing.Timing
 			double endTime = Time;
 			double endPosition = startPosition + (1 - GapLength);
 
-			mapping = new LinearMapping(new Range<double>((wholeIntervals + 0) * Width, (wholeIntervals + 1) * Width));
+			mapping = new SymmetricRangeMap(new Range<double>((wholeIntervals + 0) * Width, (wholeIntervals + 1) * Width), Mappers.Linear);
 
 			if (startTime >= wholeIntervals * Width)
-				graphMappings = new LinearMapping[]
+				graphMappings = new SymmetricRangeMap[]
 				{
-					new LinearMapping(new Range<double>(startTime, endTime), new Range<double>(startPosition,endPosition))
+					new SymmetricRangeMap(new Range<double>(startTime, endTime), new Range<double>(startPosition,endPosition), Mappers.Linear)
 				};
 			else
-				graphMappings = new LinearMapping[]
+				graphMappings = new SymmetricRangeMap[]
 				{
-					new LinearMapping(new Range<double>(startTime, wholeIntervals * Width), new Range<double>(startPosition, 1)),
-					new LinearMapping(new Range<double>(wholeIntervals * Width, endTime), new Range<double>(0, endPosition - 1))
+					new SymmetricRangeMap(new Range<double>(startTime, wholeIntervals * Width), new Range<double>(startPosition, 1), Mappers.Linear),
+					new SymmetricRangeMap(new Range<double>(wholeIntervals * Width, endTime), new Range<double>(0, endPosition - 1), Mappers.Linear)
 				};
 		}
 	}

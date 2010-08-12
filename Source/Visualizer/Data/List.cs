@@ -19,7 +19,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Utility.Extensions;
+using Krach.Extensions;
 
 namespace Data
 {
@@ -40,7 +40,7 @@ namespace Data
 
 			this.packets = packets.ToArray();
 		}
-		
+
 		public override string ToString()
 		{
 			return packets.ToStrings().Separate(" ").AggregateString();

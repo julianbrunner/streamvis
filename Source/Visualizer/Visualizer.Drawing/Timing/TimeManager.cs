@@ -17,8 +17,8 @@
 
 using System;
 using System.Collections.Generic;
-using Utility;
 using Visualizer.Data;
+using Krach.Maps.Scalar;
 
 namespace Visualizer.Drawing.Timing
 {
@@ -48,11 +48,11 @@ namespace Visualizer.Drawing.Timing
 		/// <summary>
 		/// Gets the overall Range, in which graphs are drawn.
 		/// </summary>
-		public abstract LinearMapping Mapping { get; }
+		public abstract SymmetricRangeMap Mapping { get; }
 		/// <summary>
 		/// Gets the specific sub Ranges, in which the graphs are drawn.
 		/// </summary>
-		public abstract IEnumerable<LinearMapping> GraphMappings { get; }
+		public abstract IEnumerable<SymmetricRangeMap> GraphMappings { get; }
 
 		protected TimeManager(Timer timer)
 		{

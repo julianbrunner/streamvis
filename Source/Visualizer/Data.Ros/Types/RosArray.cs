@@ -17,22 +17,23 @@
 
 using System;
 using System.Collections.Generic;
-using Utility.Extensions;
 using System.Linq;
+using Krach.Extensions;
 
 namespace Data.Ros.Types
 {
 	class RosArray : RosType
 	{
 		readonly RosType type;
-		
-		public RosArray(RosType type) : base("Array")
+
+		public RosArray(RosType type)
+			: base("Array")
 		{
 			if (type == null) throw new ArgumentNullException("type");
-			
+
 			this.type = type;
 		}
-		
+
 		public override string ToString()
 		{
 			return base.ToString() + "\n" + "[" + "\n" + type + "\n" + "]";

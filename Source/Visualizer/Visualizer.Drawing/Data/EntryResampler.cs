@@ -17,9 +17,10 @@
 
 using System;
 using System.Collections.Generic;
-using Utility;
-using Utility.Extensions;
 using Visualizer.Data;
+using Krach.Collections;
+using Krach.Basics;
+using Krach.Extensions;
 
 namespace Visualizer.Drawing.Data
 {

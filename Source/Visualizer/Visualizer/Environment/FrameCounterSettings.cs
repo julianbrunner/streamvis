@@ -20,9 +20,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Xml.Linq;
 using Graphics;
-using Utility;
-using Utility.Extensions;
-using Utility.Utilities;
 
 namespace Visualizer.Environment
 {
@@ -41,7 +38,7 @@ namespace Visualizer.Environment
 					new XElement("IsUpdated", IsUpdated.ToString().ToLowerInvariant()),
 					new XElement("IsDrawn", IsDrawn.ToString().ToLowerInvariant()),
 					new XElement("CycleLength", CycleLength),
-					new XElement("Color", Color.ToHtmlString())
+					new XElement("Color", ColorUtility.ToHtmlString(Color))
 				);
 			}
 			set

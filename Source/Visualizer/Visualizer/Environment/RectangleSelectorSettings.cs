@@ -21,9 +21,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Graphics;
-using Utility;
-using Utility.Extensions;
-using Utility.Utilities;
 
 namespace Visualizer.Environment
 {
@@ -41,7 +38,7 @@ namespace Visualizer.Environment
 					XElementName,
 					new XElement("IsDrawn", IsDrawn.ToString().ToLowerInvariant()),
 					new XElement("Button", Button),
-					new XElement("Color", Color.ToHtmlString()),
+					new XElement("Color", ColorUtility.ToHtmlString(Color)),
 					new XElement("Width", Width)
 				);
 			}

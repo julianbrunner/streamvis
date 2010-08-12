@@ -16,9 +16,11 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Linq;
-using Utility;
 using Visualizer.Data;
 using Visualizer.Drawing.Data;
+using Krach.Basics;
+using Krach.Maps.Scalar;
+using Krach.Maps;
 
 namespace Visualizer.Drawing.Values
 {
@@ -29,7 +31,7 @@ namespace Visualizer.Drawing.Values
 		Range<double> range;
 
 		public override Range<double> Range { get { return range; } }
-		public override LinearMapping Mapping { get { return new LinearMapping(range); } }
+		public override SymmetricRangeMap Mapping { get { return new SymmetricRangeMap(range, Mappers.Linear); } }
 
 		public FittingValueManager(Diagram diagram)
 		{

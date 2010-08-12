@@ -15,37 +15,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.ComponentModel;
 using System.Xml.Linq;
 
-using Visualizer.Drawing;
-
-namespace Visualizer.Environment.Drawing.Values
+namespace Visualizer
 {
-	[TypeConverter(typeof(ExpansionConverter))]
-	abstract class ValueManagerSettings : XSerializable
+	public abstract class XSerializable
 	{
-		readonly Diagram diagram;
+		readonly string xElementName;
 
-		protected Diagram Diagram { get { return diagram; } }
+		[Browsable(false)]
+		public string XElementName { get { return xElementName; } }
+		[Browsable(false)]
+		public abstract XElement XElement { get; set; }
 
-		public override XElement XElement
+		public XSerializable(string xElementName)
 		{
-			get
-			{
-				return new XElement(XElementName);
-			}
-			set
-			{
-				if (value.Name != XElementName) throw new ArgumentException("value");
-			}
-		}
-
-		protected ValueManagerSettings(string xElementName, Diagram diagram)
-			: base(xElementName)
-		{
-			this.diagram = diagram;
+			this.xElementName = xElementName;
 		}
 	}
 }

@@ -19,9 +19,6 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Xml.Linq;
-using Utility;
-using Utility.Extensions;
-using Utility.Utilities;
 using Visualizer.Drawing;
 
 namespace Visualizer.Environment.Drawing
@@ -39,7 +36,7 @@ namespace Visualizer.Environment.Drawing
 				(
 					XElementName,
 					new XElement("MarkerCount", MarkerCount),
-					new XElement("Color", Color.ToHtmlString())
+					new XElement("Color", ColorUtility.ToHtmlString(Color))
 				);
 			}
 			set

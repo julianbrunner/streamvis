@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Visualizer</RootNamespace>
     <AssemblyName>Visualizer</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <StartupObject>Visualizer.Program</StartupObject>
     <ApplicationIcon>Images\Application Icon.ico</ApplicationIcon>
@@ -34,6 +34,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -81,6 +82,7 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="ColorUtility.cs" />
     <Compile Include="CoordinateLabel.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Environment\DraggerSettings.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="TextDialog.Designer.cs">
       <DependentUpon>TextDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="XSerializable.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="AboutBox.resx">
@@ -159,6 +162,10 @@
     <EmbeddedResource Include="Text\Help Message.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Krach\Krach\Krach.csproj">
+      <Project>{132A3E13-29BF-4322-B17F-E5E5D86C22EF}</Project>
+      <Name>Krach</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data.Text\Data.Text.csproj">
       <Project>{B106CAA9-737F-4940-964E-DC32F4AED0C9}</Project>
       <Name>Data.Text</Name>
@@ -174,10 +181,6 @@
     <ProjectReference Include="..\Graphics\Graphics.csproj">
       <Project>{9CFCF6A1-6763-4108-851F-E2A8869968B2}</Project>
       <Name>Graphics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utility\Utility.csproj">
-      <Project>{541B6E2D-4AED-4DA5-BB58-5BA7CB9DA1B6}</Project>
-      <Name>Utility</Name>
     </ProjectReference>
     <ProjectReference Include="..\Visualizer.Data\Visualizer.Data.csproj">
       <Project>{188C1B70-DD61-4EEA-B733-8379A3866CF2}</Project>
@@ -211,6 +214,9 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

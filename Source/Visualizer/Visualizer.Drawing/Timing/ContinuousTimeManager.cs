@@ -16,17 +16,19 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using Utility;
 using Visualizer.Data;
+using Krach.Basics;
+using Krach.Maps.Scalar;
+using Krach.Maps;
 
 namespace Visualizer.Drawing.Timing
 {
 	public class ContinuousTimeManager : TimeManager
 	{
-		LinearMapping mapping;
+		SymmetricRangeMap mapping;
 
-		public override LinearMapping Mapping { get { return mapping; } }
-		public override IEnumerable<LinearMapping> GraphMappings { get { yield return mapping; } }
+		public override SymmetricRangeMap Mapping { get { return mapping; } }
+		public override IEnumerable<SymmetricRangeMap> GraphMappings { get { yield return mapping; } }
 
 		public ContinuousTimeManager(Timer timer) : base(timer) { }
 
@@ -34,7 +36,7 @@ namespace Visualizer.Drawing.Timing
 		{
 			base.Update();
 
-			mapping = new LinearMapping(new Range<double>(Time - Width, Time));
+			mapping = new SymmetricRangeMap(new Range<double>(Time - Width, Time), Mappers.Linear);
 		}
 	}
 }

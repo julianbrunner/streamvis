@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Utility.Extensions;
+using Krach.Extensions;
 
 namespace Data
 {
@@ -58,7 +58,7 @@ namespace Data
 				int index = 0;
 
 				foreach (Packet subPacket in (List)packet)
-					foreach (Path subPath in GetValidPaths(root.Concat(index++), subPacket))
+					foreach (Path subPath in GetValidPaths(root.Append(index++), subPacket))
 						yield return subPath;
 			}
 		}

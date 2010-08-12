@@ -20,7 +20,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using Utility.Extensions;
+using Krach.Extensions;
 
 namespace Data
 {
@@ -71,7 +71,7 @@ namespace Data
 
 			Path head = start.Head;
 
-			for (int i = start.Tail; i <= end.Tail; i++) yield return new Path(head.Concat(i));
+			for (int i = start.Tail; i <= end.Tail; i++) yield return new Path(head.Append(i));
 		}
 
 		static IEnumerable<int> Parse(string pathString)

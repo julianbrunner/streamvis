@@ -16,9 +16,9 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Linq;
-using Utility.Utilities;
 using System.Collections.Generic;
+using System.Linq;
+using Krach.Extensions;
 
 namespace Data
 {
@@ -44,7 +44,7 @@ namespace Data
 
 		protected void Initialize()
 		{
-			Sample = EnumerableUtility.Consume<Packet>(Read).First(packet => packet != null && !(packet is InvalidPacket));
+			Sample = Enumerables.Consume<Packet>(Read).First(packet => packet != null && !(packet is InvalidPacket));
 		}
 	}
 }

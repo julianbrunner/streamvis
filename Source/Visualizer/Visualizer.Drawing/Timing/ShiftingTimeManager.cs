@@ -17,30 +17,32 @@
 
 using System;
 using System.Collections.Generic;
-using Utility;
 using Visualizer.Data;
+using Krach.Basics;
+using Krach.Maps.Scalar;
+using Krach.Maps;
 
 namespace Visualizer.Drawing.Timing
 {
 	public class ShiftingTimeManager : TimeManager
 	{
-		LinearMapping mapping;
-		LinearMapping graphMappings;
+		SymmetricRangeMap mapping;
+		SymmetricRangeMap graphMappings;
 
 		double shiftLength = 0;
-		
+
 		public double ShiftLength
 		{
 			get { return shiftLength; }
 			set
 			{
 				if (value <= 0 || value > 1) throw new ArgumentOutOfRangeException("value");
-				
+
 				shiftLength = value;
 			}
 		}
-		public override LinearMapping Mapping { get { return mapping; } }
-		public override IEnumerable<LinearMapping> GraphMappings { get { yield return graphMappings; } }
+		public override SymmetricRangeMap Mapping { get { return mapping; } }
+		public override IEnumerable<SymmetricRangeMap> GraphMappings { get { yield return graphMappings; } }
 
 		public ShiftingTimeManager(Timer timer)
 			: base(timer)
@@ -63,8 +65,8 @@ namespace Visualizer.Drawing.Timing
 			double endTime = Time;
 			double endPosition = (1 - ShiftLength) + ShiftLength * fractionalIntervals;
 
-			mapping = new LinearMapping(new Range<double>(startTime, startTime + Width));
-			graphMappings = new LinearMapping(new Range<double>(startTime, endTime), new Range<double>(startPosition, endPosition));
+			mapping = new SymmetricRangeMap(new Range<double>(startTime, startTime + Width), Mappers.Linear);
+			graphMappings = new SymmetricRangeMap(new Range<double>(startTime, endTime), new Range<double>(startPosition, endPosition), Mappers.Linear);
 		}
 	}
 }

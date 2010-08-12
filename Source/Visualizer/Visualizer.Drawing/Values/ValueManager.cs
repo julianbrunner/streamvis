@@ -15,14 +15,15 @@
 // You should have received a copy of the GNU General Public License
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
-using Utility;
+using Krach.Basics;
+using Krach.Maps.Scalar;
 
 namespace Visualizer.Drawing.Values
 {
 	public abstract class ValueManager
 	{
 		public abstract Range<double> Range { get; }
-		public abstract LinearMapping Mapping { get; }
+		public abstract SymmetricRangeMap Mapping { get; }
 
 		public virtual void Update() { }
 	}

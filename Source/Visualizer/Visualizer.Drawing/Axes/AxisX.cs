@@ -18,9 +18,8 @@
 using System.Collections.Generic;
 using Graphics;
 using OpenTK;
-using Utility;
-using Utility.Extensions;
-using Utility.Utilities;
+using Krach.Maps.Scalar;
+using Krach.Extensions;
 
 namespace Visualizer.Drawing.Axes
 {
@@ -30,11 +29,11 @@ namespace Visualizer.Drawing.Axes
 		{
 			get
 			{
-				LinearMapping timeMapping = Diagram.TimeManager.Mapping;
+				SymmetricRangeMap timeMapping = Diagram.TimeManager.Mapping;
 
-				if (timeMapping.Source.IsEmpty()) yield break;
+				if (timeMapping.Source.IsEmpty) yield break;
 
-				IEnumerable<double> markers = DoubleUtility.GetMarkers(timeMapping.Source.Start, timeMapping.Source.End, MarkerCount);
+				IEnumerable<double> markers = Scalars.GetMarkers(timeMapping.Source.Start, timeMapping.Source.End, MarkerCount);
 
 				foreach (double time in markers) yield return time;
 			}
@@ -44,7 +43,7 @@ namespace Visualizer.Drawing.Axes
 
 		public override void Draw()
 		{
-			LinearMapping timeMapping = Diagram.TimeManager.Mapping;
+			SymmetricRangeMap timeMapping = Diagram.TimeManager.Mapping;
 
 			Vector2 offset = new Vector2(0, 0);
 
@@ -55,7 +54,7 @@ namespace Visualizer.Drawing.Axes
 
 			foreach (double time in Markers)
 			{
-				Vector2 markerStart = Diagram.Layouter.ForwardMap((float)timeMapping.ForwardMap(time) * Vector2.UnitX) + offset;
+				Vector2 markerStart = Diagram.Layouter.ForwardMap((float)timeMapping.Forward.Map(time) * Vector2.UnitX) + offset;
 				Vector2 markerEnd = markerStart + new Vector2(0, 5);
 
 				Drawer.DrawLine(markerStart, markerEnd, Color, 1);

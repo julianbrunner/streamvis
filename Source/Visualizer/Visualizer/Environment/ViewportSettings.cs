@@ -20,9 +20,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Xml.Linq;
 using Graphics;
-using Utility;
-using Utility.Extensions;
-using Utility.Utilities;
 
 namespace Visualizer.Environment
 {
@@ -39,7 +36,7 @@ namespace Visualizer.Environment
 				(
 					XElementName,
 					new XElement("VerticalSynchronization", VerticalSynchronization.ToString().ToLowerInvariant()),
-					new XElement("BackgroundColor", BackgroundColor.ToHtmlString())
+					new XElement("BackgroundColor", ColorUtility.ToHtmlString(BackgroundColor))
 				);
 			}
 			set

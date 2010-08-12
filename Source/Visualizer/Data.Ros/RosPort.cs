@@ -16,14 +16,11 @@
 // along with Stream Visualizer.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using Data.Ros.Types;
-using Utility.Extensions;
-using System.Diagnostics;
 
 namespace Data.Ros
 {
@@ -36,10 +33,11 @@ namespace Data.Ros
 		RosField sampleDefinition;
 		Packet currentPacket;
 
-		public RosPort(string topicName, RosNetwork network) : base(topicName)
+		public RosPort(string topicName, RosNetwork network)
+			: base(topicName)
 		{
 			if (network == null) throw new ArgumentNullException("network");
-			
+
 			this.packetAvailable = new AutoResetEvent(false);
 			this.subscriber = CreateSubscriber(network.Node, topicName, 0x100, MessageReceived);
 
@@ -56,14 +54,14 @@ namespace Data.Ros
 			{
 				packetAvailable.Close();
 				DisposeSubscriber(subscriber);
-				
+
 				disposed = true;
 			}
 		}
 		public override Packet Read()
 		{
 			packetAvailable.WaitOne();
-			
+
 			if (currentPacket == null) return new InvalidPacket();
 
 			return currentPacket;

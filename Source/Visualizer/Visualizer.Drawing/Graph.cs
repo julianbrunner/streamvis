@@ -17,10 +17,9 @@
 
 using System.Drawing;
 using Graphics;
-using Utility;
-using Utility.Extensions;
 using Visualizer.Data;
 using Visualizer.Drawing.Data;
+using Krach.Maps.Scalar;
 
 namespace Visualizer.Drawing
 {
@@ -53,17 +52,17 @@ namespace Visualizer.Drawing
 		}
 		public void Draw()
 		{
-			LinearMapping timeMapping = diagram.TimeManager.Mapping;
-			LinearMapping valueMapping = diagram.ValueManager.Mapping;
+			SymmetricRangeMap timeMapping = diagram.TimeManager.Mapping;
+			SymmetricRangeMap valueMapping = diagram.ValueManager.Mapping;
 
-			if (IsDrawn && !streamManager.EntryCache.IsEmpty && !timeMapping.Source.IsEmpty() && !valueMapping.Source.IsEmpty())
+			if (IsDrawn && !streamManager.EntryCache.IsEmpty && !timeMapping.Source.IsEmpty && !valueMapping.Source.IsEmpty)
 			{
 				Entry firstEntry = streamManager.EntryCache.FirstEntry;
 				Entry lastEntry = streamManager.EntryCache.LastEntry;
 
 				foreach (DataSegment segment in streamManager.Segments)
 				{
-					LinearMapping segmentTimeMapping = segment.TimeMapping;
+					SymmetricRangeMap segmentTimeMapping = segment.TimeMapping;
 
 					Entry? startEntry = null;
 					Entry? endEntry = null;
@@ -89,20 +88,20 @@ namespace Visualizer.Drawing
 
 					if (startEntry != null)
 					{
-						vertices[position++] = (float)segmentTimeMapping.ForwardMap(startEntry.Value.Time);
-						vertices[position++] = (float)valueMapping.ForwardMap(startEntry.Value.Value);
+						vertices[position++] = (float)segmentTimeMapping.Forward.Map(startEntry.Value.Time);
+						vertices[position++] = (float)valueMapping.Forward.Map(startEntry.Value.Value);
 					}
 
 					foreach (Entry entry in segment.Entries)
 					{
-						vertices[position++] = (float)segmentTimeMapping.ForwardMap(entry.Time);
-						vertices[position++] = (float)valueMapping.ForwardMap(entry.Value);
+						vertices[position++] = (float)segmentTimeMapping.Forward.Map(entry.Time);
+						vertices[position++] = (float)valueMapping.Forward.Map(entry.Value);
 					}
 
 					if (endEntry != null)
 					{
-						vertices[position++] = (float)segmentTimeMapping.ForwardMap(endEntry.Value.Time);
-						vertices[position++] = (float)valueMapping.ForwardMap(endEntry.Value.Value);
+						vertices[position++] = (float)segmentTimeMapping.Forward.Map(endEntry.Value.Time);
+						vertices[position++] = (float)valueMapping.Forward.Map(endEntry.Value.Value);
 					}
 
 					drawer.DrawLineStrip(vertices, diagram.Layouter.Transformation, Color, (float)diagram.GraphSettings.LineWidth);

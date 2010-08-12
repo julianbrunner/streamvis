@@ -22,7 +22,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using Utility.Utilities;
+using Krach.Extensions;
 
 namespace Visualizer
 {
@@ -50,7 +50,7 @@ namespace Visualizer
 
 					foreach (XElement textElement in helpMessage.Element("Data").Elements())
 					{
-						if (textElement.Name == "Text") ConsoleUtility.Write(columns[(string)textElement.Attribute("Column")], (string)textElement);
+						if (textElement.Name == "Text") Terminal.Write(columns[(string)textElement.Attribute("Column")], (string)textElement);
 						if (textElement.Name == "NewLine") Console.WriteLine();
 					}
 				}
