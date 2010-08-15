@@ -67,9 +67,8 @@ namespace Data
 		{
 			if (start == null) throw new ArgumentNullException("start");
 			if (end == null) throw new ArgumentNullException("end");
-			if (!Enumerable.SequenceEqual(start.Head, end.Head)) throw new ArgumentException("Heads of range delimiter paths do not match (" + start + ", " + end + ").");
 
-			Path head = start.Head;
+			Path head = Items.Equal(start.Head, end.Head, Enumerable.SequenceEqual);
 
 			for (int i = start.Tail; i <= end.Tail; i++) yield return new Path(head.Append(i));
 		}
@@ -87,7 +86,10 @@ namespace Data
 				)
 				.ToArray();
 			}
-			catch (FormatException) { throw new ArgumentException(string.Format("Parameter 'pathString' ({0}) is not a valid path string.")); }
+			catch (FormatException)
+			{
+				throw new ArgumentException(string.Format("Parameter 'pathString' ({0}) is not a valid path string.", pathString));
+			}
 		}
 	}
 }
