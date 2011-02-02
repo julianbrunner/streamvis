@@ -61,6 +61,7 @@
     <Compile Include="Types\RosStruct.cs" />
     <Compile Include="Types\RosArray.cs" />
     <Compile Include="Types\RosType.cs" />
+    <Compile Include="Types\RosConstant.cs" />
     <Compile Include="RosNetwork.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

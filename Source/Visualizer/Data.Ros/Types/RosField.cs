@@ -50,8 +50,7 @@ namespace Data.Ros.Types
 		}
 		public string GetName(Path path)
 		{
-			if (path.Any()) return name + type.GetName(path);
-			else return name;
+			return path.Any() ? name + type.GetName(path) : name;
 		}
 
 		public static RosField Parse(string field)
@@ -71,6 +70,8 @@ namespace Data.Ros.Types
 			RosType type;
 			if (members.Any() || !RosType.BasicTypes.Any(basicType => basicType.Name == typeName)) type = new RosStruct(typeName, members);
 			else type = RosType.BasicTypes.Single(basicType => basicType.Name == typeName);
+
+			if (fieldName.Contains("=")) type = new RosConstant(type);
 
 			if (isArray) type = new RosArray(type);
 

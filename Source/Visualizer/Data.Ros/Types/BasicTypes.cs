@@ -28,10 +28,31 @@ namespace Data.Ros.Types
 
 		public override Packet ToPacket(Queue<byte> data)
 		{
-			data.Dequeue(character => character != 0);
-			data.Dequeue();
+			uint length = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
+
+			data.Dequeue((int)length);
 
 			return new InvalidPacket();
+		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
+		}
+	}
+	class RosTime : RosType
+	{
+		public RosTime() : base("time") { }
+
+		public override Packet ToPacket(Queue<byte> data)
+		{
+			uint seconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
+			uint nanoseconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
+
+			long value = (seconds << 32) & (nanoseconds << 0);
+
+			return new Value(value);
 		}
 		public override string GetName(Path path)
 		{

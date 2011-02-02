@@ -100,8 +100,10 @@ namespace Data.Ros
 				definition = Regex.Replace(definition, @"^(.*?)$", @"  $0", RegexOptions.Multiline);
 				// Remove whitespaces at the end of a line
 				definition = Regex.Replace(definition, @"[ \n]*$", string.Empty);
+				// Add header
+				definition = string.Format("Message {0}\n{1}", dataType, definition);
 
-				sampleDefinition = RosField.Parse(string.Format("Message {0}\n{1}", dataType, definition));
+				sampleDefinition = RosField.Parse(definition);
 			}
 
 			byte[] data = new byte[ShapeShifterGetDataLength(message)];
