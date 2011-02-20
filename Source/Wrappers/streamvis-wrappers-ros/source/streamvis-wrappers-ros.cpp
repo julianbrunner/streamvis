@@ -61,6 +61,7 @@ void DisposeSubscriber(Subscriber* subscriber)
 	delete subscriber;
 }
 
+// TODO: Memory leaks?
 const char* ShapeShifterGetDataType(const ShapeShifter::ConstPtr message)
 {
 	string info = message->getDataType();
