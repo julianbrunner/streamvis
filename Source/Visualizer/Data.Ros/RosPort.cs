@@ -27,6 +27,7 @@ namespace Data.Ros
 	public class RosPort : Port, IDisposable
 	{
 		readonly AutoResetEvent packetAvailable;
+		readonly Action<IntPtr> messageReceived;
 		readonly IntPtr subscriber;
 
 		bool disposed = false;
@@ -39,7 +40,8 @@ namespace Data.Ros
 			if (network == null) throw new ArgumentNullException("network");
 
 			this.packetAvailable = new AutoResetEvent(false);
-			this.subscriber = CreateSubscriber(network.Node, topicName, 0x100, MessageReceived);
+			this.messageReceived = MessageReceived;
+			this.subscriber = CreateSubscriber(network.Node, topicName, 0x100, messageReceived);
 
 			Initialize();
 		}
@@ -110,6 +112,7 @@ namespace Data.Ros
 			Marshal.Copy(ShapeShifterGetData(message), data, 0, data.Length);
 
 			currentPacket = sampleDefinition.ToPacket(data);
+
 			packetAvailable.Set();
 		}
 

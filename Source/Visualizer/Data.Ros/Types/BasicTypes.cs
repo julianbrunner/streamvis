@@ -50,7 +50,27 @@ namespace Data.Ros.Types
 			uint seconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 			uint nanoseconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 
-			long value = (seconds << 32) & (nanoseconds << 0);
+			ulong value = ((ulong)seconds << 32) | ((ulong)nanoseconds << 0);
+
+			return new Value(value);
+		}
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
+
+			return string.Empty;
+		}
+	}
+	class RosDuration : RosType
+	{
+		public RosDuration() : base("duration") { }
+
+		public override Packet ToPacket(Queue<byte> data)
+		{
+			uint seconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
+			uint nanoseconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
+
+			ulong value = ((ulong)seconds << 32) | ((ulong)nanoseconds << 0);
 
 			return new Value(value);
 		}

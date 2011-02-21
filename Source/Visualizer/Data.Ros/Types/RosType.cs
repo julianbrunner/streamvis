@@ -32,6 +32,7 @@ namespace Data.Ros.Types
 			{
 				yield return new RosString();
 				yield return new RosTime();
+				yield return new RosDuration();
 				yield return new RosBool();
 				yield return new RosByte();
 				yield return new RosChar();
