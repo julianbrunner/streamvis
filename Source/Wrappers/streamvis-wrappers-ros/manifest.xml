@@ -1,15 +1,12 @@
 <package>
-  <description brief="streamvis-wrappers-ros">
 
-     streamvis-wrappers-ros
-
-  </description>
+  <description brief="streamvis-wrappers-ros">The ROS data backend for Stream Visualizer (streamvis).</description>
   <author>Julian Brunner</author>
-  <license>BSD</license>
-  <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/streamvis-wrappers-ros</url>
+  <license>GNU GPLv3</license>
+
   <depend package="roscpp"/>
   <depend package="topic_tools"/>
+
 </package>
 
 
