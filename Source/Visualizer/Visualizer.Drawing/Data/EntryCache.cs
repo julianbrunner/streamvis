@@ -115,35 +115,28 @@ namespace Visualizer.Drawing.Data
 
 		static IEnumerable<Range<double>> Exclude(IEnumerable<Range<double>> ranges, IEnumerable<Range<double>> exclusions)
 		{
-			List<Range<double>> rangeList = new List<Range<double>>(ranges);
+			List<Range<double>> result = new List<Range<double>>(ranges);
 
 			foreach (Range<double> exclusion in exclusions)
 			{
-				Range<double>[] oldRanges = rangeList.ToArray();
+				IEnumerable<Range<double>> oldRanges = result.ToArray();
 
-				rangeList.Clear();
+				result.Clear();
 
 				foreach (Range<double> range in oldRanges)
-				{
-					Range<double> intersection = Intersect(range, exclusion);
-
-					if (intersection.IsEmpty) rangeList.Add(range);
-					else
+					if (Intersect(range, exclusion)) 
 					{
-						Range<double> range1 = new Range<double>(range.Start, exclusion.Start);
-						Range<double> range2 = new Range<double>(exclusion.End, range.End);
-
-						if (!range1.IsEmpty) rangeList.Add(range1);
-						if (!range2.IsEmpty) rangeList.Add(range2);
+						if (range.Start <= exclusion.Start) result.Add(new Range<double>(range.Start, exclusion.Start));
+						if (exclusion.End <= range.End) result.Add(new Range<double>(exclusion.End, range.End));
 					}
-				}
+					else result.Add(range);
 			}
 
-			return rangeList;
+			return result;
 		}
-		static Range<double> Intersect(Range<double> a, Range<double> b)
+		static bool Intersect(Range<double> range1, Range<double> range2)
 		{
-			return new Range<double>(Math.Max(a.Start, b.Start), Math.Min(a.End, b.End));
+			return Math.Max(range1.Start, range2.Start) <= Math.Min(range1.End, range2.End);
 		}
 	}
 }
