@@ -35,11 +35,11 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="OpenTK, Version=1.0.0.201, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+    <Reference Include="OpenTK">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\OpenTK\OpenTK.dll</HintPath>
     </Reference>
-    <Reference Include="OpenTK.GLControl, Version=1.0.0.201, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
+    <Reference Include="OpenTK.GLControl">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\OpenTK\OpenTK.GLControl.dll</HintPath>
     </Reference>
