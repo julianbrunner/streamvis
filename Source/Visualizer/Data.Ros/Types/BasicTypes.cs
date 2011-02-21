@@ -50,9 +50,7 @@ namespace Data.Ros.Types
 			uint seconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 			uint nanoseconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 
-			ulong value = ((ulong)seconds << 32) | ((ulong)nanoseconds << 0);
-
-			return new Value(value);
+			return new Value(1.0 * seconds + 0.000000001 * nanoseconds);
 		}
 		public override string GetName(Path path)
 		{
@@ -70,9 +68,7 @@ namespace Data.Ros.Types
 			uint seconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 			uint nanoseconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 
-			ulong value = ((ulong)seconds << 32) | ((ulong)nanoseconds << 0);
-
-			return new Value(value);
+			return new Value(1.0 * seconds + 0.000000001 * nanoseconds);
 		}
 		public override string GetName(Path path)
 		{
