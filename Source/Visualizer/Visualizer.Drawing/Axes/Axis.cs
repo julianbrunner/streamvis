@@ -19,6 +19,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Krach.Basics;
+using Krach.Extensions;
 using Graphics;
 
 namespace Visualizer.Drawing.Axes
@@ -28,11 +30,20 @@ namespace Visualizer.Drawing.Axes
 		readonly Drawer drawer;
 		readonly Diagram diagram;
 		
-		int markerCount = 0;
+		int markerCount;
 
 		protected Drawer Drawer { get { return drawer; } }
 		protected Diagram Diagram { get { return diagram; } }
-		protected abstract IEnumerable<double> Markers { get; }
+		protected abstract Range<double> MarkersRange { get; }
+		protected IEnumerable<double> Markers
+		{
+			get
+			{
+				if (MarkersRange.IsEmpty) return Enumerable.Empty<double>();
+
+				return Scalars.GetMarkers(MarkersRange.Start, MarkersRange.End, MarkerCount);
+			}
+		}
 
 		public int MarkerCount
 		{

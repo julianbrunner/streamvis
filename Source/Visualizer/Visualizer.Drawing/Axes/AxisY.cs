@@ -18,26 +18,15 @@
 using System.Collections.Generic;
 using Graphics;
 using OpenTK;
-using Krach.Extensions;
+using Krach.Basics;
 using Krach.Maps.Scalar;
+using Krach.Extensions;
 
 namespace Visualizer.Drawing.Axes
 {
 	public class AxisY : Axis
 	{
-		protected override IEnumerable<double> Markers
-		{
-			get
-			{
-				SymmetricRangeMap valueMapping = Diagram.ValueManager.Mapping;
-
-				if (valueMapping.Source.IsEmpty) yield break;
-
-				IEnumerable<double> markers = Scalars.GetMarkers(valueMapping.Source.Start, valueMapping.Source.End, MarkerCount);
-
-				foreach (double value in markers) yield return value;
-			}
-		}
+		protected override Range<double> MarkersRange { get { return Diagram.ValueManager.Mapping.Source; } }
 
 		public AxisY(Drawer drawer, Diagram diagram) : base(drawer, diagram) { }
 

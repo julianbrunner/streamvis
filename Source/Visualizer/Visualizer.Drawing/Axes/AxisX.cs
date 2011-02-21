@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using Graphics;
 using OpenTK;
+using Krach.Basics;
 using Krach.Maps.Scalar;
 using Krach.Extensions;
 
@@ -25,19 +26,7 @@ namespace Visualizer.Drawing.Axes
 {
 	public class AxisX : Axis
 	{
-		protected override IEnumerable<double> Markers
-		{
-			get
-			{
-				SymmetricRangeMap timeMapping = Diagram.TimeManager.Mapping;
-
-				if (timeMapping.Source.IsEmpty) yield break;
-
-				IEnumerable<double> markers = Scalars.GetMarkers(timeMapping.Source.Start, timeMapping.Source.End, MarkerCount);
-
-				foreach (double time in markers) yield return time;
-			}
-		}
+		protected override Range<double> MarkersRange { get { return Diagram.TimeManager.Mapping.Source; } }
 
 		public AxisX(Drawer drawer, Diagram diagram) : base(drawer, diagram) { }
 
