@@ -36,7 +36,7 @@ namespace Visualizer.Environment
 				return new XElement
 				(
 					XElementName,
-					new XElement("IsDrawn", IsDrawn.ToString().ToLowerInvariant()),
+					new XElement("IsDrawn", IsDrawn),
 					new XElement("Button", Button),
 					new XElement("Color", ColorUtility.ToHtmlString(Color)),
 					new XElement("Width", Width)

@@ -35,8 +35,8 @@ namespace Visualizer.Environment
 				return new XElement
 				(
 					XElementName,
-					new XElement("IsUpdated", IsUpdated.ToString().ToLowerInvariant()),
-					new XElement("IsDrawn", IsDrawn.ToString().ToLowerInvariant()),
+					new XElement("IsUpdated", IsUpdated),
+					new XElement("IsDrawn", IsDrawn),
 					new XElement("CycleLength", CycleLength),
 					new XElement("Color", ColorUtility.ToHtmlString(Color))
 				);

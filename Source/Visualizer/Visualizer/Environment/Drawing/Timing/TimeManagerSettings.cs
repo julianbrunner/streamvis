@@ -36,7 +36,7 @@ namespace Visualizer.Environment.Drawing.Timing
 				return new XElement
 				(
 					XElementName,
-					new XElement("IsUpdated", IsUpdated.ToString().ToLowerInvariant()),
+					new XElement("IsUpdated", IsUpdated),
 					new XElement("Time", Time),
 					new XElement("Width", Width)
 				);

@@ -35,7 +35,7 @@ namespace Visualizer.Environment
 				return new XElement
 				(
 					XElementName,
-					new XElement("VerticalSynchronization", VerticalSynchronization.ToString().ToLowerInvariant()),
+					new XElement("VerticalSynchronization", VerticalSynchronization),
 					new XElement("BackgroundColor", ColorUtility.ToHtmlString(BackgroundColor))
 				);
 			}

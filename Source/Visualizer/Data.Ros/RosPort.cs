@@ -81,6 +81,8 @@ namespace Data.Ros
 
 		void MessageReceived(IntPtr message)
 		{
+			if (disposed) return;
+
 			if (sampleDefinition == null)
 			{
 				string dataType = ShapeShifterGetDataType(message);

@@ -35,8 +35,8 @@ namespace Visualizer.Environment
 				return new XElement
 				(
 					XElementName,
-					new XElement("LineSmoothing", LineSmoothing.ToString().ToLowerInvariant()),
-					new XElement("AlphaBlending", AlphaBlending.ToString().ToLowerInvariant())
+					new XElement("LineSmoothing", LineSmoothing),
+					new XElement("AlphaBlending", AlphaBlending)
 				);
 			}
 			set
