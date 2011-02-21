@@ -15,14 +15,28 @@
 # You should have received a copy of the GNU General Public License along with
 # Stream Visualizer. If not, see <http:#www.gnu.org/licenses/>.
 
-binaries: bundle
-	mkdir -p Binaries
-	cp Visualizer/bin/Release/streamvis Binaries
+#!/bin/sh
 
-bundle: visualizer
-	mkbundle -z -o Visualizer/bin/Release/streamvis Visualizer/bin/Release/*.exe Visualizer/bin/Release/*.dll
+referenceHeader1=`cat Header\ 1.txt`
+referenceHeader2=`cat Header\ 2.txt`
 
-visualizer:
-	xbuild /property:Configuration=Release
+totalFiles=0
+incorrectFiles=0
 
-.PHONY: visualizer
+for sourcePath in `find "$1" '-name' '*.cs' '-o' '-name' '*.h' '-o' '-name' '*.c' '-o' '-name' '*.cpp' '-o' '-name' '*.sh' '-o' '-name' 'Makefile'`
+do
+	totalFiles=`expr $totalFiles + 1`
+	testHeader=`head -16 $sourcePath`
+	if [ "$testHeader" != "$referenceHeader1" -a "$testHeader" != "$referenceHeader2" ]
+	then
+		incorrectFiles=`expr $incorrectFiles + 1`
+		echo "Incorrect header: ${sourcePath#../}"
+	fi
+done
+
+echo "Files checked:     $totalFiles"
+echo "Incorrect headers: $incorrectFiles"
+
+if [ $incorrectFiles -gt 0 ]
+then exit 1
+fi

@@ -15,14 +15,9 @@
 # You should have received a copy of the GNU General Public License along with
 # Stream Visualizer. If not, see <http:#www.gnu.org/licenses/>.
 
-binaries: bundle
-	mkdir -p Binaries
-	cp Visualizer/bin/Release/streamvis Binaries
+#!/bin/sh
 
-bundle: visualizer
-	mkbundle -z -o Visualizer/bin/Release/streamvis Visualizer/bin/Release/*.exe Visualizer/bin/Release/*.dll
+tail -n +17 "$1" > "$1.temp"
+cat "$2" "$1.temp" > "$1"
 
-visualizer:
-	xbuild /property:Configuration=Release
-
-.PHONY: visualizer
+rm "$1.temp"
