@@ -19,8 +19,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Krach.Extensions;
+using Data.Ros.Types;
 
-namespace Data.Ros.Types
+namespace Data.Ros
 {
 	class RosField
 	{
@@ -40,17 +41,17 @@ namespace Data.Ros.Types
 		{
 			return name + " : " + type;
 		}
-		public Packet ToPacket(IEnumerable<byte> data)
+		public Packet BinaryToPacket(IEnumerable<byte> data)
 		{
-			return ToPacket(new Queue<byte>(data));
+			return BinaryToPacket(new Queue<byte>(data));
 		}
-		public Packet ToPacket(Queue<byte> data)
+		public Packet BinaryToPacket(Queue<byte> data)
 		{
-			return type.ToPacket(data);
+			return type.BinaryToPacket(data);
 		}
 		public string GetName(Path path)
 		{
-			return path.Any() ? name + type.GetName(path) : name;
+			return path.Any() ? name + "." + type.GetName(path) : name;
 		}
 
 		public static RosField Parse(string field)

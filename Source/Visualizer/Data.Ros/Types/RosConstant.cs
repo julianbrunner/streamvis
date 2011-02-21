@@ -17,31 +17,19 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Data.Ros.Types
 {
-	class RosConstant : RosType
+	class RosConstant : RosBasicType
 	{
-		readonly RosType type;
-
 		public RosConstant(RosType type) : base(string.Format("constant<{0}>", type))
 		{
 			if (type == null) throw new ArgumentNullException("type");
-
-			this.type = type;
 		}
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
 			return new InvalidPacket();
-		}
-
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
 		}
 	}
 }

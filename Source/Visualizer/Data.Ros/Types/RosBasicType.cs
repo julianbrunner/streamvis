@@ -17,11 +17,19 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Data.Ros.Types
 {
-	abstract class RosBasicType<TValue> : RosType
+	abstract class RosBasicType : RosType
 	{
 		protected RosBasicType(string name) : base(name) { }
+
+		public override string GetName(Path path)
+		{
+			if (path.Any()) throw new ArgumentException("Parameter 'path' must be empty.");
+
+			return string.Empty;
+		}
 	}
 }

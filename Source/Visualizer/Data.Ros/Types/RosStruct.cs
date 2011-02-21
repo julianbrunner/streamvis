@@ -45,11 +45,11 @@ namespace Data.Ros.Types
 			
 			return result;
 		}
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
 			List<Packet> items = new List<Packet>();
 
-			foreach (RosField member in members) items.Add(member.ToPacket(data));
+			foreach (RosField member in members) items.Add(member.BinaryToPacket(data));
 
 			return new List(items);
 		}
@@ -57,7 +57,7 @@ namespace Data.Ros.Types
 		{
 			if (!path.Any()) throw new ArgumentException("Parameter 'path' cannot be empty.");
 
-			return "." + members[path.First()].GetName(new Path(path.Skip(1)));
+			return members[path.First()].GetName(new Path(path.Skip(1)));
 		}
 	}
 }

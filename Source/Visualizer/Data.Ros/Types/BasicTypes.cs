@@ -22,11 +22,11 @@ using Krach.Extensions;
 
 namespace Data.Ros.Types
 {
-	class RosString : RosType
+	class RosString : RosBasicType
 	{
 		public RosString() : base("string") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
 			uint length = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 
@@ -34,268 +34,150 @@ namespace Data.Ros.Types
 
 			return new InvalidPacket();
 		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
-		}
 	}
-	class RosTime : RosType
+	class RosTime : RosBasicType
 	{
 		public RosTime() : base("time") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
 			uint seconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 			uint nanoseconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 
 			return new Value(1.0 * seconds + 0.000000001 * nanoseconds);
 		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
-		}
 	}
-	class RosDuration : RosType
+	class RosDuration : RosBasicType
 	{
 		public RosDuration() : base("duration") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
 			uint seconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 			uint nanoseconds = BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0);
 
 			return new Value(1.0 * seconds + 0.000000001 * nanoseconds);
 		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
-		}
 	}
-	class RosBool : RosType
+	class RosBool : RosBasicType
 	{
 		public RosBool() : base("bool") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
 			data.Dequeue();
 
 			return new InvalidPacket();
 		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
-		}
 	}
-	class RosByte : RosType
+	class RosByte : RosBasicType
 	{
 		public RosByte() : base("byte") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			byte value = data.Dequeue();
-
-			return new Value(value);
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value(data.Dequeue());
 		}
 	}
-	class RosChar : RosType
+	class RosChar : RosBasicType
 	{
 		public RosChar() : base("char") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
 			data.Dequeue();
 
 			return new InvalidPacket();
 		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
-		}
 	}
-	class RosFloat32 : RosType
+	class RosFloat32 : RosBasicType
 	{
 		public RosFloat32() : base("float32") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			byte[] value = data.Dequeue(4).ToArray();
-
-			return new Value(BitConverter.ToSingle(value, 0));
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value(BitConverter.ToSingle(data.Dequeue(4).ToArray(), 0));
 		}
 	}
-	class RosFloat64 : RosType
+	class RosFloat64 : RosBasicType
 	{
 		public RosFloat64() : base("float64") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			byte[] value = data.Dequeue(8).ToArray();
-
-			return new Value(BitConverter.ToDouble(value, 0));
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value(BitConverter.ToDouble(data.Dequeue(8).ToArray(), 0));
 		}
 	}
-	class RosInt8 : RosType
+	class RosInt8 : RosBasicType
 	{
 		public RosInt8() : base("int8") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			sbyte value = (sbyte)data.Dequeue();
-
-			return new Value(value);
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value((sbyte)data.Dequeue());
 		}
 	}
-	class RosInt16 : RosType
+	class RosInt16 : RosBasicType
 	{
 		public RosInt16() : base("int16") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			byte[] value = data.Dequeue(2).ToArray();
-
-			return new Value(BitConverter.ToInt16(value, 0));
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value(BitConverter.ToInt16(data.Dequeue(2).ToArray(), 0));
 		}
 	}
-	class RosInt32 : RosType
+	class RosInt32 : RosBasicType
 	{
 		public RosInt32() : base("int32") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			byte[] value = data.Dequeue(4).ToArray();
-
-			return new Value(BitConverter.ToInt32(value, 0));
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value(BitConverter.ToInt32(data.Dequeue(4).ToArray(), 0));
 		}
 	}
-	class RosInt64 : RosType
+	class RosInt64 : RosBasicType
 	{
 		public RosInt64() : base("int64") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			byte[] value = data.Dequeue(8).ToArray();
-
-			return new Value(BitConverter.ToInt64(value, 0));
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value(BitConverter.ToInt64(data.Dequeue(8).ToArray(), 0));
 		}
 	}
-	class RosUInt8 : RosType
+	class RosUInt8 : RosBasicType
 	{
 		public RosUInt8() : base("uint8") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			byte value = data.Dequeue();
-
-			return new Value(value);
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value(data.Dequeue());
 		}
 	}
-	class RosUInt16 : RosType
+	class RosUInt16 : RosBasicType
 	{
 		public RosUInt16() : base("uint16") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			byte[] value = data.Dequeue(2).ToArray();
-
-			return new Value(BitConverter.ToUInt16(value, 0));
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value(BitConverter.ToUInt16(data.Dequeue(2).ToArray(), 0));
 		}
 	}
-	class RosUInt32 : RosType
+	class RosUInt32 : RosBasicType
 	{
 		public RosUInt32() : base("uint32") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			byte[] value = data.Dequeue(4).ToArray();
-
-			return new Value(BitConverter.ToUInt32(value, 0));
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value(BitConverter.ToUInt32(data.Dequeue(4).ToArray(), 0));
 		}
 	}
-	class RosUInt64 : RosType
+	class RosUInt64 : RosBasicType
 	{
 		public RosUInt64() : base("uint64") { }
 
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
-			byte[] value = data.Dequeue(8).ToArray();
-
-			return new Value(BitConverter.ToUInt64(value, 0));
-		}
-		public override string GetName(Path path)
-		{
-			if (path.Any()) throw new ArgumentException("Parameter 'path' cannot be non-empty.");
-
-			return string.Empty;
+			return new Value(BitConverter.ToUInt64(data.Dequeue(8).ToArray(), 0));
 		}
 	}
 }

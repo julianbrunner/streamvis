@@ -56,12 +56,13 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RosPort.cs" />
+    <Compile Include="RosField.cs" />
     <Compile Include="Types\BasicTypes.cs" />
-    <Compile Include="Types\RosField.cs" />
     <Compile Include="Types\RosStruct.cs" />
     <Compile Include="Types\RosArray.cs" />
     <Compile Include="Types\RosType.cs" />
     <Compile Include="Types\RosConstant.cs" />
+    <Compile Include="Types\RosBasicType.cs" />
     <Compile Include="RosNetwork.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

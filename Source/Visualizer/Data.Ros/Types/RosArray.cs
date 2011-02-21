@@ -27,7 +27,7 @@ namespace Data.Ros.Types
 		readonly RosType type;
 
 		public RosArray(RosType type)
-			: base("Array")
+			: base(string.Format("array<{0}>", type))
 		{
 			if (type == null) throw new ArgumentNullException("type");
 
@@ -38,12 +38,12 @@ namespace Data.Ros.Types
 		{
 			return base.ToString() + "\n" + "[" + "\n" + type + "\n" + "]";
 		}
-		public override Packet ToPacket(Queue<byte> data)
+		public override Packet BinaryToPacket(Queue<byte> data)
 		{
 			int count = BitConverter.ToInt32(data.Dequeue(4).ToArray(), 0);
 
 			List<Packet> items = new List<Packet>();
-			for (int i = 0; i < count; i++) items.Add(type.ToPacket(data));
+			for (int i = 0; i < count; i++) items.Add(type.BinaryToPacket(data));
 
 			return new List(items);
 		}

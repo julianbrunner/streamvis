@@ -111,7 +111,7 @@ namespace Data.Ros
 			byte[] data = new byte[ShapeShifterGetDataLength(message)];
 			Marshal.Copy(ShapeShifterGetData(message), data, 0, data.Length);
 
-			currentPacket = sampleDefinition.ToPacket(data);
+			currentPacket = sampleDefinition.BinaryToPacket(data);
 
 			packetAvailable.Set();
 		}
