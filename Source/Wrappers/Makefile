@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License along with
 # Stream Visualizer. If not, see <http:#www.gnu.org/licenses/>.
 
-binaries: yarp ros
-	mkdir -p Binaries
+all: yarp ros
+	-mkdir Binaries
 	-cp streamvis-wrappers-yarp/bin/libstreamvis-wrappers-yarp.so Binaries
 	-cp streamvis-wrappers-ros/bin/libstreamvis-wrappers-ros.so Binaries
 
@@ -26,4 +26,13 @@ yarp:
 ros:
 	-ROS_PACKAGE_PATH=$$ROS_PACKAGE_PATH:$$PWD/streamvis-wrappers-ros rosmake streamvis-wrappers-ros
 
-.PHONY: yarp ros
+clean: clean-yarp clean-ros
+	-rm -r Binaries
+
+clean-yarp:
+	-$(MAKE) -C streamvis-wrappers-yarp clean
+
+clean-ros:
+	-$(MAKE) -C streamvis-wrappers-ros clean
+
+.PHONY: yarp ros clean clean-yarp clean-ros

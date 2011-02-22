@@ -15,9 +15,9 @@
 # You should have received a copy of the GNU General Public License along with
 # Stream Visualizer. If not, see <http:#www.gnu.org/licenses/>.
 
-binaries: wrappers visualizer
-	mkdir -p Binaries
-	-cp -r Wrappers/Binaries/* Binaries
+all: wrappers visualizer
+	-mkdir Binaries
+	cp -r Wrappers/Binaries/* Binaries
 	cp -r Visualizer/Binaries/* Binaries
 
 wrappers:
@@ -26,4 +26,13 @@ wrappers:
 visualizer:
 	$(MAKE) -C Visualizer
 
-.PHONY: wrappers visualizer
+clean: clean-wrappers clean-visualizer
+	-rm -r Binaries
+
+clean-wrappers:
+	$(MAKE) -C Wrappers clean
+
+clean-visualizer:
+	$(MAKE) -C Visualizer clean
+
+.PHONY: wrappers visualizer clean clean-wrappers clean-visualizer

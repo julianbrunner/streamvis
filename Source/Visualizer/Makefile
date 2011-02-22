@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License along with
 # Stream Visualizer. If not, see <http:#www.gnu.org/licenses/>.
 
-binaries: bundle
-	mkdir -p Binaries
+all: bundle
+	-mkdir Binaries
 	cp Visualizer/bin/Release/streamvis Binaries
 
 bundle: visualizer
@@ -25,4 +25,13 @@ bundle: visualizer
 visualizer:
 	xbuild /property:Configuration=Release
 
-.PHONY: visualizer
+clean: clean-visualizer
+	-rm -r Binaries
+
+clean-bundle:
+	-rm Visualizer/bin/Release/streamvis
+
+clean-visualizer: clean-bundle
+	xbuild /target:Clean
+
+.PHONY: bundle visualizer clean clean-bundle clean-visualizer

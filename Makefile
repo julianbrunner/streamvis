@@ -15,11 +15,17 @@
 # You should have received a copy of the GNU General Public License along with
 # Stream Visualizer. If not, see <http:#www.gnu.org/licenses/>.
 
-binaries: streamvis
-	mkdir -p Binaries
+all: streamvis
+	-mkdir Binaries
 	cp -r Source/Binaries/* Binaries
 
 streamvis:
 	$(MAKE) -C Source
 
-.PHONY: streamvis
+clean: clean-streamvis
+	-rm -r Binaries
+
+clean-streamvis:
+	$(MAKE) -C Source clean
+
+.PHONY: streamvis clean clean-streamvis

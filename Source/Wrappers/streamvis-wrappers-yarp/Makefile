@@ -15,13 +15,19 @@
 # You should have received a copy of the GNU General Public License along with
 # Stream Visualizer. If not, see <http:#www.gnu.org/licenses/>.
 
-binaries: wrapper
-	mkdir -p bin
+all: wrapper
+	-mkdir bin
 	cp build/libstreamvis-wrappers-yarp.so bin
 
 wrapper:
-	mkdir -p build
+	-mkdir build
 	cd build && cmake ..
 	$(MAKE) -C build
 
-.PHONY: wrapper
+clean: clean-wrapper
+	-rm -r bin
+
+clean-wrapper:
+	-rm -r build
+
+.PHONY: wrapper clean clean-wrapper
