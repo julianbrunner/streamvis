@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Technische Universität München - Institut für Informatik")]
 [assembly: AssemblyProduct("Visualizer.Drawing")]
-[assembly: AssemblyCopyright("Copyright © Julian Brunner 2009 - 2010")]
+[assembly: AssemblyCopyright("Copyright © Julian Brunner 2009 - 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

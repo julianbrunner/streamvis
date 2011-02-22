@@ -76,7 +76,7 @@ Global
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		description = Stream Visualizer is an application that can be used to visualize, capture and replay data streams.
-		version = 1.3
+		version = 1.4
 		StartupItem = Visualizer\Visualizer.csproj
 	EndGlobalSection
 EndGlobal
