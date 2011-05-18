@@ -149,7 +149,7 @@ namespace Visualizer.Data
 
 			switch (details.Length)
 			{
-				case 1: return Enumerables.Single(ParseStream(port, details[0]));
+				case 1: return Enumerables.Create(ParseStream(port, details[0]));
 				case 2: return from path in Path.Range(new Path(details[0]), new Path(details[1]))
 							   select new Stream(path);
 				default: throw new ArgumentException("range");

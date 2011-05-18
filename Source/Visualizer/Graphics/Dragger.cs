@@ -28,9 +28,9 @@ namespace Graphics
 		bool dragging;
 		Point mousePosition;
 
-		public event EventHandler<EventArgs<Point>> Drag;
-		public event EventHandler BeginDrag;
-		public event EventHandler EndDrag;
+		public event Action<Point> Drag;
+		public event Action BeginDrag;
+		public event Action EndDrag;
 
 		public MouseButtons Button { get; set; }
 
@@ -45,15 +45,15 @@ namespace Graphics
 
 		protected virtual void OnDrag(Point offset)
 		{
-			if (Drag != null) Drag(this, new EventArgs<Point>(offset));
+			if (Drag != null) Drag(offset);
 		}
 		protected virtual void OnBeginDrag()
 		{
-			if (BeginDrag != null) BeginDrag(this, EventArgs.Empty);
+			if (BeginDrag != null) BeginDrag();
 		}
 		protected virtual void OnEndDrag()
 		{
-			if (EndDrag != null) EndDrag(this, EventArgs.Empty);
+			if (EndDrag != null) EndDrag();
 		}
 
 		void viewport_MouseDown(object sender, MouseEventArgs e)

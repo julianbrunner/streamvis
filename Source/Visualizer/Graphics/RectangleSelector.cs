@@ -33,8 +33,8 @@ namespace Graphics
 		Point startPosition;
 		Point mousePosition;
 
-		public event EventHandler<EventArgs<Point>> BeginSelect;
-		public event EventHandler<EventArgs<Rectangle>> EndSelect;
+		public event Action<Point> BeginSelect;
+		public event Action<Rectangle> EndSelect;
 
 		public bool IsDrawn { get; set; }
 		public MouseButtons Button { get; set; }
@@ -81,11 +81,11 @@ namespace Graphics
 
 		protected virtual void OnBeginSelect(Point startPosition)
 		{
-			if (BeginSelect != null) BeginSelect(this, new EventArgs<Point>(startPosition));
+			if (BeginSelect != null) BeginSelect(startPosition);
 		}
 		protected virtual void OnEndSelect(Rectangle selection)
 		{
-			if (EndSelect != null) EndSelect(this, new EventArgs<Rectangle>(selection));
+			if (EndSelect != null) EndSelect(selection);
 		}
 
 		void viewport_MouseDown(object sender, MouseEventArgs e)

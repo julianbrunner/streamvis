@@ -34,7 +34,7 @@ namespace Visualizer.Drawing.Data
 		{
 			get
 			{
-				foreach (Range<double> missingRange in Exclude(Enumerables.Single(range), ranges))
+				foreach (Range<double> missingRange in Exclude(Enumerables.Create(range), ranges))
 				{
 					CacheFragment fragment = entryResampler
 					[

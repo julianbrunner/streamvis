@@ -263,9 +263,9 @@ namespace Visualizer
 					SetColor(streamsList.SelectedItems[0], colorDialog.Color);
 			}
 		}
-		private void zoomSelector_Select(object sender, EventArgs<Rectangle> e)
+		private void zoomSelector_Select(Rectangle selection)
 		{
-			Rectangle intersection = Rectangle.Intersect(diagram.Layouter.Area, e.Parameter);
+			Rectangle intersection = Rectangle.Intersect(diagram.Layouter.Area, selection);
 
 			if (intersection.Width > 5 && intersection.Height > 5)
 			{
@@ -291,9 +291,9 @@ namespace Visualizer
 				settings.Diagram.Initialize();
 			}
 		}
-		private void unZoomSelector_Select(object sender, EventArgs<Rectangle> e)
+		private void unZoomSelector_Select(Rectangle selection)
 		{
-			Rectangle intersection = Rectangle.Intersect(diagram.Layouter.Area, e.Parameter);
+			Rectangle intersection = Rectangle.Intersect(diagram.Layouter.Area, selection);
 
 			if (intersection.Width > 5 && intersection.Height > 5)
 			{
@@ -319,10 +319,10 @@ namespace Visualizer
 				settings.Diagram.Initialize();
 			}
 		}
-		private void panDragger_Drag(object sender, EventArgs<Point> e)
+		private void panDragger_Drag(Point offset)
 		{
-			double width = (double)e.Parameter.X / (double)diagram.Layouter.Area.Width / (diagram.TimeManager.Mapping.Destination.Length() / diagram.TimeManager.Mapping.Source.Length());
-			double height = -(double)e.Parameter.Y / (double)diagram.Layouter.Area.Height / (diagram.ValueManager.Mapping.Destination.Length() / diagram.ValueManager.Mapping.Source.Length());
+			double width = (double)offset.X / (double)diagram.Layouter.Area.Width / (diagram.TimeManager.Mapping.Destination.Length() / diagram.TimeManager.Mapping.Source.Length());
+			double height = -(double)offset.Y / (double)diagram.Layouter.Area.Height / (diagram.ValueManager.Mapping.Destination.Length() / diagram.ValueManager.Mapping.Source.Length());
 
 			diagram.TimeManager.IsUpdated = false;
 			diagram.TimeManager.Time -= width;
@@ -331,7 +331,7 @@ namespace Visualizer
 			if (!(diagram.ValueManager is FixedValueManager)) diagram.ValueManager = new FixedValueManager();
 			((FixedValueManager)diagram.ValueManager).FixedRange = new Range<double>(valueRange.Start - height, valueRange.End - height);
 		}
-		private void panDragger_EndDrag(object sender, EventArgs e)
+		private void panDragger_EndDrag()
 		{
 			settings.Diagram.Initialize();
 		}
