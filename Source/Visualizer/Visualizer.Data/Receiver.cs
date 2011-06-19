@@ -28,7 +28,6 @@ namespace Visualizer.Data
 	{
 		readonly Port source;
 		readonly Timer timer;
-		readonly string portName;
 		readonly Stream timeStream;
 		readonly bool hasTimer;
 		readonly IEnumerable<Stream> portStreams;
@@ -37,7 +36,7 @@ namespace Visualizer.Data
 		bool disposed = false;
 		bool running = true;
 
-		public string PortName { get { return portName; } }
+		public string PortName { get { return source.Name; } }
 		public IEnumerable<Stream> PortStreams { get { return portStreams; } }
 		public bool HasTimer { get { return hasTimer; } }
 
@@ -48,14 +47,12 @@ namespace Visualizer.Data
 
 			string[] details = portString.Split(':');
 
-			this.portName = details[0];
-
 			IEnumerable<Stream> streams = GetStreams(source, details);
 			IEnumerable<Stream> timeStreams = from stream in streams
 											  where stream.Name == "TIME" || stream.Name == "TIMER"
 											  select stream;
 
-			if (timeStreams.Count() > 1) throw new ArgumentException(string.Format("More than one timestamp stream was found in '{0}'.", portName));
+			if (timeStreams.Count() > 1) throw new ArgumentException(string.Format("More than one timestamp stream was found in '{0}'.", source.Name));
 
 			this.timeStream = timeStreams.SingleOrDefault();
 			this.hasTimer = timeStream != null && timeStream.Name == "TIMER";
@@ -102,7 +99,7 @@ namespace Visualizer.Data
 
 				if (!running) break;
 
-				if (packet is InvalidPacket) Console.WriteLine("Received invalid packet on {0}.", portName);
+				if (packet is InvalidPacket) Console.WriteLine("Received invalid packet on {0}.", source.Name);
 				else
 				{
 					if (timeStream != null)
