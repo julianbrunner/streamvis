@@ -56,7 +56,7 @@ namespace Visualizer.Data
 
 			this.timeStream = timeStreams.SingleOrDefault();
 			this.hasTimer = timeStream != null && timeStream.Name == "TIMER";
-			this.portStreams = streams.Except(timeStream).ToArray();
+			this.portStreams = streams.Except(Enumerables.Create(timeStream)).ToArray();
 
 			// TODO: Try and make this stateless
 			if (HasTimer) timer.IsUpdated = false;
