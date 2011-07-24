@@ -234,7 +234,7 @@ namespace Visualizer
 		}
 		private void streamsList_AfterLabelEdit(object sender, LabelEditEventArgs e)
 		{
-			SetName(streamsList.Items[e.Item], e.Label);
+			if (e.Label != null) SetName(streamsList.Items[e.Item], e.Label);
 		}
 		private void streamsContextMenuStrip_Opening(object sender, CancelEventArgs e)
 		{
