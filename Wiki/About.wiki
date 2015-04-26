@@ -1,0 +1,13 @@
+= About =
+
+Stream Visualizer is an application that can be used to visualize, capture and replay data streams.
+
+Currently, Stream Visualizer can work with data received from files (including pipes), standard input, YARP ports and ROS topics. For more information on YARP, see http://eris.liralab.it/yarpdoc/index.html. For more information on ROS, see http://ros.org.
+
+To get going, read the InstallationInstructions and GettingStarted wiki pages.
+
+= [Screenshots] =
+
+http://streamvis.googlecode.com/svn/site/screenshots/streamvis-thumbnail.png
+http://streamvis.googlecode.com/svn/site/screenshots/streamvis-zoom-thumbnail.png
+http://streamvis.googlecode.com/svn/site/screenshots/streamvis-hand-data-thumbnail.png
