@@ -1,0 +1,230 @@
+#summary Changelog
+
+= Trunk =
+  * Fixed a bug causing streams from standard IO being categorized as "-"
+  * Fixed a bug causing labels to go empty when edited without being changed.
+
+= Version 1.4 =
+  * Updated ROS data backend to work with the latest version of ROS
+  * Updated OpenTK to Version 1.0
+  * Now uses the Krach library
+  * Fixed a few minor bugs
+  * Windows is supported again
+
+= Version 1.3 =
+  * Can now be used with ROS topics
+  * Updated YARP interface to work with latest version of YARP
+  * Streamlined build process
+
+= Version 1.2 =
+  * Added possibility to use timestamps received on ports
+  * Updated OpenTK to 1.0 RC 1
+  * Fixed a few bugs
+  * Improved error handling
+
+= Version 1.1 =
+  * Added possibility to receive data from text files and standard input
+  * Improved data backend
+  * Improved bahavior of packet parsing errors (now ignores packet and prints warning)
+  * Updated OpenTK to 1.0 Beta 3
+
+= Version 1.0 =
+  * Fixed weird behavior of streams list context menu
+  * Added ability to invert colors
+  * Fixed a possible bug that could cause sources not to load correctly
+  * Settings can now be saved to an XML file
+  * Got rid of a few less used command-line options
+  * Added some descriptions to items in the settings pane
+  * Streams list now displays name and path of a stream in two columns
+  * Old stream name and color now is preset in name and color change dialogs
+  * Stream names can now be edited in place
+  * Fixed bug causing selection rectangles to be closed on the press of any key
+
+= Version 0.12 =
+  * Unified Time and Value management
+  * Improved component model
+  * Added panning and zooming functionality
+  * Now adds comments containing Stream names in GNUPlot export
+  * Improved error checking for settings
+  * Upgraded to OpenTK 1.0 Beta 2
+  * Fixed unexpected behavior of zoom function
+  * Enabled zoom rectangle to be dragged in any direction
+  * Fixed a potential bug causing weird zoom rectangles when resizing window
+  * Managers now retain their type-invariant properties when their types are changed
+  * Fixed behavior of zooming outside of the Layouter area
+  * Fixed a bug making it impossible to zoom to areas in negative time
+  * Added function for zooming out
+  * Added threshold for zooming so it doesn't happen accidentally
+  * Fixed a bug causing zooming when maximizing the window
+  * Added ability to abort zooming
+
+= Version 0.11 =
+  * Settings pane is now collapsible
+  * Removed old user interface elements
+  * Added possibility to change the name of a stream through the user interface
+  * Added icon
+  * Added about box
+  * Now also works with integer values
+  * Dampened feedback loop between label widths and resampler
+  * Fixed a bug causing some of the caches not to be cleared when the "clear data" command is executed
+  * `TimeRange` and `ValueRange` scaling is now done on the CPU to preserve double precision
+  * Fixed a bug causing unexpected behavior when YARP is not available
+  * Introduced safe check for YARP
+
+= Version 0.10 =
+  * Added possibility to name individual streams
+  * Added possibility to scale the time axis (right mouse click + drag)
+  * Fixed a bug causing weird behavior in the coordinate label
+  * Improved command-line options
+  * Corrected a few mistakes in the command-line help message
+  * Fixed a bug causing an exception to be thrown when very short empty segments appear
+  * Lots of settings can now be changed on-the-fly using the settings pane
+
+= Version 0.9 =
+  * Moved to OpenTK 0.9.8.3
+  * Added an option to specify whether antialiasing should be used for graph lines
+  * Added an option to specify the width (thickness) of the graph lines
+  * Made the diagram use the available space more efficiently
+  * Made Layouter adaptive to label sizes
+  * Refined diagram borders
+  * Added more error checking
+  * Added a command-line switch to turn off vertical synchronization
+  * Streamlined command-line parameter processing
+  * Resampler cache is now cleared at regular intervals (every 10 diagram widths)
+  * Added a command-line switch to turn off permanent data logging
+  * Gave reader thread a higher priority (not implementing in mono as of 09/23/2009)
+  * Added a command-line switch to specify whether alpha-blending should be used
+  * Value range markers now use "nicer" values
+  * Nice value algorithms are now used for time markers aswell
+  * Doubleclicking the graph area now toggles minimal mode
+  * Added coordinate display in status bar
+  * Removed some unused code
+  * Fixed two bugs causing exceptions to be thrown because of the coordinate label
+  * Moved the X Axis upwards by 5 pixels
+  * Improved random color generation
+
+= Version 0.8 =
+  * Simpler entry buffering system
+  * More frequent entry buffer updates
+  * Improved behavior of graph extension feature
+  * Reenabled graph extension feature
+  * Reenabled exporting into GNUPlot compatible format
+  * Resolved issue causing the visualizer to hang at regular intervals
+  * Significantly reduced memory consumption and relocations
+  * Reduced thread synchronization overhead
+  * Timestamps are less prone to being screwed up because the reader thread is blocked
+  * Added new resampling options
+  * All incoming data is now captured and logged
+  * Various optimizations in all parts of the application
+  * Moved to `VertexArrays` for drawing `LineStrip`s
+  * Moved to a more flexible dynamic caching solution
+  * Fixed various bugs
+  * Refactoring
+  * Various optimizations in the new caching
+  * Went back to using properties
+  * Extended the `Visualizer.Plotting` design
+
+= Version 0.7 =
+  * Multiple visualizers can now be bound to a single YARP port
+  * Added a method to check if a specified port exists to the YARP wrapper
+  * Added a method to find an available port with a chosen prefix
+  * Minor cleanups in files
+  * Added new timestamp implementation
+  * Improved deployment (building now creates `Visualizer/bin/Debug/vis` bundled executable)
+
+= Version 0.6 =
+  * Set yarp ports to use strict behavior
+  * Added option to toggle vertical synchronization
+  * Added default values for the various show items
+  * Transformed the "Hide all graphs" command into an option to show the Diagram
+  * Frame counter can be turned on and off
+  * Backend improvements
+  * When sensible, scientific notation is used for drawing numbers
+  * Fixed a bug causing clearing of capture data not to work correctly
+  * Fixed a bug causing minimal mode not to work correctly on mono's windows forms implementation
+  * Font bitmap is now embedded in the `Graphics` assembly
+  * Checked various states for OpenGL
+  * Moved texture identifiers into array
+  * Textures are bound less often
+  * Nested .Designer.cs and .resx files
+  * Extracted `Graphics`
+  * Moved to OpenTK 0.9.8.1
+  * Added `Graphics` test project
+  * Added `Data` project
+  * Improved `Path` implementation
+  * Implemented custom wrapper
+  * Added `Receiver` to the solution
+  * Renamed "yarp" to "sharpyarp" (results in "sharpyarp.dll" and "libsharpyarp.so")
+  * Rebuilt ACE, yarp and the C# bindings (newer versions, now also using x64 in Windows)
+  * Fixed a spelling error in the startup messages
+
+= Version 0.5 =
+  * Added resampling of values before drawing
+  * Added option to set horizontal resolution of the diagram
+  * Optimized `FittingValueManager`
+  * Improved graph extension (better graph cutting, incorporates more data entries for extension)
+  * Fixed a bug causing crashes when trying to plot a stream containing `double.NaN` values
+  * Removed some unnecessary formatting code
+  * Corrected general program description
+  * Shrinked scope of parameter error try clause so that other `InvalidOperationExceptions` won't be caught
+  * Fixed a few bugs related to error handling
+
+= Version 0.4 =
+  * Fixed a bug causing exceptions because of different local number styles
+  * Removed frame timer
+  * Added VSync support
+  * Changed "-?" to "--help"
+  * Fixed a bug in "--help" layouting
+  * Added general description on "--help"
+  * Corrected spelling error
+  * Corrected a few errors in the "--help" description
+
+= Version 0.3 =
+  * Better performance when displaying text (custom text printer)
+  * Added proper error handling for invalid command-line parameters
+  * Added proper error handling for invalid capture parameters
+  * Added support for paths to deep streams
+  * Added help display when "-?" is specified
+  * Lines are now antialiased
+  * Increased graph line thickness to 1.5 (looks better)
+  * Minor performance improvements
+  * Fixed issue of lines not being drawn on pixel centers
+  * Interval counts on X and Y axes can be customized
+  * Option to change diagram color and background color
+  * Option to disable graph extension
+  * Made more settings accessible from the GUI, also added hotkeys
+  * Moved to OpenTK 0.9.7
+  * Fixed bug of not displaying the last interval caption on the X axis
+  * Fixed bug in `Container.GetIndex` method (picking wrong indices under certain conditions)
+  * Fixed bug in `Container.GetIndex` method (never picked the last index)
+  * Moved more layouting responsibilities to `Layouter`
+  * Removed all unused usings and references
+  * Fixed bug of empty ports being requested when the text box in the "New Capture" dialog is left empty
+  * `FittingValueManager` now respects graph extension feature
+  * Flipped coordinate system to improve layouting
+  * Removed option to hide labels
+  * Went back to old random color generation algorithm
+  * Removed `Yarp.Visualizer.Utilities`
+  * Fixed a bug in `FittingValueManager` that caused hidden graphs to cause value fitting
+  * Moved X axis down by 5 pixels
+  * Better internal parameter handling
+  * Proper error handling when YARP is not found
+  * Status bar is now hidden in minimal mode aswell
+
+= Version 0.2 =
+  * Major design changes in `Yarp.Visualizer.Plotting`
+  * Substantially improved performance of `Container` by using binary search
+  * Added "Wrapping" diagram type
+  * Added fixed-scale Y-axis option
+  * Substantial performance improvements in various parts of the plotting process
+  * Removed "File" menu
+  * Added "Freeze" function
+  * Fixed potential error of streams containing consecutive entries with identical or wrongly ordered timestamps
+  * Fixed potential error of different streams getting different timestamps on data entries from the same bottle
+  * Graph is extended to known adjacent values on the left and right borders of the coordinate system
+  * Fixed occasionally thrown exception on exit
+  * Application can now be used on machines that do not have YARP installed
+  * Moved more responsibilities to `TKDrawer`
+
+= Version 0.1 =
+  * Initial version

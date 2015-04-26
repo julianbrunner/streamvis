@@ -1,0 +1,7 @@
+#summary Full-Size Screenshots
+
+http://streamvis.googlecode.com/svn/site/screenshots/streamvis.png
+
+http://streamvis.googlecode.com/svn/site/screenshots/streamvis-zoom.png
+
+http://streamvis.googlecode.com/svn/site/screenshots/streamvis-hand-data.png

@@ -1,0 +1,69 @@
+#summary A quick guide to using Stream Visualizer
+#labels Featured
+
+= The command-line interface =
+
+Stream Visualizer can be started with or without command-line parameters. You can get an overview of all available parameters by running Stream Visualizer with the `--help` option.
+
+The command-line parameters can be used to do the following:
+
+  * Specify which YARP, ROS and/or text ports Stream Visualizer should visualize
+  * Specify settings that will override the saved or default settings
+
+Both of these can also be done using the user interface after Stream Visualizer was started.
+
+= The user interface =
+
+In the main window, you can see the list of ports together with their respective streams in a list view on the left side. On the right side is a settings pane that contains all the settings available together with some descriptions. In the middle is the diagram area.
+
+The capture menu allows creating a new capture as well as opening/saving/exporting captures and clearing all recorded data of the current capture. The view menu contains some options to change the appearance of Stream Visualizer, while the diagram menu contains options to freeze the time and reset the view. The settings menu lets you save your current settings, which will be loaded when you start Stream Visualizer the next time.
+
+You can right-click on the streams in the streams list to open a context menu which allows you to change the name and/or the color of the selected stream.
+
+Double-Clicking the diagram area will toggle minimal mode, in which everything except for the diagram area is hidden.
+
+In the status bar, a label shows the current time and value at the point where the mouse is hovering.
+
+You can use your left mouse button to zoom into a specific area of the graph, the right mouse button to pan the current view and the middle mouse button to zoom out.
+
+= Visualizing white-space-separated data =
+
+If you have an application (let's assume it's called `foo`) that outputs white-space separated columns of data to the standard output, you have multiple ways to visualize this data.
+
+== On the local machine ==
+
+Using the following command, you can visualize all the data that `foo` outputs on standard output on the local computer.
+
+{{{
+foo |streamvis :t:-
+}}}
+
+== On another machine using YARP ==
+
+Use the following command to send the output of `foo` to a YARP port.
+
+{{{
+foo |yarp write ... /yourport
+}}}
+
+You can then use Stream Visualizer to draw this data on any computer that can connect to `/yourport`.
+
+{{{
+streamvis :y:/yourport
+}}}
+
+== On another machine using netcat ==
+
+Similarly, you can use netcat to send the data to another computer (let's assume that the name of the other machine is `myothermachine` and the port is `1234`.
+
+{{{
+foo |nc myothermachine 1234
+}}}
+
+You can receive and visualize the data with the following command.
+
+{{{
+nc -l -p 1234 |streamvis :t:-
+}}}
+
+Note that the receiving machine should run its command first.

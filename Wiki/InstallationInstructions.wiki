@@ -1,0 +1,54 @@
+#summary Installation Instructions
+#labels Featured
+
+= Binaries =
+
+You can get a set of platform independent binaries from the downloads section on Google Code (http://code.google.com/p/streamvis/downloads/list). These do not contain the native wrappers needed to use Stream Visualizer with YARP and/or ROS, but you will be able to get data from standard input and named pipes. You need the mono runtime (minimum version: 2.8) or the .NET framework (minimum version: 4.0) to run these binaries.
+
+= Building from source =
+
+Alternatively, you can build Stream Visualizer from source code. This is the recommended way of installing on Linux, since you can build the YARP and/or ROS data backends, and you get a bundled executable.
+
+== Linux ==
+
+=== Prerequisites ===
+
+Stream Visualizer needs the mono runtime (minimum version: 2.8) to run. To build Stream Visualizer, you'll also need the mono development tools. In case the mono runtime and/or mono development packages supplied by your distribution are too old, you'll have compile libgdiplus and mono from source (for more instructions, see http://mono-project.com/Compiling_Mono). In order to do a checkout from the repository, you'll need subversion.
+
+=== Instructions ===
+
+  # (Optional) Install YARP (http://eris.liralab.it/yarpdoc/install.html)
+  # (Optional) Install ROS (http://www.ros.org/wiki/ROS/Installation)
+  # Do one of the following
+    * Do a checkout of the tag for version 1.4 from the SVN repository: `svn co http://streamvis.googlecode.com/svn/tags/Version\ 1.4 streamvis`
+    * Download the source package for version 1.4 from the downloads section on Google Code (http://code.google.com/p/streamvis/downloads/list)
+  # Run `make` inside your working copy
+
+=== Wrap-up ===
+
+The Stream Visualizer binaries along with the wrapper libraries will be created in the `Binaries` directory of your working copy.
+
+*Note:* If YARP and/or ROS are not available, the make command of the respective wrapper libraries will fail, but it will not abort the build process so that people who don't want to use one or both of these interfaces can still build Stream Visualizer. If you do want to use YARP and/or ROS, you may want to check if they built correctly.
+
+== Mac OS X ==
+
+I don't have a machine to test this on, though it should be somewhat similar to what needs to be done to get it running on Linux.
+
+If anyone has done it on Mac OS X, I'd appreciate some feedback on how to set it up.
+
+== Windows ==
+
+=== Prerequisites ===
+
+You need the mono runtime (minimum version: 2.8) or the .NET framework (minimum version: 4.0) and the associated development tools to build Stream Visualizer.
+
+=== Instructions ===
+
+  # Do one of the following
+    * Do a checkout of the tag for version 1.4 from the SVN repository at `http://streamvis.googlecode.com/svn/tags/Version 1.4`
+    * Download the source package for version 1.4 from the downloads section on Google Code (http://code.google.com/p/streamvis/downloads/list)
+  # Build the `Source\Visualizer\Visualizer.sln` solution file using an IDE or command-line build tool of your choice
+
+=== YARP and ROS ===
+
+Running YARP and/or ROS on Windows is somewhat adventurous, so if you want to do that and use Stream Visualizer with it, you're pretty much on your own. Once you've got YARP and/or ROS running, you'll have to compile the native wrappers in the `Source\Wrappers` directory (they'll probably need some adjusting to compile on Windows).

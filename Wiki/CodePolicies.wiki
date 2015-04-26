@@ -1,0 +1,18 @@
+#summary Code policies
+#labels Phase-Implementation
+
+= Calling `ToArray` =
+`System.Linq.ToArray` should be called on `IEnumerable<T>` objects that either take a long time to iterate over (i.e. LINQ queries) or rely on resources that may not be valid at later times (avoid this situation if possible).
+
+It is reasonable to do this on the provider side (since the provider of the object will know whether a call to `ToArray` is necessary) as well as on the consumer side (since the consumer will know when and how often it will iterate over the enumeration).
+
+Policy is to always do the call on the consumer side, since the performance penalty of needlessly calling `ToArray` is negligible in most cases. Exceptions may be made when profiling has revealed a significant impact on performance or other reasons exist.
+
+= Providing objects to derived classes =
+Classes may only provide objects to derived classes when, from the perspective of the base class, it is clear that most derived classes will need them. If this is not the case, objects may be forked into fields of the derived classes while being passed down the constructor chain, even if the base class also needs them.
+
+= Deep properties =
+Classes may only provide deep direct access to properties of objects they contain if the intent is to encapsulate these objects inside the parent class. In this case, it should not be possible to tell that the parent class uses these objects to achieve it's functionality from the outside.
+
+= `Dispose` methods =
+When disposing a field, always do a null check in case the constructor threw an exception and not all fields were properly initialized.

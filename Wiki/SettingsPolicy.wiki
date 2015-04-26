@@ -1,0 +1,16 @@
+#summary Policy for settings
+#labels Phase-Design
+
+= `Visualizer.Environment.Settings` object =
+  * Contains all available settings
+  * Reflects the current settings at all times after initialization
+  * Can load/save its current state from/to an XML file
+
+= Settings pane in main window =
+  * Completely reflects state of the `Visualizer.Environment.Settings` object
+
+= Default settings =
+  * Are initialized by the constructors of individual objects
+
+= Command-line parameters =
+  * A set of values that are used to override the default settings (are written to the `Visualizer.Environment.Settings` object after initialization)
